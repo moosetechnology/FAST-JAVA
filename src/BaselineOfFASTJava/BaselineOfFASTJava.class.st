@@ -32,7 +32,7 @@ BaselineOfFASTJava >> defineDependencies: spec [
 BaselineOfFASTJava >> defineGroups: spec [
 	spec
 		group: 'core'
-			with: #('FAST-Java-Model-Extension' 'FAST-Java-Model' 'FAST-Java-Generator');
+			with: #('FAST-Java-Model-Extension' 'FAST-Java-Model' 'FAST-Java-Model-Generator');
 		group: 'smacc'
 			with: #('core' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests');
 		group: 'visitor'
