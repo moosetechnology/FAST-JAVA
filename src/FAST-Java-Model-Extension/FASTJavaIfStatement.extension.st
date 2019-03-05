@@ -11,9 +11,11 @@ FASTJavaIfStatement >> condition [
 FASTJavaIfStatement >> condition: aFASTJavaConditionStatement [
 	self childrenNode
 		add:
-			(FASTJavaConditionStatement new
-				addChild: aFASTJavaConditionStatement;
-				yourself)
+			(aFASTJavaConditionStatement mooseModel
+				silentlyAdd:
+					(FASTJavaConditionStatement new
+						addChild: aFASTJavaConditionStatement;
+						yourself))
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
@@ -27,9 +29,11 @@ FASTJavaIfStatement >> elsePart [
 FASTJavaIfStatement >> elsePart: aFASTJavaElsePartStatement [
 	self childrenNode
 		add:
-			(FASTJavaElsePartStatement new
-				addChild: aFASTJavaElsePartStatement;
-				yourself)
+			(aFASTJavaElsePartStatement mooseModel
+				silentlyAdd:
+					(FASTJavaElsePartStatement new
+						addChild: aFASTJavaElsePartStatement;
+						yourself))
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
@@ -41,7 +45,11 @@ FASTJavaIfStatement >> thenPart [
 
 { #category : #'*FAST-Java-Model-Extension' }
 FASTJavaIfStatement >> thenPart: aFASTJavaThenPartStatement [
-	self childrenNode add: (FASTJavaThenPartStatement new
-				addChild: aFASTJavaThenPartStatement;
-				yourself)
+	self childrenNode
+		add:
+			(aFASTJavaThenPartStatement mooseModel
+				silentlyAdd:
+					(FASTJavaThenPartStatement new
+						addChild: aFASTJavaThenPartStatement;
+						yourself))
 ]

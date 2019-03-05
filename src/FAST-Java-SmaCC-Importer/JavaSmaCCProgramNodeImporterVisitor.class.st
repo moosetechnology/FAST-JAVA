@@ -320,12 +320,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement 
 JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 	currentFASTEntity := self addToModel: FASTJavaForStatement new.
 	self generalVisitActionForNodeEntity: aForStatement.
-	currentFASTEntity condition: (self clone accept: aForStatement test).
-	currentFASTEntity
-		incrementors: (self clone accept: aForStatement _update).
-	currentFASTEntity
-		initializers: (self clone accept: aForStatement initial).
-	currentFASTEntity body: (self clone accept: aForStatement statement).
+	aForStatement test
+		ifNotNil: [ :test | currentFASTEntity condition: (self clone accept: test) ].
+	aForStatement _update
+		ifNotNil:
+			[ :_update | currentFASTEntity incrementors: (self clone accept: _update) ].
+	aForStatement initial
+		ifNotNil:
+			[ :initial | currentFASTEntity initializers: (self clone accept: initial) ].
+	aForStatement statement
+		ifNotNil:
+			[ :statement | currentFASTEntity body: (self clone accept: statement) ].
 	^ currentFASTEntity
 ]
 

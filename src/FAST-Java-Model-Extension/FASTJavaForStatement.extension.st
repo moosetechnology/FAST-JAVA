@@ -14,9 +14,11 @@ FASTJavaForStatement >> body [
 FASTJavaForStatement >> body: aBodyStatement [
 	childrenNode
 		add:
-			(FASTJavaBodyStatement new
-				addChild: aBodyStatement;
-				yourself)
+			(aBodyStatement mooseModel
+				silentlyAdd:
+					(FASTJavaBodyStatement new
+						addChild: aBodyStatement;
+						yourself))
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
@@ -33,9 +35,11 @@ FASTJavaForStatement >> condition [
 FASTJavaForStatement >> condition: aConditionStatement [
 	self childrenNode
 		add:
-			(FASTJavaConditionStatement new
-				addChild: aConditionStatement;
-				yourself)
+			(aConditionStatement mooseModel
+				silentlyAdd:
+					(FASTJavaConditionStatement new
+						addChild: aConditionStatement;
+						yourself))
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
@@ -48,9 +52,13 @@ FASTJavaForStatement >> incrementors [
 
 { #category : #'*FAST-Java-Model-Extension' }
 FASTJavaForStatement >> incrementors: aIncrementorStatement [
-	self childrenNode add: (FASTJavaIncrementorsStatement new
-				addChild: aIncrementorStatement;
-				yourself)
+	self childrenNode
+		add:
+			(aIncrementorStatement mooseModel
+				silentlyAdd:
+					(FASTJavaIncrementorsStatement new
+						addChild: aIncrementorStatement;
+						yourself))
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
@@ -66,7 +74,9 @@ FASTJavaForStatement >> initializers [
 FASTJavaForStatement >> initializers: aInitializerStatement [
 	self childrenNode
 		add:
-			(FASTJavaInitializersStatement new
-				addChild:  aInitializerStatement;
-				yourself)
+			(aInitializerStatement mooseModel
+				silentlyAdd:
+					(FASTJavaInitializersStatement new
+						addChild: aInitializerStatement;
+						yourself))
 ]

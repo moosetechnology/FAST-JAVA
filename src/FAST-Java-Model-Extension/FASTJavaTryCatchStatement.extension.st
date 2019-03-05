@@ -25,7 +25,11 @@ FASTJavaTryCatchStatement >> try [
 
 { #category : #'*FAST-Java-Model-Extension' }
 FASTJavaTryCatchStatement >> try: aFASTJavaTryPartStatement [
-	self childrenNode add: (FASTJavaTryPartStatement new
-				addChild: aFASTJavaTryPartStatement;
-				yourself)
+	self childrenNode
+		add:
+			(aFASTJavaTryPartStatement mooseModel
+				silentlyAdd:
+					(FASTJavaTryPartStatement new
+						addChild: aFASTJavaTryPartStatement;
+						yourself))
 ]

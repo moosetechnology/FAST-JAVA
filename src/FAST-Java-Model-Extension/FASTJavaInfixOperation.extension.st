@@ -11,10 +11,12 @@ FASTJavaInfixOperation >> leftOperand [
 FASTJavaInfixOperation >> leftOperand: aFASTJavaOperationLeftOperand [
 	self childrenNode
 		add:
-			(FASTJavaOperationLeftOperand new
-				addChild: aFASTJavaOperationLeftOperand;
-				yourself).
-				^ aFASTJavaOperationLeftOperand
+			(aFASTJavaOperationLeftOperand mooseModel
+				silentlyAdd:
+					(FASTJavaOperationLeftOperand new
+						addChild: aFASTJavaOperationLeftOperand;
+						yourself)).
+	^ aFASTJavaOperationLeftOperand
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
@@ -27,8 +29,10 @@ FASTJavaInfixOperation >> rightOperand [
 FASTJavaInfixOperation >> rightOperand: aFASTJavaOperationRightOperand [
 	self childrenNode
 		add:
-			(FASTJavaOperationRightOperand new
-				addChild: aFASTJavaOperationRightOperand;
-				yourself).
+			(aFASTJavaOperationRightOperand mooseModel
+				silentlyAdd:
+					(FASTJavaOperationRightOperand new
+						addChild: aFASTJavaOperationRightOperand;
+						yourself)).
 	^ aFASTJavaOperationRightOperand
 ]

@@ -12,9 +12,13 @@ FASTJavaWhileStatement >> body [
 
 { #category : #'*FAST-Java-Model-Extension' }
 FASTJavaWhileStatement >> body: aFASTJavaBodyStatement [
-	self childrenNode add: (FASTJavaBodyStatement new
-				addChild: aFASTJavaBodyStatement;
-				yourself)
+	self childrenNode
+		add:
+			(aFASTJavaBodyStatement mooseModel
+				silentlyAdd:
+					(FASTJavaBodyStatement new
+						addChild: aFASTJavaBodyStatement;
+						yourself))
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
@@ -29,7 +33,11 @@ FASTJavaWhileStatement >> condition [
 
 { #category : #'*FAST-Java-Model-Extension' }
 FASTJavaWhileStatement >> condition: aFASTJavaConditionStatement [
-	self childrenNode add: 	(FASTJavaConditionStatement new
-				addChild: aFASTJavaConditionStatement;
-				yourself)
+	self childrenNode
+		add:
+			(aFASTJavaConditionStatement mooseModel
+				silentlyAdd:
+					(FASTJavaConditionStatement new
+						addChild: aFASTJavaConditionStatement;
+						yourself))
 ]
