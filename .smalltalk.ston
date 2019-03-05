@@ -1,0 +1,9 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'FASTJava',
+      #directory : 'src',
+      #load : [ 'smacc' 'visitor' ],
+      #platforms : [ #pharo ]
+    }
+  ]
