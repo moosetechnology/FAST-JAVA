@@ -4,9 +4,11 @@ Extension { #name : #FASTJavaNewClassExpression }
 FASTJavaNewClassExpression >> addMethod: aFASTJavaMethodDeclaration [
 	self childrenNode
 		add:
-			(FASTJavaNewClassMethodStatment new
-				addChild: aFASTJavaMethodDeclaration;
-				yourself)
+			(aFASTJavaMethodDeclaration mooseModel
+				silentlyAdd:
+					(FASTJavaNewClassMethodStatment new
+						addChild: aFASTJavaMethodDeclaration;
+						yourself))
 ]
 
 { #category : #'*FAST-Java-Model-Extension' }
