@@ -40,11 +40,9 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity [
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEntity [
-	self parentFASTVisitor
-		ifNotNil: [ currentFASTEntity parentNode: self parentFASTEntity.
-			currentFASTEntity startPos: aNodeEntity startPosition.
-			currentFASTEntity endPos: aNodeEntity stopPosition ]
-		ifNil: [ currentFASTEntity source: aNodeEntity completeSource asString.  ]
+	self parentFASTVisitor ifNotNil: [ currentFASTEntity parentNode: self parentFASTEntity ] ifNil: [ currentFASTEntity source: aNodeEntity completeSource asString ].
+	currentFASTEntity startPos: aNodeEntity startPosition.
+	currentFASTEntity endPos: aNodeEntity stopPosition
 ]
 
 { #category : #initialization }
