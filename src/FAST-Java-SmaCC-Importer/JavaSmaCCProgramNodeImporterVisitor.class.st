@@ -425,24 +425,28 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation [
 	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
-		self
-		generalVisitActionForNodeEntity: aMethodInvocation.
-	aMethodInvocation expressions
-		do:
-			[ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
+	self generalVisitActionForNodeEntity: aMethodInvocation.
+	aMethodInvocation expressions do: [ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
 	aMethodInvocation receiver
 		ifNotNil: [ :receiver | 
 			(receiver isMemberOf: JavaNameNode)
-				ifTrue:
-					[ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
+				ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
 					currentFASTEntity
 						receiver:
 							(FASTJavaIdentifier new
 								name: receiver name value;
 								parentNode: currentFASTEntity;
-								yourself).
-					self addToModel: currentFASTEntity receiver ]
-				ifFalse: [ currentFASTEntity receiver: (self clone accept: receiver) ] ].
+								yourself). ]
+				ifFalse: [ currentFASTEntity receiver: (self clone accept: receiver) ] ]
+		ifNil: [ aMethodInvocation superToken
+				ifNotNil: [ :superToken | 
+					currentFASTEntity
+						receiver:
+							(FASTJavaIdentifier new
+								name: superToken value;
+								parentNode: currentFASTEntity;
+								yourself) ] ].
+	currentFASTEntity receiver ifNotNil: [ :receiver | self addToModel: receiver ].
 	currentFASTEntity name: aMethodInvocation name value.
 	^ currentFASTEntity
 ]
