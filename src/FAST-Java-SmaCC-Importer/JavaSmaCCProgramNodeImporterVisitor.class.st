@@ -436,7 +436,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 							(FASTJavaIdentifier new
 								name: receiver name value;
 								parentNode: currentFASTEntity;
-								yourself). ]
+								startPos: receiver startPosition;
+								endPos: receiver stopPosition;
+								yourself) ]
 				ifFalse: [ currentFASTEntity receiver: (self clone accept: receiver) ] ]
 		ifNil: [ aMethodInvocation superToken
 				ifNotNil: [ :superToken | 
@@ -445,6 +447,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 							(FASTJavaIdentifier new
 								name: superToken value;
 								parentNode: currentFASTEntity;
+								startPos: superToken startPosition;
+								endPos: superToken stopPosition;
 								yourself) ] ].
 	currentFASTEntity receiver ifNotNil: [ :receiver | self addToModel: receiver ].
 	currentFASTEntity name: aMethodInvocation name value.
