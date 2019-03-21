@@ -586,16 +586,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
 	currentFASTEntity := self addToModel: FASTReturnStatement new.
 	self generalVisitActionForNodeEntity: aReturnStatement.
 	(aReturnStatement expression isKindOf: JavaNameNode)
-		ifTrue:
-			[ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
+		ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
 			currentFASTEntity
 				expression:
-					(FASTJavaIdentifier new
+					(self addToModel: (FASTJavaIdentifier new
 						name: aReturnStatement expression name value;
-						yourself) ]
-		ifFalse: [ aReturnStatement expression
-				ifNotNil:
-					[ :expression | currentFASTEntity expression: (self clone accept: expression) ] ].
+						yourself)) ]
+		ifFalse: [ aReturnStatement expression ifNotNil: [ :expression | currentFASTEntity expression: (self clone accept: expression) ] ].
 	^ currentFASTEntity
 ]
 
