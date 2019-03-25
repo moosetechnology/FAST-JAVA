@@ -6,10 +6,6 @@ Contains a referances to an assignee assignee and the expression that's being as
 Class {
 	#name : #FASTJavaAssignementExpression,
 	#superclass : #FASTExpression,
-	#instVars : [
-		'expression',
-		'variable'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -26,7 +22,7 @@ FASTJavaAssignementExpression class >> annotation [
 FASTJavaAssignementExpression class >> generatedSlotNames [
 	<generated>
 	'FASTJavaAssignementExpression class>>#generatedSlotNames'.
-	^ #(expression variable)
+	^ #()
 ]
 
 { #category : #generator }
@@ -45,33 +41,53 @@ FASTJavaAssignementExpression class >> requirements [
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression [
 
-	<MSEProperty: #expression type: #FASTExpression>
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
-	^ expression
+	<MSEProperty: #expression type: #Object>
+	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression: anObject [
 
 	<generated>
-	expression := anObject
+	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #expression put: anObject.
+	anObject javaAssignementExpressioOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaAssignementExpression >> expressionGroup [
+
+	<generated>
+	<navigation: 'Expression'>
+	^ MooseGroup
+			with: (self expression)
 ]
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> variable [
 
-	<MSEProperty: #variable type: #FASTNamedEntity>
 	<generated>
 	<MSEComment: 'Variable that s being assigned'>
-	^ variable
+	<MSEProperty: #variable type: #Object>
+	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> variable: anObject [
 
 	<generated>
-	variable := anObject
+	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #variable put: anObject.
+	anObject javaAssignementExpressioOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaAssignementExpression >> variableGroup [
+
+	<generated>
+	<navigation: 'Variable'>
+	^ MooseGroup
+			with: (self variable)
 ]

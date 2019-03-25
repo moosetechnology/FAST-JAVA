@@ -17,7 +17,6 @@ Class {
 	#name : #FASTJavaUnaryExpression,
 	#superclass : #FASTExpression,
 	#instVars : [
-		'expression',
 		'isPrefixedUnaryExpression',
 		'operator'
 	],
@@ -37,7 +36,7 @@ FASTJavaUnaryExpression class >> annotation [
 FASTJavaUnaryExpression class >> generatedSlotNames [
 	<generated>
 	'FASTJavaUnaryExpression class>>#generatedSlotNames'.
-	^ #(expression isPrefixedUnaryExpression operator)
+	^ #(isPrefixedUnaryExpression operator)
 ]
 
 { #category : #generator }
@@ -56,18 +55,28 @@ FASTJavaUnaryExpression class >> requirements [
 { #category : #accessing }
 FASTJavaUnaryExpression >> expression [
 
-	<MSEProperty: #expression type: #FASTExpression>
 	<generated>
 	<MSEComment: 'The affected expression'>
-	^ expression
+	<MSEProperty: #expression type: #Object>
+	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> expression: anObject [
 
 	<generated>
-	expression := anObject
+	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #expression put: anObject.
+	anObject javaUnaryExpressionOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaUnaryExpression >> expressionGroup [
+
+	<generated>
+	<navigation: 'Expression'>
+	^ MooseGroup
+			with: (self expression)
 ]
 
 { #category : #accessing }

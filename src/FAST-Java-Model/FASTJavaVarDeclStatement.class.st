@@ -12,7 +12,8 @@ Class {
 	#name : #FASTJavaVarDeclStatement,
 	#superclass : #FASTStatement,
 	#instVars : [
-		'type'
+		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner',
+		'#type'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -30,7 +31,7 @@ FASTJavaVarDeclStatement class >> annotation [
 FASTJavaVarDeclStatement class >> generatedSlotNames [
 	<generated>
 	'FASTJavaVarDeclStatement class>>#generatedSlotNames'.
-	^ #(type)
+	^ #(declarators type)
 ]
 
 { #category : #generator }
@@ -44,6 +45,31 @@ FASTJavaVarDeclStatement class >> requirements [
 
 	<generated>
 	^ {  }
+]
+
+{ #category : #accessing }
+FASTJavaVarDeclStatement >> declarators [
+
+	<generated>
+	<MSEComment: 'The declarators for the type'>
+	^ declarators
+]
+
+{ #category : #accessing }
+FASTJavaVarDeclStatement >> declarators: anObject [
+
+	<generated>
+	declarators value: anObject
+
+]
+
+{ #category : #navigation }
+FASTJavaVarDeclStatement >> declaratorsGroup [
+
+	<generated>
+	<navigation: 'Declarators'>
+	^ MooseGroup
+			withAll: (self declarators asSet)
 ]
 
 { #category : #accessing }

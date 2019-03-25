@@ -8,9 +8,6 @@ hello(MyClass.this)
 Class {
 	#name : #FASTJavaOuterThis,
 	#superclass : #FASTExpression,
-	#instVars : [
-		'type'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -27,7 +24,7 @@ FASTJavaOuterThis class >> annotation [
 FASTJavaOuterThis class >> generatedSlotNames [
 	<generated>
 	'FASTJavaOuterThis class>>#generatedSlotNames'.
-	^ #(type)
+	^ #()
 ]
 
 { #category : #generator }
@@ -46,16 +43,26 @@ FASTJavaOuterThis class >> requirements [
 { #category : #accessing }
 FASTJavaOuterThis >> type [
 
-	<MSEProperty: #type type: #FASTNamedEntity>
 	<generated>
 	<MSEComment: 'The accessed type'>
-	^ type
+	<MSEProperty: #type type: #Object>
+	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaOuterThis >> type: anObject [
 
 	<generated>
-	type := anObject
+	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #type put: anObject.
+	anObject javaOuterThisOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaOuterThis >> typeGroup [
+
+	<generated>
+	<navigation: 'Type'>
+	^ MooseGroup
+			with: (self type)
 ]

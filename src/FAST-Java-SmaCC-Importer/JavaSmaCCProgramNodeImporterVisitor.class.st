@@ -40,7 +40,7 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity [
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEntity [
-	self parentFASTVisitor ifNotNil: [ currentFASTEntity parentNode: self parentFASTEntity ] ifNil: [ currentFASTEntity source: aNodeEntity completeSource asString ].
+	self parentFASTVisitor ifNotNil: [  ] ifNil: [ currentFASTEntity source: aNodeEntity completeSource asString ].
 	currentFASTEntity startPos: aNodeEntity startPosition.
 	currentFASTEntity endPos: aNodeEntity stopPosition
 ]
@@ -48,7 +48,7 @@ JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEnt
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	super initialize.
-	model := FASTMooseModel new
+	model := MooseModel new metamodel: FASTJavaMetamodelGenerator metamodel; yourself
 ]
 
 { #category : #initialization }
@@ -101,7 +101,6 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 	currentFASTEntity := self addToModel: FASTJavaArrayAccess new.
 	self generalVisitActionForNodeEntity: anArrayAccess.
-	currentFASTEntity parentNode: self parentFASTEntity.
 	currentFASTEntity array: (self clone accept: anArrayAccess array).
 	currentFASTEntity
 		expression: (self clone accept: anArrayAccess expression).
@@ -137,7 +136,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
 	currentFASTEntity := self addToModel: FASTStatementBlock new.
 	self generalVisitActionForNodeEntity: aBlock.
 	aBlock statements
-		do: [ :each | currentFASTEntity addStatement: (self clone accept: each) ].
+		do: [ :each | currentFASTEntity statements add: (self clone accept: each) ].
 	^ currentFASTEntity
 ]
 
@@ -182,7 +181,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchClause: aCatchClause [
 JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
 	| param |
 	param := self visitName: aCatchParameter variable.
-	self parentFASTEntity addParameter: param.
+	self parentFASTEntity parameter: param.
 	^ param
 ]
 
@@ -208,7 +207,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
-	currentFASTEntity := self addToModel: FASTNamedEntity new.
+	currentFASTEntity := self addToModel: FASTVariableExpression new.
 	currentFASTEntity name: aClassType name name value.
 	self generalVisitActionForNodeEntity: aClassType.
 	^ currentFASTEntity
@@ -217,7 +216,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitConditionalExpression: aConditionalExpression [
 	currentFASTEntity := self
-		addToModel: FASTJavaConditionalStatement new.
+		addToModel: FASTJavaConditionalExpression new.
 	self generalVisitActionForNodeEntity: aConditionalExpression.
 	currentFASTEntity
 		condition: (self clone accept: aConditionalExpression testExpression).
@@ -268,7 +267,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionSta
 	currentFASTEntity := self addToModel: FASTExpressionStatement new.
 	self generalVisitActionForNodeEntity: anExpressionStatement.
 	currentFASTEntity
-		addExpression: (self clone accept: anExpressionStatement expression).
+		expression: (self clone accept: anExpressionStatement expression).
 	^ currentFASTEntity
 ]
 
@@ -285,7 +284,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldDeclaration: aFieldDeclaration 
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aFieldDeclaration.
 	aFieldDeclaration variableDeclarations
-		do: [ :each | currentFASTEntity addDeclarator: (self clone accept: each) ].
+		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity
 ]
 
@@ -322,10 +321,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 		ifNotNil: [ :test | currentFASTEntity condition: (self clone accept: test) ].
 	aForStatement _update
 		ifNotNil:
-			[ :_update | currentFASTEntity incrementors: (self clone accept: _update) ].
+			[ :_update | currentFASTEntity incrementor: (self clone accept: _update) ].
 	aForStatement initial
 		ifNotNil:
-			[ :initial | currentFASTEntity initializers: (self clone accept: initial) ].
+			[ :initial | currentFASTEntity initializer: (self clone accept: initial) ].
 	aForStatement statement
 		ifNotNil:
 			[ :statement | currentFASTEntity body: (self clone accept: statement) ].
@@ -395,7 +394,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVari
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aLocalVariableDeclaration.
 	aLocalVariableDeclaration variableDeclarations
-		do: [ :each | currentFASTEntity addDeclarator: (self clone accept: each) ].
+		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity
 ]
 
@@ -404,7 +403,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: a
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aLocalVariableDeclarationStatement.
 	aLocalVariableDeclarationStatement declaration variableDeclarations
-		do: [ :each | currentFASTEntity addDeclarator: (self clone accept: each) ].
+		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity
 ]
 
@@ -426,7 +425,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation [
 	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
 	self generalVisitActionForNodeEntity: aMethodInvocation.
-	aMethodInvocation expressions do: [ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
+	aMethodInvocation expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	aMethodInvocation receiver
 		ifNotNil: [ :receiver | 
 			(receiver isMemberOf: JavaNameNode)
@@ -435,7 +434,6 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 						receiver:
 							(FASTJavaIdentifier new
 								name: receiver name value;
-								parentNode: currentFASTEntity;
 								startPos: receiver startPosition;
 								endPos: receiver stopPosition;
 								yourself) ]
@@ -446,7 +444,6 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 						receiver:
 							(FASTJavaIdentifier new
 								name: superToken value;
-								parentNode: currentFASTEntity;
 								startPos: superToken startPosition;
 								endPos: superToken stopPosition;
 								yourself) ] ].
@@ -457,7 +454,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
-	currentFASTEntity := self addToModel: FASTNamedEntity new.
+	currentFASTEntity := self addToModel: FASTVariableExpression new.
 	currentFASTEntity name: aName name value.
 	self generalVisitActionForNodeEntity: aName.
 	^ currentFASTEntity
@@ -469,7 +466,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNew: aNewNode [
 	self generalVisitActionForNodeEntity: aNewNode.
 	aNewNode expressions
 		do:
-			[ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
+			[ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity type: (self clone accept: aNewNode type).
 	^ currentFASTEntity
 ]
@@ -483,11 +480,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 		ifNotNil: [ :initialize | 
 			initialize initializers
 				do:
-					[ :initializer | currentFASTEntity addInitializer: (self clone accept: initializer) ] ].
+					[ :initializer | currentFASTEntity initializers add: (self clone accept: initializer) ] ].
 	aNewArray dimExpressions
 		do: [ :dimExpression | 
 			currentFASTEntity
-				addArgument: (self clone accept: dimExpression expression) ].
+				arguments add: (self clone accept: dimExpression expression) ].
 	^ currentFASTEntity
 ]
 
@@ -497,10 +494,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 		self generalVisitActionForNodeEntity: aNewClass.
 	aNewClass expressions
 		do:
-			[ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
+			[ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity type: (self clone accept: aNewClass type).
 	aNewClass declarations
-		do: [ :method | currentFASTEntity addMethod: (self clone accept: method) ].
+		do: [ :method | currentFASTEntity declarations add: (self clone accept: method) ].
 	^ currentFASTEntity
 ]
 
@@ -527,8 +524,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	| param |
-	param := self visitName: aParameter variable.
-	self parentFASTEntity addParameter: param.
+	param := self accept: aParameter variable.
+	self parentFASTEntity parameters add: param.
 	^ param
 ]
 
@@ -606,7 +603,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStatementExpressionList: aStatementE
 	self generalVisitActionForNodeEntity: aStatementExpressionList.
 	aStatementExpressionList expressions
 		do:
-			[ :expression | currentFASTEntity addExpression: (self clone accept: expression) ].
+			[ :expression | currentFASTEntity expression: (self clone accept: expression) ].
 	^ currentFASTEntity
 ]
 
@@ -623,13 +620,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStringLiteral: aStringLiteral [
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperConstructorInvocation [
-	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
+	| expressionStatement |
+	currentFASTEntity := self addToModel: FASTExpressionStatement new.
+	expressionStatement := currentFASTEntity. 
 	self generalVisitActionForNodeEntity: aSuperConstructorInvocation.
-	aSuperConstructorInvocation expressions
-		do:
-			[ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
+	"we encasulate the call inside a fast expression statement"
+	currentFASTEntity expression: (self addToModel: FASTJavaMethodInvocation new).
+	currentFASTEntity := currentFASTEntity expression.
+	self generalVisitActionForNodeEntity: aSuperConstructorInvocation.
+	aSuperConstructorInvocation expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity name: aSuperConstructorInvocation superToken value.
-	^ currentFASTEntity
+	^ expressionStatement
 ]
 
 { #category : #initialization }
@@ -642,7 +643,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 						yourself ]
 				ifFalse: [ FASTJavaDefaultCaseStatement new ]).
 	self generalVisitActionForNodeEntity: aSwitchBlockStatementGroup.
-	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity addStatement: (self clone accept: statement) ].
+	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity statements add: (self clone accept: statement) ].
 	^ currentFASTEntity
 ]
 
@@ -651,20 +652,26 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 	currentFASTEntity := self addToModel: FASTJavaSwitchStatement new.
 	self generalVisitActionForNodeEntity: aSwitchStatement.
 	aSwitchStatement block statementGroups do: [ :aStatementGroup |
-		 currentFASTEntity addCase: (self clone accept: aStatementGroup) ].
+		 currentFASTEntity cases add: (self clone accept: aStatementGroup) ].
 	 
 	^ currentFASTEntity
 ]
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitThisConstructorInvocation: aThisConstructorInvocation [
-	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
+	| expressionStatement | 
+	currentFASTEntity := self addToModel: FASTExpressionStatement new.
+	expressionStatement := currentFASTEntity. 
+	self generalVisitActionForNodeEntity: aThisConstructorInvocation.
+	"we encasulate the call inside a fast expression statement"
+	currentFASTEntity expression: (self addToModel: FASTJavaMethodInvocation new).
+	currentFASTEntity := currentFASTEntity expression.
 	self generalVisitActionForNodeEntity: aThisConstructorInvocation.
 	aThisConstructorInvocation expressions
 		do:
-			[ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
+			[ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity name: aThisConstructorInvocation thisToken value.
-	^ currentFASTEntity
+	^ expressionStatement
 ]
 
 { #category : #initialization }
@@ -682,7 +689,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 	currentFASTEntity try: (self clone accept: aTryStatement block).
 	aTryStatement catches
 		do:
-			[ :aCatchBlock | currentFASTEntity addCatch: (self clone accept: aCatchBlock) ].
+			[ :aCatchBlock | currentFASTEntity catches add: (self clone accept: aCatchBlock) ].
 	^ currentFASTEntity
 ]
 
@@ -741,7 +748,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclar
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableName: aVariableName [
-	^ self visitName: aVariableName 
+	currentFASTEntity := self addToModel: FASTVariableExpression new.
+	currentFASTEntity name: aVariableName name value.
+	self generalVisitActionForNodeEntity: aVariableName.
+	^ currentFASTEntity
 ]
 
 { #category : #initialization }

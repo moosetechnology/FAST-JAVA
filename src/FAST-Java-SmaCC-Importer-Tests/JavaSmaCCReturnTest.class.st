@@ -24,10 +24,10 @@ JavaSmaCCReturnTest >> setUp [
 
 { #category : #'as yet unclassified' }
 JavaSmaCCReturnTest >> testIdentifierInModelSize [
-	self assert: (methodReturn allWithType: FASTNamedEntity) size equals: 1
+	self assert: (methodReturn allWithType: FASTVariableExpression) size equals: 1
 ]
 
 { #category : #'as yet unclassified' }
 JavaSmaCCReturnTest >> testNamedEntityInModelSize [
-	self assert: (methodReturn allWithType: FASTNamedEntity) size equals: 1
+	self assert: (methodReturn allWithType: FASTVariableExpression) size equals: 1
 ]

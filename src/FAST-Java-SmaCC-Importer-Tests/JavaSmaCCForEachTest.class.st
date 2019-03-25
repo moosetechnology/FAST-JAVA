@@ -44,7 +44,7 @@ JavaSmaCCForEachTest >> testForEachFieldNameParent [
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachFieldNameType [
-	self assert: methodForEach statements first fieldname class equals: FASTNamedEntity 
+	self assert: methodForEach statements first fieldname class equals: FASTVariableExpression
 ]
 
 { #category : #tests }
@@ -69,5 +69,5 @@ JavaSmaCCForEachTest >> testForEachTypeName [
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachTypeType [
-	self assert: methodForEach statements first type class equals: FASTNamedEntity
+	self assert: methodForEach statements first type class equals: FASTVariableExpression
 ]

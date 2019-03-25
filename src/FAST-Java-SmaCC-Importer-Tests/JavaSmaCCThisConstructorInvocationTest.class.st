@@ -38,7 +38,7 @@ JavaSmaCCThisConstructorInvocationTest >> testThisConstructorName [
 
 { #category : #tests }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorParent [
-	self assert: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) anyOne parentNode equals: methodSuperConstructor statementBlock 
+	self assert: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) anyOne parentNode  parentNode equals: methodSuperConstructor statementBlock 
 ]
 
 { #category : #tests }

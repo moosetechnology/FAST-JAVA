@@ -8,9 +8,6 @@ case LABEL:
 Class {
 	#name : #FASTJavaLabeledCaseStatement,
 	#superclass : #FASTJavaCaseStatement,
-	#instVars : [
-		'label'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -27,7 +24,7 @@ FASTJavaLabeledCaseStatement class >> annotation [
 FASTJavaLabeledCaseStatement class >> generatedSlotNames [
 	<generated>
 	'FASTJavaLabeledCaseStatement class>>#generatedSlotNames'.
-	^ #(label)
+	^ #()
 ]
 
 { #category : #generator }
@@ -46,16 +43,26 @@ FASTJavaLabeledCaseStatement class >> requirements [
 { #category : #accessing }
 FASTJavaLabeledCaseStatement >> label [
 
-	<MSEProperty: #label type: #FASTExpression>
 	<generated>
 	<MSEComment: 'The label of the case statement'>
-	^ label
+	<MSEProperty: #label type: #Object>
+	^ self privateState attributeAt: #label ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaLabeledCaseStatement >> label: anObject [
 
 	<generated>
-	label := anObject
+	(self privateState attributeAt: #label ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #label put: anObject.
+	anObject javaLabeledCaseStatementOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaLabeledCaseStatement >> labelGroup [
+
+	<generated>
+	<navigation: 'Label'>
+	^ MooseGroup
+			with: (self label)
 ]

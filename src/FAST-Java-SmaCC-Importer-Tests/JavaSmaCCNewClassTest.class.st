@@ -30,7 +30,7 @@ JavaSmaCCNewClassTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCNewClassTest >> testDeclaredMethodSize [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne methods size equals: 2
+	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
 ]
 
 { #category : #tests }

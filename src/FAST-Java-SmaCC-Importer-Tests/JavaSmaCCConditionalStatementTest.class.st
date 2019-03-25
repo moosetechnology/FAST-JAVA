@@ -28,7 +28,7 @@ JavaSmaCCConditionalStatementTest >> testConditionalContidionParent [
 
 { #category : #tests }
 JavaSmaCCConditionalStatementTest >> testConditionalContidionType [
-	self assert: methodConditionalStatement statements anyOne declarators anyOne expression condition class equals: FASTJavaConditionStatement 
+	self assert: methodConditionalStatement statements anyOne declarators anyOne expression condition class equals: FASTJavaInfixOperation 
 ]
 
 { #category : #tests }
@@ -38,7 +38,7 @@ JavaSmaCCConditionalStatementTest >> testConditionalElsePartParent [
 
 { #category : #tests }
 JavaSmaCCConditionalStatementTest >> testConditionalElsePartType [
-	self assert: methodConditionalStatement statements anyOne declarators anyOne expression elsePart class equals: FASTJavaElsePartStatement
+	self assert: methodConditionalStatement statements anyOne declarators anyOne expression elsePart class equals: FASTJavaIntegerLiteral
 ]
 
 { #category : #tests }
@@ -48,7 +48,7 @@ JavaSmaCCConditionalStatementTest >> testConditionalParent [
 
 { #category : #tests }
 JavaSmaCCConditionalStatementTest >> testConditionalSize [
-	self assert: (methodConditionalStatement mooseModel allWithType: FASTJavaConditionalStatement) size equals: 1 
+	self assert: (methodConditionalStatement mooseModel allWithType: FASTJavaConditionalExpression) size equals: 1 
 ]
 
 { #category : #tests }
@@ -58,10 +58,10 @@ JavaSmaCCConditionalStatementTest >> testConditionalThenPartParent [
 
 { #category : #tests }
 JavaSmaCCConditionalStatementTest >> testConditionalThenPartType [
-	self assert: methodConditionalStatement statements anyOne declarators anyOne expression thenPart class equals: FASTJavaThenPartStatement 
+	self assert: methodConditionalStatement statements anyOne declarators anyOne expression thenPart class equals: FASTJavaIntegerLiteral 
 ]
 
 { #category : #tests }
 JavaSmaCCConditionalStatementTest >> testConditionalType [
-	self assert: methodConditionalStatement statements anyOne declarators anyOne expression class equals: FASTJavaConditionalStatement 
+	self assert: methodConditionalStatement statements anyOne declarators anyOne expression class equals: FASTJavaConditionalExpression 
 ]

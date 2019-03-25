@@ -41,5 +41,5 @@ JavaSmaCCArrayAccessTest >> testNumberOfarrayAccess [
 { #category : #tests }
 JavaSmaCCArrayAccessTest >> testSubArrayType [
 	self assert: methodArrayAccess statements second declarators anyOne expression array class equals: FASTJavaArrayAccess.
-	self assert: methodArrayAccess statements second declarators anyOne expression array array class equals: FASTNamedEntity.
+	self assert: methodArrayAccess statements second declarators anyOne expression array array class equals: FASTVariableExpression.
 ]

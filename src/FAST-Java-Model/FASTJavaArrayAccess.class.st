@@ -8,10 +8,6 @@ liste[i]
 Class {
 	#name : #FASTJavaArrayAccess,
 	#superclass : #FASTExpression,
-	#instVars : [
-		'array',
-		'expression'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -28,7 +24,7 @@ FASTJavaArrayAccess class >> annotation [
 FASTJavaArrayAccess class >> generatedSlotNames [
 	<generated>
 	'FASTJavaArrayAccess class>>#generatedSlotNames'.
-	^ #(array expression)
+	^ #()
 ]
 
 { #category : #generator }
@@ -47,33 +43,53 @@ FASTJavaArrayAccess class >> requirements [
 { #category : #accessing }
 FASTJavaArrayAccess >> array [
 
-	<MSEProperty: #array type: #Object>
 	<generated>
 	<MSEComment: 'Name of accessed field'>
-	^ array
+	<MSEProperty: #array type: #Object>
+	^ self privateState attributeAt: #array ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaArrayAccess >> array: anObject [
 
 	<generated>
-	array := anObject
+	(self privateState attributeAt: #array ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #array put: anObject.
+	anObject javaArrayArrayAccessOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaArrayAccess >> arrayGroup [
+
+	<generated>
+	<navigation: 'Array'>
+	^ MooseGroup
+			with: (self array)
 ]
 
 { #category : #accessing }
 FASTJavaArrayAccess >> expression [
 
-	<MSEProperty: #expression type: #FASTExpression>
 	<generated>
 	<MSEComment: 'The accessed index'>
-	^ expression
+	<MSEProperty: #expression type: #Object>
+	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaArrayAccess >> expression: anObject [
 
 	<generated>
-	expression := anObject
+	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #expression put: anObject.
+	anObject javaArrayAccessOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaArrayAccess >> expressionGroup [
+
+	<generated>
+	<navigation: 'Expression'>
+	^ MooseGroup
+			with: (self expression)
 ]

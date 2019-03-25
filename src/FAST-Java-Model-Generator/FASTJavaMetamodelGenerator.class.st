@@ -54,7 +54,6 @@ Class {
 		'javaNewClassExpression',
 		'javaNewClassMethodStatment',
 		'javaNewArray',
-		'javaConditionalStatement',
 		'javaArrayAccess',
 		'javaInitializer',
 		'javaOuterThis',
@@ -71,10 +70,22 @@ Class {
 		'nullPointerLiteral',
 		'stringLiteral',
 		'entitySourceAnchor',
-		'scopableEntity'
+		'scopableEntity',
+		'variableEntity',
+		'statementBlock',
+		'expressionStatement',
+		'javaConditionalExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
+
+{ #category : #accessing }
+FASTJavaMetamodelGenerator class >> modifyMetamodel: aMetamodel [
+
+	super modifyMetamodel: aMetamodel.
+	
+	self fixRemoteMetamodelRelationsIn: aMetamodel.
+]
 
 { #category : #accessing }
 FASTJavaMetamodelGenerator class >> packageName [
@@ -92,7 +103,7 @@ FASTJavaMetamodelGenerator class >> submetamodels [
 	^ { FASTMetamodelGenerator }
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaArrayAccess [
 	^ 'I represent a java array access
 	
@@ -101,29 +112,29 @@ ex:
 liste[i]'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaAssignementExpression [
 	^ 'An assignment expression mode.
 
 Contains a referances to an assignee assignee and the expression that''s being assigned.'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaBreakStatement [
 	^ 'A node representing break statement in java'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaCaseStatement [
 	^ 'case part of switch statement'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaCharacterLiteral [
 	^ 'A character in Java code'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaClassProperty [
 	^ 'A FASTJavaClassProperty corresponds to the access to a class property
 	
@@ -158,7 +169,7 @@ class Enclosing {
 '
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaConditionalStatement [
 	^ 'I represent a Java conditionnal Statement
 
@@ -167,12 +178,12 @@ ex:
 (h.get() == 2) ? thenPart : elsePart'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaContinueStatement [
 	^ 'A node representing continue statement in java'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaDefaultCaseStatement [
 	^ 'I represent a default case
 	
@@ -181,7 +192,7 @@ ex.:
 default:'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaDoStatement [
 	^ 'A node of a do-while statement.
 
@@ -191,7 +202,7 @@ do {
 } while(...);'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaEmptyMethodDeclaration [
 	^ 'I reprensent an empty method declaration
 	
@@ -205,18 +216,18 @@ void newMethod() {
 }'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaFieldAccess [
 	^ 'A FASTJavaFieldAccess corresponds to an access to an instance variable (field)'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaFloatLiteral [
 	self flag: #todo.
 	^ 'todo'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaForEachStatement [
 	^ 'A node of a for loop statement.
 
@@ -226,7 +237,7 @@ for(Patate p : list) {
 }'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaForStatement [
 	^ 'A node of a for loop statement.
 
@@ -236,12 +247,12 @@ for(_;_;_) {
 }'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaIdentifier [
 	^ 'A FASTJavaIdentifier is an identifier in a Java program'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaIfStatement [
 	^ 'A node of a if statement or an if-else statement.
 
@@ -253,7 +264,7 @@ if(...) {
 }'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaInfixOperation [
 	^ 'Binary java operations in  format: <expr> <operator> <expr>
 
@@ -263,7 +274,7 @@ ex:
 	a = 6'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaInitializer [
 	^ 'I represent a Java initializer
 	
@@ -277,12 +288,12 @@ new Button(){
 '
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaIntegerLiteral [
 	^ 'Java integer literal node'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaLabeledCaseStatement [
 	^ 'I represent a Labeled case
 	
@@ -291,17 +302,17 @@ ex.:
 case LABEL:'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaMethodEntity [
 	^ 'Represents a method in FastJava'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaMethodInvocation [
 	^ 'A node representing method imvocation'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaNewArray [
 	^ 'I represent a java new array node.
 ex.
@@ -309,7 +320,7 @@ ex.
 new String()["10px", "Hello world"]'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaNewClassExpression [
 	^ 'I represent a new class expression (which is most of the time a new anonymous class)
 	
@@ -327,7 +338,7 @@ new SecureAsyncCallback<Void>() {
 }'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaNewExpression [
 	^ 'I represent the invocation of a Class constructor with the keyword ''new''
 
@@ -336,12 +347,12 @@ ex.
 new Patate()'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaNullLiteral [
 	^ '''null'' literal in Java'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaOuterThis [
 	^ 'I represent a java outer this (only a call to ''this'' to a class
 	
@@ -350,18 +361,18 @@ ex.:
 hello(MyClass.this)'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaSeparator [
 	self flag: #todo.
 	^ 'todo'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
 	^ 'A string in Java'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaSwitchStatement [
 	^ 'A node representing switch stetement
 
@@ -371,12 +382,12 @@ switch (_) {
 }'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaThis [
 	^ 'A FASTJavaThis corresponds to ''this'' in Java'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaThrowStatement [
 	^ 'I represent a java throw statement
 	
@@ -385,7 +396,7 @@ ex:
 throw new Hello();'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaTryCatch [
 	^ 'I represent the java try catch statement. I must have two parts: the ''Try'' part and the ''catch'' part. 
 	
@@ -403,7 +414,7 @@ void tryCatch() {
 '
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaUnaryExpression [
 	^ 'I represent a Java Unary Expression
 	
@@ -420,7 +431,7 @@ i--
 see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaVarDeclStatement [
 	^ 'A statement of variable declaration
 
@@ -432,7 +443,7 @@ int d = 3, e, f = 5;
 statement has 3 declarators separated by commas. Second declarator has no expression.'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaVariableDeclarator [
 	^ 'A part of variable declaration statement containing a variable (named entity) and an expression (optional) that is assigned to it.
 
@@ -444,7 +455,7 @@ int d = 3, e, f = 5;
 statement has 3 declarators separated by commas. Second declarator has no expression.'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaWhileStatement [
 	^ 'A node of a while statement.
 
@@ -480,8 +491,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaVarDeclStatement := builder newClassNamed: #VarDeclStatement comment: self commentForJavaVarDeclStatement.
 	javaVariableDeclarator := builder newClassNamed: #VariableDeclarator comment: self commentForJavaVariableDeclarator.
 	javaWhileStatement := builder newClassNamed: #WhileStatement comment: self commentForJavaWhileStatement.
-
-	"new concept"
 	javaCastExpression := builder newClassNamed: #CastExpression comment: 'todo'.
 	javaClassProperty := builder newClassNamed: #ClassProperty comment: self commentForJavaClassProperty.
 	javaTryCatch := builder newClassNamed: #TryCatchStatement comment: self commentForJavaTryCatch.
@@ -490,7 +499,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaNewExpression := builder newClassNamed: #NewExpression comment: self commentForJavaNewExpression.
 	javaNewClassExpression := builder newClassNamed: #NewClassExpression comment: self commentForJavaNewClassExpression.
 	javaNewArray := builder newClassNamed: #NewArray comment: self commentForJavaNewArray.
-	javaConditionalStatement := builder newClassNamed: #ConditionalStatement comment: self commentForJavaConditionalStatement.
+	javaConditionalExpression := builder newClassNamed: #ConditionalExpression comment: self commentForJavaConditionalStatement.
 	javaArrayAccess := builder newClassNamed: #ArrayAccess comment: self commentForJavaArrayAccess.
 	javaInitializer := builder newClassNamed: #Initializer comment: self commentForJavaInitializer.
 	javaOuterThis := builder newClassNamed: #OuterThis comment: self commentForJavaOuterThis.
@@ -499,22 +508,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaDefaultCaseStatement := builder newClassNamed: #DefaultCaseStatement comment: self commentForJavaDefaultCaseStatement.
 	javaEmptyMethodDeclaration := builder newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
 	
-	"factice"
-	javaElsePartStatement := builder newClassNamed: #ElsePartStatement.
-	javaThenPartStatement := builder newClassNamed: #ThenPartStatement.
-	javaConditionStatement := builder newClassNamed: #ConditionStatement.
-	javaOperationLeftOperand := builder newClassNamed: #OperationLeftOperand.
-	javaOperationRightOperand := builder newClassNamed: #OperationRightOperand.
-	javaIncrementorsStatement := builder newClassNamed: #IncrementorsStatement comment: 'ExpressionStatements evaluated at the end of each loop'.
-	javaBodyStatement := builder newClassNamed: #BodyStatement comment: 'A statement to be evaluated in the loop'.
-	javaInitializersStatement := builder newClassNamed: #InitializersStatement comment: 'ExpressionStatements used at initialization phase of a for loop'.
-	javaNewClassMethodStatment := builder newClassNamed: #NewClassMethodStatment comment: 'I''m a factice entity that is used by JavaNewClassExpression to represents the defined method of a class'.
-
-	"new factice"
-	javaTryPartStatement := builder newClassNamed: #TryPartStatement comment: 'I represent the ''try'' part of the TryCatch Statement'.
 	javaCatchPartStatement := builder newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
-	
-
 
 
 	"From FAST"
@@ -527,7 +521,11 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	nullPointerLiteral := self remoteEntity: #NullPointerLiteral withPrefix: #FAST.
 	stringLiteral := self remoteEntity: #StringLiteral withPrefix: #FAST.
 	entitySourceAnchor := self remoteEntity: #EntitySourceAnchor withPrefix: #FAST.
-	scopableEntity := self remoteEntity: #ScopableEntity withPrefix: #FAST
+	scopableEntity := self remoteEntity: #ScopableEntity withPrefix: #FAST.
+	namedEntity := self remoteEntity: #NamedEntity withPrefix: #FAST.
+	variableEntity := self remoteEntity: #VariableEntity withPrefix: #FAST.
+	statementBlock := self remoteEntity: #StatementBlock withPrefix: #FAST.
+	expressionStatement := self remoteEntity: #ExpressionStatement withPrefix: #FAST
 ]
 
 { #category : #definition }
@@ -539,7 +537,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaFieldAccess --|> expression.
 	javaInfixOperation --|> expression.
 	javaBreakStatement --|> statement.
-	javaCaseStatement --|> statement.
+	javaCaseStatement --|> statementBlock.
 	javaCharacterLiteral --|> characterLiteral.
 	javaContinueStatement --|> statement.
 	javaDoStatement --|> statement.
@@ -562,8 +560,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVariableDeclarator --|> entitySourceAnchor.
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamed.
-
-	"New"
 	javaCastExpression --|> expression.
 	javaClassProperty --|> expression.
 	javaTryCatch --|> statement.
@@ -572,7 +568,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaNewExpression --|> expression.
 	javaNewClassExpression --|> javaNewExpression.
 	javaNewArray --|> javaNewExpression.
-	javaConditionalStatement --|> statement.
+	javaConditionalExpression --|> expression.
 	javaArrayAccess --|> expression.
 	javaThrowStatement --|> statement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
@@ -584,19 +580,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	
 	javaOuterThis --|> expression.
 
-	"Factice"
-	javaElsePartStatement --|> statement.
-	javaThenPartStatement --|> statement.
-	javaConditionStatement --|> statement.
-	javaIncrementorsStatement --|> statement.
-	javaBodyStatement --|> statement.
-	javaInitializersStatement --|> statement.
-	javaOperationLeftOperand --|> expression.
-	javaOperationRightOperand --|> expression.
-	javaNewClassMethodStatment --|> statement.
-
-	"new factice"
-	javaTryPartStatement --|> statement.
 	javaCatchPartStatement --|> statement
 ]
 
@@ -607,37 +590,86 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaInfixOperation property: #operator type: #String) comment: 'operator s symbol'.
 	(javaSeparator property: #separator type: #String) comment: 'separator'.
 	(javaVarDeclStatement property: #type type: #Object) comment: 'type of declared variables'.
-	(javaVariableDeclarator property: #expression type: #FASTExpression) comment: 'Expression that s being assigned upon declaration to the var'.
-	(javaVariableDeclarator property: #variable type: #FASTNamedEntity) comment: 'Variable that s being declared'.
-	(javaAssignementExpression property: #expression type: #FASTExpression) comment: 'Expression that s being assigned upon declaration to the var'.
-	(javaAssignementExpression property: #variable type: #FASTNamedEntity) comment: 'Variable that s being assigned'.
-
-	"new"
-	(javaCastExpression property: #type type: #FASTNamedEntity) comment: 'The type in witch the expression will be cast'.
-	(javaCastExpression property: #expression type: #FASTExpression) comment: 'The expression to cast'.
-	(javaClassProperty property: #type type: #FASTNamedEntity) comment: 'The owner type'.
 	(javaClassProperty property: #fieldName type: #String) comment: 'Name of accessed field'.
-	(javaMethodInvocation property: #receiver type: #FASTExpression) comment: 'The expression whitch will execute this invocation'.
-	(javaUnaryExpression property: #expression type: #FASTExpression) comment: 'The affected expression'.
+	
 	(javaUnaryExpression property: #operator type: #String) comment: 'The operator string to apply to the expression'.
 	(javaUnaryExpression property: #isPrefixedUnaryExpression type: #Boolean) comment: 'true if the expression is prefixed (ex. ++i) else false'.
-	(javaNewExpression property: #type type: #FASTNamedEntity) comment: 'The type of the array'.
-	(javaArrayAccess property: #array type: #Object) comment: 'Name of accessed field'.
-	(javaArrayAccess property: #expression type: #FASTExpression) comment: 'The accessed index'.
-	(javaOuterThis property: #type type: #FASTNamedEntity) comment: 'The accessed type'.
-	(javaThrowStatement property: #expression type: #FASTExpression) comment: 'The throwed element'.
-	(javaLabeledCaseStatement property: #label type: #FASTExpression) comment: 'The label of the case statement'.
-
-	"Try to remove the maximum of factice entity. So we create a Property for the relation '-'/one-to-one"
-	(javaForEachStatement property: #body type: #FASTStatement) comment: 'The body of the For Each statement'.
-	(javaForEachStatement property: #list type: #FASTExpression) comment: 'The list the for each statement iterate on'.
-	(javaForEachStatement property: #fieldname type: #FASTExpression) comment: 'The name of the created local variable'.
-	(javaForEachStatement property: #type type: #FASTStatement) comment: 'The name of the type of the created local variable'.
-	"try catch"
-	(javaCatchPartStatement property: #body type: #FASTStatement) comment: 'The body of the Catch part statement'
+	
 ]
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineRelations [
 	super defineRelations.
+	(((javaVarDeclStatement property: #declarators) comment: 'The declarators for the type') <>-* ((javaVariableDeclarator property: #varDeclOwner) comment: 'The owner of the declarator')) withoutPrimaryContainer.
+	
+	(((javaSwitchStatement property: #cases) comment: 'The cases of the switch statements') <>-* ((javaCaseStatement property: #javaCaseStatementSwitchOwner) comment: 'javaSwitch owner')) withoutPrimaryContainer.
+	
+	(((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var') <>- ((expression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+	(((javaVariableDeclarator property: #variable ) comment: 'Variable that s being declared') <>- ((variableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var') <>- ((expression property: #javaAssignementExpressioOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaAssignementExpression property: #variable ) comment: 'Variable that s being assigned') <>- ((variableExpression property: #javaAssignementExpressioOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast') <>- ((variableExpression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaClassProperty property: #type) comment: 'The owner type') <>- ((variableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation') <>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
+	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation') <>-* ((expression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
+	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation') <>-* ((variableExpression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaUnaryExpression property: #expression) comment: 'The affected expression') <>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaNewExpression property: #type) comment: 'The type of the array') <>- ((variableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression') <>-* ((expression property: #javaNewExpressionArgumentsOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
+	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
+	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaOuterThis property: #type) comment: 'The accessed type') <>- ((variableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaThrowStatement property: #expression) comment: 'The throwed element') <>- ((expression property: #javaThrowStatementOwner) comment: 'The javaThrowStatement owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaLabeledCaseStatement property: #label) comment: 'The label of the case statement') <>- ((expression property: #javaLabeledCaseStatementOwner) comment: 'The javaLabeledCaseStatement owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaForEachStatement property: #body) comment: 'The body of the For Each statement') <>- ((statement property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+	(((javaForEachStatement property: #list) comment: 'The list the for each statement iterate on') <>- ((expression property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+	(((javaForEachStatement property: #fieldname) comment: 'The name of the created local variable') <>- ((variableExpression property: #javaForEachStatementFieldNameOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+	(((javaForEachStatement property: #type) comment: 'The name of the type of the created local variable') <>- ((variableExpression property: #javaForEachStatementTypeOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaCatchPartStatement property: #body) comment: 'The body of the Catch part statement') <>- ((statement property: #javaCatchPartStatementOwner) comment: 'The javaCatchPartStatementOwner owner (if possible)')) withoutPrimaryContainer.
+	(((javaCatchPartStatement property: #parameter) comment: 'The parameter of the catch part') <>- ((variableExpression property: #javaCatchParameterOwnler) comment: 'The javaCatchPartParameterOwner owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaTryCatch property: #try) comment: 'I represent the ''try'' part of the TryCatch Statement') <>- ((statement property: #javaTryCatchOwner) comment: 'The javaTryCatch owner (if possible)')) withoutPrimaryContainer.
+	(((javaTryCatch property: #catches) comment: 'I contains all the catch statements') <>-* ((javaCatchPartStatement property: #tryOwner) comment: 'The try owner')) withoutPrimaryContainer.
+		
+	(((javaIfStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #ifConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+	(((javaIfStatement property: #elsePart) comment: 'else part') <>- ((statement property: #ifElsePartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
+	(((javaIfStatement property: #thenPart) comment: 'then part') <>- ((statement property: #ifThenPartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaConditionalExpression property: #condition) comment: 'The condition of the statement') <>- ((expression property: #conditionalConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+	(((javaConditionalExpression property: #elsePart) comment: 'else part') <>- ((expression property: #conditionalElsePartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
+	(((javaConditionalExpression property: #thenPart) comment: 'then part') <>- ((expression property: #conditionalThenPartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaInfixOperation property: #leftOperand) comment: 'leftOperand') <>- ((expression property: #infixOperationLeftOperandOwner) comment: 'The left operand (if possible)')) withoutPrimaryContainer.
+	(((javaInfixOperation property: #rightOperand) comment: 'rightOperand') <>- ((expression property: #infixOperationRightOperandOwner) comment: 'The right operand (if possible)')) withoutPrimaryContainer.
+	
+	(((javaForStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #forConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.
+	(((javaForStatement property: #incrementor) comment: 'Expression evaluated at the end of each loop') <>- ((statement property: #forIncrementorOwner) comment: 'I am the incrementor of the for')) withoutPrimaryContainer.
+	(((javaForStatement property: #initializer) comment: 'Expression used at initialization phase of a for loop') <>- ((statement property: #forIninitializerOwner) comment: 'I am the initializer of the for')) withoutPrimaryContainer.
+	(((javaForStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #forBodyOwner) comment: 'I am the body of the for')) withoutPrimaryContainer.
+
+	(((javaDoStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+	(((javaDoStatement property: #body) comment: 'A statement to be evaluated in the loop') <>-* ((statement property: #doBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
+	
+	(((javaWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.
+	(((javaWhileStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #whileBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
+
+	(((javaNewClassExpression property: #declarations) comment: 'The methods defined in the class') <>-* ((scopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)')) withoutPrimaryContainer.
+	
+	(((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity') <>- ((statementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.')) withoutPrimaryContainer.
+	
+	(((javaNewArray property: #initializers) comment: 'The initial values of the array') <>-* ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
 ]

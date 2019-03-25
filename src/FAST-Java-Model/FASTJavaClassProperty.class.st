@@ -35,8 +35,7 @@ Class {
 	#name : #FASTJavaClassProperty,
 	#superclass : #FASTExpression,
 	#instVars : [
-		'fieldName',
-		'type'
+		'fieldName'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -54,7 +53,7 @@ FASTJavaClassProperty class >> annotation [
 FASTJavaClassProperty class >> generatedSlotNames [
 	<generated>
 	'FASTJavaClassProperty class>>#generatedSlotNames'.
-	^ #(fieldName type)
+	^ #(fieldName)
 ]
 
 { #category : #generator }
@@ -90,16 +89,26 @@ FASTJavaClassProperty >> fieldName: anObject [
 { #category : #accessing }
 FASTJavaClassProperty >> type [
 
-	<MSEProperty: #type type: #FASTNamedEntity>
 	<generated>
 	<MSEComment: 'The owner type'>
-	^ type
+	<MSEProperty: #type type: #Object>
+	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaClassProperty >> type: anObject [
 
 	<generated>
-	type := anObject
+	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #type put: anObject.
+	anObject javaClassPropertyOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaClassProperty >> typeGroup [
+
+	<generated>
+	<navigation: 'Type'>
+	^ MooseGroup
+			with: (self type)
 ]

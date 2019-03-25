@@ -1,15 +1,13 @@
 Class {
 	#name : #FASTJavaNamedEntity,
-	#superclass : #FASTJavaSourcedEntity,
-	#traits : 'FamixTNamed + TDependencyQueries + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTNamed classTrait + TDependencyQueries classTrait + TEntityMetaLevelDependency classTrait',
+	#superclass : #MooseEntity,
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaNamedEntity class >> annotation [
 
-	<MSEClass: #NamedEntity super: #FASTJavaSourcedEntity>
+	<MSEClass: #NamedEntity super: #MooseEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -25,7 +23,14 @@ FASTJavaNamedEntity class >> generatedSlotNames [
 { #category : #generator }
 FASTJavaNamedEntity class >> generatedTraitNames [
 	<generated>
-	^ #(FamixTNamed TDependencyQueries TEntityMetaLevelDependency)
+	^ #()
+]
+
+{ #category : #meta }
+FASTJavaNamedEntity class >> metamodel [
+
+	<generated>
+	^ (self class environment at: #FASTJavaMetamodelGenerator) metamodel
 ]
 
 { #category : #meta }
@@ -33,4 +38,88 @@ FASTJavaNamedEntity class >> requirements [
 
 	<generated>
 	^ {  }
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isAccess [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isAssociation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isAttribute [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isClass [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isFunction [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isInheritance [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isInvocation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isMethod [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isNamespace [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isPackage [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isReference [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FASTJavaNamedEntity >> isType [
+
+	<generated>
+	^ false
 ]
