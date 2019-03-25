@@ -26,16 +26,16 @@ JavaSmaCCALittleOfVariables5MethodTest >> setUp [
 { #category : #tests }
 JavaSmaCCALittleOfVariables5MethodTest >> testVariableDeclaratorExpressionParent5 [
 	self
-		assert: aLittleOfVariables5 statements first declarators first expression parentNode
-		equals: aLittleOfVariables5 statements first declarators first
+		assert: aLittleOfVariables5 statementBlock statements first declarators first expression parentNode
+		equals: aLittleOfVariables5 statementBlock statements first declarators first
 ]
 
 { #category : #tests }
 JavaSmaCCALittleOfVariables5MethodTest >> testVariableDeclaratorExpressionType5 [
-	self assert: aLittleOfVariables5 statements first declarators first expression class equals: FASTJavaNullLiteral
+	self assert: aLittleOfVariables5 statementBlock statements first declarators first expression class equals: FASTJavaNullLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCALittleOfVariables5MethodTest >> testVariableDeclaratorExpressionValue5 [
-	self assert: aLittleOfVariables5 statements first declarators first expression value equals: 'null'
+	self assert: aLittleOfVariables5 statementBlock statements first declarators first expression value equals: 'null'
 ]

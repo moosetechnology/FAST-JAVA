@@ -29,7 +29,7 @@ JavaSmaCCForTest >> testForEachBodyParentNode [
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachBodyType [
-	self assert: methodFor statements first body class equals: FASTJavaBodyStatement
+	self assert: methodFor statements first body class equals: FASTStatementBlock 
 ]
 
 { #category : #tests }
@@ -39,25 +39,15 @@ JavaSmaCCForTest >> testForEachConditionParentNode [
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachConditionType [
-	self assert: methodFor statements first condition class equals: FASTJavaConditionStatement
-]
-
-{ #category : #tests }
-JavaSmaCCForTest >> testForEachIncrementorsParentNode [
-	methodFor statements first incrementors do: [ :incrementor | self assert: incrementor parentNode equals: methodFor statements first ]
+	self assert: methodFor statements first condition class equals: FASTJavaInfixOperation 
 ]
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachIncrementorsType [
-	methodFor statements first incrementors do: [ :incrementor | self assert: incrementor class equals: FASTJavaIncrementorsStatement ]
-]
-
-{ #category : #tests }
-JavaSmaCCForTest >> testForEachInitializersParentNode [
-	methodFor statements first initializers do: [ :initializer | self assert: initializer parentNode equals: methodFor statements first ]
+	self assert: methodFor statements first incrementor class equals: FASTExpressionStatement 
 ]
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachInitializersType [
-	methodFor statements first initializers do: [ :initializer | self assert: initializer class equals: FASTJavaInitializersStatement ]
+	self assert: methodFor statements first initializer class equals: FASTJavaVarDeclStatement
 ]

@@ -9,12 +9,6 @@ for(Patate p : list) {
 Class {
 	#name : #FASTJavaForEachStatement,
 	#superclass : #FASTStatement,
-	#instVars : [
-		'body',
-		'fieldname',
-		'list',
-		'type'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -31,7 +25,7 @@ FASTJavaForEachStatement class >> annotation [
 FASTJavaForEachStatement class >> generatedSlotNames [
 	<generated>
 	'FASTJavaForEachStatement class>>#generatedSlotNames'.
-	^ #(body fieldname list type)
+	^ #()
 ]
 
 { #category : #generator }
@@ -50,67 +44,107 @@ FASTJavaForEachStatement class >> requirements [
 { #category : #accessing }
 FASTJavaForEachStatement >> body [
 
-	<MSEProperty: #body type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The body of the For Each statement'>
-	^ body
+	<MSEProperty: #body type: #Object>
+	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> body: anObject [
 
 	<generated>
-	body := anObject
+	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #body put: anObject.
+	anObject javaForEachStatementOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaForEachStatement >> bodyGroup [
+
+	<generated>
+	<navigation: 'Body'>
+	^ MooseGroup
+			with: (self body)
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> fieldname [
 
-	<MSEProperty: #fieldname type: #FASTExpression>
 	<generated>
 	<MSEComment: 'The name of the created local variable'>
-	^ fieldname
+	<MSEProperty: #fieldname type: #Object>
+	^ self privateState attributeAt: #fieldname ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> fieldname: anObject [
 
 	<generated>
-	fieldname := anObject
+	(self privateState attributeAt: #fieldname ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #fieldname put: anObject.
+	anObject javaForEachStatementFieldNameOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaForEachStatement >> fieldnameGroup [
+
+	<generated>
+	<navigation: 'Fieldname'>
+	^ MooseGroup
+			with: (self fieldname)
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> list [
 
-	<MSEProperty: #list type: #FASTExpression>
 	<generated>
 	<MSEComment: 'The list the for each statement iterate on'>
-	^ list
+	<MSEProperty: #list type: #Object>
+	^ self privateState attributeAt: #list ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> list: anObject [
 
 	<generated>
-	list := anObject
+	(self privateState attributeAt: #list ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #list put: anObject.
+	anObject javaForEachStatementOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaForEachStatement >> listGroup [
+
+	<generated>
+	<navigation: 'List'>
+	^ MooseGroup
+			with: (self list)
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> type [
 
-	<MSEProperty: #type type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The name of the type of the created local variable'>
-	^ type
+	<MSEProperty: #type type: #Object>
+	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> type: anObject [
 
 	<generated>
-	type := anObject
+	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #type put: anObject.
+	anObject javaForEachStatementTypeOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaForEachStatement >> typeGroup [
+
+	<generated>
+	<navigation: 'Type'>
+	^ MooseGroup
+			with: (self type)
 ]

@@ -5,7 +5,7 @@ Class {
 	#name : #FASTJavaCatchPartStatement,
 	#superclass : #FASTStatement,
 	#instVars : [
-		'body'
+		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -23,7 +23,7 @@ FASTJavaCatchPartStatement class >> annotation [
 FASTJavaCatchPartStatement class >> generatedSlotNames [
 	<generated>
 	'FASTJavaCatchPartStatement class>>#generatedSlotNames'.
-	^ #(body)
+	^ #(tryOwner)
 ]
 
 { #category : #generator }
@@ -36,22 +36,86 @@ FASTJavaCatchPartStatement class >> generatedTraitNames [
 FASTJavaCatchPartStatement class >> requirements [
 
 	<generated>
-	^ {  }
+	^ { FASTJavaTryCatchStatement }
 ]
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body [
 
-	<MSEProperty: #body type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The body of the Catch part statement'>
-	^ body
+	<MSEProperty: #body type: #Object>
+	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body: anObject [
 
 	<generated>
-	body := anObject
+	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #body put: anObject.
+	anObject javaCatchPartStatementOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaCatchPartStatement >> bodyGroup [
+
+	<generated>
+	<navigation: 'Body'>
+	^ MooseGroup
+			with: (self body)
+]
+
+{ #category : #accessing }
+FASTJavaCatchPartStatement >> parameter [
+
+	<generated>
+	<MSEComment: 'The parameter of the catch part'>
+	<MSEProperty: #parameter type: #Object>
+	^ self privateState attributeAt: #parameter ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaCatchPartStatement >> parameter: anObject [
+
+	<generated>
+	(self privateState attributeAt: #parameter ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #parameter put: anObject.
+	anObject javaCatchParameterOwnler: self
+]
+
+{ #category : #navigation }
+FASTJavaCatchPartStatement >> parameterGroup [
+
+	<generated>
+	<navigation: 'Parameter'>
+	^ MooseGroup
+			with: (self parameter)
+]
+
+{ #category : #accessing }
+FASTJavaCatchPartStatement >> tryOwner [
+
+	<generated>
+	<MSEComment: 'The try owner'>
+	<container>
+
+	^ tryOwner
+]
+
+{ #category : #accessing }
+FASTJavaCatchPartStatement >> tryOwner: anObject [
+
+	<generated>
+	tryOwner := anObject
+
+]
+
+{ #category : #navigation }
+FASTJavaCatchPartStatement >> tryOwnerGroup [
+
+	<generated>
+	<navigation: 'TryOwner'>
+	^ MooseGroup
+			with: (self tryOwner)
 ]

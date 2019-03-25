@@ -17,6 +17,9 @@ void tryCatch() {
 Class {
 	#name : #FASTJavaTryCatchStatement,
 	#superclass : #FASTStatement,
+	#instVars : [
+		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -33,7 +36,7 @@ FASTJavaTryCatchStatement class >> annotation [
 FASTJavaTryCatchStatement class >> generatedSlotNames [
 	<generated>
 	'FASTJavaTryCatchStatement class>>#generatedSlotNames'.
-	^ #()
+	^ #(catches)
 ]
 
 { #category : #generator }
@@ -47,4 +50,56 @@ FASTJavaTryCatchStatement class >> requirements [
 
 	<generated>
 	^ {  }
+]
+
+{ #category : #accessing }
+FASTJavaTryCatchStatement >> catches [
+
+	<generated>
+	<MSEComment: 'I contains all the catch statements'>
+	^ catches
+]
+
+{ #category : #accessing }
+FASTJavaTryCatchStatement >> catches: anObject [
+
+	<generated>
+	catches value: anObject
+
+]
+
+{ #category : #navigation }
+FASTJavaTryCatchStatement >> catchesGroup [
+
+	<generated>
+	<navigation: 'Catches'>
+	^ MooseGroup
+			withAll: (self catches asSet)
+]
+
+{ #category : #accessing }
+FASTJavaTryCatchStatement >> try [
+
+	<generated>
+	<MSEComment: 'I represent the ''try'' part of the TryCatch Statement'>
+	<MSEProperty: #try type: #Object>
+	^ self privateState attributeAt: #try ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaTryCatchStatement >> try: anObject [
+
+	<generated>
+	(self privateState attributeAt: #try ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #try put: anObject.
+	anObject javaTryCatchOwner: self
+]
+
+{ #category : #navigation }
+FASTJavaTryCatchStatement >> tryGroup [
+
+	<generated>
+	<navigation: 'Try'>
+	^ MooseGroup
+			with: (self try)
 ]

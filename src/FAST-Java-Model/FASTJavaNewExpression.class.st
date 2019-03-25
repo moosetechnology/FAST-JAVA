@@ -8,9 +8,6 @@ new Patate()
 Class {
 	#name : #FASTJavaNewExpression,
 	#superclass : #FASTExpression,
-	#instVars : [
-		'type'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -27,7 +24,7 @@ FASTJavaNewExpression class >> annotation [
 FASTJavaNewExpression class >> generatedSlotNames [
 	<generated>
 	'FASTJavaNewExpression class>>#generatedSlotNames'.
-	^ #(type)
+	^ #()
 ]
 
 { #category : #generator }
@@ -44,18 +41,53 @@ FASTJavaNewExpression class >> requirements [
 ]
 
 { #category : #accessing }
+FASTJavaNewExpression >> arguments [
+
+	<generated>
+	<MSEComment: 'the arguments of the new expression'>
+	<MSEProperty: #arguments type: #Object>
+	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaNewExpressionArgumentsOwner: ]
+]
+
+{ #category : #accessing }
+FASTJavaNewExpression >> arguments: anObject [
+
+	<generated>
+	self arguments value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaNewExpression >> argumentsGroup [
+
+	<generated>
+	<navigation: 'Arguments'>
+	^ MooseGroup
+			withAll: (self arguments asSet)
+]
+
+{ #category : #accessing }
 FASTJavaNewExpression >> type [
 
-	<MSEProperty: #type type: #FASTNamedEntity>
 	<generated>
 	<MSEComment: 'The type of the array'>
-	^ type
+	<MSEProperty: #type type: #Object>
+	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaNewExpression >> type: anObject [
 
 	<generated>
-	type := anObject
+	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #type put: anObject.
+	anObject javaNewExpressionOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaNewExpression >> typeGroup [
+
+	<generated>
+	<navigation: 'Type'>
+	^ MooseGroup
+			with: (self type)
 ]

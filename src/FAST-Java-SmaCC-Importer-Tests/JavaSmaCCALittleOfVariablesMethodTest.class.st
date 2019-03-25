@@ -38,12 +38,12 @@ JavaSmaCCALittleOfVariablesMethodTest >> testBlockScope [
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testReturnStatementExpressionName [
-	self assert: aLittleOfVariables statements second expression name equals: 'x'
+	self assert: aLittleOfVariables statementBlock statements second expression name equals: 'x'
 ]
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testReturnStatementExpressionType [
-	self assert: aLittleOfVariables statements second expression class equals: FASTJavaIdentifier.
+	self assert: aLittleOfVariables statementBlock statements second expression class equals: FASTJavaIdentifier.
 ]
 
 { #category : #tests }
@@ -58,7 +58,7 @@ JavaSmaCCALittleOfVariablesMethodTest >> testScope [
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testStatementsCount [
-	self assert: aLittleOfVariables statements size equals: 2
+	self assert: aLittleOfVariables statementBlock statements size equals: 2
 ]
 
 { #category : #tests }
@@ -100,7 +100,7 @@ JavaSmaCCALittleOfVariablesMethodTest >> testVariableDeclaratorVariableParent [
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testVariableDeclaratorVariableType [
-	self assert: aLittleOfVariables statements first declarators first variable class equals: FASTNamedEntity
+	self assert: aLittleOfVariables statements first declarators first variable class equals: FASTVariableExpression
 ]
 
 { #category : #tests }

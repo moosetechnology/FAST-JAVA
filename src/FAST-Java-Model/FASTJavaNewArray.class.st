@@ -38,3 +38,28 @@ FASTJavaNewArray class >> requirements [
 	<generated>
 	^ {  }
 ]
+
+{ #category : #accessing }
+FASTJavaNewArray >> initializers [
+
+	<generated>
+	<MSEComment: 'The initial values of the array'>
+	<MSEProperty: #initializers type: #Object>
+	^ self privateState attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaNewArrayInitialOwner: ]
+]
+
+{ #category : #accessing }
+FASTJavaNewArray >> initializers: anObject [
+
+	<generated>
+	self initializers value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaNewArray >> initializersGroup [
+
+	<generated>
+	<navigation: 'Initializers'>
+	^ MooseGroup
+			withAll: (self initializers asSet)
+]

@@ -25,7 +25,7 @@ JavaSmaCCContinueTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCContinueTest >> testContinueParent [
-	self assert: (methodContinue mooseModel allWithType: FASTJavaContinueStatement) anyOne parentNode equals: methodContinue statements anyOne thenPart childrenNode anyOne
+	self assert: (methodContinue mooseModel allWithType: FASTJavaContinueStatement) anyOne parentNode equals: methodContinue statements anyOne thenPart
 ]
 
 { #category : #tests }

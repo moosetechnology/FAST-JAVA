@@ -48,3 +48,28 @@ FASTJavaNewClassExpression class >> requirements [
 	<generated>
 	^ {  }
 ]
+
+{ #category : #accessing }
+FASTJavaNewClassExpression >> declarations [
+
+	<generated>
+	<MSEComment: 'The methods defined in the class'>
+	<MSEProperty: #declarations type: #Object>
+	^ self privateState attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
+]
+
+{ #category : #accessing }
+FASTJavaNewClassExpression >> declarations: anObject [
+
+	<generated>
+	self declarations value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaNewClassExpression >> declarationsGroup [
+
+	<generated>
+	<navigation: 'Declarations'>
+	^ MooseGroup
+			withAll: (self declarations asSet)
+]

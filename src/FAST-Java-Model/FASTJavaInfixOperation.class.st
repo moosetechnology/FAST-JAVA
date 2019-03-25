@@ -45,6 +45,33 @@ FASTJavaInfixOperation class >> requirements [
 ]
 
 { #category : #accessing }
+FASTJavaInfixOperation >> leftOperand [
+
+	<generated>
+	<MSEComment: 'leftOperand'>
+	<MSEProperty: #leftOperand type: #Object>
+	^ self privateState attributeAt: #leftOperand ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaInfixOperation >> leftOperand: anObject [
+
+	<generated>
+	(self privateState attributeAt: #leftOperand ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #leftOperand put: anObject.
+	anObject infixOperationLeftOperandOwner: self
+]
+
+{ #category : #navigation }
+FASTJavaInfixOperation >> leftOperandGroup [
+
+	<generated>
+	<navigation: 'LeftOperand'>
+	^ MooseGroup
+			with: (self leftOperand)
+]
+
+{ #category : #accessing }
 FASTJavaInfixOperation >> operator [
 
 	<MSEProperty: #operator type: #String>
@@ -59,4 +86,31 @@ FASTJavaInfixOperation >> operator: anObject [
 	<generated>
 	operator := anObject
 
+]
+
+{ #category : #accessing }
+FASTJavaInfixOperation >> rightOperand [
+
+	<generated>
+	<MSEComment: 'rightOperand'>
+	<MSEProperty: #rightOperand type: #Object>
+	^ self privateState attributeAt: #rightOperand ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaInfixOperation >> rightOperand: anObject [
+
+	<generated>
+	(self privateState attributeAt: #rightOperand ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #rightOperand put: anObject.
+	anObject infixOperationRightOperandOwner: self
+]
+
+{ #category : #navigation }
+FASTJavaInfixOperation >> rightOperandGroup [
+
+	<generated>
+	<navigation: 'RightOperand'>
+	^ MooseGroup
+			with: (self rightOperand)
 ]

@@ -26,16 +26,16 @@ JavaSmaCCALittleOfVariables3MethodTest >> setUp [
 { #category : #tests }
 JavaSmaCCALittleOfVariables3MethodTest >> testVariableDeclaratorExpressionParent3 [
 	self
-		assert: aLittleOfVariables3 statements first declarators first expression parentNode
-		equals: aLittleOfVariables3 statements first declarators first
+		assert: aLittleOfVariables3 statementBlock statements first declarators first expression parentNode
+		equals: aLittleOfVariables3 statementBlock statements first declarators first
 ]
 
 { #category : #tests }
 JavaSmaCCALittleOfVariables3MethodTest >> testVariableDeclaratorExpressionType3 [
-	self assert: aLittleOfVariables3 statements first declarators first expression class equals: FASTJavaCharacterLiteral
+	self assert: aLittleOfVariables3 statementBlock statements first declarators first expression class equals: FASTJavaCharacterLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCALittleOfVariables3MethodTest >> testVariableDeclaratorExpressionValue3 [
-	self assert: aLittleOfVariables3 statements first declarators first expression value equals: '''c'''
+	self assert: aLittleOfVariables3 statementBlock statements first declarators first expression value equals: '''c'''
 ]

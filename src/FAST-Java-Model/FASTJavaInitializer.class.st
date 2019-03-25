@@ -46,3 +46,30 @@ FASTJavaInitializer class >> requirements [
 	<generated>
 	^ {  }
 ]
+
+{ #category : #accessing }
+FASTJavaInitializer >> statementBlock [
+
+	<generated>
+	<MSEComment: 'Statements block of the behavioural entity'>
+	<MSEProperty: #statementBlock type: #Object>
+	^ self privateState attributeAt: #statementBlock ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaInitializer >> statementBlock: anObject [
+
+	<generated>
+	(self privateState attributeAt: #statementBlock ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #statementBlock put: anObject.
+	anObject javaInitializerOwner: self
+]
+
+{ #category : #navigation }
+FASTJavaInitializer >> statementBlockGroup [
+
+	<generated>
+	<navigation: 'StatementBlock'>
+	^ MooseGroup
+			with: (self statementBlock)
+]

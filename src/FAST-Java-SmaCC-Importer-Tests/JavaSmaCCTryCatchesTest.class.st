@@ -44,17 +44,17 @@ JavaSmaCCTryCatchesTest >> testTryCatchCatchNumber [
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchCatchParametersName [
-	self assert: tryCatchesMethod statements second catches first parameters first name equals: 'e'
+	self assert: tryCatchesMethod statements second catches first parameter name equals: 'e'
 ]
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchCatchParametersType [
-	self assert: tryCatchesMethod statements second catches first parameters first class equals: FASTNamedEntity
+	self assert: tryCatchesMethod statements second catches first parameter class equals: FASTVariableExpression
 ]
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchTryPartType [
-	self assert: tryCatchesMethod statements second try class equals: FASTJavaTryPartStatement
+	self assert: tryCatchesMethod statements second try class equals: FASTStatementBlock
 ]
 
 { #category : #tests }

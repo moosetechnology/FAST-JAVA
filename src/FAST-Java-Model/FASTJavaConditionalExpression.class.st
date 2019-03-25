@@ -1,50 +1,47 @@
 "
-A node of a if statement or an if-else statement.
+I represent a Java conditionnal Statement
 
-eg.
-if(...) {
-...
-} else {
-...
-}
+ex:
+
+(h.get() == 2) ? thenPart : elsePart
 "
 Class {
-	#name : #FASTJavaIfStatement,
-	#superclass : #FASTStatement,
+	#name : #FASTJavaConditionalExpression,
+	#superclass : #FASTExpression,
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
-FASTJavaIfStatement class >> annotation [
+FASTJavaConditionalExpression class >> annotation [
 
-	<MSEClass: #IfStatement super: #FASTStatement>
+	<MSEClass: #ConditionalExpression super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #generator }
-FASTJavaIfStatement class >> generatedSlotNames [
+FASTJavaConditionalExpression class >> generatedSlotNames [
 	<generated>
-	'FASTJavaIfStatement class>>#generatedSlotNames'.
+	'FASTJavaConditionalExpression class>>#generatedSlotNames'.
 	^ #()
 ]
 
 { #category : #generator }
-FASTJavaIfStatement class >> generatedTraitNames [
+FASTJavaConditionalExpression class >> generatedTraitNames [
 	<generated>
 	^ #()
 ]
 
 { #category : #meta }
-FASTJavaIfStatement class >> requirements [
+FASTJavaConditionalExpression class >> requirements [
 
 	<generated>
 	^ {  }
 ]
 
 { #category : #accessing }
-FASTJavaIfStatement >> condition [
+FASTJavaConditionalExpression >> condition [
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
@@ -53,16 +50,16 @@ FASTJavaIfStatement >> condition [
 ]
 
 { #category : #accessing }
-FASTJavaIfStatement >> condition: anObject [
+FASTJavaConditionalExpression >> condition: anObject [
 
 	<generated>
 	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #condition put: anObject.
-	anObject ifConditionOwner: self
+	anObject conditionalConditionOwner: self
 ]
 
 { #category : #navigation }
-FASTJavaIfStatement >> conditionGroup [
+FASTJavaConditionalExpression >> conditionGroup [
 
 	<generated>
 	<navigation: 'Condition'>
@@ -71,7 +68,7 @@ FASTJavaIfStatement >> conditionGroup [
 ]
 
 { #category : #accessing }
-FASTJavaIfStatement >> elsePart [
+FASTJavaConditionalExpression >> elsePart [
 
 	<generated>
 	<MSEComment: 'else part'>
@@ -80,16 +77,16 @@ FASTJavaIfStatement >> elsePart [
 ]
 
 { #category : #accessing }
-FASTJavaIfStatement >> elsePart: anObject [
+FASTJavaConditionalExpression >> elsePart: anObject [
 
 	<generated>
 	(self privateState attributeAt: #elsePart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #elsePart put: anObject.
-	anObject ifElsePartOwner: self
+	anObject conditionalElsePartOwner: self
 ]
 
 { #category : #navigation }
-FASTJavaIfStatement >> elsePartGroup [
+FASTJavaConditionalExpression >> elsePartGroup [
 
 	<generated>
 	<navigation: 'ElsePart'>
@@ -98,7 +95,7 @@ FASTJavaIfStatement >> elsePartGroup [
 ]
 
 { #category : #accessing }
-FASTJavaIfStatement >> thenPart [
+FASTJavaConditionalExpression >> thenPart [
 
 	<generated>
 	<MSEComment: 'then part'>
@@ -107,16 +104,16 @@ FASTJavaIfStatement >> thenPart [
 ]
 
 { #category : #accessing }
-FASTJavaIfStatement >> thenPart: anObject [
+FASTJavaConditionalExpression >> thenPart: anObject [
 
 	<generated>
 	(self privateState attributeAt: #thenPart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #thenPart put: anObject.
-	anObject ifThenPartOwner: self
+	anObject conditionalThenPartOwner: self
 ]
 
 { #category : #navigation }
-FASTJavaIfStatement >> thenPartGroup [
+FASTJavaConditionalExpression >> thenPartGroup [
 
 	<generated>
 	<navigation: 'ThenPart'>

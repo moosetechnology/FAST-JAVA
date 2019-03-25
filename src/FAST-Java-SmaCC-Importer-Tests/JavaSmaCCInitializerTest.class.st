@@ -25,7 +25,7 @@ JavaSmaCCInitializerTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerAsChild [
-	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne equals: methodInitializer statements anyOne declarators anyOne expression methods anyOne childrenNode anyOne
+	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne equals: methodInitializer statements anyOne declarators anyOne expression declarations anyOne
 ]
 
 { #category : #tests }
@@ -40,7 +40,7 @@ JavaSmaCCInitializerTest >> testInitializerHasStatementBlockMethodSize [
 
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerParent [
-	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne parentNode equals: methodInitializer statements anyOne declarators anyOne expression methods anyOne 
+	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne parentNode equals: methodInitializer statements anyOne declarators anyOne expression
 ]
 
 { #category : #tests }

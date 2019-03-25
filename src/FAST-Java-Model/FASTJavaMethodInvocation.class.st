@@ -6,9 +6,6 @@ Class {
 	#superclass : #FASTExpression,
 	#traits : 'FamixTNamed',
 	#classTraits : 'FamixTNamed classTrait',
-	#instVars : [
-		'receiver'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -25,7 +22,7 @@ FASTJavaMethodInvocation class >> annotation [
 FASTJavaMethodInvocation class >> generatedSlotNames [
 	<generated>
 	'FASTJavaMethodInvocation class>>#generatedSlotNames'.
-	^ #(receiver)
+	^ #()
 ]
 
 { #category : #generator }
@@ -42,18 +39,53 @@ FASTJavaMethodInvocation class >> requirements [
 ]
 
 { #category : #accessing }
+FASTJavaMethodInvocation >> arguments [
+
+	<generated>
+	<MSEComment: 'The arguments of the invocation'>
+	<MSEProperty: #arguments type: #Object>
+	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaMethodInvocationArgumentsOwner: ]
+]
+
+{ #category : #accessing }
+FASTJavaMethodInvocation >> arguments: anObject [
+
+	<generated>
+	self arguments value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaMethodInvocation >> argumentsGroup [
+
+	<generated>
+	<navigation: 'Arguments'>
+	^ MooseGroup
+			withAll: (self arguments asSet)
+]
+
+{ #category : #accessing }
 FASTJavaMethodInvocation >> receiver [
 
-	<MSEProperty: #receiver type: #FASTExpression>
 	<generated>
 	<MSEComment: 'The expression whitch will execute this invocation'>
-	^ receiver
+	<MSEProperty: #receiver type: #Object>
+	^ self privateState attributeAt: #receiver ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaMethodInvocation >> receiver: anObject [
 
 	<generated>
-	receiver := anObject
+	(self privateState attributeAt: #receiver ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #receiver put: anObject.
+	anObject javaMethodInvocationOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaMethodInvocation >> receiverGroup [
+
+	<generated>
+	<navigation: 'Receiver'>
+	^ MooseGroup
+			with: (self receiver)
 ]

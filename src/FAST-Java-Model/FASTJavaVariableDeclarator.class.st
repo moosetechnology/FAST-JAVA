@@ -12,8 +12,7 @@ Class {
 	#name : #FASTJavaVariableDeclarator,
 	#superclass : #FASTEntitySourceAnchor,
 	#instVars : [
-		'expression',
-		'variable'
+		'#varDeclOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #declarators'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -31,7 +30,7 @@ FASTJavaVariableDeclarator class >> annotation [
 FASTJavaVariableDeclarator class >> generatedSlotNames [
 	<generated>
 	'FASTJavaVariableDeclarator class>>#generatedSlotNames'.
-	^ #(expression variable)
+	^ #(varDeclOwner)
 ]
 
 { #category : #generator }
@@ -44,39 +43,86 @@ FASTJavaVariableDeclarator class >> generatedTraitNames [
 FASTJavaVariableDeclarator class >> requirements [
 
 	<generated>
-	^ {  }
+	^ { FASTJavaVarDeclStatement }
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> expression [
 
-	<MSEProperty: #expression type: #FASTExpression>
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
-	^ expression
+	<MSEProperty: #expression type: #Object>
+	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> expression: anObject [
 
 	<generated>
-	expression := anObject
+	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #expression put: anObject.
+	anObject javaVariableDeclaratorOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaVariableDeclarator >> expressionGroup [
+
+	<generated>
+	<navigation: 'Expression'>
+	^ MooseGroup
+			with: (self expression)
+]
+
+{ #category : #accessing }
+FASTJavaVariableDeclarator >> varDeclOwner [
+
+	<generated>
+	<MSEComment: 'The owner of the declarator'>
+	<container>
+
+	^ varDeclOwner
+]
+
+{ #category : #accessing }
+FASTJavaVariableDeclarator >> varDeclOwner: anObject [
+
+	<generated>
+	varDeclOwner := anObject
+
+]
+
+{ #category : #navigation }
+FASTJavaVariableDeclarator >> varDeclOwnerGroup [
+
+	<generated>
+	<navigation: 'VarDeclOwner'>
+	^ MooseGroup
+			with: (self varDeclOwner)
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> variable [
 
-	<MSEProperty: #variable type: #FASTNamedEntity>
 	<generated>
 	<MSEComment: 'Variable that s being declared'>
-	^ variable
+	<MSEProperty: #variable type: #Object>
+	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> variable: anObject [
 
 	<generated>
-	variable := anObject
+	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #variable put: anObject.
+	anObject javaVariableDeclaratorOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaVariableDeclarator >> variableGroup [
+
+	<generated>
+	<navigation: 'Variable'>
+	^ MooseGroup
+			with: (self variable)
 ]

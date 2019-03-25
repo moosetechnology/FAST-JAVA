@@ -26,12 +26,12 @@ JavaSmaCCThrowStatementTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCThrowStatementTest >> testThrowStatementParent [
-	self assert: (throwMethod mooseModel allWithType: FASTJavaThrowStatement) anyOne parentNode equals: throwMethod statements anyOne thenPart childrenNode anyOne
+	self assert: (throwMethod mooseModel allWithType: FASTJavaThrowStatement) anyOne parentNode equals: throwMethod statements anyOne thenPart
 ]
 
 { #category : #tests }
 JavaSmaCCThrowStatementTest >> testThrowStatementParentAsChild [
-	self assert: (throwMethod mooseModel allWithType: FASTJavaThrowStatement) anyOne equals: throwMethod statements anyOne thenPart childrenNode anyOne childrenNode anyOne
+	self assert: (throwMethod mooseModel allWithType: FASTJavaThrowStatement) anyOne equals: throwMethod statements anyOne thenPart childrenNode anyOne
 ]
 
 { #category : #tests }

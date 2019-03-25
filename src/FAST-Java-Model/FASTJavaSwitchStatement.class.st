@@ -9,6 +9,9 @@ switch (_) {
 Class {
 	#name : #FASTJavaSwitchStatement,
 	#superclass : #FASTStatement,
+	#instVars : [
+		'#cases => FMMany type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -25,7 +28,7 @@ FASTJavaSwitchStatement class >> annotation [
 FASTJavaSwitchStatement class >> generatedSlotNames [
 	<generated>
 	'FASTJavaSwitchStatement class>>#generatedSlotNames'.
-	^ #()
+	^ #(cases)
 ]
 
 { #category : #generator }
@@ -39,4 +42,29 @@ FASTJavaSwitchStatement class >> requirements [
 
 	<generated>
 	^ {  }
+]
+
+{ #category : #accessing }
+FASTJavaSwitchStatement >> cases [
+
+	<generated>
+	<MSEComment: 'The cases of the switch statements'>
+	^ cases
+]
+
+{ #category : #accessing }
+FASTJavaSwitchStatement >> cases: anObject [
+
+	<generated>
+	cases value: anObject
+
+]
+
+{ #category : #navigation }
+FASTJavaSwitchStatement >> casesGroup [
+
+	<generated>
+	<navigation: 'Cases'>
+	^ MooseGroup
+			withAll: (self cases asSet)
 ]
