@@ -8,5 +8,5 @@ FASTJavaMethodEntity >> sourceText [
 
 { #category : #'*FAST-Java-Model-Extension' }
 FASTJavaMethodEntity >> statements [
-	^ self statementBlock statements
+	^ self statementBlock ifNotNil: [ :existingStatementBlock | existingStatementBlock statements ] ifNil: [ OrderedCollection new ]
 ]
