@@ -581,6 +581,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPreIncrementExpression: aPreIncremen
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTVariableExpression new
+				name: aPrimitiveType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aPrimitiveType.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 	currentFASTEntity := self addToModel: FASTJavaClassProperty new.
 	self generalVisitActionForNodeEntity: aQualifiedName.
