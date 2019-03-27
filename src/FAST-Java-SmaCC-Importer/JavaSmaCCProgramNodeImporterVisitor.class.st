@@ -97,7 +97,7 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 	^self  model
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 	currentFASTEntity := self addToModel: FASTJavaArrayAccess new.
 	self generalVisitActionForNodeEntity: anArrayAccess.
@@ -107,7 +107,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer [
+	currentFASTEntity := self addToModel: FASTJavaArrayInitializer new.
+	self generalVisitActionForNodeEntity: anArrayInitializer.
+	anArrayInitializer initializers do: [ :initializer | currentFASTEntity initializers add: (self clone accept: initializer) ].
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: aVariableDeclaration [
 	currentFASTEntity := self
 		addToModel: FASTJavaAssignementExpression new.
@@ -119,7 +127,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: aVariableDeclaration [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression [
 	currentFASTEntity := self addToModel: FASTJavaInfixOperation new.
 	self generalVisitActionForNodeEntity: aBinaryExpression.
@@ -131,7 +139,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression 
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
 	currentFASTEntity := self addToModel: FASTStatementBlock new.
 	self generalVisitActionForNodeEntity: aBlock.
@@ -140,7 +148,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -151,14 +159,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBreakStatement: aBreakStatement [
 	currentFASTEntity := self addToModel: FASTJavaContinueStatement new.
 	self generalVisitActionForNodeEntity: aBreakStatement.
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitCastExpression: aCastExpression [
 	currentFASTEntity := self addToModel: FASTJavaCastExpression new.
 	self generalVisitActionForNodeEntity: aCastExpression.
@@ -168,7 +176,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCastExpression: aCastExpression [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitCatchClause: aCatchClause [
 	currentFASTEntity := self addToModel: FASTJavaCatchPartStatement new.
 	self generalVisitActionForNodeEntity: aCatchClause.
@@ -177,7 +185,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchClause: aCatchClause [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
 	| param |
 	param := self visitName: aCatchParameter variable.
@@ -185,7 +193,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
 	^ param
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -196,7 +204,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 	currentFASTEntity := self addToModel: FASTJavaClassProperty new.
 	self generalVisitActionForNodeEntity: aClassExpression.
@@ -205,7 +213,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 	currentFASTEntity := self addToModel: FASTVariableExpression new.
 	currentFASTEntity name: aClassType name name value.
@@ -213,7 +221,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitConditionalExpression: aConditionalExpression [
 	currentFASTEntity := self
 		addToModel: FASTJavaConditionalExpression new.
@@ -228,14 +236,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitConditionalExpression: aConditionalE
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitContinueStatement: aContinueStatement [
 	currentFASTEntity := self addToModel: FASTJavaContinueStatement new.
 	self generalVisitActionForNodeEntity: aContinueStatement.
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration [
 	currentFASTEntity := FASTJavaMethodEntity new
 		name: aConstructorDeclaration name name value;
@@ -248,21 +256,21 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaEmptyMethodDeclaration new.
 	self generalVisitActionForNodeEntity: anEmptyDeclaration.
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 	currentFASTEntity := self addToModel: FASTStatement new.
 	self generalVisitActionForNodeEntity: anEmptyStatement.
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionStatement [
 	currentFASTEntity := self addToModel: FASTExpressionStatement new.
 	self generalVisitActionForNodeEntity: anExpressionStatement.
@@ -271,7 +279,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionSta
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 	currentFASTEntity := self addToModel: FASTJavaFieldAccess new.
 	self generalVisitActionForNodeEntity: aFieldAccess.
@@ -279,7 +287,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldDeclaration: aFieldDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aFieldDeclaration.
@@ -288,7 +296,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldDeclaration: aFieldDeclaration 
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitFloatLiteral: aFloatLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -299,7 +307,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatLiteral: aFloatLiteral [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement [
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
 	self generalVisitActionForNodeEntity: aForEachStatement.
@@ -313,7 +321,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement 
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 	currentFASTEntity := self addToModel: FASTJavaForStatement new.
 	self generalVisitActionForNodeEntity: aForStatement.
@@ -331,7 +339,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIfElseStatement: anIfStatementNode [
 	currentFASTEntity := self addToModel: FASTJavaIfStatement new.
 	self generalVisitActionForNodeEntity: anIfStatementNode.
@@ -345,7 +353,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIfElseStatement: anIfStatementNode [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIfStatement: anIfStatementNode [
 	currentFASTEntity := self addToModel: FASTJavaIfStatement new.
 		self generalVisitActionForNodeEntity: anIfStatementNode.
@@ -356,7 +364,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIfStatement: anIfStatementNode [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anInitializedVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self generalVisitActionForNodeEntity: anInitializedVariableDeclaration.
@@ -367,7 +375,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anIn
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitInitializer: aInitializer [
 	currentFASTEntity := FASTJavaInitializer new.
 self
@@ -378,7 +386,7 @@ self
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -389,7 +397,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aLocalVariableDeclaration.
@@ -398,7 +406,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVari
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: aLocalVariableDeclarationStatement [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aLocalVariableDeclarationStatement.
@@ -407,7 +415,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: a
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaration [
 	currentFASTEntity := FASTJavaMethodEntity new
 		name: aMethodDeclaration declarator name value;
@@ -421,7 +429,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation [
 	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
 	self generalVisitActionForNodeEntity: aMethodInvocation.
@@ -452,7 +460,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 	currentFASTEntity := self addToModel: FASTVariableExpression new.
 	currentFASTEntity name: aName name value.
@@ -460,7 +468,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNew: aNewNode [
 	currentFASTEntity := self addToModel: FASTJavaNewExpression new.
 	self generalVisitActionForNodeEntity: aNewNode.
@@ -471,16 +479,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNew: aNewNode [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 	currentFASTEntity := self addToModel: FASTJavaNewArray new.
 		self generalVisitActionForNodeEntity: aNewArray.
+
 	currentFASTEntity type: (self clone accept: aNewArray type).
 	aNewArray initializer
 		ifNotNil: [ :initialize | 
-			initialize initializers
-				do:
-					[ :initializer | currentFASTEntity initializers add: (self clone accept: initializer) ] ].
+			currentFASTEntity initializer: (self clone accept: initialize) ].
 	aNewArray dimExpressions
 		do: [ :dimExpression | 
 			currentFASTEntity
@@ -488,7 +495,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 	currentFASTEntity := self addToModel: FASTJavaNewClassExpression new.
 		self generalVisitActionForNodeEntity: aNewClass.
@@ -501,7 +508,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNull: aNull [
 	currentFASTEntity := self
 		addToModel:
@@ -512,7 +519,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNull: aNull [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 	currentFASTEntity := FASTJavaOuterThis new.
 	self generalVisitActionForNodeEntity: aFASTJavaOuterThis.
@@ -521,7 +528,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	| param |
 	param := self accept: aParameter variable.
@@ -529,7 +536,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	^ param
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitPostDecrementExpression: aPostDecrementExpression [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -540,7 +547,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPostDecrementExpression: aPostDecrem
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitPostIncrementExpression: aPostIncrementExpression [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -551,7 +558,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPostIncrementExpression: aPostIncrem
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitPreDecrementExpression: aPreDecrementExpression [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -562,7 +569,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPreDecrementExpression: aPreDecremen
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitPreIncrementExpression: aPreIncrementExpression [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -573,7 +580,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPreIncrementExpression: aPreIncremen
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 	currentFASTEntity := self addToModel: FASTJavaClassProperty new.
 	self generalVisitActionForNodeEntity: aQualifiedName.
@@ -582,7 +589,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
 	currentFASTEntity := self addToModel: FASTReturnStatement new.
 	self generalVisitActionForNodeEntity: aReturnStatement.
@@ -597,7 +604,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitStatementExpressionList: aStatementExpressionList [
 	currentFASTEntity := self addToModel: FASTExpressionStatement new.
 	self generalVisitActionForNodeEntity: aStatementExpressionList.
@@ -607,7 +614,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStatementExpressionList: aStatementE
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitStringLiteral: aStringLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -618,7 +625,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStringLiteral: aStringLiteral [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperConstructorInvocation [
 	| expressionStatement |
 	currentFASTEntity := self addToModel: FASTExpressionStatement new.
@@ -633,7 +640,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperCo
 	^ expressionStatement
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBlockStatementGroup [
 	currentFASTEntity := self
 		addToModel:
@@ -647,7 +654,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 	currentFASTEntity := self addToModel: FASTJavaSwitchStatement new.
 	self generalVisitActionForNodeEntity: aSwitchStatement.
@@ -657,7 +664,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitThisConstructorInvocation: aThisConstructorInvocation [
 	| expressionStatement | 
 	currentFASTEntity := self addToModel: FASTExpressionStatement new.
@@ -674,7 +681,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThisConstructorInvocation: aThisCons
 	^ expressionStatement
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitThrowStatement: aThrowStatement [
 	currentFASTEntity := self addToModel: FASTJavaThrowStatement new.
 	self generalVisitActionForNodeEntity: aThrowStatement.
@@ -682,7 +689,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThrowStatement: aThrowStatement [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 	currentFASTEntity := self addToModel: FASTJavaTryCatchStatement new.
 	self generalVisitActionForNodeEntity: aTryStatement.
@@ -693,7 +700,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitUnaryAddition: anUnaryAddition [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -704,7 +711,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnaryAddition: anUnaryAddition [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitUnaryBitInvert: anUnaryBitInvert [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -715,7 +722,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnaryBitInvert: anUnaryBitInvert [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitUnaryNot: aUnaryNotExpression [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -726,7 +733,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnaryNot: aUnaryNotExpression [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitUnarySubtraction: anUnarySubtraction [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
@@ -737,7 +744,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnarySubtraction: anUnarySubtraction
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self generalVisitActionForNodeEntity: aVariableDeclaration.
@@ -746,7 +753,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclar
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableName: aVariableName [
 	currentFASTEntity := self addToModel: FASTVariableExpression new.
 	currentFASTEntity name: aVariableName name value.
@@ -754,7 +761,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableName: aVariableName [
 	^ currentFASTEntity
 ]
 
-{ #category : #initialization }
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitWhileStatement: aWhileStatementNode [
 	currentFASTEntity := self addToModel: FASTJavaWhileStatement new.
 	self generalVisitActionForNodeEntity: aWhileStatementNode.

@@ -74,7 +74,8 @@ Class {
 		'variableEntity',
 		'statementBlock',
 		'expressionStatement',
-		'javaConditionalExpression'
+		'javaConditionalExpression',
+		'javaArrayInitializer'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -110,6 +111,20 @@ FASTJavaMetamodelGenerator >> commentForJavaArrayAccess [
 ex:
 
 liste[i]'
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaArrayInitializer [
+	^ 'I represent the array initializer and I have many initializers
+	
+ex:
+String patate = {"hello", "world"}
+
+
+I am : {"hello", "world"} 
+My initializers are 
+"hello" and "world"
+ '
 ]
 
 { #category : #comments }
@@ -507,7 +522,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaLabeledCaseStatement := builder newClassNamed: #LabeledCaseStatement comment: self commentForJavaLabeledCaseStatement.
 	javaDefaultCaseStatement := builder newClassNamed: #DefaultCaseStatement comment: self commentForJavaDefaultCaseStatement.
 	javaEmptyMethodDeclaration := builder newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
-	
+	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
+		
 	javaCatchPartStatement := builder newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
 
 
@@ -561,7 +577,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamed.
 	javaCastExpression --|> expression.
-	javaClassProperty --|> expression.
+	javaClassProperty --|> variableExpression.
 	javaTryCatch --|> statement.
 	javaForEachStatement --|> statement.
 	javaUnaryExpression --|> expression.
@@ -574,6 +590,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
 	javaEmptyMethodDeclaration --|> javaMethodEntity.
+	javaArrayInitializer --|> expression.
 	
 	javaInitializer --|> scopableEntity.
 	javaInitializer --|> #TWithImmediateSource.
@@ -600,18 +617,20 @@ FASTJavaMetamodelGenerator >> defineProperties [
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineRelations [
 	super defineRelations.
+	(((javaArrayInitializer property: #initializers) comment: 'My initializers') <>-* ((expression property: #javaArrayInitializers) comment: 'The owner of the expression')) withoutPrimaryContainer.
+	
 	(((javaVarDeclStatement property: #declarators) comment: 'The declarators for the type') <>-* ((javaVariableDeclarator property: #varDeclOwner) comment: 'The owner of the declarator')) withoutPrimaryContainer.
 	
 	(((javaSwitchStatement property: #cases) comment: 'The cases of the switch statements') <>-* ((javaCaseStatement property: #javaCaseStatementSwitchOwner) comment: 'javaSwitch owner')) withoutPrimaryContainer.
 	
-	(((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var') <>- ((expression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+	(((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var') <>- ((expression property: #javaVariableDeclaratorExpressionOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 	(((javaVariableDeclarator property: #variable ) comment: 'Variable that s being declared') <>- ((variableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 	
 	(((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var') <>- ((expression property: #javaAssignementExpressioOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
 	(((javaAssignementExpression property: #variable ) comment: 'Variable that s being assigned') <>- ((variableExpression property: #javaAssignementExpressioOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 	
-	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
-	(((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast') <>- ((variableExpression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionExpressionOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast') <>- ((variableExpression property: #javaCastExpressionTypeOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaClassProperty property: #type) comment: 'The owner type') <>- ((variableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)')) withoutPrimaryContainer.
 	
@@ -671,5 +690,5 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	
 	(((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity') <>- ((statementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.')) withoutPrimaryContainer.
 	
-	(((javaNewArray property: #initializers) comment: 'The initial values of the array') <>-* ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
+	(((javaNewArray property: #initializer) comment: 'The initializer of the array') <>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
 ]

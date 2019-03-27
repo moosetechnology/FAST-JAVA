@@ -33,7 +33,7 @@ class Enclosing {
 "
 Class {
 	#name : #FASTJavaClassProperty,
-	#superclass : #FASTExpression,
+	#superclass : #FASTVariableExpression,
 	#instVars : [
 		'fieldName'
 	],
@@ -43,7 +43,7 @@ Class {
 { #category : #meta }
 FASTJavaClassProperty class >> annotation [
 
-	<MSEClass: #ClassProperty super: #FASTExpression>
+	<MSEClass: #ClassProperty super: #FASTVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

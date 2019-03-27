@@ -43,6 +43,27 @@ FASTVariableExpression >> javaCastExpressionOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaCastExpressionTypeOwner [
+
+	<generated>
+	<MSEComment: 'The javaCastExpression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaCastExpressionTypeOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaCastExpressionTypeOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaCastExpressionTypeOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaCastExpressionTypeOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaCastExpressionTypeOwner put: anObject.
+	anObject type: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaCatchParameterOwnler [
 
 	<generated>

@@ -211,6 +211,25 @@ FASTExpression >> javaArrayArrayAccessOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaArrayInitializers [
+
+	<generated>
+	<MSEComment: 'The owner of the expression'>
+	<container>
+
+	<MSEProperty: #javaArrayInitializers type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaArrayInitializers ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaArrayInitializers: anObject [
+
+	<generated>
+	self privateState attributeAt: #javaArrayInitializers put: (FMMultivalueLink on: self update: #initializers from: self javaArrayInitializers to: anObject).
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaAssignementExpressioOwner [
 
 	<generated>
@@ -228,6 +247,27 @@ FASTExpression >> javaAssignementExpressioOwner: anObject [
 	<generated>
 	(self privateState attributeAt: #javaAssignementExpressioOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #javaAssignementExpressioOwner put: anObject.
+	anObject expression: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaCastExpressionExpressionOwner [
+
+	<generated>
+	<MSEComment: 'The javaCastExpression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaCastExpressionExpressionOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaCastExpressionExpressionOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaCastExpressionExpressionOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaCastExpressionExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaCastExpressionExpressionOwner put: anObject.
 	anObject expression: self
 ]
 
@@ -350,7 +390,9 @@ FASTExpression >> javaNewArrayInitialOwner [
 FASTExpression >> javaNewArrayInitialOwner: anObject [
 
 	<generated>
-	self privateState attributeAt: #javaNewArrayInitialOwner put: (FMMultivalueLink on: self update: #initializers from: self javaNewArrayInitialOwner to: anObject).
+	(self privateState attributeAt: #javaNewArrayInitialOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaNewArrayInitialOwner put: anObject.
+	anObject initializer: self
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -411,6 +453,27 @@ FASTExpression >> javaUnaryExpressionOwner: anObject [
 	<generated>
 	(self privateState attributeAt: #javaUnaryExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #javaUnaryExpressionOwner put: anObject.
+	anObject expression: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaVariableDeclaratorExpressionOwner [
+
+	<generated>
+	<MSEComment: 'The javaVariableDeclarator owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaVariableDeclaratorExpressionOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaVariableDeclaratorExpressionOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaVariableDeclaratorExpressionOwner put: anObject.
 	anObject expression: self
 ]
 

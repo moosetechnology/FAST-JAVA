@@ -24,13 +24,13 @@ JavaSmaCCNewArrayTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCNewArrayTest >> testNewArrayAutoCreatedArrayInitializersParent [
-	self assert: (methodNewArray mooseModel allWithType: FASTJavaNewArray) first initializers anyOne parentNode
-		equals: (methodNewArray mooseModel allWithType: FASTJavaNewArray) first
+	self assert: (methodNewArray mooseModel allWithType: FASTJavaNewArray) first initializer initializers anyOne parentNode
+		equals: (methodNewArray mooseModel allWithType: FASTJavaNewArray) first initializer
 ]
 
 { #category : #tests }
 JavaSmaCCNewArrayTest >> testNewArrayAutoCreatedArrayInitializersSize [
-	self assert: (methodNewArray mooseModel allWithType: FASTJavaNewArray) first initializers size equals: 3 
+	self assert: (methodNewArray mooseModel allWithType: FASTJavaNewArray) first initializer initializers size equals: 3 
 ]
 
 { #category : #tests }

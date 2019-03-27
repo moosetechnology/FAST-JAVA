@@ -51,7 +51,7 @@ FASTJavaCastExpression >> expression: anObject [
 	<generated>
 	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #expression put: anObject.
-	anObject javaCastExpressionOwner: self
+	anObject javaCastExpressionExpressionOwner: self
 ]
 
 { #category : #navigation }
@@ -78,7 +78,7 @@ FASTJavaCastExpression >> type: anObject [
 	<generated>
 	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #type put: anObject.
-	anObject javaCastExpressionOwner: self
+	anObject javaCastExpressionTypeOwner: self
 ]
 
 { #category : #navigation }
