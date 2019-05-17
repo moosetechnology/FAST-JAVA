@@ -116,6 +116,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitArrayVariableName: anArrayVariableName [
+	^ self accept: anArrayVariableName variable
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: aVariableDeclaration [
 	currentFASTEntity := self
 		addToModel: FASTJavaAssignementExpression new.
