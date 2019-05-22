@@ -116,6 +116,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitArrayType: anArrayType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaArrayType new
+				baseType: (self clone accept: anArrayType baseType);
+				yourself).
+	self generalVisitActionForNodeEntity: anArrayType.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayVariableName: anArrayVariableName [
 	^ self accept: anArrayVariableName variable
 ]

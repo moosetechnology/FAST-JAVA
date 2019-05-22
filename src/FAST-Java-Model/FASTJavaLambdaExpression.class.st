@@ -1,5 +1,5 @@
 "
-I represent a 'lambda' expression
+I represent a lambda expression
 "
 Class {
 	#name : #FASTJavaLambdaExpression,
