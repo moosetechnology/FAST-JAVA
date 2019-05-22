@@ -403,6 +403,16 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression [
+	currentFASTEntity := self
+		addToModel: FASTJavaLambdaExpression new.
+	self generalVisitActionForNodeEntity: aLambdaExpression.
+	currentFASTEntity
+		expression: (self clone accept: aLambdaExpression value).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aLocalVariableDeclaration.
