@@ -75,7 +75,8 @@ Class {
 		'statementBlock',
 		'expressionStatement',
 		'javaConditionalExpression',
-		'javaArrayInitializer'
+		'javaArrayInitializer',
+		'javaLambdaExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -525,6 +526,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
 		
 	javaCatchPartStatement := builder newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
+	javaLambdaExpression := builder newClassNamed: #LambdaExpression comment: 'I represent a ''lambda'' expression'.
 
 
 	"From FAST"
@@ -597,7 +599,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	
 	javaOuterThis --|> expression.
 
-	javaCatchPartStatement --|> statement
+	javaCatchPartStatement --|> statement.
+	javaLambdaExpression --|> expression
 ]
 
 { #category : #definition }
@@ -691,4 +694,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity') <>- ((statementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.')) withoutPrimaryContainer.
 	
 	(((javaNewArray property: #initializer) comment: 'The initializer of the array') <>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
+	
+	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressioOwner) comment: 'The javaLambdaExpression owner (if possible)')) withoutPrimaryContainer.
 ]

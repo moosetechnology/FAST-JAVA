@@ -1,0 +1,64 @@
+"
+I represent a 'lambda' expression
+"
+Class {
+	#name : #FASTJavaLambdaExpression,
+	#superclass : #FASTExpression,
+	#category : #'FAST-Java-Model-Entities'
+}
+
+{ #category : #meta }
+FASTJavaLambdaExpression class >> annotation [
+
+	<MSEClass: #LambdaExpression super: #FASTExpression>
+	<package: #'FAST-Java-Model'>
+	<generated>
+	^self
+]
+
+{ #category : #generator }
+FASTJavaLambdaExpression class >> generatedSlotNames [
+	<generated>
+	'FASTJavaLambdaExpression class>>#generatedSlotNames'.
+	^ #()
+]
+
+{ #category : #generator }
+FASTJavaLambdaExpression class >> generatedTraitNames [
+	<generated>
+	^ #()
+]
+
+{ #category : #meta }
+FASTJavaLambdaExpression class >> requirements [
+
+	<generated>
+	^ {  }
+]
+
+{ #category : #accessing }
+FASTJavaLambdaExpression >> expression [
+
+	<generated>
+	<MSEComment: 'Expression to be executed as part of the lambda.'>
+	<MSEProperty: #expression type: #Object>
+	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaLambdaExpression >> expression: anObject [
+
+	<generated>
+	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #expression put: anObject.
+	anObject javaLambdaExpressioOwner: self
+]
+
+{ #category : #navigation }
+FASTJavaLambdaExpression >> expressionGroup [
+
+	<generated>
+	<navigation: 'Expression'>
+	^ MooseGroup
+			with: (self expression)
+]
