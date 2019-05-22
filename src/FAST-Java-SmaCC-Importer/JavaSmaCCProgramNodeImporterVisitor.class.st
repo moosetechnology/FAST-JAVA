@@ -739,6 +739,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitTypeName: aTypeName [
+	currentFASTEntity := self addToModel: FASTVariableExpression new.
+	currentFASTEntity name: aTypeName name value.
+	self generalVisitActionForNodeEntity: aTypeName.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitUnaryAddition: anUnaryAddition [
 	currentFASTEntity := self addToModel: FASTJavaUnaryExpression new.
 	currentFASTEntity
