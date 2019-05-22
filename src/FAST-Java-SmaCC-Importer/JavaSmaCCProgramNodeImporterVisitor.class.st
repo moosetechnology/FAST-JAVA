@@ -407,6 +407,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression 
 	currentFASTEntity := self
 		addToModel: FASTJavaLambdaExpression new.
 	self generalVisitActionForNodeEntity: aLambdaExpression.
+	aLambdaExpression parameters do: [ :parameter | self clone accept: parameter ].
 	currentFASTEntity
 		expression: (self clone accept: aLambdaExpression value).
 	^ currentFASTEntity

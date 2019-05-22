@@ -696,4 +696,5 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaNewArray property: #initializer) comment: 'The initializer of the array') <>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
 	
 	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressioOwner) comment: 'The javaLambdaExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda') <>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda expression owner (if possible)')) withoutPrimaryContainer.
 ]

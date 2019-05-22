@@ -62,3 +62,28 @@ FASTJavaLambdaExpression >> expressionGroup [
 	^ MooseGroup
 			with: (self expression)
 ]
+
+{ #category : #accessing }
+FASTJavaLambdaExpression >> parameters [
+
+	<generated>
+	<MSEComment: 'The parameters of the lambda'>
+	<MSEProperty: #parameters type: #Object>
+	^ self privateState attributeAt: #parameters ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaLambdaParameterOwner: ]
+]
+
+{ #category : #accessing }
+FASTJavaLambdaExpression >> parameters: anObject [
+
+	<generated>
+	self parameters value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaLambdaExpression >> parametersGroup [
+
+	<generated>
+	<navigation: 'Parameters'>
+	^ MooseGroup
+			withAll: (self parameters asSet)
+]
