@@ -356,6 +356,27 @@ FASTExpression >> javaLambdaExpressioOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaLambdaExpressionOwner [
+
+	<generated>
+	<MSEComment: 'The expression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaLambdaExpressionOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaLambdaExpressionOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaLambdaExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
+	anObject expression: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaMethodInvocationArgumentsOwner [
 
 	<generated>

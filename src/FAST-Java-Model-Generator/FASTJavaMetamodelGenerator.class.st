@@ -650,7 +650,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression') <>-* ((expression property: #javaNewExpressionArgumentsOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
 	
 	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
-	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
 	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)')) withoutPrimaryContainer.
 	
 	(((javaOuterThis property: #type) comment: 'The accessed type') <>- ((variableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)')) withoutPrimaryContainer.
@@ -698,7 +697,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	
 	(((javaNewArray property: #initializer) comment: 'The initializer of the array') <>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
 	
-	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressioOwner) comment: 'The javaLambdaExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda') <>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')) withoutPrimaryContainer.
 	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda') <>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda expression owner (if possible)')) withoutPrimaryContainer.
-		(((javaArrayType  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+		
+	(((javaArrayType  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 ]

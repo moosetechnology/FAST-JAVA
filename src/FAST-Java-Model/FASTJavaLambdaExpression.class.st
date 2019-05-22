@@ -51,7 +51,7 @@ FASTJavaLambdaExpression >> expression: anObject [
 	<generated>
 	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #expression put: anObject.
-	anObject javaLambdaExpressioOwner: self
+	anObject javaLambdaExpressionOwner: self
 ]
 
 { #category : #navigation }
