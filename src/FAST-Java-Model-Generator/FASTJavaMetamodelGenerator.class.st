@@ -703,6 +703,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)')) withoutPrimaryContainer.
 	(((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda') <>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')) withoutPrimaryContainer.
 	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda') <>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaArrayType  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 		
 	(((javaMethodReference property: #receiver) comment: 'The method of the reference') <>- ((variableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
 	
