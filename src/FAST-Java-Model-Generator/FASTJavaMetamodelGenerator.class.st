@@ -77,7 +77,8 @@ Class {
 		'javaConditionalExpression',
 		'javaArrayInitializer',
 		'javaLambdaExpression',
-		'javaArrayType'
+		'javaArrayType',
+		'javaMethodReference'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -529,6 +530,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaCatchPartStatement := builder newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
 	javaLambdaExpression := builder newClassNamed: #LambdaExpression comment: 'I represent a lambda expression'.
 	javaArrayType := builder newClassNamed: #ArrayType comment: 'I represent a type of Array'.
+	javaMethodReference := builder newClassNamed: #MethodReference comment: 'I represent a method reference'.
 
 
 	"From FAST"
@@ -604,6 +606,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCatchPartStatement --|> statement.
 	javaLambdaExpression --|> expression.
 	javaArrayType --|> variableExpression.
+	javaMethodReference --|> variableExpression. 
 ]
 
 { #category : #definition }
@@ -699,7 +702,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	
 	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)')) withoutPrimaryContainer.
 	(((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda') <>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')) withoutPrimaryContainer.
-	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda') <>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda') <>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')) withoutPrimaryContainer.
 		
-	(((javaArrayType  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaMethodReference property: #receiver) comment: 'The method of the reference') <>- ((variableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
+	
 ]

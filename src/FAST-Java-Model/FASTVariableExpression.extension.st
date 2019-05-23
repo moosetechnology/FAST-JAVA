@@ -172,7 +172,7 @@ FASTVariableExpression >> javaForEachStatementTypeOwner: anObject [
 FASTVariableExpression >> javaLambdaParameterOwner [
 
 	<generated>
-	<MSEComment: 'The lambda expression owner (if possible)'>
+	<MSEComment: 'The lambda parameters owner (if possible)'>
 	<container>
 
 	<MSEProperty: #javaLambdaParameterOwner type: #Object>
@@ -204,6 +204,27 @@ FASTVariableExpression >> javaMethodInvocationArgumentsOwner: anObject [
 
 	<generated>
 	self privateState attributeAt: #javaMethodInvocationArgumentsOwner put: (FMMultivalueLink on: self update: #arguments from: self javaMethodInvocationArgumentsOwner to: anObject).
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaMethodReferenceOwner [
+
+	<generated>
+	<MSEComment: 'The owner of the method reference (if possible)'>
+	<container>
+
+	<MSEProperty: #javaMethodReferenceOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaMethodReferenceOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaMethodReferenceOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaMethodReferenceOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaMethodReferenceOwner put: anObject.
+	anObject receiver: self
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }

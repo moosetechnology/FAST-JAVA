@@ -488,6 +488,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitMethodReference: aMethodReference [
+	currentFASTEntity := self
+		addToModel: FASTJavaMethodReference new.
+	self generalVisitActionForNodeEntity: aMethodReference.
+	currentFASTEntity
+		receiver: (self clone accept: aMethodReference receiver).
+	currentFASTEntity
+		name: (aMethodReference name value).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 	currentFASTEntity := self addToModel: FASTVariableExpression new.
 	currentFASTEntity name: aName name value.
