@@ -7,67 +7,69 @@ do {
 } while(...);
 "
 Class {
-	#name : #FASTJavaDoStatement,
+	#name : #FASTJavaDoWhileStatement,
 	#superclass : #FASTStatement,
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
-FASTJavaDoStatement class >> annotation [
+FASTJavaDoWhileStatement class >> annotation [
 
-	<MSEClass: #DoStatement super: #FASTStatement>
+	<MSEClass: #DoWhileStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #generator }
-FASTJavaDoStatement class >> generatedSlotNames [
+FASTJavaDoWhileStatement class >> generatedSlotNames [
 	<generated>
-	'FASTJavaDoStatement class>>#generatedSlotNames'.
+	'FASTJavaDoWhileStatement class>>#generatedSlotNames'.
 	^ #()
 ]
 
 { #category : #generator }
-FASTJavaDoStatement class >> generatedTraitNames [
+FASTJavaDoWhileStatement class >> generatedTraitNames [
 	<generated>
 	^ #()
 ]
 
 { #category : #meta }
-FASTJavaDoStatement class >> requirements [
+FASTJavaDoWhileStatement class >> requirements [
 
 	<generated>
 	^ {  }
 ]
 
 { #category : #accessing }
-FASTJavaDoStatement >> body [
+FASTJavaDoWhileStatement >> body [
 
 	<generated>
 	<MSEComment: 'A statement to be evaluated in the loop'>
 	<MSEProperty: #body type: #Object>
-	^ self privateState attributeAt: #body ifAbsentPut: [ FMMultivalueLink on: self opposite: #doBodyOwner: ]
+	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
-FASTJavaDoStatement >> body: anObject [
+FASTJavaDoWhileStatement >> body: anObject [
 
 	<generated>
-	self body value: anObject
+	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #body put: anObject.
+	anObject doBodyOwner: self
 ]
 
 { #category : #navigation }
-FASTJavaDoStatement >> bodyGroup [
+FASTJavaDoWhileStatement >> bodyGroup [
 
 	<generated>
 	<navigation: 'Body'>
 	^ MooseGroup
-			withAll: (self body asSet)
+			with: (self body)
 ]
 
 { #category : #accessing }
-FASTJavaDoStatement >> condition [
+FASTJavaDoWhileStatement >> condition [
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
@@ -76,7 +78,7 @@ FASTJavaDoStatement >> condition [
 ]
 
 { #category : #accessing }
-FASTJavaDoStatement >> condition: anObject [
+FASTJavaDoWhileStatement >> condition: anObject [
 
 	<generated>
 	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -85,7 +87,7 @@ FASTJavaDoStatement >> condition: anObject [
 ]
 
 { #category : #navigation }
-FASTJavaDoStatement >> conditionGroup [
+FASTJavaDoWhileStatement >> conditionGroup [
 
 	<generated>
 	<navigation: 'Condition'>

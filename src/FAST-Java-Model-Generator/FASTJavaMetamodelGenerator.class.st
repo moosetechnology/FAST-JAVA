@@ -17,7 +17,6 @@ Class {
 		'javaCaseStatement',
 		'javaCharacterLiteral',
 		'javaContinueStatement',
-		'javaDoStatement',
 		'javaFieldAccess',
 		'javaFloatLiteral',
 		'javaForStatement',
@@ -78,7 +77,8 @@ Class {
 		'javaArrayInitializer',
 		'javaLambdaExpression',
 		'javaArrayType',
-		'javaMethodReference'
+		'javaMethodReference',
+		'javaDoWhileStatement'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -211,7 +211,7 @@ default:'
 ]
 
 { #category : #comments }
-FASTJavaMetamodelGenerator >> commentForJavaDoStatement [
+FASTJavaMetamodelGenerator >> commentForJavaDoWhileStatement [
 	^ 'A node of a do-while statement.
 
 eg.
@@ -491,7 +491,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaCaseStatement := builder newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
 	javaCharacterLiteral := builder newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
 	javaContinueStatement := builder newClassNamed: #ContinueStatement comment: self commentForJavaContinueStatement.
-	javaDoStatement := builder newClassNamed: #DoStatement comment: self commentForJavaDoStatement.
+	javaDoWhileStatement := builder newClassNamed: #DoWhileStatement comment: self commentForJavaDoWhileStatement.
 	javaFieldAccess := builder newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
 	javaFloatLiteral := builder newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
 	javaForStatement := builder newClassNamed: #ForStatement comment: self commentForJavaForStatement.
@@ -562,7 +562,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCaseStatement --|> statementBlock.
 	javaCharacterLiteral --|> characterLiteral.
 	javaContinueStatement --|> statement.
-	javaDoStatement --|> statement.
+	javaDoWhileStatement --|> statement.
 	javaFloatLiteral --|> literal.
 	javaForStatement --|> statement.
 	javaIdentifier --|> variableExpression.
@@ -688,8 +688,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaForStatement property: #initializer) comment: 'Expression used at initialization phase of a for loop') <>- ((statement property: #forIninitializerOwner) comment: 'I am the initializer of the for')) withoutPrimaryContainer.
 	(((javaForStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #forBodyOwner) comment: 'I am the body of the for')) withoutPrimaryContainer.
 
-	(((javaDoStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
-	(((javaDoStatement property: #body) comment: 'A statement to be evaluated in the loop') <>-* ((statement property: #doBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
+	(((javaDoWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+	(((javaDoWhileStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #doBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
 	
 	(((javaWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.
 	(((javaWhileStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #whileBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.

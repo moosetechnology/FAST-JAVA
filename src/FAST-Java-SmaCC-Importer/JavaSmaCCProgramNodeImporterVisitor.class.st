@@ -273,6 +273,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitDoWhileStatement: aDoWhileStatement [
+	currentFASTEntity := self addToModel: FASTJavaDoWhileStatement new.
+	self generalVisitActionForNodeEntity: aDoWhileStatement.
+	currentFASTEntity
+		condition: (self clone accept: aDoWhileStatement expression).
+	currentFASTEntity
+		body: (self clone accept: aDoWhileStatement statement).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaEmptyMethodDeclaration new.
 	self generalVisitActionForNodeEntity: anEmptyDeclaration.
