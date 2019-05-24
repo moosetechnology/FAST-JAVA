@@ -17,7 +17,6 @@ Class {
 		'javaCaseStatement',
 		'javaCharacterLiteral',
 		'javaContinueStatement',
-		'javaDoStatement',
 		'javaFieldAccess',
 		'javaFloatLiteral',
 		'javaForStatement',
@@ -75,7 +74,12 @@ Class {
 		'statementBlock',
 		'expressionStatement',
 		'javaConditionalExpression',
-		'javaArrayInitializer'
+		'javaArrayInitializer',
+		'javaLambdaExpression',
+		'javaArrayType',
+		'javaMethodReference',
+		'javaDoWhileStatement',
+		'javaSynchronizedStatement'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -208,7 +212,7 @@ default:'
 ]
 
 { #category : #comments }
-FASTJavaMetamodelGenerator >> commentForJavaDoStatement [
+FASTJavaMetamodelGenerator >> commentForJavaDoWhileStatement [
 	^ 'A node of a do-while statement.
 
 eg.
@@ -488,7 +492,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaCaseStatement := builder newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
 	javaCharacterLiteral := builder newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
 	javaContinueStatement := builder newClassNamed: #ContinueStatement comment: self commentForJavaContinueStatement.
-	javaDoStatement := builder newClassNamed: #DoStatement comment: self commentForJavaDoStatement.
+	javaDoWhileStatement := builder newClassNamed: #DoWhileStatement comment: self commentForJavaDoWhileStatement.
 	javaFieldAccess := builder newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
 	javaFloatLiteral := builder newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
 	javaForStatement := builder newClassNamed: #ForStatement comment: self commentForJavaForStatement.
@@ -525,6 +529,10 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
 		
 	javaCatchPartStatement := builder newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
+	javaLambdaExpression := builder newClassNamed: #LambdaExpression comment: 'I represent a lambda expression'.
+	javaArrayType := builder newClassNamed: #ArrayType comment: 'I represent a type of Array'.
+	javaMethodReference := builder newClassNamed: #MethodReference comment: 'I represent a method reference'.
+	javaSynchronizedStatement := builder newClassNamed: #SynchronizedStatement comment: 'I represent a ''synchronized'' statement'.
 
 
 	"From FAST"
@@ -556,7 +564,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCaseStatement --|> statementBlock.
 	javaCharacterLiteral --|> characterLiteral.
 	javaContinueStatement --|> statement.
-	javaDoStatement --|> statement.
+	javaDoWhileStatement --|> statement.
 	javaFloatLiteral --|> literal.
 	javaForStatement --|> statement.
 	javaIdentifier --|> variableExpression.
@@ -597,7 +605,11 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	
 	javaOuterThis --|> expression.
 
-	javaCatchPartStatement --|> statement
+	javaCatchPartStatement --|> statement.
+	javaLambdaExpression --|> expression.
+	javaArrayType --|> variableExpression.
+	javaMethodReference --|> variableExpression. 
+	javaSynchronizedStatement --|> statement. 
 ]
 
 { #category : #definition }
@@ -644,7 +656,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression') <>-* ((expression property: #javaNewExpressionArgumentsOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
 	
 	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
-	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
 	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)')) withoutPrimaryContainer.
 	
 	(((javaOuterThis property: #type) comment: 'The accessed type') <>- ((variableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)')) withoutPrimaryContainer.
@@ -680,8 +691,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaForStatement property: #initializer) comment: 'Expression used at initialization phase of a for loop') <>- ((statement property: #forIninitializerOwner) comment: 'I am the initializer of the for')) withoutPrimaryContainer.
 	(((javaForStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #forBodyOwner) comment: 'I am the body of the for')) withoutPrimaryContainer.
 
-	(((javaDoStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
-	(((javaDoStatement property: #body) comment: 'A statement to be evaluated in the loop') <>-* ((statement property: #doBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
+	(((javaDoWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+	(((javaDoWhileStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #doBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
 	
 	(((javaWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.
 	(((javaWhileStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #whileBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
@@ -691,4 +702,16 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity') <>- ((statementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.')) withoutPrimaryContainer.
 	
 	(((javaNewArray property: #initializer) comment: 'The initializer of the array') <>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
+	
+	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda') <>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda') <>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaArrayType  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+		
+	(((javaMethodReference property: #receiver) comment: 'The method of the reference') <>- ((variableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
+	
+	(((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized') <>- ((expression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
+	(((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized') <>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
+	
 ]

@@ -335,6 +335,48 @@ FASTExpression >> javaLabeledCaseStatementOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaLambdaExpressioOwner [
+
+	<generated>
+	<MSEComment: 'The javaLambdaExpression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaLambdaExpressioOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaLambdaExpressioOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaLambdaExpressioOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaLambdaExpressioOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaLambdaExpressioOwner put: anObject.
+	anObject expression: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaLambdaExpressionOwner [
+
+	<generated>
+	<MSEComment: 'The expression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaLambdaExpressionOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaLambdaExpressionOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaLambdaExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
+	anObject expression: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaMethodInvocationArgumentsOwner [
 
 	<generated>
@@ -412,6 +454,27 @@ FASTExpression >> javaNewExpressionArgumentsOwner: anObject [
 
 	<generated>
 	self privateState attributeAt: #javaNewExpressionArgumentsOwner put: (FMMultivalueLink on: self update: #arguments from: self javaNewExpressionArgumentsOwner to: anObject).
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaSynchronizedStatementOwner [
+
+	<generated>
+	<MSEComment: 'The owner of the synchronized block (if possible)'>
+	<container>
+
+	<MSEProperty: #javaSynchronizedStatementOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaSynchronizedStatementOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+	anObject expression: self
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }

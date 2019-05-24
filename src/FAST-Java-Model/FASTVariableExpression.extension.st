@@ -1,6 +1,27 @@
 Extension { #name : #FASTVariableExpression }
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaArrayTypeOwner [
+
+	<generated>
+	<MSEComment: 'The variable expression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaArrayTypeOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaArrayTypeOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaArrayTypeOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaArrayTypeOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaArrayTypeOwner put: anObject.
+	anObject baseType: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaAssignementExpressioOwner [
 
 	<generated>
@@ -148,6 +169,25 @@ FASTVariableExpression >> javaForEachStatementTypeOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaLambdaParameterOwner [
+
+	<generated>
+	<MSEComment: 'The lambda parameters owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaLambdaParameterOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaLambdaParameterOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaLambdaParameterOwner: anObject [
+
+	<generated>
+	self privateState attributeAt: #javaLambdaParameterOwner put: (FMMultivalueLink on: self update: #parameters from: self javaLambdaParameterOwner to: anObject).
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaMethodInvocationArgumentsOwner [
 
 	<generated>
@@ -164,6 +204,27 @@ FASTVariableExpression >> javaMethodInvocationArgumentsOwner: anObject [
 
 	<generated>
 	self privateState attributeAt: #javaMethodInvocationArgumentsOwner put: (FMMultivalueLink on: self update: #arguments from: self javaMethodInvocationArgumentsOwner to: anObject).
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaMethodReferenceOwner [
+
+	<generated>
+	<MSEComment: 'The owner of the method reference (if possible)'>
+	<container>
+
+	<MSEProperty: #javaMethodReferenceOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaMethodReferenceOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaMethodReferenceOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaMethodReferenceOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaMethodReferenceOwner put: anObject.
+	anObject receiver: self
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }

@@ -16,7 +16,9 @@ FASTStatement >> doBodyOwner [
 FASTStatement >> doBodyOwner: anObject [
 
 	<generated>
-	self privateState attributeAt: #doBodyOwner put: (FMMultivalueLink on: self update: #body from: self doBodyOwner to: anObject).
+	(self privateState attributeAt: #doBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #doBodyOwner put: anObject.
+	anObject body: self
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }

@@ -70,7 +70,7 @@ FASTJavaVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatem
 ]
 
 { #category : #generated }
-FASTJavaVisitor >> visitFASTJavaDoStatement: aFASTJavaDoStatement [
+FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoStatement [
 	^ self visitFASTStatement: aFASTJavaDoStatement
 ]
 
