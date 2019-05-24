@@ -457,6 +457,27 @@ FASTExpression >> javaNewExpressionArgumentsOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaSynchronizedStatementOwner [
+
+	<generated>
+	<MSEComment: 'The owner of the synchronized block (if possible)'>
+	<container>
+
+	<MSEProperty: #javaSynchronizedStatementOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaSynchronizedStatementOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+	anObject expression: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaThrowStatementOwner [
 
 	<generated>

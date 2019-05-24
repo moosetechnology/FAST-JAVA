@@ -78,7 +78,8 @@ Class {
 		'javaLambdaExpression',
 		'javaArrayType',
 		'javaMethodReference',
-		'javaDoWhileStatement'
+		'javaDoWhileStatement',
+		'javaSynchronizedStatement'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -531,6 +532,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaLambdaExpression := builder newClassNamed: #LambdaExpression comment: 'I represent a lambda expression'.
 	javaArrayType := builder newClassNamed: #ArrayType comment: 'I represent a type of Array'.
 	javaMethodReference := builder newClassNamed: #MethodReference comment: 'I represent a method reference'.
+	javaSynchronizedStatement := builder newClassNamed: #SynchronizedStatement comment: 'I represent a ''synchronized'' statement'.
 
 
 	"From FAST"
@@ -607,6 +609,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLambdaExpression --|> expression.
 	javaArrayType --|> variableExpression.
 	javaMethodReference --|> variableExpression. 
+	javaSynchronizedStatement --|> statement. 
 ]
 
 { #category : #definition }
@@ -707,5 +710,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaArrayType  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 		
 	(((javaMethodReference property: #receiver) comment: 'The method of the reference') <>- ((variableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
+	
+	(((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized') <>- ((expression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
+	(((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized') <>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
 	
 ]

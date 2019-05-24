@@ -726,6 +726,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitSynchronizedStatement: aSynchronizedStatement [
+	currentFASTEntity := self
+		addToModel: FASTJavaSynchronizedStatement new.
+	self generalVisitActionForNodeEntity: aSynchronizedStatement.
+	currentFASTEntity
+		expression: (self clone accept: aSynchronizedStatement expression).
+	currentFASTEntity
+		block: (self clone accept: aSynchronizedStatement block).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitThisConstructorInvocation: aThisConstructorInvocation [
 	| expressionStatement | 
 	currentFASTEntity := self addToModel: FASTExpressionStatement new.
