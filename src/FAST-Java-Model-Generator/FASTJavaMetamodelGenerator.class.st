@@ -90,7 +90,8 @@ Class {
 		'javaFloatTypeExpression',
 		'javaIntTypeExpression',
 		'javaLongTypeExpression',
-		'javaShortTypeExpression'
+		'javaShortTypeExpression',
+		'javaVoidTypeExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -557,6 +558,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaIntTypeExpression := builder newClassNamed: #IntTypeExpression comment: 'I represent an int type'.
 	javaLongTypeExpression := builder newClassNamed: #LongTypeExpression comment: 'I represent a long type'.
 	javaShortTypeExpression := builder newClassNamed: #ShortTypeExpression comment: 'I represent a short type'.
+	javaVoidTypeExpression := builder newClassNamed: #VoidTypeExpression comment: 'I represent a short type'.
 	
 	"From FAST"
 	expression := self remoteEntity: #Expression withPrefix: #FAST. 
@@ -647,6 +649,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIntTypeExpression --|> javaPrimitiveTypeExpression.
 	javaLongTypeExpression --|> javaPrimitiveTypeExpression.
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
+	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 ]
 
 { #category : #definition }
@@ -749,7 +752,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized') <>- ((expression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
 	(((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized') <>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
 	
+	(((javaMethodEntity  property: #type) comment: 'The type of the method') <>- ((variableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
-	"types"
+
 	(((javaArrayTypeExpression  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 ]

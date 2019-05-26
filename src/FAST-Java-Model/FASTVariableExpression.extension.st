@@ -207,6 +207,27 @@ FASTVariableExpression >> javaMethodReferenceOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaMethodTypeOwner [
+
+	<generated>
+	<MSEComment: 'The variable expression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaMethodTypeOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaMethodTypeOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaMethodTypeOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaMethodTypeOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaMethodTypeOwner put: anObject.
+	anObject type: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaNewExpressionOwner [
 
 	<generated>

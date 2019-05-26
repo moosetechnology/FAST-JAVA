@@ -539,6 +539,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 		name: aMethodDeclaration declarator name value;
 		yourself.
 	self generalVisitActionForNodeEntity: aMethodDeclaration.
+	aMethodDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
 	aMethodDeclaration declarator parameters
 		do: [ :parameter | self clone accept: parameter ].
 	currentFASTEntity
@@ -930,6 +931,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableName: aVariableName [
 	currentFASTEntity := self addToModel: FASTVariableExpression new.
 	currentFASTEntity name: aVariableName name value.
 	self generalVisitActionForNodeEntity: aVariableName.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitVoidType: aVoidType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaVoidTypeExpression new
+				name: aVoidType voidToken value;
+				yourself).
+	self generalVisitActionForNodeEntity: aVoidType.
 	^ currentFASTEntity
 ]
 

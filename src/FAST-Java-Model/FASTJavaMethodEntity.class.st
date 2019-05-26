@@ -37,3 +37,30 @@ FASTJavaMethodEntity class >> requirements [
 	<generated>
 	^ {  }
 ]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> type [
+
+	<generated>
+	<MSEComment: 'The type of the method'>
+	<MSEProperty: #type type: #Object>
+	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> type: anObject [
+
+	<generated>
+	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #type put: anObject.
+	anObject javaMethodTypeOwner: self
+]
+
+{ #category : #navigation }
+FASTJavaMethodEntity >> typeGroup [
+
+	<generated>
+	<navigation: 'Type'>
+	^ MooseGroup
+			with: (self type)
+]
