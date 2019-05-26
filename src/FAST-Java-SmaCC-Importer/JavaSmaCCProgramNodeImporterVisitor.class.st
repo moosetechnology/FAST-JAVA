@@ -365,8 +365,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldDeclaration: aFieldDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aFieldDeclaration.
-	aFieldDeclaration variableDeclarations
-		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
+	aFieldDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aFieldDeclaration type) ].
+	aFieldDeclaration variableDeclarations do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity
 ]
 
@@ -508,6 +508,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression 
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aLocalVariableDeclaration.
+	aLocalVariableDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aLocalVariableDeclaration type) ].
 	aLocalVariableDeclaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity
@@ -517,6 +518,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVari
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: aLocalVariableDeclarationStatement [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self generalVisitActionForNodeEntity: aLocalVariableDeclarationStatement.
+	aLocalVariableDeclarationStatement declaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aLocalVariableDeclarationStatement declaration type) ].
 	aLocalVariableDeclarationStatement declaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity

@@ -23,26 +23,26 @@ JavaSmaCCUnaryBitInvertExpressionTest >> setUp [
 { #category : #tests }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionIsPrefixed [
 	self
-		assert: unaryBitInvertMethod statements first childrenNode first expression isPrefixedUnaryExpression
+		assert: unaryBitInvertMethod statements first declarators first expression isPrefixedUnaryExpression
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionOperator [
 	self
-		assert: unaryBitInvertMethod statements first childrenNode first expression operator
+		assert: unaryBitInvertMethod statements first declarators first expression operator
 		equals: '~'
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionOperatorType [
 	self
-		assert: unaryBitInvertMethod statements first childrenNode first expression operator class
+		assert: unaryBitInvertMethod statements first declarators first expression operator class
 		equals: ByteString
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionType [
 	self
-		assert: unaryBitInvertMethod statements first childrenNode first expression class
+		assert: unaryBitInvertMethod statements first declarators first expression class
 		equals: FASTJavaUnaryExpression
 ]

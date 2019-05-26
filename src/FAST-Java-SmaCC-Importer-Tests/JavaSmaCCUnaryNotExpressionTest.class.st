@@ -22,26 +22,26 @@ JavaSmaCCUnaryNotExpressionTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionIsPrefixed [
-	self assert: unaryNotMethod statements first childrenNode first expression isPrefixedUnaryExpression
+	self assert: unaryNotMethod statements first declarators first expression isPrefixedUnaryExpression
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionOperator [
 	self
-		assert: unaryNotMethod statements first childrenNode first expression operator
+		assert: unaryNotMethod statements first declarators first expression operator
 		equals: '!'
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionOperatorType [
 	self
-		assert: unaryNotMethod statements first childrenNode first expression operator class
+		assert: unaryNotMethod statements first declarators first expression operator class
 		equals: ByteString
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionType [
 	self
-		assert: unaryNotMethod statements first childrenNode first expression class
+		assert: unaryNotMethod statements first declarators first expression class
 		equals: FASTJavaUnaryExpression
 ]

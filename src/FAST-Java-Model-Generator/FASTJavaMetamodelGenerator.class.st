@@ -658,7 +658,6 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaFieldAccess property: #fieldName type: #String) comment: 'Name of accessed field'.
 	(javaInfixOperation property: #operator type: #String) comment: 'operator s symbol'.
 	(javaSeparator property: #separator type: #String) comment: 'separator'.
-	(javaVarDeclStatement property: #type type: #Object) comment: 'type of declared variables'.
 	(javaClassProperty property: #fieldName type: #String) comment: 'Name of accessed field'.
 	
 	(javaUnaryExpression property: #operator type: #String) comment: 'The operator string to apply to the expression'.
@@ -754,6 +753,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	
 	(((javaMethodEntity  property: #type) comment: 'The type of the method') <>- ((variableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
+	(((javaVarDeclStatement  property: #type) comment: 'The type of the declared variables') <>- ((variableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaArrayTypeExpression  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 ]

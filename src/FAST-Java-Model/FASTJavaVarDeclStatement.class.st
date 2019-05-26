@@ -12,8 +12,7 @@ Class {
 	#name : #FASTJavaVarDeclStatement,
 	#superclass : #FASTStatement,
 	#instVars : [
-		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner',
-		'#type'
+		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -31,7 +30,7 @@ FASTJavaVarDeclStatement class >> annotation [
 FASTJavaVarDeclStatement class >> generatedSlotNames [
 	<generated>
 	'FASTJavaVarDeclStatement class>>#generatedSlotNames'.
-	^ #(declarators type)
+	^ #(declarators)
 ]
 
 { #category : #generator }
@@ -82,16 +81,26 @@ FASTJavaVarDeclStatement >> declaratorsGroup [
 { #category : #accessing }
 FASTJavaVarDeclStatement >> type [
 
-	<MSEProperty: #type type: #Object>
 	<generated>
-	<MSEComment: 'type of declared variables'>
-	^ type
+	<MSEComment: 'The type of the declared variables'>
+	<MSEProperty: #type type: #Object>
+	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaVarDeclStatement >> type: anObject [
 
 	<generated>
-	type := anObject
+	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #type put: anObject.
+	anObject javaVarDeclTypeOwner: self
+]
 
+{ #category : #navigation }
+FASTJavaVarDeclStatement >> typeGroup [
+
+	<generated>
+	<navigation: 'Type'>
+	^ MooseGroup
+			with: (self type)
 ]

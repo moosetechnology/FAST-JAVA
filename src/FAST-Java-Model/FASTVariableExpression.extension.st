@@ -270,6 +270,27 @@ FASTVariableExpression >> javaOuterThisOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaVarDeclTypeOwner [
+
+	<generated>
+	<MSEComment: 'The variable expression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaVarDeclTypeOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaVarDeclTypeOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaVarDeclTypeOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaVarDeclTypeOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaVarDeclTypeOwner put: anObject.
+	anObject type: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaVariableDeclaratorOwner [
 
 	<generated>

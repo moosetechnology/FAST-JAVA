@@ -23,26 +23,26 @@ JavaSmaCCUnarySubstractionExpressionTest >> setUp [
 { #category : #tests }
 JavaSmaCCUnarySubstractionExpressionTest >> testUnaryExpressionIsPrefixed [
 	self
-		assert: unarySubstractionMethod statements first childrenNode first expression isPrefixedUnaryExpression
+		assert: unarySubstractionMethod statements first declarators first expression isPrefixedUnaryExpression
 ]
 
 { #category : #tests }
 JavaSmaCCUnarySubstractionExpressionTest >> testUnaryExpressionOperator [
 	self
-		assert: unarySubstractionMethod statements first childrenNode first expression operator
+		assert: unarySubstractionMethod statements first declarators first expression operator
 		equals: '-'
 ]
 
 { #category : #tests }
 JavaSmaCCUnarySubstractionExpressionTest >> testUnaryExpressionOperatorType [
 	self
-		assert: unarySubstractionMethod statements first childrenNode first expression operator class
+		assert: unarySubstractionMethod statements first declarators first expression operator class
 		equals: ByteString
 ]
 
 { #category : #tests }
 JavaSmaCCUnarySubstractionExpressionTest >> testUnaryExpressionType [
 	self
-		assert: unarySubstractionMethod statements first childrenNode first expression class
+		assert: unarySubstractionMethod statements first declarators first expression class
 		equals: FASTJavaUnaryExpression
 ]
