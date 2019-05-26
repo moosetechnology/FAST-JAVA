@@ -119,7 +119,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayType: anArrayType [
 	currentFASTEntity := self
 		addToModel:
-			(FASTJavaArrayType new
+			(FASTJavaArrayTypeExpression new
 				baseType: (self clone accept: anArrayType baseType);
 				yourself).
 	self generalVisitActionForNodeEntity: anArrayType.
@@ -176,9 +176,31 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaBooleanTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBreakStatement: aBreakStatement [
 	currentFASTEntity := self addToModel: FASTJavaContinueStatement new.
 	self generalVisitActionForNodeEntity: aBreakStatement.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitByteType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaByteTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
 	^ currentFASTEntity
 ]
 
@@ -210,6 +232,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitCharType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaCharTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -231,8 +264,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
-	currentFASTEntity := self addToModel: FASTVariableExpression new.
-	currentFASTEntity name: aClassType name name value.
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaClassTypeExpression new
+				name: aClassType name name value;
+				yourself).
 	self generalVisitActionForNodeEntity: aClassType.
 	^ currentFASTEntity
 ]
@@ -284,6 +320,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoWhileStatement: aDoWhileStatement 
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaDoubleTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaEmptyMethodDeclaration new.
 	self generalVisitActionForNodeEntity: anEmptyDeclaration.
@@ -331,6 +378,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatLiteral: aFloatLiteral [
 				value: aFloatLiteral token value;
 				yourself).
 		self generalVisitActionForNodeEntity: aFloatLiteral.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaFloatTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
 	^ currentFASTEntity
 ]
 
@@ -414,6 +472,17 @@ self
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitIntType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaIntTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -450,6 +519,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: a
 	self generalVisitActionForNodeEntity: aLocalVariableDeclarationStatement.
 	aLocalVariableDeclarationStatement declaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitLongType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaLongTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
 	^ currentFASTEntity
 ]
 
@@ -634,7 +714,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPreIncrementExpression: aPreIncremen
 JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
 	currentFASTEntity := self
 		addToModel:
-			(FASTVariableExpression new
+			(FASTJavaPrimitiveTypeExpression new
 				name: aPrimitiveType token value;
 				yourself).
 	self generalVisitActionForNodeEntity: aPrimitiveType.
@@ -662,6 +742,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
 						name: aReturnStatement expression name value;
 						yourself)) ]
 		ifFalse: [ aReturnStatement expression ifNotNil: [ :expression | currentFASTEntity expression: (self clone accept: expression) ] ].
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
+	currentFASTEntity := self
+		addToModel:
+			(FASTJavaShortTypeExpression new
+				name: aByteType token value;
+				yourself).
+	self generalVisitActionForNodeEntity: aByteType.
 	^ currentFASTEntity
 ]
 
@@ -775,7 +866,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeName: aTypeName [
-	currentFASTEntity := self addToModel: FASTVariableExpression new.
+	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	currentFASTEntity name: aTypeName name value.
 	self generalVisitActionForNodeEntity: aTypeName.
 	^ currentFASTEntity

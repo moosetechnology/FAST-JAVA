@@ -47,6 +47,13 @@ FASTJavaVarDeclStatement class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaVarDeclStatement >> addDeclarators: anObject [
+			
+	<generated>
+	^ self declarators add: anObject
+]
+
 { #category : #accessing }
 FASTJavaVarDeclStatement >> declarators [
 

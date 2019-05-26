@@ -1,43 +1,43 @@
 "
-I represent a type of Array
+I represent an array type
 "
 Class {
-	#name : #FASTJavaArrayType,
-	#superclass : #FASTVariableExpression,
+	#name : #FASTJavaArrayTypeExpression,
+	#superclass : #FASTJavaTypeExpression,
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
-FASTJavaArrayType class >> annotation [
+FASTJavaArrayTypeExpression class >> annotation [
 
-	<MSEClass: #ArrayType super: #FASTVariableExpression>
+	<MSEClass: #ArrayTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #generator }
-FASTJavaArrayType class >> generatedSlotNames [
+FASTJavaArrayTypeExpression class >> generatedSlotNames [
 	<generated>
-	'FASTJavaArrayType class>>#generatedSlotNames'.
+	'FASTJavaArrayTypeExpression class>>#generatedSlotNames'.
 	^ #()
 ]
 
 { #category : #generator }
-FASTJavaArrayType class >> generatedTraitNames [
+FASTJavaArrayTypeExpression class >> generatedTraitNames [
 	<generated>
 	^ #()
 ]
 
 { #category : #meta }
-FASTJavaArrayType class >> requirements [
+FASTJavaArrayTypeExpression class >> requirements [
 
 	<generated>
 	^ {  }
 ]
 
 { #category : #accessing }
-FASTJavaArrayType >> baseType [
+FASTJavaArrayTypeExpression >> baseType [
 
 	<generated>
 	<MSEComment: 'The type of the array'>
@@ -46,7 +46,7 @@ FASTJavaArrayType >> baseType [
 ]
 
 { #category : #accessing }
-FASTJavaArrayType >> baseType: anObject [
+FASTJavaArrayTypeExpression >> baseType: anObject [
 
 	<generated>
 	(self privateState attributeAt: #baseType ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -55,7 +55,7 @@ FASTJavaArrayType >> baseType: anObject [
 ]
 
 { #category : #navigation }
-FASTJavaArrayType >> baseTypeGroup [
+FASTJavaArrayTypeExpression >> baseTypeGroup [
 
 	<generated>
 	<navigation: 'BaseType'>

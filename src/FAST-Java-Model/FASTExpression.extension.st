@@ -335,27 +335,6 @@ FASTExpression >> javaLabeledCaseStatementOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTExpression >> javaLambdaExpressioOwner [
-
-	<generated>
-	<MSEComment: 'The javaLambdaExpression owner (if possible)'>
-	<container>
-
-	<MSEProperty: #javaLambdaExpressioOwner type: #Object>
-	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaLambdaExpressioOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTExpression >> javaLambdaExpressioOwner: anObject [
-
-	<generated>
-	(self privateState attributeAt: #javaLambdaExpressioOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaLambdaExpressioOwner put: anObject.
-	anObject expression: self
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaLambdaExpressionOwner [
 
 	<generated>
@@ -537,27 +516,6 @@ FASTExpression >> javaVariableDeclaratorExpressionOwner: anObject [
 	<generated>
 	(self privateState attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	self privateState attributeAt: #javaVariableDeclaratorExpressionOwner put: anObject.
-	anObject expression: self
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTExpression >> javaVariableDeclaratorOwner [
-
-	<generated>
-	<MSEComment: 'The javaVariableDeclarator owner (if possible)'>
-	<container>
-
-	<MSEProperty: #javaVariableDeclaratorOwner type: #Object>
-	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaVariableDeclaratorOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTExpression >> javaVariableDeclaratorOwner: anObject [
-
-	<generated>
-	(self privateState attributeAt: #javaVariableDeclaratorOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaVariableDeclaratorOwner put: anObject.
 	anObject expression: self
 ]
 

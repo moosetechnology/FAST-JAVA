@@ -69,5 +69,5 @@ JavaSmaCCForEachTest >> testForEachTypeName [
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachTypeType [
-	self assert: methodForEach statements first type class equals: FASTVariableExpression
+	self assert: methodForEach statements first type class equals: FASTJavaClassTypeExpression
 ]

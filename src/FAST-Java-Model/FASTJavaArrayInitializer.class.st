@@ -45,6 +45,13 @@ FASTJavaArrayInitializer class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaArrayInitializer >> addInitializers: anObject [
+			
+	<generated>
+	^ self initializers add: anObject
+]
+
 { #category : #accessing }
 FASTJavaArrayInitializer >> initializers [
 

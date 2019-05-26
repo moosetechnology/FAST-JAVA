@@ -36,6 +36,13 @@ FASTJavaLambdaExpression class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaLambdaExpression >> addParameters: anObject [
+			
+	<generated>
+	^ self parameters add: anObject
+]
+
 { #category : #accessing }
 FASTJavaLambdaExpression >> expression [
 

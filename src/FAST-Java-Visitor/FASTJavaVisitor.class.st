@@ -10,6 +10,11 @@ FASTJavaVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExpression [
+	^ self visitFASTJavaTypeExpression: aFASTJavaArrayTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
 	^ self visitFASTExpression: aFASTJavaAssignementExpression
 ]
@@ -20,8 +25,18 @@ FASTJavaVisitor >> visitFASTJavaBodyStatement: aFASTJavaBodyStatement [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaBooleanTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
 	^ self visitFASTStatement: aFASTJavaBreakStatement
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaByteTypeExpression
 ]
 
 { #category : #generated }
@@ -40,6 +55,11 @@ FASTJavaVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStatement 
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaCharTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
 	^ self visitFASTCharacterLiteral: aFASTJavaCharacterLiteral
 ]
@@ -47,6 +67,11 @@ FASTJavaVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 	^ self visitFASTExpression: aFASTJavaClassProperty
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
+	^ self visitFASTJavaTypeExpression: aFASTJavaClassTypeExpression
 ]
 
 { #category : #generated }
@@ -75,6 +100,11 @@ FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoStatement [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaDoubleTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaElsePartStatement: aFASTJavaElsePartStatement [
 	^ self visitFASTStatement: aFASTJavaElsePartStatement
 ]
@@ -92,6 +122,11 @@ FASTJavaVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 	^ self visitFASTLiteral: aFASTJavaFloatLiteral
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaFloatTypeExpression
 ]
 
 { #category : #generated }
@@ -135,6 +170,11 @@ FASTJavaVisitor >> visitFASTJavaInitializersStatement: aFASTJavaInitializersStat
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaIntTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaIntegerLiteral: aFASTJavaIntegerLiteral [
 	^ self visitFASTLiteral: aFASTJavaIntegerLiteral
 ]
@@ -142,6 +182,11 @@ FASTJavaVisitor >> visitFASTJavaIntegerLiteral: aFASTJavaIntegerLiteral [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatement [
 	^ self visitFASTJavaCaseStatement: aFASTJavaLabeledCaseStatement
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaLongTypeExpression
 ]
 
 { #category : #generated }
@@ -195,8 +240,18 @@ FASTJavaVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaPrimitiveTypeExpression: aFASTJavaPrimitiveTypeExpression [
+	^ self visitFASTJavaTypeExpression: aFASTJavaPrimitiveTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaSeparator: aFASTJavaSeparator [
 	^ self visitFASTVariableExpression: aFASTJavaSeparator
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaShortTypeExpression
 ]
 
 { #category : #generated }
@@ -232,6 +287,11 @@ FASTJavaVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaTryPartStatement: aFASTJavaTryPartStatement [
 	^ self visitFASTStatement: aFASTJavaTryPartStatement
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaTypeExpression: aFASTJavaTypeExpression [
+	^ self visitFASTExpression: aFASTJavaTypeExpression
 ]
 
 { #category : #generated }

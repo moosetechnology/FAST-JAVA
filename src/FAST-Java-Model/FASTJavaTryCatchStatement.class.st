@@ -52,6 +52,13 @@ FASTJavaTryCatchStatement class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaTryCatchStatement >> addCatches: anObject [
+			
+	<generated>
+	^ self catches add: anObject
+]
+
 { #category : #accessing }
 FASTJavaTryCatchStatement >> catches [
 

@@ -49,6 +49,13 @@ FASTJavaNewClassExpression class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaNewClassExpression >> addDeclarations: anObject [
+			
+	<generated>
+	^ self declarations add: anObject
+]
+
 { #category : #accessing }
 FASTJavaNewClassExpression >> declarations [
 

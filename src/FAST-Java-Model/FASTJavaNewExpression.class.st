@@ -40,6 +40,13 @@ FASTJavaNewExpression class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaNewExpression >> addArguments: anObject [
+			
+	<generated>
+	^ self arguments add: anObject
+]
+
 { #category : #accessing }
 FASTJavaNewExpression >> arguments [
 

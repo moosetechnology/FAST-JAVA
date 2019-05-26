@@ -44,6 +44,13 @@ FASTJavaSwitchStatement class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaSwitchStatement >> addCases: anObject [
+			
+	<generated>
+	^ self cases add: anObject
+]
+
 { #category : #accessing }
 FASTJavaSwitchStatement >> cases [
 

@@ -38,6 +38,13 @@ FASTJavaMethodInvocation class >> requirements [
 	^ {  }
 ]
 
+{ #category : #adding }
+FASTJavaMethodInvocation >> addArguments: anObject [
+			
+	<generated>
+	^ self arguments add: anObject
+]
+
 { #category : #accessing }
 FASTJavaMethodInvocation >> arguments [
 
