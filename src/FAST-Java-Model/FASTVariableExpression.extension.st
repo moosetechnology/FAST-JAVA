@@ -270,6 +270,48 @@ FASTVariableExpression >> javaOuterThisOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaParameterTypeOwner [
+
+	<generated>
+	<MSEComment: 'The variable expression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaParameterTypeOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaParameterTypeOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaParameterTypeOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaParameterTypeOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaParameterTypeOwner put: anObject.
+	anObject type: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaParameterVariableOwner [
+
+	<generated>
+	<MSEComment: 'The variable expression owner (if possible)'>
+	<container>
+
+	<MSEProperty: #javaParameterVariableOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaParameterVariableOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> javaParameterVariableOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaParameterVariableOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #javaParameterVariableOwner put: anObject.
+	anObject variable: self
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaVarDeclTypeOwner [
 
 	<generated>

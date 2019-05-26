@@ -59,7 +59,7 @@ JavaSmaCCParamsMethodTest >> testExpressionType [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testFirstParameterName [
-	self assert: params parameters first name equals: 'a'.
+	self assert: params parameters first variable name equals: 'a'.
 ]
 
 { #category : #tests }
@@ -87,7 +87,7 @@ JavaSmaCCParamsMethodTest >> testScope [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testSecondParameterName [
-	self assert: params parameters second name equals: 'b'.
+	self assert: params parameters second variable name equals: 'b'.
 ]
 
 { #category : #tests }
@@ -107,5 +107,5 @@ JavaSmaCCParamsMethodTest >> testStatementsType [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testThirdParameterName [
-	self assert: params parameters third name equals: 'c'.
+	self assert: params parameters third variable name equals: 'c'.
 ]

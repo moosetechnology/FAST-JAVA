@@ -91,7 +91,8 @@ Class {
 		'javaIntTypeExpression',
 		'javaLongTypeExpression',
 		'javaShortTypeExpression',
-		'javaVoidTypeExpression'
+		'javaVoidTypeExpression',
+		'javaParameterExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -559,7 +560,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaLongTypeExpression := builder newClassNamed: #LongTypeExpression comment: 'I represent a long type'.
 	javaShortTypeExpression := builder newClassNamed: #ShortTypeExpression comment: 'I represent a short type'.
 	javaVoidTypeExpression := builder newClassNamed: #VoidTypeExpression comment: 'I represent a short type'.
-	
+
+	javaParameterExpression := builder newClassNamed: #Parameter comment: 'I represent a parameter of a method declaration'.
+			
 	"From FAST"
 	expression := self remoteEntity: #Expression withPrefix: #FAST. 
 	statement := self remoteEntity: #Statement withPrefix: #FAST.
@@ -650,6 +653,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLongTypeExpression --|> javaPrimitiveTypeExpression.
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
+
+	javaParameterExpression --|> variableExpression
 ]
 
 { #category : #definition }
@@ -752,6 +757,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized') <>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
 	
 	(((javaMethodEntity  property: #type) comment: 'The type of the method') <>- ((variableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaParameterExpression property: #type) comment: 'The type of the parameter') <>- ((variableExpression property: #javaParameterTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaParameterExpression property: #variable) comment: 'parameter variable') <>- ((variableExpression property: #javaParameterVariableOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaVarDeclStatement  property: #type) comment: 'The type of the declared variables') <>- ((variableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
