@@ -50,20 +50,20 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testClassPropertyReceiverMe
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfArguments [
-	self assert: methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression arguments size equals: 2.
-	self assert: methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression receiver arguments size equals: 2
+	self assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression arguments size equals: 2.
+	self assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver arguments size equals: 2
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfMethodInvocations [
 	self
-		assert: methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression class
+		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression class
 		equals: FASTJavaMethodInvocation.
 	self
-		assert: methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression receiver class
+		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver class
 		equals: FASTJavaMethodInvocation.
 	self
-		assert: methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression receiver receiver
+		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver receiver
 		equals: nil
 ]
 
@@ -85,12 +85,12 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverKnowTheCallingM
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverMethodInvocations [
 	self
 		assert:
-			methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression receiver
+			methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver
 				class
 		equals: FASTJavaMethodInvocation.
 	self
 		assert:
-			methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression receiver
+			methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver
 				receiver
 		equals: nil.
 	self
@@ -101,10 +101,10 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverMethodInvocatio
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testTypeOfArguments [
 	self
-		assert: methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression arguments first class
+		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression arguments first class
 		equals: FASTJavaIntegerLiteral.
 	self
-		assert: methodInvocationWithParamAndReceiver childrenNode second childrenNode first childrenNode first expression arguments second class
+		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression arguments second class
 		equals: FASTJavaIntegerLiteral
 ]
 
