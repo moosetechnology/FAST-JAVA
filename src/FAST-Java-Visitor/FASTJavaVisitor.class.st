@@ -310,6 +310,11 @@ FASTJavaVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator 
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaVoidTypeExpression [
+	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaVoidTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 	^ self visitFASTStatement: aFASTJavaWhileStatement
 ]
