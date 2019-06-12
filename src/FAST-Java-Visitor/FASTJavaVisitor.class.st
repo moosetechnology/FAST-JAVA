@@ -66,7 +66,7 @@ FASTJavaVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
 
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
-	^ self visitFASTExpression: aFASTJavaClassProperty
+	^ self visitFASTVariableExpression: aFASTJavaClassProperty
 ]
 
 { #category : #generated }
