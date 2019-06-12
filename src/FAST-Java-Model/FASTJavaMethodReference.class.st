@@ -50,8 +50,13 @@ FASTJavaMethodReference >> receiver: anObject [
 
 	<generated>
 	(self privateState attributeAt: #receiver ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #receiver put: anObject.
-	anObject javaMethodReferenceOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self receiver.
+		self privateState attributeAt: #receiver put: anObject.
+		otherSide javaMethodReferenceOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #receiver put: anObject.
+		anObject javaMethodReferenceOwner: self ]
 ]
 
 { #category : #navigation }

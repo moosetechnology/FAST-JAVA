@@ -50,8 +50,13 @@ FASTJavaArrayTypeExpression >> baseType: anObject [
 
 	<generated>
 	(self privateState attributeAt: #baseType ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #baseType put: anObject.
-	anObject javaArrayTypeOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self baseType.
+		self privateState attributeAt: #baseType put: anObject.
+		otherSide javaArrayTypeOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #baseType put: anObject.
+		anObject javaArrayTypeOwner: self ]
 ]
 
 { #category : #navigation }

@@ -50,8 +50,13 @@ FASTJavaSynchronizedStatement >> block: anObject [
 
 	<generated>
 	(self privateState attributeAt: #block ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #block put: anObject.
-	anObject javaSynchronizedStatementOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self block.
+		self privateState attributeAt: #block put: anObject.
+		otherSide javaSynchronizedStatementOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #block put: anObject.
+		anObject javaSynchronizedStatementOwner: self ]
 ]
 
 { #category : #navigation }
@@ -77,8 +82,13 @@ FASTJavaSynchronizedStatement >> expression: anObject [
 
 	<generated>
 	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #expression put: anObject.
-	anObject javaSynchronizedStatementOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self expression.
+		self privateState attributeAt: #expression put: anObject.
+		otherSide javaSynchronizedStatementOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #expression put: anObject.
+		anObject javaSynchronizedStatementOwner: self ]
 ]
 
 { #category : #navigation }

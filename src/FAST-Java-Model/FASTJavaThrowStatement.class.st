@@ -54,8 +54,13 @@ FASTJavaThrowStatement >> expression: anObject [
 
 	<generated>
 	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #expression put: anObject.
-	anObject javaThrowStatementOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self expression.
+		self privateState attributeAt: #expression put: anObject.
+		otherSide javaThrowStatementOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #expression put: anObject.
+		anObject javaThrowStatementOwner: self ]
 ]
 
 { #category : #navigation }

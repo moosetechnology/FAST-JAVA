@@ -98,8 +98,13 @@ FASTJavaTryCatchStatement >> try: anObject [
 
 	<generated>
 	(self privateState attributeAt: #try ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #try put: anObject.
-	anObject javaTryCatchOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self try.
+		self privateState attributeAt: #try put: anObject.
+		otherSide javaTryCatchOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #try put: anObject.
+		anObject javaTryCatchOwner: self ]
 ]
 
 { #category : #navigation }

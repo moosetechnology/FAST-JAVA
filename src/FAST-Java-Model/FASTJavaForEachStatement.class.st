@@ -55,8 +55,13 @@ FASTJavaForEachStatement >> body: anObject [
 
 	<generated>
 	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #body put: anObject.
-	anObject javaForEachStatementOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self body.
+		self privateState attributeAt: #body put: anObject.
+		otherSide javaForEachStatementOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #body put: anObject.
+		anObject javaForEachStatementOwner: self ]
 ]
 
 { #category : #navigation }
@@ -82,8 +87,13 @@ FASTJavaForEachStatement >> fieldname: anObject [
 
 	<generated>
 	(self privateState attributeAt: #fieldname ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #fieldname put: anObject.
-	anObject javaForEachStatementFieldNameOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self fieldname.
+		self privateState attributeAt: #fieldname put: anObject.
+		otherSide javaForEachStatementFieldNameOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #fieldname put: anObject.
+		anObject javaForEachStatementFieldNameOwner: self ]
 ]
 
 { #category : #navigation }
@@ -109,8 +119,13 @@ FASTJavaForEachStatement >> list: anObject [
 
 	<generated>
 	(self privateState attributeAt: #list ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #list put: anObject.
-	anObject javaForEachStatementOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self list.
+		self privateState attributeAt: #list put: anObject.
+		otherSide javaForEachStatementOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #list put: anObject.
+		anObject javaForEachStatementOwner: self ]
 ]
 
 { #category : #navigation }
@@ -136,8 +151,13 @@ FASTJavaForEachStatement >> type: anObject [
 
 	<generated>
 	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #type put: anObject.
-	anObject javaForEachStatementTypeOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self type.
+		self privateState attributeAt: #type put: anObject.
+		otherSide javaForEachStatementTypeOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #type put: anObject.
+		anObject javaForEachStatementTypeOwner: self ]
 ]
 
 { #category : #navigation }

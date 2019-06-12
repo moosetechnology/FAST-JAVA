@@ -17,8 +17,13 @@ FASTStatement >> doBodyOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #doBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #doBodyOwner put: anObject.
-	anObject body: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self doBodyOwner.
+		self privateState attributeAt: #doBodyOwner put: anObject.
+		otherSide body: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #doBodyOwner put: anObject.
+		anObject body: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -38,8 +43,13 @@ FASTStatement >> forBodyOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #forBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #forBodyOwner put: anObject.
-	anObject body: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self forBodyOwner.
+		self privateState attributeAt: #forBodyOwner put: anObject.
+		otherSide body: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #forBodyOwner put: anObject.
+		anObject body: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -59,8 +69,13 @@ FASTStatement >> forIncrementorOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #forIncrementorOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #forIncrementorOwner put: anObject.
-	anObject incrementor: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self forIncrementorOwner.
+		self privateState attributeAt: #forIncrementorOwner put: anObject.
+		otherSide incrementor: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #forIncrementorOwner put: anObject.
+		anObject incrementor: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -80,8 +95,13 @@ FASTStatement >> forIninitializerOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #forIninitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #forIninitializerOwner put: anObject.
-	anObject initializer: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self forIninitializerOwner.
+		self privateState attributeAt: #forIninitializerOwner put: anObject.
+		otherSide initializer: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #forIninitializerOwner put: anObject.
+		anObject initializer: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -101,8 +121,13 @@ FASTStatement >> ifElsePartOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #ifElsePartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #ifElsePartOwner put: anObject.
-	anObject elsePart: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self ifElsePartOwner.
+		self privateState attributeAt: #ifElsePartOwner put: anObject.
+		otherSide elsePart: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #ifElsePartOwner put: anObject.
+		anObject elsePart: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -122,8 +147,13 @@ FASTStatement >> ifThenPartOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #ifThenPartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #ifThenPartOwner put: anObject.
-	anObject thenPart: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self ifThenPartOwner.
+		self privateState attributeAt: #ifThenPartOwner put: anObject.
+		otherSide thenPart: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #ifThenPartOwner put: anObject.
+		anObject thenPart: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -143,8 +173,13 @@ FASTStatement >> javaCatchPartStatementOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #javaCatchPartStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaCatchPartStatementOwner put: anObject.
-	anObject body: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaCatchPartStatementOwner.
+		self privateState attributeAt: #javaCatchPartStatementOwner put: anObject.
+		otherSide body: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #javaCatchPartStatementOwner put: anObject.
+		anObject body: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -164,8 +199,13 @@ FASTStatement >> javaForEachStatementOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #javaForEachStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaForEachStatementOwner put: anObject.
-	anObject body: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaForEachStatementOwner.
+		self privateState attributeAt: #javaForEachStatementOwner put: anObject.
+		otherSide body: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #javaForEachStatementOwner put: anObject.
+		anObject body: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -185,8 +225,13 @@ FASTStatement >> javaTryCatchOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #javaTryCatchOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaTryCatchOwner put: anObject.
-	anObject try: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaTryCatchOwner.
+		self privateState attributeAt: #javaTryCatchOwner put: anObject.
+		otherSide try: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #javaTryCatchOwner put: anObject.
+		anObject try: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -206,6 +251,11 @@ FASTStatement >> whileBodyOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #whileBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #whileBodyOwner put: anObject.
-	anObject body: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self whileBodyOwner.
+		self privateState attributeAt: #whileBodyOwner put: anObject.
+		otherSide body: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #whileBodyOwner put: anObject.
+		anObject body: self ]
 ]

@@ -54,8 +54,13 @@ FASTJavaArrayAccess >> array: anObject [
 
 	<generated>
 	(self privateState attributeAt: #array ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #array put: anObject.
-	anObject javaArrayArrayAccessOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self array.
+		self privateState attributeAt: #array put: anObject.
+		otherSide javaArrayArrayAccessOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #array put: anObject.
+		anObject javaArrayArrayAccessOwner: self ]
 ]
 
 { #category : #navigation }
@@ -81,8 +86,13 @@ FASTJavaArrayAccess >> expression: anObject [
 
 	<generated>
 	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #expression put: anObject.
-	anObject javaArrayAccessOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self expression.
+		self privateState attributeAt: #expression put: anObject.
+		otherSide javaArrayAccessOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #expression put: anObject.
+		anObject javaArrayAccessOwner: self ]
 ]
 
 { #category : #navigation }

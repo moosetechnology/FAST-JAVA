@@ -55,8 +55,13 @@ FASTJavaForStatement >> body: anObject [
 
 	<generated>
 	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #body put: anObject.
-	anObject forBodyOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self body.
+		self privateState attributeAt: #body put: anObject.
+		otherSide forBodyOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #body put: anObject.
+		anObject forBodyOwner: self ]
 ]
 
 { #category : #navigation }
@@ -82,8 +87,13 @@ FASTJavaForStatement >> condition: anObject [
 
 	<generated>
 	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #condition put: anObject.
-	anObject forConditionOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self condition.
+		self privateState attributeAt: #condition put: anObject.
+		otherSide forConditionOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #condition put: anObject.
+		anObject forConditionOwner: self ]
 ]
 
 { #category : #navigation }
@@ -109,8 +119,13 @@ FASTJavaForStatement >> incrementor: anObject [
 
 	<generated>
 	(self privateState attributeAt: #incrementor ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #incrementor put: anObject.
-	anObject forIncrementorOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self incrementor.
+		self privateState attributeAt: #incrementor put: anObject.
+		otherSide forIncrementorOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #incrementor put: anObject.
+		anObject forIncrementorOwner: self ]
 ]
 
 { #category : #navigation }
@@ -136,8 +151,13 @@ FASTJavaForStatement >> initializer: anObject [
 
 	<generated>
 	(self privateState attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #initializer put: anObject.
-	anObject forIninitializerOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self initializer.
+		self privateState attributeAt: #initializer put: anObject.
+		otherSide forIninitializerOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #initializer put: anObject.
+		anObject forIninitializerOwner: self ]
 ]
 
 { #category : #navigation }

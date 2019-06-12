@@ -60,8 +60,13 @@ FASTJavaVariableDeclarator >> expression: anObject [
 
 	<generated>
 	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #expression put: anObject.
-	anObject javaVariableDeclaratorExpressionOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self expression.
+		self privateState attributeAt: #expression put: anObject.
+		otherSide javaVariableDeclaratorExpressionOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #expression put: anObject.
+		anObject javaVariableDeclaratorExpressionOwner: self ]
 ]
 
 { #category : #navigation }
@@ -114,8 +119,13 @@ FASTJavaVariableDeclarator >> variable: anObject [
 
 	<generated>
 	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #variable put: anObject.
-	anObject javaVariableDeclaratorOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self variable.
+		self privateState attributeAt: #variable put: anObject.
+		otherSide javaVariableDeclaratorOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #variable put: anObject.
+		anObject javaVariableDeclaratorOwner: self ]
 ]
 
 { #category : #navigation }

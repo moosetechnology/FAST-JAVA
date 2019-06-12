@@ -53,8 +53,13 @@ FASTJavaNewArray >> initializer: anObject [
 
 	<generated>
 	(self privateState attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #initializer put: anObject.
-	anObject javaNewArrayInitialOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self initializer.
+		self privateState attributeAt: #initializer put: anObject.
+		otherSide javaNewArrayInitialOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #initializer put: anObject.
+		anObject javaNewArrayInitialOwner: self ]
 ]
 
 { #category : #navigation }

@@ -52,8 +52,13 @@ FASTJavaAssignementExpression >> expression: anObject [
 
 	<generated>
 	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #expression put: anObject.
-	anObject javaAssignementExpressioOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self expression.
+		self privateState attributeAt: #expression put: anObject.
+		otherSide javaAssignementExpressioOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #expression put: anObject.
+		anObject javaAssignementExpressioOwner: self ]
 ]
 
 { #category : #navigation }
@@ -79,8 +84,13 @@ FASTJavaAssignementExpression >> variable: anObject [
 
 	<generated>
 	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #variable put: anObject.
-	anObject javaAssignementExpressioOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self variable.
+		self privateState attributeAt: #variable put: anObject.
+		otherSide javaAssignementExpressioOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #variable put: anObject.
+		anObject javaAssignementExpressioOwner: self ]
 ]
 
 { #category : #navigation }

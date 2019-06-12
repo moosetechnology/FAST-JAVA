@@ -54,8 +54,13 @@ FASTJavaOuterThis >> type: anObject [
 
 	<generated>
 	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #type put: anObject.
-	anObject javaOuterThisOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self type.
+		self privateState attributeAt: #type put: anObject.
+		otherSide javaOuterThisOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #type put: anObject.
+		anObject javaOuterThisOwner: self ]
 ]
 
 { #category : #navigation }

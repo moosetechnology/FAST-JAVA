@@ -100,8 +100,13 @@ FASTJavaClassProperty >> type: anObject [
 
 	<generated>
 	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #type put: anObject.
-	anObject javaClassPropertyOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self type.
+		self privateState attributeAt: #type put: anObject.
+		otherSide javaClassPropertyOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #type put: anObject.
+		anObject javaClassPropertyOwner: self ]
 ]
 
 { #category : #navigation }

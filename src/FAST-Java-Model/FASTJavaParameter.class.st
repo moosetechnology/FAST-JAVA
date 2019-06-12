@@ -50,8 +50,13 @@ FASTJavaParameter >> type: anObject [
 
 	<generated>
 	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #type put: anObject.
-	anObject javaParameterTypeOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self type.
+		self privateState attributeAt: #type put: anObject.
+		otherSide javaParameterTypeOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #type put: anObject.
+		anObject javaParameterTypeOwner: self ]
 ]
 
 { #category : #navigation }
@@ -77,8 +82,13 @@ FASTJavaParameter >> variable: anObject [
 
 	<generated>
 	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #variable put: anObject.
-	anObject javaParameterVariableOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self variable.
+		self privateState attributeAt: #variable put: anObject.
+		otherSide javaParameterVariableOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #variable put: anObject.
+		anObject javaParameterVariableOwner: self ]
 ]
 
 { #category : #navigation }

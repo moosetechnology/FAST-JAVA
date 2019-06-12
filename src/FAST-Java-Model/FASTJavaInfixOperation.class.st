@@ -58,8 +58,13 @@ FASTJavaInfixOperation >> leftOperand: anObject [
 
 	<generated>
 	(self privateState attributeAt: #leftOperand ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #leftOperand put: anObject.
-	anObject infixOperationLeftOperandOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self leftOperand.
+		self privateState attributeAt: #leftOperand put: anObject.
+		otherSide infixOperationLeftOperandOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #leftOperand put: anObject.
+		anObject infixOperationLeftOperandOwner: self ]
 ]
 
 { #category : #navigation }
@@ -102,8 +107,13 @@ FASTJavaInfixOperation >> rightOperand: anObject [
 
 	<generated>
 	(self privateState attributeAt: #rightOperand ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #rightOperand put: anObject.
-	anObject infixOperationRightOperandOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self rightOperand.
+		self privateState attributeAt: #rightOperand put: anObject.
+		otherSide infixOperationRightOperandOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #rightOperand put: anObject.
+		anObject infixOperationRightOperandOwner: self ]
 ]
 
 { #category : #navigation }

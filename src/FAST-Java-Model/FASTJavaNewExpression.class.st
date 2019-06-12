@@ -86,8 +86,13 @@ FASTJavaNewExpression >> type: anObject [
 
 	<generated>
 	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #type put: anObject.
-	anObject javaNewExpressionOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self type.
+		self privateState attributeAt: #type put: anObject.
+		otherSide javaNewExpressionOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #type put: anObject.
+		anObject javaNewExpressionOwner: self ]
 ]
 
 { #category : #navigation }

@@ -55,8 +55,13 @@ FASTJavaWhileStatement >> body: anObject [
 
 	<generated>
 	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #body put: anObject.
-	anObject whileBodyOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self body.
+		self privateState attributeAt: #body put: anObject.
+		otherSide whileBodyOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #body put: anObject.
+		anObject whileBodyOwner: self ]
 ]
 
 { #category : #navigation }
@@ -82,8 +87,13 @@ FASTJavaWhileStatement >> condition: anObject [
 
 	<generated>
 	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #condition put: anObject.
-	anObject whileConditionOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self condition.
+		self privateState attributeAt: #condition put: anObject.
+		otherSide whileConditionOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #condition put: anObject.
+		anObject whileConditionOwner: self ]
 ]
 
 { #category : #navigation }

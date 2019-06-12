@@ -61,8 +61,13 @@ FASTJavaInitializer >> statementBlock: anObject [
 
 	<generated>
 	(self privateState attributeAt: #statementBlock ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #statementBlock put: anObject.
-	anObject javaInitializerOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self statementBlock.
+		self privateState attributeAt: #statementBlock put: anObject.
+		otherSide javaInitializerOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #statementBlock put: anObject.
+		anObject javaInitializerOwner: self ]
 ]
 
 { #category : #navigation }

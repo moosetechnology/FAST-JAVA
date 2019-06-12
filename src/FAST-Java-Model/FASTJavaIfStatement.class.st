@@ -57,8 +57,13 @@ FASTJavaIfStatement >> condition: anObject [
 
 	<generated>
 	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #condition put: anObject.
-	anObject ifConditionOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self condition.
+		self privateState attributeAt: #condition put: anObject.
+		otherSide ifConditionOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #condition put: anObject.
+		anObject ifConditionOwner: self ]
 ]
 
 { #category : #navigation }
@@ -84,8 +89,13 @@ FASTJavaIfStatement >> elsePart: anObject [
 
 	<generated>
 	(self privateState attributeAt: #elsePart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #elsePart put: anObject.
-	anObject ifElsePartOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self elsePart.
+		self privateState attributeAt: #elsePart put: anObject.
+		otherSide ifElsePartOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #elsePart put: anObject.
+		anObject ifElsePartOwner: self ]
 ]
 
 { #category : #navigation }
@@ -111,8 +121,13 @@ FASTJavaIfStatement >> thenPart: anObject [
 
 	<generated>
 	(self privateState attributeAt: #thenPart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #thenPart put: anObject.
-	anObject ifThenPartOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self thenPart.
+		self privateState attributeAt: #thenPart put: anObject.
+		otherSide ifThenPartOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #thenPart put: anObject.
+		anObject ifThenPartOwner: self ]
 ]
 
 { #category : #navigation }

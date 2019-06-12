@@ -54,8 +54,13 @@ FASTJavaLabeledCaseStatement >> label: anObject [
 
 	<generated>
 	(self privateState attributeAt: #label ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #label put: anObject.
-	anObject javaLabeledCaseStatementOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self label.
+		self privateState attributeAt: #label put: anObject.
+		otherSide javaLabeledCaseStatementOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #label put: anObject.
+		anObject javaLabeledCaseStatementOwner: self ]
 ]
 
 { #category : #navigation }

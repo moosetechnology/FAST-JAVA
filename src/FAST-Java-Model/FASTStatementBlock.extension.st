@@ -17,8 +17,13 @@ FASTStatementBlock >> javaInitializerOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #javaInitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaInitializerOwner put: anObject.
-	anObject statementBlock: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaInitializerOwner.
+		self privateState attributeAt: #javaInitializerOwner put: anObject.
+		otherSide statementBlock: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #javaInitializerOwner put: anObject.
+		anObject statementBlock: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -38,8 +43,13 @@ FASTStatementBlock >> javaLambdaExpressionOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #javaLambdaExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
-	anObject expression: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaLambdaExpressionOwner.
+		self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
+		otherSide expression: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
+		anObject expression: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -59,6 +69,11 @@ FASTStatementBlock >> javaSynchronizedStatementOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
-	anObject block: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaSynchronizedStatementOwner.
+		self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+		otherSide block: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+		anObject block: self ]
 ]

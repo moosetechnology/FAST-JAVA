@@ -53,8 +53,13 @@ FASTJavaCatchPartStatement >> body: anObject [
 
 	<generated>
 	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #body put: anObject.
-	anObject javaCatchPartStatementOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self body.
+		self privateState attributeAt: #body put: anObject.
+		otherSide javaCatchPartStatementOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #body put: anObject.
+		anObject javaCatchPartStatementOwner: self ]
 ]
 
 { #category : #navigation }
@@ -80,8 +85,13 @@ FASTJavaCatchPartStatement >> parameter: anObject [
 
 	<generated>
 	(self privateState attributeAt: #parameter ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #parameter put: anObject.
-	anObject javaCatchParameterOwnler: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self parameter.
+		self privateState attributeAt: #parameter put: anObject.
+		otherSide javaCatchParameterOwnler: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #parameter put: anObject.
+		anObject javaCatchParameterOwnler: self ]
 ]
 
 { #category : #navigation }
