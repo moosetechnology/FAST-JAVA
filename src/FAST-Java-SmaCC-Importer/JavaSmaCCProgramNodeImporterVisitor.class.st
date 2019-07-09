@@ -84,7 +84,7 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 	| ast |
 	ast := JavaParser
 		parse: aCodeString
-		startingAt: JavaParser startingStateForclass_body_declaration.
+		startingAt: JavaParser startingStateForclass_or_interface_body_declaration.
 	self accept: ast.
 	^ self model
 ]
