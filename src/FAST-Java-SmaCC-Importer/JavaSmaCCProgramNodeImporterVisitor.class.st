@@ -300,6 +300,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 	currentFASTEntity := FASTJavaMethodEntity new
 		name: aConstructorDeclaration name name value;
 		yourself.
+	self generalVisitActionForNodeEntity: aConstructorDeclaration.
 	aConstructorDeclaration parameters
 		do: [ :parameter | self clone accept: parameter ].
 	currentFASTEntity
