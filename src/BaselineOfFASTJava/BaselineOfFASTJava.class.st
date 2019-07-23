@@ -37,7 +37,8 @@ BaselineOfFASTJava >> defineGroups: spec [
 			with: #('core' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests');
 		group: 'visitor'
 			with: #('core' 'FAST-Java-Visitor');
-		group: 'all' with: #('smacc' 'visitor');
+		group: 'highlighter' with: #('core' 'FAST-Java-Highlighter');
+		group: 'all' with: #('smacc' 'visitor' 'highlighter');
 		group: 'default' with: #('core')
 ]
 
@@ -51,5 +52,6 @@ BaselineOfFASTJava >> definePackages: spec [
 		package: 'FAST-Java-Model-Extension' with: [ spec requires: #('FAST-Java-Model') ];
 		package: 'FAST-Java-SmaCC-Importer';
 		package: 'FAST-Java-SmaCC-Importer-Tests' with: [ spec requires: #('FAST-Java-SmaCC-Importer') ];
-		package: 'FAST-Java-Visitor' with: [ spec requires: #('FAST-Java-Model') ]
+		package: 'FAST-Java-Visitor' with: [ spec requires: #('FAST-Java-Model') ];
+		package: 'FAST-Java-Highlighter' with: [ spec requires: #('FAST-Java-Model') ]
 ]
