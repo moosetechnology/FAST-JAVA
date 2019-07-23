@@ -48,7 +48,7 @@ JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEnt
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	super initialize.
-	model := MooseModel new metamodel: FASTJavaMetamodelGenerator metamodel; yourself
+	model := FASTJavaMooseModel new
 ]
 
 { #category : #initialization }
