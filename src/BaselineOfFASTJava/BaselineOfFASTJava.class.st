@@ -37,6 +37,7 @@ BaselineOfFASTJava >> defineGroups: spec [
 			with: #('core' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests');
 		group: 'visitor'
 			with: #('core' 'FAST-Java-Visitor');
+		group: 'all' with: #('smacc' 'visitor');
 		group: 'default' with: #('core')
 ]
 
