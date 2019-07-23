@@ -14,23 +14,3 @@ FASTJavaComment class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaComment class >> generatedSlotNames [
-	<generated>
-	'FASTJavaComment class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaComment class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTComment)
-]
-
-{ #category : #meta }
-FASTJavaComment class >> requirements [
-
-	<generated>
-	^ {  }
-]

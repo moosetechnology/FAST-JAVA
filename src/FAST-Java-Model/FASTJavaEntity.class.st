@@ -13,31 +13,11 @@ FASTJavaEntity class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaEntity class >> generatedSlotNames [
-	<generated>
-	'FASTJavaEntity class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaEntity class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
 { #category : #meta }
 FASTJavaEntity class >> metamodel [
 
 	<generated>
 	^ (self class environment at: #FASTJavaMetamodelGenerator) metamodel
-]
-
-{ #category : #meta }
-FASTJavaEntity class >> requirements [
-
-	<generated>
-	^ {  }
 ]
 
 { #category : #testing }

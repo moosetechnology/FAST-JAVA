@@ -21,26 +21,6 @@ FASTJavaForEachStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaForEachStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaForEachStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaForEachStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaForEachStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaForEachStatement >> body [
 

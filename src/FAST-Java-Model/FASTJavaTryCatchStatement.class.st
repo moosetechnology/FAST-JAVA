@@ -32,26 +32,6 @@ FASTJavaTryCatchStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaTryCatchStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaTryCatchStatement class>>#generatedSlotNames'.
-	^ #(catches)
-]
-
-{ #category : #generator }
-FASTJavaTryCatchStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaTryCatchStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #adding }
 FASTJavaTryCatchStatement >> addCatches: anObject [
 			

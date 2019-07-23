@@ -15,23 +15,3 @@ FASTJavaIdentifier class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaIdentifier class >> generatedSlotNames [
-	<generated>
-	'FASTJavaIdentifier class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaIdentifier class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaIdentifier class >> requirements [
-
-	<generated>
-	^ {  }
-]

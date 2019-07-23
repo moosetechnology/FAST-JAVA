@@ -15,23 +15,3 @@ FASTJavaBooleanTypeExpression class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaBooleanTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaBooleanTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaBooleanTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaBooleanTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]

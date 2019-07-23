@@ -20,26 +20,6 @@ FASTJavaThrowStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaThrowStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaThrowStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaThrowStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaThrowStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaThrowStatement >> expression [
 

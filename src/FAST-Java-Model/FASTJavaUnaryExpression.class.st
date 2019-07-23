@@ -32,26 +32,6 @@ FASTJavaUnaryExpression class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaUnaryExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaUnaryExpression class>>#generatedSlotNames'.
-	^ #(isPrefixedUnaryExpression operator)
-]
-
-{ #category : #generator }
-FASTJavaUnaryExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaUnaryExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaUnaryExpression >> expression [
 

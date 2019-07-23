@@ -21,26 +21,6 @@ FASTJavaDoWhileStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaDoWhileStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaDoWhileStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaDoWhileStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaDoWhileStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaDoWhileStatement >> body [
 

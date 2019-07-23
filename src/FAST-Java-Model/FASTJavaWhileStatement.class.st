@@ -21,26 +21,6 @@ FASTJavaWhileStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaWhileStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaWhileStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaWhileStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaWhileStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaWhileStatement >> body [
 

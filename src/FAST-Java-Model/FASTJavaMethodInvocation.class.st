@@ -18,26 +18,6 @@ FASTJavaMethodInvocation class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaMethodInvocation class >> generatedSlotNames [
-	<generated>
-	'FASTJavaMethodInvocation class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaMethodInvocation class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTNamed)
-]
-
-{ #category : #meta }
-FASTJavaMethodInvocation class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #adding }
 FASTJavaMethodInvocation >> addArguments: anObject [
 			

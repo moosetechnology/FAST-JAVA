@@ -15,23 +15,3 @@ FASTJavaPrimitiveTypeExpression class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaPrimitiveTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaPrimitiveTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaPrimitiveTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaPrimitiveTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]

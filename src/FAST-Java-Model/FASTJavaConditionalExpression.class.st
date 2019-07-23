@@ -20,26 +20,6 @@ FASTJavaConditionalExpression class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaConditionalExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaConditionalExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaConditionalExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaConditionalExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaConditionalExpression >> condition [
 

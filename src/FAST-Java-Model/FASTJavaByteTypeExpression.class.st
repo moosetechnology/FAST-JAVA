@@ -15,23 +15,3 @@ FASTJavaByteTypeExpression class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaByteTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaByteTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaByteTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaByteTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]

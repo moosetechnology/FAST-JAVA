@@ -15,23 +15,3 @@ FASTJavaVoidTypeExpression class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaVoidTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaVoidTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaVoidTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaVoidTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]

@@ -29,26 +29,6 @@ FASTJavaNewClassExpression class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaNewClassExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaNewClassExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaNewClassExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaNewClassExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #adding }
 FASTJavaNewClassExpression >> addDeclarations: anObject [
 			

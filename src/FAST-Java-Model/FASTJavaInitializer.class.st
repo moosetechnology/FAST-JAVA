@@ -27,26 +27,6 @@ FASTJavaInitializer class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaInitializer class >> generatedSlotNames [
-	<generated>
-	'FASTJavaInitializer class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaInitializer class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTWithImmediateSource)
-]
-
-{ #category : #meta }
-FASTJavaInitializer class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaInitializer >> statementBlock [
 

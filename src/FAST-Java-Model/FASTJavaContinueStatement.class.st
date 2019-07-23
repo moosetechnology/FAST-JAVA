@@ -15,23 +15,3 @@ FASTJavaContinueStatement class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaContinueStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaContinueStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaContinueStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaContinueStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]

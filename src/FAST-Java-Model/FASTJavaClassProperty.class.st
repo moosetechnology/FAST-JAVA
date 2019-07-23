@@ -49,26 +49,6 @@ FASTJavaClassProperty class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaClassProperty class >> generatedSlotNames [
-	<generated>
-	'FASTJavaClassProperty class>>#generatedSlotNames'.
-	^ #(fieldName)
-]
-
-{ #category : #generator }
-FASTJavaClassProperty class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaClassProperty class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaClassProperty >> fieldName [
 

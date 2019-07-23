@@ -19,26 +19,6 @@ FASTJavaSeparator class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaSeparator class >> generatedSlotNames [
-	<generated>
-	'FASTJavaSeparator class>>#generatedSlotNames'.
-	^ #(separator)
-]
-
-{ #category : #generator }
-FASTJavaSeparator class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaSeparator class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaSeparator >> separator [
 

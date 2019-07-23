@@ -16,26 +16,6 @@ FASTJavaSynchronizedStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaSynchronizedStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaSynchronizedStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaSynchronizedStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaSynchronizedStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaSynchronizedStatement >> block [
 

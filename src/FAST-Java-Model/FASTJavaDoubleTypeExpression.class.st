@@ -15,23 +15,3 @@ FASTJavaDoubleTypeExpression class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaDoubleTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaDoubleTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaDoubleTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaDoubleTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]

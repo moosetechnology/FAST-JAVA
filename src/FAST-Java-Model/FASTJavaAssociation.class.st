@@ -14,23 +14,3 @@ FASTJavaAssociation class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaAssociation class >> generatedSlotNames [
-	<generated>
-	'FASTJavaAssociation class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaAssociation class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTAssociation TAssociationMetaLevelDependency)
-]
-
-{ #category : #meta }
-FASTJavaAssociation class >> requirements [
-
-	<generated>
-	^ {  }
-]

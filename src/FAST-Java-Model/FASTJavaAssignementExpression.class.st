@@ -18,26 +18,6 @@ FASTJavaAssignementExpression class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaAssignementExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaAssignementExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaAssignementExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaAssignementExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression [
 

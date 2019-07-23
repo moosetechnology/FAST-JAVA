@@ -16,26 +16,6 @@ FASTJavaCastExpression class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaCastExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaCastExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaCastExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaCastExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaCastExpression >> expression [
 

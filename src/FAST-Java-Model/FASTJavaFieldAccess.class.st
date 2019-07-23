@@ -19,26 +19,6 @@ FASTJavaFieldAccess class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaFieldAccess class >> generatedSlotNames [
-	<generated>
-	'FASTJavaFieldAccess class>>#generatedSlotNames'.
-	^ #(fieldName)
-]
-
-{ #category : #generator }
-FASTJavaFieldAccess class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaFieldAccess class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaFieldAccess >> fieldName [
 

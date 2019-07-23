@@ -20,26 +20,6 @@ FASTJavaArrayAccess class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaArrayAccess class >> generatedSlotNames [
-	<generated>
-	'FASTJavaArrayAccess class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaArrayAccess class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaArrayAccess class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaArrayAccess >> array [
 

@@ -18,26 +18,6 @@ FASTJavaMethodEntity class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaMethodEntity class >> generatedSlotNames [
-	<generated>
-	'FASTJavaMethodEntity class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaMethodEntity class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTWithImmediateSource)
-]
-
-{ #category : #meta }
-FASTJavaMethodEntity class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaMethodEntity >> type [
 

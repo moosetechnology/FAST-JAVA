@@ -24,23 +24,3 @@ FASTJavaEmptyMethodDeclaration class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaEmptyMethodDeclaration class >> generatedSlotNames [
-	<generated>
-	'FASTJavaEmptyMethodDeclaration class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaEmptyMethodDeclaration class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaEmptyMethodDeclaration class >> requirements [
-
-	<generated>
-	^ {  }
-]

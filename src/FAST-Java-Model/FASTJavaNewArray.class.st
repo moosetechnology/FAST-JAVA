@@ -19,26 +19,6 @@ FASTJavaNewArray class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaNewArray class >> generatedSlotNames [
-	<generated>
-	'FASTJavaNewArray class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaNewArray class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaNewArray class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaNewArray >> initializer [
 

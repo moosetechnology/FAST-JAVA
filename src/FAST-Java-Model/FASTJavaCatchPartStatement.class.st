@@ -19,19 +19,6 @@ FASTJavaCatchPartStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaCatchPartStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaCatchPartStatement class>>#generatedSlotNames'.
-	^ #(tryOwner)
-]
-
-{ #category : #generator }
-FASTJavaCatchPartStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
 { #category : #meta }
 FASTJavaCatchPartStatement class >> requirements [
 

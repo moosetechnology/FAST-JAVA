@@ -16,26 +16,6 @@ FASTJavaArrayTypeExpression class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaArrayTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaArrayTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaArrayTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaArrayTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaArrayTypeExpression >> baseType [
 

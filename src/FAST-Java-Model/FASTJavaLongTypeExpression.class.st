@@ -15,23 +15,3 @@ FASTJavaLongTypeExpression class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaLongTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaLongTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaLongTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaLongTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]

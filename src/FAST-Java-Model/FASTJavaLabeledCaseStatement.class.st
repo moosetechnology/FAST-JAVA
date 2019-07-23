@@ -20,26 +20,6 @@ FASTJavaLabeledCaseStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaLabeledCaseStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaLabeledCaseStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaLabeledCaseStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaLabeledCaseStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaLabeledCaseStatement >> label [
 

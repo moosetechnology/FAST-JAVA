@@ -23,26 +23,6 @@ FASTJavaIfStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaIfStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaIfStatement class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaIfStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaIfStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaIfStatement >> condition [
 

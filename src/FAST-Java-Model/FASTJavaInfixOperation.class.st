@@ -24,26 +24,6 @@ FASTJavaInfixOperation class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaInfixOperation class >> generatedSlotNames [
-	<generated>
-	'FASTJavaInfixOperation class>>#generatedSlotNames'.
-	^ #(operator)
-]
-
-{ #category : #generator }
-FASTJavaInfixOperation class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaInfixOperation class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaInfixOperation >> leftOperand [
 

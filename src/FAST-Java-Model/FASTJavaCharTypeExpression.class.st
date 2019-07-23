@@ -15,23 +15,3 @@ FASTJavaCharTypeExpression class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaCharTypeExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaCharTypeExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaCharTypeExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaCharTypeExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]

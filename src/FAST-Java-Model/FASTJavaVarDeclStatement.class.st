@@ -26,26 +26,6 @@ FASTJavaVarDeclStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaVarDeclStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaVarDeclStatement class>>#generatedSlotNames'.
-	^ #(declarators)
-]
-
-{ #category : #generator }
-FASTJavaVarDeclStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaVarDeclStatement class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #adding }
 FASTJavaVarDeclStatement >> addDeclarators: anObject [
 			

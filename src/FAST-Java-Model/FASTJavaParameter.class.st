@@ -16,26 +16,6 @@ FASTJavaParameter class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaParameter class >> generatedSlotNames [
-	<generated>
-	'FASTJavaParameter class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaParameter class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaParameter class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaParameter >> type [
 

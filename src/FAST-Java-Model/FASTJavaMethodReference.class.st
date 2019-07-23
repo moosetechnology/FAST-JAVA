@@ -16,26 +16,6 @@ FASTJavaMethodReference class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaMethodReference class >> generatedSlotNames [
-	<generated>
-	'FASTJavaMethodReference class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaMethodReference class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaMethodReference class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaMethodReference >> receiver [
 

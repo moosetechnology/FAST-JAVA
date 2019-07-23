@@ -20,26 +20,6 @@ FASTJavaOuterThis class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaOuterThis class >> generatedSlotNames [
-	<generated>
-	'FASTJavaOuterThis class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaOuterThis class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaOuterThis class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 FASTJavaOuterThis >> type [
 

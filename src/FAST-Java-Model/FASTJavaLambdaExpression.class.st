@@ -16,26 +16,6 @@ FASTJavaLambdaExpression class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaLambdaExpression class >> generatedSlotNames [
-	<generated>
-	'FASTJavaLambdaExpression class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaLambdaExpression class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaLambdaExpression class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #adding }
 FASTJavaLambdaExpression >> addParameters: anObject [
 			

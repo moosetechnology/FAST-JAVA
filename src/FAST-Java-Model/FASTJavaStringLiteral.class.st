@@ -15,23 +15,3 @@ FASTJavaStringLiteral class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaStringLiteral class >> generatedSlotNames [
-	<generated>
-	'FASTJavaStringLiteral class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaStringLiteral class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaStringLiteral class >> requirements [
-
-	<generated>
-	^ {  }
-]

@@ -19,19 +19,6 @@ FASTJavaCaseStatement class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaCaseStatement class >> generatedSlotNames [
-	<generated>
-	'FASTJavaCaseStatement class>>#generatedSlotNames'.
-	^ #(javaCaseStatementSwitchOwner)
-]
-
-{ #category : #generator }
-FASTJavaCaseStatement class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
 { #category : #meta }
 FASTJavaCaseStatement class >> requirements [
 

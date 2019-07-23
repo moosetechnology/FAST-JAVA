@@ -25,26 +25,6 @@ FASTJavaArrayInitializer class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-FASTJavaArrayInitializer class >> generatedSlotNames [
-	<generated>
-	'FASTJavaArrayInitializer class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaArrayInitializer class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-FASTJavaArrayInitializer class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #adding }
 FASTJavaArrayInitializer >> addInitializers: anObject [
 			

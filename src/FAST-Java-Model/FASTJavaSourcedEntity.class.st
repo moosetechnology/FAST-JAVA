@@ -14,23 +14,3 @@ FASTJavaSourcedEntity class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-FASTJavaSourcedEntity class >> generatedSlotNames [
-	<generated>
-	'FASTJavaSourcedEntity class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-FASTJavaSourcedEntity class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTWithComments FamixTWithSourceAnchor FamixTWithSourceLanguage)
-]
-
-{ #category : #meta }
-FASTJavaSourcedEntity class >> requirements [
-
-	<generated>
-	^ {  }
-]
