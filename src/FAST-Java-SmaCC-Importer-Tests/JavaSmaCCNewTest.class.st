@@ -22,7 +22,7 @@ JavaSmaCCNewTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCNewTest >> testNewName [
-	self assert: methodNew statements anyOne childrenNode anyOne type name equals: 'Patate'
+	self assert: methodNew statements anyOne childrenNode anyOne type fullName equals: 'Patate'
 ]
 
 { #category : #tests }

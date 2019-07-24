@@ -64,7 +64,7 @@ JavaSmaCCForEachTest >> testForEachType [
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachTypeName [
-	self assert: methodForEach statements first type name equals: 'HandlerRegistration'
+	self assert: methodForEach statements first type fullName equals: 'HandlerRegistration'
 ]
 
 { #category : #tests }

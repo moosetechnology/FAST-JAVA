@@ -46,5 +46,5 @@ JavaSmaCCMethodCastTest >> testCastExpressionType [
 { #category : #tests }
 JavaSmaCCMethodCastTest >> testCastType [
 	self assert: methodCastAndClassProperty statements third childrenNode first receiver type class equals: FASTJavaClassTypeExpression.
-	self assert: methodCastAndClassProperty statements third childrenNode first receiver type name equals: 'IEditableListModel'
+	self assert: methodCastAndClassProperty statements third childrenNode first receiver type fullName equals: 'IEditableListModel'
 ]

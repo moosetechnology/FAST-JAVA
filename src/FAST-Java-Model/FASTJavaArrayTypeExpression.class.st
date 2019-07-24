@@ -4,6 +4,9 @@ I represent an array type
 Class {
 	#name : #FASTJavaArrayTypeExpression,
 	#superclass : #FASTJavaTypeExpression,
+	#instVars : [
+		'#baseType => FMOne type: #FASTJavaTypeName opposite: #javaArrayTypeOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -21,22 +24,15 @@ FASTJavaArrayTypeExpression >> baseType [
 
 	<generated>
 	<MSEComment: 'The type of the array'>
-	<MSEProperty: #baseType type: #Object>
-	^ self privateState attributeAt: #baseType ifAbsent: [ nil ]
+	^ baseType
 ]
 
 { #category : #accessing }
 FASTJavaArrayTypeExpression >> baseType: anObject [
 
 	<generated>
-	(self privateState attributeAt: #baseType ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self baseType.
-		self privateState attributeAt: #baseType put: anObject.
-		otherSide javaArrayTypeOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #baseType put: anObject.
-		anObject javaArrayTypeOwner: self ]
+	baseType := anObject
+
 ]
 
 { #category : #navigation }

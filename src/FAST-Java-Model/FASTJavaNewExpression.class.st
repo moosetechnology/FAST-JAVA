@@ -33,6 +33,7 @@ FASTJavaNewExpression >> arguments [
 	<generated>
 	<MSEComment: 'the arguments of the new expression'>
 	<MSEProperty: #arguments type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaNewExpressionArgumentsOwner: ]
 ]
 
@@ -58,6 +59,7 @@ FASTJavaNewExpression >> type [
 	<generated>
 	<MSEComment: 'The type of the array'>
 	<MSEProperty: #type type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 

@@ -72,6 +72,7 @@ FASTJavaClassProperty >> type [
 	<generated>
 	<MSEComment: 'The owner type'>
 	<MSEProperty: #type type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 

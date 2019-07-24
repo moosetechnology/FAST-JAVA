@@ -32,7 +32,7 @@ JavaSmaCCArrayTypeNameTest >> testArrayTypeBaseTypeParentNode [
 
 { #category : #'as yet unclassified' }
 JavaSmaCCArrayTypeNameTest >> testArrayTypeBaseTypeType [
-	self assert: (methodArrayType allWithType: FASTJavaArrayTypeExpression) first baseType class equals: FASTJavaClassTypeExpression.
+	self assert: (methodArrayType allWithType: FASTJavaArrayTypeExpression) first baseType class equals: FASTJavaTypeName.
 ]
 
 { #category : #'as yet unclassified' }

@@ -264,12 +264,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaClassTypeExpression new
-				name: aClassType name name value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	self generalVisitActionForNodeEntity: aClassType.
+	currentFASTEntity typeName: (self clone accept: aClassType name).
 	^ currentFASTEntity
 ]
 
@@ -742,6 +739,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeName [
+	currentFASTEntity := self addToModel: FASTJavaQualifiedTypeName new.
+	self generalVisitActionForNodeEntity: aQualifiedTypeName.
+	currentFASTEntity name: aQualifiedTypeName name value.
+	currentFASTEntity namespace: (self clone accept: aQualifiedTypeName nspace).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
 	currentFASTEntity := self addToModel: FASTReturnStatement new.
 	self generalVisitActionForNodeEntity: aReturnStatement.
@@ -873,7 +879,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeName: aTypeName [
-	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
+	currentFASTEntity := self addToModel: FASTJavaTypeName new.
 	currentFASTEntity name: aTypeName name value.
 	self generalVisitActionForNodeEntity: aTypeName.
 	^ currentFASTEntity

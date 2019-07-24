@@ -35,7 +35,7 @@ JavaSmaCCInnerNewClassInMethodTest >> testDeclaredMethodSize [
 
 { #category : #tests }
 JavaSmaCCInnerNewClassInMethodTest >> testNewName [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne type name equals: 'Patate'
+	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
 ]
 
 { #category : #tests }

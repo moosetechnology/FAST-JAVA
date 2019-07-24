@@ -92,7 +92,9 @@ Class {
 		'javaLongTypeExpression',
 		'javaShortTypeExpression',
 		'javaVoidTypeExpression',
-		'javaParameterExpression'
+		'javaParameterExpression',
+		'javaTypeName',
+		'javaQualifiedTypeName'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -394,6 +396,24 @@ hello(MyClass.this)'
 ]
 
 { #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaQualifiedTypeName [
+	^ 'I represent a qualified name for a type
+
+example:
+
+new Canard.Poulet(){
+
+}
+
+"Canard.Poulet" is the qualified name
+
+"Poulet" is the main name
+
+"Canard" is the namespace of the main name 
+'
+]
+
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaSeparator [
 	self flag: #todo.
 	^ 'todo'
@@ -546,6 +566,10 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaMethodReference := builder newClassNamed: #MethodReference comment: 'I represent a method reference'.
 	javaSynchronizedStatement := builder newClassNamed: #SynchronizedStatement comment: 'I represent a ''synchronized'' statement'.
 
+	"The type name"
+	javaTypeName := builder newClassNamed: #TypeName comment: 'I represent the name of a type'.
+	javaQualifiedTypeName := builder newClassNamed: #QualifiedTypeName comment: self commentForJavaQualifiedTypeName.
+
 	"The type"
 	javaTypeExpression := builder newClassNamed: #TypeExpression comment: 'I represent a type'.
 	javaArrayTypeExpression := builder newClassNamed: #ArrayTypeExpression comment: 'I represent an array type'.
@@ -637,6 +661,11 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLambdaExpression --|> expression.
 	javaMethodReference --|> variableExpression.
 	javaSynchronizedStatement --|> statement.
+
+	"types name"
+	javaTypeName --|> #TNamed.
+	javaTypeName --|> expression.
+	javaQualifiedTypeName --|> javaTypeName. 
 
 	"types"
 	javaTypeExpression --|> variableExpression.
@@ -763,5 +792,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	(((javaVarDeclStatement  property: #type) comment: 'The type of the declared variables') <>- ((variableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
-	(((javaArrayTypeExpression  property: #baseType) comment: 'The type of the array') <>- ((variableExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaArrayTypeExpression  property: #baseType) comment: 'The type of the array') <>- ((javaTypeName property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaArrayTypeExpression  property: #baseType) comment: 'The type of the array') <>- ((javaPrimitiveTypeExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	
+	(((javaClassTypeExpression  property: #typeName) comment: 'The name of the type') <>- ((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment: 'The type expression that own me')) withoutPrimaryContainer.
+	
+	(((javaQualifiedTypeName  property: #namespace) comment: 'The namespace of the name') <>- ((javaTypeName property: #javaTypeNameQualify) comment: 'the name I qualify')) withoutPrimaryContainer.
 ]
