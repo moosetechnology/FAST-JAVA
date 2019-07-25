@@ -4,6 +4,9 @@ A string in Java
 Class {
 	#name : #FASTJavaStringLiteral,
 	#superclass : #FASTStringLiteral,
+	#instVars : [
+		'#javaStringAssertStatementOwner => FMOne type: #FASTJavaAssertStatement opposite: #message'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -14,4 +17,38 @@ FASTJavaStringLiteral class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
+]
+
+{ #category : #meta }
+FASTJavaStringLiteral class >> requirements [
+
+	<generated>
+	^ { FASTJavaAssertStatement }
+]
+
+{ #category : #accessing }
+FASTJavaStringLiteral >> javaStringAssertStatementOwner [
+
+	<generated>
+	<MSEComment: 'the assert that can raised me'>
+	<container>
+
+	^ javaStringAssertStatementOwner
+]
+
+{ #category : #accessing }
+FASTJavaStringLiteral >> javaStringAssertStatementOwner: anObject [
+
+	<generated>
+	javaStringAssertStatementOwner := anObject
+
+]
+
+{ #category : #navigation }
+FASTJavaStringLiteral >> javaStringAssertStatementOwnerGroup [
+
+	<generated>
+	<navigation: 'JavaStringAssertStatementOwner'>
+	^ MooseGroup
+			with: (self javaStringAssertStatementOwner)
 ]

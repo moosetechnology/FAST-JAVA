@@ -94,7 +94,8 @@ Class {
 		'javaVoidTypeExpression',
 		'javaParameterExpression',
 		'javaTypeName',
-		'javaQualifiedTypeName'
+		'javaQualifiedTypeName',
+		'javaAssertStatement'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -121,6 +122,18 @@ FASTJavaMetamodelGenerator class >> prefix [
 { #category : #accessing }
 FASTJavaMetamodelGenerator class >> submetamodels [
 	^ { FASTMetamodelGenerator }
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForAssertStatement [
+	^ 'I represent an assert statement
+
+example:
+
+void method (){
+	assert condition1 || condition2 : "error message"
+}
+'
 ]
 
 { #category : #comments }
@@ -586,6 +599,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaVoidTypeExpression := builder newClassNamed: #VoidTypeExpression comment: 'I represent a short type'.
 
 	javaParameterExpression := builder newClassNamed: #Parameter comment: 'I represent a parameter of a method declaration'.
+	
+	javaAssertStatement := builder newClassNamed: #AssertStatement comment: self commentForAssertStatement. 
 			
 	"From FAST"
 	expression := self remoteEntity: #Expression withPrefix: #FAST. 
@@ -683,7 +698,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 
-	javaParameterExpression --|> variableExpression
+	javaParameterExpression --|> variableExpression.
+	javaAssertStatement --|> statement.
 ]
 
 { #category : #definition }
@@ -799,4 +815,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaClassTypeExpression  property: #typeName) comment: 'The name of the type') <>- ((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment: 'The type expression that own me')) withoutPrimaryContainer.
 	
 	(((javaQualifiedTypeName  property: #namespace) comment: 'The namespace of the name') <>- ((javaTypeName property: #javaTypeNameQualify) comment: 'the name I qualify')) withoutPrimaryContainer.
+	
+	(((javaAssertStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #assertConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+	(((javaAssertStatement property: #message) comment: 'The error message that is raised in case the condition is false') <>- ((javaStringLiteral property: #javaStringAssertStatementOwner) comment: 'the assert that can raised me')) withoutPrimaryContainer.
 ]

@@ -10,8 +10,18 @@ FASTJavaVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitializer [
+	^ self visitFASTExpression: aFASTJavaArrayInitializer
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExpression [
 	^ self visitFASTJavaTypeExpression: aFASTJavaArrayTypeExpression
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaAssertStatement: aFASTJavaAssertStatement [
+	^ self visitFASTStatement: aFASTJavaAssertStatement
 ]
 
 { #category : #generated }

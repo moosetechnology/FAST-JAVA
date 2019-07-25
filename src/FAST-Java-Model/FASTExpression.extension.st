@@ -1,6 +1,32 @@
 Extension { #name : #FASTExpression }
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> assertConditionOwner [
+
+	<generated>
+	<MSEComment: 'I reprensent a condition for my owner'>
+	<container>
+
+	<MSEProperty: #assertConditionOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #assertConditionOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> assertConditionOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #assertConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self assertConditionOwner.
+		self privateState attributeAt: #assertConditionOwner put: anObject.
+		otherSide condition: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #assertConditionOwner put: anObject.
+		anObject condition: self ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> conditionalConditionOwner [
 
 	<generated>

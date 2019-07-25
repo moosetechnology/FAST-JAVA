@@ -24,7 +24,6 @@ FASTJavaAssignementExpression >> expression [
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
 	<MSEProperty: #expression type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -57,7 +56,6 @@ FASTJavaAssignementExpression >> variable [
 	<generated>
 	<MSEComment: 'Variable that s being assigned'>
 	<MSEProperty: #variable type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
 ]
 

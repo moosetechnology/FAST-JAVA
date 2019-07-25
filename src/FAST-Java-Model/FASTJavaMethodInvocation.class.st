@@ -31,7 +31,6 @@ FASTJavaMethodInvocation >> arguments [
 	<generated>
 	<MSEComment: 'The arguments of the invocation'>
 	<MSEProperty: #arguments type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaMethodInvocationArgumentsOwner: ]
 ]
 
@@ -57,7 +56,6 @@ FASTJavaMethodInvocation >> receiver [
 	<generated>
 	<MSEComment: 'The expression whitch will execute this invocation'>
 	<MSEProperty: #receiver type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #receiver ifAbsent: [ nil ]
 ]
 

@@ -132,6 +132,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayVariableName: anArrayVariableNa
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitAssertStatement: anAssertStatement [
+	currentFASTEntity := self addToModel: FASTJavaAssertStatement new.
+	self generalVisitActionForNodeEntity: anAssertStatement.
+	currentFASTEntity condition: (self clone accept: anAssertStatement testExpression).
+	currentFASTEntity message: (self clone accept: anAssertStatement messageExpression).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: aVariableDeclaration [
 	currentFASTEntity := self
 		addToModel: FASTJavaAssignementExpression new.
@@ -546,11 +555,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 	currentFASTEntity := FASTJavaMethodEntity new
 		name: aMethodDeclaration declarator name value;
 		yourself.
+	self addToModel: currentFASTEntity.
 	self generalVisitActionForNodeEntity: aMethodDeclaration.
 	aMethodDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
 	aMethodDeclaration declarator parameters do: [ :parameter | currentFASTEntity parameters add: (self clone accept: parameter) ].
 	currentFASTEntity statementBlock: (self clone accept: aMethodDeclaration body).
-	self addToModel: currentFASTEntity.
 	^ currentFASTEntity
 ]
 
