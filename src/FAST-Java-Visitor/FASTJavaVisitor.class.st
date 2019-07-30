@@ -1,6 +1,6 @@
 Class {
 	#name : #FASTJavaVisitor,
-	#superclass : #Object,
+	#superclass : #FASTCoreVisitor,
 	#category : #'FAST-Java-Visitor'
 }
 
