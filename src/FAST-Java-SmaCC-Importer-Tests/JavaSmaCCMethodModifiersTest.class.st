@@ -9,7 +9,9 @@ Class {
 
 { #category : #'as yet unclassified' }
 JavaSmaCCMethodModifiersTest >> methodWithModifiers [
-	 ^ 'private transient void hello(){}'
+	 ^ '
+	@Hello
+	private transient void hello(){}'
 ]
 
 { #category : #'as yet unclassified' }
@@ -19,6 +21,11 @@ JavaSmaCCMethodModifiersTest >> setUp [
 ]
 
 { #category : #'as yet unclassified' }
+JavaSmaCCMethodModifiersTest >> testMethodAnnotationExpression [
+	self assert: (methodWithModifiers allWithType: FASTJavaAnnotation) anyOne expression class equals: FASTVariableExpression
+]
+
+{ #category : #'as yet unclassified' }
 JavaSmaCCMethodModifiersTest >> testMethodModifiersNumber [
-	self assert: (methodWithModifiers allWithType: FASTJavaMethodEntity) anyOne modifiers size equals: 2
+	self assert: (methodWithModifiers allWithType: FASTJavaMethodEntity) anyOne modifiers size equals: 3
 ]

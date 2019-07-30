@@ -98,6 +98,13 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
+	self create: FASTJavaAnnotation from: anAnnotation.
+	currentFASTEntity expression: (self clone accept: anAnnotation name).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 	currentFASTEntity := self addToModel: FASTJavaArrayAccess new.
 	self generalVisitActionForNodeEntity: anArrayAccess.

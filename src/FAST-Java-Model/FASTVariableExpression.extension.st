@@ -401,3 +401,29 @@ FASTVariableExpression >> javaVariableDeclaratorOwner: anObject [
 		self privateState attributeAt: #javaVariableDeclaratorOwner put: anObject.
 		anObject variable: self ]
 ]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> variableExpressionOwnerIsAnnotation [
+
+	<generated>
+	<MSEComment: 'The annotation that own me'>
+	<container>
+
+	<MSEProperty: #variableExpressionOwnerIsAnnotation type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #variableExpressionOwnerIsAnnotation ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTVariableExpression >> variableExpressionOwnerIsAnnotation: anObject [
+
+	<generated>
+	(self privateState attributeAt: #variableExpressionOwnerIsAnnotation ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self variableExpressionOwnerIsAnnotation.
+		self privateState attributeAt: #variableExpressionOwnerIsAnnotation put: anObject.
+		otherSide expression: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #variableExpressionOwnerIsAnnotation put: anObject.
+		anObject expression: self ]
+]

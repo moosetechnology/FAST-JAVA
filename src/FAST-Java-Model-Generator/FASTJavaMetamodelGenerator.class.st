@@ -101,7 +101,8 @@ Class {
 		'tWithDeclarations',
 		'tModifier',
 		'tWithModifiers',
-		'javaModifier'
+		'javaModifier',
+		'javaAnnotationExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -140,6 +141,15 @@ void method (){
 	assert condition1 || condition2 : "error message"
 }
 '
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaAnnotation [
+	^ 'I reprensent a Java Annotation
+
+example:
+
+@Override'
 ]
 
 { #category : #comments }
@@ -661,6 +671,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaParameterExpression := builder newClassNamed: #Parameter comment: 'I represent a parameter of a method declaration'.
 	
 	javaAssertStatement := builder newClassNamed: #AssertStatement comment: self commentForAssertStatement. 
+	
+	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
 			
 	"From FAST"
 	expression := self remoteEntity: #Expression withPrefix: #FAST. 
@@ -774,7 +786,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAssertStatement --|> statement.
 	
 	javaModifier --|> tModifier.
-	javaModifier --|> expression
+	javaModifier --|> expression.
+	
+	javaAnnotationExpression --|> expression.
+	javaAnnotationExpression --|> tModifier.
 ]
 
 { #category : #definition }
@@ -956,7 +971,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	
 	(((tWithModifiers property: #modifiers) comment: 'My modifiers') <>-* ((tModifier property: #javaModifierOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer.
 	
-	
+	(((javaAnnotationExpression property: #expression) comment: 'My expression (because annotation can be complex)') <>- ((variableExpression property: #variableExpressionOwnerIsAnnotation) comment: 'The annotation that own me')) withoutPrimaryContainer.
 ]
 
 { #category : #definition }

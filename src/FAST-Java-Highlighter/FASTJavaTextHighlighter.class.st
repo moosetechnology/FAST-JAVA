@@ -13,7 +13,8 @@ FASTJavaTextHighlighter >> initialize [
 	FASTLiteral allSubclassesDo: [ :class | self addAttribute: (TextColor new color: self literalColor) for: class ].
 	self addAttribute: (TextColor new color: (Color pink)) for: FASTReturnStatement.
 	self addAttribute: (TextColor new color: (Color gray)) for: FASTComment.
-	self addAttribute: (TextColor new color: (textColor mixed: 0.8 with: Color blue)) for: FASTJavaModifier
+	self addAttribute: (TextColor new color: (textColor mixed: 0.8 with: Color blue)) for: FASTJavaModifier.
+	self addAttribute: (TextColor new color: (textColor mixed: 0.8 with: Color orange)) for: FASTJavaAnnotation
 ]
 
 { #category : #initialization }
