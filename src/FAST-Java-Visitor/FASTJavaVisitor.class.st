@@ -1,8 +1,13 @@
 Class {
 	#name : #FASTJavaVisitor,
-	#superclass : #FASTCoreVisitor,
+	#superclass : #Object,
 	#category : #'FAST-Java-Visitor'
 }
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
+	^ self visitFASTExpression: aFASTJavaAnnotation
+]
 
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
@@ -51,7 +56,7 @@ FASTJavaVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpression 
 
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaCaseStatement: aFASTJavaCaseStatement [
-	^ self visitFASTStatement: aFASTJavaCaseStatement
+	^ self visitFASTStatementBlock: aFASTJavaCaseStatement
 ]
 
 { #category : #generated }
@@ -75,6 +80,11 @@ FASTJavaVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
+	^ self visitFASTStatement: aFASTJavaClassDeclaration
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 	^ self visitFASTVariableExpression: aFASTJavaClassProperty
 ]
@@ -87,6 +97,11 @@ FASTJavaVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpressio
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaConditionStatement: aFASTJavaConditionStatement [
 	^ self visitFASTStatement: aFASTJavaConditionStatement
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression [
+	^ self visitFASTExpression: aFASTJavaConditionalExpression
 ]
 
 { #category : #generated }
@@ -105,8 +120,8 @@ FASTJavaVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatem
 ]
 
 { #category : #generated }
-FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoStatement [
-	^ self visitFASTStatement: aFASTJavaDoStatement
+FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
+	^ self visitFASTStatement: aFASTJavaDoWhileStatement
 ]
 
 { #category : #generated }
@@ -195,6 +210,11 @@ FASTJavaVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatem
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpression [
+	^ self visitFASTExpression: aFASTJavaLambdaExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
 	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaLongTypeExpression
 ]
@@ -207,6 +227,16 @@ FASTJavaVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocation [
 	^ self visitFASTExpression: aFASTJavaMethodInvocation
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaMethodReference: aFASTJavaMethodReference [
+	^ self visitFASTVariableExpression: aFASTJavaMethodReference
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
+	^ self visitFASTExpression: aFASTJavaModifier
 ]
 
 { #category : #generated }
@@ -250,8 +280,18 @@ FASTJavaVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
+	^ self visitFASTVariableExpression: aFASTJavaParameter
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaPrimitiveTypeExpression: aFASTJavaPrimitiveTypeExpression [
 	^ self visitFASTJavaTypeExpression: aFASTJavaPrimitiveTypeExpression
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
+	^ self visitFASTJavaTypeName: aFASTJavaQualifiedTypeName
 ]
 
 { #category : #generated }
@@ -272,6 +312,11 @@ FASTJavaVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
 	^ self visitFASTStatement: aFASTJavaSwitchStatement
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaSynchronizedStatement: aFASTJavaSynchronizedStatement [
+	^ self visitFASTStatement: aFASTJavaSynchronizedStatement
 ]
 
 { #category : #generated }
@@ -301,7 +346,12 @@ FASTJavaVisitor >> visitFASTJavaTryPartStatement: aFASTJavaTryPartStatement [
 
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaTypeExpression: aFASTJavaTypeExpression [
-	^ self visitFASTExpression: aFASTJavaTypeExpression
+	^ self visitFASTVariableExpression: aFASTJavaTypeExpression
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
+	^ self visitFASTExpression: aFASTJavaTypeName
 ]
 
 { #category : #generated }
