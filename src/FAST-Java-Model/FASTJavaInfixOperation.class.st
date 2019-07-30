@@ -10,7 +10,7 @@ Class {
 	#name : #FASTJavaInfixOperation,
 	#superclass : #FASTExpression,
 	#instVars : [
-		'operator'
+		'#operator => FMProperty'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

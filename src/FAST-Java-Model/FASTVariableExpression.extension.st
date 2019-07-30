@@ -1,32 +1,6 @@
 Extension { #name : #FASTVariableExpression }
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTVariableExpression >> javaArrayTypeOwner [
-
-	<generated>
-	<MSEComment: 'The variable expression owner (if possible)'>
-	<container>
-
-	<MSEProperty: #javaArrayTypeOwner type: #Object>
-	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaArrayTypeOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTVariableExpression >> javaArrayTypeOwner: anObject [
-
-	<generated>
-	(self privateState attributeAt: #javaArrayTypeOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaArrayTypeOwner.
-		self privateState attributeAt: #javaArrayTypeOwner put: anObject.
-		otherSide baseType: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #javaArrayTypeOwner put: anObject.
-		anObject baseType: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaAssignementExpressioOwner [
 
 	<generated>

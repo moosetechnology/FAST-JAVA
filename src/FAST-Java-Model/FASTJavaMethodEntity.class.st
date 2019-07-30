@@ -4,8 +4,8 @@ Represents a method in FastJava
 Class {
 	#name : #FASTJavaMethodEntity,
 	#superclass : #FASTNamedBehaviouralEntity,
-	#traits : 'FamixTWithImmediateSource',
-	#classTraits : 'FamixTWithImmediateSource classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FamixTWithImmediateSource',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FamixTWithImmediateSource classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -16,6 +16,29 @@ FASTJavaMethodEntity class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
+]
+
+{ #category : #meta }
+FASTJavaMethodEntity class >> requirements [
+
+	<generated>
+	^ { FASTJavaClassDeclaration }
+]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> belongsTo [
+
+	<generated>
+	^ self javaDeclarationOwner
+
+]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> belongsTo: anObject [
+
+	<generated>
+	self javaDeclarationOwner: anObject
+
 ]
 
 { #category : #accessing }

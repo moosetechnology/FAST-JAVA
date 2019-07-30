@@ -95,7 +95,13 @@ Class {
 		'javaParameterExpression',
 		'javaTypeName',
 		'javaQualifiedTypeName',
-		'javaAssertStatement'
+		'javaAssertStatement',
+		'javaClassDeclaration',
+		'tDeclaration',
+		'tWithDeclarations',
+		'tModifier',
+		'tWithModifiers',
+		'javaModifier'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -179,6 +185,20 @@ FASTJavaMetamodelGenerator >> commentForJavaCaseStatement [
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaCharacterLiteral [
 	^ 'A character in Java code'
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaClassDeclaration [
+	^ 'I represent a class declaration
+example
+
+public class ClassName extends SomeClass implements OneClass, TwoClass {
+
+	int oneDeclaration;
+	
+	void methodDeclaration(){
+	}
+}'
 ]
 
 { #category : #comments }
@@ -360,6 +380,35 @@ FASTJavaMetamodelGenerator >> commentForJavaMethodInvocation [
 ]
 
 { #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaModifier [
+	^ 'I am a Java modifier
+
+example: 
+for classes: 
+
+- public
+- default
+- final
+- abstract
+
+for methods:
+
+- public
+- private
+- default
+- protected
+- final
+- static
+- abstract
+- transient
+- synchronized
+- volatile
+
+
+'
+]
+
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaNewArray [
 	^ 'I represent a java new array node.
 ex.
@@ -445,6 +494,14 @@ eg.
 switch (_) {
 ...
 }'
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaTModifier [
+	^ 'I am a modifier in java
+example:
+
+public, proctected, private'
 ]
 
 { #category : #comments }
@@ -573,7 +630,10 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaDefaultCaseStatement := builder newClassNamed: #DefaultCaseStatement comment: self commentForJavaDefaultCaseStatement.
 	javaEmptyMethodDeclaration := builder newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
 	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
+	javaClassDeclaration := builder newClassNamed: #ClassDeclaration comment: self commentForJavaClassDeclaration.
 		
+	javaModifier := builder newClassNamed: #Modifier comment: self commentForJavaModifier.	
+	
 	javaCatchPartStatement := builder newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
 	javaLambdaExpression := builder newClassNamed: #LambdaExpression comment: 'I represent a lambda expression'.
 	javaMethodReference := builder newClassNamed: #MethodReference comment: 'I represent a method reference'.
@@ -640,6 +700,14 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaMethodEntity --|> namedBehaviouralEntity.
 	javaMethodEntity --|> #TWithImmediateSource.
+	javaMethodEntity --|> tDeclaration.
+	javaMethodEntity --|> tWithModifiers.
+
+	javaClassDeclaration --|> statement.
+	javaClassDeclaration --|> tDeclaration. 
+	javaClassDeclaration --|> tWithDeclarations.
+	javaClassDeclaration --|> tWithModifiers.
+	javaClassDeclaration --|> #TNamed. 
 
 	javaMethodInvocation --|> expression.
 	javaNullLiteral --|> nullPointerLiteral.
@@ -647,7 +715,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaStringLiteral --|> stringLiteral.
 	javaSwitchStatement --|> statement.
 	javaThis --|> variableExpression.
+	
 	javaVarDeclStatement --|> statement.
+	javaVarDeclStatement --|> tDeclaration.
+	
 	javaVariableDeclarator --|> entitySourceAnchor.
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamed.
@@ -669,6 +740,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaInitializer --|> scopableEntity.
 	javaInitializer --|> #TWithImmediateSource.
+	javaInitializer --|> tDeclaration.
 
 	javaOuterThis --|> expression.
 
@@ -700,6 +772,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaParameterExpression --|> variableExpression.
 	javaAssertStatement --|> statement.
+	
+	javaModifier --|> tModifier.
+	javaModifier --|> expression
 ]
 
 { #category : #definition }
@@ -713,109 +788,183 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaUnaryExpression property: #operator type: #String) comment: 'The operator string to apply to the expression'.
 	(javaUnaryExpression property: #isPrefixedUnaryExpression type: #Boolean) comment: 'true if the expression is prefixed (ex. ++i) else false'.
 	
+	(javaModifier property: #token type: #String) comment: 'The modifier value'
+	
 ]
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineRelations [
 	super defineRelations.
 	(((javaArrayInitializer property: #initializers) comment: 'My initializers') <>-* ((expression property: #javaArrayInitializers) comment: 'The owner of the expression')) withoutPrimaryContainer.
-	
-	(((javaVarDeclStatement property: #declarators) comment: 'The declarators for the type') <>-* ((javaVariableDeclarator property: #varDeclOwner) comment: 'The owner of the declarator')) withoutPrimaryContainer.
-	
-	(((javaSwitchStatement property: #cases) comment: 'The cases of the switch statements') <>-* ((javaCaseStatement property: #javaCaseStatementSwitchOwner) comment: 'javaSwitch owner')) withoutPrimaryContainer.
-	
-	(((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var') <>- ((expression property: #javaVariableDeclaratorExpressionOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
-	(((javaVariableDeclarator property: #variable ) comment: 'Variable that s being declared') <>- ((variableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var') <>- ((expression property: #javaAssignementExpressioOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
-	(((javaAssignementExpression property: #variable ) comment: 'Variable that s being assigned') <>- ((variableExpression property: #javaAssignementExpressioOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
-	(((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast') <>- ((variableExpression property: #javaCastExpressionTypeOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
 
-	(((javaClassProperty property: #type) comment: 'The owner type') <>- ((variableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)')) withoutPrimaryContainer.
-		
-	(((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation') <>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
-	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation') <>-* ((expression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
-	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation') <>-* ((variableExpression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaUnaryExpression property: #expression) comment: 'The affected expression') <>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaNewExpression property: #type) comment: 'The type of the array') <>- ((variableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
-	(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression') <>-* ((expression property: #javaNewExpressionArgumentsOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
-	
+	(((javaVarDeclStatement property: #declarators) comment: 'The declarators for the type') <>-* ((javaVariableDeclarator property: #varDeclOwner) comment: 'The owner of the declarator'))
+		withoutPrimaryContainer.
+
+	(((javaSwitchStatement property: #cases) comment: 'The cases of the switch statements') <>-* ((javaCaseStatement property: #javaCaseStatementSwitchOwner) comment: 'javaSwitch owner'))
+		withoutPrimaryContainer.
+
+	(((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
+		<>- ((expression property: #javaVariableDeclaratorExpressionOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+	(((javaVariableDeclarator property: #variable) comment: 'Variable that s being declared')
+		<>- ((variableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
+		<>- ((expression property: #javaAssignementExpressioOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
+	(((javaAssignementExpression property: #variable) comment: 'Variable that s being assigned')
+		<>- ((variableExpression property: #javaAssignementExpressioOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)'))
+		withoutPrimaryContainer.
+	(((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast')
+		<>- ((variableExpression property: #javaCastExpressionTypeOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaClassProperty property: #type) comment: 'The owner type') <>- ((variableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)'))
+		withoutPrimaryContainer.
+
+	(((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation')
+		<>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
+	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation')
+		<>-* ((expression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
+	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation')
+		<>-* ((variableExpression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaUnaryExpression property: #expression) comment: 'The affected expression') <>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)'))
+		withoutPrimaryContainer.
+
+	(((javaNewExpression property: #type) comment: 'The type of the array') <>- ((variableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)'))
+		withoutPrimaryContainer.
+	(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression')
+		<>-* ((expression property: #javaNewExpressionArgumentsOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
+
 	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
-	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)')) withoutPrimaryContainer.
-	
+	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)'))
+		withoutPrimaryContainer.
+
 	(((javaOuterThis property: #type) comment: 'The accessed type') <>- ((variableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaThrowStatement property: #expression) comment: 'The throwed element') <>- ((expression property: #javaThrowStatementOwner) comment: 'The javaThrowStatement owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaLabeledCaseStatement property: #label) comment: 'The label of the case statement') <>- ((expression property: #javaLabeledCaseStatementOwner) comment: 'The javaLabeledCaseStatement owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaForEachStatement property: #body) comment: 'The body of the For Each statement') <>- ((statement property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
-	(((javaForEachStatement property: #list) comment: 'The list the for each statement iterate on') <>- ((expression property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
-	(((javaForEachStatement property: #fieldname) comment: 'The name of the created local variable') <>- ((variableExpression property: #javaForEachStatementFieldNameOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
-	(((javaForEachStatement property: #type) comment: 'The name of the type of the created local variable') <>- ((variableExpression property: #javaForEachStatementTypeOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaCatchPartStatement property: #body) comment: 'The body of the Catch part statement') <>- ((statement property: #javaCatchPartStatementOwner) comment: 'The javaCatchPartStatementOwner owner (if possible)')) withoutPrimaryContainer.
-	(((javaCatchPartStatement property: #parameter) comment: 'The parameter of the catch part') <>- ((variableExpression property: #javaCatchParameterOwnler) comment: 'The javaCatchPartParameterOwner owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaTryCatch property: #try) comment: 'I represent the ''try'' part of the TryCatch Statement') <>- ((statement property: #javaTryCatchOwner) comment: 'The javaTryCatch owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaThrowStatement property: #expression) comment: 'The throwed element') <>- ((expression property: #javaThrowStatementOwner) comment: 'The javaThrowStatement owner (if possible)'))
+		withoutPrimaryContainer.
+
+	(((javaLabeledCaseStatement property: #label) comment: 'The label of the case statement')
+		<>- ((expression property: #javaLabeledCaseStatementOwner) comment: 'The javaLabeledCaseStatement owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaForEachStatement property: #body) comment: 'The body of the For Each statement') <>- ((statement property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)'))
+		withoutPrimaryContainer.
+	(((javaForEachStatement property: #list) comment: 'The list the for each statement iterate on')
+		<>- ((expression property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+	(((javaForEachStatement property: #fieldname) comment: 'The name of the created local variable')
+		<>- ((variableExpression property: #javaForEachStatementFieldNameOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+	(((javaForEachStatement property: #type) comment: 'The name of the type of the created local variable')
+		<>- ((variableExpression property: #javaForEachStatementTypeOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaCatchPartStatement property: #body) comment: 'The body of the Catch part statement')
+		<>- ((statement property: #javaCatchPartStatementOwner) comment: 'The javaCatchPartStatementOwner owner (if possible)')) withoutPrimaryContainer.
+	(((javaCatchPartStatement property: #parameter) comment: 'The parameter of the catch part')
+		<>- ((variableExpression property: #javaCatchParameterOwnler) comment: 'The javaCatchPartParameterOwner owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaTryCatch property: #try) comment: 'I represent the ''try'' part of the TryCatch Statement') <>- ((statement property: #javaTryCatchOwner) comment: 'The javaTryCatch owner (if possible)'))
+		withoutPrimaryContainer.
 	(((javaTryCatch property: #catches) comment: 'I contains all the catch statements') <>-* ((javaCatchPartStatement property: #tryOwner) comment: 'The try owner')) withoutPrimaryContainer.
-		
-	(((javaIfStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #ifConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+
+	(((javaIfStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #ifConditionOwner) comment: 'I reprensent a condition for my owner'))
+		withoutPrimaryContainer.
 	(((javaIfStatement property: #elsePart) comment: 'else part') <>- ((statement property: #ifElsePartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
 	(((javaIfStatement property: #thenPart) comment: 'then part') <>- ((statement property: #ifThenPartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
-	
-	(((javaConditionalExpression property: #condition) comment: 'The condition of the statement') <>- ((expression property: #conditionalConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+
+	(((javaConditionalExpression property: #condition) comment: 'The condition of the statement') <>- ((expression property: #conditionalConditionOwner) comment: 'I reprensent a condition for my owner'))
+		withoutPrimaryContainer.
 	(((javaConditionalExpression property: #elsePart) comment: 'else part') <>- ((expression property: #conditionalElsePartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
 	(((javaConditionalExpression property: #thenPart) comment: 'then part') <>- ((expression property: #conditionalThenPartOwner) comment: 'The if owner (if possible)')) withoutPrimaryContainer.
-	
+
 	(((javaInfixOperation property: #leftOperand) comment: 'leftOperand') <>- ((expression property: #infixOperationLeftOperandOwner) comment: 'The left operand (if possible)')) withoutPrimaryContainer.
-	(((javaInfixOperation property: #rightOperand) comment: 'rightOperand') <>- ((expression property: #infixOperationRightOperandOwner) comment: 'The right operand (if possible)')) withoutPrimaryContainer.
-	
-	(((javaForStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #forConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.
-	(((javaForStatement property: #incrementor) comment: 'Expression evaluated at the end of each loop') <>- ((statement property: #forIncrementorOwner) comment: 'I am the incrementor of the for')) withoutPrimaryContainer.
-	(((javaForStatement property: #initializer) comment: 'Expression used at initialization phase of a for loop') <>- ((statement property: #forIninitializerOwner) comment: 'I am the initializer of the for')) withoutPrimaryContainer.
+	(((javaInfixOperation property: #rightOperand) comment: 'rightOperand') <>- ((expression property: #infixOperationRightOperandOwner) comment: 'The right operand (if possible)'))
+		withoutPrimaryContainer.
+
+	(((javaForStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #forConditionOwner) comment: 'I reprensent a condition for my owner'))
+		withoutPrimaryContainer.
+	(((javaForStatement property: #incrementor) comment: 'Expression evaluated at the end of each loop') <>- ((statement property: #forIncrementorOwner) comment: 'I am the incrementor of the for'))
+		withoutPrimaryContainer.
+	(((javaForStatement property: #initializer) comment: 'Expression used at initialization phase of a for loop')
+		<>- ((statement property: #forIninitializerOwner) comment: 'I am the initializer of the for')) withoutPrimaryContainer.
 	(((javaForStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #forBodyOwner) comment: 'I am the body of the for')) withoutPrimaryContainer.
 
-	(((javaDoWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
+	(((javaDoWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner'))
+		withoutPrimaryContainer.
 	(((javaDoWhileStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #doBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
-	
-	(((javaWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.
+
+	(((javaWhileStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner'))
+		withoutPrimaryContainer.
 	(((javaWhileStatement property: #body) comment: 'A statement to be evaluated in the loop') <>- ((statement property: #whileBodyOwner) comment: 'I am the body of the do')) withoutPrimaryContainer.
 
-	(((javaNewClassExpression property: #declarations) comment: 'The methods defined in the class') <>-* ((scopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)')) withoutPrimaryContainer.
-	
-	(((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity') <>- ((statementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.')) withoutPrimaryContainer.
-	
-	(((javaNewArray property: #initializer) comment: 'The initializer of the array') <>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations')) withoutPrimaryContainer.
-	
-	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.') <>- ((expression property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)')) withoutPrimaryContainer.
-	(((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda') <>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')) withoutPrimaryContainer.
-	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda') <>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')) withoutPrimaryContainer.
-			
-	(((javaMethodReference property: #receiver) comment: 'The method of the reference') <>- ((variableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
-	
-	(((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized') <>- ((expression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
-	(((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized') <>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
-	
-	(((javaMethodEntity  property: #type) comment: 'The type of the method') <>- ((variableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaNewClassExpression property: #declarations) comment: 'The methods defined in the class') <>-* ((scopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)'))
+		withoutPrimaryContainer.
 
-	(((javaParameterExpression property: #type) comment: 'The type of the parameter') <>- ((variableExpression property: #javaParameterTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
-	(((javaParameterExpression property: #variable) comment: 'parameter variable') <>- ((variableExpression property: #javaParameterVariableOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity')
+		<>- ((statementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.')) withoutPrimaryContainer.
 
-	(((javaVarDeclStatement  property: #type) comment: 'The type of the declared variables') <>- ((variableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaNewArray property: #initializer) comment: 'The initializer of the array') <>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations'))
+		withoutPrimaryContainer.
 
-	(((javaArrayTypeExpression  property: #baseType) comment: 'The type of the array') <>- ((javaTypeName property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.')
+		<>- ((expression property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda')
+		<>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')) withoutPrimaryContainer.
+	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda')
+		<>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')) withoutPrimaryContainer.
 
-	(((javaArrayTypeExpression  property: #baseType) comment: 'The type of the array') <>- ((javaPrimitiveTypeExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+	(((javaMethodReference property: #receiver) comment: 'The method of the reference')
+		<>- ((variableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
+
+	(((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized')
+		<>- ((expression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
+	(((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized')
+		<>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
+
+	(((javaMethodEntity property: #type) comment: 'The type of the method') <>- ((variableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)'))
+		withoutPrimaryContainer.
+
+	(((javaParameterExpression property: #type) comment: 'The type of the parameter') <>- ((variableExpression property: #javaParameterTypeOwner) comment: 'The variable expression owner (if possible)'))
+		withoutPrimaryContainer.
+	(((javaParameterExpression property: #variable) comment: 'parameter variable') <>- ((variableExpression property: #javaParameterVariableOwner) comment: 'The variable expression owner (if possible)'))
+		withoutPrimaryContainer.
+
+	(((javaVarDeclStatement property: #type) comment: 'The type of the declared variables')
+		<>- ((variableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaArrayTypeExpression property: #baseType) comment: 'The type of the array') <>- ((javaTypeName property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)'))
+		withoutPrimaryContainer.
+
+	(((javaArrayTypeExpression property: #baseType) comment: 'The type of the array')
+		<>- ((javaPrimitiveTypeExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+
+	(((javaClassTypeExpression property: #typeName) comment: 'The name of the type') <>- ((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment: 'The type expression that own me'))
+		withoutPrimaryContainer.
+
+	(((javaQualifiedTypeName property: #namespace) comment: 'The namespace of the name') <>- ((javaTypeName property: #javaTypeNameQualify) comment: 'the name I qualify')) withoutPrimaryContainer.
+
+	(((javaAssertStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #assertConditionOwner) comment: 'I reprensent a condition for my owner'))
+		withoutPrimaryContainer.
+	(((javaAssertStatement property: #message) comment: 'The error message that is raised in case the condition is false')
+		<>- ((javaStringLiteral property: #javaStringAssertStatementOwner) comment: 'the assert that can raised me')) withoutPrimaryContainer.
+
+	(((javaClassDeclaration property: #superclass) comment: 'My superclass') <>- ((javaTypeExpression property: #javaClassDeclarationSuperclassOwnver) comment: 'The class that own me'))
+		withoutPrimaryContainer.
+	(((javaClassDeclaration property: #interfaces) comment: 'My superclass') <>-* ((javaTypeExpression property: #javaClassDeclarationInterfaceOwnver) comment: 'The class that own me'))
+		withoutPrimaryContainer.
+
+	(((tWithDeclarations property: #declarations) comment: 'The element I declared') <>-* ((tDeclaration property: #javaDeclarationOwner) comment: 'The element that declared me')) withoutPrimaryContainer.
 	
-	(((javaClassTypeExpression  property: #typeName) comment: 'The name of the type') <>- ((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment: 'The type expression that own me')) withoutPrimaryContainer.
+	(((tWithModifiers property: #modifiers) comment: 'My modifiers') <>-* ((tModifier property: #javaModifierOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer.
 	
-	(((javaQualifiedTypeName  property: #namespace) comment: 'The namespace of the name') <>- ((javaTypeName property: #javaTypeNameQualify) comment: 'the name I qualify')) withoutPrimaryContainer.
 	
-	(((javaAssertStatement property: #condition) comment: 'The condition of the statement') <>- ((expression property: #assertConditionOwner) comment: 'I reprensent a condition for my owner')) withoutPrimaryContainer.	
-	(((javaAssertStatement property: #message) comment: 'The error message that is raised in case the condition is false') <>- ((javaStringLiteral property: #javaStringAssertStatementOwner) comment: 'the assert that can raised me')) withoutPrimaryContainer.
+]
+
+{ #category : #definition }
+FASTJavaMetamodelGenerator >> defineTraits [
+	super defineTraits.
+	tDeclaration := builder newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
+	tWithDeclarations := builder newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
+	
+	tModifier := builder newTraitNamed: #TModifier comment: self commentForJavaTModifier. 
+	tWithModifiers := builder newTraitNamed: #TWithModifiers comment: 'I have modifiers'
 ]

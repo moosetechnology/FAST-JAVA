@@ -11,6 +11,8 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 Class {
 	#name : #FASTJavaVarDeclStatement,
 	#superclass : #FASTStatement,
+	#traits : 'FASTJavaTDeclaration',
+	#classTraits : 'FASTJavaTDeclaration classTrait',
 	#instVars : [
 		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner'
 	],
@@ -26,11 +28,34 @@ FASTJavaVarDeclStatement class >> annotation [
 	^self
 ]
 
+{ #category : #meta }
+FASTJavaVarDeclStatement class >> requirements [
+
+	<generated>
+	^ { FASTJavaClassDeclaration }
+]
+
 { #category : #adding }
 FASTJavaVarDeclStatement >> addDeclarators: anObject [
 			
 	<generated>
 	^ self declarators add: anObject
+]
+
+{ #category : #accessing }
+FASTJavaVarDeclStatement >> belongsTo [
+
+	<generated>
+	^ self javaDeclarationOwner
+
+]
+
+{ #category : #accessing }
+FASTJavaVarDeclStatement >> belongsTo: anObject [
+
+	<generated>
+	self javaDeclarationOwner: anObject
+
 ]
 
 { #category : #accessing }

@@ -98,6 +98,13 @@ FASTJavaEntity >> isReference [
 ]
 
 { #category : #testing }
+FASTJavaEntity >> isStructuralEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FASTJavaEntity >> isType [
 
 	<generated>

@@ -17,8 +17,8 @@ Class {
 	#name : #FASTJavaUnaryExpression,
 	#superclass : #FASTExpression,
 	#instVars : [
-		'isPrefixedUnaryExpression',
-		'operator'
+		'#operator => FMProperty',
+		'#isPrefixedUnaryExpression => FMProperty'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

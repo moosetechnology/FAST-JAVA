@@ -5,7 +5,7 @@ Class {
 	#name : #FASTJavaSeparator,
 	#superclass : #FASTVariableExpression,
 	#instVars : [
-		'separator'
+		'#separator => FMProperty'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

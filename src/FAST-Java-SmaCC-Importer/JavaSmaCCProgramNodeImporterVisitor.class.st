@@ -27,9 +27,9 @@ JavaSmaCCProgramNodeImporterVisitor >> clone [
 ]
 
 { #category : #initialization }
-JavaSmaCCProgramNodeImporterVisitor >> createExpression: aFASTExp [
-	currentFASTEntity := self addToModel: aFASTExp.
-	currentFASTEntity parentNode: self parentFASTEntity.
+JavaSmaCCProgramNodeImporterVisitor >> create: anEntity from: aNodeEntity [
+	currentFASTEntity := self addToModel: anEntity new.
+	self generalVisitActionForNodeEntity: aNodeEntity.
 	^ currentFASTEntity
 ]
 
@@ -259,6 +259,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 				value: aCharacterLiteral token value;
 				yourself).
 	self generalVisitActionForNodeEntity: aCharacterLiteral.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration [
+	self create: FASTJavaClassDeclaration from: aClassDeclaration.
+	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclarations: (self clone accept: declaration) ].
+	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterfaces: (self clone accept: interface) ].
+	aClassDeclaration superclass ifNotNil: [ :superclass | currentFASTEntity superclass: (self clone accept: superclass) ].
+	aClassDeclaration modifiers do: [ :modifier | currentFASTEntity addModifiers: (self clone accept: modifier) ].
+	currentFASTEntity name: aClassDeclaration name value.
 	^ currentFASTEntity
 ]
 
@@ -552,14 +563,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLongType: aByteType [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaration [
-	currentFASTEntity := FASTJavaMethodEntity new
-		name: aMethodDeclaration declarator name value;
-		yourself.
-	self addToModel: currentFASTEntity.
-	self generalVisitActionForNodeEntity: aMethodDeclaration.
+	self create: FASTJavaMethodEntity from: aMethodDeclaration.
+	currentFASTEntity name: aMethodDeclaration declarator name value.
 	aMethodDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
-	aMethodDeclaration declarator parameters do: [ :parameter | currentFASTEntity parameters add: (self clone accept: parameter) ].
+	aMethodDeclaration declarator parameters do: [ :parameter | currentFASTEntity addParameters: (self clone accept: parameter) ].
 	currentFASTEntity statementBlock: (self clone accept: aMethodDeclaration body).
+	aMethodDeclaration modifiers do: [ :modifier | currentFASTEntity addModifiers: (self clone accept: modifier) ].
 	^ currentFASTEntity
 ]
 
@@ -603,6 +612,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodReference: aMethodReference [
 		receiver: (self clone accept: aMethodReference receiver).
 	currentFASTEntity
 		name: (aMethodReference name value).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitModifier: aModifier [
+	self create: FASTJavaModifier from: aModifier.
+	currentFASTEntity token: aModifier token value.
 	^ currentFASTEntity
 ]
 

@@ -35,7 +35,7 @@ Class {
 	#name : #FASTJavaClassProperty,
 	#superclass : #FASTVariableExpression,
 	#instVars : [
-		'fieldName'
+		'#fieldName => FMProperty'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

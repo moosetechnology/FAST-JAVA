@@ -8,8 +8,8 @@ Class {
 	#classTraits : 'FamixTNamed classTrait',
 	#instVars : [
 		'#javaArrayTypeOwner => FMOne type: #FASTJavaArrayTypeExpression opposite: #baseType',
-		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
-		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'
+		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName',
+		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

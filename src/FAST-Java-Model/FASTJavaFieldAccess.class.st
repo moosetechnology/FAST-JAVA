@@ -5,7 +5,7 @@ Class {
 	#name : #FASTJavaFieldAccess,
 	#superclass : #FASTExpression,
 	#instVars : [
-		'fieldName'
+		'#fieldName => FMProperty'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
