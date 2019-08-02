@@ -42,9 +42,9 @@ JavaSmaCCSwitchTest >> testDefaultCaseSize [
 
 { #category : #running }
 JavaSmaCCSwitchTest >> testExpressionsSize [
-	self assert: ((switchMethod mooseModel allWithSubTypesOf: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'HELLO'  ]) anyOne statements size equals: 2. 
-	self assert: ((switchMethod mooseModel allWithSubTypesOf: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'WORLD'  ]) anyOne statements size equals: 1.
-	self assert: (switchMethod mooseModel allWithSubTypesOf: FASTJavaDefaultCaseStatement) anyOne statements size equals: 1.
+	self assert: ((switchMethod mooseModel allWithType: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'HELLO'  ]) anyOne statements size equals: 2. 
+	self assert: ((switchMethod mooseModel allWithType: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'WORLD'  ]) anyOne statements size equals: 1.
+	self assert: (switchMethod mooseModel allWithType: FASTJavaDefaultCaseStatement) anyOne statements size equals: 1.
 ]
 
 { #category : #running }
