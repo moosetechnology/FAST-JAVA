@@ -32,7 +32,7 @@ JavaSmaCCSwitchTest >> setUp [
 
 { #category : #running }
 JavaSmaCCSwitchTest >> testCaseSize [
-	self assert: (switchMethod mooseModel allWithType: FASTJavaCaseStatement) size equals: 3
+	self assert: (switchMethod mooseModel allWithSubTypesOf: FASTJavaCaseStatement) size equals: 3
 ]
 
 { #category : #running }
