@@ -321,15 +321,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitContinueStatement: aContinueStatemen
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration [
-	currentFASTEntity := FASTJavaMethodEntity new
+	currentFASTEntity := (self create: FASTJavaMethodEntity from: aConstructorDeclaration)
 		name: aConstructorDeclaration name name value;
 		yourself.
 	self generalVisitActionForNodeEntity: aConstructorDeclaration.
-	aConstructorDeclaration parameters
-		do: [ :parameter | self clone accept: parameter ].
-	currentFASTEntity
-		statementBlock: (self clone accept: aConstructorDeclaration body).
-	self addToModel: currentFASTEntity.
+	aConstructorDeclaration parameters do: [ :parameter | currentFASTEntity addParameters: (self clone accept: parameter) ].
+	currentFASTEntity statementBlock: (self clone accept: aConstructorDeclaration body).
+	aConstructorDeclaration modifiers do: [ :modifier | currentFASTEntity addModifiers: (self clone accept: modifier) ].
 	^ currentFASTEntity
 ]
 
@@ -496,10 +494,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anIn
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitInitializer: aInitializer [
 	currentFASTEntity := FASTJavaInitializer new.
-self
-		generalVisitActionForNodeEntity: aInitializer.
-	currentFASTEntity
-		statementBlock: (self clone accept: aInitializer block).
+	self generalVisitActionForNodeEntity: aInitializer.
+	currentFASTEntity statementBlock: (self clone accept: aInitializer block).
 	self addToModel: currentFASTEntity.
 	^ currentFASTEntity
 ]
