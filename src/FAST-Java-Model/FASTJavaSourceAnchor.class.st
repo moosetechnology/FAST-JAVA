@@ -1,8 +1,8 @@
 Class {
 	#name : #FASTJavaSourceAnchor,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FamixTSourceAnchor + TDependencyQueries + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTSourceAnchor classTrait + TDependencyQueries classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTSourceAnchor',
+	#classTraits : 'FamixTSourceAnchor classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

@@ -34,6 +34,7 @@ FASTJavaQualifiedTypeName class >> annotation [
 
 { #category : #accessing }
 FASTJavaQualifiedTypeName >> namespace [
+	"Relation named: #namespace type: #FASTJavaTypeName opposite: #javaTypeNameQualify"
 
 	<generated>
 	<MSEComment: 'The namespace of the name'>
@@ -50,9 +51,7 @@ FASTJavaQualifiedTypeName >> namespace: anObject [
 
 { #category : #navigation }
 FASTJavaQualifiedTypeName >> namespaceGroup [
-
 	<generated>
 	<navigation: 'Namespace'>
-	^ MooseGroup
-			with: (self namespace)
+	^ MooseGroup with: self namespace
 ]

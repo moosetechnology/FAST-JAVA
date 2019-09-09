@@ -22,6 +22,7 @@ FASTJavaOuterThis class >> annotation [
 
 { #category : #accessing }
 FASTJavaOuterThis >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner"
 
 	<generated>
 	<MSEComment: 'The accessed type'>
@@ -45,9 +46,7 @@ FASTJavaOuterThis >> type: anObject [
 
 { #category : #navigation }
 FASTJavaOuterThis >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]

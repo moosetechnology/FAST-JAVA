@@ -4,8 +4,8 @@ A node representing method imvocation
 Class {
 	#name : #FASTJavaMethodInvocation,
 	#superclass : #FASTExpression,
-	#traits : 'FamixTNamed',
-	#classTraits : 'FamixTNamed classTrait',
+	#traits : 'FASTTWithArguments + FamixTNamed',
+	#classTraits : 'FASTTWithArguments classTrait + FamixTNamed classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -18,44 +18,14 @@ FASTJavaMethodInvocation class >> annotation [
 	^self
 ]
 
-{ #category : #adding }
-FASTJavaMethodInvocation >> addArguments: anObject [
-			
-	<generated>
-	^ self arguments add: anObject
-]
-
-{ #category : #accessing }
-FASTJavaMethodInvocation >> arguments [
-
-	<generated>
-	<MSEComment: 'The arguments of the invocation'>
-	<MSEProperty: #arguments type: #Object>
-	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaMethodInvocationArgumentsOwner: ]
-]
-
-{ #category : #accessing }
-FASTJavaMethodInvocation >> arguments: anObject [
-
-	<generated>
-	self arguments value: anObject
-]
-
-{ #category : #navigation }
-FASTJavaMethodInvocation >> argumentsGroup [
-
-	<generated>
-	<navigation: 'Arguments'>
-	^ MooseGroup
-			withAll: (self arguments asSet)
-]
-
 { #category : #accessing }
 FASTJavaMethodInvocation >> receiver [
+	"Relation named: #receiver type: #FASTJavaExpression opposite: #javaMethodInvocationOwner"
 
 	<generated>
 	<MSEComment: 'The expression whitch will execute this invocation'>
 	<MSEProperty: #receiver type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #receiver ifAbsent: [ nil ]
 ]
 
@@ -75,9 +45,7 @@ FASTJavaMethodInvocation >> receiver: anObject [
 
 { #category : #navigation }
 FASTJavaMethodInvocation >> receiverGroup [
-
 	<generated>
 	<navigation: 'Receiver'>
-	^ MooseGroup
-			with: (self receiver)
+	^ MooseGroup with: self receiver
 ]

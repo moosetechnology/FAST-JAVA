@@ -18,6 +18,7 @@ FASTJavaParameter class >> annotation [
 
 { #category : #accessing }
 FASTJavaParameter >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner"
 
 	<generated>
 	<MSEComment: 'The type of the parameter'>
@@ -41,15 +42,14 @@ FASTJavaParameter >> type: anObject [
 
 { #category : #navigation }
 FASTJavaParameter >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]
 
 { #category : #accessing }
 FASTJavaParameter >> variable [
+	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner"
 
 	<generated>
 	<MSEComment: 'parameter variable'>
@@ -73,9 +73,7 @@ FASTJavaParameter >> variable: anObject [
 
 { #category : #navigation }
 FASTJavaParameter >> variableGroup [
-
 	<generated>
 	<navigation: 'Variable'>
-	^ MooseGroup
-			with: (self variable)
+	^ MooseGroup with: self variable
 ]

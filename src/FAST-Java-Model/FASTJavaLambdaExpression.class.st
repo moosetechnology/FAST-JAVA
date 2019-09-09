@@ -18,13 +18,13 @@ FASTJavaLambdaExpression class >> annotation [
 
 { #category : #adding }
 FASTJavaLambdaExpression >> addParameters: anObject [
-			
 	<generated>
 	^ self parameters add: anObject
 ]
 
 { #category : #accessing }
 FASTJavaLambdaExpression >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaLambdaExpressionOwner"
 
 	<generated>
 	<MSEComment: 'Expression to be executed as part of the lambda.'>
@@ -48,15 +48,14 @@ FASTJavaLambdaExpression >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaLambdaExpression >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]
 
 { #category : #accessing }
 FASTJavaLambdaExpression >> parameters [
+	"Relation named: #parameters type: #FASTJavaVariableExpression opposite: #javaLambdaParameterOwner"
 
 	<generated>
 	<MSEComment: 'The parameters of the lambda'>
@@ -73,9 +72,7 @@ FASTJavaLambdaExpression >> parameters: anObject [
 
 { #category : #navigation }
 FASTJavaLambdaExpression >> parametersGroup [
-
 	<generated>
 	<navigation: 'Parameters'>
-	^ MooseGroup
-			withAll: (self parameters asSet)
+	^ MooseGroup withAll: self parameters asSet
 ]

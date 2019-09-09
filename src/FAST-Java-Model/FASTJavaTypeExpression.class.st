@@ -29,11 +29,11 @@ FASTJavaTypeExpression class >> requirements [
 
 { #category : #accessing }
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnver [
+	"Relation named: #javaClassDeclarationInterfaceOwnver type: #FASTJavaClassDeclaration opposite: #interfaces"
 
 	<generated>
 	<MSEComment: 'The class that own me'>
 	<container>
-
 	^ javaClassDeclarationInterfaceOwnver
 ]
 
@@ -47,20 +47,18 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnver: anObject [
 
 { #category : #navigation }
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnverGroup [
-
 	<generated>
 	<navigation: 'JavaClassDeclarationInterfaceOwnver'>
-	^ MooseGroup
-			with: (self javaClassDeclarationInterfaceOwnver)
+	^ MooseGroup with: self javaClassDeclarationInterfaceOwnver
 ]
 
 { #category : #accessing }
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver [
+	"Relation named: #javaClassDeclarationSuperclassOwnver type: #FASTJavaClassDeclaration opposite: #superclass"
 
 	<generated>
 	<MSEComment: 'The class that own me'>
 	<container>
-
 	^ javaClassDeclarationSuperclassOwnver
 ]
 
@@ -74,9 +72,7 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver: anObject [
 
 { #category : #navigation }
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnverGroup [
-
 	<generated>
 	<navigation: 'JavaClassDeclarationSuperclassOwnver'>
-	^ MooseGroup
-			with: (self javaClassDeclarationSuperclassOwnver)
+	^ MooseGroup with: self javaClassDeclarationSuperclassOwnver
 ]

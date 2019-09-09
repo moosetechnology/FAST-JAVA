@@ -37,29 +37,13 @@ FASTJavaVarDeclStatement class >> requirements [
 
 { #category : #adding }
 FASTJavaVarDeclStatement >> addDeclarators: anObject [
-			
 	<generated>
 	^ self declarators add: anObject
 ]
 
 { #category : #accessing }
-FASTJavaVarDeclStatement >> belongsTo [
-
-	<generated>
-	^ self javaDeclarationOwner
-
-]
-
-{ #category : #accessing }
-FASTJavaVarDeclStatement >> belongsTo: anObject [
-
-	<generated>
-	self javaDeclarationOwner: anObject
-
-]
-
-{ #category : #accessing }
 FASTJavaVarDeclStatement >> declarators [
+	"Relation named: #declarators type: #FASTJavaVariableDeclarator opposite: #varDeclOwner"
 
 	<generated>
 	<MSEComment: 'The declarators for the type'>
@@ -76,15 +60,14 @@ FASTJavaVarDeclStatement >> declarators: anObject [
 
 { #category : #navigation }
 FASTJavaVarDeclStatement >> declaratorsGroup [
-
 	<generated>
 	<navigation: 'Declarators'>
-	^ MooseGroup
-			withAll: (self declarators asSet)
+	^ MooseGroup withAll: self declarators asSet
 ]
 
 { #category : #accessing }
 FASTJavaVarDeclStatement >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner"
 
 	<generated>
 	<MSEComment: 'The type of the declared variables'>
@@ -108,9 +91,7 @@ FASTJavaVarDeclStatement >> type: anObject [
 
 { #category : #navigation }
 FASTJavaVarDeclStatement >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]

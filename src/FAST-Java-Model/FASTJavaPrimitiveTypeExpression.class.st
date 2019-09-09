@@ -28,11 +28,11 @@ FASTJavaPrimitiveTypeExpression class >> requirements [
 
 { #category : #accessing }
 FASTJavaPrimitiveTypeExpression >> javaArrayTypeOwner [
+	"Relation named: #javaArrayTypeOwner type: #FASTJavaArrayTypeExpression opposite: #baseType"
 
 	<generated>
 	<MSEComment: 'The variable expression owner (if possible)'>
 	<container>
-
 	^ javaArrayTypeOwner
 ]
 
@@ -46,9 +46,7 @@ FASTJavaPrimitiveTypeExpression >> javaArrayTypeOwner: anObject [
 
 { #category : #navigation }
 FASTJavaPrimitiveTypeExpression >> javaArrayTypeOwnerGroup [
-
 	<generated>
 	<navigation: 'JavaArrayTypeOwner'>
-	^ MooseGroup
-			with: (self javaArrayTypeOwner)
+	^ MooseGroup with: self javaArrayTypeOwner
 ]

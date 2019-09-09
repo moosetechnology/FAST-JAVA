@@ -23,11 +23,11 @@ FASTJavaTModifier classSide >> annotation [
 
 { #category : #accessing }
 FASTJavaTModifier >> javaModifierOwner [
+	"Relation named: #javaModifierOwner type: #FASTJavaTWithModifiers opposite: #modifiers"
 
 	<generated>
 	<MSEComment: 'The owner of the modifier'>
 	<container>
-
 	^ javaModifierOwner
 ]
 
@@ -41,9 +41,7 @@ FASTJavaTModifier >> javaModifierOwner: anObject [
 
 { #category : #navigation }
 FASTJavaTModifier >> javaModifierOwnerGroup [
-
 	<generated>
 	<navigation: 'JavaModifierOwner'>
-	^ MooseGroup
-			with: (self javaModifierOwner)
+	^ MooseGroup with: self javaModifierOwner
 ]

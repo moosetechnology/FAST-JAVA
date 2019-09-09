@@ -35,27 +35,13 @@ FASTJavaInitializer class >> requirements [
 ]
 
 { #category : #accessing }
-FASTJavaInitializer >> belongsTo [
-
-	<generated>
-	^ self javaDeclarationOwner
-
-]
-
-{ #category : #accessing }
-FASTJavaInitializer >> belongsTo: anObject [
-
-	<generated>
-	self javaDeclarationOwner: anObject
-
-]
-
-{ #category : #accessing }
 FASTJavaInitializer >> statementBlock [
+	"Relation named: #statementBlock type: #FASTJavaStatementBlock opposite: #javaInitializerOwner"
 
 	<generated>
 	<MSEComment: 'Statements block of the behavioural entity'>
 	<MSEProperty: #statementBlock type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #statementBlock ifAbsent: [ nil ]
 ]
 
@@ -75,9 +61,7 @@ FASTJavaInitializer >> statementBlock: anObject [
 
 { #category : #navigation }
 FASTJavaInitializer >> statementBlockGroup [
-
 	<generated>
 	<navigation: 'StatementBlock'>
-	^ MooseGroup
-			with: (self statementBlock)
+	^ MooseGroup with: self statementBlock
 ]

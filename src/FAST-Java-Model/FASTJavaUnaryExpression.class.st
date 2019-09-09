@@ -34,6 +34,7 @@ FASTJavaUnaryExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaUnaryExpressionOwner"
 
 	<generated>
 	<MSEComment: 'The affected expression'>
@@ -57,11 +58,9 @@ FASTJavaUnaryExpression >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaUnaryExpression >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]
 
 { #category : #accessing }

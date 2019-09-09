@@ -31,17 +31,18 @@ FASTJavaNewClassExpression class >> annotation [
 
 { #category : #adding }
 FASTJavaNewClassExpression >> addDeclarations: anObject [
-			
 	<generated>
 	^ self declarations add: anObject
 ]
 
 { #category : #accessing }
 FASTJavaNewClassExpression >> declarations [
+	"Relation named: #declarations type: #FASTJavaScopableEntity opposite: #newClassOwner"
 
 	<generated>
 	<MSEComment: 'The methods defined in the class'>
 	<MSEProperty: #declarations type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
 ]
 
@@ -54,9 +55,7 @@ FASTJavaNewClassExpression >> declarations: anObject [
 
 { #category : #navigation }
 FASTJavaNewClassExpression >> declarationsGroup [
-
 	<generated>
 	<navigation: 'Declarations'>
-	^ MooseGroup
-			withAll: (self declarations asSet)
+	^ MooseGroup withAll: self declarations asSet
 ]

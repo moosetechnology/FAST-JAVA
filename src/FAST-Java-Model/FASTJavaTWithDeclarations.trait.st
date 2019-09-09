@@ -20,13 +20,13 @@ FASTJavaTWithDeclarations classSide >> annotation [
 
 { #category : #adding }
 FASTJavaTWithDeclarations >> addDeclarations: anObject [
-			
 	<generated>
 	^ self declarations add: anObject
 ]
 
 { #category : #accessing }
 FASTJavaTWithDeclarations >> declarations [
+	"Relation named: #declarations type: #FASTJavaTDeclaration opposite: #javaDeclarationOwner"
 
 	<generated>
 	<MSEComment: 'The element I declared'>
@@ -43,9 +43,7 @@ FASTJavaTWithDeclarations >> declarations: anObject [
 
 { #category : #navigation }
 FASTJavaTWithDeclarations >> declarationsGroup [
-
 	<generated>
 	<navigation: 'Declarations'>
-	^ MooseGroup
-			withAll: (self declarations asSet)
+	^ MooseGroup withAll: self declarations asSet
 ]

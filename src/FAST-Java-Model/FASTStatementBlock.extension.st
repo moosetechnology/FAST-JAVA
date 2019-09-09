@@ -2,11 +2,11 @@ Extension { #name : #FASTStatementBlock }
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTStatementBlock >> javaInitializerOwner [
+	"Relation named: #javaInitializerOwner type: #FASTInitializer opposite: #statementBlock"
 
 	<generated>
 	<MSEComment: 'Behavioural entity containing the statement block.'>
 	<container>
-
 	<MSEProperty: #javaInitializerOwner type: #Object>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
@@ -28,11 +28,11 @@ FASTStatementBlock >> javaInitializerOwner: anObject [
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTStatementBlock >> javaLambdaExpressionOwner [
+	"Relation named: #javaLambdaExpressionOwner type: #FASTLambdaExpression opposite: #expression"
 
 	<generated>
 	<MSEComment: 'The statementBlock owner (if possible)'>
 	<container>
-
 	<MSEProperty: #javaLambdaExpressionOwner type: #Object>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
@@ -54,11 +54,11 @@ FASTStatementBlock >> javaLambdaExpressionOwner: anObject [
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTStatementBlock >> javaSynchronizedStatementOwner [
+	"Relation named: #javaSynchronizedStatementOwner type: #FASTSynchronizedStatement opposite: #block"
 
 	<generated>
 	<MSEComment: 'The owner of the synchronized block (if possible)'>
 	<container>
-
 	<MSEProperty: #javaSynchronizedStatementOwner type: #Object>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]

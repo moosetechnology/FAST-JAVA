@@ -23,6 +23,7 @@ FASTJavaForStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaForStatement >> body [
+	"Relation named: #body type: #FASTJavaStatement opposite: #forBodyOwner"
 
 	<generated>
 	<MSEComment: 'A statement to be evaluated in the loop'>
@@ -46,15 +47,14 @@ FASTJavaForStatement >> body: anObject [
 
 { #category : #navigation }
 FASTJavaForStatement >> bodyGroup [
-
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup
-			with: (self body)
+	^ MooseGroup with: self body
 ]
 
 { #category : #accessing }
 FASTJavaForStatement >> condition [
+	"Relation named: #condition type: #FASTJavaExpression opposite: #forConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
@@ -78,15 +78,14 @@ FASTJavaForStatement >> condition: anObject [
 
 { #category : #navigation }
 FASTJavaForStatement >> conditionGroup [
-
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup
-			with: (self condition)
+	^ MooseGroup with: self condition
 ]
 
 { #category : #accessing }
 FASTJavaForStatement >> incrementor [
+	"Relation named: #incrementor type: #FASTJavaStatement opposite: #forIncrementorOwner"
 
 	<generated>
 	<MSEComment: 'Expression evaluated at the end of each loop'>
@@ -110,15 +109,14 @@ FASTJavaForStatement >> incrementor: anObject [
 
 { #category : #navigation }
 FASTJavaForStatement >> incrementorGroup [
-
 	<generated>
 	<navigation: 'Incrementor'>
-	^ MooseGroup
-			with: (self incrementor)
+	^ MooseGroup with: self incrementor
 ]
 
 { #category : #accessing }
 FASTJavaForStatement >> initializer [
+	"Relation named: #initializer type: #FASTJavaStatement opposite: #forIninitializerOwner"
 
 	<generated>
 	<MSEComment: 'Expression used at initialization phase of a for loop'>
@@ -142,9 +140,7 @@ FASTJavaForStatement >> initializer: anObject [
 
 { #category : #navigation }
 FASTJavaForStatement >> initializerGroup [
-
 	<generated>
 	<navigation: 'Initializer'>
-	^ MooseGroup
-			with: (self initializer)
+	^ MooseGroup with: self initializer
 ]

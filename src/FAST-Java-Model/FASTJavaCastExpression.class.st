@@ -18,6 +18,7 @@ FASTJavaCastExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaCastExpression >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaCastExpressionOwner"
 
 	<generated>
 	<MSEComment: 'The expression to cast'>
@@ -41,15 +42,14 @@ FASTJavaCastExpression >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaCastExpression >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]
 
 { #category : #accessing }
 FASTJavaCastExpression >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"
 
 	<generated>
 	<MSEComment: 'The type in witch the expression will be cast'>
@@ -73,9 +73,7 @@ FASTJavaCastExpression >> type: anObject [
 
 { #category : #navigation }
 FASTJavaCastExpression >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]

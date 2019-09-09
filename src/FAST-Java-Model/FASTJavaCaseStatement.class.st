@@ -28,11 +28,11 @@ FASTJavaCaseStatement class >> requirements [
 
 { #category : #accessing }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
+	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaSwitchStatement opposite: #cases"
 
 	<generated>
 	<MSEComment: 'javaSwitch owner'>
 	<container>
-
 	^ javaCaseStatementSwitchOwner
 ]
 
@@ -46,9 +46,7 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner: anObject [
 
 { #category : #navigation }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwnerGroup [
-
 	<generated>
 	<navigation: 'JavaCaseStatementSwitchOwner'>
-	^ MooseGroup
-			with: (self javaCaseStatementSwitchOwner)
+	^ MooseGroup with: self javaCaseStatementSwitchOwner
 ]

@@ -35,10 +35,12 @@ FASTJavaVariableDeclarator class >> requirements [
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaVariableDeclaratorExpressionOwner"
 
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
 	<MSEProperty: #expression type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -58,20 +60,18 @@ FASTJavaVariableDeclarator >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaVariableDeclarator >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> varDeclOwner [
+	"Relation named: #varDeclOwner type: #FASTJavaVarDeclStatement opposite: #declarators"
 
 	<generated>
 	<MSEComment: 'The owner of the declarator'>
 	<container>
-
 	^ varDeclOwner
 ]
 
@@ -85,19 +85,19 @@ FASTJavaVariableDeclarator >> varDeclOwner: anObject [
 
 { #category : #navigation }
 FASTJavaVariableDeclarator >> varDeclOwnerGroup [
-
 	<generated>
 	<navigation: 'VarDeclOwner'>
-	^ MooseGroup
-			with: (self varDeclOwner)
+	^ MooseGroup with: self varDeclOwner
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> variable [
+	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner"
 
 	<generated>
 	<MSEComment: 'Variable that s being declared'>
 	<MSEProperty: #variable type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
 ]
 
@@ -117,9 +117,7 @@ FASTJavaVariableDeclarator >> variable: anObject [
 
 { #category : #navigation }
 FASTJavaVariableDeclarator >> variableGroup [
-
 	<generated>
 	<navigation: 'Variable'>
-	^ MooseGroup
-			with: (self variable)
+	^ MooseGroup with: self variable
 ]

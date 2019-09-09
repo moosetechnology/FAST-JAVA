@@ -27,13 +27,13 @@ FASTJavaArrayInitializer class >> annotation [
 
 { #category : #adding }
 FASTJavaArrayInitializer >> addInitializers: anObject [
-			
 	<generated>
 	^ self initializers add: anObject
 ]
 
 { #category : #accessing }
 FASTJavaArrayInitializer >> initializers [
+	"Relation named: #initializers type: #FASTJavaExpression opposite: #javaArrayInitializers"
 
 	<generated>
 	<MSEComment: 'My initializers'>
@@ -50,9 +50,7 @@ FASTJavaArrayInitializer >> initializers: anObject [
 
 { #category : #navigation }
 FASTJavaArrayInitializer >> initializersGroup [
-
 	<generated>
 	<navigation: 'Initializers'>
-	^ MooseGroup
-			withAll: (self initializers asSet)
+	^ MooseGroup withAll: self initializers asSet
 ]

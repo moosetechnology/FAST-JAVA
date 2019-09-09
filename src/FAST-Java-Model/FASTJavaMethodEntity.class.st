@@ -26,27 +26,13 @@ FASTJavaMethodEntity class >> requirements [
 ]
 
 { #category : #accessing }
-FASTJavaMethodEntity >> belongsTo [
-
-	<generated>
-	^ self javaDeclarationOwner
-
-]
-
-{ #category : #accessing }
-FASTJavaMethodEntity >> belongsTo: anObject [
-
-	<generated>
-	self javaDeclarationOwner: anObject
-
-]
-
-{ #category : #accessing }
 FASTJavaMethodEntity >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner"
 
 	<generated>
 	<MSEComment: 'The type of the method'>
 	<MSEProperty: #type type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
@@ -66,9 +52,7 @@ FASTJavaMethodEntity >> type: anObject [
 
 { #category : #navigation }
 FASTJavaMethodEntity >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]

@@ -26,6 +26,7 @@ FASTJavaInfixOperation class >> annotation [
 
 { #category : #accessing }
 FASTJavaInfixOperation >> leftOperand [
+	"Relation named: #leftOperand type: #FASTJavaExpression opposite: #infixOperationLeftOperandOwner"
 
 	<generated>
 	<MSEComment: 'leftOperand'>
@@ -49,11 +50,9 @@ FASTJavaInfixOperation >> leftOperand: anObject [
 
 { #category : #navigation }
 FASTJavaInfixOperation >> leftOperandGroup [
-
 	<generated>
 	<navigation: 'LeftOperand'>
-	^ MooseGroup
-			with: (self leftOperand)
+	^ MooseGroup with: self leftOperand
 ]
 
 { #category : #accessing }
@@ -75,6 +74,7 @@ FASTJavaInfixOperation >> operator: anObject [
 
 { #category : #accessing }
 FASTJavaInfixOperation >> rightOperand [
+	"Relation named: #rightOperand type: #FASTJavaExpression opposite: #infixOperationRightOperandOwner"
 
 	<generated>
 	<MSEComment: 'rightOperand'>
@@ -98,9 +98,7 @@ FASTJavaInfixOperation >> rightOperand: anObject [
 
 { #category : #navigation }
 FASTJavaInfixOperation >> rightOperandGroup [
-
 	<generated>
 	<navigation: 'RightOperand'>
-	^ MooseGroup
-			with: (self rightOperand)
+	^ MooseGroup with: self rightOperand
 ]

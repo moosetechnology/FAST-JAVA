@@ -40,29 +40,13 @@ FASTJavaClassDeclaration class >> requirements [
 
 { #category : #adding }
 FASTJavaClassDeclaration >> addInterfaces: anObject [
-			
 	<generated>
 	^ self interfaces add: anObject
 ]
 
 { #category : #accessing }
-FASTJavaClassDeclaration >> belongsTo [
-
-	<generated>
-	^ self javaDeclarationOwner
-
-]
-
-{ #category : #accessing }
-FASTJavaClassDeclaration >> belongsTo: anObject [
-
-	<generated>
-	self javaDeclarationOwner: anObject
-
-]
-
-{ #category : #accessing }
 FASTJavaClassDeclaration >> interfaces [
+	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver"
 
 	<generated>
 	<MSEComment: 'My superclass'>
@@ -79,15 +63,14 @@ FASTJavaClassDeclaration >> interfaces: anObject [
 
 { #category : #navigation }
 FASTJavaClassDeclaration >> interfacesGroup [
-
 	<generated>
 	<navigation: 'Interfaces'>
-	^ MooseGroup
-			withAll: (self interfaces asSet)
+	^ MooseGroup withAll: self interfaces asSet
 ]
 
 { #category : #accessing }
 FASTJavaClassDeclaration >> superclass [
+	"Relation named: #superclass type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver"
 
 	<generated>
 	<MSEComment: 'My superclass'>
@@ -104,9 +87,7 @@ FASTJavaClassDeclaration >> superclass: anObject [
 
 { #category : #navigation }
 FASTJavaClassDeclaration >> superclassGroup [
-
 	<generated>
 	<navigation: 'Superclass'>
-	^ MooseGroup
-			with: (self superclass)
+	^ MooseGroup with: self superclass
 ]

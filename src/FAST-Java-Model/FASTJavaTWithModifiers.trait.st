@@ -20,13 +20,13 @@ FASTJavaTWithModifiers classSide >> annotation [
 
 { #category : #adding }
 FASTJavaTWithModifiers >> addModifiers: anObject [
-			
 	<generated>
 	^ self modifiers add: anObject
 ]
 
 { #category : #accessing }
 FASTJavaTWithModifiers >> modifiers [
+	"Relation named: #modifiers type: #FASTJavaTModifier opposite: #javaModifierOwner"
 
 	<generated>
 	<MSEComment: 'My modifiers'>
@@ -43,9 +43,7 @@ FASTJavaTWithModifiers >> modifiers: anObject [
 
 { #category : #navigation }
 FASTJavaTWithModifiers >> modifiersGroup [
-
 	<generated>
 	<navigation: 'Modifiers'>
-	^ MooseGroup
-			withAll: (self modifiers asSet)
+	^ MooseGroup withAll: self modifiers asSet
 ]

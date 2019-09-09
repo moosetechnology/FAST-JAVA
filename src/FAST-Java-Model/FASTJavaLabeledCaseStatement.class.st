@@ -22,6 +22,7 @@ FASTJavaLabeledCaseStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaLabeledCaseStatement >> label [
+	"Relation named: #label type: #FASTJavaExpression opposite: #javaLabeledCaseStatementOwner"
 
 	<generated>
 	<MSEComment: 'The label of the case statement'>
@@ -45,9 +46,7 @@ FASTJavaLabeledCaseStatement >> label: anObject [
 
 { #category : #navigation }
 FASTJavaLabeledCaseStatement >> labelGroup [
-
 	<generated>
 	<navigation: 'Label'>
-	^ MooseGroup
-			with: (self label)
+	^ MooseGroup with: self label
 ]

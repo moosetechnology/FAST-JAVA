@@ -23,6 +23,7 @@ FASTJavaWhileStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaWhileStatement >> body [
+	"Relation named: #body type: #FASTJavaStatement opposite: #whileBodyOwner"
 
 	<generated>
 	<MSEComment: 'A statement to be evaluated in the loop'>
@@ -46,15 +47,14 @@ FASTJavaWhileStatement >> body: anObject [
 
 { #category : #navigation }
 FASTJavaWhileStatement >> bodyGroup [
-
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup
-			with: (self body)
+	^ MooseGroup with: self body
 ]
 
 { #category : #accessing }
 FASTJavaWhileStatement >> condition [
+	"Relation named: #condition type: #FASTJavaExpression opposite: #whileConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
@@ -78,9 +78,7 @@ FASTJavaWhileStatement >> condition: anObject [
 
 { #category : #navigation }
 FASTJavaWhileStatement >> conditionGroup [
-
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup
-			with: (self condition)
+	^ MooseGroup with: self condition
 ]

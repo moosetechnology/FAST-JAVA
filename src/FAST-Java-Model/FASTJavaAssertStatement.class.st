@@ -28,6 +28,7 @@ FASTJavaAssertStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaAssertStatement >> condition [
+	"Relation named: #condition type: #FASTJavaExpression opposite: #assertConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
@@ -51,15 +52,14 @@ FASTJavaAssertStatement >> condition: anObject [
 
 { #category : #navigation }
 FASTJavaAssertStatement >> conditionGroup [
-
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup
-			with: (self condition)
+	^ MooseGroup with: self condition
 ]
 
 { #category : #accessing }
 FASTJavaAssertStatement >> message [
+	"Relation named: #message type: #FASTJavaStringLiteral opposite: #javaStringAssertStatementOwner"
 
 	<generated>
 	<MSEComment: 'The error message that is raised in case the condition is false'>
@@ -76,9 +76,7 @@ FASTJavaAssertStatement >> message: anObject [
 
 { #category : #navigation }
 FASTJavaAssertStatement >> messageGroup [
-
 	<generated>
 	<navigation: 'Message'>
-	^ MooseGroup
-			with: (self message)
+	^ MooseGroup with: self message
 ]

@@ -21,6 +21,7 @@ FASTJavaNewArray class >> annotation [
 
 { #category : #accessing }
 FASTJavaNewArray >> initializer [
+	"Relation named: #initializer type: #FASTJavaExpression opposite: #javaNewArrayInitialOwner"
 
 	<generated>
 	<MSEComment: 'The initializer of the array'>
@@ -44,9 +45,7 @@ FASTJavaNewArray >> initializer: anObject [
 
 { #category : #navigation }
 FASTJavaNewArray >> initializerGroup [
-
 	<generated>
 	<navigation: 'Initializer'>
-	^ MooseGroup
-			with: (self initializer)
+	^ MooseGroup with: self initializer
 ]

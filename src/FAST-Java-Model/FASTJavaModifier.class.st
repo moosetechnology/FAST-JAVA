@@ -53,22 +53,6 @@ FASTJavaModifier class >> requirements [
 ]
 
 { #category : #accessing }
-FASTJavaModifier >> belongsTo [
-
-	<generated>
-	^ self javaModifierOwner
-
-]
-
-{ #category : #accessing }
-FASTJavaModifier >> belongsTo: anObject [
-
-	<generated>
-	self javaModifierOwner: anObject
-
-]
-
-{ #category : #accessing }
 FASTJavaModifier >> token [
 
 	<MSEProperty: #token type: #String>

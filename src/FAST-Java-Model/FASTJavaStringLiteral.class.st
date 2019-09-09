@@ -28,11 +28,11 @@ FASTJavaStringLiteral class >> requirements [
 
 { #category : #accessing }
 FASTJavaStringLiteral >> javaStringAssertStatementOwner [
+	"Relation named: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message"
 
 	<generated>
 	<MSEComment: 'the assert that can raised me'>
 	<container>
-
 	^ javaStringAssertStatementOwner
 ]
 
@@ -46,9 +46,7 @@ FASTJavaStringLiteral >> javaStringAssertStatementOwner: anObject [
 
 { #category : #navigation }
 FASTJavaStringLiteral >> javaStringAssertStatementOwnerGroup [
-
 	<generated>
 	<navigation: 'JavaStringAssertStatementOwner'>
-	^ MooseGroup
-			with: (self javaStringAssertStatementOwner)
+	^ MooseGroup with: self javaStringAssertStatementOwner
 ]

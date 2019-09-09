@@ -22,6 +22,7 @@ FASTJavaThrowStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaThrowStatement >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaThrowStatementOwner"
 
 	<generated>
 	<MSEComment: 'The throwed element'>
@@ -45,9 +46,7 @@ FASTJavaThrowStatement >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaThrowStatement >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]

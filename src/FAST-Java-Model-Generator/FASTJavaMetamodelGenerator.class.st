@@ -722,9 +722,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> #TNamed. 
 
 	javaMethodInvocation --|> expression.
+	javaMethodInvocation --|> #TWithArguments.
+
 	javaNullLiteral --|> nullPointerLiteral.
 	javaSeparator --|> variableExpression.
+	
 	javaStringLiteral --|> stringLiteral.
+	
 	javaSwitchStatement --|> statement.
 	javaThis --|> variableExpression.
 	
@@ -735,12 +739,18 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamed.
 	javaCastExpression --|> expression.
+	
 	javaClassProperty --|> variableExpression.
+	
 	javaTryCatch --|> statement.
 	javaForEachStatement --|> statement.
 	javaUnaryExpression --|> expression.
+	
 	javaNewExpression --|> expression.
+	javaNewExpression --|> #TWithArguments.
+	
 	javaNewClassExpression --|> javaNewExpression.
+	
 	javaNewArray --|> javaNewExpression.
 	javaConditionalExpression --|> expression.
 	javaArrayAccess --|> expression.
@@ -757,7 +767,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaOuterThis --|> expression.
 
 	javaCatchPartStatement --|> statement.
+	
 	javaLambdaExpression --|> expression.
+	
 	javaMethodReference --|> variableExpression.
 	javaSynchronizedStatement --|> statement.
 
@@ -838,19 +850,21 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	(((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation')
 		<>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
-	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation')
+
+	"(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation')
 		<>-* ((expression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
+
 	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation')
 		<>-* ((variableExpression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
-
+"
 	(((javaUnaryExpression property: #expression) comment: 'The affected expression') <>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)'))
 		withoutPrimaryContainer.
 
 	(((javaNewExpression property: #type) comment: 'The type of the array') <>- ((variableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)'))
 		withoutPrimaryContainer.
-	(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression')
+	"(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression')
 		<>-* ((expression property: #javaNewExpressionArgumentsOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
-
+"
 	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
 	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)'))
 		withoutPrimaryContainer.

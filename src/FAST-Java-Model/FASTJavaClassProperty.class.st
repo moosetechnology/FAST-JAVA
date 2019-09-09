@@ -68,10 +68,12 @@ FASTJavaClassProperty >> fieldName: anObject [
 
 { #category : #accessing }
 FASTJavaClassProperty >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner"
 
 	<generated>
 	<MSEComment: 'The owner type'>
 	<MSEProperty: #type type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
@@ -91,9 +93,7 @@ FASTJavaClassProperty >> type: anObject [
 
 { #category : #navigation }
 FASTJavaClassProperty >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]

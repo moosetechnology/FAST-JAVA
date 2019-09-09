@@ -8,6 +8,8 @@ new Patate()
 Class {
 	#name : #FASTJavaNewExpression,
 	#superclass : #FASTExpression,
+	#traits : 'FASTTWithArguments',
+	#classTraits : 'FASTTWithArguments classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -20,44 +22,14 @@ FASTJavaNewExpression class >> annotation [
 	^self
 ]
 
-{ #category : #adding }
-FASTJavaNewExpression >> addArguments: anObject [
-			
-	<generated>
-	^ self arguments add: anObject
-]
-
-{ #category : #accessing }
-FASTJavaNewExpression >> arguments [
-
-	<generated>
-	<MSEComment: 'the arguments of the new expression'>
-	<MSEProperty: #arguments type: #Object>
-	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaNewExpressionArgumentsOwner: ]
-]
-
-{ #category : #accessing }
-FASTJavaNewExpression >> arguments: anObject [
-
-	<generated>
-	self arguments value: anObject
-]
-
-{ #category : #navigation }
-FASTJavaNewExpression >> argumentsGroup [
-
-	<generated>
-	<navigation: 'Arguments'>
-	^ MooseGroup
-			withAll: (self arguments asSet)
-]
-
 { #category : #accessing }
 FASTJavaNewExpression >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner"
 
 	<generated>
 	<MSEComment: 'The type of the array'>
 	<MSEProperty: #type type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 
@@ -77,9 +49,7 @@ FASTJavaNewExpression >> type: anObject [
 
 { #category : #navigation }
 FASTJavaNewExpression >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]

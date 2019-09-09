@@ -20,10 +20,12 @@ FASTJavaAssignementExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaAssignementExpressioOwner"
 
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
 	<MSEProperty: #expression type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -43,19 +45,19 @@ FASTJavaAssignementExpression >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaAssignementExpression >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> variable [
+	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaAssignementExpressioOwner"
 
 	<generated>
 	<MSEComment: 'Variable that s being assigned'>
 	<MSEProperty: #variable type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
 ]
 
@@ -75,9 +77,7 @@ FASTJavaAssignementExpression >> variable: anObject [
 
 { #category : #navigation }
 FASTJavaAssignementExpression >> variableGroup [
-
 	<generated>
 	<navigation: 'Variable'>
-	^ MooseGroup
-			with: (self variable)
+	^ MooseGroup with: self variable
 ]

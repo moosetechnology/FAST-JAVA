@@ -28,6 +28,7 @@ FASTJavaCatchPartStatement class >> requirements [
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body [
+	"Relation named: #body type: #FASTJavaStatement opposite: #javaCatchPartStatementOwner"
 
 	<generated>
 	<MSEComment: 'The body of the Catch part statement'>
@@ -51,15 +52,14 @@ FASTJavaCatchPartStatement >> body: anObject [
 
 { #category : #navigation }
 FASTJavaCatchPartStatement >> bodyGroup [
-
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup
-			with: (self body)
+	^ MooseGroup with: self body
 ]
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> parameter [
+	"Relation named: #parameter type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler"
 
 	<generated>
 	<MSEComment: 'The parameter of the catch part'>
@@ -83,20 +83,18 @@ FASTJavaCatchPartStatement >> parameter: anObject [
 
 { #category : #navigation }
 FASTJavaCatchPartStatement >> parameterGroup [
-
 	<generated>
 	<navigation: 'Parameter'>
-	^ MooseGroup
-			with: (self parameter)
+	^ MooseGroup with: self parameter
 ]
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> tryOwner [
+	"Relation named: #tryOwner type: #FASTJavaTryCatchStatement opposite: #catches"
 
 	<generated>
 	<MSEComment: 'The try owner'>
 	<container>
-
 	^ tryOwner
 ]
 
@@ -110,9 +108,7 @@ FASTJavaCatchPartStatement >> tryOwner: anObject [
 
 { #category : #navigation }
 FASTJavaCatchPartStatement >> tryOwnerGroup [
-
 	<generated>
 	<navigation: 'TryOwner'>
-	^ MooseGroup
-			with: (self tryOwner)
+	^ MooseGroup with: self tryOwner
 ]

@@ -32,11 +32,11 @@ FASTJavaTypeName class >> requirements [
 
 { #category : #accessing }
 FASTJavaTypeName >> javaArrayTypeOwner [
+	"Relation named: #javaArrayTypeOwner type: #FASTJavaArrayTypeExpression opposite: #baseType"
 
 	<generated>
 	<MSEComment: 'The variable expression owner (if possible)'>
 	<container>
-
 	^ javaArrayTypeOwner
 ]
 
@@ -50,20 +50,18 @@ FASTJavaTypeName >> javaArrayTypeOwner: anObject [
 
 { #category : #navigation }
 FASTJavaTypeName >> javaArrayTypeOwnerGroup [
-
 	<generated>
 	<navigation: 'JavaArrayTypeOwner'>
-	^ MooseGroup
-			with: (self javaArrayTypeOwner)
+	^ MooseGroup with: self javaArrayTypeOwner
 ]
 
 { #category : #accessing }
 FASTJavaTypeName >> javaTypeNameQualify [
+	"Relation named: #javaTypeNameQualify type: #FASTJavaQualifiedTypeName opposite: #namespace"
 
 	<generated>
 	<MSEComment: 'the name I qualify'>
 	<container>
-
 	^ javaTypeNameQualify
 ]
 
@@ -77,20 +75,18 @@ FASTJavaTypeName >> javaTypeNameQualify: anObject [
 
 { #category : #navigation }
 FASTJavaTypeName >> javaTypeNameQualifyGroup [
-
 	<generated>
 	<navigation: 'JavaTypeNameQualify'>
-	^ MooseGroup
-			with: (self javaTypeNameQualify)
+	^ MooseGroup with: self javaTypeNameQualify
 ]
 
 { #category : #accessing }
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
+	"Relation named: #javaTypeNameTypeExpressionOwner type: #FASTJavaClassTypeExpression opposite: #typeName"
 
 	<generated>
 	<MSEComment: 'The type expression that own me'>
 	<container>
-
 	^ javaTypeNameTypeExpressionOwner
 ]
 
@@ -104,9 +100,7 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner: anObject [
 
 { #category : #navigation }
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwnerGroup [
-
 	<generated>
 	<navigation: 'JavaTypeNameTypeExpressionOwner'>
-	^ MooseGroup
-			with: (self javaTypeNameTypeExpressionOwner)
+	^ MooseGroup with: self javaTypeNameTypeExpressionOwner
 ]

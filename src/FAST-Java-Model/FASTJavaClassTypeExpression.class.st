@@ -21,6 +21,7 @@ FASTJavaClassTypeExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaClassTypeExpression >> typeName [
+	"Relation named: #typeName type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner"
 
 	<generated>
 	<MSEComment: 'The name of the type'>
@@ -37,9 +38,7 @@ FASTJavaClassTypeExpression >> typeName: anObject [
 
 { #category : #navigation }
 FASTJavaClassTypeExpression >> typeNameGroup [
-
 	<generated>
 	<navigation: 'TypeName'>
-	^ MooseGroup
-			with: (self typeName)
+	^ MooseGroup with: self typeName
 ]

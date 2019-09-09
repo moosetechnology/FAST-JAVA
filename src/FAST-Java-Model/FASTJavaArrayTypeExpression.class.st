@@ -21,6 +21,7 @@ FASTJavaArrayTypeExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaArrayTypeExpression >> baseType [
+	"Relation named: #baseType type: #FASTJavaTypeName opposite: #javaArrayTypeOwner"
 
 	<generated>
 	<MSEComment: 'The type of the array'>
@@ -37,9 +38,7 @@ FASTJavaArrayTypeExpression >> baseType: anObject [
 
 { #category : #navigation }
 FASTJavaArrayTypeExpression >> baseTypeGroup [
-
 	<generated>
 	<navigation: 'BaseType'>
-	^ MooseGroup
-			with: (self baseType)
+	^ MooseGroup with: self baseType
 ]

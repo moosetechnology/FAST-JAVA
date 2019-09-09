@@ -26,13 +26,13 @@ FASTJavaSwitchStatement class >> annotation [
 
 { #category : #adding }
 FASTJavaSwitchStatement >> addCases: anObject [
-			
 	<generated>
 	^ self cases add: anObject
 ]
 
 { #category : #accessing }
 FASTJavaSwitchStatement >> cases [
+	"Relation named: #cases type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner"
 
 	<generated>
 	<MSEComment: 'The cases of the switch statements'>
@@ -49,9 +49,7 @@ FASTJavaSwitchStatement >> cases: anObject [
 
 { #category : #navigation }
 FASTJavaSwitchStatement >> casesGroup [
-
 	<generated>
 	<navigation: 'Cases'>
-	^ MooseGroup
-			withAll: (self cases asSet)
+	^ MooseGroup withAll: self cases asSet
 ]

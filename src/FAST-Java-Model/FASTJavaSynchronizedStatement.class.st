@@ -18,6 +18,7 @@ FASTJavaSynchronizedStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaSynchronizedStatement >> block [
+	"Relation named: #block type: #FASTJavaStatementBlock opposite: #javaSynchronizedStatementOwner"
 
 	<generated>
 	<MSEComment: 'The block that is synchronized'>
@@ -41,15 +42,14 @@ FASTJavaSynchronizedStatement >> block: anObject [
 
 { #category : #navigation }
 FASTJavaSynchronizedStatement >> blockGroup [
-
 	<generated>
 	<navigation: 'Block'>
-	^ MooseGroup
-			with: (self block)
+	^ MooseGroup with: self block
 ]
 
 { #category : #accessing }
 FASTJavaSynchronizedStatement >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaSynchronizedStatementOwner"
 
 	<generated>
 	<MSEComment: 'The instance on which the statement block is synchronized'>
@@ -73,9 +73,7 @@ FASTJavaSynchronizedStatement >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaSynchronizedStatement >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]

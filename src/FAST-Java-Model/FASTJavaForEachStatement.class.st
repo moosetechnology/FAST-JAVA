@@ -23,6 +23,7 @@ FASTJavaForEachStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaForEachStatement >> body [
+	"Relation named: #body type: #FASTJavaStatement opposite: #javaForEachStatementOwner"
 
 	<generated>
 	<MSEComment: 'The body of the For Each statement'>
@@ -46,15 +47,14 @@ FASTJavaForEachStatement >> body: anObject [
 
 { #category : #navigation }
 FASTJavaForEachStatement >> bodyGroup [
-
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup
-			with: (self body)
+	^ MooseGroup with: self body
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> fieldname [
+	"Relation named: #fieldname type: #FASTJavaVariableExpression opposite: #javaForEachStatementFieldNameOwner"
 
 	<generated>
 	<MSEComment: 'The name of the created local variable'>
@@ -78,15 +78,14 @@ FASTJavaForEachStatement >> fieldname: anObject [
 
 { #category : #navigation }
 FASTJavaForEachStatement >> fieldnameGroup [
-
 	<generated>
 	<navigation: 'Fieldname'>
-	^ MooseGroup
-			with: (self fieldname)
+	^ MooseGroup with: self fieldname
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> list [
+	"Relation named: #list type: #FASTJavaExpression opposite: #javaForEachStatementOwner"
 
 	<generated>
 	<MSEComment: 'The list the for each statement iterate on'>
@@ -110,15 +109,14 @@ FASTJavaForEachStatement >> list: anObject [
 
 { #category : #navigation }
 FASTJavaForEachStatement >> listGroup [
-
 	<generated>
 	<navigation: 'List'>
-	^ MooseGroup
-			with: (self list)
+	^ MooseGroup with: self list
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> type [
+	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaForEachStatementTypeOwner"
 
 	<generated>
 	<MSEComment: 'The name of the type of the created local variable'>
@@ -142,9 +140,7 @@ FASTJavaForEachStatement >> type: anObject [
 
 { #category : #navigation }
 FASTJavaForEachStatement >> typeGroup [
-
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup
-			with: (self type)
+	^ MooseGroup with: self type
 ]

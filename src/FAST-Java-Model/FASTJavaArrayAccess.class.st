@@ -22,6 +22,7 @@ FASTJavaArrayAccess class >> annotation [
 
 { #category : #accessing }
 FASTJavaArrayAccess >> array [
+	"Relation named: #array type: #FASTJavaExpression opposite: #javaArrayArrayAccessOwner"
 
 	<generated>
 	<MSEComment: 'Name of accessed field'>
@@ -45,15 +46,14 @@ FASTJavaArrayAccess >> array: anObject [
 
 { #category : #navigation }
 FASTJavaArrayAccess >> arrayGroup [
-
 	<generated>
 	<navigation: 'Array'>
-	^ MooseGroup
-			with: (self array)
+	^ MooseGroup with: self array
 ]
 
 { #category : #accessing }
 FASTJavaArrayAccess >> expression [
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaArrayAccessOwner"
 
 	<generated>
 	<MSEComment: 'The accessed index'>
@@ -77,9 +77,7 @@ FASTJavaArrayAccess >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaArrayAccess >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]

@@ -34,13 +34,13 @@ FASTJavaTryCatchStatement class >> annotation [
 
 { #category : #adding }
 FASTJavaTryCatchStatement >> addCatches: anObject [
-			
 	<generated>
 	^ self catches add: anObject
 ]
 
 { #category : #accessing }
 FASTJavaTryCatchStatement >> catches [
+	"Relation named: #catches type: #FASTJavaCatchPartStatement opposite: #tryOwner"
 
 	<generated>
 	<MSEComment: 'I contains all the catch statements'>
@@ -57,15 +57,14 @@ FASTJavaTryCatchStatement >> catches: anObject [
 
 { #category : #navigation }
 FASTJavaTryCatchStatement >> catchesGroup [
-
 	<generated>
 	<navigation: 'Catches'>
-	^ MooseGroup
-			withAll: (self catches asSet)
+	^ MooseGroup withAll: self catches asSet
 ]
 
 { #category : #accessing }
 FASTJavaTryCatchStatement >> try [
+	"Relation named: #try type: #FASTJavaStatement opposite: #javaTryCatchOwner"
 
 	<generated>
 	<MSEComment: 'I represent the ''try'' part of the TryCatch Statement'>
@@ -89,9 +88,7 @@ FASTJavaTryCatchStatement >> try: anObject [
 
 { #category : #navigation }
 FASTJavaTryCatchStatement >> tryGroup [
-
 	<generated>
 	<navigation: 'Try'>
-	^ MooseGroup
-			with: (self try)
+	^ MooseGroup with: self try
 ]

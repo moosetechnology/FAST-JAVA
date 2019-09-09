@@ -20,11 +20,11 @@ FASTJavaTDeclaration classSide >> annotation [
 
 { #category : #accessing }
 FASTJavaTDeclaration >> javaDeclarationOwner [
+	"Relation named: #javaDeclarationOwner type: #FASTJavaTWithDeclarations opposite: #declarations"
 
 	<generated>
 	<MSEComment: 'The element that declared me'>
 	<container>
-
 	^ javaDeclarationOwner
 ]
 
@@ -38,9 +38,7 @@ FASTJavaTDeclaration >> javaDeclarationOwner: anObject [
 
 { #category : #navigation }
 FASTJavaTDeclaration >> javaDeclarationOwnerGroup [
-
 	<generated>
 	<navigation: 'JavaDeclarationOwner'>
-	^ MooseGroup
-			with: (self javaDeclarationOwner)
+	^ MooseGroup with: self javaDeclarationOwner
 ]

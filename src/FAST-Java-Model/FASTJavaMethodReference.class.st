@@ -18,6 +18,7 @@ FASTJavaMethodReference class >> annotation [
 
 { #category : #accessing }
 FASTJavaMethodReference >> receiver [
+	"Relation named: #receiver type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner"
 
 	<generated>
 	<MSEComment: 'The method of the reference'>
@@ -41,9 +42,7 @@ FASTJavaMethodReference >> receiver: anObject [
 
 { #category : #navigation }
 FASTJavaMethodReference >> receiverGroup [
-
 	<generated>
 	<navigation: 'Receiver'>
-	^ MooseGroup
-			with: (self receiver)
+	^ MooseGroup with: self receiver
 ]

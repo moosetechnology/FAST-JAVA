@@ -30,23 +30,8 @@ FASTJavaAnnotation class >> requirements [
 ]
 
 { #category : #accessing }
-FASTJavaAnnotation >> belongsTo [
-
-	<generated>
-	^ self javaModifierOwner
-
-]
-
-{ #category : #accessing }
-FASTJavaAnnotation >> belongsTo: anObject [
-
-	<generated>
-	self javaModifierOwner: anObject
-
-]
-
-{ #category : #accessing }
 FASTJavaAnnotation >> expression [
+	"Relation named: #expression type: #FASTJavaVariableExpression opposite: #variableExpressionOwnerIsAnnotation"
 
 	<generated>
 	<MSEComment: 'My expression (because annotation can be complex)'>
@@ -70,9 +55,7 @@ FASTJavaAnnotation >> expression: anObject [
 
 { #category : #navigation }
 FASTJavaAnnotation >> expressionGroup [
-
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup
-			with: (self expression)
+	^ MooseGroup with: self expression
 ]

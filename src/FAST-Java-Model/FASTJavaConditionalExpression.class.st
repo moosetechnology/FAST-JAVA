@@ -22,6 +22,7 @@ FASTJavaConditionalExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> condition [
+	"Relation named: #condition type: #FASTJavaExpression opposite: #conditionalConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
@@ -45,15 +46,14 @@ FASTJavaConditionalExpression >> condition: anObject [
 
 { #category : #navigation }
 FASTJavaConditionalExpression >> conditionGroup [
-
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup
-			with: (self condition)
+	^ MooseGroup with: self condition
 ]
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> elsePart [
+	"Relation named: #elsePart type: #FASTJavaExpression opposite: #conditionalElsePartOwner"
 
 	<generated>
 	<MSEComment: 'else part'>
@@ -77,15 +77,14 @@ FASTJavaConditionalExpression >> elsePart: anObject [
 
 { #category : #navigation }
 FASTJavaConditionalExpression >> elsePartGroup [
-
 	<generated>
 	<navigation: 'ElsePart'>
-	^ MooseGroup
-			with: (self elsePart)
+	^ MooseGroup with: self elsePart
 ]
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> thenPart [
+	"Relation named: #thenPart type: #FASTJavaExpression opposite: #conditionalThenPartOwner"
 
 	<generated>
 	<MSEComment: 'then part'>
@@ -109,9 +108,7 @@ FASTJavaConditionalExpression >> thenPart: anObject [
 
 { #category : #navigation }
 FASTJavaConditionalExpression >> thenPartGroup [
-
 	<generated>
 	<navigation: 'ThenPart'>
-	^ MooseGroup
-			with: (self thenPart)
+	^ MooseGroup with: self thenPart
 ]
