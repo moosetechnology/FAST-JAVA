@@ -25,7 +25,6 @@ FASTJavaMethodInvocation >> receiver [
 	<generated>
 	<MSEComment: 'The expression whitch will execute this invocation'>
 	<MSEProperty: #receiver type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #receiver ifAbsent: [ nil ]
 ]
 

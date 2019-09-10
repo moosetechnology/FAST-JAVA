@@ -8,6 +8,8 @@ liste[i]
 Class {
 	#name : #FASTJavaArrayAccess,
 	#superclass : #FASTExpression,
+	#traits : 'FASTJavaTAssigneable',
+	#classTraits : 'FASTJavaTAssigneable classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -18,6 +20,13 @@ FASTJavaArrayAccess class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
+]
+
+{ #category : #meta }
+FASTJavaArrayAccess class >> requirements [
+
+	<generated>
+	^ { FASTJavaAssignementExpression }
 ]
 
 { #category : #accessing }

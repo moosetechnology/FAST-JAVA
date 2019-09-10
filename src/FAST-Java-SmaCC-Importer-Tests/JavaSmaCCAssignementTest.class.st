@@ -17,6 +17,8 @@ JavaSmaCCAssignementTest >> methodAssignement [
         devicePanel = deviceView;
         mapPanel = mapView;
         archivePanel = archiveView;
+        this.var = 5;
+        array[3] = 5.3;
 	}'
 ]
 
@@ -27,13 +29,33 @@ JavaSmaCCAssignementTest >> setUp [
 ]
 
 { #category : #'as yet unclassified' }
-JavaSmaCCAssignementTest >> testAssertNodeConditionParentNode [
-	(assignementMethod allWithType: FASTJavaAssignementExpression) detect:  [ :assignement | assignement expression name = 'navView' ]
-		 ifFound: [ :assignement | self assert: assignement variable name equals: 'navPanel' ] ifNone: [ self fail ].
-(assignementMethod allWithType: FASTJavaAssignementExpression) detect:  [ :assignement | assignement expression name = 'deviceView' ]
-		 ifFound: [ :assignement | self assert: assignement variable name equals: 'devicePanel' ] ifNone: [ self fail ].
-		(assignementMethod allWithType: FASTJavaAssignementExpression) detect:  [ :assignement | assignement expression name = 'mapView' ]
-		 ifFound: [ :assignement | self assert: assignement variable name equals: 'mapPanel' ] ifNone: [ self fail ].
-		(assignementMethod allWithType: FASTJavaAssignementExpression) detect:  [ :assignement | assignement expression name = 'archiveView' ]
-		 ifFound: [ :assignement | self assert: assignement variable name equals: 'archivePanel' ] ifNone: [ self fail ]
+JavaSmaCCAssignementTest >> testAssignementInArrayAccess [
+	(assignementMethod allWithType: FASTJavaAssignementExpression) detect:  [ :assignement | assignement expression class = FASTJavaFloatLiteral ]
+		 ifFound: [ :assignement | self assert: assignement variable class equals: FASTJavaArrayAccess ] ifNone: [ self fail ].
+]
+
+{ #category : #'as yet unclassified' }
+JavaSmaCCAssignementTest >> testAssignementInFieldAccess [
+	(assignementMethod allWithType: FASTJavaAssignementExpression) detect:  [ :assignement | assignement expression class = FASTJavaIntegerLiteral ]
+		 ifFound: [ :assignement | self assert: assignement variable class equals: FASTJavaFieldAccess ] ifNone: [ self fail ].
+]
+
+{ #category : #'as yet unclassified' }
+JavaSmaCCAssignementTest >> testAssignementParameter [
+	(assignementMethod allWithType: FASTJavaAssignementExpression)
+		detect: [ :assignement | assignement expression name = 'navView' ]
+		ifFound: [ :assignement | self assert: assignement variable name equals: 'navPanel' ]
+		ifNone: [ self fail ].
+	(assignementMethod allWithType: FASTJavaAssignementExpression)
+		detect: [ :assignement | assignement expression name = 'deviceView' ]
+		ifFound: [ :assignement | self assert: assignement variable name equals: 'devicePanel' ]
+		ifNone: [ self fail ].
+	(assignementMethod allWithType: FASTJavaAssignementExpression)
+		detect: [ :assignement | assignement expression name = 'mapView' ]
+		ifFound: [ :assignement | self assert: assignement variable name equals: 'mapPanel' ]
+		ifNone: [ self fail ].
+	(assignementMethod allWithType: FASTJavaAssignementExpression)
+		detect: [ :assignement | assignement expression name = 'archiveView' ]
+		ifFound: [ :assignement | self assert: assignement variable name equals: 'archivePanel' ]
+		ifNone: [ self fail ]
 ]

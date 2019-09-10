@@ -102,7 +102,9 @@ Class {
 		'tModifier',
 		'tWithModifiers',
 		'javaModifier',
-		'javaAnnotationExpression'
+		'javaAnnotationExpression',
+		'tAssigneable',
+		'tWithAssigneable'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -511,6 +513,14 @@ switch (_) {
 ]
 
 { #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaTAssigneable [
+	^ 'You can assign something to me
+example:
+
+this.hello = "hello"'
+]
+
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaTModifier [
 	^ 'I am a modifier in java
 example:
@@ -700,8 +710,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"define class hierarchy"
 
 	super defineHierarchy.
+	
 	javaAssignementExpression --|> expression.
+	javaAssignementExpression --|> tWithAssigneable.
+	
 	javaFieldAccess --|> expression.
+	javaFieldAccess --|> tAssigneable.
+	
 	javaInfixOperation --|> expression.
 	javaBreakStatement --|> statement.
 	javaCaseStatement --|> statementBlock.
@@ -757,7 +772,12 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	
 	javaNewArray --|> javaNewExpression.
 	javaConditionalExpression --|> expression.
+	
 	javaArrayAccess --|> expression.
+	javaArrayAccess --|> tAssigneable.
+	
+	variableExpression --|> tAssigneable.
+	
 	javaThrowStatement --|> statement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
@@ -841,8 +861,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	(((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
 		<>- ((expression property: #javaAssignementExpressionOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
-	(((javaAssignementExpression property: #variable) comment: 'Variable that s being assigned')
-		<>- ((variableExpression property: #javaAssignementVariableOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)'))
 		withoutPrimaryContainer.
@@ -855,20 +873,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation')
 		<>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
 
-	"(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation')
-		<>-* ((expression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
-
-	(((javaMethodInvocation property: #arguments) comment: 'The arguments of the invocation')
-		<>-* ((variableExpression property: #javaMethodInvocationArgumentsOwner) comment: 'The javaMethodInvocation owner (if possible)')) withoutPrimaryContainer.
-"
 	(((javaUnaryExpression property: #expression) comment: 'The affected expression') <>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)'))
 		withoutPrimaryContainer.
 
 	(((javaNewExpression property: #type) comment: 'The type of the array') <>- ((variableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)'))
 		withoutPrimaryContainer.
-	"(((javaNewExpression property: #arguments) comment: 'the arguments of the new expression')
-		<>-* ((expression property: #javaNewExpressionArgumentsOwner) comment: 'The javaNewExpression owner (if possible)')) withoutPrimaryContainer.
-"
+	
 	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
 	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)'))
 		withoutPrimaryContainer.
@@ -986,10 +996,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		withoutPrimaryContainer.
 
 	(((tWithDeclarations property: #declarations) comment: 'The element I declared') <>-* ((tDeclaration property: #javaDeclarationOwner) comment: 'The element that declared me')) withoutPrimaryContainer.
-	
+
 	(((tWithModifiers property: #modifiers) comment: 'My modifiers') <>-* ((tModifier property: #javaModifierOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer.
-	
-	(((javaAnnotationExpression property: #expression) comment: 'My expression (because annotation can be complex)') <>- ((variableExpression property: #variableExpressionOwnerIsAnnotation) comment: 'The annotation that own me')) withoutPrimaryContainer.
+
+	(((javaAnnotationExpression property: #expression) comment: 'My expression (because annotation can be complex)')
+		<>- ((variableExpression property: #variableExpressionOwnerIsAnnotation) comment: 'The annotation that own me')) withoutPrimaryContainer.
+		
+	(((tWithAssigneable property: #variable) comment: 'My modifiers') <>- ((tAssigneable property: #javaVariableAssignementOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer.
 ]
 
 { #category : #definition }
@@ -999,5 +1012,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tWithDeclarations := builder newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
 	
 	tModifier := builder newTraitNamed: #TModifier comment: self commentForJavaTModifier. 
-	tWithModifiers := builder newTraitNamed: #TWithModifiers comment: 'I have modifiers'
+	tWithModifiers := builder newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
+	
+	tAssigneable := builder newTraitNamed: #TAssigneable comment: self commentForJavaTAssigneable. 
+	tWithAssigneable := builder newTraitNamed: #TWithAssigneable comment: 'I have an assigneable'.
 ]

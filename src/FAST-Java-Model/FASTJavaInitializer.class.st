@@ -41,7 +41,6 @@ FASTJavaInitializer >> statementBlock [
 	<generated>
 	<MSEComment: 'Statements block of the behavioural entity'>
 	<MSEProperty: #statementBlock type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #statementBlock ifAbsent: [ nil ]
 ]
 

@@ -32,7 +32,6 @@ FASTJavaMethodEntity >> type [
 	<generated>
 	<MSEComment: 'The type of the method'>
 	<MSEProperty: #type type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #type ifAbsent: [ nil ]
 ]
 

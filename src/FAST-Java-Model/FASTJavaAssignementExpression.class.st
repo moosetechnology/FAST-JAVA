@@ -6,6 +6,8 @@ Contains a referances to an assignee assignee and the expression that's being as
 Class {
 	#name : #FASTJavaAssignementExpression,
 	#superclass : #FASTExpression,
+	#traits : 'FASTJavaTWithAssigneable',
+	#classTraits : 'FASTJavaTWithAssigneable classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -25,7 +27,6 @@ FASTJavaAssignementExpression >> expression [
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
 	<MSEProperty: #expression type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -48,36 +49,4 @@ FASTJavaAssignementExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseGroup with: self expression
-]
-
-{ #category : #accessing }
-FASTJavaAssignementExpression >> variable [
-	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaAssignementVariableOwner"
-
-	<generated>
-	<MSEComment: 'Variable that s being assigned'>
-	<MSEProperty: #variable type: #Object>
-	<package: #'Carrefour-Model'>
-	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
-]
-
-{ #category : #accessing }
-FASTJavaAssignementExpression >> variable: anObject [
-
-	<generated>
-	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self variable.
-		self privateState attributeAt: #variable put: anObject.
-		otherSide javaAssignementVariableOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #variable put: anObject.
-		anObject javaAssignementVariableOwner: self ]
-]
-
-{ #category : #navigation }
-FASTJavaAssignementExpression >> variableGroup [
-	<generated>
-	<navigation: 'Variable'>
-	^ MooseGroup with: self variable
 ]
