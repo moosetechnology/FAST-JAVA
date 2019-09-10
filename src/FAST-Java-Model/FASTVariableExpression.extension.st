@@ -40,7 +40,7 @@ FASTVariableExpression >> javaAssignementVariableOwner [
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaAssignementVariableOwner: anObject [
-
+	
 	<generated>
 	(self privateState attributeAt: #javaAssignementVariableOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

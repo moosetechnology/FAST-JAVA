@@ -1002,7 +1002,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaAnnotationExpression property: #expression) comment: 'My expression (because annotation can be complex)')
 		<>- ((variableExpression property: #variableExpressionOwnerIsAnnotation) comment: 'The annotation that own me')) withoutPrimaryContainer.
 		
-	(((tWithAssigneable property: #variable) comment: 'My modifiers') <>- ((tAssigneable property: #javaVariableAssignementOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer.
+	(((tWithAssigneable property: #variable) comment: 'My variable') <>- ((tAssigneable property: #javaVariableAssignementOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer
 ]
 
 { #category : #definition }
