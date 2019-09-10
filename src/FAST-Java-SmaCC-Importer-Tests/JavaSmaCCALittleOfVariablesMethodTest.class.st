@@ -100,7 +100,7 @@ JavaSmaCCALittleOfVariablesMethodTest >> testVariableDeclaratorVariableParent [
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testVariableDeclaratorVariableType [
-	self assert: aLittleOfVariables statements first declarators first variable class equals: FASTVariableExpression
+	self assert: aLittleOfVariables statements first declarators first variable class equals: FASTJavaVariableExpression
 ]
 
 { #category : #tests }

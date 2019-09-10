@@ -4,6 +4,9 @@ I represent a lambda expression
 Class {
 	#name : #FASTJavaLambdaExpression,
 	#superclass : #FASTExpression,
+	#instVars : [
+		'#parameters => FMMany type: #FASTJavaVariableExpression opposite: #javaLambdaParameterOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -59,15 +62,15 @@ FASTJavaLambdaExpression >> parameters [
 
 	<generated>
 	<MSEComment: 'The parameters of the lambda'>
-	<MSEProperty: #parameters type: #Object>
-	^ self privateState attributeAt: #parameters ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaLambdaParameterOwner: ]
+	^ parameters
 ]
 
 { #category : #accessing }
 FASTJavaLambdaExpression >> parameters: anObject [
 
 	<generated>
-	self parameters value: anObject
+	parameters value: anObject
+
 ]
 
 { #category : #navigation }

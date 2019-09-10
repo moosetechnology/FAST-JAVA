@@ -32,7 +32,7 @@ JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementExpressionParentN
 
 { #category : #'as yet unclassified' }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementExpressionType [
-	self assert: testElement expression class equals: FASTVariableExpression .
+	self assert: testElement expression class equals: FASTJavaVariableExpression .
 
 ]
 

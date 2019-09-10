@@ -3,7 +3,7 @@ todo
 "
 Class {
 	#name : #FASTJavaSeparator,
-	#superclass : #FASTVariableExpression,
+	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
 		'#separator => FMProperty'
 	],
@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 FASTJavaSeparator class >> annotation [
 
-	<MSEClass: #Separator super: #FASTVariableExpression>
+	<MSEClass: #Separator super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

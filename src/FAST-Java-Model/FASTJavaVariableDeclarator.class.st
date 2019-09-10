@@ -12,7 +12,8 @@ Class {
 	#name : #FASTJavaVariableDeclarator,
 	#superclass : #FASTEntitySourceAnchor,
 	#instVars : [
-		'#varDeclOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #declarators'
+		'#varDeclOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #declarators',
+		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -40,6 +41,7 @@ FASTJavaVariableDeclarator >> expression [
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
 	<MSEProperty: #expression type: #Object>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -95,22 +97,15 @@ FASTJavaVariableDeclarator >> variable [
 
 	<generated>
 	<MSEComment: 'Variable that s being declared'>
-	<MSEProperty: #variable type: #Object>
-	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
+	^ variable
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> variable: anObject [
 
 	<generated>
-	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self variable.
-		self privateState attributeAt: #variable put: anObject.
-		otherSide javaVariableDeclaratorOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #variable put: anObject.
-		anObject javaVariableDeclaratorOwner: self ]
+	variable := anObject
+
 ]
 
 { #category : #navigation }

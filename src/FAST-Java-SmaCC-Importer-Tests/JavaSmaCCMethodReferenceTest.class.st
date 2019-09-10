@@ -37,7 +37,7 @@ JavaSmaCCMethodReferenceTest >> testMethodReferenceParentNode [
 
 { #category : #'as yet unclassified' }
 JavaSmaCCMethodReferenceTest >> testMethodReferenceReceiver [
-	self assert: (methodMethodReference allWithType: FASTJavaMethodReference) first receiver class equals: FASTVariableExpression.
+	self assert: (methodMethodReference allWithType: FASTJavaMethodReference) first receiver class equals: FASTJavaVariableExpression.
 ]
 
 { #category : #'as yet unclassified' }

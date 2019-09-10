@@ -49,7 +49,7 @@ JavaSmaCCParamsMethodTest >> testExpressionRHSParent [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testExpressionRHSType [
-	self assert: params statements first expression expression rightOperand class equals: FASTVariableExpression
+	self assert: params statements first expression expression rightOperand class equals: FASTJavaVariableExpression
 ]
 
 { #category : #tests }

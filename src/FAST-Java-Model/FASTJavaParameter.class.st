@@ -3,14 +3,18 @@ I represent a parameter of a method declaration
 "
 Class {
 	#name : #FASTJavaParameter,
-	#superclass : #FASTVariableExpression,
+	#superclass : #FASTJavaVariableExpression,
+	#instVars : [
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
+		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaParameter class >> annotation [
 
-	<MSEClass: #Parameter super: #FASTVariableExpression>
+	<MSEClass: #Parameter super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -22,22 +26,15 @@ FASTJavaParameter >> type [
 
 	<generated>
 	<MSEComment: 'The type of the parameter'>
-	<MSEProperty: #type type: #Object>
-	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+	^ type
 ]
 
 { #category : #accessing }
 FASTJavaParameter >> type: anObject [
 
 	<generated>
-	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self type.
-		self privateState attributeAt: #type put: anObject.
-		otherSide javaParameterTypeOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #type put: anObject.
-		anObject javaParameterTypeOwner: self ]
+	type := anObject
+
 ]
 
 { #category : #navigation }
@@ -53,22 +50,15 @@ FASTJavaParameter >> variable [
 
 	<generated>
 	<MSEComment: 'parameter variable'>
-	<MSEProperty: #variable type: #Object>
-	^ self privateState attributeAt: #variable ifAbsent: [ nil ]
+	^ variable
 ]
 
 { #category : #accessing }
 FASTJavaParameter >> variable: anObject [
 
 	<generated>
-	(self privateState attributeAt: #variable ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self variable.
-		self privateState attributeAt: #variable put: anObject.
-		otherSide javaParameterVariableOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #variable put: anObject.
-		anObject javaParameterVariableOwner: self ]
+	variable := anObject
+
 ]
 
 { #category : #navigation }

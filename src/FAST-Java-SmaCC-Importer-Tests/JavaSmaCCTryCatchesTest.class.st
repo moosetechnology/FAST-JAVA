@@ -49,7 +49,7 @@ JavaSmaCCTryCatchesTest >> testTryCatchCatchParametersName [
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchCatchParametersType [
-	self assert: tryCatchesMethod statements second catches first parameter class equals: FASTVariableExpression
+	self assert: tryCatchesMethod statements second catches first parameter class equals: FASTJavaVariableExpression
 ]
 
 { #category : #tests }

@@ -104,7 +104,8 @@ Class {
 		'javaModifier',
 		'javaAnnotationExpression',
 		'tAssigneable',
-		'tWithAssigneable'
+		'tWithAssigneable',
+		'javaVariableExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -687,6 +688,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaAssertStatement := builder newClassNamed: #AssertStatement comment: self commentForAssertStatement. 
 	
 	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
+	
+	javaVariableExpression := builder newClassNamed: #VariableExpression. 
 			
 	"From FAST"
 	expression := self remoteEntity: #Expression withPrefix: #FAST. 
@@ -710,13 +713,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"define class hierarchy"
 
 	super defineHierarchy.
-	
+
 	javaAssignementExpression --|> expression.
 	javaAssignementExpression --|> tWithAssigneable.
-	
+
 	javaFieldAccess --|> expression.
 	javaFieldAccess --|> tAssigneable.
-	
+
 	javaInfixOperation --|> expression.
 	javaBreakStatement --|> statement.
 	javaCaseStatement --|> statementBlock.
@@ -725,7 +728,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaDoWhileStatement --|> statement.
 	javaFloatLiteral --|> literal.
 	javaForStatement --|> statement.
-	javaIdentifier --|> variableExpression.
+	javaIdentifier --|> javaVariableExpression.
 	javaIfStatement --|> statement.
 	javaIntegerLiteral --|> literal.
 
@@ -735,49 +738,50 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodEntity --|> tWithModifiers.
 
 	javaClassDeclaration --|> statement.
-	javaClassDeclaration --|> tDeclaration. 
+	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
-	javaClassDeclaration --|> #TNamed. 
+	javaClassDeclaration --|> #TNamed.
 
 	javaMethodInvocation --|> expression.
 	javaMethodInvocation --|> #TWithArguments.
 
 	javaNullLiteral --|> nullPointerLiteral.
-	javaSeparator --|> variableExpression.
-	
+	javaSeparator --|> javaVariableExpression.
+
 	javaStringLiteral --|> stringLiteral.
-	
+
 	javaSwitchStatement --|> statement.
-	javaThis --|> variableExpression.
-	
+	javaThis --|> javaVariableExpression.
+
 	javaVarDeclStatement --|> statement.
 	javaVarDeclStatement --|> tDeclaration.
-	
+
 	javaVariableDeclarator --|> entitySourceAnchor.
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamed.
 	javaCastExpression --|> expression.
-	
-	javaClassProperty --|> variableExpression.
-	
+
+	javaClassProperty --|> javaVariableExpression.
+
 	javaTryCatch --|> statement.
 	javaForEachStatement --|> statement.
 	javaUnaryExpression --|> expression.
-	
+
 	javaNewExpression --|> expression.
 	javaNewExpression --|> #TWithArguments.
-	
+
 	javaNewClassExpression --|> javaNewExpression.
-	
+
 	javaNewArray --|> javaNewExpression.
 	javaConditionalExpression --|> expression.
-	
+
 	javaArrayAccess --|> expression.
 	javaArrayAccess --|> tAssigneable.
-	
-	variableExpression --|> tAssigneable.
-	
+
+	javaVariableExpression --|> variableExpression.
+	javaVariableExpression --|> tAssigneable.
+
 	javaThrowStatement --|> statement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
@@ -791,19 +795,19 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaOuterThis --|> expression.
 
 	javaCatchPartStatement --|> statement.
-	
+
 	javaLambdaExpression --|> expression.
-	
-	javaMethodReference --|> variableExpression.
+
+	javaMethodReference --|> javaVariableExpression.
 	javaSynchronizedStatement --|> statement.
 
 	"types name"
 	javaTypeName --|> #TNamed.
 	javaTypeName --|> expression.
-	javaQualifiedTypeName --|> javaTypeName. 
+	javaQualifiedTypeName --|> javaTypeName.
 
 	"types"
-	javaTypeExpression --|> variableExpression.
+	javaTypeExpression --|> javaVariableExpression.
 	javaArrayTypeExpression --|> javaTypeExpression.
 	javaClassTypeExpression --|> javaTypeExpression.
 	javaPrimitiveTypeExpression --|> javaTypeExpression.
@@ -818,14 +822,14 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 
-	javaParameterExpression --|> variableExpression.
+	javaParameterExpression --|> javaVariableExpression.
 	javaAssertStatement --|> statement.
-	
+
 	javaModifier --|> tModifier.
 	javaModifier --|> expression.
-	
+
 	javaAnnotationExpression --|> expression.
-	javaAnnotationExpression --|> tModifier.
+	javaAnnotationExpression --|> tModifier
 ]
 
 { #category : #definition }
@@ -857,7 +861,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
 		<>- ((expression property: #javaVariableDeclaratorExpressionOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 	(((javaVariableDeclarator property: #variable) comment: 'Variable that s being declared')
-		<>- ((variableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
 		<>- ((expression property: #javaAssignementExpressionOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
@@ -865,9 +869,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)'))
 		withoutPrimaryContainer.
 	(((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast')
-		<>- ((variableExpression property: #javaCastExpressionTypeOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaCastExpressionTypeOwner) comment: 'The javaCastExpression owner (if possible)')) withoutPrimaryContainer.
 
-	(((javaClassProperty property: #type) comment: 'The owner type') <>- ((variableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)'))
+	(((javaClassProperty property: #type) comment: 'The owner type') <>- ((javaVariableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)'))
 		withoutPrimaryContainer.
 
 	(((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation')
@@ -876,14 +880,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaUnaryExpression property: #expression) comment: 'The affected expression') <>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)'))
 		withoutPrimaryContainer.
 
-	(((javaNewExpression property: #type) comment: 'The type of the array') <>- ((variableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)'))
+	(((javaNewExpression property: #type) comment: 'The type of the array') <>- ((javaVariableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)'))
 		withoutPrimaryContainer.
 	
 	(((javaArrayAccess property: #expression) comment: 'The accessed index') <>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)')) withoutPrimaryContainer.
 	(((javaArrayAccess property: #array) comment: 'Name of accessed field') <>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)'))
 		withoutPrimaryContainer.
 
-	(((javaOuterThis property: #type) comment: 'The accessed type') <>- ((variableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)')) withoutPrimaryContainer.
+	(((javaOuterThis property: #type) comment: 'The accessed type') <>- ((javaVariableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaThrowStatement property: #expression) comment: 'The throwed element') <>- ((expression property: #javaThrowStatementOwner) comment: 'The javaThrowStatement owner (if possible)'))
 		withoutPrimaryContainer.
@@ -896,14 +900,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaForEachStatement property: #list) comment: 'The list the for each statement iterate on')
 		<>- ((expression property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
 	(((javaForEachStatement property: #fieldname) comment: 'The name of the created local variable')
-		<>- ((variableExpression property: #javaForEachStatementFieldNameOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaForEachStatementFieldNameOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
 	(((javaForEachStatement property: #type) comment: 'The name of the type of the created local variable')
-		<>- ((variableExpression property: #javaForEachStatementTypeOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaForEachStatementTypeOwner) comment: 'The javaForEachStatement owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaCatchPartStatement property: #body) comment: 'The body of the Catch part statement')
 		<>- ((statement property: #javaCatchPartStatementOwner) comment: 'The javaCatchPartStatementOwner owner (if possible)')) withoutPrimaryContainer.
 	(((javaCatchPartStatement property: #parameter) comment: 'The parameter of the catch part')
-		<>- ((variableExpression property: #javaCatchParameterOwnler) comment: 'The javaCatchPartParameterOwner owner (if possible)')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaCatchParameterOwnler) comment: 'The javaCatchPartParameterOwner owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaTryCatch property: #try) comment: 'I represent the ''try'' part of the TryCatch Statement') <>- ((statement property: #javaTryCatchOwner) comment: 'The javaTryCatch owner (if possible)'))
 		withoutPrimaryContainer.
@@ -953,26 +957,26 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda')
 		<>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')) withoutPrimaryContainer.
 	(((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda')
-		<>-* ((variableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')) withoutPrimaryContainer.
+		<>-* ((javaVariableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaMethodReference property: #receiver) comment: 'The method of the reference')
-		<>- ((variableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)')) withoutPrimaryContainer.
 
 	(((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized')
 		<>- ((expression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
 	(((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized')
 		<>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)')) withoutPrimaryContainer.
 
-	(((javaMethodEntity property: #type) comment: 'The type of the method') <>- ((variableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)'))
+	(((javaMethodEntity property: #type) comment: 'The type of the method') <>- ((javaVariableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)'))
 		withoutPrimaryContainer.
 
-	(((javaParameterExpression property: #type) comment: 'The type of the parameter') <>- ((variableExpression property: #javaParameterTypeOwner) comment: 'The variable expression owner (if possible)'))
+	(((javaParameterExpression property: #type) comment: 'The type of the parameter') <>- ((javaVariableExpression property: #javaParameterTypeOwner) comment: 'The variable expression owner (if possible)'))
 		withoutPrimaryContainer.
-	(((javaParameterExpression property: #variable) comment: 'parameter variable') <>- ((variableExpression property: #javaParameterVariableOwner) comment: 'The variable expression owner (if possible)'))
+	(((javaParameterExpression property: #variable) comment: 'parameter variable') <>- ((javaVariableExpression property: #javaParameterVariableOwner) comment: 'The variable expression owner (if possible)'))
 		withoutPrimaryContainer.
 
 	(((javaVarDeclStatement property: #type) comment: 'The type of the declared variables')
-		<>- ((variableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaArrayTypeExpression property: #baseType) comment: 'The type of the array') <>- ((javaTypeName property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)'))
 		withoutPrimaryContainer.
@@ -1000,7 +1004,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((tWithModifiers property: #modifiers) comment: 'My modifiers') <>-* ((tModifier property: #javaModifierOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer.
 
 	(((javaAnnotationExpression property: #expression) comment: 'My expression (because annotation can be complex)')
-		<>- ((variableExpression property: #variableExpressionOwnerIsAnnotation) comment: 'The annotation that own me')) withoutPrimaryContainer.
+		<>- ((javaVariableExpression property: #javaVariableExpressionOwnerIsAnnotation) comment: 'The annotation that own me')) withoutPrimaryContainer.
 		
 	(((tWithAssigneable property: #variable) comment: 'My variable') <>- ((tAssigneable property: #javaVariableAssignementOwner) comment: 'The owner of the modifier')) withoutPrimaryContainer
 ]

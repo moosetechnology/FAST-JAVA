@@ -22,7 +22,7 @@ JavaSmaCCMethodModifiersTest >> setUp [
 
 { #category : #'as yet unclassified' }
 JavaSmaCCMethodModifiersTest >> testMethodAnnotationExpression [
-	self assert: (methodWithModifiers allWithType: FASTJavaAnnotation) anyOne expression class equals: FASTVariableExpression
+	self assert: (methodWithModifiers allWithType: FASTJavaAnnotation) anyOne expression class equals: FASTJavaVariableExpression
 ]
 
 { #category : #'as yet unclassified' }

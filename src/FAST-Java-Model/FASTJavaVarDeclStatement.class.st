@@ -14,7 +14,8 @@ Class {
 	#traits : 'FASTJavaTDeclaration',
 	#classTraits : 'FASTJavaTDeclaration classTrait',
 	#instVars : [
-		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner'
+		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner',
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -71,22 +72,15 @@ FASTJavaVarDeclStatement >> type [
 
 	<generated>
 	<MSEComment: 'The type of the declared variables'>
-	<MSEProperty: #type type: #Object>
-	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+	^ type
 ]
 
 { #category : #accessing }
 FASTJavaVarDeclStatement >> type: anObject [
 
 	<generated>
-	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self type.
-		self privateState attributeAt: #type put: anObject.
-		otherSide javaVarDeclTypeOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #type put: anObject.
-		anObject javaVarDeclTypeOwner: self ]
+	type := anObject
+
 ]
 
 { #category : #navigation }

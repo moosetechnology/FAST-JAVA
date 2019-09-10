@@ -6,6 +6,9 @@ Class {
 	#superclass : #FASTNamedBehaviouralEntity,
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FamixTWithImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FamixTWithImmediateSource classTrait',
+	#instVars : [
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -31,22 +34,15 @@ FASTJavaMethodEntity >> type [
 
 	<generated>
 	<MSEComment: 'The type of the method'>
-	<MSEProperty: #type type: #Object>
-	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+	^ type
 ]
 
 { #category : #accessing }
 FASTJavaMethodEntity >> type: anObject [
 
 	<generated>
-	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self type.
-		self privateState attributeAt: #type put: anObject.
-		otherSide javaMethodTypeOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #type put: anObject.
-		anObject javaMethodTypeOwner: self ]
+	type := anObject
+
 ]
 
 { #category : #navigation }

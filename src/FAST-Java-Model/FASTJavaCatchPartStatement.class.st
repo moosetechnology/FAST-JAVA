@@ -5,6 +5,7 @@ Class {
 	#name : #FASTJavaCatchPartStatement,
 	#superclass : #FASTStatement,
 	#instVars : [
+		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler',
 		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -63,22 +64,15 @@ FASTJavaCatchPartStatement >> parameter [
 
 	<generated>
 	<MSEComment: 'The parameter of the catch part'>
-	<MSEProperty: #parameter type: #Object>
-	^ self privateState attributeAt: #parameter ifAbsent: [ nil ]
+	^ parameter
 ]
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> parameter: anObject [
 
 	<generated>
-	(self privateState attributeAt: #parameter ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self parameter.
-		self privateState attributeAt: #parameter put: anObject.
-		otherSide javaCatchParameterOwnler: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #parameter put: anObject.
-		anObject javaCatchParameterOwnler: self ]
+	parameter := anObject
+
 ]
 
 { #category : #navigation }

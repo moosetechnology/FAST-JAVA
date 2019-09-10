@@ -3,7 +3,7 @@ I represent a type
 "
 Class {
 	#name : #FASTJavaTypeExpression,
-	#superclass : #FASTVariableExpression,
+	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
 		'#javaClassDeclarationInterfaceOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
 		'#javaClassDeclarationSuperclassOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #superclass'
@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FASTJavaTypeExpression class >> annotation [
 
-	<MSEClass: #TypeExpression super: #FASTVariableExpression>
+	<MSEClass: #TypeExpression super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

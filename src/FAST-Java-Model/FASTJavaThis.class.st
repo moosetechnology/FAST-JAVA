@@ -3,14 +3,14 @@ A FASTJavaThis corresponds to 'this' in Java
 "
 Class {
 	#name : #FASTJavaThis,
-	#superclass : #FASTVariableExpression,
+	#superclass : #FASTJavaVariableExpression,
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaThis class >> annotation [
 
-	<MSEClass: #This super: #FASTVariableExpression>
+	<MSEClass: #This super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

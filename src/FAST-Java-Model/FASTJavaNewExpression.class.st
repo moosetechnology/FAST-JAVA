@@ -10,6 +10,9 @@ Class {
 	#superclass : #FASTExpression,
 	#traits : 'FASTTWithArguments',
 	#classTraits : 'FASTTWithArguments classTrait',
+	#instVars : [
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -28,22 +31,15 @@ FASTJavaNewExpression >> type [
 
 	<generated>
 	<MSEComment: 'The type of the array'>
-	<MSEProperty: #type type: #Object>
-	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+	^ type
 ]
 
 { #category : #accessing }
 FASTJavaNewExpression >> type: anObject [
 
 	<generated>
-	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self type.
-		self privateState attributeAt: #type put: anObject.
-		otherSide javaNewExpressionOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #type put: anObject.
-		anObject javaNewExpressionOwner: self ]
+	type := anObject
+
 ]
 
 { #category : #navigation }

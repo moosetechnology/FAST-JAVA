@@ -4,6 +4,9 @@ todo
 Class {
 	#name : #FASTJavaCastExpression,
 	#superclass : #FASTExpression,
+	#instVars : [
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -53,22 +56,15 @@ FASTJavaCastExpression >> type [
 
 	<generated>
 	<MSEComment: 'The type in witch the expression will be cast'>
-	<MSEProperty: #type type: #Object>
-	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+	^ type
 ]
 
 { #category : #accessing }
 FASTJavaCastExpression >> type: anObject [
 
 	<generated>
-	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self type.
-		self privateState attributeAt: #type put: anObject.
-		otherSide javaCastExpressionTypeOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #type put: anObject.
-		anObject javaCastExpressionTypeOwner: self ]
+	type := anObject
+
 ]
 
 { #category : #navigation }

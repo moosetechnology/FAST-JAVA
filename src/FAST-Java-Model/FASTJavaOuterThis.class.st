@@ -8,6 +8,9 @@ hello(MyClass.this)
 Class {
 	#name : #FASTJavaOuterThis,
 	#superclass : #FASTExpression,
+	#instVars : [
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -26,22 +29,15 @@ FASTJavaOuterThis >> type [
 
 	<generated>
 	<MSEComment: 'The accessed type'>
-	<MSEProperty: #type type: #Object>
-	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+	^ type
 ]
 
 { #category : #accessing }
 FASTJavaOuterThis >> type: anObject [
 
 	<generated>
-	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self type.
-		self privateState attributeAt: #type put: anObject.
-		otherSide javaOuterThisOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #type put: anObject.
-		anObject javaOuterThisOwner: self ]
+	type := anObject
+
 ]
 
 { #category : #navigation }

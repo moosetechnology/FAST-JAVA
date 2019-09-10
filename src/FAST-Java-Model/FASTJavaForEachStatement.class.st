@@ -9,6 +9,10 @@ for(Patate p : list) {
 Class {
 	#name : #FASTJavaForEachStatement,
 	#superclass : #FASTStatement,
+	#instVars : [
+		'#fieldname => FMOne type: #FASTJavaVariableExpression opposite: #javaForEachStatementFieldNameOwner',
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaForEachStatementTypeOwner'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -58,22 +62,15 @@ FASTJavaForEachStatement >> fieldname [
 
 	<generated>
 	<MSEComment: 'The name of the created local variable'>
-	<MSEProperty: #fieldname type: #Object>
-	^ self privateState attributeAt: #fieldname ifAbsent: [ nil ]
+	^ fieldname
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> fieldname: anObject [
 
 	<generated>
-	(self privateState attributeAt: #fieldname ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self fieldname.
-		self privateState attributeAt: #fieldname put: anObject.
-		otherSide javaForEachStatementFieldNameOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #fieldname put: anObject.
-		anObject javaForEachStatementFieldNameOwner: self ]
+	fieldname := anObject
+
 ]
 
 { #category : #navigation }
@@ -120,22 +117,15 @@ FASTJavaForEachStatement >> type [
 
 	<generated>
 	<MSEComment: 'The name of the type of the created local variable'>
-	<MSEProperty: #type type: #Object>
-	^ self privateState attributeAt: #type ifAbsent: [ nil ]
+	^ type
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> type: anObject [
 
 	<generated>
-	(self privateState attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self type.
-		self privateState attributeAt: #type put: anObject.
-		otherSide javaForEachStatementTypeOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #type put: anObject.
-		anObject javaForEachStatementTypeOwner: self ]
+	type := anObject
+
 ]
 
 { #category : #navigation }

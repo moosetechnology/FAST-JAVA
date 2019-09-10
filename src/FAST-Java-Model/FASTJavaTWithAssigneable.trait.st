@@ -4,7 +4,7 @@ I have an assigneable
 Trait {
 	#name : #FASTJavaTWithAssigneable,
 	#instVars : [
-		'#variable => FMMany type: #FASTJavaTAssigneable opposite: #javaVariableAssignementOwner'
+		'#variable => FMOne type: #FASTJavaTAssigneable opposite: #javaVariableAssignementOwner'
 	],
 	#category : #'FAST-Java-Model-Traits'
 }
@@ -23,7 +23,7 @@ FASTJavaTWithAssigneable >> variable [
 	"Relation named: #variable type: #FASTJavaTAssigneable opposite: #javaVariableAssignementOwner"
 
 	<generated>
-	<MSEComment: 'My modifiers'>
+	<MSEComment: 'My variable'>
 	^ variable
 ]
 

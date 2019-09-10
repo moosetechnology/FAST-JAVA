@@ -623,7 +623,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModifier: aModifier [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
-	currentFASTEntity := self create: FASTVariableExpression from: aName.
+	currentFASTEntity := self create: FASTJavaVariableExpression from: aName.
 	currentFASTEntity name: aName name value.
 	^ currentFASTEntity
 ]
@@ -963,9 +963,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclar
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableName: aVariableName [
-	currentFASTEntity := self addToModel: FASTVariableExpression new.
+	currentFASTEntity := self create: FASTJavaVariableExpression from: aVariableName.
 	currentFASTEntity name: aVariableName name value.
-	self generalVisitActionForNodeEntity: aVariableName.
 	^ currentFASTEntity
 ]
 

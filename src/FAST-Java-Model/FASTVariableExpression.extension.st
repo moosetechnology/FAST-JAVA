@@ -1,58 +1,6 @@
 Extension { #name : #FASTVariableExpression }
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTVariableExpression >> javaAssignementExpressioOwner [
-	"Relation named: #javaAssignementExpressioOwner type: #FASTAssignementExpression opposite: #variable"
-
-	<generated>
-	<MSEComment: 'The javaVariableDeclarator owner (if possible)'>
-	<container>
-	<MSEProperty: #javaAssignementExpressioOwner type: #Object>
-	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaAssignementExpressioOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTVariableExpression >> javaAssignementExpressioOwner: anObject [
-
-	<generated>
-	(self privateState attributeAt: #javaAssignementExpressioOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaAssignementExpressioOwner.
-		self privateState attributeAt: #javaAssignementExpressioOwner put: anObject.
-		otherSide variable: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #javaAssignementExpressioOwner put: anObject.
-		anObject variable: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTVariableExpression >> javaAssignementVariableOwner [
-	"Relation named: #javaAssignementVariableOwner type: #FASTAssignementExpression opposite: #variable"
-
-	<generated>
-	<MSEComment: 'The javaVariableDeclarator owner (if possible)'>
-	<container>
-	<MSEProperty: #javaAssignementVariableOwner type: #Object>
-	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaAssignementVariableOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTVariableExpression >> javaAssignementVariableOwner: anObject [
-	
-	<generated>
-	(self privateState attributeAt: #javaAssignementVariableOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaAssignementVariableOwner.
-		self privateState attributeAt: #javaAssignementVariableOwner put: anObject.
-		otherSide variable: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #javaAssignementVariableOwner put: anObject.
-		anObject variable: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTVariableExpression >> javaCastExpressionTypeOwner [
 	"Relation named: #javaCastExpressionTypeOwner type: #FASTCastExpression opposite: #type"
 

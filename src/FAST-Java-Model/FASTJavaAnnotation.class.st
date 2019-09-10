@@ -10,6 +10,9 @@ Class {
 	#superclass : #FASTExpression,
 	#traits : 'FASTJavaTModifier',
 	#classTraits : 'FASTJavaTModifier classTrait',
+	#instVars : [
+		'#expression => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableExpressionOwnerIsAnnotation'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -31,26 +34,19 @@ FASTJavaAnnotation class >> requirements [
 
 { #category : #accessing }
 FASTJavaAnnotation >> expression [
-	"Relation named: #expression type: #FASTJavaVariableExpression opposite: #variableExpressionOwnerIsAnnotation"
+	"Relation named: #expression type: #FASTJavaVariableExpression opposite: #javaVariableExpressionOwnerIsAnnotation"
 
 	<generated>
 	<MSEComment: 'My expression (because annotation can be complex)'>
-	<MSEProperty: #expression type: #Object>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ expression
 ]
 
 { #category : #accessing }
 FASTJavaAnnotation >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
-		otherSide variableExpressionOwnerIsAnnotation: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
-		anObject variableExpressionOwnerIsAnnotation: self ]
+	expression := anObject
+
 ]
 
 { #category : #navigation }
