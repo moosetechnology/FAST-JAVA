@@ -1,5 +1,10 @@
 "
-todo
+I represent a Float Literal
+example:
+
+float f = 12.3;
+
+12.3 is the float literal
 "
 Class {
 	#name : #FASTJavaFloatLiteral,

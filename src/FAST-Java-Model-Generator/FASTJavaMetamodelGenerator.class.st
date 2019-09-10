@@ -300,8 +300,12 @@ FASTJavaMetamodelGenerator >> commentForJavaFieldAccess [
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaFloatLiteral [
-	self flag: #todo.
-	^ 'todo'
+	^ 'I represent a Float Literal
+example:
+
+float f = 12.3;
+
+12.3 is the float literal'
 ]
 
 { #category : #comments }
@@ -836,9 +840,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((variableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
-		<>- ((expression property: #javaAssignementExpressioOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
+		<>- ((expression property: #javaAssignementExpressionOwner) comment: 'The javaAssignementExpression owner (if possible)')) withoutPrimaryContainer.
 	(((javaAssignementExpression property: #variable) comment: 'Variable that s being assigned')
-		<>- ((variableExpression property: #javaAssignementExpressioOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
+		<>- ((variableExpression property: #javaAssignementVariableOwner) comment: 'The javaVariableDeclarator owner (if possible)')) withoutPrimaryContainer.
 
 	(((javaCastExpression property: #expression) comment: 'The expression to cast') <>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)'))
 		withoutPrimaryContainer.

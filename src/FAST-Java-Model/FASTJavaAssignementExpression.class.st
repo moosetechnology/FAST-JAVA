@@ -20,7 +20,7 @@ FASTJavaAssignementExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaAssignementExpressioOwner"
+	"Relation named: #expression type: #FASTJavaExpression opposite: #javaAssignementExpressionOwner"
 
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
@@ -37,10 +37,10 @@ FASTJavaAssignementExpression >> expression: anObject [
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
 		self privateState attributeAt: #expression put: anObject.
-		otherSide javaAssignementExpressioOwner: nil ]
+		otherSide javaAssignementExpressionOwner: nil ]
 	ifNotNil: [ 
 		self privateState attributeAt: #expression put: anObject.
-		anObject javaAssignementExpressioOwner: self ]
+		anObject javaAssignementExpressionOwner: self ]
 ]
 
 { #category : #navigation }
@@ -52,7 +52,7 @@ FASTJavaAssignementExpression >> expressionGroup [
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> variable [
-	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaAssignementExpressioOwner"
+	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaAssignementVariableOwner"
 
 	<generated>
 	<MSEComment: 'Variable that s being assigned'>
@@ -69,10 +69,10 @@ FASTJavaAssignementExpression >> variable: anObject [
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self variable.
 		self privateState attributeAt: #variable put: anObject.
-		otherSide javaAssignementExpressioOwner: nil ]
+		otherSide javaAssignementVariableOwner: nil ]
 	ifNotNil: [ 
 		self privateState attributeAt: #variable put: anObject.
-		anObject javaAssignementExpressioOwner: self ]
+		anObject javaAssignementVariableOwner: self ]
 ]
 
 { #category : #navigation }

@@ -149,13 +149,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAssertStatement: anAssertStatement [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: aVariableDeclaration [
-	currentFASTEntity := self
-		addToModel: FASTJavaAssignementExpression new.
-	self generalVisitActionForNodeEntity: aVariableDeclaration.
-	currentFASTEntity
-		variable: (self clone accept: aVariableDeclaration variable).
-	currentFASTEntity
-		expression: (self clone accept: aVariableDeclaration value).
+	currentFASTEntity := self create: FASTJavaAssignementExpression from: aVariableDeclaration.
+	currentFASTEntity variable: (self clone accept: aVariableDeclaration variable).
+	currentFASTEntity expression: (self clone accept: aVariableDeclaration value).
 	^ currentFASTEntity
 ]
 

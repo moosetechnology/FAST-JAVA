@@ -332,6 +332,32 @@ FASTExpression >> javaAssignementExpressioOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaAssignementExpressionOwner [
+	"Relation named: #javaAssignementExpressionOwner type: #FASTAssignementExpression opposite: #expression"
+
+	<generated>
+	<MSEComment: 'The javaAssignementExpression owner (if possible)'>
+	<container>
+	<MSEProperty: #javaAssignementExpressionOwner type: #Object>
+	<package: #'FAST-Java-Model'>
+	^ self privateState attributeAt: #javaAssignementExpressionOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTExpression >> javaAssignementExpressionOwner: anObject [
+
+	<generated>
+	(self privateState attributeAt: #javaAssignementExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaAssignementExpressionOwner.
+		self privateState attributeAt: #javaAssignementExpressionOwner put: anObject.
+		otherSide expression: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #javaAssignementExpressionOwner put: anObject.
+		anObject expression: self ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaCastExpressionOwner [
 	"Relation named: #javaCastExpressionOwner type: #FASTCastExpression opposite: #expression"
 
