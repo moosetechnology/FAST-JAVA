@@ -7,6 +7,7 @@ FASTStatementBlock >> javaInitializerOwner [
 	<generated>
 	<MSEComment: 'Behavioural entity containing the statement block.'>
 	<container>
+	<derived>
 	<MSEProperty: #javaInitializerOwner type: #Object>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
@@ -33,6 +34,7 @@ FASTStatementBlock >> javaLambdaExpressionOwner [
 	<generated>
 	<MSEComment: 'The statementBlock owner (if possible)'>
 	<container>
+	<derived>
 	<MSEProperty: #javaLambdaExpressionOwner type: #Object>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
@@ -59,6 +61,7 @@ FASTStatementBlock >> javaSynchronizedStatementOwner [
 	<generated>
 	<MSEComment: 'The owner of the synchronized block (if possible)'>
 	<container>
+	<derived>
 	<MSEProperty: #javaSynchronizedStatementOwner type: #Object>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]

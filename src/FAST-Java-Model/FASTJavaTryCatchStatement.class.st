@@ -44,6 +44,7 @@ FASTJavaTryCatchStatement >> catches [
 
 	<generated>
 	<MSEComment: 'I contains all the catch statements'>
+	<derived>
 	^ catches
 ]
 

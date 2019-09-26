@@ -30,6 +30,7 @@ FASTJavaTWithModifiers >> modifiers [
 
 	<generated>
 	<MSEComment: 'My modifiers'>
+	<derived>
 	^ modifiers
 ]
 

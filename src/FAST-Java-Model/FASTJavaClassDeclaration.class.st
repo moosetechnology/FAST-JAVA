@@ -50,6 +50,7 @@ FASTJavaClassDeclaration >> interfaces [
 
 	<generated>
 	<MSEComment: 'My superclass'>
+	<derived>
 	^ interfaces
 ]
 

@@ -48,6 +48,7 @@ FASTJavaVarDeclStatement >> declarators [
 
 	<generated>
 	<MSEComment: 'The declarators for the type'>
+	<derived>
 	^ declarators
 ]
 

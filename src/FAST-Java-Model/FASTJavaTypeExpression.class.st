@@ -59,6 +59,7 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver [
 	<generated>
 	<MSEComment: 'The class that own me'>
 	<container>
+	<derived>
 	^ javaClassDeclarationSuperclassOwnver
 ]
 

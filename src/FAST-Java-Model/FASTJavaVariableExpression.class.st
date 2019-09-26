@@ -46,6 +46,7 @@ FASTJavaVariableExpression >> javaCastExpressionTypeOwner [
 	<generated>
 	<MSEComment: 'The javaCastExpression owner (if possible)'>
 	<container>
+	<derived>
 	^ javaCastExpressionTypeOwner
 ]
 
@@ -71,6 +72,7 @@ FASTJavaVariableExpression >> javaCatchParameterOwnler [
 	<generated>
 	<MSEComment: 'The javaCatchPartParameterOwner owner (if possible)'>
 	<container>
+	<derived>
 	^ javaCatchParameterOwnler
 ]
 
@@ -96,6 +98,7 @@ FASTJavaVariableExpression >> javaClassPropertyOwner [
 	<generated>
 	<MSEComment: 'The javaClassProperty owner (if possible)'>
 	<container>
+	<derived>
 	^ javaClassPropertyOwner
 ]
 
@@ -121,6 +124,7 @@ FASTJavaVariableExpression >> javaForEachStatementFieldNameOwner [
 	<generated>
 	<MSEComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
+	<derived>
 	^ javaForEachStatementFieldNameOwner
 ]
 
@@ -146,6 +150,7 @@ FASTJavaVariableExpression >> javaForEachStatementTypeOwner [
 	<generated>
 	<MSEComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
+	<derived>
 	^ javaForEachStatementTypeOwner
 ]
 
@@ -196,6 +201,7 @@ FASTJavaVariableExpression >> javaMethodReferenceOwner [
 	<generated>
 	<MSEComment: 'The owner of the method reference (if possible)'>
 	<container>
+	<derived>
 	^ javaMethodReferenceOwner
 ]
 
@@ -221,6 +227,7 @@ FASTJavaVariableExpression >> javaMethodTypeOwner [
 	<generated>
 	<MSEComment: 'The variable expression owner (if possible)'>
 	<container>
+	<derived>
 	^ javaMethodTypeOwner
 ]
 
@@ -246,6 +253,7 @@ FASTJavaVariableExpression >> javaNewExpressionOwner [
 	<generated>
 	<MSEComment: 'The javaNewExpression owner (if possible)'>
 	<container>
+	<derived>
 	^ javaNewExpressionOwner
 ]
 
@@ -271,6 +279,7 @@ FASTJavaVariableExpression >> javaOuterThisOwner [
 	<generated>
 	<MSEComment: 'The javaOuterThis owner (if possible)'>
 	<container>
+	<derived>
 	^ javaOuterThisOwner
 ]
 
@@ -296,6 +305,7 @@ FASTJavaVariableExpression >> javaParameterTypeOwner [
 	<generated>
 	<MSEComment: 'The variable expression owner (if possible)'>
 	<container>
+	<derived>
 	^ javaParameterTypeOwner
 ]
 
@@ -321,6 +331,7 @@ FASTJavaVariableExpression >> javaParameterVariableOwner [
 	<generated>
 	<MSEComment: 'The variable expression owner (if possible)'>
 	<container>
+	<derived>
 	^ javaParameterVariableOwner
 ]
 
@@ -346,6 +357,7 @@ FASTJavaVariableExpression >> javaVarDeclTypeOwner [
 	<generated>
 	<MSEComment: 'The variable expression owner (if possible)'>
 	<container>
+	<derived>
 	^ javaVarDeclTypeOwner
 ]
 
@@ -371,6 +383,7 @@ FASTJavaVariableExpression >> javaVariableDeclaratorOwner [
 	<generated>
 	<MSEComment: 'The javaVariableDeclarator owner (if possible)'>
 	<container>
+	<derived>
 	^ javaVariableDeclaratorOwner
 ]
 
@@ -396,6 +409,7 @@ FASTJavaVariableExpression >> javaVariableExpressionOwnerIsAnnotation [
 	<generated>
 	<MSEComment: 'The annotation that own me'>
 	<container>
+	<derived>
 	^ javaVariableExpressionOwnerIsAnnotation
 ]
 

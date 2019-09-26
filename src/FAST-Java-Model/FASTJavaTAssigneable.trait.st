@@ -28,6 +28,7 @@ FASTJavaTAssigneable >> javaVariableAssignementOwner [
 	<generated>
 	<MSEComment: 'The owner of the modifier'>
 	<container>
+	<derived>
 	^ javaVariableAssignementOwner
 ]
 

@@ -33,6 +33,7 @@ FASTJavaStringLiteral >> javaStringAssertStatementOwner [
 	<generated>
 	<MSEComment: 'the assert that can raised me'>
 	<container>
+	<derived>
 	^ javaStringAssertStatementOwner
 ]
 

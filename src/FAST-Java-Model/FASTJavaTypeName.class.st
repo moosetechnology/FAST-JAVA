@@ -7,9 +7,8 @@ Class {
 	#traits : 'FamixTNamed',
 	#classTraits : 'FamixTNamed classTrait',
 	#instVars : [
-		'#javaArrayTypeOwner => FMOne type: #FASTJavaArrayTypeExpression opposite: #baseType',
-		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName',
-		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace'
+		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
+		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -27,32 +26,7 @@ FASTJavaTypeName class >> annotation [
 FASTJavaTypeName class >> requirements [
 
 	<generated>
-	^ { FASTJavaArrayTypeExpression. FASTJavaClassTypeExpression. FASTJavaQualifiedTypeName }
-]
-
-{ #category : #accessing }
-FASTJavaTypeName >> javaArrayTypeOwner [
-	"Relation named: #javaArrayTypeOwner type: #FASTJavaArrayTypeExpression opposite: #baseType"
-
-	<generated>
-	<MSEComment: 'The variable expression owner (if possible)'>
-	<container>
-	^ javaArrayTypeOwner
-]
-
-{ #category : #accessing }
-FASTJavaTypeName >> javaArrayTypeOwner: anObject [
-
-	<generated>
-	javaArrayTypeOwner := anObject
-
-]
-
-{ #category : #navigation }
-FASTJavaTypeName >> javaArrayTypeOwnerGroup [
-	<generated>
-	<navigation: 'JavaArrayTypeOwner'>
-	^ MooseGroup with: self javaArrayTypeOwner
+	^ { FASTJavaClassTypeExpression. FASTJavaQualifiedTypeName }
 ]
 
 { #category : #accessing }
@@ -62,6 +36,7 @@ FASTJavaTypeName >> javaTypeNameQualify [
 	<generated>
 	<MSEComment: 'the name I qualify'>
 	<container>
+	<derived>
 	^ javaTypeNameQualify
 ]
 
@@ -87,6 +62,7 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
 	<generated>
 	<MSEComment: 'The type expression that own me'>
 	<container>
+	<derived>
 	^ javaTypeNameTypeExpressionOwner
 ]
 

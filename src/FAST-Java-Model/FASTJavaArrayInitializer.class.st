@@ -37,6 +37,7 @@ FASTJavaArrayInitializer >> initializers [
 
 	<generated>
 	<MSEComment: 'My initializers'>
+	<derived>
 	<MSEProperty: #initializers type: #Object>
 	^ self privateState attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaArrayInitializers: ]
 ]

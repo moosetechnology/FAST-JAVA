@@ -30,6 +30,7 @@ FASTJavaTWithDeclarations >> declarations [
 
 	<generated>
 	<MSEComment: 'The element I declared'>
+	<derived>
 	^ declarations
 ]
 

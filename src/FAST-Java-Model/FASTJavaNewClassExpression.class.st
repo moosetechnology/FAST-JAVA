@@ -41,8 +41,8 @@ FASTJavaNewClassExpression >> declarations [
 
 	<generated>
 	<MSEComment: 'The methods defined in the class'>
+	<derived>
 	<MSEProperty: #declarations type: #Object>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
 ]
 

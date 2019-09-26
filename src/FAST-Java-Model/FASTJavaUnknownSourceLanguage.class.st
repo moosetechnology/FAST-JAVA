@@ -1,8 +1,8 @@
 Class {
 	#name : #FASTJavaUnknownSourceLanguage,
 	#superclass : #FASTJavaSourceLanguage,
-	#traits : 'FamixTSourceLanguage',
-	#classTraits : 'FamixTSourceLanguage classTrait',
+	#traits : 'FamixTSourceLanguage + FamixTUnknownSourceLanguage',
+	#classTraits : 'FamixTSourceLanguage classTrait + FamixTUnknownSourceLanguage classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

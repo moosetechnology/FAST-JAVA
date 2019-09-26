@@ -978,12 +978,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	(((javaVarDeclStatement property: #type) comment: 'The type of the declared variables')
 		<>- ((javaVariableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
 
-	(((javaArrayTypeExpression property: #baseType) comment: 'The type of the array') <>- ((javaTypeName property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)'))
+	(((javaArrayTypeExpression property: #baseType) comment: 'The type of the array') <>- ((expression property: #javaArrayTypeNameOwner) comment: 'The variable expression owner (if possible)'))
 		withoutPrimaryContainer.
-
-	(((javaArrayTypeExpression property: #baseType) comment: 'The type of the array')
-		<>- ((javaPrimitiveTypeExpression property: #javaArrayTypeOwner) comment: 'The variable expression owner (if possible)')) withoutPrimaryContainer.
-
+		
 	(((javaClassTypeExpression property: #typeName) comment: 'The name of the type') <>- ((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment: 'The type expression that own me'))
 		withoutPrimaryContainer.
 

@@ -62,6 +62,7 @@ FASTJavaLambdaExpression >> parameters [
 
 	<generated>
 	<MSEComment: 'The parameters of the lambda'>
+	<derived>
 	^ parameters
 ]
 

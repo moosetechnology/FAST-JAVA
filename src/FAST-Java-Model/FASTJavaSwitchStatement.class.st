@@ -36,6 +36,7 @@ FASTJavaSwitchStatement >> cases [
 
 	<generated>
 	<MSEComment: 'The cases of the switch statements'>
+	<derived>
 	^ cases
 ]
 
