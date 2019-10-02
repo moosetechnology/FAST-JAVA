@@ -22,11 +22,12 @@ FASTJavaAssignementExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaAssignementExpressionOwner"
+	"Relation named: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner"
 
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
-	<MSEProperty: #expression type: #Object>
+	<MSEProperty: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

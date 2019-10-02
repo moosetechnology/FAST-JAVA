@@ -12,7 +12,7 @@ Trait {
 { #category : #meta }
 FASTJavaTWithModifiers classSide >> annotation [
 
-	<MSEClass: #TWithModifiers super: #Trait>
+	<MSEClass: #TWithModifiers super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

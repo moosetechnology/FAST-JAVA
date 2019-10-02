@@ -65,11 +65,11 @@ FASTJavaTryCatchStatement >> catchesGroup [
 
 { #category : #accessing }
 FASTJavaTryCatchStatement >> try [
-	"Relation named: #try type: #FASTJavaStatement opposite: #javaTryCatchOwner"
+	"Relation named: #try type: #FASTStatement opposite: #javaTryCatchOwner"
 
 	<generated>
 	<MSEComment: 'I represent the ''try'' part of the TryCatch Statement'>
-	<MSEProperty: #try type: #Object>
+	<MSEProperty: #try type: #FASTStatement opposite: #javaTryCatchOwner>
 	^ self privateState attributeAt: #try ifAbsent: [ nil ]
 ]
 

@@ -23,11 +23,11 @@ FASTJavaForStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaForStatement >> body [
-	"Relation named: #body type: #FASTJavaStatement opposite: #forBodyOwner"
+	"Relation named: #body type: #FASTStatement opposite: #forBodyOwner"
 
 	<generated>
 	<MSEComment: 'A statement to be evaluated in the loop'>
-	<MSEProperty: #body type: #Object>
+	<MSEProperty: #body type: #FASTStatement opposite: #forBodyOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -54,11 +54,11 @@ FASTJavaForStatement >> bodyGroup [
 
 { #category : #accessing }
 FASTJavaForStatement >> condition [
-	"Relation named: #condition type: #FASTJavaExpression opposite: #forConditionOwner"
+	"Relation named: #condition type: #FASTExpression opposite: #forConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #Object>
+	<MSEProperty: #condition type: #FASTExpression opposite: #forConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 
@@ -85,11 +85,11 @@ FASTJavaForStatement >> conditionGroup [
 
 { #category : #accessing }
 FASTJavaForStatement >> incrementor [
-	"Relation named: #incrementor type: #FASTJavaStatement opposite: #forIncrementorOwner"
+	"Relation named: #incrementor type: #FASTStatement opposite: #forIncrementorOwner"
 
 	<generated>
 	<MSEComment: 'Expression evaluated at the end of each loop'>
-	<MSEProperty: #incrementor type: #Object>
+	<MSEProperty: #incrementor type: #FASTStatement opposite: #forIncrementorOwner>
 	^ self privateState attributeAt: #incrementor ifAbsent: [ nil ]
 ]
 
@@ -116,11 +116,11 @@ FASTJavaForStatement >> incrementorGroup [
 
 { #category : #accessing }
 FASTJavaForStatement >> initializer [
-	"Relation named: #initializer type: #FASTJavaStatement opposite: #forIninitializerOwner"
+	"Relation named: #initializer type: #FASTStatement opposite: #forIninitializerOwner"
 
 	<generated>
 	<MSEComment: 'Expression used at initialization phase of a for loop'>
-	<MSEProperty: #initializer type: #Object>
+	<MSEProperty: #initializer type: #FASTStatement opposite: #forIninitializerOwner>
 	^ self privateState attributeAt: #initializer ifAbsent: [ nil ]
 ]
 

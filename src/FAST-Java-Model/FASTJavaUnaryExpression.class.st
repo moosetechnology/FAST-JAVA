@@ -34,11 +34,11 @@ FASTJavaUnaryExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaUnaryExpressionOwner"
+	"Relation named: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner"
 
 	<generated>
 	<MSEComment: 'The affected expression'>
-	<MSEProperty: #expression type: #Object>
+	<MSEProperty: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

@@ -31,11 +31,11 @@ FASTJavaArrayAccess class >> requirements [
 
 { #category : #accessing }
 FASTJavaArrayAccess >> array [
-	"Relation named: #array type: #FASTJavaExpression opposite: #javaArrayArrayAccessOwner"
+	"Relation named: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner"
 
 	<generated>
 	<MSEComment: 'Name of accessed field'>
-	<MSEProperty: #array type: #Object>
+	<MSEProperty: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner>
 	^ self privateState attributeAt: #array ifAbsent: [ nil ]
 ]
 
@@ -62,11 +62,11 @@ FASTJavaArrayAccess >> arrayGroup [
 
 { #category : #accessing }
 FASTJavaArrayAccess >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaArrayAccessOwner"
+	"Relation named: #expression type: #FASTExpression opposite: #javaArrayAccessOwner"
 
 	<generated>
 	<MSEComment: 'The accessed index'>
-	<MSEProperty: #expression type: #Object>
+	<MSEProperty: #expression type: #FASTExpression opposite: #javaArrayAccessOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

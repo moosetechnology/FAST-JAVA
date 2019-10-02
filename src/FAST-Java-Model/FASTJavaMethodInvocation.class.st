@@ -20,11 +20,12 @@ FASTJavaMethodInvocation class >> annotation [
 
 { #category : #accessing }
 FASTJavaMethodInvocation >> receiver [
-	"Relation named: #receiver type: #FASTJavaExpression opposite: #javaMethodInvocationOwner"
+	"Relation named: #receiver type: #FASTExpression opposite: #javaMethodInvocationOwner"
 
 	<generated>
 	<MSEComment: 'The expression whitch will execute this invocation'>
-	<MSEProperty: #receiver type: #Object>
+	<MSEProperty: #receiver type: #FASTExpression opposite: #javaMethodInvocationOwner>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #receiver ifAbsent: [ nil ]
 ]
 

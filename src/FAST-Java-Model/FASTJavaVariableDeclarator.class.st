@@ -36,11 +36,12 @@ FASTJavaVariableDeclarator class >> requirements [
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaVariableDeclaratorExpressionOwner"
+	"Relation named: #expression type: #FASTExpression opposite: #javaVariableDeclaratorExpressionOwner"
 
 	<generated>
 	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
-	<MSEProperty: #expression type: #Object>
+	<MSEProperty: #expression type: #FASTExpression opposite: #javaVariableDeclaratorExpressionOwner>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

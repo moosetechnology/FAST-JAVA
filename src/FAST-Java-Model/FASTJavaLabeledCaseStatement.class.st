@@ -22,11 +22,11 @@ FASTJavaLabeledCaseStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaLabeledCaseStatement >> label [
-	"Relation named: #label type: #FASTJavaExpression opposite: #javaLabeledCaseStatementOwner"
+	"Relation named: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner"
 
 	<generated>
 	<MSEComment: 'The label of the case statement'>
-	<MSEProperty: #label type: #Object>
+	<MSEProperty: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner>
 	^ self privateState attributeAt: #label ifAbsent: [ nil ]
 ]
 

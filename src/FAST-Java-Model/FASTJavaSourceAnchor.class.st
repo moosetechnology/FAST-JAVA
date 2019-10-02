@@ -1,6 +1,6 @@
 Class {
 	#name : #FASTJavaSourceAnchor,
-	#superclass : #FASTJavaEntity,
+	#superclass : #FASTEntity,
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
 	#category : #'FAST-Java-Model-Entities'
@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 FASTJavaSourceAnchor class >> annotation [
 
-	<MSEClass: #SourceAnchor super: #FASTJavaEntity>
+	<MSEClass: #SourceAnchor super: #FASTEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

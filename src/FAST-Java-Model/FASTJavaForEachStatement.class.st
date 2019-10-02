@@ -27,11 +27,11 @@ FASTJavaForEachStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaForEachStatement >> body [
-	"Relation named: #body type: #FASTJavaStatement opposite: #javaForEachStatementOwner"
+	"Relation named: #body type: #FASTStatement opposite: #javaForEachStatementOwner"
 
 	<generated>
 	<MSEComment: 'The body of the For Each statement'>
-	<MSEProperty: #body type: #Object>
+	<MSEProperty: #body type: #FASTStatement opposite: #javaForEachStatementOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -82,11 +82,11 @@ FASTJavaForEachStatement >> fieldnameGroup [
 
 { #category : #accessing }
 FASTJavaForEachStatement >> list [
-	"Relation named: #list type: #FASTJavaExpression opposite: #javaForEachStatementOwner"
+	"Relation named: #list type: #FASTExpression opposite: #javaForEachStatementOwner"
 
 	<generated>
 	<MSEComment: 'The list the for each statement iterate on'>
-	<MSEProperty: #list type: #Object>
+	<MSEProperty: #list type: #FASTExpression opposite: #javaForEachStatementOwner>
 	^ self privateState attributeAt: #list ifAbsent: [ nil ]
 ]
 

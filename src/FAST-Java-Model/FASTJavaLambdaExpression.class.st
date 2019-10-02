@@ -27,11 +27,11 @@ FASTJavaLambdaExpression >> addParameters: anObject [
 
 { #category : #accessing }
 FASTJavaLambdaExpression >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaLambdaExpressionOwner"
+	"Relation named: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner"
 
 	<generated>
 	<MSEComment: 'Expression to be executed as part of the lambda.'>
-	<MSEProperty: #expression type: #Object>
+	<MSEProperty: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

@@ -1,6 +1,6 @@
 Class {
 	#name : #FASTJavaSourceLanguage,
-	#superclass : #FASTJavaEntity,
+	#superclass : #FASTEntity,
 	#traits : 'FamixTSourceLanguage',
 	#classTraits : 'FamixTSourceLanguage classTrait',
 	#category : #'FAST-Java-Model-Entities'
@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 FASTJavaSourceLanguage class >> annotation [
 
-	<MSEClass: #SourceLanguage super: #FASTJavaEntity>
+	<MSEClass: #SourceLanguage super: #FASTEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

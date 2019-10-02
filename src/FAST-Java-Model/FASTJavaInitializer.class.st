@@ -36,11 +36,12 @@ FASTJavaInitializer class >> requirements [
 
 { #category : #accessing }
 FASTJavaInitializer >> statementBlock [
-	"Relation named: #statementBlock type: #FASTJavaStatementBlock opposite: #javaInitializerOwner"
+	"Relation named: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner"
 
 	<generated>
 	<MSEComment: 'Statements block of the behavioural entity'>
-	<MSEProperty: #statementBlock type: #Object>
+	<MSEProperty: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #statementBlock ifAbsent: [ nil ]
 ]
 

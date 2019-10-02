@@ -22,11 +22,11 @@ FASTJavaThrowStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaThrowStatement >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaThrowStatementOwner"
+	"Relation named: #expression type: #FASTExpression opposite: #javaThrowStatementOwner"
 
 	<generated>
 	<MSEComment: 'The throwed element'>
-	<MSEProperty: #expression type: #Object>
+	<MSEProperty: #expression type: #FASTExpression opposite: #javaThrowStatementOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

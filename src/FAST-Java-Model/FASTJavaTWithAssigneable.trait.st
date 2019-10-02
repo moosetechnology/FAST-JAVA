@@ -12,7 +12,7 @@ Trait {
 { #category : #meta }
 FASTJavaTWithAssigneable classSide >> annotation [
 
-	<MSEClass: #TWithAssigneable super: #Trait>
+	<MSEClass: #TWithAssigneable super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

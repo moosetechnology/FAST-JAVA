@@ -23,11 +23,11 @@ FASTJavaDoWhileStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaDoWhileStatement >> body [
-	"Relation named: #body type: #FASTJavaStatement opposite: #doBodyOwner"
+	"Relation named: #body type: #FASTStatement opposite: #doBodyOwner"
 
 	<generated>
 	<MSEComment: 'A statement to be evaluated in the loop'>
-	<MSEProperty: #body type: #Object>
+	<MSEProperty: #body type: #FASTStatement opposite: #doBodyOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -54,11 +54,11 @@ FASTJavaDoWhileStatement >> bodyGroup [
 
 { #category : #accessing }
 FASTJavaDoWhileStatement >> condition [
-	"Relation named: #condition type: #FASTJavaExpression opposite: #doConditionOwner"
+	"Relation named: #condition type: #FASTExpression opposite: #doConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #Object>
+	<MSEProperty: #condition type: #FASTExpression opposite: #doConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 

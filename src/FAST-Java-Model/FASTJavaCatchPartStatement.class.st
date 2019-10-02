@@ -29,11 +29,11 @@ FASTJavaCatchPartStatement class >> requirements [
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body [
-	"Relation named: #body type: #FASTJavaStatement opposite: #javaCatchPartStatementOwner"
+	"Relation named: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner"
 
 	<generated>
 	<MSEComment: 'The body of the Catch part statement'>
-	<MSEProperty: #body type: #Object>
+	<MSEProperty: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 

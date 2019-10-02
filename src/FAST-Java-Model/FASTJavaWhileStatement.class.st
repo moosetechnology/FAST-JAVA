@@ -23,11 +23,11 @@ FASTJavaWhileStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaWhileStatement >> body [
-	"Relation named: #body type: #FASTJavaStatement opposite: #whileBodyOwner"
+	"Relation named: #body type: #FASTStatement opposite: #whileBodyOwner"
 
 	<generated>
 	<MSEComment: 'A statement to be evaluated in the loop'>
-	<MSEProperty: #body type: #Object>
+	<MSEProperty: #body type: #FASTStatement opposite: #whileBodyOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -54,11 +54,11 @@ FASTJavaWhileStatement >> bodyGroup [
 
 { #category : #accessing }
 FASTJavaWhileStatement >> condition [
-	"Relation named: #condition type: #FASTJavaExpression opposite: #whileConditionOwner"
+	"Relation named: #condition type: #FASTExpression opposite: #whileConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #Object>
+	<MSEProperty: #condition type: #FASTExpression opposite: #whileConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 

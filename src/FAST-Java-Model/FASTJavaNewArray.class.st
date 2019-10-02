@@ -21,11 +21,11 @@ FASTJavaNewArray class >> annotation [
 
 { #category : #accessing }
 FASTJavaNewArray >> initializer [
-	"Relation named: #initializer type: #FASTJavaExpression opposite: #javaNewArrayInitialOwner"
+	"Relation named: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner"
 
 	<generated>
 	<MSEComment: 'The initializer of the array'>
-	<MSEProperty: #initializer type: #Object>
+	<MSEProperty: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner>
 	^ self privateState attributeAt: #initializer ifAbsent: [ nil ]
 ]
 

@@ -15,7 +15,7 @@ Trait {
 { #category : #meta }
 FASTJavaTModifier classSide >> annotation [
 
-	<MSEClass: #TModifier super: #Trait>
+	<MSEClass: #TModifier super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

@@ -37,12 +37,13 @@ FASTJavaNewClassExpression >> addDeclarations: anObject [
 
 { #category : #accessing }
 FASTJavaNewClassExpression >> declarations [
-	"Relation named: #declarations type: #FASTJavaScopableEntity opposite: #newClassOwner"
+	"Relation named: #declarations type: #FASTScopableEntity opposite: #newClassOwner"
 
 	<generated>
 	<MSEComment: 'The methods defined in the class'>
 	<derived>
-	<MSEProperty: #declarations type: #Object>
+	<MSEProperty: #declarations type: #FASTScopableEntity opposite: #newClassOwner>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
 ]
 

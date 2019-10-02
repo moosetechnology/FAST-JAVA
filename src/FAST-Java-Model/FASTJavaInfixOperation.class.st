@@ -26,11 +26,11 @@ FASTJavaInfixOperation class >> annotation [
 
 { #category : #accessing }
 FASTJavaInfixOperation >> leftOperand [
-	"Relation named: #leftOperand type: #FASTJavaExpression opposite: #infixOperationLeftOperandOwner"
+	"Relation named: #leftOperand type: #FASTExpression opposite: #infixOperationLeftOperandOwner"
 
 	<generated>
 	<MSEComment: 'leftOperand'>
-	<MSEProperty: #leftOperand type: #Object>
+	<MSEProperty: #leftOperand type: #FASTExpression opposite: #infixOperationLeftOperandOwner>
 	^ self privateState attributeAt: #leftOperand ifAbsent: [ nil ]
 ]
 
@@ -74,11 +74,11 @@ FASTJavaInfixOperation >> operator: anObject [
 
 { #category : #accessing }
 FASTJavaInfixOperation >> rightOperand [
-	"Relation named: #rightOperand type: #FASTJavaExpression opposite: #infixOperationRightOperandOwner"
+	"Relation named: #rightOperand type: #FASTExpression opposite: #infixOperationRightOperandOwner"
 
 	<generated>
 	<MSEComment: 'rightOperand'>
-	<MSEProperty: #rightOperand type: #Object>
+	<MSEProperty: #rightOperand type: #FASTExpression opposite: #infixOperationRightOperandOwner>
 	^ self privateState attributeAt: #rightOperand ifAbsent: [ nil ]
 ]
 

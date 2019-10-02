@@ -18,11 +18,11 @@ FASTJavaArrayTypeExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaArrayTypeExpression >> baseType [
-	"Relation named: #baseType type: #FASTJavaExpression opposite: #javaArrayTypeNameOwner"
+	"Relation named: #baseType type: #FASTExpression opposite: #javaArrayTypeNameOwner"
 
 	<generated>
 	<MSEComment: 'The type of the array'>
-	<MSEProperty: #baseType type: #Object>
+	<MSEProperty: #baseType type: #FASTExpression opposite: #javaArrayTypeNameOwner>
 	^ self privateState attributeAt: #baseType ifAbsent: [ nil ]
 ]
 

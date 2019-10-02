@@ -28,11 +28,11 @@ FASTJavaAssertStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaAssertStatement >> condition [
-	"Relation named: #condition type: #FASTJavaExpression opposite: #assertConditionOwner"
+	"Relation named: #condition type: #FASTExpression opposite: #assertConditionOwner"
 
 	<generated>
 	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #Object>
+	<MSEProperty: #condition type: #FASTExpression opposite: #assertConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 

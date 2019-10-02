@@ -12,7 +12,7 @@ Trait {
 { #category : #meta }
 FASTJavaTDeclaration classSide >> annotation [
 
-	<MSEClass: #TDeclaration super: #Trait>
+	<MSEClass: #TDeclaration super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

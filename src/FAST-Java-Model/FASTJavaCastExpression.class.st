@@ -21,11 +21,11 @@ FASTJavaCastExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaCastExpression >> expression [
-	"Relation named: #expression type: #FASTJavaExpression opposite: #javaCastExpressionOwner"
+	"Relation named: #expression type: #FASTExpression opposite: #javaCastExpressionOwner"
 
 	<generated>
 	<MSEComment: 'The expression to cast'>
-	<MSEProperty: #expression type: #Object>
+	<MSEProperty: #expression type: #FASTExpression opposite: #javaCastExpressionOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

@@ -2,13 +2,13 @@ Extension { #name : #FASTStatementBlock }
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTStatementBlock >> javaInitializerOwner [
-	"Relation named: #javaInitializerOwner type: #FASTInitializer opposite: #statementBlock"
+	"Relation named: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock"
 
 	<generated>
 	<MSEComment: 'Behavioural entity containing the statement block.'>
 	<container>
 	<derived>
-	<MSEProperty: #javaInitializerOwner type: #Object>
+	<MSEProperty: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
 ]
@@ -28,41 +28,14 @@ FASTStatementBlock >> javaInitializerOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatementBlock >> javaLambdaExpressionOwner [
-	"Relation named: #javaLambdaExpressionOwner type: #FASTLambdaExpression opposite: #expression"
-
-	<generated>
-	<MSEComment: 'The statementBlock owner (if possible)'>
-	<container>
-	<derived>
-	<MSEProperty: #javaLambdaExpressionOwner type: #Object>
-	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTStatementBlock >> javaLambdaExpressionOwner: anObject [
-
-	<generated>
-	(self privateState attributeAt: #javaLambdaExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaLambdaExpressionOwner.
-		self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
-		otherSide expression: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
-		anObject expression: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTStatementBlock >> javaSynchronizedStatementOwner [
-	"Relation named: #javaSynchronizedStatementOwner type: #FASTSynchronizedStatement opposite: #block"
+	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block"
 
 	<generated>
 	<MSEComment: 'The owner of the synchronized block (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaSynchronizedStatementOwner type: #Object>
+	<MSEProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]

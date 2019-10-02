@@ -33,12 +33,12 @@ FASTJavaArrayInitializer >> addInitializers: anObject [
 
 { #category : #accessing }
 FASTJavaArrayInitializer >> initializers [
-	"Relation named: #initializers type: #FASTJavaExpression opposite: #javaArrayInitializers"
+	"Relation named: #initializers type: #FASTExpression opposite: #javaArrayInitializers"
 
 	<generated>
 	<MSEComment: 'My initializers'>
 	<derived>
-	<MSEProperty: #initializers type: #Object>
+	<MSEProperty: #initializers type: #FASTExpression opposite: #javaArrayInitializers>
 	^ self privateState attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaArrayInitializers: ]
 ]
 
