@@ -17,7 +17,7 @@ FASTJavaNamedEntity class >> annotation [
 FASTJavaNamedEntity class >> metamodel [
 
 	<generated>
-	^ (self class environment at: #FASTJavaMetamodelGenerator) metamodel
+	^ FASTJavaModel metamodel
 ]
 
 { #category : #testing }
