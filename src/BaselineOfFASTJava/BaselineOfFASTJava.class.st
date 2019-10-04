@@ -26,6 +26,12 @@ BaselineOfFASTJava >> defineDependencies: spec [
 		with: [ spec
 				loads: #('default');
 				repository: 'github://moosetechnology/FAST:master/src' ].
+	spec
+		baseline: 'SmaCC'
+		with: [ spec
+				loads: #('Java');
+				repository: 'github://j-brant/SmaCC:master/src' ].
+	
 ]
 
 { #category : #baselines }
@@ -34,7 +40,7 @@ BaselineOfFASTJava >> defineGroups: spec [
 		group: 'core'
 			with: #('FAST-Java-Model-Extension' 'FAST-Java-Model' 'FAST-Java-Model-Generator');
 		group: 'smacc'
-			with: #('core' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests');
+			with: #('core' 'SmaCC' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests');
 		group: 'visitor'
 			with: #('core' 'FAST-Java-Visitor');
 		group: 'highlighter' with: #('core' 'FAST-Java-Highlighter');
