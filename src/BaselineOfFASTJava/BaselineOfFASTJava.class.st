@@ -29,7 +29,7 @@ BaselineOfFASTJava >> defineDependencies: spec [
 	spec
 		baseline: 'SmaCC'
 		with: [ spec
-				loads: #('Java');
+				loads: #('Java' 'withSource');
 				repository: 'github://j-brant/SmaCC:master/src' ].
 	
 ]
