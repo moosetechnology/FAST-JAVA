@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 FASTJavaCastExpression class >> annotation [
 
-	<MSEClass: #CastExpression super: #FASTExpression>
+	<FMClass: #CastExpression super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -24,8 +24,8 @@ FASTJavaCastExpression >> expression [
 	"Relation named: #expression type: #FASTExpression opposite: #javaCastExpressionOwner"
 
 	<generated>
-	<MSEComment: 'The expression to cast'>
-	<MSEProperty: #expression type: #FASTExpression opposite: #javaCastExpressionOwner>
+	<FMComment: 'The expression to cast'>
+	<FMProperty: #expression type: #FASTExpression opposite: #javaCastExpressionOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -55,7 +55,7 @@ FASTJavaCastExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"
 
 	<generated>
-	<MSEComment: 'The type in witch the expression will be cast'>
+	<FMComment: 'The type in witch the expression will be cast'>
 	^ type
 ]
 
@@ -64,7 +64,6 @@ FASTJavaCastExpression >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }

@@ -21,17 +21,10 @@ Class {
 { #category : #meta }
 FASTJavaInitializer class >> annotation [
 
-	<MSEClass: #Initializer super: #FASTScopableEntity>
+	<FMClass: #Initializer super: #FASTScopableEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaInitializer class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassDeclaration }
 ]
 
 { #category : #accessing }
@@ -39,8 +32,8 @@ FASTJavaInitializer >> statementBlock [
 	"Relation named: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner"
 
 	<generated>
-	<MSEComment: 'Statements block of the behavioural entity'>
-	<MSEProperty: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner>
+	<FMComment: 'Statements block of the behavioural entity'>
+	<FMProperty: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner>
 	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #statementBlock ifAbsent: [ nil ]
 ]

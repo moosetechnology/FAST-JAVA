@@ -5,10 +5,10 @@ FASTStatementBlock >> javaInitializerOwner [
 	"Relation named: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock"
 
 	<generated>
-	<MSEComment: 'Behavioural entity containing the statement block.'>
+	<FMComment: 'Behavioural entity containing the statement block.'>
 	<container>
 	<derived>
-	<MSEProperty: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock>
+	<FMProperty: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
 ]
@@ -32,10 +32,10 @@ FASTStatementBlock >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block"
 
 	<generated>
-	<MSEComment: 'The owner of the synchronized block (if possible)'>
+	<FMComment: 'The owner of the synchronized block (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block>
+	<FMProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]

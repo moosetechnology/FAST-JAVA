@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FASTJavaAssignementExpression class >> annotation [
 
-	<MSEClass: #AssignementExpression super: #FASTExpression>
+	<FMClass: #AssignementExpression super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -25,8 +25,8 @@ FASTJavaAssignementExpression >> expression [
 	"Relation named: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner"
 
 	<generated>
-	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
-	<MSEProperty: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner>
+	<FMComment: 'Expression that s being assigned upon declaration to the var'>
+	<FMProperty: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner>
 	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]

@@ -18,14 +18,14 @@ Class {
 { #category : #meta }
 FASTJavaSwitchStatement class >> annotation [
 
-	<MSEClass: #SwitchStatement super: #FASTStatement>
+	<FMClass: #SwitchStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-FASTJavaSwitchStatement >> addCases: anObject [
+FASTJavaSwitchStatement >> addCase: anObject [
 	<generated>
 	^ self cases add: anObject
 ]
@@ -35,7 +35,7 @@ FASTJavaSwitchStatement >> cases [
 	"Relation named: #cases type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner"
 
 	<generated>
-	<MSEComment: 'The cases of the switch statements'>
+	<FMComment: 'The cases of the switch statements'>
 	<derived>
 	^ cases
 ]
@@ -45,7 +45,6 @@ FASTJavaSwitchStatement >> cases: anObject [
 
 	<generated>
 	cases value: anObject
-
 ]
 
 { #category : #navigation }

@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 FASTJavaMethodReference class >> annotation [
 
-	<MSEClass: #MethodReference super: #FASTJavaVariableExpression>
+	<FMClass: #MethodReference super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -24,7 +24,7 @@ FASTJavaMethodReference >> receiver [
 	"Relation named: #receiver type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner"
 
 	<generated>
-	<MSEComment: 'The method of the reference'>
+	<FMComment: 'The method of the reference'>
 	^ receiver
 ]
 
@@ -33,7 +33,6 @@ FASTJavaMethodReference >> receiver: anObject [
 
 	<generated>
 	receiver := anObject
-
 ]
 
 { #category : #navigation }

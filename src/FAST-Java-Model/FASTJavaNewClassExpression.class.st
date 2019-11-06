@@ -23,14 +23,14 @@ Class {
 { #category : #meta }
 FASTJavaNewClassExpression class >> annotation [
 
-	<MSEClass: #NewClassExpression super: #FASTJavaNewExpression>
+	<FMClass: #NewClassExpression super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-FASTJavaNewClassExpression >> addDeclarations: anObject [
+FASTJavaNewClassExpression >> addDeclaration: anObject [
 	<generated>
 	^ self declarations add: anObject
 ]
@@ -40,9 +40,9 @@ FASTJavaNewClassExpression >> declarations [
 	"Relation named: #declarations type: #FASTScopableEntity opposite: #newClassOwner"
 
 	<generated>
-	<MSEComment: 'The methods defined in the class'>
+	<FMComment: 'The methods defined in the class'>
 	<derived>
-	<MSEProperty: #declarations type: #FASTScopableEntity opposite: #newClassOwner>
+	<FMProperty: #declarations type: #FASTScopableEntity opposite: #newClassOwner>
 	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
 ]

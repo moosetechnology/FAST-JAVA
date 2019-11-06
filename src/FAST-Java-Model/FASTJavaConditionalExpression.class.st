@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FASTJavaConditionalExpression class >> annotation [
 
-	<MSEClass: #ConditionalExpression super: #FASTExpression>
+	<FMClass: #ConditionalExpression super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -25,8 +25,8 @@ FASTJavaConditionalExpression >> condition [
 	"Relation named: #condition type: #FASTExpression opposite: #conditionalConditionOwner"
 
 	<generated>
-	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #FASTExpression opposite: #conditionalConditionOwner>
+	<FMComment: 'The condition of the statement'>
+	<FMProperty: #condition type: #FASTExpression opposite: #conditionalConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 
@@ -56,8 +56,8 @@ FASTJavaConditionalExpression >> elsePart [
 	"Relation named: #elsePart type: #FASTExpression opposite: #conditionalElsePartOwner"
 
 	<generated>
-	<MSEComment: 'else part'>
-	<MSEProperty: #elsePart type: #FASTExpression opposite: #conditionalElsePartOwner>
+	<FMComment: 'else part'>
+	<FMProperty: #elsePart type: #FASTExpression opposite: #conditionalElsePartOwner>
 	^ self privateState attributeAt: #elsePart ifAbsent: [ nil ]
 ]
 
@@ -87,8 +87,8 @@ FASTJavaConditionalExpression >> thenPart [
 	"Relation named: #thenPart type: #FASTExpression opposite: #conditionalThenPartOwner"
 
 	<generated>
-	<MSEComment: 'then part'>
-	<MSEProperty: #thenPart type: #FASTExpression opposite: #conditionalThenPartOwner>
+	<FMComment: 'then part'>
+	<FMProperty: #thenPart type: #FASTExpression opposite: #conditionalThenPartOwner>
 	^ self privateState attributeAt: #thenPart ifAbsent: [ nil ]
 ]
 

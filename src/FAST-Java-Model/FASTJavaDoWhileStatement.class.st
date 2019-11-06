@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaDoWhileStatement class >> annotation [
 
-	<MSEClass: #DoWhileStatement super: #FASTStatement>
+	<FMClass: #DoWhileStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -26,8 +26,8 @@ FASTJavaDoWhileStatement >> body [
 	"Relation named: #body type: #FASTStatement opposite: #doBodyOwner"
 
 	<generated>
-	<MSEComment: 'A statement to be evaluated in the loop'>
-	<MSEProperty: #body type: #FASTStatement opposite: #doBodyOwner>
+	<FMComment: 'A statement to be evaluated in the loop'>
+	<FMProperty: #body type: #FASTStatement opposite: #doBodyOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -57,8 +57,8 @@ FASTJavaDoWhileStatement >> condition [
 	"Relation named: #condition type: #FASTExpression opposite: #doConditionOwner"
 
 	<generated>
-	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #FASTExpression opposite: #doConditionOwner>
+	<FMComment: 'The condition of the statement'>
+	<FMProperty: #condition type: #FASTExpression opposite: #doConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 

@@ -12,7 +12,7 @@ Trait {
 { #category : #meta }
 FASTJavaTDeclaration classSide >> annotation [
 
-	<MSEClass: #TDeclaration super: #Object>
+	<FMClass: #TDeclaration super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -23,7 +23,7 @@ FASTJavaTDeclaration >> javaDeclarationOwner [
 	"Relation named: #javaDeclarationOwner type: #FASTJavaTWithDeclarations opposite: #declarations"
 
 	<generated>
-	<MSEComment: 'The element that declared me'>
+	<FMComment: 'The element that declared me'>
 	<container>
 	^ javaDeclarationOwner
 ]
@@ -33,7 +33,6 @@ FASTJavaTDeclaration >> javaDeclarationOwner: anObject [
 
 	<generated>
 	javaDeclarationOwner := anObject
-
 ]
 
 { #category : #navigation }

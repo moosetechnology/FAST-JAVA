@@ -5,10 +5,10 @@ FASTEntity >> javaLambdaExpressionOwner [
 	"Relation named: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The expression owner (if possible)'>
+	<FMComment: 'The expression owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression>
+	<FMProperty: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
 ]

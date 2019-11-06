@@ -15,7 +15,7 @@ Trait {
 { #category : #meta }
 FASTJavaTAssigneable classSide >> annotation [
 
-	<MSEClass: #TAssigneable super: #Object>
+	<FMClass: #TAssigneable super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -26,7 +26,7 @@ FASTJavaTAssigneable >> javaVariableAssignementOwner [
 	"Relation named: #javaVariableAssignementOwner type: #FASTJavaTWithAssigneable opposite: #variable"
 
 	<generated>
-	<MSEComment: 'The owner of the modifier'>
+	<FMComment: 'The owner of the modifier'>
 	<container>
 	<derived>
 	^ javaVariableAssignementOwner
@@ -37,7 +37,6 @@ FASTJavaTAssigneable >> javaVariableAssignementOwner: anObject [
 
 	<generated>
 	javaVariableAssignementOwner := anObject
-
 ]
 
 { #category : #navigation }

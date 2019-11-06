@@ -26,7 +26,7 @@ Class {
 { #category : #meta }
 FASTJavaQualifiedTypeName class >> annotation [
 
-	<MSEClass: #QualifiedTypeName super: #FASTJavaTypeName>
+	<FMClass: #QualifiedTypeName super: #FASTJavaTypeName>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -37,7 +37,7 @@ FASTJavaQualifiedTypeName >> namespace [
 	"Relation named: #namespace type: #FASTJavaTypeName opposite: #javaTypeNameQualify"
 
 	<generated>
-	<MSEComment: 'The namespace of the name'>
+	<FMComment: 'The namespace of the name'>
 	^ namespace
 ]
 
@@ -46,7 +46,6 @@ FASTJavaQualifiedTypeName >> namespace: anObject [
 
 	<generated>
 	namespace := anObject
-
 ]
 
 { #category : #navigation }

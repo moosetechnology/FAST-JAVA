@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaIntegerLiteral class >> annotation [
 
-	<MSEClass: #IntegerLiteral super: #FASTLiteral>
+	<FMClass: #IntegerLiteral super: #FASTLiteral>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

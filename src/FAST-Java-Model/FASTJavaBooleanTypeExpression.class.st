@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaBooleanTypeExpression class >> annotation [
 
-	<MSEClass: #BooleanTypeExpression super: #FASTJavaPrimitiveTypeExpression>
+	<FMClass: #BooleanTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

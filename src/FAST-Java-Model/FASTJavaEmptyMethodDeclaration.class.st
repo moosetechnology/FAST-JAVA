@@ -19,7 +19,7 @@ Class {
 { #category : #meta }
 FASTJavaEmptyMethodDeclaration class >> annotation [
 
-	<MSEClass: #EmptyMethodDeclaration super: #FASTJavaMethodEntity>
+	<FMClass: #EmptyMethodDeclaration super: #FASTJavaMethodEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

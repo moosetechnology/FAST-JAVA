@@ -39,32 +39,23 @@ Class {
 { #category : #meta }
 FASTJavaModifier class >> annotation [
 
-	<MSEClass: #Modifier super: #FASTExpression>
+	<FMClass: #Modifier super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #meta }
-FASTJavaModifier class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassDeclaration. FASTJavaMethodEntity }
-]
-
 { #category : #accessing }
 FASTJavaModifier >> token [
 
-	<MSEProperty: #token type: #String>
+	<FMProperty: #token type: #String>
 	<generated>
-	<MSEComment: 'The modifier value'>
+	<FMComment: 'The modifier value'>
 	^ token
 ]
 
 { #category : #accessing }
 FASTJavaModifier >> token: anObject [
-
 	<generated>
 	token := anObject
-
 ]

@@ -19,17 +19,10 @@ Class {
 { #category : #meta }
 FASTJavaAnnotation class >> annotation [
 
-	<MSEClass: #Annotation super: #FASTExpression>
+	<FMClass: #Annotation super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaAnnotation class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassDeclaration. FASTJavaMethodEntity }
 ]
 
 { #category : #accessing }
@@ -37,7 +30,7 @@ FASTJavaAnnotation >> expression [
 	"Relation named: #expression type: #FASTJavaVariableExpression opposite: #javaVariableExpressionOwnerIsAnnotation"
 
 	<generated>
-	<MSEComment: 'My expression (because annotation can be complex)'>
+	<FMComment: 'My expression (because annotation can be complex)'>
 	^ expression
 ]
 
@@ -46,7 +39,6 @@ FASTJavaAnnotation >> expression: anObject [
 
 	<generated>
 	expression := anObject
-
 ]
 
 { #category : #navigation }

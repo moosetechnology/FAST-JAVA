@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaArrayTypeExpression class >> annotation [
 
-	<MSEClass: #ArrayTypeExpression super: #FASTJavaTypeExpression>
+	<FMClass: #ArrayTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -21,8 +21,8 @@ FASTJavaArrayTypeExpression >> baseType [
 	"Relation named: #baseType type: #FASTExpression opposite: #javaArrayTypeNameOwner"
 
 	<generated>
-	<MSEComment: 'The type of the array'>
-	<MSEProperty: #baseType type: #FASTExpression opposite: #javaArrayTypeNameOwner>
+	<FMComment: 'The type of the array'>
+	<FMProperty: #baseType type: #FASTExpression opposite: #javaArrayTypeNameOwner>
 	^ self privateState attributeAt: #baseType ifAbsent: [ nil ]
 ]
 

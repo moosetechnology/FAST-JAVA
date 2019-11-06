@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 FASTJavaSourcedEntity class >> annotation [
 
-	<MSEClass: #SourcedEntity super: #FASTEntity>
+	<FMClass: #SourcedEntity super: #FASTEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

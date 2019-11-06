@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 FASTJavaNewArray class >> annotation [
 
-	<MSEClass: #NewArray super: #FASTJavaNewExpression>
+	<FMClass: #NewArray super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -24,8 +24,8 @@ FASTJavaNewArray >> initializer [
 	"Relation named: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner"
 
 	<generated>
-	<MSEComment: 'The initializer of the array'>
-	<MSEProperty: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner>
+	<FMComment: 'The initializer of the array'>
+	<FMProperty: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner>
 	^ self privateState attributeAt: #initializer ifAbsent: [ nil ]
 ]
 

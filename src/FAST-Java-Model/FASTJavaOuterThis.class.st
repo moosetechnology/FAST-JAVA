@@ -17,7 +17,7 @@ Class {
 { #category : #meta }
 FASTJavaOuterThis class >> annotation [
 
-	<MSEClass: #OuterThis super: #FASTExpression>
+	<FMClass: #OuterThis super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -28,7 +28,7 @@ FASTJavaOuterThis >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner"
 
 	<generated>
-	<MSEComment: 'The accessed type'>
+	<FMComment: 'The accessed type'>
 	^ type
 ]
 
@@ -37,7 +37,6 @@ FASTJavaOuterThis >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }

@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaForStatement class >> annotation [
 
-	<MSEClass: #ForStatement super: #FASTStatement>
+	<FMClass: #ForStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -26,8 +26,8 @@ FASTJavaForStatement >> body [
 	"Relation named: #body type: #FASTStatement opposite: #forBodyOwner"
 
 	<generated>
-	<MSEComment: 'A statement to be evaluated in the loop'>
-	<MSEProperty: #body type: #FASTStatement opposite: #forBodyOwner>
+	<FMComment: 'A statement to be evaluated in the loop'>
+	<FMProperty: #body type: #FASTStatement opposite: #forBodyOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -57,8 +57,8 @@ FASTJavaForStatement >> condition [
 	"Relation named: #condition type: #FASTExpression opposite: #forConditionOwner"
 
 	<generated>
-	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #FASTExpression opposite: #forConditionOwner>
+	<FMComment: 'The condition of the statement'>
+	<FMProperty: #condition type: #FASTExpression opposite: #forConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 
@@ -88,8 +88,8 @@ FASTJavaForStatement >> incrementor [
 	"Relation named: #incrementor type: #FASTStatement opposite: #forIncrementorOwner"
 
 	<generated>
-	<MSEComment: 'Expression evaluated at the end of each loop'>
-	<MSEProperty: #incrementor type: #FASTStatement opposite: #forIncrementorOwner>
+	<FMComment: 'Expression evaluated at the end of each loop'>
+	<FMProperty: #incrementor type: #FASTStatement opposite: #forIncrementorOwner>
 	^ self privateState attributeAt: #incrementor ifAbsent: [ nil ]
 ]
 
@@ -119,8 +119,8 @@ FASTJavaForStatement >> initializer [
 	"Relation named: #initializer type: #FASTStatement opposite: #forIninitializerOwner"
 
 	<generated>
-	<MSEComment: 'Expression used at initialization phase of a for loop'>
-	<MSEProperty: #initializer type: #FASTStatement opposite: #forIninitializerOwner>
+	<FMComment: 'Expression used at initialization phase of a for loop'>
+	<FMProperty: #initializer type: #FASTStatement opposite: #forIninitializerOwner>
 	^ self privateState attributeAt: #initializer ifAbsent: [ nil ]
 ]
 

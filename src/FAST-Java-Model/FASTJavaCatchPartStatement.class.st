@@ -14,17 +14,10 @@ Class {
 { #category : #meta }
 FASTJavaCatchPartStatement class >> annotation [
 
-	<MSEClass: #CatchPartStatement super: #FASTStatement>
+	<FMClass: #CatchPartStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaCatchPartStatement class >> requirements [
-
-	<generated>
-	^ { FASTJavaTryCatchStatement }
 ]
 
 { #category : #accessing }
@@ -32,8 +25,8 @@ FASTJavaCatchPartStatement >> body [
 	"Relation named: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner"
 
 	<generated>
-	<MSEComment: 'The body of the Catch part statement'>
-	<MSEProperty: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner>
+	<FMComment: 'The body of the Catch part statement'>
+	<FMProperty: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -63,7 +56,7 @@ FASTJavaCatchPartStatement >> parameter [
 	"Relation named: #parameter type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler"
 
 	<generated>
-	<MSEComment: 'The parameter of the catch part'>
+	<FMComment: 'The parameter of the catch part'>
 	^ parameter
 ]
 
@@ -72,7 +65,6 @@ FASTJavaCatchPartStatement >> parameter: anObject [
 
 	<generated>
 	parameter := anObject
-
 ]
 
 { #category : #navigation }
@@ -87,7 +79,7 @@ FASTJavaCatchPartStatement >> tryOwner [
 	"Relation named: #tryOwner type: #FASTJavaTryCatchStatement opposite: #catches"
 
 	<generated>
-	<MSEComment: 'The try owner'>
+	<FMComment: 'The try owner'>
 	<container>
 	^ tryOwner
 ]
@@ -97,7 +89,6 @@ FASTJavaCatchPartStatement >> tryOwner: anObject [
 
 	<generated>
 	tryOwner := anObject
-
 ]
 
 { #category : #navigation }

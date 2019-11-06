@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FASTJavaDefaultCaseStatement class >> annotation [
 
-	<MSEClass: #DefaultCaseStatement super: #FASTJavaCaseStatement>
+	<FMClass: #DefaultCaseStatement super: #FASTJavaCaseStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

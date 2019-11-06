@@ -15,32 +15,23 @@ Class {
 { #category : #meta }
 FASTJavaFieldAccess class >> annotation [
 
-	<MSEClass: #FieldAccess super: #FASTExpression>
+	<FMClass: #FieldAccess super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #meta }
-FASTJavaFieldAccess class >> requirements [
-
-	<generated>
-	^ { FASTJavaAssignementExpression }
-]
-
 { #category : #accessing }
 FASTJavaFieldAccess >> fieldName [
 
-	<MSEProperty: #fieldName type: #String>
+	<FMProperty: #fieldName type: #String>
 	<generated>
-	<MSEComment: 'Name of accessed field'>
+	<FMComment: 'Name of accessed field'>
 	^ fieldName
 ]
 
 { #category : #accessing }
 FASTJavaFieldAccess >> fieldName: anObject [
-
 	<generated>
 	fieldName := anObject
-
 ]

@@ -25,21 +25,14 @@ Class {
 { #category : #meta }
 FASTJavaClassDeclaration class >> annotation [
 
-	<MSEClass: #ClassDeclaration super: #FASTStatement>
+	<FMClass: #ClassDeclaration super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #meta }
-FASTJavaClassDeclaration class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassDeclaration }
-]
-
 { #category : #adding }
-FASTJavaClassDeclaration >> addInterfaces: anObject [
+FASTJavaClassDeclaration >> addInterface: anObject [
 	<generated>
 	^ self interfaces add: anObject
 ]
@@ -49,7 +42,7 @@ FASTJavaClassDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver"
 
 	<generated>
-	<MSEComment: 'My superclass'>
+	<FMComment: 'My superclass'>
 	<derived>
 	^ interfaces
 ]
@@ -59,7 +52,6 @@ FASTJavaClassDeclaration >> interfaces: anObject [
 
 	<generated>
 	interfaces value: anObject
-
 ]
 
 { #category : #navigation }
@@ -74,7 +66,7 @@ FASTJavaClassDeclaration >> superclass [
 	"Relation named: #superclass type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver"
 
 	<generated>
-	<MSEComment: 'My superclass'>
+	<FMComment: 'My superclass'>
 	^ superclass
 ]
 
@@ -83,7 +75,6 @@ FASTJavaClassDeclaration >> superclass: anObject [
 
 	<generated>
 	superclass := anObject
-
 ]
 
 { #category : #navigation }

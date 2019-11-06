@@ -19,7 +19,7 @@ Class {
 { #category : #meta }
 FASTJavaForEachStatement class >> annotation [
 
-	<MSEClass: #ForEachStatement super: #FASTStatement>
+	<FMClass: #ForEachStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -30,8 +30,8 @@ FASTJavaForEachStatement >> body [
 	"Relation named: #body type: #FASTStatement opposite: #javaForEachStatementOwner"
 
 	<generated>
-	<MSEComment: 'The body of the For Each statement'>
-	<MSEProperty: #body type: #FASTStatement opposite: #javaForEachStatementOwner>
+	<FMComment: 'The body of the For Each statement'>
+	<FMProperty: #body type: #FASTStatement opposite: #javaForEachStatementOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -61,7 +61,7 @@ FASTJavaForEachStatement >> fieldname [
 	"Relation named: #fieldname type: #FASTJavaVariableExpression opposite: #javaForEachStatementFieldNameOwner"
 
 	<generated>
-	<MSEComment: 'The name of the created local variable'>
+	<FMComment: 'The name of the created local variable'>
 	^ fieldname
 ]
 
@@ -70,7 +70,6 @@ FASTJavaForEachStatement >> fieldname: anObject [
 
 	<generated>
 	fieldname := anObject
-
 ]
 
 { #category : #navigation }
@@ -85,8 +84,8 @@ FASTJavaForEachStatement >> list [
 	"Relation named: #list type: #FASTExpression opposite: #javaForEachStatementOwner"
 
 	<generated>
-	<MSEComment: 'The list the for each statement iterate on'>
-	<MSEProperty: #list type: #FASTExpression opposite: #javaForEachStatementOwner>
+	<FMComment: 'The list the for each statement iterate on'>
+	<FMProperty: #list type: #FASTExpression opposite: #javaForEachStatementOwner>
 	^ self privateState attributeAt: #list ifAbsent: [ nil ]
 ]
 
@@ -116,7 +115,7 @@ FASTJavaForEachStatement >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaForEachStatementTypeOwner"
 
 	<generated>
-	<MSEComment: 'The name of the type of the created local variable'>
+	<FMComment: 'The name of the type of the created local variable'>
 	^ type
 ]
 
@@ -125,7 +124,6 @@ FASTJavaForEachStatement >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }

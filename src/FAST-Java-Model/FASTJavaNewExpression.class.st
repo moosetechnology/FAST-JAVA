@@ -19,7 +19,7 @@ Class {
 { #category : #meta }
 FASTJavaNewExpression class >> annotation [
 
-	<MSEClass: #NewExpression super: #FASTExpression>
+	<FMClass: #NewExpression super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -30,7 +30,7 @@ FASTJavaNewExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner"
 
 	<generated>
-	<MSEComment: 'The type of the array'>
+	<FMComment: 'The type of the array'>
 	^ type
 ]
 
@@ -39,7 +39,6 @@ FASTJavaNewExpression >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }

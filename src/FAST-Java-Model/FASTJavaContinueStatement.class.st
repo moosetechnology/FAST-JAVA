@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaContinueStatement class >> annotation [
 
-	<MSEClass: #ContinueStatement super: #FASTStatement>
+	<FMClass: #ContinueStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

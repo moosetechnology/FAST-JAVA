@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FASTJavaLabeledCaseStatement class >> annotation [
 
-	<MSEClass: #LabeledCaseStatement super: #FASTJavaCaseStatement>
+	<FMClass: #LabeledCaseStatement super: #FASTJavaCaseStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -25,8 +25,8 @@ FASTJavaLabeledCaseStatement >> label [
 	"Relation named: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner"
 
 	<generated>
-	<MSEComment: 'The label of the case statement'>
-	<MSEProperty: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner>
+	<FMComment: 'The label of the case statement'>
+	<FMProperty: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner>
 	^ self privateState attributeAt: #label ifAbsent: [ nil ]
 ]
 

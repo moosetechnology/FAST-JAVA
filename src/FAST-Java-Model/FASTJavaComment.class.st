@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 FASTJavaComment class >> annotation [
 
-	<MSEClass: #Comment super: #FASTJavaSourcedEntity>
+	<FMClass: #Comment super: #FASTJavaSourcedEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

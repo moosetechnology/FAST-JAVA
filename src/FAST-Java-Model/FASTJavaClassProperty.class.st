@@ -44,7 +44,7 @@ Class {
 { #category : #meta }
 FASTJavaClassProperty class >> annotation [
 
-	<MSEClass: #ClassProperty super: #FASTJavaVariableExpression>
+	<FMClass: #ClassProperty super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -53,18 +53,16 @@ FASTJavaClassProperty class >> annotation [
 { #category : #accessing }
 FASTJavaClassProperty >> fieldName [
 
-	<MSEProperty: #fieldName type: #String>
+	<FMProperty: #fieldName type: #String>
 	<generated>
-	<MSEComment: 'Name of accessed field'>
+	<FMComment: 'Name of accessed field'>
 	^ fieldName
 ]
 
 { #category : #accessing }
 FASTJavaClassProperty >> fieldName: anObject [
-
 	<generated>
 	fieldName := anObject
-
 ]
 
 { #category : #accessing }
@@ -72,7 +70,7 @@ FASTJavaClassProperty >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner"
 
 	<generated>
-	<MSEComment: 'The owner type'>
+	<FMComment: 'The owner type'>
 	^ type
 ]
 
@@ -81,7 +79,6 @@ FASTJavaClassProperty >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }

@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaSynchronizedStatement class >> annotation [
 
-	<MSEClass: #SynchronizedStatement super: #FASTStatement>
+	<FMClass: #SynchronizedStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -21,8 +21,8 @@ FASTJavaSynchronizedStatement >> block [
 	"Relation named: #block type: #FASTStatementBlock opposite: #javaSynchronizedStatementOwner"
 
 	<generated>
-	<MSEComment: 'The block that is synchronized'>
-	<MSEProperty: #block type: #FASTStatementBlock opposite: #javaSynchronizedStatementOwner>
+	<FMComment: 'The block that is synchronized'>
+	<FMProperty: #block type: #FASTStatementBlock opposite: #javaSynchronizedStatementOwner>
 	^ self privateState attributeAt: #block ifAbsent: [ nil ]
 ]
 
@@ -52,8 +52,8 @@ FASTJavaSynchronizedStatement >> expression [
 	"Relation named: #expression type: #FASTExpression opposite: #javaSynchronizedStatementOwner"
 
 	<generated>
-	<MSEComment: 'The instance on which the statement block is synchronized'>
-	<MSEProperty: #expression type: #FASTExpression opposite: #javaSynchronizedStatementOwner>
+	<FMComment: 'The instance on which the statement block is synchronized'>
+	<FMProperty: #expression type: #FASTExpression opposite: #javaSynchronizedStatementOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

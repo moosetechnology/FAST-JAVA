@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 FASTJavaEntity class >> annotation [
 
-	<MSEClass: #Entity super: #MooseEntity>
+	<FMClass: #Entity super: #MooseEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

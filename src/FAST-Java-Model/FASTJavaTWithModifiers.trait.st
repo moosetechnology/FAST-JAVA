@@ -12,14 +12,14 @@ Trait {
 { #category : #meta }
 FASTJavaTWithModifiers classSide >> annotation [
 
-	<MSEClass: #TWithModifiers super: #Object>
+	<FMClass: #TWithModifiers super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-FASTJavaTWithModifiers >> addModifiers: anObject [
+FASTJavaTWithModifiers >> addModifier: anObject [
 	<generated>
 	^ self modifiers add: anObject
 ]
@@ -29,7 +29,7 @@ FASTJavaTWithModifiers >> modifiers [
 	"Relation named: #modifiers type: #FASTJavaTModifier opposite: #javaModifierOwner"
 
 	<generated>
-	<MSEComment: 'My modifiers'>
+	<FMComment: 'My modifiers'>
 	<derived>
 	^ modifiers
 ]
@@ -39,7 +39,6 @@ FASTJavaTWithModifiers >> modifiers: anObject [
 
 	<generated>
 	modifiers value: anObject
-
 ]
 
 { #category : #navigation }

@@ -15,7 +15,7 @@ Trait {
 { #category : #meta }
 FASTJavaTModifier classSide >> annotation [
 
-	<MSEClass: #TModifier super: #Object>
+	<FMClass: #TModifier super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -26,7 +26,7 @@ FASTJavaTModifier >> javaModifierOwner [
 	"Relation named: #javaModifierOwner type: #FASTJavaTWithModifiers opposite: #modifiers"
 
 	<generated>
-	<MSEComment: 'The owner of the modifier'>
+	<FMComment: 'The owner of the modifier'>
 	<container>
 	^ javaModifierOwner
 ]
@@ -36,7 +36,6 @@ FASTJavaTModifier >> javaModifierOwner: anObject [
 
 	<generated>
 	javaModifierOwner := anObject
-
 ]
 
 { #category : #navigation }

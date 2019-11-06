@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 FASTJavaClassTypeExpression class >> annotation [
 
-	<MSEClass: #ClassTypeExpression super: #FASTJavaTypeExpression>
+	<FMClass: #ClassTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -24,7 +24,7 @@ FASTJavaClassTypeExpression >> typeName [
 	"Relation named: #typeName type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner"
 
 	<generated>
-	<MSEComment: 'The name of the type'>
+	<FMComment: 'The name of the type'>
 	^ typeName
 ]
 
@@ -33,7 +33,6 @@ FASTJavaClassTypeExpression >> typeName: anObject [
 
 	<generated>
 	typeName := anObject
-
 ]
 
 { #category : #navigation }

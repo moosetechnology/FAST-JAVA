@@ -5,10 +5,10 @@ FASTExpression >> assertConditionOwner [
 	"Relation named: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition"
 
 	<generated>
-	<MSEComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I reprensent a condition for my owner'>
 	<container>
 	<derived>
-	<MSEProperty: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition>
+	<FMProperty: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #assertConditionOwner ifAbsent: [ nil ]
 ]
@@ -32,10 +32,10 @@ FASTExpression >> conditionalConditionOwner [
 	"Relation named: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition"
 
 	<generated>
-	<MSEComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I reprensent a condition for my owner'>
 	<container>
 	<derived>
-	<MSEProperty: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition>
+	<FMProperty: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #conditionalConditionOwner ifAbsent: [ nil ]
 ]
@@ -59,10 +59,10 @@ FASTExpression >> conditionalElsePartOwner [
 	"Relation named: #conditionalElsePartOwner type: #FASTJavaConditionalExpression opposite: #elsePart"
 
 	<generated>
-	<MSEComment: 'The if owner (if possible)'>
+	<FMComment: 'The if owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #conditionalElsePartOwner type: #FASTJavaConditionalExpression opposite: #elsePart>
+	<FMProperty: #conditionalElsePartOwner type: #FASTJavaConditionalExpression opposite: #elsePart>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #conditionalElsePartOwner ifAbsent: [ nil ]
 ]
@@ -86,10 +86,10 @@ FASTExpression >> conditionalThenPartOwner [
 	"Relation named: #conditionalThenPartOwner type: #FASTJavaConditionalExpression opposite: #thenPart"
 
 	<generated>
-	<MSEComment: 'The if owner (if possible)'>
+	<FMComment: 'The if owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #conditionalThenPartOwner type: #FASTJavaConditionalExpression opposite: #thenPart>
+	<FMProperty: #conditionalThenPartOwner type: #FASTJavaConditionalExpression opposite: #thenPart>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #conditionalThenPartOwner ifAbsent: [ nil ]
 ]
@@ -113,10 +113,10 @@ FASTExpression >> doConditionOwner [
 	"Relation named: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition"
 
 	<generated>
-	<MSEComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I reprensent a condition for my owner'>
 	<container>
 	<derived>
-	<MSEProperty: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition>
+	<FMProperty: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #doConditionOwner ifAbsent: [ nil ]
 ]
@@ -140,10 +140,10 @@ FASTExpression >> forConditionOwner [
 	"Relation named: #forConditionOwner type: #FASTJavaForStatement opposite: #condition"
 
 	<generated>
-	<MSEComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I reprensent a condition for my owner'>
 	<container>
 	<derived>
-	<MSEProperty: #forConditionOwner type: #FASTJavaForStatement opposite: #condition>
+	<FMProperty: #forConditionOwner type: #FASTJavaForStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #forConditionOwner ifAbsent: [ nil ]
 ]
@@ -167,10 +167,10 @@ FASTExpression >> ifConditionOwner [
 	"Relation named: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition"
 
 	<generated>
-	<MSEComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I reprensent a condition for my owner'>
 	<container>
 	<derived>
-	<MSEProperty: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition>
+	<FMProperty: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #ifConditionOwner ifAbsent: [ nil ]
 ]
@@ -194,10 +194,10 @@ FASTExpression >> infixOperationLeftOperandOwner [
 	"Relation named: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand"
 
 	<generated>
-	<MSEComment: 'The left operand (if possible)'>
+	<FMComment: 'The left operand (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand>
+	<FMProperty: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #infixOperationLeftOperandOwner ifAbsent: [ nil ]
 ]
@@ -221,10 +221,10 @@ FASTExpression >> infixOperationRightOperandOwner [
 	"Relation named: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand"
 
 	<generated>
-	<MSEComment: 'The right operand (if possible)'>
+	<FMComment: 'The right operand (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand>
+	<FMProperty: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #infixOperationRightOperandOwner ifAbsent: [ nil ]
 ]
@@ -248,10 +248,10 @@ FASTExpression >> javaArrayAccessOwner [
 	"Relation named: #javaArrayAccessOwner type: #FASTJavaArrayAccess opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The javaArrayAccess owner (if possible)'>
+	<FMComment: 'The javaArrayAccess owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaArrayAccessOwner type: #FASTJavaArrayAccess opposite: #expression>
+	<FMProperty: #javaArrayAccessOwner type: #FASTJavaArrayAccess opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaArrayAccessOwner ifAbsent: [ nil ]
 ]
@@ -275,10 +275,10 @@ FASTExpression >> javaArrayArrayAccessOwner [
 	"Relation named: #javaArrayArrayAccessOwner type: #FASTJavaArrayAccess opposite: #array"
 
 	<generated>
-	<MSEComment: 'The javaArrayArrayAccess owner (if possible)'>
+	<FMComment: 'The javaArrayArrayAccess owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaArrayArrayAccessOwner type: #FASTJavaArrayAccess opposite: #array>
+	<FMProperty: #javaArrayArrayAccessOwner type: #FASTJavaArrayAccess opposite: #array>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaArrayArrayAccessOwner ifAbsent: [ nil ]
 ]
@@ -302,9 +302,9 @@ FASTExpression >> javaArrayInitializers [
 	"Relation named: #javaArrayInitializers type: #FASTJavaArrayInitializer opposite: #initializers"
 
 	<generated>
-	<MSEComment: 'The owner of the expression'>
+	<FMComment: 'The owner of the expression'>
 	<container>
-	<MSEProperty: #javaArrayInitializers type: #FASTJavaArrayInitializer opposite: #initializers>
+	<FMProperty: #javaArrayInitializers type: #FASTJavaArrayInitializer opposite: #initializers>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaArrayInitializers ifAbsent: [ nil ]
 ]
@@ -321,10 +321,10 @@ FASTExpression >> javaArrayTypeNameOwner [
 	"Relation named: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType"
 
 	<generated>
-	<MSEComment: 'The variable expression owner (if possible)'>
+	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType>
+	<FMProperty: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaArrayTypeNameOwner ifAbsent: [ nil ]
 ]
@@ -348,10 +348,10 @@ FASTExpression >> javaAssignementExpressionOwner [
 	"Relation named: #javaAssignementExpressionOwner type: #FASTJavaAssignementExpression opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The javaAssignementExpression owner (if possible)'>
+	<FMComment: 'The javaAssignementExpression owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaAssignementExpressionOwner type: #FASTJavaAssignementExpression opposite: #expression>
+	<FMProperty: #javaAssignementExpressionOwner type: #FASTJavaAssignementExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaAssignementExpressionOwner ifAbsent: [ nil ]
 ]
@@ -375,10 +375,10 @@ FASTExpression >> javaCastExpressionOwner [
 	"Relation named: #javaCastExpressionOwner type: #FASTJavaCastExpression opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The javaCastExpression owner (if possible)'>
+	<FMComment: 'The javaCastExpression owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaCastExpressionOwner type: #FASTJavaCastExpression opposite: #expression>
+	<FMProperty: #javaCastExpressionOwner type: #FASTJavaCastExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaCastExpressionOwner ifAbsent: [ nil ]
 ]
@@ -402,10 +402,10 @@ FASTExpression >> javaForEachStatementOwner [
 	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #list"
 
 	<generated>
-	<MSEComment: 'The javaForEachStatement owner (if possible)'>
+	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #list>
+	<FMProperty: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #list>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaForEachStatementOwner ifAbsent: [ nil ]
 ]
@@ -429,10 +429,10 @@ FASTExpression >> javaLabeledCaseStatementOwner [
 	"Relation named: #javaLabeledCaseStatementOwner type: #FASTJavaLabeledCaseStatement opposite: #label"
 
 	<generated>
-	<MSEComment: 'The javaLabeledCaseStatement owner (if possible)'>
+	<FMComment: 'The javaLabeledCaseStatement owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaLabeledCaseStatementOwner type: #FASTJavaLabeledCaseStatement opposite: #label>
+	<FMProperty: #javaLabeledCaseStatementOwner type: #FASTJavaLabeledCaseStatement opposite: #label>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaLabeledCaseStatementOwner ifAbsent: [ nil ]
 ]
@@ -456,10 +456,10 @@ FASTExpression >> javaMethodInvocationOwner [
 	"Relation named: #javaMethodInvocationOwner type: #FASTJavaMethodInvocation opposite: #receiver"
 
 	<generated>
-	<MSEComment: 'The javaMethodInvocation owner (if possible)'>
+	<FMComment: 'The javaMethodInvocation owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaMethodInvocationOwner type: #FASTJavaMethodInvocation opposite: #receiver>
+	<FMProperty: #javaMethodInvocationOwner type: #FASTJavaMethodInvocation opposite: #receiver>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaMethodInvocationOwner ifAbsent: [ nil ]
 ]
@@ -483,10 +483,10 @@ FASTExpression >> javaNewArrayInitialOwner [
 	"Relation named: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer"
 
 	<generated>
-	<MSEComment: 'I belong to a new array initializations'>
+	<FMComment: 'I belong to a new array initializations'>
 	<container>
 	<derived>
-	<MSEProperty: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer>
+	<FMProperty: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaNewArrayInitialOwner ifAbsent: [ nil ]
 ]
@@ -510,10 +510,10 @@ FASTExpression >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The owner of the synchronized block (if possible)'>
+	<FMComment: 'The owner of the synchronized block (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #expression>
+	<FMProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]
@@ -537,10 +537,10 @@ FASTExpression >> javaThrowStatementOwner [
 	"Relation named: #javaThrowStatementOwner type: #FASTJavaThrowStatement opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The javaThrowStatement owner (if possible)'>
+	<FMComment: 'The javaThrowStatement owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaThrowStatementOwner type: #FASTJavaThrowStatement opposite: #expression>
+	<FMProperty: #javaThrowStatementOwner type: #FASTJavaThrowStatement opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaThrowStatementOwner ifAbsent: [ nil ]
 ]
@@ -564,10 +564,10 @@ FASTExpression >> javaUnaryExpressionOwner [
 	"Relation named: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The javaUnaryExpression owner (if possible)'>
+	<FMComment: 'The javaUnaryExpression owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression>
+	<FMProperty: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaUnaryExpressionOwner ifAbsent: [ nil ]
 ]
@@ -591,10 +591,10 @@ FASTExpression >> javaVariableDeclaratorExpressionOwner [
 	"Relation named: #javaVariableDeclaratorExpressionOwner type: #FASTJavaVariableDeclarator opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The javaVariableDeclarator owner (if possible)'>
+	<FMComment: 'The javaVariableDeclarator owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaVariableDeclaratorExpressionOwner type: #FASTJavaVariableDeclarator opposite: #expression>
+	<FMProperty: #javaVariableDeclaratorExpressionOwner type: #FASTJavaVariableDeclarator opposite: #expression>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsent: [ nil ]
 ]
@@ -618,10 +618,10 @@ FASTExpression >> whileConditionOwner [
 	"Relation named: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition"
 
 	<generated>
-	<MSEComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I reprensent a condition for my owner'>
 	<container>
 	<derived>
-	<MSEProperty: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition>
+	<FMProperty: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #whileConditionOwner ifAbsent: [ nil ]
 ]

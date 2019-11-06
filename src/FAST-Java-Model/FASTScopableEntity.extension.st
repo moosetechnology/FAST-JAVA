@@ -5,9 +5,9 @@ FASTScopableEntity >> newClassOwner [
 	"Relation named: #newClassOwner type: #FASTJavaNewClassExpression opposite: #declarations"
 
 	<generated>
-	<MSEComment: 'I may be in a new class (ex. anonymous one)'>
+	<FMComment: 'I may be in a new class (ex. anonymous one)'>
 	<container>
-	<MSEProperty: #newClassOwner type: #FASTJavaNewClassExpression opposite: #declarations>
+	<FMProperty: #newClassOwner type: #FASTJavaNewClassExpression opposite: #declarations>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #newClassOwner ifAbsent: [ nil ]
 ]

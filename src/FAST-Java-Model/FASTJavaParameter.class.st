@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FASTJavaParameter class >> annotation [
 
-	<MSEClass: #Parameter super: #FASTJavaVariableExpression>
+	<FMClass: #Parameter super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -25,7 +25,7 @@ FASTJavaParameter >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner"
 
 	<generated>
-	<MSEComment: 'The type of the parameter'>
+	<FMComment: 'The type of the parameter'>
 	^ type
 ]
 
@@ -34,7 +34,6 @@ FASTJavaParameter >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }
@@ -49,7 +48,7 @@ FASTJavaParameter >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner"
 
 	<generated>
-	<MSEComment: 'parameter variable'>
+	<FMComment: 'parameter variable'>
 	^ variable
 ]
 
@@ -58,7 +57,6 @@ FASTJavaParameter >> variable: anObject [
 
 	<generated>
 	variable := anObject
-
 ]
 
 { #category : #navigation }

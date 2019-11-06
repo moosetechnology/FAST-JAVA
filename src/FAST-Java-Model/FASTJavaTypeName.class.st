@@ -16,17 +16,10 @@ Class {
 { #category : #meta }
 FASTJavaTypeName class >> annotation [
 
-	<MSEClass: #TypeName super: #FASTExpression>
+	<FMClass: #TypeName super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaTypeName class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassTypeExpression. FASTJavaQualifiedTypeName }
 ]
 
 { #category : #accessing }
@@ -34,7 +27,7 @@ FASTJavaTypeName >> javaTypeNameQualify [
 	"Relation named: #javaTypeNameQualify type: #FASTJavaQualifiedTypeName opposite: #namespace"
 
 	<generated>
-	<MSEComment: 'the name I qualify'>
+	<FMComment: 'the name I qualify'>
 	<container>
 	<derived>
 	^ javaTypeNameQualify
@@ -45,7 +38,6 @@ FASTJavaTypeName >> javaTypeNameQualify: anObject [
 
 	<generated>
 	javaTypeNameQualify := anObject
-
 ]
 
 { #category : #navigation }
@@ -60,7 +52,7 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
 	"Relation named: #javaTypeNameTypeExpressionOwner type: #FASTJavaClassTypeExpression opposite: #typeName"
 
 	<generated>
-	<MSEComment: 'The type expression that own me'>
+	<FMComment: 'The type expression that own me'>
 	<container>
 	<derived>
 	^ javaTypeNameTypeExpressionOwner
@@ -71,7 +63,6 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner: anObject [
 
 	<generated>
 	javaTypeNameTypeExpressionOwner := anObject
-
 ]
 
 { #category : #navigation }

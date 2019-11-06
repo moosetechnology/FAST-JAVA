@@ -16,17 +16,10 @@ Class {
 { #category : #meta }
 FASTJavaArrayAccess class >> annotation [
 
-	<MSEClass: #ArrayAccess super: #FASTExpression>
+	<FMClass: #ArrayAccess super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaArrayAccess class >> requirements [
-
-	<generated>
-	^ { FASTJavaAssignementExpression }
 ]
 
 { #category : #accessing }
@@ -34,8 +27,8 @@ FASTJavaArrayAccess >> array [
 	"Relation named: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner"
 
 	<generated>
-	<MSEComment: 'Name of accessed field'>
-	<MSEProperty: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner>
+	<FMComment: 'Name of accessed field'>
+	<FMProperty: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner>
 	^ self privateState attributeAt: #array ifAbsent: [ nil ]
 ]
 
@@ -65,8 +58,8 @@ FASTJavaArrayAccess >> expression [
 	"Relation named: #expression type: #FASTExpression opposite: #javaArrayAccessOwner"
 
 	<generated>
-	<MSEComment: 'The accessed index'>
-	<MSEProperty: #expression type: #FASTExpression opposite: #javaArrayAccessOwner>
+	<FMComment: 'The accessed index'>
+	<FMProperty: #expression type: #FASTExpression opposite: #javaArrayAccessOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 

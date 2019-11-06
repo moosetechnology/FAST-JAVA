@@ -13,17 +13,10 @@ Class {
 { #category : #meta }
 FASTJavaStringLiteral class >> annotation [
 
-	<MSEClass: #StringLiteral super: #FASTStringLiteral>
+	<FMClass: #StringLiteral super: #FASTStringLiteral>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaStringLiteral class >> requirements [
-
-	<generated>
-	^ { FASTJavaAssertStatement }
 ]
 
 { #category : #accessing }
@@ -31,7 +24,7 @@ FASTJavaStringLiteral >> javaStringAssertStatementOwner [
 	"Relation named: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message"
 
 	<generated>
-	<MSEComment: 'the assert that can raised me'>
+	<FMComment: 'the assert that can raised me'>
 	<container>
 	<derived>
 	^ javaStringAssertStatementOwner
@@ -42,7 +35,6 @@ FASTJavaStringLiteral >> javaStringAssertStatementOwner: anObject [
 
 	<generated>
 	javaStringAssertStatementOwner := anObject
-
 ]
 
 { #category : #navigation }

@@ -20,7 +20,7 @@ Class {
 { #category : #meta }
 FASTJavaAssertStatement class >> annotation [
 
-	<MSEClass: #AssertStatement super: #FASTStatement>
+	<FMClass: #AssertStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -31,8 +31,8 @@ FASTJavaAssertStatement >> condition [
 	"Relation named: #condition type: #FASTExpression opposite: #assertConditionOwner"
 
 	<generated>
-	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #FASTExpression opposite: #assertConditionOwner>
+	<FMComment: 'The condition of the statement'>
+	<FMProperty: #condition type: #FASTExpression opposite: #assertConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 
@@ -62,7 +62,7 @@ FASTJavaAssertStatement >> message [
 	"Relation named: #message type: #FASTJavaStringLiteral opposite: #javaStringAssertStatementOwner"
 
 	<generated>
-	<MSEComment: 'The error message that is raised in case the condition is false'>
+	<FMComment: 'The error message that is raised in case the condition is false'>
 	^ message
 ]
 
@@ -71,7 +71,6 @@ FASTJavaAssertStatement >> message: anObject [
 
 	<generated>
 	message := anObject
-
 ]
 
 { #category : #navigation }

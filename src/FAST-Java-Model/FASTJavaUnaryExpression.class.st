@@ -26,7 +26,7 @@ Class {
 { #category : #meta }
 FASTJavaUnaryExpression class >> annotation [
 
-	<MSEClass: #UnaryExpression super: #FASTExpression>
+	<FMClass: #UnaryExpression super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -37,8 +37,8 @@ FASTJavaUnaryExpression >> expression [
 	"Relation named: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner"
 
 	<generated>
-	<MSEComment: 'The affected expression'>
-	<MSEProperty: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner>
+	<FMComment: 'The affected expression'>
+	<FMProperty: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -66,33 +66,29 @@ FASTJavaUnaryExpression >> expressionGroup [
 { #category : #accessing }
 FASTJavaUnaryExpression >> isPrefixedUnaryExpression [
 
-	<MSEProperty: #isPrefixedUnaryExpression type: #Boolean>
+	<FMProperty: #isPrefixedUnaryExpression type: #Boolean>
 	<generated>
-	<MSEComment: 'true if the expression is prefixed (ex. ++i) else false'>
+	<FMComment: 'true if the expression is prefixed (ex. ++i) else false'>
 	^ isPrefixedUnaryExpression
 ]
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> isPrefixedUnaryExpression: anObject [
-
 	<generated>
 	isPrefixedUnaryExpression := anObject
-
 ]
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> operator [
 
-	<MSEProperty: #operator type: #String>
+	<FMProperty: #operator type: #String>
 	<generated>
-	<MSEComment: 'The operator string to apply to the expression'>
+	<FMComment: 'The operator string to apply to the expression'>
 	^ operator
 ]
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> operator: anObject [
-
 	<generated>
 	operator := anObject
-
 ]

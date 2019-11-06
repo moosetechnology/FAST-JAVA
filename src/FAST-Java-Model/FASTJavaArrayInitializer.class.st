@@ -19,14 +19,14 @@ Class {
 { #category : #meta }
 FASTJavaArrayInitializer class >> annotation [
 
-	<MSEClass: #ArrayInitializer super: #FASTExpression>
+	<FMClass: #ArrayInitializer super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-FASTJavaArrayInitializer >> addInitializers: anObject [
+FASTJavaArrayInitializer >> addInitializer: anObject [
 	<generated>
 	^ self initializers add: anObject
 ]
@@ -36,9 +36,9 @@ FASTJavaArrayInitializer >> initializers [
 	"Relation named: #initializers type: #FASTExpression opposite: #javaArrayInitializers"
 
 	<generated>
-	<MSEComment: 'My initializers'>
+	<FMComment: 'My initializers'>
 	<derived>
-	<MSEProperty: #initializers type: #FASTExpression opposite: #javaArrayInitializers>
+	<FMProperty: #initializers type: #FASTExpression opposite: #javaArrayInitializers>
 	^ self privateState attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaArrayInitializers: ]
 ]
 

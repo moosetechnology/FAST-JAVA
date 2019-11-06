@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 FASTJavaSourceTextAnchor class >> annotation [
 
-	<MSEClass: #SourceTextAnchor super: #FASTJavaSourceAnchor>
+	<FMClass: #SourceTextAnchor super: #FASTJavaSourceAnchor>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

@@ -26,14 +26,14 @@ Class {
 { #category : #meta }
 FASTJavaTryCatchStatement class >> annotation [
 
-	<MSEClass: #TryCatchStatement super: #FASTStatement>
+	<FMClass: #TryCatchStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-FASTJavaTryCatchStatement >> addCatches: anObject [
+FASTJavaTryCatchStatement >> addCatch: anObject [
 	<generated>
 	^ self catches add: anObject
 ]
@@ -43,7 +43,7 @@ FASTJavaTryCatchStatement >> catches [
 	"Relation named: #catches type: #FASTJavaCatchPartStatement opposite: #tryOwner"
 
 	<generated>
-	<MSEComment: 'I contains all the catch statements'>
+	<FMComment: 'I contains all the catch statements'>
 	<derived>
 	^ catches
 ]
@@ -53,7 +53,6 @@ FASTJavaTryCatchStatement >> catches: anObject [
 
 	<generated>
 	catches value: anObject
-
 ]
 
 { #category : #navigation }
@@ -68,8 +67,8 @@ FASTJavaTryCatchStatement >> try [
 	"Relation named: #try type: #FASTStatement opposite: #javaTryCatchOwner"
 
 	<generated>
-	<MSEComment: 'I represent the ''try'' part of the TryCatch Statement'>
-	<MSEProperty: #try type: #FASTStatement opposite: #javaTryCatchOwner>
+	<FMComment: 'I represent the ''try'' part of the TryCatch Statement'>
+	<FMProperty: #try type: #FASTStatement opposite: #javaTryCatchOwner>
 	^ self privateState attributeAt: #try ifAbsent: [ nil ]
 ]
 

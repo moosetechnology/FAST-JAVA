@@ -18,7 +18,7 @@ Class {
 { #category : #meta }
 FASTJavaInfixOperation class >> annotation [
 
-	<MSEClass: #InfixOperation super: #FASTExpression>
+	<FMClass: #InfixOperation super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -29,8 +29,8 @@ FASTJavaInfixOperation >> leftOperand [
 	"Relation named: #leftOperand type: #FASTExpression opposite: #infixOperationLeftOperandOwner"
 
 	<generated>
-	<MSEComment: 'leftOperand'>
-	<MSEProperty: #leftOperand type: #FASTExpression opposite: #infixOperationLeftOperandOwner>
+	<FMComment: 'leftOperand'>
+	<FMProperty: #leftOperand type: #FASTExpression opposite: #infixOperationLeftOperandOwner>
 	^ self privateState attributeAt: #leftOperand ifAbsent: [ nil ]
 ]
 
@@ -58,18 +58,16 @@ FASTJavaInfixOperation >> leftOperandGroup [
 { #category : #accessing }
 FASTJavaInfixOperation >> operator [
 
-	<MSEProperty: #operator type: #String>
+	<FMProperty: #operator type: #String>
 	<generated>
-	<MSEComment: 'operator s symbol'>
+	<FMComment: 'operator s symbol'>
 	^ operator
 ]
 
 { #category : #accessing }
 FASTJavaInfixOperation >> operator: anObject [
-
 	<generated>
 	operator := anObject
-
 ]
 
 { #category : #accessing }
@@ -77,8 +75,8 @@ FASTJavaInfixOperation >> rightOperand [
 	"Relation named: #rightOperand type: #FASTExpression opposite: #infixOperationRightOperandOwner"
 
 	<generated>
-	<MSEComment: 'rightOperand'>
-	<MSEProperty: #rightOperand type: #FASTExpression opposite: #infixOperationRightOperandOwner>
+	<FMComment: 'rightOperand'>
+	<FMProperty: #rightOperand type: #FASTExpression opposite: #infixOperationRightOperandOwner>
 	^ self privateState attributeAt: #rightOperand ifAbsent: [ nil ]
 ]
 

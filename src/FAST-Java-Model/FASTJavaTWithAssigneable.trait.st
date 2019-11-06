@@ -12,7 +12,7 @@ Trait {
 { #category : #meta }
 FASTJavaTWithAssigneable classSide >> annotation [
 
-	<MSEClass: #TWithAssigneable super: #Object>
+	<FMClass: #TWithAssigneable super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -23,7 +23,7 @@ FASTJavaTWithAssigneable >> variable [
 	"Relation named: #variable type: #FASTJavaTAssigneable opposite: #javaVariableAssignementOwner"
 
 	<generated>
-	<MSEComment: 'My variable'>
+	<FMComment: 'My variable'>
 	^ variable
 ]
 
@@ -32,7 +32,6 @@ FASTJavaTWithAssigneable >> variable: anObject [
 
 	<generated>
 	variable := anObject
-
 ]
 
 { #category : #navigation }

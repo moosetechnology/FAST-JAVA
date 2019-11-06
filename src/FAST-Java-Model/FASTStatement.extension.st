@@ -5,10 +5,10 @@ FASTStatement >> doBodyOwner [
 	"Relation named: #doBodyOwner type: #FASTJavaDoWhileStatement opposite: #body"
 
 	<generated>
-	<MSEComment: 'I am the body of the do'>
+	<FMComment: 'I am the body of the do'>
 	<container>
 	<derived>
-	<MSEProperty: #doBodyOwner type: #FASTJavaDoWhileStatement opposite: #body>
+	<FMProperty: #doBodyOwner type: #FASTJavaDoWhileStatement opposite: #body>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #doBodyOwner ifAbsent: [ nil ]
 ]
@@ -32,10 +32,10 @@ FASTStatement >> forBodyOwner [
 	"Relation named: #forBodyOwner type: #FASTJavaForStatement opposite: #body"
 
 	<generated>
-	<MSEComment: 'I am the body of the for'>
+	<FMComment: 'I am the body of the for'>
 	<container>
 	<derived>
-	<MSEProperty: #forBodyOwner type: #FASTJavaForStatement opposite: #body>
+	<FMProperty: #forBodyOwner type: #FASTJavaForStatement opposite: #body>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #forBodyOwner ifAbsent: [ nil ]
 ]
@@ -59,10 +59,10 @@ FASTStatement >> forIncrementorOwner [
 	"Relation named: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor"
 
 	<generated>
-	<MSEComment: 'I am the incrementor of the for'>
+	<FMComment: 'I am the incrementor of the for'>
 	<container>
 	<derived>
-	<MSEProperty: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor>
+	<FMProperty: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #forIncrementorOwner ifAbsent: [ nil ]
 ]
@@ -86,10 +86,10 @@ FASTStatement >> forIninitializerOwner [
 	"Relation named: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer"
 
 	<generated>
-	<MSEComment: 'I am the initializer of the for'>
+	<FMComment: 'I am the initializer of the for'>
 	<container>
 	<derived>
-	<MSEProperty: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer>
+	<FMProperty: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #forIninitializerOwner ifAbsent: [ nil ]
 ]
@@ -113,10 +113,10 @@ FASTStatement >> ifElsePartOwner [
 	"Relation named: #ifElsePartOwner type: #FASTJavaIfStatement opposite: #elsePart"
 
 	<generated>
-	<MSEComment: 'The if owner (if possible)'>
+	<FMComment: 'The if owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #ifElsePartOwner type: #FASTJavaIfStatement opposite: #elsePart>
+	<FMProperty: #ifElsePartOwner type: #FASTJavaIfStatement opposite: #elsePart>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #ifElsePartOwner ifAbsent: [ nil ]
 ]
@@ -140,10 +140,10 @@ FASTStatement >> ifThenPartOwner [
 	"Relation named: #ifThenPartOwner type: #FASTJavaIfStatement opposite: #thenPart"
 
 	<generated>
-	<MSEComment: 'The if owner (if possible)'>
+	<FMComment: 'The if owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #ifThenPartOwner type: #FASTJavaIfStatement opposite: #thenPart>
+	<FMProperty: #ifThenPartOwner type: #FASTJavaIfStatement opposite: #thenPart>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #ifThenPartOwner ifAbsent: [ nil ]
 ]
@@ -167,10 +167,10 @@ FASTStatement >> javaCatchPartStatementOwner [
 	"Relation named: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body"
 
 	<generated>
-	<MSEComment: 'The javaCatchPartStatementOwner owner (if possible)'>
+	<FMComment: 'The javaCatchPartStatementOwner owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body>
+	<FMProperty: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaCatchPartStatementOwner ifAbsent: [ nil ]
 ]
@@ -194,10 +194,10 @@ FASTStatement >> javaForEachStatementOwner [
 	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body"
 
 	<generated>
-	<MSEComment: 'The javaForEachStatement owner (if possible)'>
+	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body>
+	<FMProperty: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaForEachStatementOwner ifAbsent: [ nil ]
 ]
@@ -221,10 +221,10 @@ FASTStatement >> javaTryCatchOwner [
 	"Relation named: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try"
 
 	<generated>
-	<MSEComment: 'The javaTryCatch owner (if possible)'>
+	<FMComment: 'The javaTryCatch owner (if possible)'>
 	<container>
 	<derived>
-	<MSEProperty: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try>
+	<FMProperty: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #javaTryCatchOwner ifAbsent: [ nil ]
 ]
@@ -248,10 +248,10 @@ FASTStatement >> whileBodyOwner [
 	"Relation named: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body"
 
 	<generated>
-	<MSEComment: 'I am the body of the do'>
+	<FMComment: 'I am the body of the do'>
 	<container>
 	<derived>
-	<MSEProperty: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body>
+	<FMProperty: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body>
 	<package: #'FAST-Java-Model'>
 	^ self privateState attributeAt: #whileBodyOwner ifAbsent: [ nil ]
 ]

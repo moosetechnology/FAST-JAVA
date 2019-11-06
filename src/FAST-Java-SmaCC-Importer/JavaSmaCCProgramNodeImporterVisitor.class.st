@@ -268,10 +268,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration [
 	self create: FASTJavaClassDeclaration from: aClassDeclaration.
-	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclarations: (self clone accept: declaration) ].
-	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterfaces: (self clone accept: interface) ].
+	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
+	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
 	aClassDeclaration superclass ifNotNil: [ :superclass | currentFASTEntity superclass: (self clone accept: superclass) ].
-	aClassDeclaration modifiers do: [ :modifier | currentFASTEntity addModifiers: (self clone accept: modifier) ].
+	aClassDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	currentFASTEntity name: aClassDeclaration name value.
 	^ currentFASTEntity
 ]
@@ -321,9 +321,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 		name: aConstructorDeclaration name name value;
 		yourself.
 	self generalVisitActionForNodeEntity: aConstructorDeclaration.
-	aConstructorDeclaration parameters do: [ :parameter | currentFASTEntity addParameters: (self clone accept: parameter) ].
+	aConstructorDeclaration parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
 	currentFASTEntity statementBlock: (self clone accept: aConstructorDeclaration body).
-	aConstructorDeclaration modifiers do: [ :modifier | currentFASTEntity addModifiers: (self clone accept: modifier) ].
+	aConstructorDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	^ currentFASTEntity
 ]
 
@@ -523,7 +523,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression 
 	currentFASTEntity := self
 		addToModel: FASTJavaLambdaExpression new.
 	self generalVisitActionForNodeEntity: aLambdaExpression.
-	aLambdaExpression parameters do: [ :parameter | currentFASTEntity addParameters: (self clone accept: parameter) ].
+	aLambdaExpression parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
 	currentFASTEntity
 		expression: (self clone accept: aLambdaExpression value).
 	^ currentFASTEntity
@@ -565,9 +565,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 	self create: FASTJavaMethodEntity from: aMethodDeclaration.
 	currentFASTEntity name: aMethodDeclaration declarator name value.
 	aMethodDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
-	aMethodDeclaration declarator parameters do: [ :parameter | currentFASTEntity addParameters: (self clone accept: parameter) ].
+	aMethodDeclaration declarator parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
 	currentFASTEntity statementBlock: (self clone accept: aMethodDeclaration body).
-	aMethodDeclaration modifiers do: [ :modifier | currentFASTEntity addModifiers: (self clone accept: modifier) ].
+	aMethodDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	^ currentFASTEntity
 ]
 

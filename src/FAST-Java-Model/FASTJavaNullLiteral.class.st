@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaNullLiteral class >> annotation [
 
-	<MSEClass: #NullLiteral super: #FASTNullPointerLiteral>
+	<FMClass: #NullLiteral super: #FASTNullPointerLiteral>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

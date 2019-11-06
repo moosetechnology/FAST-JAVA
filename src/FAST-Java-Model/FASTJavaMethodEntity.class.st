@@ -15,17 +15,10 @@ Class {
 { #category : #meta }
 FASTJavaMethodEntity class >> annotation [
 
-	<MSEClass: #MethodEntity super: #FASTNamedBehaviouralEntity>
+	<FMClass: #MethodEntity super: #FASTNamedBehaviouralEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaMethodEntity class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassDeclaration }
 ]
 
 { #category : #accessing }
@@ -33,7 +26,7 @@ FASTJavaMethodEntity >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner"
 
 	<generated>
-	<MSEComment: 'The type of the method'>
+	<FMComment: 'The type of the method'>
 	^ type
 ]
 
@@ -42,7 +35,6 @@ FASTJavaMethodEntity >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }

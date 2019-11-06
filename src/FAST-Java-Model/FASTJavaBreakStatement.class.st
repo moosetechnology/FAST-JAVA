@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaBreakStatement class >> annotation [
 
-	<MSEClass: #BreakStatement super: #FASTStatement>
+	<FMClass: #BreakStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

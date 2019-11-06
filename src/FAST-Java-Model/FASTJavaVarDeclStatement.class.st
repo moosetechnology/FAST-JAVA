@@ -23,21 +23,14 @@ Class {
 { #category : #meta }
 FASTJavaVarDeclStatement class >> annotation [
 
-	<MSEClass: #VarDeclStatement super: #FASTStatement>
+	<FMClass: #VarDeclStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #meta }
-FASTJavaVarDeclStatement class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassDeclaration }
-]
-
 { #category : #adding }
-FASTJavaVarDeclStatement >> addDeclarators: anObject [
+FASTJavaVarDeclStatement >> addDeclarator: anObject [
 	<generated>
 	^ self declarators add: anObject
 ]
@@ -47,7 +40,7 @@ FASTJavaVarDeclStatement >> declarators [
 	"Relation named: #declarators type: #FASTJavaVariableDeclarator opposite: #varDeclOwner"
 
 	<generated>
-	<MSEComment: 'The declarators for the type'>
+	<FMComment: 'The declarators for the type'>
 	<derived>
 	^ declarators
 ]
@@ -57,7 +50,6 @@ FASTJavaVarDeclStatement >> declarators: anObject [
 
 	<generated>
 	declarators value: anObject
-
 ]
 
 { #category : #navigation }
@@ -72,7 +64,7 @@ FASTJavaVarDeclStatement >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner"
 
 	<generated>
-	<MSEComment: 'The type of the declared variables'>
+	<FMComment: 'The type of the declared variables'>
 	^ type
 ]
 
@@ -81,7 +73,6 @@ FASTJavaVarDeclStatement >> type: anObject [
 
 	<generated>
 	type := anObject
-
 ]
 
 { #category : #navigation }

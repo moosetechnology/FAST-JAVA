@@ -13,14 +13,14 @@ Class {
 { #category : #meta }
 FASTJavaLambdaExpression class >> annotation [
 
-	<MSEClass: #LambdaExpression super: #FASTExpression>
+	<FMClass: #LambdaExpression super: #FASTExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-FASTJavaLambdaExpression >> addParameters: anObject [
+FASTJavaLambdaExpression >> addParameter: anObject [
 	<generated>
 	^ self parameters add: anObject
 ]
@@ -30,8 +30,8 @@ FASTJavaLambdaExpression >> expression [
 	"Relation named: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner"
 
 	<generated>
-	<MSEComment: 'Expression to be executed as part of the lambda.'>
-	<MSEProperty: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner>
+	<FMComment: 'Expression to be executed as part of the lambda.'>
+	<FMProperty: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
@@ -61,7 +61,7 @@ FASTJavaLambdaExpression >> parameters [
 	"Relation named: #parameters type: #FASTJavaVariableExpression opposite: #javaLambdaParameterOwner"
 
 	<generated>
-	<MSEComment: 'The parameters of the lambda'>
+	<FMComment: 'The parameters of the lambda'>
 	<derived>
 	^ parameters
 ]
@@ -71,7 +71,6 @@ FASTJavaLambdaExpression >> parameters: anObject [
 
 	<generated>
 	parameters value: anObject
-
 ]
 
 { #category : #navigation }

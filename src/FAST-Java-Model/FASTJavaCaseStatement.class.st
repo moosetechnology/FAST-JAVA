@@ -13,17 +13,10 @@ Class {
 { #category : #meta }
 FASTJavaCaseStatement class >> annotation [
 
-	<MSEClass: #CaseStatement super: #FASTStatementBlock>
+	<FMClass: #CaseStatement super: #FASTStatementBlock>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaCaseStatement class >> requirements [
-
-	<generated>
-	^ { FASTJavaSwitchStatement }
 ]
 
 { #category : #accessing }
@@ -31,7 +24,7 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
 	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaSwitchStatement opposite: #cases"
 
 	<generated>
-	<MSEComment: 'javaSwitch owner'>
+	<FMComment: 'javaSwitch owner'>
 	<container>
 	^ javaCaseStatementSwitchOwner
 ]
@@ -41,7 +34,6 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner: anObject [
 
 	<generated>
 	javaCaseStatementSwitchOwner := anObject
-
 ]
 
 { #category : #navigation }

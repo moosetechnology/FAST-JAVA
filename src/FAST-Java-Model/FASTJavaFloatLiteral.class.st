@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaFloatLiteral class >> annotation [
 
-	<MSEClass: #FloatLiteral super: #FASTLiteral>
+	<FMClass: #FloatLiteral super: #FASTLiteral>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

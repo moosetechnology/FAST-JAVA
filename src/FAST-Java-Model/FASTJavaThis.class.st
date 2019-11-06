@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 FASTJavaThis class >> annotation [
 
-	<MSEClass: #This super: #FASTJavaVariableExpression>
+	<FMClass: #This super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

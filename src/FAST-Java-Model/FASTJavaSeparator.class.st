@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 FASTJavaSeparator class >> annotation [
 
-	<MSEClass: #Separator super: #FASTJavaVariableExpression>
+	<FMClass: #Separator super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -22,16 +22,14 @@ FASTJavaSeparator class >> annotation [
 { #category : #accessing }
 FASTJavaSeparator >> separator [
 
-	<MSEProperty: #separator type: #String>
+	<FMProperty: #separator type: #String>
 	<generated>
-	<MSEComment: 'separator'>
+	<FMComment: 'separator'>
 	^ separator
 ]
 
 { #category : #accessing }
 FASTJavaSeparator >> separator: anObject [
-
 	<generated>
 	separator := anObject
-
 ]

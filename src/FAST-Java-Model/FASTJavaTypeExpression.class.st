@@ -14,17 +14,10 @@ Class {
 { #category : #meta }
 FASTJavaTypeExpression class >> annotation [
 
-	<MSEClass: #TypeExpression super: #FASTJavaVariableExpression>
+	<FMClass: #TypeExpression super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaTypeExpression class >> requirements [
-
-	<generated>
-	^ { FASTJavaClassDeclaration }
 ]
 
 { #category : #accessing }
@@ -32,7 +25,7 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnver [
 	"Relation named: #javaClassDeclarationInterfaceOwnver type: #FASTJavaClassDeclaration opposite: #interfaces"
 
 	<generated>
-	<MSEComment: 'The class that own me'>
+	<FMComment: 'The class that own me'>
 	<container>
 	^ javaClassDeclarationInterfaceOwnver
 ]
@@ -42,7 +35,6 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnver: anObject [
 
 	<generated>
 	javaClassDeclarationInterfaceOwnver := anObject
-
 ]
 
 { #category : #navigation }
@@ -57,7 +49,7 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver [
 	"Relation named: #javaClassDeclarationSuperclassOwnver type: #FASTJavaClassDeclaration opposite: #superclass"
 
 	<generated>
-	<MSEComment: 'The class that own me'>
+	<FMComment: 'The class that own me'>
 	<container>
 	<derived>
 	^ javaClassDeclarationSuperclassOwnver
@@ -68,7 +60,6 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver: anObject [
 
 	<generated>
 	javaClassDeclarationSuperclassOwnver := anObject
-
 ]
 
 { #category : #navigation }

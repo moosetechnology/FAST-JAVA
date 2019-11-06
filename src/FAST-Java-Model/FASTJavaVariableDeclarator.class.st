@@ -21,17 +21,10 @@ Class {
 { #category : #meta }
 FASTJavaVariableDeclarator class >> annotation [
 
-	<MSEClass: #VariableDeclarator super: #FASTEntitySourceAnchor>
+	<FMClass: #VariableDeclarator super: #FASTEntitySourceAnchor>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaVariableDeclarator class >> requirements [
-
-	<generated>
-	^ { FASTJavaVarDeclStatement }
 ]
 
 { #category : #accessing }
@@ -39,8 +32,8 @@ FASTJavaVariableDeclarator >> expression [
 	"Relation named: #expression type: #FASTExpression opposite: #javaVariableDeclaratorExpressionOwner"
 
 	<generated>
-	<MSEComment: 'Expression that s being assigned upon declaration to the var'>
-	<MSEProperty: #expression type: #FASTExpression opposite: #javaVariableDeclaratorExpressionOwner>
+	<FMComment: 'Expression that s being assigned upon declaration to the var'>
+	<FMProperty: #expression type: #FASTExpression opposite: #javaVariableDeclaratorExpressionOwner>
 	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
@@ -71,7 +64,7 @@ FASTJavaVariableDeclarator >> varDeclOwner [
 	"Relation named: #varDeclOwner type: #FASTJavaVarDeclStatement opposite: #declarators"
 
 	<generated>
-	<MSEComment: 'The owner of the declarator'>
+	<FMComment: 'The owner of the declarator'>
 	<container>
 	^ varDeclOwner
 ]
@@ -81,7 +74,6 @@ FASTJavaVariableDeclarator >> varDeclOwner: anObject [
 
 	<generated>
 	varDeclOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -96,7 +88,7 @@ FASTJavaVariableDeclarator >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner"
 
 	<generated>
-	<MSEComment: 'Variable that s being declared'>
+	<FMComment: 'Variable that s being declared'>
 	^ variable
 ]
 
@@ -105,7 +97,6 @@ FASTJavaVariableDeclarator >> variable: anObject [
 
 	<generated>
 	variable := anObject
-
 ]
 
 { #category : #navigation }

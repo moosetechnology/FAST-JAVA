@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaWhileStatement class >> annotation [
 
-	<MSEClass: #WhileStatement super: #FASTStatement>
+	<FMClass: #WhileStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -26,8 +26,8 @@ FASTJavaWhileStatement >> body [
 	"Relation named: #body type: #FASTStatement opposite: #whileBodyOwner"
 
 	<generated>
-	<MSEComment: 'A statement to be evaluated in the loop'>
-	<MSEProperty: #body type: #FASTStatement opposite: #whileBodyOwner>
+	<FMComment: 'A statement to be evaluated in the loop'>
+	<FMProperty: #body type: #FASTStatement opposite: #whileBodyOwner>
 	^ self privateState attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -57,8 +57,8 @@ FASTJavaWhileStatement >> condition [
 	"Relation named: #condition type: #FASTExpression opposite: #whileConditionOwner"
 
 	<generated>
-	<MSEComment: 'The condition of the statement'>
-	<MSEProperty: #condition type: #FASTExpression opposite: #whileConditionOwner>
+	<FMComment: 'The condition of the statement'>
+	<FMProperty: #condition type: #FASTExpression opposite: #whileConditionOwner>
 	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
 ]
 

@@ -26,17 +26,10 @@ Class {
 { #category : #meta }
 FASTJavaVariableExpression class >> annotation [
 
-	<MSEClass: #VariableExpression super: #FASTVariableExpression>
+	<FMClass: #VariableExpression super: #FASTVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-FASTJavaVariableExpression class >> requirements [
-
-	<generated>
-	^ { FASTJavaAnnotation. FASTJavaAssignementExpression. FASTJavaCastExpression. FASTJavaCatchPartStatement. FASTJavaClassProperty. FASTJavaForEachStatement. FASTJavaLambdaExpression. FASTJavaMethodEntity. FASTJavaMethodReference. FASTJavaNewExpression. FASTJavaOuterThis. FASTJavaParameter. FASTJavaVarDeclStatement. FASTJavaVariableDeclarator }
 ]
 
 { #category : #accessing }
@@ -44,7 +37,7 @@ FASTJavaVariableExpression >> javaCastExpressionTypeOwner [
 	"Relation named: #javaCastExpressionTypeOwner type: #FASTJavaCastExpression opposite: #type"
 
 	<generated>
-	<MSEComment: 'The javaCastExpression owner (if possible)'>
+	<FMComment: 'The javaCastExpression owner (if possible)'>
 	<container>
 	<derived>
 	^ javaCastExpressionTypeOwner
@@ -55,7 +48,6 @@ FASTJavaVariableExpression >> javaCastExpressionTypeOwner: anObject [
 
 	<generated>
 	javaCastExpressionTypeOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -70,7 +62,7 @@ FASTJavaVariableExpression >> javaCatchParameterOwnler [
 	"Relation named: #javaCatchParameterOwnler type: #FASTJavaCatchPartStatement opposite: #parameter"
 
 	<generated>
-	<MSEComment: 'The javaCatchPartParameterOwner owner (if possible)'>
+	<FMComment: 'The javaCatchPartParameterOwner owner (if possible)'>
 	<container>
 	<derived>
 	^ javaCatchParameterOwnler
@@ -81,7 +73,6 @@ FASTJavaVariableExpression >> javaCatchParameterOwnler: anObject [
 
 	<generated>
 	javaCatchParameterOwnler := anObject
-
 ]
 
 { #category : #navigation }
@@ -96,7 +87,7 @@ FASTJavaVariableExpression >> javaClassPropertyOwner [
 	"Relation named: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type"
 
 	<generated>
-	<MSEComment: 'The javaClassProperty owner (if possible)'>
+	<FMComment: 'The javaClassProperty owner (if possible)'>
 	<container>
 	<derived>
 	^ javaClassPropertyOwner
@@ -107,7 +98,6 @@ FASTJavaVariableExpression >> javaClassPropertyOwner: anObject [
 
 	<generated>
 	javaClassPropertyOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -122,7 +112,7 @@ FASTJavaVariableExpression >> javaForEachStatementFieldNameOwner [
 	"Relation named: #javaForEachStatementFieldNameOwner type: #FASTJavaForEachStatement opposite: #fieldname"
 
 	<generated>
-	<MSEComment: 'The javaForEachStatement owner (if possible)'>
+	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
 	<derived>
 	^ javaForEachStatementFieldNameOwner
@@ -133,7 +123,6 @@ FASTJavaVariableExpression >> javaForEachStatementFieldNameOwner: anObject [
 
 	<generated>
 	javaForEachStatementFieldNameOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -148,7 +137,7 @@ FASTJavaVariableExpression >> javaForEachStatementTypeOwner [
 	"Relation named: #javaForEachStatementTypeOwner type: #FASTJavaForEachStatement opposite: #type"
 
 	<generated>
-	<MSEComment: 'The javaForEachStatement owner (if possible)'>
+	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
 	<derived>
 	^ javaForEachStatementTypeOwner
@@ -159,7 +148,6 @@ FASTJavaVariableExpression >> javaForEachStatementTypeOwner: anObject [
 
 	<generated>
 	javaForEachStatementTypeOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -174,7 +162,7 @@ FASTJavaVariableExpression >> javaLambdaParameterOwner [
 	"Relation named: #javaLambdaParameterOwner type: #FASTJavaLambdaExpression opposite: #parameters"
 
 	<generated>
-	<MSEComment: 'The lambda parameters owner (if possible)'>
+	<FMComment: 'The lambda parameters owner (if possible)'>
 	<container>
 	^ javaLambdaParameterOwner
 ]
@@ -184,7 +172,6 @@ FASTJavaVariableExpression >> javaLambdaParameterOwner: anObject [
 
 	<generated>
 	javaLambdaParameterOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -199,7 +186,7 @@ FASTJavaVariableExpression >> javaMethodReferenceOwner [
 	"Relation named: #javaMethodReferenceOwner type: #FASTJavaMethodReference opposite: #receiver"
 
 	<generated>
-	<MSEComment: 'The owner of the method reference (if possible)'>
+	<FMComment: 'The owner of the method reference (if possible)'>
 	<container>
 	<derived>
 	^ javaMethodReferenceOwner
@@ -210,7 +197,6 @@ FASTJavaVariableExpression >> javaMethodReferenceOwner: anObject [
 
 	<generated>
 	javaMethodReferenceOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -225,7 +211,7 @@ FASTJavaVariableExpression >> javaMethodTypeOwner [
 	"Relation named: #javaMethodTypeOwner type: #FASTJavaMethodEntity opposite: #type"
 
 	<generated>
-	<MSEComment: 'The variable expression owner (if possible)'>
+	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
 	<derived>
 	^ javaMethodTypeOwner
@@ -236,7 +222,6 @@ FASTJavaVariableExpression >> javaMethodTypeOwner: anObject [
 
 	<generated>
 	javaMethodTypeOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -251,7 +236,7 @@ FASTJavaVariableExpression >> javaNewExpressionOwner [
 	"Relation named: #javaNewExpressionOwner type: #FASTJavaNewExpression opposite: #type"
 
 	<generated>
-	<MSEComment: 'The javaNewExpression owner (if possible)'>
+	<FMComment: 'The javaNewExpression owner (if possible)'>
 	<container>
 	<derived>
 	^ javaNewExpressionOwner
@@ -262,7 +247,6 @@ FASTJavaVariableExpression >> javaNewExpressionOwner: anObject [
 
 	<generated>
 	javaNewExpressionOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -277,7 +261,7 @@ FASTJavaVariableExpression >> javaOuterThisOwner [
 	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
 
 	<generated>
-	<MSEComment: 'The javaOuterThis owner (if possible)'>
+	<FMComment: 'The javaOuterThis owner (if possible)'>
 	<container>
 	<derived>
 	^ javaOuterThisOwner
@@ -288,7 +272,6 @@ FASTJavaVariableExpression >> javaOuterThisOwner: anObject [
 
 	<generated>
 	javaOuterThisOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -303,7 +286,7 @@ FASTJavaVariableExpression >> javaParameterTypeOwner [
 	"Relation named: #javaParameterTypeOwner type: #FASTJavaParameter opposite: #type"
 
 	<generated>
-	<MSEComment: 'The variable expression owner (if possible)'>
+	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
 	<derived>
 	^ javaParameterTypeOwner
@@ -314,7 +297,6 @@ FASTJavaVariableExpression >> javaParameterTypeOwner: anObject [
 
 	<generated>
 	javaParameterTypeOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -329,7 +311,7 @@ FASTJavaVariableExpression >> javaParameterVariableOwner [
 	"Relation named: #javaParameterVariableOwner type: #FASTJavaParameter opposite: #variable"
 
 	<generated>
-	<MSEComment: 'The variable expression owner (if possible)'>
+	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
 	<derived>
 	^ javaParameterVariableOwner
@@ -340,7 +322,6 @@ FASTJavaVariableExpression >> javaParameterVariableOwner: anObject [
 
 	<generated>
 	javaParameterVariableOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -355,7 +336,7 @@ FASTJavaVariableExpression >> javaVarDeclTypeOwner [
 	"Relation named: #javaVarDeclTypeOwner type: #FASTJavaVarDeclStatement opposite: #type"
 
 	<generated>
-	<MSEComment: 'The variable expression owner (if possible)'>
+	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
 	<derived>
 	^ javaVarDeclTypeOwner
@@ -366,7 +347,6 @@ FASTJavaVariableExpression >> javaVarDeclTypeOwner: anObject [
 
 	<generated>
 	javaVarDeclTypeOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -381,7 +361,7 @@ FASTJavaVariableExpression >> javaVariableDeclaratorOwner [
 	"Relation named: #javaVariableDeclaratorOwner type: #FASTJavaVariableDeclarator opposite: #variable"
 
 	<generated>
-	<MSEComment: 'The javaVariableDeclarator owner (if possible)'>
+	<FMComment: 'The javaVariableDeclarator owner (if possible)'>
 	<container>
 	<derived>
 	^ javaVariableDeclaratorOwner
@@ -392,7 +372,6 @@ FASTJavaVariableExpression >> javaVariableDeclaratorOwner: anObject [
 
 	<generated>
 	javaVariableDeclaratorOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -407,7 +386,7 @@ FASTJavaVariableExpression >> javaVariableExpressionOwnerIsAnnotation [
 	"Relation named: #javaVariableExpressionOwnerIsAnnotation type: #FASTJavaAnnotation opposite: #expression"
 
 	<generated>
-	<MSEComment: 'The annotation that own me'>
+	<FMComment: 'The annotation that own me'>
 	<container>
 	<derived>
 	^ javaVariableExpressionOwnerIsAnnotation
@@ -418,7 +397,6 @@ FASTJavaVariableExpression >> javaVariableExpressionOwnerIsAnnotation: anObject 
 
 	<generated>
 	javaVariableExpressionOwnerIsAnnotation := anObject
-
 ]
 
 { #category : #navigation }

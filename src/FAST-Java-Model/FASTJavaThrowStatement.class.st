@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FASTJavaThrowStatement class >> annotation [
 
-	<MSEClass: #ThrowStatement super: #FASTStatement>
+	<FMClass: #ThrowStatement super: #FASTStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -25,8 +25,8 @@ FASTJavaThrowStatement >> expression [
 	"Relation named: #expression type: #FASTExpression opposite: #javaThrowStatementOwner"
 
 	<generated>
-	<MSEComment: 'The throwed element'>
-	<MSEProperty: #expression type: #FASTExpression opposite: #javaThrowStatementOwner>
+	<FMComment: 'The throwed element'>
+	<FMProperty: #expression type: #FASTExpression opposite: #javaThrowStatementOwner>
 	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
 ]
 
