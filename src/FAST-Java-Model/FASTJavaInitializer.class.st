@@ -34,7 +34,6 @@ FASTJavaInitializer >> statementBlock [
 	<generated>
 	<FMComment: 'Statements block of the behavioural entity'>
 	<FMProperty: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner>
-	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #statementBlock ifAbsent: [ nil ]
 ]
 

@@ -105,7 +105,9 @@ Class {
 		'javaAnnotationExpression',
 		'tAssigneable',
 		'tWithAssigneable',
-		'javaVariableExpression'
+		'javaVariableExpression',
+		'tWithReceiver',
+		'tReceiver'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -720,6 +722,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaFieldAccess --|> expression.
 	javaFieldAccess --|> tAssigneable.
+	javaFieldAccess --|> tWithReceiver.
+	javaFieldAccess --|> tReceiver.
 
 	javaInfixOperation --|> expression.
 	javaBreakStatement --|> statement.
@@ -729,7 +733,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaDoWhileStatement --|> statement.
 	javaFloatLiteral --|> literal.
 	javaForStatement --|> statement.
+	
 	javaIdentifier --|> javaVariableExpression.
+	javaIdentifier --|> tReceiver.
+	
 	javaIfStatement --|> statement.
 	javaIntegerLiteral --|> literal.
 
@@ -746,6 +753,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaMethodInvocation --|> expression.
 	javaMethodInvocation --|> #TWithArguments.
+	javaMethodInvocation --|> tWithReceiver.
+	javaMethodInvocation --|> tReceiver.
+	
 
 	javaNullLiteral --|> nullPointerLiteral.
 	javaSeparator --|> javaVariableExpression.
@@ -762,8 +772,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamed.
 	javaCastExpression --|> expression.
+	javaCastExpression --|> tReceiver.
 
 	javaClassProperty --|> javaVariableExpression.
+	javaClassProperty --|> tReceiver.
 
 	javaTryCatch --|> statement.
 	javaForEachStatement --|> statement.
@@ -782,6 +794,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaVariableExpression --|> variableExpression.
 	javaVariableExpression --|> tAssigneable.
+	javaVariableExpression --|> tReceiver.
 
 	javaThrowStatement --|> statement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
@@ -876,8 +889,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaClassProperty property: #type) comment: 'The owner type')
 		<>- ((javaVariableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)').
 
-	((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation')
-		<>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)').
+	"Replaced by tWithReceiver"
+	"((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation')
+		<>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')."
 
 	((javaUnaryExpression property: #expression) comment: 'The affected expression')
 		<>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)').
@@ -1016,7 +1030,10 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((javaVariableExpression property: #javaVariableExpressionOwnerIsAnnotation) comment: 'The annotation that own me').
 
 	((tWithAssigneable property: #variable) comment: 'My variable')
-		<>- ((tAssigneable property: #javaVariableAssignementOwner) comment: 'The owner of the modifier')
+		<>- ((tAssigneable property: #javaVariableAssignementOwner) comment: 'The owner of the modifier').
+		
+	((tWithReceiver property: #receiver) comment: 'My variable')
+		<>- ((tReceiver property: #receiverOwner) comment: 'The owner of the receiver')
 ]
 
 { #category : #definition }
@@ -1030,4 +1047,7 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	
 	tAssigneable := builder newTraitNamed: #TAssigneable comment: self commentForJavaTAssigneable. 
 	tWithAssigneable := builder newTraitNamed: #TWithAssigneable comment: 'I have an assigneable'.
+	
+	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send message to someone'.
+	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive message from someone'.
 ]

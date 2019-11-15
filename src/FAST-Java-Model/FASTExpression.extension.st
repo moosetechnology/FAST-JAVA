@@ -452,33 +452,6 @@ FASTExpression >> javaLabeledCaseStatementOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTExpression >> javaMethodInvocationOwner [
-	"Relation named: #javaMethodInvocationOwner type: #FASTJavaMethodInvocation opposite: #receiver"
-
-	<generated>
-	<FMComment: 'The javaMethodInvocation owner (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #javaMethodInvocationOwner type: #FASTJavaMethodInvocation opposite: #receiver>
-	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaMethodInvocationOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTExpression >> javaMethodInvocationOwner: anObject [
-
-	<generated>
-	(self privateState attributeAt: #javaMethodInvocationOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaMethodInvocationOwner.
-		self privateState attributeAt: #javaMethodInvocationOwner put: anObject.
-		otherSide receiver: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #javaMethodInvocationOwner put: anObject.
-		anObject receiver: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaNewArrayInitialOwner [
 	"Relation named: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer"
 

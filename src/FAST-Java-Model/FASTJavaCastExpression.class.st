@@ -4,6 +4,8 @@ todo
 Class {
 	#name : #FASTJavaCastExpression,
 	#superclass : #FASTExpression,
+	#traits : 'FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTReceiver classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner'
 	],

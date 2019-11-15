@@ -4,8 +4,8 @@ A FASTJavaFieldAccess corresponds to an access to an instance variable (field)
 Class {
 	#name : #FASTJavaFieldAccess,
 	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTAssigneable',
-	#classTraits : 'FASTJavaTAssigneable classTrait',
+	#traits : 'FASTJavaTAssigneable + FASTJavaTReceiver + FASTJavaTWithReceiver',
+	#classTraits : 'FASTJavaTAssigneable classTrait + FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait',
 	#instVars : [
 		'#fieldName => FMProperty'
 	],

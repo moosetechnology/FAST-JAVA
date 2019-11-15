@@ -26,7 +26,7 @@ JavaSmaCCProgramNodeImporterVisitor >> clone [
 			yourself.
 ]
 
-{ #category : #initialization }
+{ #category : #creating }
 JavaSmaCCProgramNodeImporterVisitor >> create: anEntity from: aNodeEntity [
 	currentFASTEntity := self addToModel: anEntity new.
 	self generalVisitActionForNodeEntity: aNodeEntity.
@@ -376,6 +376,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionSta
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 	currentFASTEntity := self addToModel: FASTJavaFieldAccess new.
 	self generalVisitActionForNodeEntity: aFieldAccess.
+	aFieldAccess receiver ifNotNil: [ :receiver | currentFASTEntity receiver: (self clone accept: receiver) ].
 	currentFASTEntity fieldName: aFieldAccess name value.
 	^ currentFASTEntity
 ]
@@ -586,7 +587,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 								name: receiver name value;
 								startPos: receiver startPosition;
 								endPos: receiver stopPosition;
-								yourself) ]
+								yourself).
+					self addToModel: currentFASTEntity receiver ]
 				ifFalse: [ currentFASTEntity receiver: (self clone accept: receiver) ] ]
 		ifNil: [ aMethodInvocation superToken
 				ifNotNil: [ :superToken | 
@@ -596,8 +598,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 								name: superToken value;
 								startPos: superToken startPosition;
 								endPos: superToken stopPosition;
-								yourself) ] ].
-	currentFASTEntity receiver ifNotNil: [ :receiver | self addToModel: receiver ].
+								yourself).
+					self addToModel: currentFASTEntity receiver ] ].
 	currentFASTEntity name: aMethodInvocation name value.
 	^ currentFASTEntity
 ]
