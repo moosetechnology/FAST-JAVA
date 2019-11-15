@@ -9,6 +9,8 @@ float f = 12.3;
 Class {
 	#name : #FASTJavaFloatLiteral,
 	#superclass : #FASTLiteral,
+	#traits : 'FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTReceiver classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

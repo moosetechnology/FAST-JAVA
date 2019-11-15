@@ -729,9 +729,11 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaBreakStatement --|> statement.
 	javaCaseStatement --|> statementBlock.
 	javaCharacterLiteral --|> characterLiteral.
+	javaCharacterLiteral --|> tReceiver.
 	javaContinueStatement --|> statement.
 	javaDoWhileStatement --|> statement.
 	javaFloatLiteral --|> literal.
+	javaFloatLiteral --|> tReceiver.
 	javaForStatement --|> statement.
 	
 	javaIdentifier --|> javaVariableExpression.
@@ -739,7 +741,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	
 	javaIfStatement --|> statement.
 	javaIntegerLiteral --|> literal.
-
+	javaIntegerLiteral --|> tReceiver.
+	
 	javaMethodEntity --|> namedBehaviouralEntity.
 	javaMethodEntity --|> #TWithImmediateSource.
 	javaMethodEntity --|> tDeclaration.
@@ -761,6 +764,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaSeparator --|> javaVariableExpression.
 
 	javaStringLiteral --|> stringLiteral.
+	javaStringLiteral --|> tReceiver.
 
 	javaSwitchStatement --|> statement.
 	javaThis --|> javaVariableExpression.

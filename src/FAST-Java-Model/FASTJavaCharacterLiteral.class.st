@@ -4,6 +4,8 @@ A character in Java code
 Class {
 	#name : #FASTJavaCharacterLiteral,
 	#superclass : #FASTCharacterLiteral,
+	#traits : 'FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTReceiver classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

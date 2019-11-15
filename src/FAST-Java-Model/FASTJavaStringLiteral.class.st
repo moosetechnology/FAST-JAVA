@@ -4,6 +4,8 @@ A string in Java
 Class {
 	#name : #FASTJavaStringLiteral,
 	#superclass : #FASTStringLiteral,
+	#traits : 'FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTReceiver classTrait',
 	#instVars : [
 		'#javaStringAssertStatementOwner => FMOne type: #FASTJavaAssertStatement opposite: #message'
 	],

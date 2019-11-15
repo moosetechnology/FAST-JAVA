@@ -4,6 +4,8 @@ Java integer literal node
 Class {
 	#name : #FASTJavaIntegerLiteral,
 	#superclass : #FASTLiteral,
+	#traits : 'FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTReceiver classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
