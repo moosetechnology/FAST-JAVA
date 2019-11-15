@@ -8,6 +8,8 @@ hello(MyClass.this)
 Class {
 	#name : #FASTJavaOuterThis,
 	#superclass : #FASTExpression,
+	#traits : 'FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTReceiver classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner'
 	],

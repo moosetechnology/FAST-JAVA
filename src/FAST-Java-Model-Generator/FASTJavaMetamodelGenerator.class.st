@@ -807,6 +807,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInitializer --|> tDeclaration.
 
 	javaOuterThis --|> expression.
+	javaOuterThis --|> tReceiver.
 
 	javaCatchPartStatement --|> statement.
 
