@@ -787,6 +787,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaNewExpression --|> expression.
 	javaNewExpression --|> #TWithArguments.
+	javaNewExpression --|> tReceiver.
 
 	javaNewClassExpression --|> javaNewExpression.
 
