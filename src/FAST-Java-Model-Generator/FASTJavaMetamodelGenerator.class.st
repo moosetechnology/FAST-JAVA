@@ -791,6 +791,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaArrayAccess --|> expression.
 	javaArrayAccess --|> tAssigneable.
+	javaArrayAccess --|> tReceiver.
 
 	javaVariableExpression --|> variableExpression.
 	javaVariableExpression --|> tAssigneable.
