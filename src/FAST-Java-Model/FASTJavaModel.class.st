@@ -1,7 +1,7 @@
 Class {
 	#name : #FASTJavaModel,
 	#superclass : #MooseModel,
-	#category : #'FAST-Java-Model'
+	#category : #'FAST-Java-Model-Model'
 }
 
 { #category : #accessing }

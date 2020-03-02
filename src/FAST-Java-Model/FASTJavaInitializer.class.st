@@ -13,8 +13,8 @@ new Button(){
 Class {
 	#name : #FASTJavaInitializer,
 	#superclass : #FASTScopableEntity,
-	#traits : 'FASTJavaTDeclaration + FamixTWithImmediateSource',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FamixTWithImmediateSource classTrait',
+	#traits : 'FASTJavaTDeclaration + FamixTHasImmediateSource',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FamixTHasImmediateSource classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

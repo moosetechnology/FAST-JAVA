@@ -4,8 +4,8 @@ Represents a method in FastJava
 Class {
 	#name : #FASTJavaMethodEntity,
 	#superclass : #FASTNamedBehaviouralEntity,
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FamixTWithImmediateSource',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FamixTWithImmediateSource classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FamixTHasImmediateSource',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
 	],

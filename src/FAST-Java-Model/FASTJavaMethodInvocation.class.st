@@ -4,8 +4,8 @@ A node representing method imvocation
 Class {
 	#name : #FASTJavaMethodInvocation,
 	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTWithArguments + FamixTNamed',
-	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTWithArguments classTrait + FamixTNamed classTrait',
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTWithArguments + FamixTNamedEntity',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTWithArguments classTrait + FamixTNamedEntity classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

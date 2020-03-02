@@ -1,8 +1,8 @@
 Class {
 	#name : #FASTJavaSourceTextAnchor,
 	#superclass : #FASTJavaSourceAnchor,
-	#traits : 'FamixTWithImmediateSource',
-	#classTraits : 'FamixTWithImmediateSource classTrait',
+	#traits : 'FamixTHasImmediateSource',
+	#classTraits : 'FamixTHasImmediateSource classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

@@ -19,10 +19,3 @@ FASTJavaEntity class >> metamodel [
 	<generated>
 	^ FASTJavaModel metamodel
 ]
-
-{ #category : #testing }
-FASTJavaEntity >> isAssociation [
-
-	<generated>
-	^ false
-]

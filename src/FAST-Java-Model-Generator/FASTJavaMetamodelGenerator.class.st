@@ -744,7 +744,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIntegerLiteral --|> tReceiver.
 	
 	javaMethodEntity --|> namedBehaviouralEntity.
-	javaMethodEntity --|> #TWithImmediateSource.
+	javaMethodEntity --|> #THasImmediateSource.
 	javaMethodEntity --|> tDeclaration.
 	javaMethodEntity --|> tWithModifiers.
 
@@ -752,7 +752,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
-	javaClassDeclaration --|> #TNamed.
+	javaClassDeclaration --|> #TNamedEntity.
 
 	javaMethodInvocation --|> expression.
 	javaMethodInvocation --|> #TWithArguments.
@@ -774,7 +774,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaVariableDeclarator --|> entitySourceAnchor.
 	javaWhileStatement --|> statement.
-	javaMethodInvocation --|> #TNamed.
+	javaMethodInvocation --|> #TNamedEntity.
 	javaCastExpression --|> expression.
 	javaCastExpression --|> tReceiver.
 
@@ -809,7 +809,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaArrayInitializer --|> expression.
 
 	javaInitializer --|> scopableEntity.
-	javaInitializer --|> #TWithImmediateSource.
+	javaInitializer --|> #THasImmediateSource.
 	javaInitializer --|> tDeclaration.
 
 	javaOuterThis --|> expression.
@@ -823,7 +823,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaSynchronizedStatement --|> statement.
 
 	"types name"
-	javaTypeName --|> #TNamed.
+	javaTypeName --|> #TNamedEntity.
 	javaTypeName --|> expression.
 	javaQualifiedTypeName --|> javaTypeName.
 

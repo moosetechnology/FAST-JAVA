@@ -13,11 +13,11 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 Class {
 	#name : #FASTJavaClassDeclaration,
 	#superclass : #FASTStatement,
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FamixTNamed',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FamixTNamed classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FamixTNamedEntity',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FamixTNamedEntity classTrait',
 	#instVars : [
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver',
-		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver'
+		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver',
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

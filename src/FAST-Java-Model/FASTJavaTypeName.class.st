@@ -4,11 +4,11 @@ I represent the name of a type
 Class {
 	#name : #FASTJavaTypeName,
 	#superclass : #FASTExpression,
-	#traits : 'FamixTNamed',
-	#classTraits : 'FamixTNamed classTrait',
+	#traits : 'FamixTNamedEntity',
+	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
-		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
-		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'
+		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName',
+		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
