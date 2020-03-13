@@ -40,7 +40,6 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity [
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEntity [
-	self parentFASTVisitor ifNotNil: [  ] ifNil: [ currentFASTEntity source: aNodeEntity completeSource asString ].
 	currentFASTEntity startPos: aNodeEntity startPosition.
 	currentFASTEntity endPos: aNodeEntity stopPosition
 ]
@@ -85,7 +84,7 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 	ast := JavaParser
 		parse: aCodeString
 		startingAt: JavaParser startingStateForclass_or_interface_body_declaration.
-	self accept: ast.
+	(self accept: ast) source: ast completeSource asString.
 	^ self model
 ]
 
