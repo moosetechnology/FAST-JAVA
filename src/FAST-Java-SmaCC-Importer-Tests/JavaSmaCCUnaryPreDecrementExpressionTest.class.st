@@ -22,26 +22,20 @@ JavaSmaCCUnaryPreDecrementExpressionTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCUnaryPreDecrementExpressionTest >> testUnaryExpressionIsPrefixed [
-	self assert: unaryPreDecrementMethod statements first childrenNode first isPrefixedUnaryExpression
+	self assert: unaryPreDecrementMethod statements first children anyOne isPrefixedUnaryExpression
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPreDecrementExpressionTest >> testUnaryExpressionOperator [
-	self
-		assert: unaryPreDecrementMethod statements first childrenNode first operator
-		equals: '--'
+	self assert: unaryPreDecrementMethod statements first children anyOne operator equals: '--'
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPreDecrementExpressionTest >> testUnaryExpressionOperatorType [
-	self
-		assert: unaryPreDecrementMethod statements first childrenNode first operator class
-		equals: ByteString
+	self assert: unaryPreDecrementMethod statements first children anyOne operator class equals: ByteString
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPreDecrementExpressionTest >> testUnaryExpressionType [
-	self
-		assert: unaryPreDecrementMethod statements first childrenNode first class
-		equals: FASTJavaUnaryExpression
+	self assert: unaryPreDecrementMethod statements first children anyOne class equals: FASTJavaUnaryExpression
 ]

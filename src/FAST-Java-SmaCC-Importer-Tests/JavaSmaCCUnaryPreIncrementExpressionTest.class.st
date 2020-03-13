@@ -22,19 +22,15 @@ JavaSmaCCUnaryPreIncrementExpressionTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCUnaryPreIncrementExpressionTest >> testUnaryExpressionIsPrefixed [
-	self assert: unaryPreIncrementMethod statements first childrenNode first isPrefixedUnaryExpression
+	self assert: unaryPreIncrementMethod statements first children anyOne isPrefixedUnaryExpression
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPreIncrementExpressionTest >> testUnaryExpressionOperator [
-	self
-		assert: unaryPreIncrementMethod statements first childrenNode first operator
-		equals: '++'
+	self assert: unaryPreIncrementMethod statements first children anyOne operator equals: '++'
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPreIncrementExpressionTest >> testUnaryExpressionType [
-	self
-		assert: unaryPreIncrementMethod statements first childrenNode first class
-		equals: FASTJavaUnaryExpression
+	self assert: unaryPreIncrementMethod statements first children anyOne class equals: FASTJavaUnaryExpression
 ]

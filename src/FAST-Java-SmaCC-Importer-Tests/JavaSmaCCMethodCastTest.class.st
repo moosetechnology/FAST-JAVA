@@ -26,25 +26,21 @@ JavaSmaCCMethodCastTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCMethodCastTest >> testCastAsAReceiverOfAnInvocation [
-	self assert: methodCastAndClassProperty statements third childrenNode first receiver class equals: FASTJavaCastExpression.
+	self assert: methodCastAndClassProperty statements third children anyOne receiver class equals: FASTJavaCastExpression
 ]
 
 { #category : #tests }
 JavaSmaCCMethodCastTest >> testCastExpressionName [
-	self
-		assert: methodCastAndClassProperty statements third childrenNode first receiver expression fieldName
-		equals: 'pListModel'
+	self assert: methodCastAndClassProperty statements third children anyOne receiver expression fieldName equals: 'pListModel'
 ]
 
 { #category : #tests }
 JavaSmaCCMethodCastTest >> testCastExpressionType [
-	self
-		assert: methodCastAndClassProperty statements third childrenNode first receiver expression class
-		equals: FASTJavaClassProperty.
+	self assert: methodCastAndClassProperty statements third children anyOne receiver expression class equals: FASTJavaClassProperty
 ]
 
 { #category : #tests }
 JavaSmaCCMethodCastTest >> testCastType [
-	self assert: methodCastAndClassProperty statements third childrenNode first receiver type class equals: FASTJavaClassTypeExpression.
-	self assert: methodCastAndClassProperty statements third childrenNode first receiver type fullName equals: 'IEditableListModel'
+	self assert: methodCastAndClassProperty statements third children anyOne receiver type class equals: FASTJavaClassTypeExpression.
+	self assert: methodCastAndClassProperty statements third children anyOne receiver type fullName equals: 'IEditableListModel'
 ]

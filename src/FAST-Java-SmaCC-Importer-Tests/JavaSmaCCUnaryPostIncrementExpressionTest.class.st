@@ -22,26 +22,20 @@ JavaSmaCCUnaryPostIncrementExpressionTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionIsPrefixed [
-	self deny: unaryPostIncrementMethod statements first childrenNode first isPrefixedUnaryExpression
+	self deny: unaryPostIncrementMethod statements first children anyOne isPrefixedUnaryExpression
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionOperator [
-	self
-		assert: unaryPostIncrementMethod statements first childrenNode first operator
-		equals: '++'
+	self assert: unaryPostIncrementMethod statements first children anyOne operator equals: '++'
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionOperatorType [
-	self
-		assert: unaryPostIncrementMethod statements first childrenNode first operator class
-		equals: ByteString
+	self assert: unaryPostIncrementMethod statements first children anyOne operator class equals: ByteString
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionType [
-	self
-		assert: unaryPostIncrementMethod statements first childrenNode first class
-		equals: FASTJavaUnaryExpression
+	self assert: unaryPostIncrementMethod statements first children anyOne class equals: FASTJavaUnaryExpression
 ]

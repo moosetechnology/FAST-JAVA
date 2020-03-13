@@ -22,10 +22,10 @@ JavaSmaCCNewTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCNewTest >> testNewName [
-	self assert: methodNew statements anyOne childrenNode anyOne type fullName equals: 'Patate'
+	self assert: methodNew statements anyOne children anyOne type fullName equals: 'Patate'
 ]
 
 { #category : #tests }
 JavaSmaCCNewTest >> testNewType [
-	self assert: methodNew statements first childrenNode first class equals: FASTJavaNewExpression
+	self assert: methodNew statements first children anyOne class equals: FASTJavaNewExpression
 ]

@@ -26,15 +26,10 @@ JavaSmaCCCClassPropertyTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCCClassPropertyTest >> testClassPropertyName [
-	self
-		assert: methodCastAndClassProperty statements asOrderedCollection fourth childrenNode first receiver fieldName
-		equals: 'editableTablelist'
+	self assert: methodCastAndClassProperty statements asOrderedCollection fourth children anyOne receiver fieldName equals: 'editableTablelist'
 ]
 
 { #category : #tests }
 JavaSmaCCCClassPropertyTest >> testClassPropertyType [
-	self
-		assert: methodCastAndClassProperty statements asOrderedCollection fourth childrenNode first receiver class
-		equals: FASTJavaClassProperty.
-
+	self assert: methodCastAndClassProperty statements asOrderedCollection fourth children anyOne receiver class equals: FASTJavaClassProperty
 ]

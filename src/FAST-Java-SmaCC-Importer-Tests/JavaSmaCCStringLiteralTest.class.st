@@ -23,14 +23,10 @@ JavaSmaCCStringLiteralTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCStringLiteralTest >> testStringLiteralType [
-	self
-		assert: methodStringLiteral statements first childrenNode first arguments first class
-		equals: FASTJavaStringLiteral
+	self assert: methodStringLiteral statements first children anyOne arguments first class equals: FASTJavaStringLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCStringLiteralTest >> testStringLiteralValue [
-	self
-		assert: methodStringLiteral statements first childrenNode first arguments first value
-		equals: 'Patate'
+	self assert: methodStringLiteral statements first children anyOne arguments first value equals: 'Patate'
 ]

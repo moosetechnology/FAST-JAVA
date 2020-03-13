@@ -24,20 +24,20 @@ JavaSmaCCInfixOperationTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCInfixOperationTest >> testInfixOperationLeftPartType [
-	self assert: infixOperationMethod statements first condition childrenNode first leftOperand class equals: FASTJavaIntegerLiteral
+	self assert: infixOperationMethod statements first condition leftOperand leftOperand class equals: FASTJavaIntegerLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCInfixOperationTest >> testInfixOperationOperatorType [
-	self assert: infixOperationMethod statements first condition childrenNode first operator class equals: ByteString.
+	self assert: infixOperationMethod statements first condition operator class equals: ByteString
 ]
 
 { #category : #tests }
 JavaSmaCCInfixOperationTest >> testInfixOperationRightPartType [
-	self assert: infixOperationMethod statements first condition childrenNode first rightOperand class equals: FASTJavaIntegerLiteral
+	self assert: infixOperationMethod statements first condition leftOperand rightOperand class equals: FASTJavaIntegerLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCInfixOperationTest >> testInfixOperationType [
-	self assert: infixOperationMethod statements first condition childrenNode first class equals: FASTJavaInfixOperation
+	self assert: infixOperationMethod statements first condition leftOperand class equals: FASTJavaInfixOperation
 ]

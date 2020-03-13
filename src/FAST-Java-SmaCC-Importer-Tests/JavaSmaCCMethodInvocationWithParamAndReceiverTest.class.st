@@ -43,74 +43,54 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testClassPropertyReceiverMethodInvocations [
-	self
-		assert: methodInvocationWithClassPropertyAsReceiver statements first childrenNode first receiver class
-		equals: FASTJavaClassProperty
+	self assert: methodInvocationWithClassPropertyAsReceiver statements first children anyOne receiver class equals: FASTJavaClassProperty
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfArguments [
-	self assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression arguments size equals: 2.
-	self assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver arguments size equals: 2
+	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression arguments size equals: 2.
+	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver arguments size equals: 2
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfMethodInvocations [
-	self
-		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression class
-		equals: FASTJavaMethodInvocation.
-	self
-		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver class
-		equals: FASTJavaMethodInvocation.
-	self
-		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver receiver
-		equals: nil
+	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression class equals: FASTJavaMethodInvocation.
+	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
+	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver receiver equals: nil
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverIsInModel [
 	self
-		assert: methodInvocationWithVariableAsReceiver statements first childrenNode first receiver localMooseModel
+		assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver localMooseModel
 		equals: methodInvocationWithVariableAsReceiver localMooseModel
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverKnowTheCallingMethod [
 	self
-		assert: methodInvocationWithVariableAsReceiver statements first childrenNode first receiver parentNode
-		equals: methodInvocationWithVariableAsReceiver statements first childrenNode first
+		assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver parentNode
+		equals: methodInvocationWithVariableAsReceiver statements first children anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverMethodInvocations [
-	self
-		assert:
-			methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver
-				class
-		equals: FASTJavaMethodInvocation.
-	self
-		assert:
-			methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression receiver
-				receiver
-		equals: nil.
-	self
-		assert: methodInvocationWithVariableAsReceiver statements first childrenNode first receiver class
-		equals: FASTJavaIdentifier
+	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
+	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver receiver equals: nil.
+	self assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver class equals: FASTJavaIdentifier
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testTypeOfArguments [
 	self
-		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression arguments first class
+		assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression arguments first class
 		equals: FASTJavaIntegerLiteral.
 	self
-		assert: methodInvocationWithParamAndReceiver statementBlock childrenNode first childrenNode first expression arguments second class
+		assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression arguments second class
 		equals: FASTJavaIntegerLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testVariableReceiverMethodInvocations [
-	self
-		assert: methodInvocationWithVariableAsReceiver statements first childrenNode first receiver class
-		equals: FASTJavaIdentifier
+	self assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver class equals: FASTJavaIdentifier
 ]
