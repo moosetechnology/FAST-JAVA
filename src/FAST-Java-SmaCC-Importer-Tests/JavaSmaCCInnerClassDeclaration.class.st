@@ -29,32 +29,32 @@ JavaSmaCCInnerClassDeclaration >> setUp [
 		first
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCInnerClassDeclaration >> testClassDeclarationName [
 	self assert: ( innerClassDeclaration mooseModel allWithType: FASTJavaClassDeclaration) anyOne name equals: 'ClassA' 
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclaration [
 	self assert: ( innerClassDeclaration mooseModel allWithType: FASTJavaClassDeclaration) size equals: 1
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationDeclaration [
 	self assert: ( innerClassDeclaration mooseModel allWithType: FASTJavaClassDeclaration) anyOne declarations size equals: 3
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationInterfaces [
 	self assert: ( innerClassDeclaration mooseModel allWithType: FASTJavaClassDeclaration) anyOne interfaces size equals: 2 
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationModifiers [
 	self assert: ( innerClassDeclaration mooseModel allWithType: FASTJavaClassDeclaration) anyOne modifiers size equals: 1 
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationSuperClass [
 	self assert: ( innerClassDeclaration mooseModel allWithType: FASTJavaClassDeclaration) anyOne superclass class equals: FASTJavaClassTypeExpression 
 ]

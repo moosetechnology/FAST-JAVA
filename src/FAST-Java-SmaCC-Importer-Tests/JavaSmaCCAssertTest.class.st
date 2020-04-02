@@ -20,33 +20,33 @@ JavaSmaCCAssertTest >> setUp [
 	assertMethod := (self parseMethod: 'assertMethod')
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCAssertTest >> testAssertNodeCondition [
 	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne condition class equals: FASTJavaInfixOperation
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCAssertTest >> testAssertNodeConditionParentNode [
 	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne condition parentNode equals: (assertMethod allWithType: FASTJavaAssertStatement) anyOne
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCAssertTest >> testAssertNodeMessage [
 	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne message class equals: FASTJavaStringLiteral
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCAssertTest >> testAssertNodeMessageParentNode [
 	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne equals: (assertMethod allWithType: FASTJavaAssertStatement) anyOne message parentNode
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCAssertTest >> testAssertNodeParentNode [
 	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne parentNode equals: (assertMethod allWithType: FASTStatementBlock) anyOne.
 	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne equals: (assertMethod allWithType: FASTStatementBlock) anyOne statements anyOne
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCAssertTest >> testNumberOfAssertNode [
 	self assert: (assertMethod allWithType: FASTJavaAssertStatement) size equals: 1
 ]

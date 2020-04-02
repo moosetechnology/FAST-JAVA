@@ -18,7 +18,7 @@ JavaSmaCCMethodShortTypeTest >> setUp [
 	methodType := (self parseMethod: 'Type')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCMethodShortTypeTest >> testMethodTypeType [
 	self assert: (methodType allWithType: FASTJavaMethodEntity) anyOne type class equals: FASTJavaShortTypeExpression
 ]

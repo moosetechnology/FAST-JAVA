@@ -22,12 +22,12 @@ JavaSmaCCReturnTest >> setUp [
 	methodReturn := (self parseMethod: 'return')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCReturnTest >> testIdentifierInModelSize [
 	self assert: (methodReturn allWithType: FASTJavaVariableExpression) size equals: 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCReturnTest >> testNamedEntityInModelSize [
 	self assert: (methodReturn allWithType: FASTJavaVariableExpression) size equals: 1
 ]

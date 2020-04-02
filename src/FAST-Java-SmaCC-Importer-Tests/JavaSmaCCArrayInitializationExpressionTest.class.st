@@ -22,7 +22,7 @@ JavaSmaCCArrayInitializationExpressionTest >> setUp [
 	methodArrayInitializationExpression := (self parseMethod: 'ArrayInitializationExpression')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCArrayInitializationExpressionTest >> testNumberOfInitializedElement [
 	self assert: (methodArrayInitializationExpression allWithType: FASTJavaNewExpression) size equals: 3 
 ]

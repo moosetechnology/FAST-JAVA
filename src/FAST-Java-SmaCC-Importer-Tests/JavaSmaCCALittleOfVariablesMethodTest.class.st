@@ -25,9 +25,8 @@ JavaSmaCCALittleOfVariablesMethodTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testBlockScope [
-	| symbols |
-	self flag: 'Should we keep the fastScope ? '.
-	
+	self flag: 'Should we keep the fastScope ? '
+
 	"
 	symbols := OrderedCollection new.
 	aLittleOfVariables statementBlock fastScope do: [:each | symbols add: each].
@@ -48,8 +47,7 @@ JavaSmaCCALittleOfVariablesMethodTest >> testReturnStatementExpressionType [
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testScope [
-	| symbols |
-	self flag: 'Should we keep the fastScope ? '.
+	self flag: 'Should we keep the fastScope ? '
 	"symbols := OrderedCollection new.
 	aLittleOfVariables fastScope do: [:each | symbols add: each].
 

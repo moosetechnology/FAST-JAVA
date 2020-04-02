@@ -21,22 +21,22 @@ JavaSmaCCSuperMethodInvocationTest >> setUp [
 	superMethodInvocation := (self parseMethod: 'superMethodInvocation')
 ]
 
-{ #category : #resources }
+{ #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiver [
 	self assert: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver name equals: 'super'
 ]
 
-{ #category : #resources }
+{ #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverAsChild [
 	self assert: (superMethodInvocation allWithType: FASTJavaIdentifier) anyOne equals: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver
 ]
 
-{ #category : #resources }
+{ #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverParent [
 	self assert: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver parentNode equals: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne
 ]
 
-{ #category : #resources }
+{ #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverType [
 	self assert: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver class equals: FASTJavaIdentifier
 ]

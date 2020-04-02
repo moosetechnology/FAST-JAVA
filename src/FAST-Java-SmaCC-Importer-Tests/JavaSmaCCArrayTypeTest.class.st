@@ -20,22 +20,22 @@ JavaSmaCCArrayTypeTest >> setUp [
 	methodArrayType := (self parseMethod: 'arrayType')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCArrayTypeTest >> testArrayTypeBaseTypeParentNode [
 	self assert: (methodArrayType allWithType: FASTJavaArrayTypeExpression) first baseType parentNode equals: (methodArrayType allWithType: FASTJavaArrayTypeExpression) first.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCArrayTypeTest >> testArrayTypeBaseTypeType [
 	self assert: (methodArrayType allWithType: FASTJavaArrayTypeExpression) first baseType class equals: FASTJavaByteTypeExpression.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCArrayTypeTest >> testArrayTypeInModelSize [
 	self assert: (methodArrayType allWithType: FASTJavaArrayTypeExpression) size equals: 2
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCArrayTypeTest >> testArrayTypeParentNode [
 	self assert: ((methodArrayType allWithType: FASTJavaArrayTypeExpression) sort: [:a :b | a startPos < b startPos ]) last parentNode class equals: FASTJavaClassProperty.
 ]

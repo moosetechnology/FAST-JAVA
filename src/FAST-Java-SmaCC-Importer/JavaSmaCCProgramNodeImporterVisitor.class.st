@@ -18,7 +18,7 @@ JavaSmaCCProgramNodeImporterVisitor >> addToModel: anEntity [
 	^ anEntity
 ]
 
-{ #category : #initialization }
+{ #category : #copying }
 JavaSmaCCProgramNodeImporterVisitor >> clone [
 	^ self class new
 			model: self model ;

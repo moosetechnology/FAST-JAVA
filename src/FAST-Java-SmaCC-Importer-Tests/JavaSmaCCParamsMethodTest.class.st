@@ -23,8 +23,7 @@ JavaSmaCCParamsMethodTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testBlockScope [
-	| symbols |
-	self flag: 'Should we keep the fastScope ? '.
+	self flag: 'Should we keep the fastScope ? '
 	"symbols := OrderedCollection new.
 	params statementBlock fastScope do: [ :each | symbols add: each ].
 	self assert: symbols size equals: 0"
@@ -74,8 +73,7 @@ JavaSmaCCParamsMethodTest >> testParametersParent [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testScope [
-	| symbols |
-	self flag: 'Should we keep the fastScope ? '.
+	self flag: 'Should we keep the fastScope ? '
 	"symbols := OrderedCollection new.
 	params fastScope do: [:each | symbols add: each].
 

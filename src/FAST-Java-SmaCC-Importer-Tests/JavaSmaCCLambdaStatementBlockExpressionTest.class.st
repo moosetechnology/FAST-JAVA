@@ -28,27 +28,27 @@ JavaSmaCCLambdaStatementBlockExpressionTest >> setUp [
 	methodLambda := (self parseMethod: 'lambda')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaExpressionParentNode [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression parentNode equals: (methodLambda allWithType: FASTJavaLambdaExpression) first.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaExpressionType [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression class equals: FASTStatementBlock .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaInModelSize [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) size equals: 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaParentNode [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first parentNode class equals: FASTJavaMethodInvocation.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaParentNodeArguments [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first parentNode arguments first equals: (methodLambda allWithType: FASTJavaLambdaExpression) first.
 ]

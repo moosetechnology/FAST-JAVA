@@ -18,7 +18,7 @@ JavaSmaCCMethodVoidTypeTest >> setUp [
 	methodType := (self parseMethod: 'Type')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCMethodVoidTypeTest >> testMethodTypeType [
 	self assert: (methodType allWithType: FASTJavaMethodEntity) anyOne type class equals: FASTJavaVoidTypeExpression
 ]

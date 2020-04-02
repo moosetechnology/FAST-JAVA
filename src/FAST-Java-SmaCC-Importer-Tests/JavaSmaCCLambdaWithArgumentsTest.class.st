@@ -20,38 +20,38 @@ JavaSmaCCLambdaWithArgumentsTest >> setUp [
 	methodLambda := (self parseMethod: 'lambda')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaWithArgumentsTest >> testLambdaExpressionParentNode [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression parentNode equals: (methodLambda allWithType: FASTJavaLambdaExpression) first.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaWithArgumentsTest >> testLambdaExpressionType [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression class equals: FASTJavaMethodInvocation.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaWithArgumentsTest >> testLambdaInModelSize [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) size equals: 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaWithArgumentsTest >> testLambdaParametersParentNode [
 	(methodLambda allWithType: FASTJavaLambdaExpression) first parameters do: [ :parameter | 
 		self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first equals: parameter parentNode. ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaWithArgumentsTest >> testLambdaParametersSize [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first parameters size equals: 2.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaWithArgumentsTest >> testLambdaParentNode [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first parentNode class equals: FASTJavaMethodInvocation.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCLambdaWithArgumentsTest >> testLambdaParentNodeArguments [
 	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first parentNode arguments first equals: (methodLambda allWithType: FASTJavaLambdaExpression) first.
 ]

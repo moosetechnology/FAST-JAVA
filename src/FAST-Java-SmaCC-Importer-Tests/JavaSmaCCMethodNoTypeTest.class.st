@@ -18,7 +18,7 @@ JavaSmaCCMethodNoTypeTest >> setUp [
 	methodType := (self parseMethod: 'Type')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCMethodNoTypeTest >> testMethodTypeType [
 	self assert: (methodType allWithType: FASTJavaMethodEntity) anyOne type equals: nil
 ]

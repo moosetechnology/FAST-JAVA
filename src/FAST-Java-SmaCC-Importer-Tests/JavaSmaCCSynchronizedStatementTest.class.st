@@ -25,28 +25,28 @@ JavaSmaCCSynchronizedStatementTest >> setUp [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementExpressionParentNode [
 	self assert: testElement expression parentNode equals: (methodSynchronizedStatement allWithType: FASTJavaSynchronizedStatement) first.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementExpressionType [
 	self assert: testElement expression class equals: FASTJavaVariableExpression .
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementInModelSize [
 	self assert: (methodSynchronizedStatement allWithType: FASTJavaSynchronizedStatement) size equals: 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementParentNode [
 	self assert: testElement parentNode class equals: FASTStatementBlock.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementType [
 	self assert: testElement block class equals: FASTStatementBlock.
 ]

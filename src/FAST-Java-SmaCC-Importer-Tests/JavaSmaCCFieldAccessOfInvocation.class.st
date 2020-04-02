@@ -20,17 +20,17 @@ JavaSmaCCFieldAccessOfInvocation >> setUp [
 	fieldAccessOfInvocation := (self parseMethod: 'fieldAccessOfInvocation')
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCFieldAccessOfInvocation >> testFieldAccessReceiver [
 	self assert: (fieldAccessOfInvocation allWithType: FASTJavaFieldAccess) first receiver equals: (((fieldAccessOfInvocation allWithType: FASTJavaMethodInvocation) select: [ :invoc | invoc name = 'invoc2' ]) first).
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCFieldAccessOfInvocation >> testFieldAccessReceiverOwner [
 	self assert: (fieldAccessOfInvocation allWithType: FASTJavaFieldAccess) first equals: (((fieldAccessOfInvocation allWithType: FASTJavaMethodInvocation) select: [ :invoc | invoc name = 'invoc2' ]) first receiverOwner).
 ]
 
-{ #category : #running }
+{ #category : #tests }
 JavaSmaCCFieldAccessOfInvocation >> testFieldAccessSize [
 	self assert: (fieldAccessOfInvocation allWithType: FASTJavaFieldAccess) size equals: 1.
 ]

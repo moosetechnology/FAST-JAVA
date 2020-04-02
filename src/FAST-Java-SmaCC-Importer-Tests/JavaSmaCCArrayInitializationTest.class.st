@@ -21,7 +21,7 @@ JavaSmaCCArrayInitializationTest >> setUp [
 	methodArrayInitialization := (self parseMethod: 'ArrayInitialization')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 JavaSmaCCArrayInitializationTest >> testNumberOfInitializedElement [
 	
 ]
