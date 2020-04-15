@@ -366,7 +366,7 @@ FASTJavaVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
-	^ self visitFASTEntitySourceAnchor: aFASTJavaVariableDeclarator
+	^ self visitFASTEntity: aFASTJavaVariableDeclarator
 ]
 
 { #category : #generated }
