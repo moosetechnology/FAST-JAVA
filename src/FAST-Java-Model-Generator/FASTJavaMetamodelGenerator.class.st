@@ -114,14 +114,6 @@ Class {
 }
 
 { #category : #accessing }
-FASTJavaMetamodelGenerator class >> modifyMetamodel: aMetamodel [
-
-	super modifyMetamodel: aMetamodel.
-	
-	self fixRemoteMetamodelRelationsIn: aMetamodel.
-]
-
-{ #category : #accessing }
 FASTJavaMetamodelGenerator class >> packageName [
 
 	^ #'FAST-Java-Model'
