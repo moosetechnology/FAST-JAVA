@@ -27,7 +27,6 @@ Class {
 		'javaMethodEntity',
 		'javaMethodInvocation',
 		'javaNullLiteral',
-		'javaSeparator',
 		'javaStringLiteral',
 		'javaSwitchStatement',
 		'javaThis',
@@ -490,12 +489,6 @@ new Canard.Poulet(){
 ]
 
 { #category : #comments }
-FASTJavaMetamodelGenerator >> commentForJavaSeparator [
-	self flag: #todo.
-	^ 'todo'
-]
-
-{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
 	^ 'A string in Java'
 ]
@@ -628,7 +621,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaMethodEntity := builder newClassNamed: #MethodEntity comment: self commentForJavaMethodEntity.
 	javaMethodInvocation := builder newClassNamed: #MethodInvocation comment: self commentForJavaMethodInvocation.
 	javaNullLiteral := builder newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
-	javaSeparator := builder newClassNamed: #Separator comment: self commentForJavaSeparator.
 	javaStringLiteral := builder newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
 	javaSwitchStatement := builder newClassNamed: #SwitchStatement comment: self commentForJavaSwitchStatement.
 	javaThis := builder newClassNamed: #This comment: self commentForJavaThis.
@@ -757,7 +749,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	
 
 	javaNullLiteral --|> nullPointerLiteral.
-	javaSeparator --|> javaVariableExpression.
 
 	javaStringLiteral --|> stringLiteral.
 	javaStringLiteral --|> tReceiver.
@@ -857,7 +848,6 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	super defineProperties.
 	(javaFieldAccess property: #fieldName type: #String) comment: 'Name of accessed field'.
 	(javaInfixOperation property: #operator type: #String) comment: 'operator s symbol'.
-	(javaSeparator property: #separator type: #String) comment: 'separator'.
 	(javaClassProperty property: #fieldName type: #String) comment: 'Name of accessed field'.
 	
 	(javaUnaryExpression property: #operator type: #String) comment: 'The operator string to apply to the expression'.
