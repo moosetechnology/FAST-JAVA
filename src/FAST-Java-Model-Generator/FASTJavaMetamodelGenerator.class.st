@@ -68,7 +68,6 @@ Class {
 		'namedBehaviouralEntity',
 		'nullPointerLiteral',
 		'stringLiteral',
-		'entitySourceAnchor',
 		'scopableEntity',
 		'variableEntity',
 		'statementBlock',
@@ -705,7 +704,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	namedBehaviouralEntity := self remoteEntity: #NamedBehaviouralEntity withPrefix: #FAST.
 	nullPointerLiteral := self remoteEntity: #NullPointerLiteral withPrefix: #FAST.
 	stringLiteral := self remoteEntity: #StringLiteral withPrefix: #FAST.
-	entitySourceAnchor := self remoteEntity: #EntitySourceAnchor withPrefix: #FAST.
 	scopableEntity := self remoteEntity: #ScopableEntity withPrefix: #FAST.
 	namedEntity := self remoteEntity: #NamedEntity withPrefix: #FAST.
 	variableEntity := self remoteEntity: #VariableEntity withPrefix: #FAST.
@@ -774,7 +772,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVarDeclStatement --|> statement.
 	javaVarDeclStatement --|> tDeclaration.
 
-	javaVariableDeclarator --|> entitySourceAnchor.
+	javaVariableDeclarator --|> entity.
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamedEntity.
 	javaCastExpression --|> expression.
