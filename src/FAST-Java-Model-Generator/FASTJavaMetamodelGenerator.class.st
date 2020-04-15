@@ -10,7 +10,7 @@ FASTJavaMetamodelGenerator resetMetamodel.
 "
 Class {
 	#name : #FASTJavaMetamodelGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'javaAssignementExpression',
 		'javaBreakStatement',
@@ -107,7 +107,9 @@ Class {
 		'tWithAssigneable',
 		'javaVariableExpression',
 		'tWithReceiver',
-		'tReceiver'
+		'tReceiver',
+		'entity',
+		'namedEntity'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
