@@ -4,20 +4,19 @@ Class {
 	#traits : 'FASTJavaTAssigneable + FASTJavaTReceiver',
 	#classTraits : 'FASTJavaTAssigneable classTrait + FASTJavaTReceiver classTrait',
 	#instVars : [
-		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable',
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
+		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
 		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
-		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
-		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaForEachStatementFieldNameOwner => FMOne type: #FASTJavaForEachStatement opposite: #fieldname',
 		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
-		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
-		'#javaLambdaParameterOwner => FMOne type: #FASTJavaLambdaExpression opposite: #parameters',
 		'#javaMethodReferenceOwner => FMOne type: #FASTJavaMethodReference opposite: #receiver',
 		'#javaMethodTypeOwner => FMOne type: #FASTJavaMethodEntity opposite: #type',
+		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
+		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaParameterTypeOwner => FMOne type: #FASTJavaParameter opposite: #type',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
 		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
+		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable',
 		'#javaVariableExpressionOwnerIsAnnotation => FMOne type: #FASTJavaAnnotation opposite: #expression'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -155,30 +154,6 @@ FASTJavaVariableExpression >> javaForEachStatementTypeOwnerGroup [
 	<generated>
 	<navigation: 'JavaForEachStatementTypeOwner'>
 	^ MooseGroup with: self javaForEachStatementTypeOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaLambdaParameterOwner [
-	"Relation named: #javaLambdaParameterOwner type: #FASTJavaLambdaExpression opposite: #parameters"
-
-	<generated>
-	<FMComment: 'The lambda parameters owner (if possible)'>
-	<container>
-	^ javaLambdaParameterOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaLambdaParameterOwner: anObject [
-
-	<generated>
-	javaLambdaParameterOwner := anObject
-]
-
-{ #category : #navigation }
-FASTJavaVariableExpression >> javaLambdaParameterOwnerGroup [
-	<generated>
-	<navigation: 'JavaLambdaParameterOwner'>
-	^ MooseGroup with: self javaLambdaParameterOwner
 ]
 
 { #category : #accessing }

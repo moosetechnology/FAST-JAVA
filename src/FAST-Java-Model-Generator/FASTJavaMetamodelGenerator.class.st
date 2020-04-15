@@ -108,7 +108,9 @@ Class {
 		'tWithReceiver',
 		'tReceiver',
 		'entity',
-		'namedEntity'
+		'namedEntity',
+		'fastTParameter',
+		'fastTWithParameters'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -700,7 +702,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	namedEntity := self remoteEntity: #NamedEntity withPrefix: #FAST.
 	variableEntity := self remoteEntity: #VariableEntity withPrefix: #FAST.
 	statementBlock := self remoteEntity: #StatementBlock withPrefix: #FAST.
-	expressionStatement := self remoteEntity: #ExpressionStatement withPrefix: #FAST
+	expressionStatement := self remoteEntity: #ExpressionStatement withPrefix: #FAST.
+	fastTParameter := self remoteTrait: #TParameter withPrefix: #FAST.
+	fastTWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
 ]
 
 { #category : #definition }
@@ -810,6 +814,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCatchPartStatement --|> statement.
 
 	javaLambdaExpression --|> expression.
+	javaLambdaExpression --|> fastTWithParameters.
 
 	javaMethodReference --|> javaVariableExpression.
 	javaSynchronizedStatement --|> statement.
@@ -835,14 +840,16 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 
-	javaParameterExpression --|> javaVariableExpression.
+	javaParameterExpression --|> expression.
 	javaAssertStatement --|> statement.
 
 	javaModifier --|> tModifier.
 	javaModifier --|> expression.
 
 	javaAnnotationExpression --|> expression.
-	javaAnnotationExpression --|> tModifier
+	javaAnnotationExpression --|> tModifier.
+	
+	javaParameterExpression --|> fastTParameter
 ]
 
 { #category : #definition }
@@ -979,8 +986,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((entity property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)').
 	"((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda')
 		<>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')."
-	((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda')
-		<>-* ((javaVariableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)').
+	"((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda')
+		<>-* ((javaVariableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')."
 
 	((javaMethodReference property: #receiver) comment: 'The method of the reference')
 		<>- ((javaVariableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)').

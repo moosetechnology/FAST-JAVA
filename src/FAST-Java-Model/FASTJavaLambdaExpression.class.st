@@ -4,9 +4,8 @@ I represent a lambda expression
 Class {
 	#name : #FASTJavaLambdaExpression,
 	#superclass : #FASTExpression,
-	#instVars : [
-		'#parameters => FMMany type: #FASTJavaVariableExpression opposite: #javaLambdaParameterOwner'
-	],
+	#traits : 'FASTTWithParameters',
+	#classTraits : 'FASTTWithParameters classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -17,12 +16,6 @@ FASTJavaLambdaExpression class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #adding }
-FASTJavaLambdaExpression >> addParameter: anObject [
-	<generated>
-	^ self parameters add: anObject
 ]
 
 { #category : #accessing }
@@ -54,28 +47,4 @@ FASTJavaLambdaExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseGroup with: self expression
-]
-
-{ #category : #accessing }
-FASTJavaLambdaExpression >> parameters [
-	"Relation named: #parameters type: #FASTJavaVariableExpression opposite: #javaLambdaParameterOwner"
-
-	<generated>
-	<FMComment: 'The parameters of the lambda'>
-	<derived>
-	^ parameters
-]
-
-{ #category : #accessing }
-FASTJavaLambdaExpression >> parameters: anObject [
-
-	<generated>
-	parameters value: anObject
-]
-
-{ #category : #navigation }
-FASTJavaLambdaExpression >> parametersGroup [
-	<generated>
-	<navigation: 'Parameters'>
-	^ MooseGroup withAll: self parameters asSet
 ]

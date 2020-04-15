@@ -43,6 +43,7 @@ FASTJavaNewClassExpression >> declarations [
 	<FMComment: 'The methods defined in the class'>
 	<derived>
 	<FMProperty: #declarations type: #FASTScopableEntity opposite: #newClassOwner>
+	<package: #'Carrefour-Model'>
 	^ self privateState attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
 ]
 
