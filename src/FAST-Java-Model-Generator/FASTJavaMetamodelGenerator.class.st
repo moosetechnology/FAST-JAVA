@@ -807,7 +807,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLambdaExpression --|> expression.
 	javaLambdaExpression --|> fastTWithParameters.
 
-	javaMethodReference --|> javaVariableExpression.
+	javaMethodReference --|> expression.
+	javaMethodReference --|> #TNamedEntity.
+	
 	javaSynchronizedStatement --|> statement.
 
 	"types name"
