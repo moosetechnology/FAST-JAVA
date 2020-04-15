@@ -10,7 +10,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 "
 Class {
 	#name : #FASTJavaVariableDeclarator,
-	#superclass : #FASTEntitySourceAnchor,
+	#superclass : #FASTEntity,
 	#instVars : [
 		'#varDeclOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #declarators',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner'
@@ -21,7 +21,7 @@ Class {
 { #category : #meta }
 FASTJavaVariableDeclarator class >> annotation [
 
-	<FMClass: #VariableDeclarator super: #FASTEntitySourceAnchor>
+	<FMClass: #VariableDeclarator super: #FASTEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
