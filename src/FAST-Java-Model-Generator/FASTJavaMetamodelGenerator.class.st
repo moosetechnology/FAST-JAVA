@@ -842,7 +842,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAnnotationExpression --|> expression.
 	javaAnnotationExpression --|> tModifier.
 	
-	javaParameterExpression --|> fastTParameter
+	javaParameterExpression --|> fastTParameter.
+	
+	javaConditionalExpression --|> tReceiver.
 ]
 
 { #category : #definition }

@@ -8,6 +8,8 @@ ex:
 Class {
 	#name : #FASTJavaConditionalExpression,
 	#superclass : #FASTExpression,
+	#traits : 'FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTReceiver classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
