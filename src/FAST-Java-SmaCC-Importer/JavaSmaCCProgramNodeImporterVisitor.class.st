@@ -81,9 +81,13 @@ JavaSmaCCProgramNodeImporterVisitor >> parentFASTVisitor: anObject [
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 	| ast |
-	ast := JavaParser parse: aCodeString startingAt: JavaParser startingStateForclass_or_interface_body_declaration.
+	[ ast := JavaParser parse: aCodeString startingAt: JavaParser startingStateForclass_or_interface_body_declaration ]
+		on: Error
+		do: [ :err | 
+			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
+			err signal ].
 	[ (self accept: ast) source: ast completeSource asString ]
-		on: Exception
+		on: Error
 		do: [ :err | 
 			('FAST Err parsing: ' , String crlf , aCodeString) record.
 			err signal ].
