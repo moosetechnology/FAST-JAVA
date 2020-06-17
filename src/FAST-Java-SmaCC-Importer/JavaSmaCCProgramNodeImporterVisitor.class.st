@@ -1,3 +1,10 @@
+"
+I parse a java method string and convert it into a FASTJava model.
+
+API:
+
+JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString: 'TheString'
+"
 Class {
 	#name : #JavaSmaCCProgramNodeImporterVisitor,
 	#superclass : #JavaProgramNodeVisitor,
@@ -11,6 +18,11 @@ Class {
 	],
 	#category : #'FAST-Java-SmaCC-Importer'
 }
+
+{ #category : #parsing }
+JavaSmaCCProgramNodeImporterVisitor class >> parseCodeMethodString: aCodeString [
+	^ self new parseCodeMethodString: aCodeString
+]
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> addToModel: anEntity [
@@ -31,6 +43,24 @@ JavaSmaCCProgramNodeImporterVisitor >> create: anEntity from: aNodeEntity [
 	currentFASTEntity := self addToModel: anEntity new.
 	self generalVisitActionForNodeEntity: aNodeEntity.
 	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> createTypeName: aName [
+	"I am a helper for visitNew"
+
+	| classTypeExpression |
+	classTypeExpression := self addToModel: FASTJavaClassTypeExpression new.
+	currentFASTEntity := classTypeExpression.
+	self generalVisitActionForNodeEntity: aName.
+	currentFASTEntity
+		typeName:
+			((self addToModel: FASTJavaTypeName new)
+				name: aName value;
+				yourself).
+	currentFASTEntity := currentFASTEntity typeName.
+	self generalVisitActionForNodeEntity: aName.
+	^ classTypeExpression
 ]
 
 { #category : #initialization }
@@ -640,10 +670,16 @@ JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 JavaSmaCCProgramNodeImporterVisitor >> visitNew: aNewNode [
 	currentFASTEntity := self addToModel: FASTJavaNewExpression new.
 	self generalVisitActionForNodeEntity: aNewNode.
-	aNewNode expressions
-		do:
-			[ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
-	currentFASTEntity type: (self clone accept: aNewNode type).
+	aNewNode expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
+	
+	"
+in the following 'InnerClass' is considered as a Name in FAST but should be considered as a Type in FASTJava	
+public void onClick(ClickEvent event) {
+  view.setDisplayView(view.new InnerClass());
+}"
+	aNewNode type
+		ifNotNil: [ currentFASTEntity type: (self clone accept: aNewNode type) ]
+		ifNil: [ currentFASTEntity type: (self clone createTypeName: aNewNode name) ].
 	^ currentFASTEntity
 ]
 
