@@ -41,5 +41,5 @@ FASTJavaMethodReference >> receiver: anObject [
 FASTJavaMethodReference >> receiverGroup [
 	<generated>
 	<navigation: 'Receiver'>
-	^ MooseGroup with: self receiver
+	^ MooseSpecializedGroup with: self receiver
 ]

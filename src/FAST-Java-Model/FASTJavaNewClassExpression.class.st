@@ -43,8 +43,7 @@ FASTJavaNewClassExpression >> declarations [
 	<FMComment: 'The methods defined in the class'>
 	<derived>
 	<FMProperty: #declarations type: #FASTScopableEntity opposite: #newClassOwner>
-	<package: #'Carrefour-Model'>
-	^ self privateState attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
+	^ self attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
 ]
 
 { #category : #accessing }
@@ -58,5 +57,5 @@ FASTJavaNewClassExpression >> declarations: anObject [
 FASTJavaNewClassExpression >> declarationsGroup [
 	<generated>
 	<navigation: 'Declarations'>
-	^ MooseGroup withAll: self declarations asSet
+	^ MooseSpecializedGroup withAll: self declarations asSet
 ]

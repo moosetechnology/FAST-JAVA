@@ -26,20 +26,20 @@ FASTJavaNewArray >> initializer [
 	<generated>
 	<FMComment: 'The initializer of the array'>
 	<FMProperty: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner>
-	^ self privateState attributeAt: #initializer ifAbsent: [ nil ]
+	^ self attributeAt: #initializer ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaNewArray >> initializer: anObject [
 
 	<generated>
-	(self privateState attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self initializer.
-		self privateState attributeAt: #initializer put: anObject.
+		self attributeAt: #initializer put: anObject.
 		otherSide javaNewArrayInitialOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #initializer put: anObject.
+		self attributeAt: #initializer put: anObject.
 		anObject javaNewArrayInitialOwner: self ]
 ]
 
@@ -47,5 +47,5 @@ FASTJavaNewArray >> initializer: anObject [
 FASTJavaNewArray >> initializerGroup [
 	<generated>
 	<navigation: 'Initializer'>
-	^ MooseGroup with: self initializer
+	^ MooseSpecializedGroup with: self initializer
 ]

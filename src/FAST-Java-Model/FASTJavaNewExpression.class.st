@@ -45,5 +45,5 @@ FASTJavaNewExpression >> type: anObject [
 FASTJavaNewExpression >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup with: self type
+	^ MooseSpecializedGroup with: self type
 ]

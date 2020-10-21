@@ -29,20 +29,20 @@ FASTJavaArrayAccess >> array [
 	<generated>
 	<FMComment: 'Name of accessed field'>
 	<FMProperty: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner>
-	^ self privateState attributeAt: #array ifAbsent: [ nil ]
+	^ self attributeAt: #array ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaArrayAccess >> array: anObject [
 
 	<generated>
-	(self privateState attributeAt: #array ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #array ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self array.
-		self privateState attributeAt: #array put: anObject.
+		self attributeAt: #array put: anObject.
 		otherSide javaArrayArrayAccessOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #array put: anObject.
+		self attributeAt: #array put: anObject.
 		anObject javaArrayArrayAccessOwner: self ]
 ]
 
@@ -50,7 +50,7 @@ FASTJavaArrayAccess >> array: anObject [
 FASTJavaArrayAccess >> arrayGroup [
 	<generated>
 	<navigation: 'Array'>
-	^ MooseGroup with: self array
+	^ MooseSpecializedGroup with: self array
 ]
 
 { #category : #accessing }
@@ -60,20 +60,20 @@ FASTJavaArrayAccess >> expression [
 	<generated>
 	<FMComment: 'The accessed index'>
 	<FMProperty: #expression type: #FASTExpression opposite: #javaArrayAccessOwner>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaArrayAccess >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaArrayAccessOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaArrayAccessOwner: self ]
 ]
 
@@ -81,5 +81,5 @@ FASTJavaArrayAccess >> expression: anObject [
 FASTJavaArrayAccess >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]

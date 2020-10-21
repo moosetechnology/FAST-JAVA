@@ -42,5 +42,5 @@ FASTJavaTModifier >> javaModifierOwner: anObject [
 FASTJavaTModifier >> javaModifierOwnerGroup [
 	<generated>
 	<navigation: 'JavaModifierOwner'>
-	^ MooseGroup with: self javaModifierOwner
+	^ MooseSpecializedGroup with: self javaModifierOwner
 ]

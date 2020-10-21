@@ -44,7 +44,7 @@ FASTJavaTypeName >> javaTypeNameQualify: anObject [
 FASTJavaTypeName >> javaTypeNameQualifyGroup [
 	<generated>
 	<navigation: 'JavaTypeNameQualify'>
-	^ MooseGroup with: self javaTypeNameQualify
+	^ MooseSpecializedGroup with: self javaTypeNameQualify
 ]
 
 { #category : #accessing }
@@ -69,5 +69,5 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner: anObject [
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwnerGroup [
 	<generated>
 	<navigation: 'JavaTypeNameTypeExpressionOwner'>
-	^ MooseGroup with: self javaTypeNameTypeExpressionOwner
+	^ MooseSpecializedGroup with: self javaTypeNameTypeExpressionOwner
 ]

@@ -45,5 +45,5 @@ FASTJavaTWithDeclarations >> declarations: anObject [
 FASTJavaTWithDeclarations >> declarationsGroup [
 	<generated>
 	<navigation: 'Declarations'>
-	^ MooseGroup withAll: self declarations asSet
+	^ MooseSpecializedGroup withAll: self declarations asSet
 ]

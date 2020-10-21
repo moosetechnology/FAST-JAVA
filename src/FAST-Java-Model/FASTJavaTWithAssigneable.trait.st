@@ -38,5 +38,5 @@ FASTJavaTWithAssigneable >> variable: anObject [
 FASTJavaTWithAssigneable >> variableGroup [
 	<generated>
 	<navigation: 'Variable'>
-	^ MooseGroup with: self variable
+	^ MooseSpecializedGroup with: self variable
 ]

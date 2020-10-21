@@ -27,21 +27,20 @@ FASTJavaAssignementExpression >> expression [
 	<generated>
 	<FMComment: 'Expression that s being assigned upon declaration to the var'>
 	<FMProperty: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner>
-	<package: #'Carrefour-Model'>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaAssignementExpressionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaAssignementExpressionOwner: self ]
 ]
 
@@ -49,5 +48,5 @@ FASTJavaAssignementExpression >> expression: anObject [
 FASTJavaAssignementExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]

@@ -28,20 +28,20 @@ FASTJavaDoWhileStatement >> body [
 	<generated>
 	<FMComment: 'A statement to be evaluated in the loop'>
 	<FMProperty: #body type: #FASTStatement opposite: #doBodyOwner>
-	^ self privateState attributeAt: #body ifAbsent: [ nil ]
+	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaDoWhileStatement >> body: anObject [
 
 	<generated>
-	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self body.
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		otherSide doBodyOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		anObject doBodyOwner: self ]
 ]
 
@@ -49,7 +49,7 @@ FASTJavaDoWhileStatement >> body: anObject [
 FASTJavaDoWhileStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup with: self body
+	^ MooseSpecializedGroup with: self body
 ]
 
 { #category : #accessing }
@@ -59,20 +59,20 @@ FASTJavaDoWhileStatement >> condition [
 	<generated>
 	<FMComment: 'The condition of the statement'>
 	<FMProperty: #condition type: #FASTExpression opposite: #doConditionOwner>
-	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
+	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaDoWhileStatement >> condition: anObject [
 
 	<generated>
-	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self condition.
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		otherSide doConditionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		anObject doConditionOwner: self ]
 ]
 
@@ -80,5 +80,5 @@ FASTJavaDoWhileStatement >> condition: anObject [
 FASTJavaDoWhileStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup with: self condition
+	^ MooseSpecializedGroup with: self condition
 ]

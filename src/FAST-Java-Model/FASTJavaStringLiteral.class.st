@@ -43,5 +43,5 @@ FASTJavaStringLiteral >> javaStringAssertStatementOwner: anObject [
 FASTJavaStringLiteral >> javaStringAssertStatementOwnerGroup [
 	<generated>
 	<navigation: 'JavaStringAssertStatementOwner'>
-	^ MooseGroup with: self javaStringAssertStatementOwner
+	^ MooseSpecializedGroup with: self javaStringAssertStatementOwner
 ]

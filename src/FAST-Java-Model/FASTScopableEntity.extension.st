@@ -9,12 +9,12 @@ FASTScopableEntity >> newClassOwner [
 	<container>
 	<FMProperty: #newClassOwner type: #FASTJavaNewClassExpression opposite: #declarations>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #newClassOwner ifAbsent: [ nil ]
+	^ self attributeAt: #newClassOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTScopableEntity >> newClassOwner: anObject [
 
 	<generated>
-	self privateState attributeAt: #newClassOwner put: (FMMultivalueLink on: self update: #declarations from: self newClassOwner to: anObject).
+	self attributeAt: #newClassOwner put: (FMMultivalueLink on: self update: #declarations from: self newClassOwner to: anObject).
 ]

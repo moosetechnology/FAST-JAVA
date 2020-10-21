@@ -41,7 +41,7 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnver: anObject [
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnverGroup [
 	<generated>
 	<navigation: 'JavaClassDeclarationInterfaceOwnver'>
-	^ MooseGroup with: self javaClassDeclarationInterfaceOwnver
+	^ MooseSpecializedGroup with: self javaClassDeclarationInterfaceOwnver
 ]
 
 { #category : #accessing }
@@ -66,5 +66,5 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver: anObject [
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnverGroup [
 	<generated>
 	<navigation: 'JavaClassDeclarationSuperclassOwnver'>
-	^ MooseGroup with: self javaClassDeclarationSuperclassOwnver
+	^ MooseSpecializedGroup with: self javaClassDeclarationSuperclassOwnver
 ]

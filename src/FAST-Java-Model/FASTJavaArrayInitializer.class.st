@@ -39,7 +39,7 @@ FASTJavaArrayInitializer >> initializers [
 	<FMComment: 'My initializers'>
 	<derived>
 	<FMProperty: #initializers type: #FASTExpression opposite: #javaArrayInitializers>
-	^ self privateState attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaArrayInitializers: ]
+	^ self attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaArrayInitializers: ]
 ]
 
 { #category : #accessing }
@@ -53,5 +53,5 @@ FASTJavaArrayInitializer >> initializers: anObject [
 FASTJavaArrayInitializer >> initializersGroup [
 	<generated>
 	<navigation: 'Initializers'>
-	^ MooseGroup withAll: self initializers asSet
+	^ MooseSpecializedGroup withAll: self initializers asSet
 ]

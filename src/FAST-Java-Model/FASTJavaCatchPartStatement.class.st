@@ -27,20 +27,20 @@ FASTJavaCatchPartStatement >> body [
 	<generated>
 	<FMComment: 'The body of the Catch part statement'>
 	<FMProperty: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner>
-	^ self privateState attributeAt: #body ifAbsent: [ nil ]
+	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body: anObject [
 
 	<generated>
-	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self body.
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		otherSide javaCatchPartStatementOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		anObject javaCatchPartStatementOwner: self ]
 ]
 
@@ -48,7 +48,7 @@ FASTJavaCatchPartStatement >> body: anObject [
 FASTJavaCatchPartStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup with: self body
+	^ MooseSpecializedGroup with: self body
 ]
 
 { #category : #accessing }
@@ -71,7 +71,7 @@ FASTJavaCatchPartStatement >> parameter: anObject [
 FASTJavaCatchPartStatement >> parameterGroup [
 	<generated>
 	<navigation: 'Parameter'>
-	^ MooseGroup with: self parameter
+	^ MooseSpecializedGroup with: self parameter
 ]
 
 { #category : #accessing }
@@ -95,5 +95,5 @@ FASTJavaCatchPartStatement >> tryOwner: anObject [
 FASTJavaCatchPartStatement >> tryOwnerGroup [
 	<generated>
 	<navigation: 'TryOwner'>
-	^ MooseGroup with: self tryOwner
+	^ MooseSpecializedGroup with: self tryOwner
 ]

@@ -51,5 +51,5 @@ FASTJavaSwitchStatement >> cases: anObject [
 FASTJavaSwitchStatement >> casesGroup [
 	<generated>
 	<navigation: 'Cases'>
-	^ MooseGroup withAll: self cases asSet
+	^ MooseSpecializedGroup withAll: self cases asSet
 ]

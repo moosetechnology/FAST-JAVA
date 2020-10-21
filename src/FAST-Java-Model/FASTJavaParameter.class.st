@@ -42,7 +42,7 @@ FASTJavaParameter >> type: anObject [
 FASTJavaParameter >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup with: self type
+	^ MooseSpecializedGroup with: self type
 ]
 
 { #category : #accessing }
@@ -65,5 +65,5 @@ FASTJavaParameter >> variable: anObject [
 FASTJavaParameter >> variableGroup [
 	<generated>
 	<navigation: 'Variable'>
-	^ MooseGroup with: self variable
+	^ MooseSpecializedGroup with: self variable
 ]

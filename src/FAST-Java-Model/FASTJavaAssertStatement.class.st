@@ -33,20 +33,20 @@ FASTJavaAssertStatement >> condition [
 	<generated>
 	<FMComment: 'The condition of the statement'>
 	<FMProperty: #condition type: #FASTExpression opposite: #assertConditionOwner>
-	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
+	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaAssertStatement >> condition: anObject [
 
 	<generated>
-	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self condition.
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		otherSide assertConditionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		anObject assertConditionOwner: self ]
 ]
 
@@ -54,7 +54,7 @@ FASTJavaAssertStatement >> condition: anObject [
 FASTJavaAssertStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup with: self condition
+	^ MooseSpecializedGroup with: self condition
 ]
 
 { #category : #accessing }
@@ -77,5 +77,5 @@ FASTJavaAssertStatement >> message: anObject [
 FASTJavaAssertStatement >> messageGroup [
 	<generated>
 	<navigation: 'Message'>
-	^ MooseGroup with: self message
+	^ MooseSpecializedGroup with: self message
 ]

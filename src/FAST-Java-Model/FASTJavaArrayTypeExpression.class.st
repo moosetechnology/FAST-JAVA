@@ -23,20 +23,20 @@ FASTJavaArrayTypeExpression >> baseType [
 	<generated>
 	<FMComment: 'The type of the array'>
 	<FMProperty: #baseType type: #FASTExpression opposite: #javaArrayTypeNameOwner>
-	^ self privateState attributeAt: #baseType ifAbsent: [ nil ]
+	^ self attributeAt: #baseType ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaArrayTypeExpression >> baseType: anObject [
 
 	<generated>
-	(self privateState attributeAt: #baseType ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #baseType ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self baseType.
-		self privateState attributeAt: #baseType put: anObject.
+		self attributeAt: #baseType put: anObject.
 		otherSide javaArrayTypeNameOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #baseType put: anObject.
+		self attributeAt: #baseType put: anObject.
 		anObject javaArrayTypeNameOwner: self ]
 ]
 
@@ -44,5 +44,5 @@ FASTJavaArrayTypeExpression >> baseType: anObject [
 FASTJavaArrayTypeExpression >> baseTypeGroup [
 	<generated>
 	<navigation: 'BaseType'>
-	^ MooseGroup with: self baseType
+	^ MooseSpecializedGroup with: self baseType
 ]

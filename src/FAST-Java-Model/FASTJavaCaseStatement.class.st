@@ -40,5 +40,5 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner: anObject [
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwnerGroup [
 	<generated>
 	<navigation: 'JavaCaseStatementSwitchOwner'>
-	^ MooseGroup with: self javaCaseStatementSwitchOwner
+	^ MooseSpecializedGroup with: self javaCaseStatementSwitchOwner
 ]

@@ -45,5 +45,5 @@ FASTJavaTWithModifiers >> modifiers: anObject [
 FASTJavaTWithModifiers >> modifiersGroup [
 	<generated>
 	<navigation: 'Modifiers'>
-	^ MooseGroup withAll: self modifiers asSet
+	^ MooseSpecializedGroup withAll: self modifiers asSet
 ]

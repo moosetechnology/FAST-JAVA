@@ -39,5 +39,5 @@ FASTJavaTDeclaration >> javaDeclarationOwner: anObject [
 FASTJavaTDeclaration >> javaDeclarationOwnerGroup [
 	<generated>
 	<navigation: 'JavaDeclarationOwner'>
-	^ MooseGroup with: self javaDeclarationOwner
+	^ MooseSpecializedGroup with: self javaDeclarationOwner
 ]

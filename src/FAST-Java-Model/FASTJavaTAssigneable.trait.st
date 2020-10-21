@@ -43,5 +43,5 @@ FASTJavaTAssigneable >> javaVariableAssignementOwner: anObject [
 FASTJavaTAssigneable >> javaVariableAssignementOwnerGroup [
 	<generated>
 	<navigation: 'JavaVariableAssignementOwner'>
-	^ MooseGroup with: self javaVariableAssignementOwner
+	^ MooseSpecializedGroup with: self javaVariableAssignementOwner
 ]

@@ -39,20 +39,20 @@ FASTJavaUnaryExpression >> expression [
 	<generated>
 	<FMComment: 'The affected expression'>
 	<FMProperty: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaUnaryExpressionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaUnaryExpressionOwner: self ]
 ]
 
@@ -60,7 +60,7 @@ FASTJavaUnaryExpression >> expression: anObject [
 FASTJavaUnaryExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]
 
 { #category : #accessing }

@@ -52,5 +52,5 @@ FASTJavaQualifiedTypeName >> namespace: anObject [
 FASTJavaQualifiedTypeName >> namespaceGroup [
 	<generated>
 	<navigation: 'Namespace'>
-	^ MooseGroup with: self namespace
+	^ MooseSpecializedGroup with: self namespace
 ]

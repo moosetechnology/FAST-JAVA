@@ -29,20 +29,20 @@ FASTJavaConditionalExpression >> condition [
 	<generated>
 	<FMComment: 'The condition of the statement'>
 	<FMProperty: #condition type: #FASTExpression opposite: #conditionalConditionOwner>
-	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
+	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> condition: anObject [
 
 	<generated>
-	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self condition.
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		otherSide conditionalConditionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		anObject conditionalConditionOwner: self ]
 ]
 
@@ -50,7 +50,7 @@ FASTJavaConditionalExpression >> condition: anObject [
 FASTJavaConditionalExpression >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup with: self condition
+	^ MooseSpecializedGroup with: self condition
 ]
 
 { #category : #accessing }
@@ -60,20 +60,20 @@ FASTJavaConditionalExpression >> elsePart [
 	<generated>
 	<FMComment: 'else part'>
 	<FMProperty: #elsePart type: #FASTExpression opposite: #conditionalElsePartOwner>
-	^ self privateState attributeAt: #elsePart ifAbsent: [ nil ]
+	^ self attributeAt: #elsePart ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> elsePart: anObject [
 
 	<generated>
-	(self privateState attributeAt: #elsePart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #elsePart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self elsePart.
-		self privateState attributeAt: #elsePart put: anObject.
+		self attributeAt: #elsePart put: anObject.
 		otherSide conditionalElsePartOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #elsePart put: anObject.
+		self attributeAt: #elsePart put: anObject.
 		anObject conditionalElsePartOwner: self ]
 ]
 
@@ -81,7 +81,7 @@ FASTJavaConditionalExpression >> elsePart: anObject [
 FASTJavaConditionalExpression >> elsePartGroup [
 	<generated>
 	<navigation: 'ElsePart'>
-	^ MooseGroup with: self elsePart
+	^ MooseSpecializedGroup with: self elsePart
 ]
 
 { #category : #accessing }
@@ -91,20 +91,20 @@ FASTJavaConditionalExpression >> thenPart [
 	<generated>
 	<FMComment: 'then part'>
 	<FMProperty: #thenPart type: #FASTExpression opposite: #conditionalThenPartOwner>
-	^ self privateState attributeAt: #thenPart ifAbsent: [ nil ]
+	^ self attributeAt: #thenPart ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> thenPart: anObject [
 
 	<generated>
-	(self privateState attributeAt: #thenPart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #thenPart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self thenPart.
-		self privateState attributeAt: #thenPart put: anObject.
+		self attributeAt: #thenPart put: anObject.
 		otherSide conditionalThenPartOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #thenPart put: anObject.
+		self attributeAt: #thenPart put: anObject.
 		anObject conditionalThenPartOwner: self ]
 ]
 
@@ -112,5 +112,5 @@ FASTJavaConditionalExpression >> thenPart: anObject [
 FASTJavaConditionalExpression >> thenPartGroup [
 	<generated>
 	<navigation: 'ThenPart'>
-	^ MooseGroup with: self thenPart
+	^ MooseSpecializedGroup with: self thenPart
 ]

@@ -27,20 +27,20 @@ FASTJavaLabeledCaseStatement >> label [
 	<generated>
 	<FMComment: 'The label of the case statement'>
 	<FMProperty: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner>
-	^ self privateState attributeAt: #label ifAbsent: [ nil ]
+	^ self attributeAt: #label ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaLabeledCaseStatement >> label: anObject [
 
 	<generated>
-	(self privateState attributeAt: #label ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #label ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self label.
-		self privateState attributeAt: #label put: anObject.
+		self attributeAt: #label put: anObject.
 		otherSide javaLabeledCaseStatementOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #label put: anObject.
+		self attributeAt: #label put: anObject.
 		anObject javaLabeledCaseStatementOwner: self ]
 ]
 
@@ -48,5 +48,5 @@ FASTJavaLabeledCaseStatement >> label: anObject [
 FASTJavaLabeledCaseStatement >> labelGroup [
 	<generated>
 	<navigation: 'Label'>
-	^ MooseGroup with: self label
+	^ MooseSpecializedGroup with: self label
 ]

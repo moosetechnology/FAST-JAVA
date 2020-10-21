@@ -23,20 +23,20 @@ FASTJavaSynchronizedStatement >> block [
 	<generated>
 	<FMComment: 'The block that is synchronized'>
 	<FMProperty: #block type: #FASTStatementBlock opposite: #javaSynchronizedStatementOwner>
-	^ self privateState attributeAt: #block ifAbsent: [ nil ]
+	^ self attributeAt: #block ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaSynchronizedStatement >> block: anObject [
 
 	<generated>
-	(self privateState attributeAt: #block ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #block ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self block.
-		self privateState attributeAt: #block put: anObject.
+		self attributeAt: #block put: anObject.
 		otherSide javaSynchronizedStatementOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #block put: anObject.
+		self attributeAt: #block put: anObject.
 		anObject javaSynchronizedStatementOwner: self ]
 ]
 
@@ -44,7 +44,7 @@ FASTJavaSynchronizedStatement >> block: anObject [
 FASTJavaSynchronizedStatement >> blockGroup [
 	<generated>
 	<navigation: 'Block'>
-	^ MooseGroup with: self block
+	^ MooseSpecializedGroup with: self block
 ]
 
 { #category : #accessing }
@@ -54,20 +54,20 @@ FASTJavaSynchronizedStatement >> expression [
 	<generated>
 	<FMComment: 'The instance on which the statement block is synchronized'>
 	<FMProperty: #expression type: #FASTExpression opposite: #javaSynchronizedStatementOwner>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaSynchronizedStatement >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaSynchronizedStatementOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaSynchronizedStatementOwner: self ]
 ]
 
@@ -75,5 +75,5 @@ FASTJavaSynchronizedStatement >> expression: anObject [
 FASTJavaSynchronizedStatement >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]

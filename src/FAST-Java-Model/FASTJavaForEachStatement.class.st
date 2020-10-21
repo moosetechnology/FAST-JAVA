@@ -32,20 +32,20 @@ FASTJavaForEachStatement >> body [
 	<generated>
 	<FMComment: 'The body of the For Each statement'>
 	<FMProperty: #body type: #FASTStatement opposite: #javaForEachStatementOwner>
-	^ self privateState attributeAt: #body ifAbsent: [ nil ]
+	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> body: anObject [
 
 	<generated>
-	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self body.
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		otherSide javaForEachStatementOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		anObject javaForEachStatementOwner: self ]
 ]
 
@@ -53,7 +53,7 @@ FASTJavaForEachStatement >> body: anObject [
 FASTJavaForEachStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup with: self body
+	^ MooseSpecializedGroup with: self body
 ]
 
 { #category : #accessing }
@@ -76,7 +76,7 @@ FASTJavaForEachStatement >> fieldname: anObject [
 FASTJavaForEachStatement >> fieldnameGroup [
 	<generated>
 	<navigation: 'Fieldname'>
-	^ MooseGroup with: self fieldname
+	^ MooseSpecializedGroup with: self fieldname
 ]
 
 { #category : #accessing }
@@ -86,20 +86,20 @@ FASTJavaForEachStatement >> list [
 	<generated>
 	<FMComment: 'The list the for each statement iterate on'>
 	<FMProperty: #list type: #FASTExpression opposite: #javaForEachStatementOwner>
-	^ self privateState attributeAt: #list ifAbsent: [ nil ]
+	^ self attributeAt: #list ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForEachStatement >> list: anObject [
 
 	<generated>
-	(self privateState attributeAt: #list ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #list ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self list.
-		self privateState attributeAt: #list put: anObject.
+		self attributeAt: #list put: anObject.
 		otherSide javaForEachStatementOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #list put: anObject.
+		self attributeAt: #list put: anObject.
 		anObject javaForEachStatementOwner: self ]
 ]
 
@@ -107,7 +107,7 @@ FASTJavaForEachStatement >> list: anObject [
 FASTJavaForEachStatement >> listGroup [
 	<generated>
 	<navigation: 'List'>
-	^ MooseGroup with: self list
+	^ MooseSpecializedGroup with: self list
 ]
 
 { #category : #accessing }
@@ -130,5 +130,5 @@ FASTJavaForEachStatement >> type: anObject [
 FASTJavaForEachStatement >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup with: self type
+	^ MooseSpecializedGroup with: self type
 ]

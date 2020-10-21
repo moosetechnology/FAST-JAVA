@@ -58,7 +58,7 @@ FASTJavaClassDeclaration >> interfaces: anObject [
 FASTJavaClassDeclaration >> interfacesGroup [
 	<generated>
 	<navigation: 'Interfaces'>
-	^ MooseGroup withAll: self interfaces asSet
+	^ MooseSpecializedGroup withAll: self interfaces asSet
 ]
 
 { #category : #accessing }
@@ -81,5 +81,5 @@ FASTJavaClassDeclaration >> superclass: anObject [
 FASTJavaClassDeclaration >> superclassGroup [
 	<generated>
 	<navigation: 'Superclass'>
-	^ MooseGroup with: self superclass
+	^ MooseSpecializedGroup with: self superclass
 ]

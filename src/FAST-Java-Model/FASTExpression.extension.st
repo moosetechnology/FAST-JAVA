@@ -10,20 +10,20 @@ FASTExpression >> assertConditionOwner [
 	<derived>
 	<FMProperty: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #assertConditionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #assertConditionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> assertConditionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #assertConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #assertConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self assertConditionOwner.
-		self privateState attributeAt: #assertConditionOwner put: anObject.
+		self attributeAt: #assertConditionOwner put: anObject.
 		otherSide condition: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #assertConditionOwner put: anObject.
+		self attributeAt: #assertConditionOwner put: anObject.
 		anObject condition: self ]
 ]
 
@@ -37,20 +37,20 @@ FASTExpression >> conditionalConditionOwner [
 	<derived>
 	<FMProperty: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #conditionalConditionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #conditionalConditionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> conditionalConditionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #conditionalConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #conditionalConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self conditionalConditionOwner.
-		self privateState attributeAt: #conditionalConditionOwner put: anObject.
+		self attributeAt: #conditionalConditionOwner put: anObject.
 		otherSide condition: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #conditionalConditionOwner put: anObject.
+		self attributeAt: #conditionalConditionOwner put: anObject.
 		anObject condition: self ]
 ]
 
@@ -64,20 +64,20 @@ FASTExpression >> conditionalElsePartOwner [
 	<derived>
 	<FMProperty: #conditionalElsePartOwner type: #FASTJavaConditionalExpression opposite: #elsePart>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #conditionalElsePartOwner ifAbsent: [ nil ]
+	^ self attributeAt: #conditionalElsePartOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> conditionalElsePartOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #conditionalElsePartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #conditionalElsePartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self conditionalElsePartOwner.
-		self privateState attributeAt: #conditionalElsePartOwner put: anObject.
+		self attributeAt: #conditionalElsePartOwner put: anObject.
 		otherSide elsePart: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #conditionalElsePartOwner put: anObject.
+		self attributeAt: #conditionalElsePartOwner put: anObject.
 		anObject elsePart: self ]
 ]
 
@@ -91,20 +91,20 @@ FASTExpression >> conditionalThenPartOwner [
 	<derived>
 	<FMProperty: #conditionalThenPartOwner type: #FASTJavaConditionalExpression opposite: #thenPart>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #conditionalThenPartOwner ifAbsent: [ nil ]
+	^ self attributeAt: #conditionalThenPartOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> conditionalThenPartOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #conditionalThenPartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #conditionalThenPartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self conditionalThenPartOwner.
-		self privateState attributeAt: #conditionalThenPartOwner put: anObject.
+		self attributeAt: #conditionalThenPartOwner put: anObject.
 		otherSide thenPart: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #conditionalThenPartOwner put: anObject.
+		self attributeAt: #conditionalThenPartOwner put: anObject.
 		anObject thenPart: self ]
 ]
 
@@ -118,20 +118,20 @@ FASTExpression >> doConditionOwner [
 	<derived>
 	<FMProperty: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #doConditionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #doConditionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> doConditionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #doConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #doConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self doConditionOwner.
-		self privateState attributeAt: #doConditionOwner put: anObject.
+		self attributeAt: #doConditionOwner put: anObject.
 		otherSide condition: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #doConditionOwner put: anObject.
+		self attributeAt: #doConditionOwner put: anObject.
 		anObject condition: self ]
 ]
 
@@ -145,20 +145,20 @@ FASTExpression >> forConditionOwner [
 	<derived>
 	<FMProperty: #forConditionOwner type: #FASTJavaForStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #forConditionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #forConditionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> forConditionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #forConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #forConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self forConditionOwner.
-		self privateState attributeAt: #forConditionOwner put: anObject.
+		self attributeAt: #forConditionOwner put: anObject.
 		otherSide condition: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #forConditionOwner put: anObject.
+		self attributeAt: #forConditionOwner put: anObject.
 		anObject condition: self ]
 ]
 
@@ -172,20 +172,20 @@ FASTExpression >> ifConditionOwner [
 	<derived>
 	<FMProperty: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #ifConditionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #ifConditionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> ifConditionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #ifConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #ifConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self ifConditionOwner.
-		self privateState attributeAt: #ifConditionOwner put: anObject.
+		self attributeAt: #ifConditionOwner put: anObject.
 		otherSide condition: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #ifConditionOwner put: anObject.
+		self attributeAt: #ifConditionOwner put: anObject.
 		anObject condition: self ]
 ]
 
@@ -199,20 +199,20 @@ FASTExpression >> infixOperationLeftOperandOwner [
 	<derived>
 	<FMProperty: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #infixOperationLeftOperandOwner ifAbsent: [ nil ]
+	^ self attributeAt: #infixOperationLeftOperandOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> infixOperationLeftOperandOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #infixOperationLeftOperandOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #infixOperationLeftOperandOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self infixOperationLeftOperandOwner.
-		self privateState attributeAt: #infixOperationLeftOperandOwner put: anObject.
+		self attributeAt: #infixOperationLeftOperandOwner put: anObject.
 		otherSide leftOperand: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #infixOperationLeftOperandOwner put: anObject.
+		self attributeAt: #infixOperationLeftOperandOwner put: anObject.
 		anObject leftOperand: self ]
 ]
 
@@ -226,20 +226,20 @@ FASTExpression >> infixOperationRightOperandOwner [
 	<derived>
 	<FMProperty: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #infixOperationRightOperandOwner ifAbsent: [ nil ]
+	^ self attributeAt: #infixOperationRightOperandOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> infixOperationRightOperandOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #infixOperationRightOperandOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #infixOperationRightOperandOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self infixOperationRightOperandOwner.
-		self privateState attributeAt: #infixOperationRightOperandOwner put: anObject.
+		self attributeAt: #infixOperationRightOperandOwner put: anObject.
 		otherSide rightOperand: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #infixOperationRightOperandOwner put: anObject.
+		self attributeAt: #infixOperationRightOperandOwner put: anObject.
 		anObject rightOperand: self ]
 ]
 
@@ -253,20 +253,20 @@ FASTExpression >> javaArrayAccessOwner [
 	<derived>
 	<FMProperty: #javaArrayAccessOwner type: #FASTJavaArrayAccess opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaArrayAccessOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaArrayAccessOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaArrayAccessOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaArrayAccessOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaArrayAccessOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaArrayAccessOwner.
-		self privateState attributeAt: #javaArrayAccessOwner put: anObject.
+		self attributeAt: #javaArrayAccessOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaArrayAccessOwner put: anObject.
+		self attributeAt: #javaArrayAccessOwner put: anObject.
 		anObject expression: self ]
 ]
 
@@ -280,20 +280,20 @@ FASTExpression >> javaArrayArrayAccessOwner [
 	<derived>
 	<FMProperty: #javaArrayArrayAccessOwner type: #FASTJavaArrayAccess opposite: #array>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaArrayArrayAccessOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaArrayArrayAccessOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaArrayArrayAccessOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaArrayArrayAccessOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaArrayArrayAccessOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaArrayArrayAccessOwner.
-		self privateState attributeAt: #javaArrayArrayAccessOwner put: anObject.
+		self attributeAt: #javaArrayArrayAccessOwner put: anObject.
 		otherSide array: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaArrayArrayAccessOwner put: anObject.
+		self attributeAt: #javaArrayArrayAccessOwner put: anObject.
 		anObject array: self ]
 ]
 
@@ -306,14 +306,14 @@ FASTExpression >> javaArrayInitializers [
 	<container>
 	<FMProperty: #javaArrayInitializers type: #FASTJavaArrayInitializer opposite: #initializers>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaArrayInitializers ifAbsent: [ nil ]
+	^ self attributeAt: #javaArrayInitializers ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaArrayInitializers: anObject [
 
 	<generated>
-	self privateState attributeAt: #javaArrayInitializers put: (FMMultivalueLink on: self update: #initializers from: self javaArrayInitializers to: anObject).
+	self attributeAt: #javaArrayInitializers put: (FMMultivalueLink on: self update: #initializers from: self javaArrayInitializers to: anObject).
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
@@ -326,20 +326,20 @@ FASTExpression >> javaArrayTypeNameOwner [
 	<derived>
 	<FMProperty: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaArrayTypeNameOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaArrayTypeNameOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaArrayTypeNameOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaArrayTypeNameOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaArrayTypeNameOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaArrayTypeNameOwner.
-		self privateState attributeAt: #javaArrayTypeNameOwner put: anObject.
+		self attributeAt: #javaArrayTypeNameOwner put: anObject.
 		otherSide baseType: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaArrayTypeNameOwner put: anObject.
+		self attributeAt: #javaArrayTypeNameOwner put: anObject.
 		anObject baseType: self ]
 ]
 
@@ -353,20 +353,20 @@ FASTExpression >> javaAssignementExpressionOwner [
 	<derived>
 	<FMProperty: #javaAssignementExpressionOwner type: #FASTJavaAssignementExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaAssignementExpressionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaAssignementExpressionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaAssignementExpressionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaAssignementExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaAssignementExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaAssignementExpressionOwner.
-		self privateState attributeAt: #javaAssignementExpressionOwner put: anObject.
+		self attributeAt: #javaAssignementExpressionOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaAssignementExpressionOwner put: anObject.
+		self attributeAt: #javaAssignementExpressionOwner put: anObject.
 		anObject expression: self ]
 ]
 
@@ -380,20 +380,20 @@ FASTExpression >> javaCastExpressionOwner [
 	<derived>
 	<FMProperty: #javaCastExpressionOwner type: #FASTJavaCastExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaCastExpressionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaCastExpressionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaCastExpressionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaCastExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaCastExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaCastExpressionOwner.
-		self privateState attributeAt: #javaCastExpressionOwner put: anObject.
+		self attributeAt: #javaCastExpressionOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaCastExpressionOwner put: anObject.
+		self attributeAt: #javaCastExpressionOwner put: anObject.
 		anObject expression: self ]
 ]
 
@@ -407,20 +407,20 @@ FASTExpression >> javaForEachStatementOwner [
 	<derived>
 	<FMProperty: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #list>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaForEachStatementOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaForEachStatementOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaForEachStatementOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaForEachStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaForEachStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaForEachStatementOwner.
-		self privateState attributeAt: #javaForEachStatementOwner put: anObject.
+		self attributeAt: #javaForEachStatementOwner put: anObject.
 		otherSide list: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaForEachStatementOwner put: anObject.
+		self attributeAt: #javaForEachStatementOwner put: anObject.
 		anObject list: self ]
 ]
 
@@ -434,20 +434,20 @@ FASTExpression >> javaLabeledCaseStatementOwner [
 	<derived>
 	<FMProperty: #javaLabeledCaseStatementOwner type: #FASTJavaLabeledCaseStatement opposite: #label>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaLabeledCaseStatementOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaLabeledCaseStatementOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaLabeledCaseStatementOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaLabeledCaseStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaLabeledCaseStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaLabeledCaseStatementOwner.
-		self privateState attributeAt: #javaLabeledCaseStatementOwner put: anObject.
+		self attributeAt: #javaLabeledCaseStatementOwner put: anObject.
 		otherSide label: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaLabeledCaseStatementOwner put: anObject.
+		self attributeAt: #javaLabeledCaseStatementOwner put: anObject.
 		anObject label: self ]
 ]
 
@@ -461,20 +461,20 @@ FASTExpression >> javaNewArrayInitialOwner [
 	<derived>
 	<FMProperty: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaNewArrayInitialOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaNewArrayInitialOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaNewArrayInitialOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaNewArrayInitialOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaNewArrayInitialOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaNewArrayInitialOwner.
-		self privateState attributeAt: #javaNewArrayInitialOwner put: anObject.
+		self attributeAt: #javaNewArrayInitialOwner put: anObject.
 		otherSide initializer: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaNewArrayInitialOwner put: anObject.
+		self attributeAt: #javaNewArrayInitialOwner put: anObject.
 		anObject initializer: self ]
 ]
 
@@ -488,20 +488,20 @@ FASTExpression >> javaSynchronizedStatementOwner [
 	<derived>
 	<FMProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaSynchronizedStatementOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaSynchronizedStatementOwner.
-		self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+		self attributeAt: #javaSynchronizedStatementOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+		self attributeAt: #javaSynchronizedStatementOwner put: anObject.
 		anObject expression: self ]
 ]
 
@@ -515,20 +515,20 @@ FASTExpression >> javaThrowStatementOwner [
 	<derived>
 	<FMProperty: #javaThrowStatementOwner type: #FASTJavaThrowStatement opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaThrowStatementOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaThrowStatementOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaThrowStatementOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaThrowStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaThrowStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaThrowStatementOwner.
-		self privateState attributeAt: #javaThrowStatementOwner put: anObject.
+		self attributeAt: #javaThrowStatementOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaThrowStatementOwner put: anObject.
+		self attributeAt: #javaThrowStatementOwner put: anObject.
 		anObject expression: self ]
 ]
 
@@ -542,20 +542,20 @@ FASTExpression >> javaUnaryExpressionOwner [
 	<derived>
 	<FMProperty: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaUnaryExpressionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaUnaryExpressionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaUnaryExpressionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaUnaryExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaUnaryExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaUnaryExpressionOwner.
-		self privateState attributeAt: #javaUnaryExpressionOwner put: anObject.
+		self attributeAt: #javaUnaryExpressionOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaUnaryExpressionOwner put: anObject.
+		self attributeAt: #javaUnaryExpressionOwner put: anObject.
 		anObject expression: self ]
 ]
 
@@ -569,20 +569,20 @@ FASTExpression >> javaVariableDeclaratorExpressionOwner [
 	<derived>
 	<FMProperty: #javaVariableDeclaratorExpressionOwner type: #FASTJavaVariableDeclarator opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> javaVariableDeclaratorExpressionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaVariableDeclaratorExpressionOwner.
-		self privateState attributeAt: #javaVariableDeclaratorExpressionOwner put: anObject.
+		self attributeAt: #javaVariableDeclaratorExpressionOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaVariableDeclaratorExpressionOwner put: anObject.
+		self attributeAt: #javaVariableDeclaratorExpressionOwner put: anObject.
 		anObject expression: self ]
 ]
 
@@ -596,19 +596,19 @@ FASTExpression >> whileConditionOwner [
 	<derived>
 	<FMProperty: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #whileConditionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #whileConditionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTExpression >> whileConditionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #whileConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #whileConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self whileConditionOwner.
-		self privateState attributeAt: #whileConditionOwner put: anObject.
+		self attributeAt: #whileConditionOwner put: anObject.
 		otherSide condition: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #whileConditionOwner put: anObject.
+		self attributeAt: #whileConditionOwner put: anObject.
 		anObject condition: self ]
 ]

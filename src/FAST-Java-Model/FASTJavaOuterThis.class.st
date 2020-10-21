@@ -45,5 +45,5 @@ FASTJavaOuterThis >> type: anObject [
 FASTJavaOuterThis >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup with: self type
+	^ MooseSpecializedGroup with: self type
 ]

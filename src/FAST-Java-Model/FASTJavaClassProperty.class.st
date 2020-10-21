@@ -87,5 +87,5 @@ FASTJavaClassProperty >> type: anObject [
 FASTJavaClassProperty >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup with: self type
+	^ MooseSpecializedGroup with: self type
 ]

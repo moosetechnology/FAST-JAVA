@@ -39,5 +39,5 @@ FASTJavaClassTypeExpression >> typeName: anObject [
 FASTJavaClassTypeExpression >> typeNameGroup [
 	<generated>
 	<navigation: 'TypeName'>
-	^ MooseGroup with: self typeName
+	^ MooseSpecializedGroup with: self typeName
 ]

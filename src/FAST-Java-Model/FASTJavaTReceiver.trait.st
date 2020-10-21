@@ -40,5 +40,5 @@ FASTJavaTReceiver >> receiverOwner: anObject [
 FASTJavaTReceiver >> receiverOwnerGroup [
 	<generated>
 	<navigation: 'ReceiverOwner'>
-	^ MooseGroup with: self receiverOwner
+	^ MooseSpecializedGroup with: self receiverOwner
 ]

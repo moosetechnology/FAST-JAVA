@@ -59,7 +59,7 @@ FASTJavaTryCatchStatement >> catches: anObject [
 FASTJavaTryCatchStatement >> catchesGroup [
 	<generated>
 	<navigation: 'Catches'>
-	^ MooseGroup withAll: self catches asSet
+	^ MooseSpecializedGroup withAll: self catches asSet
 ]
 
 { #category : #accessing }
@@ -69,20 +69,20 @@ FASTJavaTryCatchStatement >> try [
 	<generated>
 	<FMComment: 'I represent the ''try'' part of the TryCatch Statement'>
 	<FMProperty: #try type: #FASTStatement opposite: #javaTryCatchOwner>
-	^ self privateState attributeAt: #try ifAbsent: [ nil ]
+	^ self attributeAt: #try ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaTryCatchStatement >> try: anObject [
 
 	<generated>
-	(self privateState attributeAt: #try ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #try ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self try.
-		self privateState attributeAt: #try put: anObject.
+		self attributeAt: #try put: anObject.
 		otherSide javaTryCatchOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #try put: anObject.
+		self attributeAt: #try put: anObject.
 		anObject javaTryCatchOwner: self ]
 ]
 
@@ -90,5 +90,5 @@ FASTJavaTryCatchStatement >> try: anObject [
 FASTJavaTryCatchStatement >> tryGroup [
 	<generated>
 	<navigation: 'Try'>
-	^ MooseGroup with: self try
+	^ MooseSpecializedGroup with: self try
 ]

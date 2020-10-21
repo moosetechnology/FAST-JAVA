@@ -56,7 +56,7 @@ FASTJavaVarDeclStatement >> declarators: anObject [
 FASTJavaVarDeclStatement >> declaratorsGroup [
 	<generated>
 	<navigation: 'Declarators'>
-	^ MooseGroup withAll: self declarators asSet
+	^ MooseSpecializedGroup withAll: self declarators asSet
 ]
 
 { #category : #accessing }
@@ -79,5 +79,5 @@ FASTJavaVarDeclStatement >> type: anObject [
 FASTJavaVarDeclStatement >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup with: self type
+	^ MooseSpecializedGroup with: self type
 ]

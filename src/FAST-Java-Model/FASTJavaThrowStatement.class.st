@@ -27,20 +27,20 @@ FASTJavaThrowStatement >> expression [
 	<generated>
 	<FMComment: 'The throwed element'>
 	<FMProperty: #expression type: #FASTExpression opposite: #javaThrowStatementOwner>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaThrowStatement >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaThrowStatementOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaThrowStatementOwner: self ]
 ]
 
@@ -48,5 +48,5 @@ FASTJavaThrowStatement >> expression: anObject [
 FASTJavaThrowStatement >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]

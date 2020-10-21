@@ -25,20 +25,20 @@ FASTJavaLambdaExpression >> expression [
 	<generated>
 	<FMComment: 'Expression to be executed as part of the lambda.'>
 	<FMProperty: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaLambdaExpression >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaLambdaExpressionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaLambdaExpressionOwner: self ]
 ]
 
@@ -46,5 +46,5 @@ FASTJavaLambdaExpression >> expression: anObject [
 FASTJavaLambdaExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]

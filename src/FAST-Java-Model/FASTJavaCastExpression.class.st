@@ -28,20 +28,20 @@ FASTJavaCastExpression >> expression [
 	<generated>
 	<FMComment: 'The expression to cast'>
 	<FMProperty: #expression type: #FASTExpression opposite: #javaCastExpressionOwner>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaCastExpression >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaCastExpressionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaCastExpressionOwner: self ]
 ]
 
@@ -49,7 +49,7 @@ FASTJavaCastExpression >> expression: anObject [
 FASTJavaCastExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]
 
 { #category : #accessing }
@@ -72,5 +72,5 @@ FASTJavaCastExpression >> type: anObject [
 FASTJavaCastExpression >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
-	^ MooseGroup with: self type
+	^ MooseSpecializedGroup with: self type
 ]

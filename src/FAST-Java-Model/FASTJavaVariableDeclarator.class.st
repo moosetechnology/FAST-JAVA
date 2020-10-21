@@ -34,21 +34,20 @@ FASTJavaVariableDeclarator >> expression [
 	<generated>
 	<FMComment: 'Expression that s being assigned upon declaration to the var'>
 	<FMProperty: #expression type: #FASTExpression opposite: #javaVariableDeclaratorExpressionOwner>
-	<package: #'Carrefour-Model'>
-	^ self privateState attributeAt: #expression ifAbsent: [ nil ]
+	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaVariableDeclarator >> expression: anObject [
 
 	<generated>
-	(self privateState attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		otherSide javaVariableDeclaratorExpressionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #expression put: anObject.
+		self attributeAt: #expression put: anObject.
 		anObject javaVariableDeclaratorExpressionOwner: self ]
 ]
 
@@ -56,7 +55,7 @@ FASTJavaVariableDeclarator >> expression: anObject [
 FASTJavaVariableDeclarator >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
-	^ MooseGroup with: self expression
+	^ MooseSpecializedGroup with: self expression
 ]
 
 { #category : #accessing }
@@ -80,7 +79,7 @@ FASTJavaVariableDeclarator >> varDeclOwner: anObject [
 FASTJavaVariableDeclarator >> varDeclOwnerGroup [
 	<generated>
 	<navigation: 'VarDeclOwner'>
-	^ MooseGroup with: self varDeclOwner
+	^ MooseSpecializedGroup with: self varDeclOwner
 ]
 
 { #category : #accessing }
@@ -103,5 +102,5 @@ FASTJavaVariableDeclarator >> variable: anObject [
 FASTJavaVariableDeclarator >> variableGroup [
 	<generated>
 	<navigation: 'Variable'>
-	^ MooseGroup with: self variable
+	^ MooseSpecializedGroup with: self variable
 ]

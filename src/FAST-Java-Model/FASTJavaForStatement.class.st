@@ -28,20 +28,20 @@ FASTJavaForStatement >> body [
 	<generated>
 	<FMComment: 'A statement to be evaluated in the loop'>
 	<FMProperty: #body type: #FASTStatement opposite: #forBodyOwner>
-	^ self privateState attributeAt: #body ifAbsent: [ nil ]
+	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForStatement >> body: anObject [
 
 	<generated>
-	(self privateState attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self body.
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		otherSide forBodyOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #body put: anObject.
+		self attributeAt: #body put: anObject.
 		anObject forBodyOwner: self ]
 ]
 
@@ -49,7 +49,7 @@ FASTJavaForStatement >> body: anObject [
 FASTJavaForStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
-	^ MooseGroup with: self body
+	^ MooseSpecializedGroup with: self body
 ]
 
 { #category : #accessing }
@@ -59,20 +59,20 @@ FASTJavaForStatement >> condition [
 	<generated>
 	<FMComment: 'The condition of the statement'>
 	<FMProperty: #condition type: #FASTExpression opposite: #forConditionOwner>
-	^ self privateState attributeAt: #condition ifAbsent: [ nil ]
+	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForStatement >> condition: anObject [
 
 	<generated>
-	(self privateState attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self condition.
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		otherSide forConditionOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #condition put: anObject.
+		self attributeAt: #condition put: anObject.
 		anObject forConditionOwner: self ]
 ]
 
@@ -80,7 +80,7 @@ FASTJavaForStatement >> condition: anObject [
 FASTJavaForStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
-	^ MooseGroup with: self condition
+	^ MooseSpecializedGroup with: self condition
 ]
 
 { #category : #accessing }
@@ -90,20 +90,20 @@ FASTJavaForStatement >> incrementor [
 	<generated>
 	<FMComment: 'Expression evaluated at the end of each loop'>
 	<FMProperty: #incrementor type: #FASTStatement opposite: #forIncrementorOwner>
-	^ self privateState attributeAt: #incrementor ifAbsent: [ nil ]
+	^ self attributeAt: #incrementor ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForStatement >> incrementor: anObject [
 
 	<generated>
-	(self privateState attributeAt: #incrementor ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #incrementor ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self incrementor.
-		self privateState attributeAt: #incrementor put: anObject.
+		self attributeAt: #incrementor put: anObject.
 		otherSide forIncrementorOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #incrementor put: anObject.
+		self attributeAt: #incrementor put: anObject.
 		anObject forIncrementorOwner: self ]
 ]
 
@@ -111,7 +111,7 @@ FASTJavaForStatement >> incrementor: anObject [
 FASTJavaForStatement >> incrementorGroup [
 	<generated>
 	<navigation: 'Incrementor'>
-	^ MooseGroup with: self incrementor
+	^ MooseSpecializedGroup with: self incrementor
 ]
 
 { #category : #accessing }
@@ -121,20 +121,20 @@ FASTJavaForStatement >> initializer [
 	<generated>
 	<FMComment: 'Expression used at initialization phase of a for loop'>
 	<FMProperty: #initializer type: #FASTStatement opposite: #forIninitializerOwner>
-	^ self privateState attributeAt: #initializer ifAbsent: [ nil ]
+	^ self attributeAt: #initializer ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaForStatement >> initializer: anObject [
 
 	<generated>
-	(self privateState attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self initializer.
-		self privateState attributeAt: #initializer put: anObject.
+		self attributeAt: #initializer put: anObject.
 		otherSide forIninitializerOwner: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #initializer put: anObject.
+		self attributeAt: #initializer put: anObject.
 		anObject forIninitializerOwner: self ]
 ]
 
@@ -142,5 +142,5 @@ FASTJavaForStatement >> initializer: anObject [
 FASTJavaForStatement >> initializerGroup [
 	<generated>
 	<navigation: 'Initializer'>
-	^ MooseGroup with: self initializer
+	^ MooseSpecializedGroup with: self initializer
 ]

@@ -10,19 +10,19 @@ FASTEntity >> javaLambdaExpressionOwner [
 	<derived>
 	<FMProperty: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTEntity >> javaLambdaExpressionOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaLambdaExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaLambdaExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaLambdaExpressionOwner.
-		self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
+		self attributeAt: #javaLambdaExpressionOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaLambdaExpressionOwner put: anObject.
+		self attributeAt: #javaLambdaExpressionOwner put: anObject.
 		anObject expression: self ]
 ]

@@ -10,20 +10,20 @@ FASTStatementBlock >> javaInitializerOwner [
 	<derived>
 	<FMProperty: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTStatementBlock >> javaInitializerOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaInitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaInitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaInitializerOwner.
-		self privateState attributeAt: #javaInitializerOwner put: anObject.
+		self attributeAt: #javaInitializerOwner put: anObject.
 		otherSide statementBlock: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaInitializerOwner put: anObject.
+		self attributeAt: #javaInitializerOwner put: anObject.
 		anObject statementBlock: self ]
 ]
 
@@ -37,19 +37,19 @@ FASTStatementBlock >> javaSynchronizedStatementOwner [
 	<derived>
 	<FMProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block>
 	<package: #'FAST-Java-Model'>
-	^ self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
 FASTStatementBlock >> javaSynchronizedStatementOwner: anObject [
 
 	<generated>
-	(self privateState attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaSynchronizedStatementOwner.
-		self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+		self attributeAt: #javaSynchronizedStatementOwner put: anObject.
 		otherSide block: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #javaSynchronizedStatementOwner put: anObject.
+		self attributeAt: #javaSynchronizedStatementOwner put: anObject.
 		anObject block: self ]
 ]
