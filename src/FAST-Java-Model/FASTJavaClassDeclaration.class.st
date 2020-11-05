@@ -13,11 +13,11 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 Class {
 	#name : #FASTJavaClassDeclaration,
 	#superclass : #FASTStatement,
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FamixTNamedEntity',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FamixTNamedEntity classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FamixTHasImmediateSource + FamixTNamedEntity',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FamixTHasImmediateSource classTrait + FamixTNamedEntity classTrait',
 	#instVars : [
-		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver',
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver'
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver',
+		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -59,6 +59,12 @@ FASTJavaClassDeclaration >> interfacesGroup [
 	<generated>
 	<navigation: 'Interfaces'>
 	^ MooseSpecializedGroup withAll: self interfaces asSet
+]
+
+{ #category : #accessing }
+FASTJavaClassDeclaration >> sourceText [
+
+	^ self source ifNil: [ self parentNode ifNil: [ '' ] ifNotNil: [ :existingParentNode | existingParentNode sourceText ] ]
 ]
 
 { #category : #accessing }

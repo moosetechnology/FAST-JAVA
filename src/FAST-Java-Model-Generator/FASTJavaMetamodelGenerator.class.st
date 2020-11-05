@@ -741,6 +741,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
 	javaClassDeclaration --|> #TNamedEntity.
+	javaClassDeclaration --|> #THasImmediateSource.
 
 	javaMethodInvocation --|> expression.
 	javaMethodInvocation --|> #TWithArguments.
