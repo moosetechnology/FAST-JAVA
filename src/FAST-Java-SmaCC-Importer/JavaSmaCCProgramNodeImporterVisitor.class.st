@@ -134,7 +134,7 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
 			err signal ].
 	[ self accept: ast.
-	self model anyOne rootNode source: ast completeSource asString ]
+	((self model allWithType: FASTJavaClassDeclaration) detect: [ :classDeclaration | classDeclaration parentNode isNil ]) source: ast completeSource asString ]
 		on: Error
 		do: [ :err | 
 			('FAST Err parsing: ' , String crlf , aCodeString) record.
@@ -751,6 +751,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclaration [
+	self flag: 'ignore in current version. Please make a PR if you need this feature or contact us'.
+	^ self visitExpression: aPackageDeclaration
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	currentFASTEntity := self addToModel: FASTJavaParameter new.
 	self generalVisitActionForNodeEntity: aParameter.
@@ -852,6 +858,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
 				yourself).
 	self generalVisitActionForNodeEntity: aByteType.
 	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingleTypeImportDeclaration [
+	self flag: 'ignore in current version. Please make a PR if you need this feature or contact us'.
+	^ self visitExpression: aSingleTypeImportDeclaration
 ]
 
 { #category : #visitor }
