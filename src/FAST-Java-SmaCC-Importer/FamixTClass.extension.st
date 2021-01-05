@@ -1,6 +1,6 @@
-Extension { #name : #FAMIXClass }
+Extension { #name : #FamixTClass }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FAMIXClass >> generateFastJava [
+FamixTClass >> generateFastJava [
 	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeString: self sourceAnchor sourceText
 ]
