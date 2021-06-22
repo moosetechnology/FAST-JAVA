@@ -106,10 +106,10 @@ Class {
 		'javaVariableExpression',
 		'tWithReceiver',
 		'tReceiver',
-		'entity',
 		'namedEntity',
 		'fastTParameter',
-		'fastTWithParameters'
+		'fastTWithParameters',
+		'tEntity'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -681,7 +681,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaVariableExpression := builder newClassNamed: #VariableExpression. 
 			
 	"From FAST"
-	entity := self remoteEntity: #Entity withPrefix: #FAST. 
 	expression := self remoteEntity: #Expression withPrefix: #FAST. 
 	statement := self remoteEntity: #Statement withPrefix: #FAST.
 	characterLiteral := self remoteEntity: #CharacterLiteral withPrefix: #FAST.
@@ -760,7 +759,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVarDeclStatement --|> statement.
 	javaVarDeclStatement --|> tDeclaration.
 
-	javaVariableDeclarator --|> entity.
+	javaVariableDeclarator --|> tEntity.
 	javaWhileStatement --|> statement.
 	javaMethodInvocation --|> #TNamedEntity.
 	javaCastExpression --|> expression.
@@ -978,7 +977,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations').
 
 	((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.')
-		<>- ((entity property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)').
+		<>- ((tEntity property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)').
 	"((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda')
 		<>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')."
 	"((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda')
@@ -1051,4 +1050,7 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	
 	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send message to someone'.
 	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive message from someone'.
+	
+	"From FAST"
+	tEntity := self remoteTrait: #TEntity withPrefix: #FAST. 
 ]

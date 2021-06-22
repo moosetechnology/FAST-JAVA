@@ -20,11 +20,11 @@ FASTJavaLambdaExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaLambdaExpression >> expression [
-	"Relation named: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner"
+	"Relation named: #expression type: #FASTTEntity opposite: #javaLambdaExpressionOwner"
 
 	<generated>
 	<FMComment: 'Expression to be executed as part of the lambda.'>
-	<FMProperty: #expression type: #FASTEntity opposite: #javaLambdaExpressionOwner>
+	<FMProperty: #expression type: #FASTTEntity opposite: #javaLambdaExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
