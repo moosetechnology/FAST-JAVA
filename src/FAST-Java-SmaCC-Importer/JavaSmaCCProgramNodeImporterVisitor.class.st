@@ -214,7 +214,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression 
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
-	currentFASTEntity := self addToModel: FASTStatementBlock new.
+	currentFASTEntity := self addToModel: FASTJavaStatementBlock new.
 	self generalVisitActionForNodeEntity: aBlock.
 	aBlock statements
 		do: [ :each | currentFASTEntity statements add: (self clone accept: each) ].
@@ -225,7 +225,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
 JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 	currentFASTEntity := self
 		addToModel:
-			(FASTBooleanLiteral new
+			(FASTJavaBooleanTypeExpression new
 				value: aBooleanLiteral token value;
 				yourself).
 	self generalVisitActionForNodeEntity: aBooleanLiteral.
@@ -410,7 +410,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionStatement [
-	currentFASTEntity := self addToModel: FASTExpressionStatement new.
+	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
 	self generalVisitActionForNodeEntity: anExpressionStatement.
 	currentFASTEntity
 		expression: (self clone accept: anExpressionStatement expression).
@@ -840,7 +840,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeNam
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
-	currentFASTEntity := self addToModel: FASTReturnStatement new.
+	currentFASTEntity := self addToModel: FASTJavaReturnStatement new.
 	self generalVisitActionForNodeEntity: aReturnStatement.
 	(aReturnStatement expression isKindOf: JavaNameNode)
 		ifTrue:

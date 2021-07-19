@@ -109,7 +109,13 @@ Class {
 		'entity',
 		'namedEntity',
 		'fastTParameter',
-		'fastTWithParameters'
+		'fastTWithParameters',
+		'tNamedEntity',
+		'javaStatementBlock',
+		'javaReturnStatement',
+		'returnStatement',
+		'javaExpressionStatement',
+		'booleanLiteral'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -679,24 +685,12 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
 	
 	javaVariableExpression := builder newClassNamed: #VariableExpression. 
-			
-	"From FAST"
-	entity := self remoteEntity: #Entity withPrefix: #FAST. 
-	expression := self remoteEntity: #Expression withPrefix: #FAST. 
-	statement := self remoteEntity: #Statement withPrefix: #FAST.
-	characterLiteral := self remoteEntity: #CharacterLiteral withPrefix: #FAST.
-	literal := self remoteEntity: #Literal withPrefix: #FAST.
-	variableExpression := self remoteEntity: #VariableExpression withPrefix: #FAST.
-	namedBehaviouralEntity := self remoteEntity: #NamedBehaviouralEntity withPrefix: #FAST.
-	nullPointerLiteral := self remoteEntity: #NullPointerLiteral withPrefix: #FAST.
-	stringLiteral := self remoteEntity: #StringLiteral withPrefix: #FAST.
-	scopableEntity := self remoteEntity: #ScopableEntity withPrefix: #FAST.
-	namedEntity := self remoteEntity: #NamedEntity withPrefix: #FAST.
-	variableEntity := self remoteEntity: #VariableEntity withPrefix: #FAST.
-	statementBlock := self remoteEntity: #StatementBlock withPrefix: #FAST.
-	expressionStatement := self remoteEntity: #ExpressionStatement withPrefix: #FAST.
-	fastTParameter := self remoteTrait: #TParameter withPrefix: #FAST.
-	fastTWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
+	
+	javaStatementBlock := builder newClassNamed: #StatementBlock.
+	
+	javaReturnStatement := builder newClassNamed: #ReturnStatement.
+	
+	javaExpressionStatement := builder newClassNamed: #ExpressionStatement.
 ]
 
 { #category : #definition }
@@ -740,7 +734,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
-	javaClassDeclaration --|> #TNamedEntity.
+	javaClassDeclaration --|> tNamedEntity.
 	javaClassDeclaration --|> #THasImmediateSource.
 
 	javaMethodInvocation --|> expression.
@@ -762,7 +756,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaVariableDeclarator --|> entity.
 	javaWhileStatement --|> statement.
-	javaMethodInvocation --|> #TNamedEntity.
+	javaMethodInvocation --|> tNamedEntity.
 	javaCastExpression --|> expression.
 	javaCastExpression --|> tReceiver.
 
@@ -809,12 +803,12 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLambdaExpression --|> fastTWithParameters.
 
 	javaMethodReference --|> expression.
-	javaMethodReference --|> #TNamedEntity.
+	javaMethodReference --|> tNamedEntity.
 	
 	javaSynchronizedStatement --|> statement.
 
 	"types name"
-	javaTypeName --|> #TNamedEntity.
+	javaTypeName --|> tNamedEntity.
 	javaTypeName --|> expression.
 	javaQualifiedTypeName --|> javaTypeName.
 
@@ -823,7 +817,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaArrayTypeExpression --|> javaTypeExpression.
 	javaClassTypeExpression --|> javaTypeExpression.
 	javaPrimitiveTypeExpression --|> javaTypeExpression.
-	javaBooleanTypeExpression --|> javaPrimitiveTypeExpression.
+	javaBooleanTypeExpression --|> booleanLiteral.
 	javaByteTypeExpression --|> javaPrimitiveTypeExpression.
 	javaByteTypeExpression --|> javaPrimitiveTypeExpression.
 	javaCharTypeExpression --|> javaPrimitiveTypeExpression.
@@ -834,7 +828,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 
-	javaParameterExpression --|> expression.
+	javaParameterExpression --|> variableEntity.
 	javaAssertStatement --|> statement.
 
 	javaModifier --|> tModifier.
@@ -843,9 +837,15 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAnnotationExpression --|> expression.
 	javaAnnotationExpression --|> tModifier.
 	
-	javaParameterExpression --|> fastTParameter.
+	javaParameterExpression --|> expression.
 	
 	javaConditionalExpression --|> tReceiver.
+	
+	javaStatementBlock --|> statementBlock.
+	
+	javaReturnStatement --|> returnStatement.
+	
+	javaExpressionStatement  --|> expressionStatement.
 ]
 
 { #category : #definition }
@@ -1051,4 +1051,25 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	
 	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send message to someone'.
 	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive message from someone'.
+	
+	"From FAST"
+	entity := self remoteTrait: #TEntity withPrefix: #FAST. 
+	expression := self remoteTrait: #TExpression withPrefix: #FAST. 
+	statement := self remoteTrait: #TStatement withPrefix: #FAST.
+	characterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
+	literal := self remoteTrait: #TLiteral withPrefix: #FAST.
+	variableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
+	namedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
+	nullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
+	stringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
+	scopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
+	namedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
+	variableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
+	statementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
+	expressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
+	"fastTParameter := self remoteTrait: #TParameter withPrefix: #FAST."
+	fastTWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
+	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
+	returnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
+	booleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
 ]

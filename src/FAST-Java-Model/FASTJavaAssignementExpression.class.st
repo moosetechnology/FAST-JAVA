@@ -5,16 +5,16 @@ Contains a referances to an assignee assignee and the expression that's being as
 "
 Class {
 	#name : #FASTJavaAssignementExpression,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTWithAssigneable',
-	#classTraits : 'FASTJavaTWithAssigneable classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTWithAssigneable + FASTTExpression',
+	#classTraits : 'FASTJavaTWithAssigneable classTrait + FASTTExpression classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaAssignementExpression class >> annotation [
 
-	<FMClass: #AssignementExpression super: #FASTExpression>
+	<FMClass: #AssignementExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -22,11 +22,11 @@ FASTJavaAssignementExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaAssignementExpression >> expression [
-	"Relation named: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner"
+	"Relation named: #expression type: #FASTTExpression opposite: #javaAssignementExpressionOwner"
 
 	<generated>
 	<FMComment: 'Expression that s being assigned upon declaration to the var'>
-	<FMProperty: #expression type: #FASTExpression opposite: #javaAssignementExpressionOwner>
+	<FMProperty: #expression type: #FASTTExpression opposite: #javaAssignementExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 

@@ -29,7 +29,7 @@ JavaSmaCCForEachTest >> testForEachBodyParentNode [
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachBodyType [
-	self assert: methodForEach statements first body class equals: FASTStatementBlock 
+	self assert: methodForEach statements first body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }

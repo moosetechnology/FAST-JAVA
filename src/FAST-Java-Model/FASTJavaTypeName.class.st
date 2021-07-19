@@ -3,9 +3,9 @@ I represent the name of a type
 "
 Class {
 	#name : #FASTJavaTypeName,
-	#superclass : #FASTExpression,
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTExpression + FASTTNamedEntity',
+	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName',
 		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace'
@@ -16,7 +16,7 @@ Class {
 { #category : #meta }
 FASTJavaTypeName class >> annotation [
 
-	<FMClass: #TypeName super: #FASTExpression>
+	<FMClass: #TypeName super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

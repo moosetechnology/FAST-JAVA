@@ -8,14 +8,16 @@ do {
 "
 Class {
 	#name : #FASTJavaDoWhileStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaDoWhileStatement class >> annotation [
 
-	<FMClass: #DoWhileStatement super: #FASTStatement>
+	<FMClass: #DoWhileStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -23,11 +25,11 @@ FASTJavaDoWhileStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaDoWhileStatement >> body [
-	"Relation named: #body type: #FASTStatement opposite: #doBodyOwner"
+	"Relation named: #body type: #FASTTStatement opposite: #doBodyOwner"
 
 	<generated>
 	<FMComment: 'A statement to be evaluated in the loop'>
-	<FMProperty: #body type: #FASTStatement opposite: #doBodyOwner>
+	<FMProperty: #body type: #FASTTStatement opposite: #doBodyOwner>
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -54,11 +56,11 @@ FASTJavaDoWhileStatement >> bodyGroup [
 
 { #category : #accessing }
 FASTJavaDoWhileStatement >> condition [
-	"Relation named: #condition type: #FASTExpression opposite: #doConditionOwner"
+	"Relation named: #condition type: #FASTTExpression opposite: #doConditionOwner"
 
 	<generated>
 	<FMComment: 'The condition of the statement'>
-	<FMProperty: #condition type: #FASTExpression opposite: #doConditionOwner>
+	<FMProperty: #condition type: #FASTTExpression opposite: #doConditionOwner>
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 

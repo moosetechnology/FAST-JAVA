@@ -33,7 +33,7 @@ JavaSmaCCTryCatchesTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchCatchBodyType [
-	self assert: tryCatchesMethod statements second catches first body class equals: FASTStatementBlock
+	self assert: tryCatchesMethod statements second catches first body class equals: FASTJavaStatementBlock
 ]
 
 { #category : #tests }
@@ -54,7 +54,7 @@ JavaSmaCCTryCatchesTest >> testTryCatchCatchParametersType [
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchTryPartType [
-	self assert: tryCatchesMethod statements second try class equals: FASTStatementBlock
+	self assert: tryCatchesMethod statements second try class equals: FASTJavaStatementBlock
 ]
 
 { #category : #tests }

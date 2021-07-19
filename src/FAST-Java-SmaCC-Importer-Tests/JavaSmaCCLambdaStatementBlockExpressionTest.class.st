@@ -35,7 +35,7 @@ JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaExpressionParentNode [
 
 { #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaExpressionType [
-	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression class equals: FASTStatementBlock .
+	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression class equals: FASTJavaStatementBlock .
 ]
 
 { #category : #tests }

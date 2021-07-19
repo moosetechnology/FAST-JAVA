@@ -3,9 +3,9 @@ Represents a method in FastJava
 "
 Class {
 	#name : #FASTJavaMethodEntity,
-	#superclass : #FASTNamedBehaviouralEntity,
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FamixTHasImmediateSource',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FamixTHasImmediateSource classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
 	],
@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaMethodEntity class >> annotation [
 
-	<FMClass: #MethodEntity super: #FASTNamedBehaviouralEntity>
+	<FMClass: #MethodEntity super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

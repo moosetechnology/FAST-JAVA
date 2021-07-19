@@ -42,8 +42,8 @@ JavaSmaCCAssertTest >> testAssertNodeMessageParentNode [
 
 { #category : #tests }
 JavaSmaCCAssertTest >> testAssertNodeParentNode [
-	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne parentNode equals: (assertMethod allWithType: FASTStatementBlock) anyOne.
-	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne equals: (assertMethod allWithType: FASTStatementBlock) anyOne statements anyOne
+	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne parentNode equals: (assertMethod allWithType: FASTJavaStatementBlock) anyOne.
+	self assert: (assertMethod allWithType: FASTJavaAssertStatement) anyOne equals: (assertMethod allWithType: FASTJavaStatementBlock) anyOne statements anyOne
 ]
 
 { #category : #tests }

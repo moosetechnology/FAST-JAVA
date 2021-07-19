@@ -1,7 +1,7 @@
-Extension { #name : #FASTStatementBlock }
+Extension { #name : #FASTTStatementBlock }
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatementBlock >> javaInitializerOwner [
+FASTTStatementBlock >> javaInitializerOwner [
 	"Relation named: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock"
 
 	<generated>
@@ -14,7 +14,7 @@ FASTStatementBlock >> javaInitializerOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatementBlock >> javaInitializerOwner: anObject [
+FASTTStatementBlock >> javaInitializerOwner: anObject [
 
 	<generated>
 	(self attributeAt: #javaInitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -28,7 +28,7 @@ FASTStatementBlock >> javaInitializerOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatementBlock >> javaSynchronizedStatementOwner [
+FASTTStatementBlock >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block"
 
 	<generated>
@@ -41,7 +41,7 @@ FASTStatementBlock >> javaSynchronizedStatementOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatementBlock >> javaSynchronizedStatementOwner: anObject [
+FASTTStatementBlock >> javaSynchronizedStatementOwner: anObject [
 
 	<generated>
 	(self attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].

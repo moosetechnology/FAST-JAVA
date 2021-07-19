@@ -12,16 +12,16 @@ new Button(){
 "
 Class {
 	#name : #FASTJavaInitializer,
-	#superclass : #FASTScopableEntity,
-	#traits : 'FASTJavaTDeclaration + FamixTHasImmediateSource',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FamixTHasImmediateSource classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTDeclaration + FASTTScopableEntity + FamixTHasImmediateSource',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTTScopableEntity classTrait + FamixTHasImmediateSource classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaInitializer class >> annotation [
 
-	<FMClass: #Initializer super: #FASTScopableEntity>
+	<FMClass: #Initializer super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -29,11 +29,11 @@ FASTJavaInitializer class >> annotation [
 
 { #category : #accessing }
 FASTJavaInitializer >> statementBlock [
-	"Relation named: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner"
+	"Relation named: #statementBlock type: #FASTTStatementBlock opposite: #javaInitializerOwner"
 
 	<generated>
 	<FMComment: 'Statements block of the behavioural entity'>
-	<FMProperty: #statementBlock type: #FASTStatementBlock opposite: #javaInitializerOwner>
+	<FMProperty: #statementBlock type: #FASTTStatementBlock opposite: #javaInitializerOwner>
 	^ self attributeAt: #statementBlock ifAbsent: [ nil ]
 ]
 

@@ -3,14 +3,16 @@ I represent a 'synchronized' statement
 "
 Class {
 	#name : #FASTJavaSynchronizedStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaSynchronizedStatement class >> annotation [
 
-	<FMClass: #SynchronizedStatement super: #FASTStatement>
+	<FMClass: #SynchronizedStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -18,11 +20,11 @@ FASTJavaSynchronizedStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaSynchronizedStatement >> block [
-	"Relation named: #block type: #FASTStatementBlock opposite: #javaSynchronizedStatementOwner"
+	"Relation named: #block type: #FASTTStatementBlock opposite: #javaSynchronizedStatementOwner"
 
 	<generated>
 	<FMComment: 'The block that is synchronized'>
-	<FMProperty: #block type: #FASTStatementBlock opposite: #javaSynchronizedStatementOwner>
+	<FMProperty: #block type: #FASTTStatementBlock opposite: #javaSynchronizedStatementOwner>
 	^ self attributeAt: #block ifAbsent: [ nil ]
 ]
 
@@ -49,11 +51,11 @@ FASTJavaSynchronizedStatement >> blockGroup [
 
 { #category : #accessing }
 FASTJavaSynchronizedStatement >> expression [
-	"Relation named: #expression type: #FASTExpression opposite: #javaSynchronizedStatementOwner"
+	"Relation named: #expression type: #FASTTExpression opposite: #javaSynchronizedStatementOwner"
 
 	<generated>
 	<FMComment: 'The instance on which the statement block is synchronized'>
-	<FMProperty: #expression type: #FASTExpression opposite: #javaSynchronizedStatementOwner>
+	<FMProperty: #expression type: #FASTTExpression opposite: #javaSynchronizedStatementOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 

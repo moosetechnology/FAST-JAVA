@@ -21,11 +21,11 @@ FASTJavaNewArray class >> annotation [
 
 { #category : #accessing }
 FASTJavaNewArray >> initializer [
-	"Relation named: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner"
+	"Relation named: #initializer type: #FASTTExpression opposite: #javaNewArrayInitialOwner"
 
 	<generated>
 	<FMComment: 'The initializer of the array'>
-	<FMProperty: #initializer type: #FASTExpression opposite: #javaNewArrayInitialOwner>
+	<FMProperty: #initializer type: #FASTTExpression opposite: #javaNewArrayInitialOwner>
 	^ self attributeAt: #initializer ifAbsent: [ nil ]
 ]
 

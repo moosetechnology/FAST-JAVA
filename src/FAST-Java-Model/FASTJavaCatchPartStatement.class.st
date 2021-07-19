@@ -3,7 +3,9 @@ I represent the 'catch' part of the TryCatch Statement
 "
 Class {
 	#name : #FASTJavaCatchPartStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler',
 		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches'
@@ -14,7 +16,7 @@ Class {
 { #category : #meta }
 FASTJavaCatchPartStatement class >> annotation [
 
-	<FMClass: #CatchPartStatement super: #FASTStatement>
+	<FMClass: #CatchPartStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -22,11 +24,11 @@ FASTJavaCatchPartStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body [
-	"Relation named: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner"
+	"Relation named: #body type: #FASTTStatement opposite: #javaCatchPartStatementOwner"
 
 	<generated>
 	<FMComment: 'The body of the Catch part statement'>
-	<FMProperty: #body type: #FASTStatement opposite: #javaCatchPartStatementOwner>
+	<FMProperty: #body type: #FASTTStatement opposite: #javaCatchPartStatementOwner>
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 

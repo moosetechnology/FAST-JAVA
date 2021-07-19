@@ -10,7 +10,9 @@ void method (){
 "
 Class {
 	#name : #FASTJavaAssertStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#message => FMOne type: #FASTJavaStringLiteral opposite: #javaStringAssertStatementOwner'
 	],
@@ -20,7 +22,7 @@ Class {
 { #category : #meta }
 FASTJavaAssertStatement class >> annotation [
 
-	<FMClass: #AssertStatement super: #FASTStatement>
+	<FMClass: #AssertStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -28,11 +30,11 @@ FASTJavaAssertStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaAssertStatement >> condition [
-	"Relation named: #condition type: #FASTExpression opposite: #assertConditionOwner"
+	"Relation named: #condition type: #FASTTExpression opposite: #assertConditionOwner"
 
 	<generated>
 	<FMComment: 'The condition of the statement'>
-	<FMProperty: #condition type: #FASTExpression opposite: #assertConditionOwner>
+	<FMProperty: #condition type: #FASTTExpression opposite: #assertConditionOwner>
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 

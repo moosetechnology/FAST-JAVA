@@ -7,16 +7,16 @@ liste[i]
 "
 Class {
 	#name : #FASTJavaArrayAccess,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTAssigneable + FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTAssigneable classTrait + FASTJavaTReceiver classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTAssigneable + FASTJavaTReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTAssigneable classTrait + FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaArrayAccess class >> annotation [
 
-	<FMClass: #ArrayAccess super: #FASTExpression>
+	<FMClass: #ArrayAccess super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -24,11 +24,11 @@ FASTJavaArrayAccess class >> annotation [
 
 { #category : #accessing }
 FASTJavaArrayAccess >> array [
-	"Relation named: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner"
+	"Relation named: #array type: #FASTTExpression opposite: #javaArrayArrayAccessOwner"
 
 	<generated>
 	<FMComment: 'Name of accessed field'>
-	<FMProperty: #array type: #FASTExpression opposite: #javaArrayArrayAccessOwner>
+	<FMProperty: #array type: #FASTTExpression opposite: #javaArrayArrayAccessOwner>
 	^ self attributeAt: #array ifAbsent: [ nil ]
 ]
 
@@ -55,11 +55,11 @@ FASTJavaArrayAccess >> arrayGroup [
 
 { #category : #accessing }
 FASTJavaArrayAccess >> expression [
-	"Relation named: #expression type: #FASTExpression opposite: #javaArrayAccessOwner"
+	"Relation named: #expression type: #FASTTExpression opposite: #javaArrayAccessOwner"
 
 	<generated>
 	<FMComment: 'The accessed index'>
-	<FMProperty: #expression type: #FASTExpression opposite: #javaArrayAccessOwner>
+	<FMProperty: #expression type: #FASTTExpression opposite: #javaArrayAccessOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 

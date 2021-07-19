@@ -7,9 +7,9 @@ example:
 "
 Class {
 	#name : #FASTJavaAnnotation,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTModifier',
-	#classTraits : 'FASTJavaTModifier classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTModifier + FASTTExpression',
+	#classTraits : 'FASTJavaTModifier classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#expression => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableExpressionOwnerIsAnnotation'
 	],
@@ -19,7 +19,7 @@ Class {
 { #category : #meta }
 FASTJavaAnnotation class >> annotation [
 
-	<FMClass: #Annotation super: #FASTExpression>
+	<FMClass: #Annotation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

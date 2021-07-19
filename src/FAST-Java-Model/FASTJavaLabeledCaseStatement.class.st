@@ -22,11 +22,11 @@ FASTJavaLabeledCaseStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaLabeledCaseStatement >> label [
-	"Relation named: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner"
+	"Relation named: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner"
 
 	<generated>
 	<FMComment: 'The label of the case statement'>
-	<FMProperty: #label type: #FASTExpression opposite: #javaLabeledCaseStatementOwner>
+	<FMProperty: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner>
 	^ self attributeAt: #label ifAbsent: [ nil ]
 ]
 

@@ -8,14 +8,16 @@ for(_;_;_) {
 "
 Class {
 	#name : #FASTJavaForStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaForStatement class >> annotation [
 
-	<FMClass: #ForStatement super: #FASTStatement>
+	<FMClass: #ForStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -23,11 +25,11 @@ FASTJavaForStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaForStatement >> body [
-	"Relation named: #body type: #FASTStatement opposite: #forBodyOwner"
+	"Relation named: #body type: #FASTTStatement opposite: #forBodyOwner"
 
 	<generated>
 	<FMComment: 'A statement to be evaluated in the loop'>
-	<FMProperty: #body type: #FASTStatement opposite: #forBodyOwner>
+	<FMProperty: #body type: #FASTTStatement opposite: #forBodyOwner>
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -54,11 +56,11 @@ FASTJavaForStatement >> bodyGroup [
 
 { #category : #accessing }
 FASTJavaForStatement >> condition [
-	"Relation named: #condition type: #FASTExpression opposite: #forConditionOwner"
+	"Relation named: #condition type: #FASTTExpression opposite: #forConditionOwner"
 
 	<generated>
 	<FMComment: 'The condition of the statement'>
-	<FMProperty: #condition type: #FASTExpression opposite: #forConditionOwner>
+	<FMProperty: #condition type: #FASTTExpression opposite: #forConditionOwner>
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
@@ -85,11 +87,11 @@ FASTJavaForStatement >> conditionGroup [
 
 { #category : #accessing }
 FASTJavaForStatement >> incrementor [
-	"Relation named: #incrementor type: #FASTStatement opposite: #forIncrementorOwner"
+	"Relation named: #incrementor type: #FASTTStatement opposite: #forIncrementorOwner"
 
 	<generated>
 	<FMComment: 'Expression evaluated at the end of each loop'>
-	<FMProperty: #incrementor type: #FASTStatement opposite: #forIncrementorOwner>
+	<FMProperty: #incrementor type: #FASTTStatement opposite: #forIncrementorOwner>
 	^ self attributeAt: #incrementor ifAbsent: [ nil ]
 ]
 
@@ -116,11 +118,11 @@ FASTJavaForStatement >> incrementorGroup [
 
 { #category : #accessing }
 FASTJavaForStatement >> initializer [
-	"Relation named: #initializer type: #FASTStatement opposite: #forIninitializerOwner"
+	"Relation named: #initializer type: #FASTTStatement opposite: #forIninitializerOwner"
 
 	<generated>
 	<FMComment: 'Expression used at initialization phase of a for loop'>
-	<FMProperty: #initializer type: #FASTStatement opposite: #forIninitializerOwner>
+	<FMProperty: #initializer type: #FASTTStatement opposite: #forIninitializerOwner>
 	^ self attributeAt: #initializer ifAbsent: [ nil ]
 ]
 

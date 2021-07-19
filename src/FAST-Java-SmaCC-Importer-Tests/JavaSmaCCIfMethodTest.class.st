@@ -32,7 +32,7 @@ JavaSmaCCIfMethodTest >> testFirstIfConditionParent [
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfConditionType [
-	self assert: ifMethod statements first condition class equals: FASTBooleanLiteral 
+	self assert: ifMethod statements first condition class equals: FASTJavaBooleanTypeExpression  
 ]
 
 { #category : #tests }
@@ -47,7 +47,7 @@ JavaSmaCCIfMethodTest >> testFirstIfThenParent [
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfThenType [
-	self assert: ifMethod statements first thenPart class equals: FASTReturnStatement 
+	self assert: ifMethod statements first thenPart class equals: FASTJavaReturnStatement 
 ]
 
 { #category : #tests }
@@ -57,7 +57,7 @@ JavaSmaCCIfMethodTest >> testFirstSecondConditionParent [
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstSecondConditionType [
-	self assert: ifMethod statements last condition class equals: FASTBooleanLiteral
+	self assert: ifMethod statements last condition class equals: FASTJavaBooleanTypeExpression 
 ]
 
 { #category : #tests }
@@ -67,7 +67,7 @@ JavaSmaCCIfMethodTest >> testSecondIfElseParent [
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testSecondIfElseType [
-	self assert: ifMethod statements last elsePart class equals: FASTReturnStatement
+	self assert: ifMethod statements last elsePart class equals: FASTJavaReturnStatement
 ]
 
 { #category : #tests }
@@ -77,7 +77,7 @@ JavaSmaCCIfMethodTest >> testSecondIfThenParent [
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testSecondIfThenType [
-	self assert: ifMethod statements last thenPart class equals: FASTStatementBlock 
+	self assert: ifMethod statements last thenPart class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }

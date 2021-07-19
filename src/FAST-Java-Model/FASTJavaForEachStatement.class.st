@@ -8,7 +8,9 @@ for(Patate p : list) {
 "
 Class {
 	#name : #FASTJavaForEachStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#fieldname => FMOne type: #FASTJavaVariableExpression opposite: #javaForEachStatementFieldNameOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaForEachStatementTypeOwner'
@@ -19,7 +21,7 @@ Class {
 { #category : #meta }
 FASTJavaForEachStatement class >> annotation [
 
-	<FMClass: #ForEachStatement super: #FASTStatement>
+	<FMClass: #ForEachStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -27,11 +29,11 @@ FASTJavaForEachStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaForEachStatement >> body [
-	"Relation named: #body type: #FASTStatement opposite: #javaForEachStatementOwner"
+	"Relation named: #body type: #FASTTStatement opposite: #javaForEachStatementOwner"
 
 	<generated>
 	<FMComment: 'The body of the For Each statement'>
-	<FMProperty: #body type: #FASTStatement opposite: #javaForEachStatementOwner>
+	<FMProperty: #body type: #FASTTStatement opposite: #javaForEachStatementOwner>
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -81,11 +83,11 @@ FASTJavaForEachStatement >> fieldnameGroup [
 
 { #category : #accessing }
 FASTJavaForEachStatement >> list [
-	"Relation named: #list type: #FASTExpression opposite: #javaForEachStatementOwner"
+	"Relation named: #list type: #FASTTExpression opposite: #javaForEachStatementOwner"
 
 	<generated>
 	<FMComment: 'The list the for each statement iterate on'>
-	<FMProperty: #list type: #FASTExpression opposite: #javaForEachStatementOwner>
+	<FMProperty: #list type: #FASTTExpression opposite: #javaForEachStatementOwner>
 	^ self attributeAt: #list ifAbsent: [ nil ]
 ]
 

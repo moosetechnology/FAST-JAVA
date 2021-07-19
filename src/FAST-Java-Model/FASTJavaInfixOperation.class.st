@@ -8,7 +8,9 @@ ex:
 "
 Class {
 	#name : #FASTJavaInfixOperation,
-	#superclass : #FASTExpression,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty'
 	],
@@ -18,7 +20,7 @@ Class {
 { #category : #meta }
 FASTJavaInfixOperation class >> annotation [
 
-	<FMClass: #InfixOperation super: #FASTExpression>
+	<FMClass: #InfixOperation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -26,11 +28,11 @@ FASTJavaInfixOperation class >> annotation [
 
 { #category : #accessing }
 FASTJavaInfixOperation >> leftOperand [
-	"Relation named: #leftOperand type: #FASTExpression opposite: #infixOperationLeftOperandOwner"
+	"Relation named: #leftOperand type: #FASTTExpression opposite: #infixOperationLeftOperandOwner"
 
 	<generated>
 	<FMComment: 'leftOperand'>
-	<FMProperty: #leftOperand type: #FASTExpression opposite: #infixOperationLeftOperandOwner>
+	<FMProperty: #leftOperand type: #FASTTExpression opposite: #infixOperationLeftOperandOwner>
 	^ self attributeAt: #leftOperand ifAbsent: [ nil ]
 ]
 
@@ -72,11 +74,11 @@ FASTJavaInfixOperation >> operator: anObject [
 
 { #category : #accessing }
 FASTJavaInfixOperation >> rightOperand [
-	"Relation named: #rightOperand type: #FASTExpression opposite: #infixOperationRightOperandOwner"
+	"Relation named: #rightOperand type: #FASTTExpression opposite: #infixOperationRightOperandOwner"
 
 	<generated>
 	<FMComment: 'rightOperand'>
-	<FMProperty: #rightOperand type: #FASTExpression opposite: #infixOperationRightOperandOwner>
+	<FMProperty: #rightOperand type: #FASTTExpression opposite: #infixOperationRightOperandOwner>
 	^ self attributeAt: #rightOperand ifAbsent: [ nil ]
 ]
 

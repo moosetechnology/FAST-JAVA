@@ -63,7 +63,7 @@ JavaSmaCCALittleOfVariablesMethodTest >> testStatementsCount [
 JavaSmaCCALittleOfVariablesMethodTest >> testStatementsType [
 	self
 		assert: aLittleOfVariables statements first class equals: FASTJavaVarDeclStatement;
-		assert: aLittleOfVariables statements last class equals: FASTReturnStatement
+		assert: aLittleOfVariables statements last class equals: FASTJavaReturnStatement
 ]
 
 { #category : #tests }

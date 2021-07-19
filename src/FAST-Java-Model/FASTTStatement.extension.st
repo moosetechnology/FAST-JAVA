@@ -1,7 +1,7 @@
-Extension { #name : #FASTStatement }
+Extension { #name : #FASTTStatement }
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> doBodyOwner [
+FASTTStatement >> doBodyOwner [
 	"Relation named: #doBodyOwner type: #FASTJavaDoWhileStatement opposite: #body"
 
 	<generated>
@@ -14,7 +14,7 @@ FASTStatement >> doBodyOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> doBodyOwner: anObject [
+FASTTStatement >> doBodyOwner: anObject [
 
 	<generated>
 	(self attributeAt: #doBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -28,7 +28,7 @@ FASTStatement >> doBodyOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> forBodyOwner [
+FASTTStatement >> forBodyOwner [
 	"Relation named: #forBodyOwner type: #FASTJavaForStatement opposite: #body"
 
 	<generated>
@@ -41,7 +41,7 @@ FASTStatement >> forBodyOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> forBodyOwner: anObject [
+FASTTStatement >> forBodyOwner: anObject [
 
 	<generated>
 	(self attributeAt: #forBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -55,7 +55,7 @@ FASTStatement >> forBodyOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> forIncrementorOwner [
+FASTTStatement >> forIncrementorOwner [
 	"Relation named: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor"
 
 	<generated>
@@ -68,7 +68,7 @@ FASTStatement >> forIncrementorOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> forIncrementorOwner: anObject [
+FASTTStatement >> forIncrementorOwner: anObject [
 
 	<generated>
 	(self attributeAt: #forIncrementorOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -82,7 +82,7 @@ FASTStatement >> forIncrementorOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> forIninitializerOwner [
+FASTTStatement >> forIninitializerOwner [
 	"Relation named: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer"
 
 	<generated>
@@ -95,7 +95,7 @@ FASTStatement >> forIninitializerOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> forIninitializerOwner: anObject [
+FASTTStatement >> forIninitializerOwner: anObject [
 
 	<generated>
 	(self attributeAt: #forIninitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -109,7 +109,7 @@ FASTStatement >> forIninitializerOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> ifElsePartOwner [
+FASTTStatement >> ifElsePartOwner [
 	"Relation named: #ifElsePartOwner type: #FASTJavaIfStatement opposite: #elsePart"
 
 	<generated>
@@ -122,7 +122,7 @@ FASTStatement >> ifElsePartOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> ifElsePartOwner: anObject [
+FASTTStatement >> ifElsePartOwner: anObject [
 
 	<generated>
 	(self attributeAt: #ifElsePartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -136,7 +136,7 @@ FASTStatement >> ifElsePartOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> ifThenPartOwner [
+FASTTStatement >> ifThenPartOwner [
 	"Relation named: #ifThenPartOwner type: #FASTJavaIfStatement opposite: #thenPart"
 
 	<generated>
@@ -149,7 +149,7 @@ FASTStatement >> ifThenPartOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> ifThenPartOwner: anObject [
+FASTTStatement >> ifThenPartOwner: anObject [
 
 	<generated>
 	(self attributeAt: #ifThenPartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -163,7 +163,7 @@ FASTStatement >> ifThenPartOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> javaCatchPartStatementOwner [
+FASTTStatement >> javaCatchPartStatementOwner [
 	"Relation named: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body"
 
 	<generated>
@@ -176,7 +176,7 @@ FASTStatement >> javaCatchPartStatementOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> javaCatchPartStatementOwner: anObject [
+FASTTStatement >> javaCatchPartStatementOwner: anObject [
 
 	<generated>
 	(self attributeAt: #javaCatchPartStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -190,7 +190,7 @@ FASTStatement >> javaCatchPartStatementOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> javaForEachStatementOwner [
+FASTTStatement >> javaForEachStatementOwner [
 	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body"
 
 	<generated>
@@ -203,7 +203,7 @@ FASTStatement >> javaForEachStatementOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> javaForEachStatementOwner: anObject [
+FASTTStatement >> javaForEachStatementOwner: anObject [
 
 	<generated>
 	(self attributeAt: #javaForEachStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -217,7 +217,7 @@ FASTStatement >> javaForEachStatementOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> javaTryCatchOwner [
+FASTTStatement >> javaTryCatchOwner [
 	"Relation named: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try"
 
 	<generated>
@@ -230,7 +230,7 @@ FASTStatement >> javaTryCatchOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> javaTryCatchOwner: anObject [
+FASTTStatement >> javaTryCatchOwner: anObject [
 
 	<generated>
 	(self attributeAt: #javaTryCatchOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -244,7 +244,7 @@ FASTStatement >> javaTryCatchOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> whileBodyOwner [
+FASTTStatement >> whileBodyOwner [
 	"Relation named: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body"
 
 	<generated>
@@ -257,7 +257,7 @@ FASTStatement >> whileBodyOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTStatement >> whileBodyOwner: anObject [
+FASTTStatement >> whileBodyOwner: anObject [
 
 	<generated>
 	(self attributeAt: #whileBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].

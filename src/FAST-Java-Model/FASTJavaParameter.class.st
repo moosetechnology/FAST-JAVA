@@ -3,9 +3,9 @@ I represent a parameter of a method declaration
 "
 Class {
 	#name : #FASTJavaParameter,
-	#superclass : #FASTExpression,
-	#traits : 'FASTTParameter',
-	#classTraits : 'FASTTParameter classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTExpression + FASTTVariableEntity',
+	#classTraits : 'FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
@@ -16,7 +16,7 @@ Class {
 { #category : #meta }
 FASTJavaParameter class >> annotation [
 
-	<FMClass: #Parameter super: #FASTExpression>
+	<FMClass: #Parameter super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
