@@ -868,7 +868,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingle
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitStatementExpressionList: aStatementExpressionList [
-	currentFASTEntity := self addToModel: FASTExpressionStatement new.
+	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
 	self generalVisitActionForNodeEntity: aStatementExpressionList.
 	aStatementExpressionList expressions
 		do:
