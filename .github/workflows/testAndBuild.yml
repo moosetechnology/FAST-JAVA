@@ -29,15 +29,15 @@ jobs:
         run: |
           $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'fast-java.puml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: FASTModel; withModel: FASTJavaModel andColor: Color lightBlue; generatePlantUMLModelWithout: { FASTModel. FASTJavaModel })]."
       
-      - name: Generate Coaster PNG Diagrams
+      - name: Generate Coaster SVG Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
-            args: -v -tpng fast-java.puml
+            args: -v -tsvg fast-java.puml
 
       - name: Move UML
         run: |
           mkdir doc-uml
-          mv *.png doc-uml
+          mv *.svg doc-uml
       
       - name: Init new repo UML in doc-uml folder and commit generated files
         run: |
