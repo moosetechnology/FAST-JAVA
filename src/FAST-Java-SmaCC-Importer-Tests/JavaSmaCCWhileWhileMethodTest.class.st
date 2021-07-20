@@ -50,7 +50,7 @@ JavaSmaCCWhileWhileMethodTest >> testFirstWhileConditionParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testFirstWhileConditionType [
-	self assert: whileWhile statements second condition class equals: FASTJavaBooleanTypeExpression
+	self assert: whileWhile statements second condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
@@ -75,7 +75,7 @@ JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionType [
-	self assert: whileWhile statements third body statements first condition class equals: FASTJavaBooleanTypeExpression
+	self assert: whileWhile statements third body statements first condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }

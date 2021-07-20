@@ -3,16 +3,14 @@ I represent a boolean type
 "
 Class {
 	#name : #FASTJavaBooleanTypeExpression,
-	#superclass : #FASTJavaEntity,
-	#traits : 'FASTTBooleanLiteral',
-	#classTraits : 'FASTTBooleanLiteral classTrait',
+	#superclass : #FASTJavaPrimitiveTypeExpression,
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaBooleanTypeExpression class >> annotation [
 
-	<FMClass: #BooleanTypeExpression super: #FASTJavaEntity>
+	<FMClass: #BooleanTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

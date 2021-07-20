@@ -116,7 +116,9 @@ Class {
 		'returnStatement',
 		'javaExpressionStatement',
 		'booleanLiteral',
-		'javaStatement'
+		'javaStatement',
+		'javaBooleanLiteral',
+		'javaByteLiteral'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -669,6 +671,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaArrayTypeExpression := builder newClassNamed: #ArrayTypeExpression comment: 'I represent an array type'.
 	javaClassTypeExpression := builder newClassNamed: #ClassTypeExpression comment: 'I represent a class type'.
 	javaPrimitiveTypeExpression := builder newClassNamed: #PrimitiveTypeExpression comment: 'I represent a primitive type'.
+	
+	
 	javaBooleanTypeExpression := builder newClassNamed: #BooleanTypeExpression comment: 'I represent a boolean type'.
 	javaByteTypeExpression := builder newClassNamed: #ByteTypeExpression comment: 'I represent a byte type'.
 	javaCharTypeExpression := builder newClassNamed: #CharTypeExpression comment: 'I represent a char type'.
@@ -694,6 +698,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaExpressionStatement := builder newClassNamed: #ExpressionStatement.
 	
 	javaStatement := builder newClassNamed: #Statement.
+	
+	javaBooleanLiteral := builder newClassNamed: #BooleanLiteral.
 ]
 
 { #category : #definition }
@@ -822,8 +828,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaArrayTypeExpression --|> javaTypeExpression.
 	javaClassTypeExpression --|> javaTypeExpression.
 	javaPrimitiveTypeExpression --|> javaTypeExpression.
-	javaBooleanTypeExpression --|> booleanLiteral.
-	javaByteTypeExpression --|> javaPrimitiveTypeExpression.
+	javaBooleanTypeExpression --|> javaPrimitiveTypeExpression.
 	javaByteTypeExpression --|> javaPrimitiveTypeExpression.
 	javaCharTypeExpression --|> javaPrimitiveTypeExpression.
 	javaDoubleTypeExpression --|> javaPrimitiveTypeExpression.
@@ -832,6 +837,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLongTypeExpression --|> javaPrimitiveTypeExpression.
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
+	
+	javaBooleanLiteral --|> literal.
+	javaBooleanLiteral --|> tReceiver.
 
 	javaParameterExpression --|> variableEntity.
 	javaAssertStatement --|> statement.

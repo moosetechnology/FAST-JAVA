@@ -225,7 +225,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
 JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 	currentFASTEntity := self
 		addToModel:
-			(FASTJavaBooleanTypeExpression new
+			(FASTJavaBooleanLiteral new
 				primitiveValue: aBooleanLiteral token value;
 				yourself).
 	self generalVisitActionForNodeEntity: aBooleanLiteral.
@@ -233,13 +233,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 ]
 
 { #category : #visitor }
-JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aByteType [
+JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aBooleanType [
 	currentFASTEntity := self
 		addToModel:
 			(FASTJavaBooleanTypeExpression new
-				primitiveValue: aByteType token value;
+				name: aBooleanType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self generalVisitActionForNodeEntity: aBooleanType.
 	^ currentFASTEntity
 ]
 

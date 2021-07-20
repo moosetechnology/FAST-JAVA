@@ -32,7 +32,7 @@ JavaSmaCCIfMethodTest >> testFirstIfConditionParent [
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfConditionType [
-	self assert: ifMethod statements first condition class equals: FASTJavaBooleanTypeExpression  
+	self assert: ifMethod statements first condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
@@ -57,7 +57,7 @@ JavaSmaCCIfMethodTest >> testFirstSecondConditionParent [
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstSecondConditionType [
-	self assert: ifMethod statements last condition class equals: FASTJavaBooleanTypeExpression 
+	self assert: ifMethod statements last condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
