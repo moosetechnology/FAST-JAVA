@@ -753,6 +753,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaVarDeclStatement --|> statement.
 	javaVarDeclStatement --|> tDeclaration.
+	javaVarDeclStatement --|> scopableEntity.
 
 	javaVariableDeclarator --|> entity.
 	javaWhileStatement --|> statement.
