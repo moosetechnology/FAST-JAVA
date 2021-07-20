@@ -115,7 +115,8 @@ Class {
 		'javaReturnStatement',
 		'returnStatement',
 		'javaExpressionStatement',
-		'booleanLiteral'
+		'booleanLiteral',
+		'javaStatement'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -691,6 +692,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaReturnStatement := builder newClassNamed: #ReturnStatement.
 	
 	javaExpressionStatement := builder newClassNamed: #ExpressionStatement.
+	
+	javaStatement := builder newClassNamed: #Statement.
 ]
 
 { #category : #definition }
@@ -736,6 +739,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> tWithModifiers.
 	javaClassDeclaration --|> tNamedEntity.
 	javaClassDeclaration --|> #THasImmediateSource.
+	javaClassDeclaration withPrecedenceOf: #THasImmediateSource.
 
 	javaMethodInvocation --|> expression.
 	javaMethodInvocation --|> #TWithArguments.
@@ -847,6 +851,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaReturnStatement --|> returnStatement.
 	
 	javaExpressionStatement  --|> expressionStatement.
+	
+	javaStatement --|> statement.
 ]
 
 { #category : #definition }
@@ -859,7 +865,7 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaUnaryExpression property: #operator type: #String) comment: 'The operator string to apply to the expression'.
 	(javaUnaryExpression property: #isPrefixedUnaryExpression type: #Boolean) comment: 'true if the expression is prefixed (ex. ++i) else false'.
 	
-	(javaModifier property: #token type: #String) comment: 'The modifier value'
+	(javaModifier property: #token type: #String) comment: 'The modifier value'.
 	
 ]
 
