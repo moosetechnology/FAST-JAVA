@@ -75,6 +75,7 @@ JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionType [
+	
 	self assert: whileWhile statements third body statements first condition class equals: FASTJavaBooleanLiteral
 ]
 

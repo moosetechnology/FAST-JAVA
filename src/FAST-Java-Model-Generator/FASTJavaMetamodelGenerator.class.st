@@ -17,6 +17,7 @@ Class {
 		'javaCaseStatement',
 		'javaCharacterLiteral',
 		'javaContinueStatement',
+		'javaDoWhileStatement',
 		'javaFieldAccess',
 		'javaFloatLiteral',
 		'javaForStatement',
@@ -33,25 +34,15 @@ Class {
 		'javaVarDeclStatement',
 		'javaVariableDeclarator',
 		'javaWhileStatement',
-		'javaElsePartStatement',
-		'javaThenPartStatement',
-		'javaConditionStatement',
-		'javaIncrementorsStatement',
-		'javaBodyStatement',
-		'javaInitializersStatement',
-		'javaOperationLeftOperand',
-		'javaOperationRightOperand',
 		'javaCastExpression',
 		'javaClassProperty',
 		'javaTryCatch',
-		'javaTryPartStatement',
-		'javaCatchPartStatement',
 		'javaForEachStatement',
 		'javaUnaryExpression',
 		'javaNewExpression',
 		'javaNewClassExpression',
-		'javaNewClassMethodStatment',
 		'javaNewArray',
+		'javaConditionalExpression',
 		'javaArrayAccess',
 		'javaInitializer',
 		'javaOuterThis',
@@ -59,24 +50,15 @@ Class {
 		'javaLabeledCaseStatement',
 		'javaDefaultCaseStatement',
 		'javaEmptyMethodDeclaration',
-		'expression',
-		'statement',
-		'characterLiteral',
-		'literal',
-		'variableExpression',
-		'namedBehaviouralEntity',
-		'nullPointerLiteral',
-		'stringLiteral',
-		'scopableEntity',
-		'variableEntity',
-		'statementBlock',
-		'expressionStatement',
-		'javaConditionalExpression',
 		'javaArrayInitializer',
+		'javaClassDeclaration',
+		'javaModifier',
+		'javaCatchPartStatement',
 		'javaLambdaExpression',
 		'javaMethodReference',
-		'javaDoWhileStatement',
 		'javaSynchronizedStatement',
+		'javaTypeName',
+		'javaQualifiedTypeName',
 		'javaTypeExpression',
 		'javaArrayTypeExpression',
 		'javaClassTypeExpression',
@@ -91,34 +73,39 @@ Class {
 		'javaShortTypeExpression',
 		'javaVoidTypeExpression',
 		'javaParameterExpression',
-		'javaTypeName',
-		'javaQualifiedTypeName',
 		'javaAssertStatement',
-		'javaClassDeclaration',
+		'javaAnnotationExpression',
+		'javaVariableExpression',
+		'javaStatementBlock',
+		'javaReturnStatement',
+		'javaExpressionStatement',
+		'javaStatement',
+		'javaBooleanLiteral',
 		'tDeclaration',
 		'tWithDeclarations',
 		'tModifier',
 		'tWithModifiers',
-		'javaModifier',
-		'javaAnnotationExpression',
 		'tAssigneable',
 		'tWithAssigneable',
-		'javaVariableExpression',
 		'tWithReceiver',
 		'tReceiver',
-		'entity',
-		'namedEntity',
-		'fastTParameter',
-		'fastTWithParameters',
 		'tNamedEntity',
-		'javaStatementBlock',
-		'javaReturnStatement',
-		'returnStatement',
-		'javaExpressionStatement',
-		'booleanLiteral',
-		'javaStatement',
-		'javaBooleanLiteral',
-		'javaByteLiteral'
+		'tEntity',
+		'tExpression',
+		'tStatement',
+		'tCharacterLiteral',
+		'tLiteral',
+		'tVariableExpression',
+		'tNamedBehaviouralEntity',
+		'tNullPointerLiteral',
+		'tStringLiteral',
+		'tScopableEntity',
+		'tVariableEntity',
+		'tStatementBlock',
+		'tExpressionStatement',
+		'tWithParameters',
+		'tReturnStatement',
+		'tBooleanLiteral'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -613,7 +600,7 @@ while(...) {
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineClasses [
-	super defineClasses.
+	super defineClasses. 
 	javaAssignementExpression := builder newClassNamed: #AssignementExpression comment: self commentForJavaAssignementExpression.
 	javaBreakStatement := builder newClassNamed: #BreakStatement comment: self commentForJavaBreakStatement.
 	javaCaseStatement := builder newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
@@ -708,38 +695,38 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	super defineHierarchy.
 
-	javaAssignementExpression --|> expression.
+	javaAssignementExpression --|> tExpression.
 	javaAssignementExpression --|> tWithAssigneable.
 
-	javaFieldAccess --|> expression.
+	javaFieldAccess --|> tExpression.
 	javaFieldAccess --|> tAssigneable.
 	javaFieldAccess --|> tWithReceiver.
 	javaFieldAccess --|> tReceiver.
 
-	javaInfixOperation --|> expression.
-	javaBreakStatement --|> statement.
-	javaCaseStatement --|> statementBlock.
-	javaCharacterLiteral --|> characterLiteral.
+	javaInfixOperation --|> tExpression.
+	javaBreakStatement --|> tStatement.
+	javaCaseStatement --|> tStatementBlock.
+	javaCharacterLiteral --|> tCharacterLiteral.
 	javaCharacterLiteral --|> tReceiver.
-	javaContinueStatement --|> statement.
-	javaDoWhileStatement --|> statement.
-	javaFloatLiteral --|> literal.
+	javaContinueStatement --|> tStatement.
+	javaDoWhileStatement --|> tStatement.
+	javaFloatLiteral --|> tLiteral.
 	javaFloatLiteral --|> tReceiver.
-	javaForStatement --|> statement.
+	javaForStatement --|> tStatement.
 	
 	javaIdentifier --|> javaVariableExpression.
 	javaIdentifier --|> tReceiver.
 	
-	javaIfStatement --|> statement.
-	javaIntegerLiteral --|> literal.
+	javaIfStatement --|> tStatement.
+	javaIntegerLiteral --|> tLiteral.
 	javaIntegerLiteral --|> tReceiver.
 	
-	javaMethodEntity --|> namedBehaviouralEntity.
+	javaMethodEntity --|> tNamedBehaviouralEntity.
 	javaMethodEntity --|> #THasImmediateSource.
 	javaMethodEntity --|> tDeclaration.
 	javaMethodEntity --|> tWithModifiers.
 
-	javaClassDeclaration --|> statement.
+	javaClassDeclaration --|> tStatement.
 	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
@@ -747,80 +734,80 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> #THasImmediateSource.
 	javaClassDeclaration withPrecedenceOf: #THasImmediateSource.
 
-	javaMethodInvocation --|> expression.
+	javaMethodInvocation --|> tExpression.
 	javaMethodInvocation --|> #TWithArguments.
 	javaMethodInvocation --|> tWithReceiver.
 	javaMethodInvocation --|> tReceiver.
 	
 
-	javaNullLiteral --|> nullPointerLiteral.
+	javaNullLiteral --|> tNullPointerLiteral.
 
-	javaStringLiteral --|> stringLiteral.
+	javaStringLiteral --|> tStringLiteral.
 	javaStringLiteral --|> tReceiver.
 
-	javaSwitchStatement --|> statement.
+	javaSwitchStatement --|> tStatement.
 	javaThis --|> javaVariableExpression.
 
-	javaVarDeclStatement --|> statement.
+	javaVarDeclStatement --|> tStatement.
 	javaVarDeclStatement --|> tDeclaration.
-	javaVarDeclStatement --|> scopableEntity.
+	javaVarDeclStatement --|> tScopableEntity.
 
-	javaVariableDeclarator --|> entity.
-	javaWhileStatement --|> statement.
+	javaVariableDeclarator --|> tEntity.
+	javaWhileStatement --|> tStatement.
 	javaMethodInvocation --|> tNamedEntity.
-	javaCastExpression --|> expression.
+	javaCastExpression --|> tExpression.
 	javaCastExpression --|> tReceiver.
 
 	javaClassProperty --|> javaVariableExpression.
 	javaClassProperty --|> tReceiver.
 
-	javaTryCatch --|> statement.
-	javaForEachStatement --|> statement.
-	javaUnaryExpression --|> expression.
+	javaTryCatch --|> tStatement.
+	javaForEachStatement --|> tStatement.
+	javaUnaryExpression --|> tExpression.
 
-	javaNewExpression --|> expression.
+	javaNewExpression --|> tExpression.
 	javaNewExpression --|> #TWithArguments.
 	javaNewExpression --|> tReceiver.
 
 	javaNewClassExpression --|> javaNewExpression.
 
 	javaNewArray --|> javaNewExpression.
-	javaConditionalExpression --|> expression.
+	javaConditionalExpression --|> tExpression.
 
-	javaArrayAccess --|> expression.
+	javaArrayAccess --|> tExpression.
 	javaArrayAccess --|> tAssigneable.
 	javaArrayAccess --|> tReceiver.
 
-	javaVariableExpression --|> variableExpression.
+	javaVariableExpression --|> tVariableExpression.
 	javaVariableExpression --|> tAssigneable.
 	javaVariableExpression --|> tReceiver.
 
-	javaThrowStatement --|> statement.
+	javaThrowStatement --|> tStatement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
 	javaEmptyMethodDeclaration --|> javaMethodEntity.
-	javaArrayInitializer --|> expression.
+	javaArrayInitializer --|> tExpression.
 
-	javaInitializer --|> scopableEntity.
+	javaInitializer --|> tScopableEntity.
 	javaInitializer --|> #THasImmediateSource.
 	javaInitializer --|> tDeclaration.
 
-	javaOuterThis --|> expression.
+	javaOuterThis --|> tExpression.
 	javaOuterThis --|> tReceiver.
 
-	javaCatchPartStatement --|> statement.
+	javaCatchPartStatement --|> tStatement.
 
-	javaLambdaExpression --|> expression.
-	javaLambdaExpression --|> fastTWithParameters.
+	javaLambdaExpression --|> tExpression.
+	javaLambdaExpression --|> tWithParameters.
 
-	javaMethodReference --|> expression.
+	javaMethodReference --|> tExpression.
 	javaMethodReference --|> tNamedEntity.
 	
-	javaSynchronizedStatement --|> statement.
+	javaSynchronizedStatement --|> tStatement.
 
 	"types name"
 	javaTypeName --|> tNamedEntity.
-	javaTypeName --|> expression.
+	javaTypeName --|> tExpression.
 	javaQualifiedTypeName --|> javaTypeName.
 
 	"types"
@@ -838,29 +825,29 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 	
-	javaBooleanLiteral --|> literal.
+	javaBooleanLiteral --|> tLiteral.
 	javaBooleanLiteral --|> tReceiver.
 
-	javaParameterExpression --|> variableEntity.
-	javaAssertStatement --|> statement.
+	javaParameterExpression --|> tVariableEntity.
+	javaAssertStatement --|> tStatement.
 
 	javaModifier --|> tModifier.
-	javaModifier --|> expression.
+	javaModifier --|> tExpression.
 
-	javaAnnotationExpression --|> expression.
+	javaAnnotationExpression --|> tExpression.
 	javaAnnotationExpression --|> tModifier.
 	
-	javaParameterExpression --|> expression.
+	javaParameterExpression --|> tExpression.
 	
 	javaConditionalExpression --|> tReceiver.
 	
-	javaStatementBlock --|> statementBlock.
+	javaStatementBlock --|> tStatementBlock.
 	
-	javaReturnStatement --|> returnStatement.
+	javaReturnStatement --|> tReturnStatement.
 	
-	javaExpressionStatement  --|> expressionStatement.
+	javaExpressionStatement  --|> tExpressionStatement.
 	
-	javaStatement --|> statement.
+	javaStatement --|> tStatement.
 ]
 
 { #category : #definition }
@@ -881,7 +868,7 @@ FASTJavaMetamodelGenerator >> defineProperties [
 FASTJavaMetamodelGenerator >> defineRelations [
 	super defineRelations.
 	((javaArrayInitializer property: #initializers) comment: 'My initializers')
-		<>-* ((expression property: #javaArrayInitializers) comment: 'The owner of the expression').
+		<>-* ((tExpression property: #javaArrayInitializers) comment: 'The owner of the expression').
 
 	((javaVarDeclStatement property: #declarators) comment: 'The declarators for the type')
 		<>-* ((javaVariableDeclarator property: #varDeclOwner) comment: 'The owner of the declarator').
@@ -890,15 +877,15 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>-* ((javaCaseStatement property: #javaCaseStatementSwitchOwner) comment: 'javaSwitch owner').
 
 	((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
-		<>- ((expression property: #javaVariableDeclaratorExpressionOwner) comment: 'The javaVariableDeclarator owner (if possible)').
+		<>- ((tExpression property: #javaVariableDeclaratorExpressionOwner) comment: 'The javaVariableDeclarator owner (if possible)').
 	((javaVariableDeclarator property: #variable) comment: 'Variable that s being declared')
 		<>- ((javaVariableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)').
 
 	((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
-		<>- ((expression property: #javaAssignementExpressionOwner) comment: 'The javaAssignementExpression owner (if possible)').
+		<>- ((tExpression property: #javaAssignementExpressionOwner) comment: 'The javaAssignementExpression owner (if possible)').
 
 	((javaCastExpression property: #expression) comment: 'The expression to cast')
-		<>- ((expression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)').
+		<>- ((tExpression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)').
 	((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast')
 		<>- ((javaVariableExpression property: #javaCastExpressionTypeOwner) comment: 'The javaCastExpression owner (if possible)').
 
@@ -910,90 +897,90 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')."
 
 	((javaUnaryExpression property: #expression) comment: 'The affected expression')
-		<>- ((expression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)').
+		<>- ((tExpression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)').
 
 	((javaNewExpression property: #type) comment: 'The type of the array')
 		<>- ((javaVariableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)').
 
 	((javaArrayAccess property: #expression) comment: 'The accessed index')
-		<>- ((expression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)').
+		<>- ((tExpression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)').
 	((javaArrayAccess property: #array) comment: 'Name of accessed field')
-		<>- ((expression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)').
+		<>- ((tExpression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)').
 
 	((javaOuterThis property: #type) comment: 'The accessed type')
 		<>- ((javaVariableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)').
 
 	((javaThrowStatement property: #expression) comment: 'The throwed element')
-		<>- ((expression property: #javaThrowStatementOwner) comment: 'The javaThrowStatement owner (if possible)').
+		<>- ((tExpression property: #javaThrowStatementOwner) comment: 'The javaThrowStatement owner (if possible)').
 
 	((javaLabeledCaseStatement property: #label) comment: 'The label of the case statement')
-		<>- ((expression property: #javaLabeledCaseStatementOwner) comment: 'The javaLabeledCaseStatement owner (if possible)').
+		<>- ((tExpression property: #javaLabeledCaseStatementOwner) comment: 'The javaLabeledCaseStatement owner (if possible)').
 
 	((javaForEachStatement property: #body) comment: 'The body of the For Each statement')
-		<>- ((statement property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)').
+		<>- ((tStatement property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #list) comment: 'The list the for each statement iterate on')
-		<>- ((expression property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)').
+		<>- ((tExpression property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #fieldname) comment: 'The name of the created local variable')
 		<>- ((javaVariableExpression property: #javaForEachStatementFieldNameOwner) comment: 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #type) comment: 'The name of the type of the created local variable')
 		<>- ((javaVariableExpression property: #javaForEachStatementTypeOwner) comment: 'The javaForEachStatement owner (if possible)').
 
 	((javaCatchPartStatement property: #body) comment: 'The body of the Catch part statement')
-		<>- ((statement property: #javaCatchPartStatementOwner) comment: 'The javaCatchPartStatementOwner owner (if possible)').
+		<>- ((tStatement property: #javaCatchPartStatementOwner) comment: 'The javaCatchPartStatementOwner owner (if possible)').
 	((javaCatchPartStatement property: #parameter) comment: 'The parameter of the catch part')
 		<>- ((javaVariableExpression property: #javaCatchParameterOwnler) comment: 'The javaCatchPartParameterOwner owner (if possible)').
 
 	((javaTryCatch property: #try) comment: 'I represent the ''try'' part of the TryCatch Statement')
-		<>- ((statement property: #javaTryCatchOwner) comment: 'The javaTryCatch owner (if possible)').
+		<>- ((tStatement property: #javaTryCatchOwner) comment: 'The javaTryCatch owner (if possible)').
 	((javaTryCatch property: #catches) comment: 'I contains all the catch statements') <>-* ((javaCatchPartStatement property: #tryOwner) comment: 'The try owner').
 
 	((javaIfStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((expression property: #ifConditionOwner) comment: 'I reprensent a condition for my owner').
-	((javaIfStatement property: #elsePart) comment: 'else part') <>- ((statement property: #ifElsePartOwner) comment: 'The if owner (if possible)').
-	((javaIfStatement property: #thenPart) comment: 'then part') <>- ((statement property: #ifThenPartOwner) comment: 'The if owner (if possible)').
+		<>- ((tExpression property: #ifConditionOwner) comment: 'I reprensent a condition for my owner').
+	((javaIfStatement property: #elsePart) comment: 'else part') <>- ((tStatement property: #ifElsePartOwner) comment: 'The if owner (if possible)').
+	((javaIfStatement property: #thenPart) comment: 'then part') <>- ((tStatement property: #ifThenPartOwner) comment: 'The if owner (if possible)').
 
 	((javaConditionalExpression property: #condition) comment: 'The condition of the statement')
-		<>- ((expression property: #conditionalConditionOwner) comment: 'I reprensent a condition for my owner').
+		<>- ((tExpression property: #conditionalConditionOwner) comment: 'I reprensent a condition for my owner').
 	((javaConditionalExpression property: #elsePart) comment: 'else part')
-		<>- ((expression property: #conditionalElsePartOwner) comment: 'The if owner (if possible)').
+		<>- ((tExpression property: #conditionalElsePartOwner) comment: 'The if owner (if possible)').
 	((javaConditionalExpression property: #thenPart) comment: 'then part')
-		<>- ((expression property: #conditionalThenPartOwner) comment: 'The if owner (if possible)').
+		<>- ((tExpression property: #conditionalThenPartOwner) comment: 'The if owner (if possible)').
 
 	((javaInfixOperation property: #leftOperand) comment: 'leftOperand')
-		<>- ((expression property: #infixOperationLeftOperandOwner) comment: 'The left operand (if possible)').
+		<>- ((tExpression property: #infixOperationLeftOperandOwner) comment: 'The left operand (if possible)').
 	((javaInfixOperation property: #rightOperand) comment: 'rightOperand')
-		<>- ((expression property: #infixOperationRightOperandOwner) comment: 'The right operand (if possible)').
+		<>- ((tExpression property: #infixOperationRightOperandOwner) comment: 'The right operand (if possible)').
 
 	((javaForStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((expression property: #forConditionOwner) comment: 'I reprensent a condition for my owner').
+		<>- ((tExpression property: #forConditionOwner) comment: 'I reprensent a condition for my owner').
 	((javaForStatement property: #incrementor) comment: 'Expression evaluated at the end of each loop')
-		<>- ((statement property: #forIncrementorOwner) comment: 'I am the incrementor of the for').
+		<>- ((tStatement property: #forIncrementorOwner) comment: 'I am the incrementor of the for').
 	((javaForStatement property: #initializer) comment: 'Expression used at initialization phase of a for loop')
-		<>- ((statement property: #forIninitializerOwner) comment: 'I am the initializer of the for').
+		<>- ((tStatement property: #forIninitializerOwner) comment: 'I am the initializer of the for').
 	((javaForStatement property: #body) comment: 'A statement to be evaluated in the loop')
-		<>- ((statement property: #forBodyOwner) comment: 'I am the body of the for').
+		<>- ((tStatement property: #forBodyOwner) comment: 'I am the body of the for').
 
 	((javaDoWhileStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((expression property: #doConditionOwner) comment: 'I reprensent a condition for my owner').
+		<>- ((tExpression property: #doConditionOwner) comment: 'I reprensent a condition for my owner').
 	((javaDoWhileStatement property: #body) comment: 'A statement to be evaluated in the loop')
-		<>- ((statement property: #doBodyOwner) comment: 'I am the body of the do').
+		<>- ((tStatement property: #doBodyOwner) comment: 'I am the body of the do').
 
 	((javaWhileStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((expression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner').
+		<>- ((tExpression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner').
 	((javaWhileStatement property: #body) comment: 'A statement to be evaluated in the loop')
-		<>- ((statement property: #whileBodyOwner) comment: 'I am the body of the do').
+		<>- ((tStatement property: #whileBodyOwner) comment: 'I am the body of the do').
 
 	((javaNewClassExpression property: #declarations) comment: 'The methods defined in the class')
-		<>-* ((scopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)').
+		<>-* ((tScopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)').
 
 	((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity')
-		<>- ((statementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.').
+		<>- ((tStatementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.').
 
 	((javaNewArray property: #initializer) comment: 'The initializer of the array')
-		<>- ((expression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations').
+		<>- ((tExpression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations').
 
 	((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.')
-		<>- ((entity property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)').
+		<>- ((tEntity property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)').
 	"((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda')
 		<>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')."
 	"((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda')
@@ -1003,9 +990,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((javaVariableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)').
 
 	((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized')
-		<>- ((expression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)').
+		<>- ((tExpression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)').
 	((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized')
-		<>- ((statementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)').
+		<>- ((tStatementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)').
 
 	((javaMethodEntity property: #type) comment: 'The type of the method')
 		<>- ((javaVariableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)').
@@ -1019,7 +1006,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((javaVariableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)').
 
 	((javaArrayTypeExpression property: #baseType) comment: 'The type of the array')
-		<>- ((expression property: #javaArrayTypeNameOwner) comment: 'The variable expression owner (if possible)').
+		<>- ((tExpression property: #javaArrayTypeNameOwner) comment: 'The variable expression owner (if possible)').
 
 	((javaClassTypeExpression property: #typeName) comment: 'The name of the type')
 		<>- ((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment: 'The type expression that own me').
@@ -1028,7 +1015,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((javaTypeName property: #javaTypeNameQualify) comment: 'the name I qualify').
 
 	((javaAssertStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((expression property: #assertConditionOwner) comment: 'I reprensent a condition for my owner').
+		<>- ((tExpression property: #assertConditionOwner) comment: 'I reprensent a condition for my owner').
 	((javaAssertStatement property: #message) comment: 'The error message that is raised in case the condition is false')
 		<>- ((javaStringLiteral property: #javaStringAssertStatementOwner) comment: 'the assert that can raised me').
 
@@ -1054,7 +1041,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineTraits [
-	super defineTraits.
+	super defineTraits. 
 	tDeclaration := builder newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
 	tWithDeclarations := builder newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
 	
@@ -1068,23 +1055,22 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive message from someone'.
 	
 	"From FAST"
-	entity := self remoteTrait: #TEntity withPrefix: #FAST. 
-	expression := self remoteTrait: #TExpression withPrefix: #FAST. 
-	statement := self remoteTrait: #TStatement withPrefix: #FAST.
-	characterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
-	literal := self remoteTrait: #TLiteral withPrefix: #FAST.
-	variableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
-	namedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
-	nullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
-	stringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
-	scopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
-	namedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
-	variableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
-	statementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
-	expressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
+	tEntity := self remoteTrait: #TEntity withPrefix: #FAST. 
+	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
+	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
+	tCharacterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
+	tLiteral := self remoteTrait: #TLiteral withPrefix: #FAST.
+	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
+	tNamedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
+	tNullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
+	tStringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
+	tScopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
+	tVariableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
+	tStatementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
+	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
 	"fastTParameter := self remoteTrait: #TParameter withPrefix: #FAST."
-	fastTWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
+	tWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
 	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
-	returnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
-	booleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
+	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
+	tBooleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
 ]
