@@ -25,7 +25,7 @@ BaselineOfFASTJava >> defineDependencies: spec [
 		baseline: 'FAST'
 		with: [ spec
 				loads: #('default');
-				repository: 'github://moosetechnology/FAST:v1.x.x/src' ].
+				repository: 'github://moosetechnology/FAST:v2/src' ].
 	spec
 		baseline: 'SmaCC'
 		with: [ spec
