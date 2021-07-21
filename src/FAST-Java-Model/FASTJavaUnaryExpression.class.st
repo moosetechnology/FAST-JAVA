@@ -15,7 +15,9 @@ see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html
 "
 Class {
 	#name : #FASTJavaUnaryExpression,
-	#superclass : #FASTExpression,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty',
 		'#isPrefixedUnaryExpression => FMProperty'
@@ -26,7 +28,7 @@ Class {
 { #category : #meta }
 FASTJavaUnaryExpression class >> annotation [
 
-	<FMClass: #UnaryExpression super: #FASTExpression>
+	<FMClass: #UnaryExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -34,11 +36,11 @@ FASTJavaUnaryExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaUnaryExpression >> expression [
-	"Relation named: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner"
+	"Relation named: #expression type: #FASTTExpression opposite: #javaUnaryExpressionOwner"
 
 	<generated>
 	<FMComment: 'The affected expression'>
-	<FMProperty: #expression type: #FASTExpression opposite: #javaUnaryExpressionOwner>
+	<FMProperty: #expression type: #FASTTExpression opposite: #javaUnaryExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 

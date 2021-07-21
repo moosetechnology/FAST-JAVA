@@ -7,14 +7,16 @@ throw new Hello();
 "
 Class {
 	#name : #FASTJavaThrowStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaThrowStatement class >> annotation [
 
-	<FMClass: #ThrowStatement super: #FASTStatement>
+	<FMClass: #ThrowStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -22,11 +24,11 @@ FASTJavaThrowStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaThrowStatement >> expression [
-	"Relation named: #expression type: #FASTExpression opposite: #javaThrowStatementOwner"
+	"Relation named: #expression type: #FASTTExpression opposite: #javaThrowStatementOwner"
 
 	<generated>
 	<FMComment: 'The throwed element'>
-	<FMProperty: #expression type: #FASTExpression opposite: #javaThrowStatementOwner>
+	<FMProperty: #expression type: #FASTTExpression opposite: #javaThrowStatementOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 

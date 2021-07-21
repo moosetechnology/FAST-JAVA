@@ -3,7 +3,9 @@ case part of switch statement
 "
 Class {
 	#name : #FASTJavaCaseStatement,
-	#superclass : #FASTStatementBlock,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatementBlock',
+	#classTraits : 'FASTTStatementBlock classTrait',
 	#instVars : [
 		'#javaCaseStatementSwitchOwner => FMOne type: #FASTJavaSwitchStatement opposite: #cases'
 	],
@@ -13,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaCaseStatement class >> annotation [
 
-	<FMClass: #CaseStatement super: #FASTStatementBlock>
+	<FMClass: #CaseStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

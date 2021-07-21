@@ -37,12 +37,12 @@ FASTJavaNewClassExpression >> addDeclaration: anObject [
 
 { #category : #accessing }
 FASTJavaNewClassExpression >> declarations [
-	"Relation named: #declarations type: #FASTScopableEntity opposite: #newClassOwner"
+	"Relation named: #declarations type: #FASTTScopableEntity opposite: #newClassOwner"
 
 	<generated>
 	<FMComment: 'The methods defined in the class'>
 	<derived>
-	<FMProperty: #declarations type: #FASTScopableEntity opposite: #newClassOwner>
+	<FMProperty: #declarations type: #FASTTScopableEntity opposite: #newClassOwner>
 	^ self attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
 ]
 

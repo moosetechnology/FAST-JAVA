@@ -37,5 +37,5 @@ JavaSmaCCALittleOfVariables3MethodTest >> testVariableDeclaratorExpressionType3 
 
 { #category : #tests }
 JavaSmaCCALittleOfVariables3MethodTest >> testVariableDeclaratorExpressionValue3 [
-	self assert: aLittleOfVariables3 statementBlock statements first declarators first expression value equals: '''c'''
+	self assert: aLittleOfVariables3 statementBlock statements first declarators first expression primitiveValue equals: '''c'''
 ]

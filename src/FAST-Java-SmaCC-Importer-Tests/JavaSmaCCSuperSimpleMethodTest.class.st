@@ -29,7 +29,7 @@ JavaSmaCCSuperSimpleMethodTest >> testExpressionParent [
 
 { #category : #tests }
 JavaSmaCCSuperSimpleMethodTest >> testExpressionType [
-	self assert: supersimple statements last expression class equals: FASTBooleanLiteral 
+	self assert: supersimple statements last expression class equals: FASTJavaBooleanLiteral  
 ]
 
 { #category : #tests }
@@ -39,5 +39,5 @@ JavaSmaCCSuperSimpleMethodTest >> testStatementsCount [
 
 { #category : #tests }
 JavaSmaCCSuperSimpleMethodTest >> testStatementsType [
-	self assert: supersimple statements last class equals: FASTReturnStatement  
+	self assert: supersimple statements last class equals: FASTJavaReturnStatement  
 ]

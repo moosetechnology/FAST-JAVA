@@ -40,7 +40,14 @@ JavaSmaCCNewClassTest >> testNewName [
 
 { #category : #tests }
 JavaSmaCCNewClassTest >> testNewParent [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne parentNode equals: (methodNew entityNamed: 'newMethod') statements anyOne
+
+	self
+		assert:
+		(methodNew allWithType: FASTJavaNewClassExpression) anyOne
+			parentNode
+		equals:
+			(methodNew detect: [ :entity | entity mooseName = 'newMethod' ])
+				statements anyOne
 ]
 
 { #category : #tests }

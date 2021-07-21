@@ -10,14 +10,16 @@ if(...) {
 "
 Class {
 	#name : #FASTJavaIfStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaIfStatement class >> annotation [
 
-	<FMClass: #IfStatement super: #FASTStatement>
+	<FMClass: #IfStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -25,11 +27,11 @@ FASTJavaIfStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaIfStatement >> condition [
-	"Relation named: #condition type: #FASTExpression opposite: #ifConditionOwner"
+	"Relation named: #condition type: #FASTTExpression opposite: #ifConditionOwner"
 
 	<generated>
 	<FMComment: 'The condition of the statement'>
-	<FMProperty: #condition type: #FASTExpression opposite: #ifConditionOwner>
+	<FMProperty: #condition type: #FASTTExpression opposite: #ifConditionOwner>
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
@@ -56,11 +58,11 @@ FASTJavaIfStatement >> conditionGroup [
 
 { #category : #accessing }
 FASTJavaIfStatement >> elsePart [
-	"Relation named: #elsePart type: #FASTStatement opposite: #ifElsePartOwner"
+	"Relation named: #elsePart type: #FASTTStatement opposite: #ifElsePartOwner"
 
 	<generated>
 	<FMComment: 'else part'>
-	<FMProperty: #elsePart type: #FASTStatement opposite: #ifElsePartOwner>
+	<FMProperty: #elsePart type: #FASTTStatement opposite: #ifElsePartOwner>
 	^ self attributeAt: #elsePart ifAbsent: [ nil ]
 ]
 
@@ -87,11 +89,11 @@ FASTJavaIfStatement >> elsePartGroup [
 
 { #category : #accessing }
 FASTJavaIfStatement >> thenPart [
-	"Relation named: #thenPart type: #FASTStatement opposite: #ifThenPartOwner"
+	"Relation named: #thenPart type: #FASTTStatement opposite: #ifThenPartOwner"
 
 	<generated>
 	<FMComment: 'then part'>
-	<FMProperty: #thenPart type: #FASTStatement opposite: #ifThenPartOwner>
+	<FMProperty: #thenPart type: #FASTTStatement opposite: #ifThenPartOwner>
 	^ self attributeAt: #thenPart ifAbsent: [ nil ]
 ]
 

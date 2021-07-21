@@ -3,9 +3,9 @@ I represent a method reference
 "
 Class {
 	#name : #FASTJavaMethodReference,
-	#superclass : #FASTExpression,
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTExpression + FASTTNamedEntity',
+	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#receiver => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner'
 	],
@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaMethodReference class >> annotation [
 
-	<FMClass: #MethodReference super: #FASTExpression>
+	<FMClass: #MethodReference super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

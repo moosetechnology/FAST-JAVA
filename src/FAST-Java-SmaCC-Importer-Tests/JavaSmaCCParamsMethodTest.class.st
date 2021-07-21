@@ -100,7 +100,7 @@ JavaSmaCCParamsMethodTest >> testStatementsParent [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testStatementsType [
-	self assert: params statements last class equals: FASTExpressionStatement 
+	self assert: params statements last class equals: FASTJavaExpressionStatement 
 ]
 
 { #category : #tests }

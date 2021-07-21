@@ -1,8 +1,5 @@
-"
-A node representing continue statement in java
-"
 Class {
-	#name : #FASTJavaContinueStatement,
+	#name : #FASTJavaStatement,
 	#superclass : #FASTJavaEntity,
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
@@ -10,9 +7,9 @@ Class {
 }
 
 { #category : #meta }
-FASTJavaContinueStatement class >> annotation [
+FASTJavaStatement class >> annotation [
 
-	<FMClass: #ContinueStatement super: #FASTJavaEntity>
+	<FMClass: #Statement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

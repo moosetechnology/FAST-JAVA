@@ -12,9 +12,9 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 "
 Class {
 	#name : #FASTJavaClassDeclaration,
-	#superclass : #FASTStatement,
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FamixTHasImmediateSource + FamixTNamedEntity',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FamixTHasImmediateSource classTrait + FamixTNamedEntity classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : '(FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
+	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
 		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver',
 		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver'
@@ -25,7 +25,7 @@ Class {
 { #category : #meta }
 FASTJavaClassDeclaration class >> annotation [
 
-	<FMClass: #ClassDeclaration super: #FASTStatement>
+	<FMClass: #ClassDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -59,12 +59,6 @@ FASTJavaClassDeclaration >> interfacesGroup [
 	<generated>
 	<navigation: 'Interfaces'>
 	^ MooseSpecializedGroup withAll: self interfaces asSet
-]
-
-{ #category : #accessing }
-FASTJavaClassDeclaration >> sourceText [
-
-	^ self source ifNil: [ self parentNode ifNil: [ '' ] ifNotNil: [ :existingParentNode | existingParentNode sourceText ] ]
 ]
 
 { #category : #accessing }

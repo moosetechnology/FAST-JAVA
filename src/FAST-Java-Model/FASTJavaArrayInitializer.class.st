@@ -12,14 +12,16 @@ My initializers are
 "
 Class {
 	#name : #FASTJavaArrayInitializer,
-	#superclass : #FASTExpression,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaArrayInitializer class >> annotation [
 
-	<FMClass: #ArrayInitializer super: #FASTExpression>
+	<FMClass: #ArrayInitializer super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -33,12 +35,12 @@ FASTJavaArrayInitializer >> addInitializer: anObject [
 
 { #category : #accessing }
 FASTJavaArrayInitializer >> initializers [
-	"Relation named: #initializers type: #FASTExpression opposite: #javaArrayInitializers"
+	"Relation named: #initializers type: #FASTTExpression opposite: #javaArrayInitializers"
 
 	<generated>
 	<FMComment: 'My initializers'>
 	<derived>
-	<FMProperty: #initializers type: #FASTExpression opposite: #javaArrayInitializers>
+	<FMProperty: #initializers type: #FASTTExpression opposite: #javaArrayInitializers>
 	^ self attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaArrayInitializers: ]
 ]
 

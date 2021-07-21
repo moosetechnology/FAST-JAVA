@@ -40,7 +40,7 @@ JavaSmaCCWhileWhileMethodTest >> testFirstWhileBodyParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testFirstWhileBodyType [
-	self assert: whileWhile statements second body class equals: FASTStatementBlock 
+	self assert: whileWhile statements second body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
@@ -50,7 +50,7 @@ JavaSmaCCWhileWhileMethodTest >> testFirstWhileConditionParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testFirstWhileConditionType [
-	self assert: whileWhile statements second condition class equals: FASTBooleanLiteral
+	self assert: whileWhile statements second condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
@@ -65,7 +65,7 @@ JavaSmaCCWhileWhileMethodTest >> testNestedWhileBodyParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileBodyType [
-	self assert: whileWhile statements third body statements first body class equals: FASTExpressionStatement
+	self assert: whileWhile statements third body statements first body class equals: FASTJavaExpressionStatement
 ]
 
 { #category : #tests }
@@ -75,7 +75,8 @@ JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionType [
-	self assert: whileWhile statements third body statements first condition class equals: FASTBooleanLiteral 
+	
+	self assert: whileWhile statements third body statements first condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
@@ -85,7 +86,7 @@ JavaSmaCCWhileWhileMethodTest >> testSecondWhileBodyParent [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testSecondWhileBodyType [
-	self assert: whileWhile statements third body class equals: FASTStatementBlock 
+	self assert: whileWhile statements third body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
@@ -115,5 +116,5 @@ JavaSmaCCWhileWhileMethodTest >> testStatementsType [
 		assert: whileWhile statements second class equals: FASTJavaWhileStatement;
 		assert: whileWhile statements third class equals: FASTJavaWhileStatement;
 		assert: (whileWhile statements at: 4) class equals: FASTJavaVarDeclStatement;
-		assert: whileWhile statements last class equals: FASTReturnStatement
+		assert: whileWhile statements last class equals: FASTJavaReturnStatement
 ]

@@ -43,10 +43,10 @@ JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementInModelSize [
 
 { #category : #tests }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementParentNode [
-	self assert: testElement parentNode class equals: FASTStatementBlock.
+	self assert: testElement parentNode class equals: FASTJavaStatementBlock.
 ]
 
 { #category : #tests }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementType [
-	self assert: testElement block class equals: FASTStatementBlock.
+	self assert: testElement block class equals: FASTJavaStatementBlock.
 ]

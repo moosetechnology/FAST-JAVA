@@ -8,7 +8,9 @@ switch (_) {
 "
 Class {
 	#name : #FASTJavaSwitchStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#cases => FMMany type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner'
 	],
@@ -18,7 +20,7 @@ Class {
 { #category : #meta }
 FASTJavaSwitchStatement class >> annotation [
 
-	<FMClass: #SwitchStatement super: #FASTStatement>
+	<FMClass: #SwitchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

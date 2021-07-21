@@ -29,7 +29,7 @@ JavaSmaCCForTest >> testForEachBodyParentNode [
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachBodyType [
-	self assert: methodFor statements first body class equals: FASTStatementBlock 
+	self assert: methodFor statements first body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
@@ -44,7 +44,7 @@ JavaSmaCCForTest >> testForEachConditionType [
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachIncrementorsType [
-	self assert: methodFor statements first incrementor class equals: FASTExpressionStatement 
+	self assert: methodFor statements first incrementor class equals: FASTJavaExpressionStatement 
 ]
 
 { #category : #tests }

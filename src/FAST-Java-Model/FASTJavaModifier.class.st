@@ -27,9 +27,9 @@ for methods:
 "
 Class {
 	#name : #FASTJavaModifier,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTModifier',
-	#classTraits : 'FASTJavaTModifier classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTModifier + FASTTExpression',
+	#classTraits : 'FASTJavaTModifier classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#token => FMProperty'
 	],
@@ -39,7 +39,7 @@ Class {
 { #category : #meta }
 FASTJavaModifier class >> annotation [
 
-	<FMClass: #Modifier super: #FASTExpression>
+	<FMClass: #Modifier super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

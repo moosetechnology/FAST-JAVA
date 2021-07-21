@@ -28,5 +28,5 @@ JavaSmaCCStringLiteralTest >> testStringLiteralType [
 
 { #category : #tests }
 JavaSmaCCStringLiteralTest >> testStringLiteralValue [
-	self assert: methodStringLiteral statements first children anyOne arguments first value equals: 'Patate'
+	self assert: methodStringLiteral statements first children anyOne arguments first primitiveValue equals: 'Patate'
 ]

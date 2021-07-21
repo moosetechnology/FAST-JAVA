@@ -8,14 +8,16 @@ while(...) {
 "
 Class {
 	#name : #FASTJavaWhileStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaWhileStatement class >> annotation [
 
-	<FMClass: #WhileStatement super: #FASTStatement>
+	<FMClass: #WhileStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -23,11 +25,11 @@ FASTJavaWhileStatement class >> annotation [
 
 { #category : #accessing }
 FASTJavaWhileStatement >> body [
-	"Relation named: #body type: #FASTStatement opposite: #whileBodyOwner"
+	"Relation named: #body type: #FASTTStatement opposite: #whileBodyOwner"
 
 	<generated>
 	<FMComment: 'A statement to be evaluated in the loop'>
-	<FMProperty: #body type: #FASTStatement opposite: #whileBodyOwner>
+	<FMProperty: #body type: #FASTTStatement opposite: #whileBodyOwner>
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
@@ -54,11 +56,11 @@ FASTJavaWhileStatement >> bodyGroup [
 
 { #category : #accessing }
 FASTJavaWhileStatement >> condition [
-	"Relation named: #condition type: #FASTExpression opposite: #whileConditionOwner"
+	"Relation named: #condition type: #FASTTExpression opposite: #whileConditionOwner"
 
 	<generated>
 	<FMComment: 'The condition of the statement'>
-	<FMProperty: #condition type: #FASTExpression opposite: #whileConditionOwner>
+	<FMProperty: #condition type: #FASTTExpression opposite: #whileConditionOwner>
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 

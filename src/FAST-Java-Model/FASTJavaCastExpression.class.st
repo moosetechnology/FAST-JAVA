@@ -3,9 +3,9 @@ todo
 "
 Class {
 	#name : #FASTJavaCastExpression,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTReceiver classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner'
 	],
@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaCastExpression class >> annotation [
 
-	<FMClass: #CastExpression super: #FASTExpression>
+	<FMClass: #CastExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -23,11 +23,11 @@ FASTJavaCastExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaCastExpression >> expression [
-	"Relation named: #expression type: #FASTExpression opposite: #javaCastExpressionOwner"
+	"Relation named: #expression type: #FASTTExpression opposite: #javaCastExpressionOwner"
 
 	<generated>
 	<FMComment: 'The expression to cast'>
-	<FMProperty: #expression type: #FASTExpression opposite: #javaCastExpressionOwner>
+	<FMProperty: #expression type: #FASTTExpression opposite: #javaCastExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 

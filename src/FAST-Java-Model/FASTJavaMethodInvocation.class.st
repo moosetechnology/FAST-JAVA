@@ -3,16 +3,16 @@ A node representing method imvocation
 "
 Class {
 	#name : #FASTJavaMethodInvocation,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTWithArguments + FamixTNamedEntity',
-	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTWithArguments classTrait + FamixTNamedEntity classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTExpression + FASTTNamedEntity + FASTTWithArguments',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaMethodInvocation class >> annotation [
 
-	<FMClass: #MethodInvocation super: #FASTExpression>
+	<FMClass: #MethodInvocation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

@@ -3,9 +3,9 @@ A string in Java
 "
 Class {
 	#name : #FASTJavaStringLiteral,
-	#superclass : #FASTStringLiteral,
-	#traits : 'FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTReceiver classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTReceiver + FASTTStringLiteral',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTStringLiteral classTrait',
 	#instVars : [
 		'#javaStringAssertStatementOwner => FMOne type: #FASTJavaAssertStatement opposite: #message'
 	],
@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 FASTJavaStringLiteral class >> annotation [
 
-	<FMClass: #StringLiteral super: #FASTStringLiteral>
+	<FMClass: #StringLiteral super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

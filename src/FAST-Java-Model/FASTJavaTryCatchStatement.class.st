@@ -16,7 +16,9 @@ void tryCatch() {
 "
 Class {
 	#name : #FASTJavaTryCatchStatement,
-	#superclass : #FASTStatement,
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTTStatement',
+	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner'
 	],
@@ -26,7 +28,7 @@ Class {
 { #category : #meta }
 FASTJavaTryCatchStatement class >> annotation [
 
-	<FMClass: #TryCatchStatement super: #FASTStatement>
+	<FMClass: #TryCatchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -64,11 +66,11 @@ FASTJavaTryCatchStatement >> catchesGroup [
 
 { #category : #accessing }
 FASTJavaTryCatchStatement >> try [
-	"Relation named: #try type: #FASTStatement opposite: #javaTryCatchOwner"
+	"Relation named: #try type: #FASTTStatement opposite: #javaTryCatchOwner"
 
 	<generated>
 	<FMComment: 'I represent the ''try'' part of the TryCatch Statement'>
-	<FMProperty: #try type: #FASTStatement opposite: #javaTryCatchOwner>
+	<FMProperty: #try type: #FASTTStatement opposite: #javaTryCatchOwner>
 	^ self attributeAt: #try ifAbsent: [ nil ]
 ]
 

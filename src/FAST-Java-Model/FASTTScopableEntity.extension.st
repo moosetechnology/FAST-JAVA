@@ -1,7 +1,7 @@
-Extension { #name : #FASTScopableEntity }
+Extension { #name : #FASTTScopableEntity }
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTScopableEntity >> newClassOwner [
+FASTTScopableEntity >> newClassOwner [
 	"Relation named: #newClassOwner type: #FASTJavaNewClassExpression opposite: #declarations"
 
 	<generated>
@@ -13,7 +13,7 @@ FASTScopableEntity >> newClassOwner [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTScopableEntity >> newClassOwner: anObject [
+FASTTScopableEntity >> newClassOwner: anObject [
 
 	<generated>
 	self attributeAt: #newClassOwner put: (FMMultivalueLink on: self update: #declarations from: self newClassOwner to: anObject).

@@ -63,7 +63,7 @@ JavaSmaCCALittleOfVariablesMethodTest >> testStatementsCount [
 JavaSmaCCALittleOfVariablesMethodTest >> testStatementsType [
 	self
 		assert: aLittleOfVariables statements first class equals: FASTJavaVarDeclStatement;
-		assert: aLittleOfVariables statements last class equals: FASTReturnStatement
+		assert: aLittleOfVariables statements last class equals: FASTJavaReturnStatement
 ]
 
 { #category : #tests }
@@ -78,7 +78,7 @@ JavaSmaCCALittleOfVariablesMethodTest >> testVariableDeclaratorExpressionType [
 
 { #category : #tests }
 JavaSmaCCALittleOfVariablesMethodTest >> testVariableDeclaratorExpressionValue [
-	self assert: aLittleOfVariables statements  first declarators first expression value equals: '5'
+	self assert: aLittleOfVariables statements  first declarators first expression primitiveValue equals: '5'
 ]
 
 { #category : #tests }

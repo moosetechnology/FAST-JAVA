@@ -8,16 +8,16 @@ float f = 12.3;
 "
 Class {
 	#name : #FASTJavaFloatLiteral,
-	#superclass : #FASTLiteral,
-	#traits : 'FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTReceiver classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTReceiver + FASTTLiteral',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTLiteral classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaFloatLiteral class >> annotation [
 
-	<FMClass: #FloatLiteral super: #FASTLiteral>
+	<FMClass: #FloatLiteral super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

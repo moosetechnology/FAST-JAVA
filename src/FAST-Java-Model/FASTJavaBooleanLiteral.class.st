@@ -1,8 +1,5 @@
-"
-Java integer literal node
-"
 Class {
-	#name : #FASTJavaIntegerLiteral,
+	#name : #FASTJavaBooleanLiteral,
 	#superclass : #FASTJavaEntity,
 	#traits : 'FASTJavaTReceiver + FASTTLiteral',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTLiteral classTrait',
@@ -10,9 +7,9 @@ Class {
 }
 
 { #category : #meta }
-FASTJavaIntegerLiteral class >> annotation [
+FASTJavaBooleanLiteral class >> annotation [
 
-	<FMClass: #IntegerLiteral super: #FASTJavaEntity>
+	<FMClass: #BooleanLiteral super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

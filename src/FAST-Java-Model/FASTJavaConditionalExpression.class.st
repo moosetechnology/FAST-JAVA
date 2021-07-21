@@ -7,16 +7,16 @@ ex:
 "
 Class {
 	#name : #FASTJavaConditionalExpression,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTReceiver classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaConditionalExpression class >> annotation [
 
-	<FMClass: #ConditionalExpression super: #FASTExpression>
+	<FMClass: #ConditionalExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
@@ -24,11 +24,11 @@ FASTJavaConditionalExpression class >> annotation [
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> condition [
-	"Relation named: #condition type: #FASTExpression opposite: #conditionalConditionOwner"
+	"Relation named: #condition type: #FASTTExpression opposite: #conditionalConditionOwner"
 
 	<generated>
 	<FMComment: 'The condition of the statement'>
-	<FMProperty: #condition type: #FASTExpression opposite: #conditionalConditionOwner>
+	<FMProperty: #condition type: #FASTTExpression opposite: #conditionalConditionOwner>
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
@@ -55,11 +55,11 @@ FASTJavaConditionalExpression >> conditionGroup [
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> elsePart [
-	"Relation named: #elsePart type: #FASTExpression opposite: #conditionalElsePartOwner"
+	"Relation named: #elsePart type: #FASTTExpression opposite: #conditionalElsePartOwner"
 
 	<generated>
 	<FMComment: 'else part'>
-	<FMProperty: #elsePart type: #FASTExpression opposite: #conditionalElsePartOwner>
+	<FMProperty: #elsePart type: #FASTTExpression opposite: #conditionalElsePartOwner>
 	^ self attributeAt: #elsePart ifAbsent: [ nil ]
 ]
 
@@ -86,11 +86,11 @@ FASTJavaConditionalExpression >> elsePartGroup [
 
 { #category : #accessing }
 FASTJavaConditionalExpression >> thenPart [
-	"Relation named: #thenPart type: #FASTExpression opposite: #conditionalThenPartOwner"
+	"Relation named: #thenPart type: #FASTTExpression opposite: #conditionalThenPartOwner"
 
 	<generated>
 	<FMComment: 'then part'>
-	<FMProperty: #thenPart type: #FASTExpression opposite: #conditionalThenPartOwner>
+	<FMProperty: #thenPart type: #FASTTExpression opposite: #conditionalThenPartOwner>
 	^ self attributeAt: #thenPart ifAbsent: [ nil ]
 ]
 

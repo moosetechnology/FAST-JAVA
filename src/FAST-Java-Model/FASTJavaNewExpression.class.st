@@ -7,9 +7,9 @@ new Patate()
 "
 Class {
 	#name : #FASTJavaNewExpression,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTReceiver + FASTTWithArguments',
-	#classTraits : 'FASTJavaTReceiver classTrait + FASTTWithArguments classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTReceiver + FASTTExpression + FASTTWithArguments',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner'
 	],
@@ -19,7 +19,7 @@ Class {
 { #category : #meta }
 FASTJavaNewExpression class >> annotation [
 
-	<FMClass: #NewExpression super: #FASTExpression>
+	<FMClass: #NewExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

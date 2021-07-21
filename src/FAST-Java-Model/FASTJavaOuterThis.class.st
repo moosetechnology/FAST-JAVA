@@ -7,9 +7,9 @@ hello(MyClass.this)
 "
 Class {
 	#name : #FASTJavaOuterThis,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTReceiver classTrait',
+	#superclass : #FASTJavaEntity,
+	#traits : 'FASTJavaTReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner'
 	],
@@ -19,7 +19,7 @@ Class {
 { #category : #meta }
 FASTJavaOuterThis class >> annotation [
 
-	<FMClass: #OuterThis super: #FASTExpression>
+	<FMClass: #OuterThis super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self

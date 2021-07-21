@@ -32,7 +32,7 @@ JavaSmaCCDoWhileMethodTest >> testDoWhileBodyParentNode [
 
 { #category : #tests }
 JavaSmaCCDoWhileMethodTest >> testDoWhileBodyType [
-	self assert: (doWhile allWithType: FASTJavaDoWhileStatement) first body class equals: FASTStatementBlock
+	self assert: (doWhile allWithType: FASTJavaDoWhileStatement) first body class equals: FASTJavaStatementBlock
 ]
 
 { #category : #tests }
@@ -47,5 +47,5 @@ JavaSmaCCDoWhileMethodTest >> testDoWhileInModelSize [
 
 { #category : #tests }
 JavaSmaCCDoWhileMethodTest >> testDoWhileParentNode [
-	self assert: (doWhile allWithType: FASTJavaDoWhileStatement) first parentNode class equals: FASTStatementBlock 
+	self assert: (doWhile allWithType: FASTJavaDoWhileStatement) first parentNode class equals: FASTJavaStatementBlock 
 ]
