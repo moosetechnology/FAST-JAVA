@@ -719,14 +719,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
+
 	currentFASTEntity := self addToModel: FASTJavaNewClassExpression new.
-		self generalVisitActionForNodeEntity: aNewClass.
-	aNewClass expressions
-		do:
-			[ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
-	currentFASTEntity type: (self clone accept: aNewClass type).
-	aNewClass declarations
-		do: [ :method | currentFASTEntity declarations add: (self clone accept: method) ].
+	self generalVisitActionForNodeEntity: aNewClass.
+	aNewClass expressions do: [ :expression | 
+		currentFASTEntity arguments add: (self clone accept: expression) ].
+	aNewClass type
+		ifNotNil: [ 
+		currentFASTEntity type: (self clone accept: aNewClass type) ]
+		ifNil: [ 
+		currentFASTEntity type: (self clone createTypeName: aNewClass name) ].
+
+	aNewClass declarations do: [ :method | 
+		currentFASTEntity declarations add: (self clone accept: method) ].
 	^ currentFASTEntity
 ]
 
