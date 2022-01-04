@@ -8,8 +8,8 @@ new Patate()
 Class {
 	#name : #FASTJavaNewExpression,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTReceiver + FASTTExpression + FASTTWithArguments',
-	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTExpression + FASTTWithArguments',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner'
 	],

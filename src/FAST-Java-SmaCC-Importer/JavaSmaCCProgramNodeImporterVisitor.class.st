@@ -728,8 +728,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 		ifNotNil: [ 
 		currentFASTEntity type: (self clone accept: aNewClass type) ]
 		ifNil: [ 
-		currentFASTEntity type: (self clone createTypeName: aNewClass name) ].
-
+			currentFASTEntity type: (self clone createTypeName: aNewClass name).
+			currentFASTEntity receiver: (self clone accept: aNewClass primary) ].
 	aNewClass declarations do: [ :method | 
 		currentFASTEntity declarations add: (self clone accept: method) ].
 	^ currentFASTEntity

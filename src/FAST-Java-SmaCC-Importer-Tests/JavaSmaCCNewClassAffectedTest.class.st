@@ -54,3 +54,10 @@ JavaSmaCCNewClassAffectedTest >> testNewParent [
 JavaSmaCCNewClassAffectedTest >> testNumberOfMethod [
 	self assert: methodNew allFASTJavaMethodEntity size equals: 3
 ]
+
+{ #category : #tests }
+JavaSmaCCNewClassAffectedTest >> testNumberOfNewClass [
+	self
+		assert: (methodNew allWithType: FASTJavaNewClassExpression) size
+		equals: 1
+]
