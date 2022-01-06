@@ -6,5 +6,11 @@ SmalltalkCISpec {
       #load : [ 'smacc', 'visitor' ],
       #platforms : [ #pharo ]
     }
-  ]
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'FAST-Java.*' ],
+      #format : #lcov
+    }
+  }
 }
