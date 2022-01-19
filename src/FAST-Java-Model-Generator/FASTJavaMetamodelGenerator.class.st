@@ -771,6 +771,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaNewExpression --|> tWithReceiver.
 
 	javaNewClassExpression --|> javaNewExpression.
+	javaNewClassExpression --|> tWithDeclarations.
 
 	javaNewArray --|> javaNewExpression.
 	javaConditionalExpression --|> tExpression.
@@ -971,8 +972,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaWhileStatement property: #body) comment: 'A statement to be evaluated in the loop')
 		<>- ((tStatement property: #whileBodyOwner) comment: 'I am the body of the do').
 
-	((javaNewClassExpression property: #declarations) comment: 'The methods defined in the class')
-		<>-* ((tScopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)').
+	"replaced by javaNewClassExpression --|> tWithDeclaration "
+	"((javaNewClassExpression property: #declarations) comment: 'The methods defined in the class')
+		<>-* ((tScopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)')."
 
 	((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity')
 		<>- ((tStatementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.').

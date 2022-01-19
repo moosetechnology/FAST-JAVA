@@ -17,6 +17,8 @@ new SecureAsyncCallback<Void>() {
 Class {
 	#name : #FASTJavaNewClassExpression,
 	#superclass : #FASTJavaNewExpression,
+	#traits : 'FASTJavaTWithDeclarations',
+	#classTraits : 'FASTJavaTWithDeclarations classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -27,35 +29,4 @@ FASTJavaNewClassExpression class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #adding }
-FASTJavaNewClassExpression >> addDeclaration: anObject [
-	<generated>
-	^ self declarations add: anObject
-]
-
-{ #category : #accessing }
-FASTJavaNewClassExpression >> declarations [
-	"Relation named: #declarations type: #FASTTScopableEntity opposite: #newClassOwner"
-
-	<generated>
-	<FMComment: 'The methods defined in the class'>
-	<derived>
-	<FMProperty: #declarations type: #FASTTScopableEntity opposite: #newClassOwner>
-	^ self attributeAt: #declarations ifAbsentPut: [ FMMultivalueLink on: self opposite: #newClassOwner: ]
-]
-
-{ #category : #accessing }
-FASTJavaNewClassExpression >> declarations: anObject [
-
-	<generated>
-	self declarations value: anObject
-]
-
-{ #category : #navigation }
-FASTJavaNewClassExpression >> declarationsGroup [
-	<generated>
-	<navigation: 'Declarations'>
-	^ MooseSpecializedGroup withAll: self declarations asSet
 ]
