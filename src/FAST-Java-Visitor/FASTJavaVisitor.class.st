@@ -140,6 +140,11 @@ FASTJavaVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDecl
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration [
+	^ self visitFASTTStatement: aFASTJavaEnumDeclaration
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 	^ self visitFASTTExpression: aFASTJavaFieldAccess
 ]
