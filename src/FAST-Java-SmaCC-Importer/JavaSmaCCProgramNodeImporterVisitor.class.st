@@ -409,6 +409,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitEnumDeclaration: anEnumDeclaration [
+
+	self create: FASTJavaEnumDeclaration from: anEnumDeclaration.
+	anEnumDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
+	anEnumDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
+	anEnumDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	currentFASTEntity name: anEnumDeclaration name value.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionStatement [
 	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
 	self generalVisitActionForNodeEntity: anExpressionStatement.

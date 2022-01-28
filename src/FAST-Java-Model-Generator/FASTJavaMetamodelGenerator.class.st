@@ -105,7 +105,8 @@ Class {
 		'tExpressionStatement',
 		'tWithParameters',
 		'tReturnStatement',
-		'tBooleanLiteral'
+		'tBooleanLiteral',
+		'javaEnumDeclaration'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -285,6 +286,22 @@ void newMethod() {
 		;
 		
 	};
+}'
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaEnumDeclaration [
+	^ 'I represent an enum declaration
+example
+
+public enum MyEnum {
+	
+	HELLO;
+	
+	int oneDeclaration;
+	
+	void methodDeclaration(){
+	}
 }'
 ]
 
@@ -641,6 +658,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaEmptyMethodDeclaration := builder newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
 	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
 	javaClassDeclaration := builder newClassNamed: #ClassDeclaration comment: self commentForJavaClassDeclaration.
+	javaEnumDeclaration := builder newClassNamed: #EnumDeclaration comment: self commentForJavaEnumDeclaration.
 		
 	javaModifier := builder newClassNamed: #Modifier comment: self commentForJavaModifier.	
 	
@@ -733,6 +751,12 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> tNamedEntity.
 	javaClassDeclaration --|> #THasImmediateSource.
 	javaClassDeclaration withPrecedenceOf: #THasImmediateSource.
+	
+	javaEnumDeclaration  --|> tStatement.
+	javaEnumDeclaration  --|> tDeclaration.
+	javaEnumDeclaration  --|> tWithDeclarations.
+	javaEnumDeclaration  --|> tWithModifiers.
+	javaEnumDeclaration  --|> tNamedEntity.
 
 	javaMethodInvocation --|> tExpression.
 	javaMethodInvocation --|> #TWithArguments.
