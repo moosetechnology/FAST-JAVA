@@ -106,7 +106,8 @@ Class {
 		'tWithParameters',
 		'tReturnStatement',
 		'tBooleanLiteral',
-		'javaEnumDeclaration'
+		'javaEnumDeclaration',
+		'javaInterfaceDeclaration'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -387,6 +388,21 @@ FASTJavaMetamodelGenerator >> commentForJavaIntegerLiteral [
 ]
 
 { #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaInterfaceDeclaration [
+	^ 'I represent an interface declaration
+example
+
+```java
+public interface MyInterface {
+
+    public static final String CODE = "SEME";
+
+}
+```
+'
+]
+
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaLabeledCaseStatement [
 	^ 'I represent a Labeled case
 	
@@ -659,6 +675,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
 	javaClassDeclaration := builder newClassNamed: #ClassDeclaration comment: self commentForJavaClassDeclaration.
 	javaEnumDeclaration := builder newClassNamed: #EnumDeclaration comment: self commentForJavaEnumDeclaration.
+	javaInterfaceDeclaration := builder newClassNamed: #InterfaceDeclaration comment: self commentForJavaInterfaceDeclaration.
 		
 	javaModifier := builder newClassNamed: #Modifier comment: self commentForJavaModifier.	
 	
@@ -757,7 +774,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaEnumDeclaration  --|> tWithDeclarations.
 	javaEnumDeclaration  --|> tWithModifiers.
 	javaEnumDeclaration  --|> tNamedEntity.
-
+	
+	javaInterfaceDeclaration --|> tStatement.
+	javaInterfaceDeclaration  --|> tDeclaration.
+	javaInterfaceDeclaration  --|> tWithDeclarations.
+	javaInterfaceDeclaration  --|> tWithModifiers.
+	javaInterfaceDeclaration  --|> tNamedEntity.
+	
 	javaMethodInvocation --|> tExpression.
 	javaMethodInvocation --|> #TWithArguments.
 	javaMethodInvocation --|> tWithReceiver.

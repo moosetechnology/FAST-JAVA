@@ -210,6 +210,11 @@ FASTJavaVisitor >> visitFASTJavaIntegerLiteral: aFASTJavaIntegerLiteral [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDeclaration [
+	^ self visitFASTTStatement: aFASTJavaInterfaceDeclaration
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatement [
 	^ self visitFASTJavaCaseStatement: aFASTJavaLabeledCaseStatement
 ]
