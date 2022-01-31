@@ -780,6 +780,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInterfaceDeclaration  --|> tWithDeclarations.
 	javaInterfaceDeclaration  --|> tWithModifiers.
 	javaInterfaceDeclaration  --|> tNamedEntity.
+	javaInterfaceDeclaration --|> #THasImmediateSource.
+	javaInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
 	
 	javaMethodInvocation --|> tExpression.
 	javaMethodInvocation --|> #TWithArguments.

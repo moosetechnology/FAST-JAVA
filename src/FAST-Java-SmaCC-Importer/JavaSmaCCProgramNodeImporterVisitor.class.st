@@ -127,14 +127,20 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
+
 	| ast |
 	[ ast := JavaParser parse: aCodeString ]
 		on: Error
 		do: [ :err | 
 			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
 			err signal ].
-	[ self accept: ast.
-	((self model allWithType: FASTJavaClassDeclaration) detect: [ :classDeclaration | classDeclaration parentNode isNil ]) source: ast completeSource asString ]
+	[ 
+	self accept: ast.
+	((self model allWithSubTypesOfAny: { 
+			  FASTJavaClassDeclaration.
+			  FASTJavaInterfaceDeclaration }) detect: [ :classDeclaration | 
+		 classDeclaration parentNode isNil ]) source:
+		ast completeSource asString ]
 		on: Error
 		do: [ :err | 
 			('FAST Err parsing: ' , String crlf , aCodeString) record.
