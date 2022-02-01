@@ -26,6 +26,18 @@ Metacello new
   load: 'all'
 ```
 
+## Create a FAST-Java Model based on java string
+
+Thanks to the [Smacc Project](https://github.com/j-brant/SmaCC) it is easy to parse Java methods and classes.
+We used a visitor on the parsed java string to create a FAST-Java model.
+
+If you need to create a FAST-Java model from a method or class, the easiest way is thus to perform:
+
+```st
+JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString: 'void hello() {
+    // My method string
+}'
+```
 
 ## UML
 
