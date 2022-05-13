@@ -5,8 +5,9 @@ Class {
 	#name : #FASTJavaTypeExpression,
 	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
+		'#javaClassDeclarationInterfaceOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
 		'#javaClassDeclarationSuperclassOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
-		'#javaClassDeclarationInterfaceOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces'
+		'#javaInterfaceDeclarationInterfaceOwnver => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -67,4 +68,28 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnverGroup [
 	<generated>
 	<navigation: 'JavaClassDeclarationSuperclassOwnver'>
 	^ MooseSpecializedGroup with: self javaClassDeclarationSuperclassOwnver
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnver [
+	"Relation named: #javaInterfaceDeclarationInterfaceOwnver type: #FASTJavaInterfaceDeclaration opposite: #interfaces"
+
+	<generated>
+	<FMComment: 'The interface that own me'>
+	<container>
+	^ javaInterfaceDeclarationInterfaceOwnver
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnver: anObject [
+
+	<generated>
+	javaInterfaceDeclarationInterfaceOwnver := anObject
+]
+
+{ #category : #navigation }
+FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnverGroup [
+	<generated>
+	<navigation: 'JavaInterfaceDeclarationInterfaceOwnver'>
+	^ MooseSpecializedGroup with: self javaInterfaceDeclarationInterfaceOwnver
 ]

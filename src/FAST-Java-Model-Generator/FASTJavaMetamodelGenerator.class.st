@@ -1075,6 +1075,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		<>- ((javaTypeExpression property: #javaClassDeclarationSuperclassOwnver) comment: 'The class that own me').
 	((javaClassDeclaration property: #interfaces) comment: 'My superclass')
 		<>-* ((javaTypeExpression property: #javaClassDeclarationInterfaceOwnver) comment: 'The class that own me').
+		
+	((javaInterfaceDeclaration property: #interfaces) comment: 'My super interfaces')
+		<>-* ((javaTypeExpression property: #javaInterfaceDeclarationInterfaceOwnver) comment: 'The interface that own me').
 
 	((tWithDeclarations property: #declarations) comment: 'The element I declared')
 		<>-* ((tDeclaration property: #javaDeclarationOwner) comment: 'The element that declared me').
