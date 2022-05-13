@@ -9,8 +9,8 @@ ex:
 Class {
 	#name : #FASTJavaInfixOperation,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTTExpression',
-	#classTraits : 'FASTTExpression classTrait',
+	#traits : 'FASTJavaTReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty'
 	],
