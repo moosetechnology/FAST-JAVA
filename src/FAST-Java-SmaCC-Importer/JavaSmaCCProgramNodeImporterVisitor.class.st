@@ -149,6 +149,24 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstractMethodDeclaration [
+
+	currentFASTEntity := (self
+		                      create: FASTJavaMethodEntity
+		                      from: anAbstractMethodDeclaration)
+		                     name:
+			                     anAbstractMethodDeclaration declarator name
+				                     value;
+		                     yourself.
+	self generalVisitActionForNodeEntity: anAbstractMethodDeclaration.
+	anAbstractMethodDeclaration declarator parameters do: [ :parameter | 
+		currentFASTEntity addParameter: (self clone accept: parameter) ].
+	anAbstractMethodDeclaration modifiers do: [ :modifier | 
+		currentFASTEntity addModifier: (self clone accept: modifier) ].
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 	self create: FASTJavaAnnotation from: anAnnotation.
 	currentFASTEntity expression: (self clone accept: anAnnotation name).
