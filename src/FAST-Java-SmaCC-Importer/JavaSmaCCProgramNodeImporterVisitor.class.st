@@ -972,7 +972,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 	self generalVisitActionForNodeEntity: aSwitchStatement.
 	aSwitchStatement block statementGroups do: [ :aStatementGroup |
 		 currentFASTEntity cases add: (self clone accept: aStatementGroup) ].
-	 
+	currentFASTEntity condition: (self clone accept: aSwitchStatement expression).
 	^ currentFASTEntity
 ]
 

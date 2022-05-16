@@ -587,6 +587,33 @@ FASTTExpression >> javaVariableDeclaratorExpressionOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTTExpression >> switchConditionOwner [
+	"Relation named: #switchConditionOwner type: #FASTJavaSwitchStatement opposite: #condition"
+
+	<generated>
+	<FMComment: 'I reprensent a condition for my owner'>
+	<container>
+	<derived>
+	<FMProperty: #switchConditionOwner type: #FASTJavaSwitchStatement opposite: #condition>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #switchConditionOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTTExpression >> switchConditionOwner: anObject [
+
+	<generated>
+	(self attributeAt: #switchConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self switchConditionOwner.
+		self attributeAt: #switchConditionOwner put: anObject.
+		otherSide condition: nil ]
+	ifNotNil: [ 
+		self attributeAt: #switchConditionOwner put: anObject.
+		anObject condition: self ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTTExpression >> whileConditionOwner [
 	"Relation named: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition"
 

@@ -59,6 +59,15 @@ JavaSmaCCSwitchTest >> testLabeledValue [
 ]
 
 { #category : #tests }
+JavaSmaCCSwitchTest >> testSwitchCondition [
+
+	| switchStatement |
+	switchStatement := (switchMethod mooseModel allWithType:
+		                    FASTJavaSwitchStatement) anyOne.
+	self assert: switchStatement condition class equals: FASTJavaVariableExpression
+]
+
+{ #category : #tests }
 JavaSmaCCSwitchTest >> testSwitchSize [
 	self assert: (switchMethod mooseModel allWithType: FASTJavaSwitchStatement) size equals: 1 
 ]

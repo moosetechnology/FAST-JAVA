@@ -919,181 +919,324 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineRelations [
+
 	super defineRelations.
-	((javaArrayInitializer property: #initializers) comment: 'My initializers')
-		<>-* ((tExpression property: #javaArrayInitializers) comment: 'The owner of the expression').
+	((javaArrayInitializer property: #initializers) comment:
+		 'My initializers')
+	<>-* ((tExpression property: #javaArrayInitializers) comment:
+			 'The owner of the expression').
 
-	((javaVarDeclStatement property: #declarators) comment: 'The declarators for the type')
-		<>-* ((javaVariableDeclarator property: #varDeclOwner) comment: 'The owner of the declarator').
+	((javaVarDeclStatement property: #declarators) comment:
+		 'The declarators for the type')
+	<>-* ((javaVariableDeclarator property: #varDeclOwner) comment:
+			 'The owner of the declarator').
 
-	((javaSwitchStatement property: #cases) comment: 'The cases of the switch statements')
-		<>-* ((javaCaseStatement property: #javaCaseStatementSwitchOwner) comment: 'javaSwitch owner').
+	((javaSwitchStatement property: #cases) comment:
+		 'The cases of the switch statements')
+	<>-*
+		((javaCaseStatement property: #javaCaseStatementSwitchOwner) 
+			 comment: 'javaSwitch owner').
 
-	((javaVariableDeclarator property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
-		<>- ((tExpression property: #javaVariableDeclaratorExpressionOwner) comment: 'The javaVariableDeclarator owner (if possible)').
-	((javaVariableDeclarator property: #variable) comment: 'Variable that s being declared')
-		<>- ((javaVariableExpression property: #javaVariableDeclaratorOwner) comment: 'The javaVariableDeclarator owner (if possible)').
+	((javaVariableDeclarator property: #expression) comment:
+		 'Expression that s being assigned upon declaration to the var')
+	<>- ((tExpression property: #javaVariableDeclaratorExpressionOwner) 
+			 comment: 'The javaVariableDeclarator owner (if possible)').
+	((javaVariableDeclarator property: #variable) comment:
+		 'Variable that s being declared')
+	<>-
+		((javaVariableExpression property: #javaVariableDeclaratorOwner) 
+			 comment: 'The javaVariableDeclarator owner (if possible)').
 
-	((javaAssignementExpression property: #expression) comment: 'Expression that s being assigned upon declaration to the var')
-		<>- ((tExpression property: #javaAssignementExpressionOwner) comment: 'The javaAssignementExpression owner (if possible)').
+	((javaAssignementExpression property: #expression) comment:
+		 'Expression that s being assigned upon declaration to the var')
+	<>-
+		((tExpression property: #javaAssignementExpressionOwner) comment:
+			 'The javaAssignementExpression owner (if possible)').
 
-	((javaCastExpression property: #expression) comment: 'The expression to cast')
-		<>- ((tExpression property: #javaCastExpressionOwner) comment: 'The javaCastExpression owner (if possible)').
-	((javaCastExpression property: #type) comment: 'The type in witch the expression will be cast')
-		<>- ((javaVariableExpression property: #javaCastExpressionTypeOwner) comment: 'The javaCastExpression owner (if possible)').
+	((javaCastExpression property: #expression) comment:
+		 'The expression to cast')
+	<>- ((tExpression property: #javaCastExpressionOwner) comment:
+			 'The javaCastExpression owner (if possible)').
+	((javaCastExpression property: #type) comment:
+		 'The type in witch the expression will be cast')
+	<>-
+		((javaVariableExpression property: #javaCastExpressionTypeOwner) 
+			 comment: 'The javaCastExpression owner (if possible)').
 
 	((javaClassProperty property: #type) comment: 'The owner type')
-		<>- ((javaVariableExpression property: #javaClassPropertyOwner) comment: 'The javaClassProperty owner (if possible)').
+	<>-
+		((javaVariableExpression property: #javaClassPropertyOwner) 
+			 comment: 'The javaClassProperty owner (if possible)').
 
 	"Replaced by tWithReceiver"
 	"((javaMethodInvocation property: #receiver) comment: 'The expression whitch will execute this invocation')
 		<>- ((expression property: #javaMethodInvocationOwner) comment: 'The javaMethodInvocation owner (if possible)')."
 
-	((javaUnaryExpression property: #expression) comment: 'The affected expression')
-		<>- ((tExpression property: #javaUnaryExpressionOwner) comment: 'The javaUnaryExpression owner (if possible)').
+	((javaUnaryExpression property: #expression) comment:
+		 'The affected expression')
+	<>- ((tExpression property: #javaUnaryExpressionOwner) comment:
+			 'The javaUnaryExpression owner (if possible)').
 
 	((javaNewExpression property: #type) comment: 'The type of the array')
-		<>- ((javaVariableExpression property: #javaNewExpressionOwner) comment: 'The javaNewExpression owner (if possible)').
+	<>-
+		((javaVariableExpression property: #javaNewExpressionOwner) 
+			 comment: 'The javaNewExpression owner (if possible)').
 
-	((javaArrayAccess property: #expression) comment: 'The accessed index')
-		<>- ((tExpression property: #javaArrayAccessOwner) comment: 'The javaArrayAccess owner (if possible)').
+	((javaArrayAccess property: #expression) comment:
+		 'The accessed index')
+	<>- ((tExpression property: #javaArrayAccessOwner) comment:
+			 'The javaArrayAccess owner (if possible)').
 	((javaArrayAccess property: #array) comment: 'Name of accessed field')
-		<>- ((tExpression property: #javaArrayArrayAccessOwner) comment: 'The javaArrayArrayAccess owner (if possible)').
+	<>- ((tExpression property: #javaArrayArrayAccessOwner) comment:
+			 'The javaArrayArrayAccess owner (if possible)').
 
 	((javaOuterThis property: #type) comment: 'The accessed type')
-		<>- ((javaVariableExpression property: #javaOuterThisOwner) comment: 'The javaOuterThis owner (if possible)').
+	<>- ((javaVariableExpression property: #javaOuterThisOwner) comment:
+			 'The javaOuterThis owner (if possible)').
 
-	((javaThrowStatement property: #expression) comment: 'The throwed element')
-		<>- ((tExpression property: #javaThrowStatementOwner) comment: 'The javaThrowStatement owner (if possible)').
+	((javaThrowStatement property: #expression) comment:
+		 'The throwed element')
+	<>- ((tExpression property: #javaThrowStatementOwner) comment:
+			 'The javaThrowStatement owner (if possible)').
 
-	((javaLabeledCaseStatement property: #label) comment: 'The label of the case statement')
-		<>- ((tExpression property: #javaLabeledCaseStatementOwner) comment: 'The javaLabeledCaseStatement owner (if possible)').
+	((javaLabeledCaseStatement property: #label) comment:
+		 'The label of the case statement')
+	<>- ((tExpression property: #javaLabeledCaseStatementOwner) comment:
+			 'The javaLabeledCaseStatement owner (if possible)').
 
-	((javaForEachStatement property: #body) comment: 'The body of the For Each statement')
-		<>- ((tStatement property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)').
-	((javaForEachStatement property: #list) comment: 'The list the for each statement iterate on')
-		<>- ((tExpression property: #javaForEachStatementOwner) comment: 'The javaForEachStatement owner (if possible)').
-	((javaForEachStatement property: #fieldname) comment: 'The name of the created local variable')
-		<>- ((javaVariableExpression property: #javaForEachStatementFieldNameOwner) comment: 'The javaForEachStatement owner (if possible)').
-	((javaForEachStatement property: #type) comment: 'The name of the type of the created local variable')
-		<>- ((javaVariableExpression property: #javaForEachStatementTypeOwner) comment: 'The javaForEachStatement owner (if possible)').
+	((javaForEachStatement property: #body) comment:
+		 'The body of the For Each statement')
+	<>- ((tStatement property: #javaForEachStatementOwner) comment:
+			 'The javaForEachStatement owner (if possible)').
+	((javaForEachStatement property: #list) comment:
+		 'The list the for each statement iterate on')
+	<>- ((tExpression property: #javaForEachStatementOwner) comment:
+			 'The javaForEachStatement owner (if possible)').
+	((javaForEachStatement property: #fieldname) comment:
+		 'The name of the created local variable')
+	<>-
+		((javaVariableExpression property:
+			  #javaForEachStatementFieldNameOwner) comment:
+			 'The javaForEachStatement owner (if possible)').
+	((javaForEachStatement property: #type) comment:
+		 'The name of the type of the created local variable')
+	<>-
+		((javaVariableExpression property: #javaForEachStatementTypeOwner) 
+			 comment: 'The javaForEachStatement owner (if possible)').
 
-	((javaCatchPartStatement property: #body) comment: 'The body of the Catch part statement')
-		<>- ((tStatement property: #javaCatchPartStatementOwner) comment: 'The javaCatchPartStatementOwner owner (if possible)').
-	((javaCatchPartStatement property: #parameter) comment: 'The parameter of the catch part')
-		<>- ((javaVariableExpression property: #javaCatchParameterOwnler) comment: 'The javaCatchPartParameterOwner owner (if possible)').
+	((javaCatchPartStatement property: #body) comment:
+		 'The body of the Catch part statement')
+	<>- ((tStatement property: #javaCatchPartStatementOwner) comment:
+			 'The javaCatchPartStatementOwner owner (if possible)').
+	((javaCatchPartStatement property: #parameter) comment:
+		 'The parameter of the catch part')
+	<>- ((javaVariableExpression property: #javaCatchParameterOwnler) 
+			 comment: 'The javaCatchPartParameterOwner owner (if possible)').
 
-	((javaTryCatch property: #try) comment: 'I represent the ''try'' part of the TryCatch Statement')
-		<>- ((tStatement property: #javaTryCatchOwner) comment: 'The javaTryCatch owner (if possible)').
-	((javaTryCatch property: #catches) comment: 'I contains all the catch statements') <>-* ((javaCatchPartStatement property: #tryOwner) comment: 'The try owner').
+	((javaTryCatch property: #try) comment:
+		 'I represent the ''try'' part of the TryCatch Statement')
+	<>- ((tStatement property: #javaTryCatchOwner) comment:
+			 'The javaTryCatch owner (if possible)').
+	((javaTryCatch property: #catches) comment:
+		 'I contains all the catch statements')
+	<>-*
+	((javaCatchPartStatement property: #tryOwner) comment:
+		 'The try owner').
 
-	((javaIfStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((tExpression property: #ifConditionOwner) comment: 'I reprensent a condition for my owner').
-	((javaIfStatement property: #elsePart) comment: 'else part') <>- ((tStatement property: #ifElsePartOwner) comment: 'The if owner (if possible)').
-	((javaIfStatement property: #thenPart) comment: 'then part') <>- ((tStatement property: #ifThenPartOwner) comment: 'The if owner (if possible)').
+	((javaIfStatement property: #condition) comment:
+		 'The condition of the statement')
+	<>- ((tExpression property: #ifConditionOwner) comment:
+			 'I reprensent a condition for my owner').
+	((javaIfStatement property: #elsePart) comment: 'else part')
+	<>- ((tStatement property: #ifElsePartOwner) comment:
+			 'The if owner (if possible)').
+	((javaIfStatement property: #thenPart) comment: 'then part')
+	<>- ((tStatement property: #ifThenPartOwner) comment:
+			 'The if owner (if possible)').
 
-	((javaConditionalExpression property: #condition) comment: 'The condition of the statement')
-		<>- ((tExpression property: #conditionalConditionOwner) comment: 'I reprensent a condition for my owner').
+	((javaConditionalExpression property: #condition) comment:
+		 'The condition of the statement')
+	<>- ((tExpression property: #conditionalConditionOwner) comment:
+			 'I reprensent a condition for my owner').
 	((javaConditionalExpression property: #elsePart) comment: 'else part')
-		<>- ((tExpression property: #conditionalElsePartOwner) comment: 'The if owner (if possible)').
+	<>- ((tExpression property: #conditionalElsePartOwner) comment:
+			 'The if owner (if possible)').
 	((javaConditionalExpression property: #thenPart) comment: 'then part')
-		<>- ((tExpression property: #conditionalThenPartOwner) comment: 'The if owner (if possible)').
+	<>- ((tExpression property: #conditionalThenPartOwner) comment:
+			 'The if owner (if possible)').
 
 	((javaInfixOperation property: #leftOperand) comment: 'leftOperand')
-		<>- ((tExpression property: #infixOperationLeftOperandOwner) comment: 'The left operand (if possible)').
+	<>-
+		((tExpression property: #infixOperationLeftOperandOwner) comment:
+			 'The left operand (if possible)').
 	((javaInfixOperation property: #rightOperand) comment: 'rightOperand')
-		<>- ((tExpression property: #infixOperationRightOperandOwner) comment: 'The right operand (if possible)').
+	<>-
+		((tExpression property: #infixOperationRightOperandOwner) comment:
+			 'The right operand (if possible)').
 
-	((javaForStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((tExpression property: #forConditionOwner) comment: 'I reprensent a condition for my owner').
-	((javaForStatement property: #incrementor) comment: 'Expression evaluated at the end of each loop')
-		<>- ((tStatement property: #forIncrementorOwner) comment: 'I am the incrementor of the for').
-	((javaForStatement property: #initializer) comment: 'Expression used at initialization phase of a for loop')
-		<>- ((tStatement property: #forIninitializerOwner) comment: 'I am the initializer of the for').
-	((javaForStatement property: #body) comment: 'A statement to be evaluated in the loop')
-		<>- ((tStatement property: #forBodyOwner) comment: 'I am the body of the for').
+	((javaForStatement property: #condition) comment:
+		 'The condition of the statement')
+	<>- ((tExpression property: #forConditionOwner) comment:
+			 'I reprensent a condition for my owner').
+	((javaForStatement property: #incrementor) comment:
+		 'Expression evaluated at the end of each loop')
+	<>- ((tStatement property: #forIncrementorOwner) comment:
+			 'I am the incrementor of the for').
+	((javaForStatement property: #initializer) comment:
+		 'Expression used at initialization phase of a for loop')
+	<>- ((tStatement property: #forIninitializerOwner) comment:
+			 'I am the initializer of the for').
+	((javaForStatement property: #body) comment:
+		 'A statement to be evaluated in the loop')
+	<>- ((tStatement property: #forBodyOwner) comment:
+			 'I am the body of the for').
 
-	((javaDoWhileStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((tExpression property: #doConditionOwner) comment: 'I reprensent a condition for my owner').
-	((javaDoWhileStatement property: #body) comment: 'A statement to be evaluated in the loop')
-		<>- ((tStatement property: #doBodyOwner) comment: 'I am the body of the do').
+	((javaSwitchStatement property: #condition) comment:
+		 'The condition of the statement')
+	<>- ((tExpression property: #switchConditionOwner) comment:
+			 'I reprensent a condition for my owner').
 
-	((javaWhileStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((tExpression property: #whileConditionOwner) comment: 'I reprensent a condition for my owner').
-	((javaWhileStatement property: #body) comment: 'A statement to be evaluated in the loop')
-		<>- ((tStatement property: #whileBodyOwner) comment: 'I am the body of the do').
+	((javaDoWhileStatement property: #condition) comment:
+		 'The condition of the statement')
+	<>- ((tExpression property: #doConditionOwner) comment:
+			 'I reprensent a condition for my owner').
+	((javaDoWhileStatement property: #body) comment:
+		 'A statement to be evaluated in the loop')
+	<>- ((tStatement property: #doBodyOwner) comment:
+			 'I am the body of the do').
+
+	((javaWhileStatement property: #condition) comment:
+		 'The condition of the statement')
+	<>- ((tExpression property: #whileConditionOwner) comment:
+			 'I reprensent a condition for my owner').
+	((javaWhileStatement property: #body) comment:
+		 'A statement to be evaluated in the loop')
+	<>- ((tStatement property: #whileBodyOwner) comment:
+			 'I am the body of the do').
 
 	"replaced by javaNewClassExpression --|> tWithDeclaration "
 	"((javaNewClassExpression property: #declarations) comment: 'The methods defined in the class')
 		<>-* ((tScopableEntity property: #newClassOwner) comment: 'I may be in a new class (ex. anonymous one)')."
 
-	((javaInitializer property: #statementBlock) comment: 'Statements block of the behavioural entity')
-		<>- ((tStatementBlock property: #javaInitializerOwner) comment: 'Behavioural entity containing the statement block.').
+	((javaInitializer property: #statementBlock) comment:
+		 'Statements block of the behavioural entity')
+	<>- ((tStatementBlock property: #javaInitializerOwner) comment:
+			 'Behavioural entity containing the statement block.').
 
-	((javaNewArray property: #initializer) comment: 'The initializer of the array')
-		<>- ((tExpression property: #javaNewArrayInitialOwner) comment: 'I belong to a new array initializations').
+	((javaNewArray property: #initializer) comment:
+		 'The initializer of the array')
+	<>- ((tExpression property: #javaNewArrayInitialOwner) comment:
+			 'I belong to a new array initializations').
 
-	((javaLambdaExpression property: #expression) comment: 'Expression to be executed as part of the lambda.')
-		<>- ((tEntity property: #javaLambdaExpressionOwner) comment: 'The expression owner (if possible)').
+	((javaLambdaExpression property: #expression) comment:
+		 'Expression to be executed as part of the lambda.')
+	<>- ((tEntity property: #javaLambdaExpressionOwner) comment:
+			 'The expression owner (if possible)').
 	"((javaLambdaExpression property: #expression) comment: 'Statement block to be executed as part of the lambda')
 		<>- ((statementBlock property: #javaLambdaExpressionOwner) comment: 'The statementBlock owner (if possible)')."
 	"((javaLambdaExpression property: #parameters) comment: 'The parameters of the lambda')
 		<>-* ((javaVariableExpression property: #javaLambdaParameterOwner) comment: 'The lambda parameters owner (if possible)')."
 
-	((javaMethodReference property: #receiver) comment: 'The method of the reference')
-		<>- ((javaVariableExpression property: #javaMethodReferenceOwner) comment: 'The owner of the method reference (if possible)').
+	((javaMethodReference property: #receiver) comment:
+		 'The method of the reference')
+	<>- ((javaVariableExpression property: #javaMethodReferenceOwner) 
+			 comment: 'The owner of the method reference (if possible)').
 
-	((javaSynchronizedStatement property: #expression) comment: 'The instance on which the statement block is synchronized')
-		<>- ((tExpression property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)').
-	((javaSynchronizedStatement property: #block) comment: 'The block that is synchronized')
-		<>- ((tStatementBlock property: #javaSynchronizedStatementOwner) comment: 'The owner of the synchronized block (if possible)').
+	((javaSynchronizedStatement property: #expression) comment:
+		 'The instance on which the statement block is synchronized')
+	<>-
+		((tExpression property: #javaSynchronizedStatementOwner) comment:
+			 'The owner of the synchronized block (if possible)').
+	((javaSynchronizedStatement property: #block) comment:
+		 'The block that is synchronized')
+	<>-
+		((tStatementBlock property: #javaSynchronizedStatementOwner) 
+			 comment: 'The owner of the synchronized block (if possible)').
 
 	((javaMethodEntity property: #type) comment: 'The type of the method')
-		<>- ((javaVariableExpression property: #javaMethodTypeOwner) comment: 'The variable expression owner (if possible)').
+	<>-
+		((javaVariableExpression property: #javaMethodTypeOwner) comment:
+			 'The variable expression owner (if possible)').
 
-	((javaParameterExpression property: #type) comment: 'The type of the parameter')
-		<>- ((javaVariableExpression property: #javaParameterTypeOwner) comment: 'The variable expression owner (if possible)').
-	((javaParameterExpression property: #variable) comment: 'parameter variable')
-		<>- ((javaVariableExpression property: #javaParameterVariableOwner) comment: 'The variable expression owner (if possible)').
+	((javaParameterExpression property: #type) comment:
+		 'The type of the parameter')
+	<>-
+		((javaVariableExpression property: #javaParameterTypeOwner) 
+			 comment: 'The variable expression owner (if possible)').
+	((javaParameterExpression property: #variable) comment:
+		 'parameter variable')
+	<>- ((javaVariableExpression property: #javaParameterVariableOwner) 
+			 comment: 'The variable expression owner (if possible)').
 
-	((javaVarDeclStatement property: #type) comment: 'The type of the declared variables')
-		<>- ((javaVariableExpression property: #javaVarDeclTypeOwner) comment: 'The variable expression owner (if possible)').
+	((javaVarDeclStatement property: #type) comment:
+		 'The type of the declared variables')
+	<>-
+		((javaVariableExpression property: #javaVarDeclTypeOwner) comment:
+			 'The variable expression owner (if possible)').
 
-	((javaArrayTypeExpression property: #baseType) comment: 'The type of the array')
-		<>- ((tExpression property: #javaArrayTypeNameOwner) comment: 'The variable expression owner (if possible)').
+	((javaArrayTypeExpression property: #baseType) comment:
+		 'The type of the array')
+	<>- ((tExpression property: #javaArrayTypeNameOwner) comment:
+			 'The variable expression owner (if possible)').
 
-	((javaClassTypeExpression property: #typeName) comment: 'The name of the type')
-		<>- ((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment: 'The type expression that own me').
+	((javaClassTypeExpression property: #typeName) comment:
+		 'The name of the type')
+	<>-
+		((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment:
+			 'The type expression that own me').
 
-	((javaQualifiedTypeName property: #namespace) comment: 'The namespace of the name')
-		<>- ((javaTypeName property: #javaTypeNameQualify) comment: 'the name I qualify').
+	((javaQualifiedTypeName property: #namespace) comment:
+		 'The namespace of the name')
+	<>- ((javaTypeName property: #javaTypeNameQualify) comment:
+			 'the name I qualify').
 
-	((javaAssertStatement property: #condition) comment: 'The condition of the statement')
-		<>- ((tExpression property: #assertConditionOwner) comment: 'I reprensent a condition for my owner').
-	((javaAssertStatement property: #message) comment: 'The error message that is raised in case the condition is false')
-		<>- ((javaStringLiteral property: #javaStringAssertStatementOwner) comment: 'the assert that can raised me').
+	((javaAssertStatement property: #condition) comment:
+		 'The condition of the statement')
+	<>- ((tExpression property: #assertConditionOwner) comment:
+			 'I reprensent a condition for my owner').
+	((javaAssertStatement property: #message) comment:
+		 'The error message that is raised in case the condition is false')
+	<>- ((javaStringLiteral property: #javaStringAssertStatementOwner) 
+			 comment: 'the assert that can raised me').
 
-	((javaClassDeclaration property: #superclass) comment: 'My superclass')
-		<>- ((javaTypeExpression property: #javaClassDeclarationSuperclassOwnver) comment: 'The class that own me').
-	((javaClassDeclaration property: #interfaces) comment: 'My superclass')
-		<>-* ((javaTypeExpression property: #javaClassDeclarationInterfaceOwnver) comment: 'The class that own me').
-		
-	((javaInterfaceDeclaration property: #interfaces) comment: 'My super interfaces')
-		<>-* ((javaTypeExpression property: #javaInterfaceDeclarationInterfaceOwnver) comment: 'The interface that own me').
+	((javaClassDeclaration property: #superclass) comment:
+		 'My superclass')
+	<>-
+		((javaTypeExpression property: #javaClassDeclarationSuperclassOwnver) 
+			 comment: 'The class that own me').
+	((javaClassDeclaration property: #interfaces) comment:
+		 'My superclass')
+	<>-*
+		((javaTypeExpression property: #javaClassDeclarationInterfaceOwnver) 
+			 comment: 'The class that own me').
 
-	((tWithDeclarations property: #declarations) comment: 'The element I declared')
-		<>-* ((tDeclaration property: #javaDeclarationOwner) comment: 'The element that declared me').
+	((javaInterfaceDeclaration property: #interfaces) comment:
+		 'My super interfaces') <>-* ((javaTypeExpression property:
+		  #javaInterfaceDeclarationInterfaceOwnver) comment:
+		 'The interface that own me').
 
-	((tWithModifiers property: #modifiers) comment: 'My modifiers') <>-* ((tModifier property: #javaModifierOwner) comment: 'The owner of the modifier').
+	((tWithDeclarations property: #declarations) comment:
+		 'The element I declared')
+	<>-* ((tDeclaration property: #javaDeclarationOwner) comment:
+			 'The element that declared me').
 
-	((javaAnnotationExpression property: #expression) comment: 'My expression (because annotation can be complex)')
-		<>- ((javaVariableExpression property: #javaVariableExpressionOwnerIsAnnotation) comment: 'The annotation that own me').
+	((tWithModifiers property: #modifiers) comment: 'My modifiers')
+	<>-* ((tModifier property: #javaModifierOwner) comment:
+			 'The owner of the modifier').
+
+	((javaAnnotationExpression property: #expression) comment:
+		 'My expression (because annotation can be complex)')
+	<>- ((javaVariableExpression property:
+			  #javaVariableExpressionOwnerIsAnnotation) comment:
+			 'The annotation that own me').
 
 	((tWithAssigneable property: #variable) comment: 'My variable')
-		<>- ((tAssigneable property: #javaVariableAssignementOwner) comment: 'The owner of the modifier').
-		
+	<>- ((tAssigneable property: #javaVariableAssignementOwner) comment:
+			 'The owner of the modifier').
+
 	((tWithReceiver property: #receiver) comment: 'My variable')
-		<>- ((tReceiver property: #receiverOwner) comment: 'The owner of the receiver')
+	<>- ((tReceiver property: #receiverOwner) comment:
+			 'The owner of the receiver')
 ]
 
 { #category : #definition }

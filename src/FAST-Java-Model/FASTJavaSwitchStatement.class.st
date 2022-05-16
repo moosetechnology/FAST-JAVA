@@ -55,3 +55,34 @@ FASTJavaSwitchStatement >> casesGroup [
 	<navigation: 'Cases'>
 	^ MooseSpecializedGroup withAll: self cases asSet
 ]
+
+{ #category : #accessing }
+FASTJavaSwitchStatement >> condition [
+	"Relation named: #condition type: #FASTTExpression opposite: #switchConditionOwner"
+
+	<generated>
+	<FMComment: 'The condition of the statement'>
+	<FMProperty: #condition type: #FASTTExpression opposite: #switchConditionOwner>
+	^ self attributeAt: #condition ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+FASTJavaSwitchStatement >> condition: anObject [
+
+	<generated>
+	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self condition.
+		self attributeAt: #condition put: anObject.
+		otherSide switchConditionOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #condition put: anObject.
+		anObject switchConditionOwner: self ]
+]
+
+{ #category : #navigation }
+FASTJavaSwitchStatement >> conditionGroup [
+	<generated>
+	<navigation: 'Condition'>
+	^ MooseSpecializedGroup with: self condition
+]
