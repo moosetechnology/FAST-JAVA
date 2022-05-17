@@ -23,5 +23,5 @@ JavaSmaCCArrayInitializationTest >> setUp [
 
 { #category : #tests }
 JavaSmaCCArrayInitializationTest >> testNumberOfInitializedElement [
-	
+	self assert: (methodArrayInitialization allWithType: FASTJavaArrayInitializer) first initializers size equals: 2
 ]
