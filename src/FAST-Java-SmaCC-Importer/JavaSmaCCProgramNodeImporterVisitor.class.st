@@ -193,12 +193,26 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayType: anArrayType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaArrayTypeExpression new
-				baseType: (self clone accept: anArrayType baseType);
-				yourself).
-	self generalVisitActionForNodeEntity: anArrayType.
+
+	currentFASTEntity := self addToModel:
+		                     (FASTJavaArrayTypeExpression new
+			                      baseType:
+				                      (self clone accept: anArrayType baseType);
+			                      yourself).
+	currentFASTEntity
+		startPos: anArrayType startPosition;
+		endPos: (anArrayType rightBrackets at: 1) stopPosition.
+
+	"Arrays with more than one dimension are nested"
+	2 to: anArrayType leftBrackets size do: [ :index | 
+		currentFASTEntity := self addToModel:
+			                     (FASTJavaArrayTypeExpression new
+				                      baseType: currentFASTEntity;
+				                      yourself).
+		currentFASTEntity
+			startPos: anArrayType startPosition;
+			endPos: (anArrayType rightBrackets at: index) stopPosition ].
+
 	^ currentFASTEntity
 ]
 
