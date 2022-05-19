@@ -726,6 +726,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineHierarchy [
+
 	"define class hierarchy"
 
 	super defineHierarchy.
@@ -740,7 +741,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaInfixOperation --|> tExpression.
 	javaInfixOperation --|> tReceiver.
-	
+
 	javaBreakStatement --|> tStatement.
 	javaCaseStatement --|> tStatementBlock.
 	javaCharacterLiteral --|> tCharacterLiteral.
@@ -750,14 +751,14 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaFloatLiteral --|> tLiteral.
 	javaFloatLiteral --|> tReceiver.
 	javaForStatement --|> tStatement.
-	
+
 	javaIdentifier --|> javaVariableExpression.
 	javaIdentifier --|> tReceiver.
-	
+
 	javaIfStatement --|> tStatement.
 	javaIntegerLiteral --|> tLiteral.
 	javaIntegerLiteral --|> tReceiver.
-	
+
 	javaMethodEntity --|> tNamedBehaviouralEntity.
 	javaMethodEntity --|> #THasImmediateSource.
 	javaMethodEntity --|> tDeclaration.
@@ -770,26 +771,26 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassDeclaration --|> tNamedEntity.
 	javaClassDeclaration --|> #THasImmediateSource.
 	javaClassDeclaration withPrecedenceOf: #THasImmediateSource.
-	
-	javaEnumDeclaration  --|> tStatement.
-	javaEnumDeclaration  --|> tDeclaration.
-	javaEnumDeclaration  --|> tWithDeclarations.
-	javaEnumDeclaration  --|> tWithModifiers.
-	javaEnumDeclaration  --|> tNamedEntity.
-	
+
+	javaEnumDeclaration --|> tStatement.
+	javaEnumDeclaration --|> tDeclaration.
+	javaEnumDeclaration --|> tWithDeclarations.
+	javaEnumDeclaration --|> tWithModifiers.
+	javaEnumDeclaration --|> tNamedEntity.
+
 	javaInterfaceDeclaration --|> tStatement.
-	javaInterfaceDeclaration  --|> tDeclaration.
-	javaInterfaceDeclaration  --|> tWithDeclarations.
-	javaInterfaceDeclaration  --|> tWithModifiers.
-	javaInterfaceDeclaration  --|> tNamedEntity.
+	javaInterfaceDeclaration --|> tDeclaration.
+	javaInterfaceDeclaration --|> tWithDeclarations.
+	javaInterfaceDeclaration --|> tWithModifiers.
+	javaInterfaceDeclaration --|> tNamedEntity.
 	javaInterfaceDeclaration --|> #THasImmediateSource.
 	javaInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
-	
+
 	javaMethodInvocation --|> tExpression.
 	javaMethodInvocation --|> #TWithArguments.
 	javaMethodInvocation --|> tWithReceiver.
 	javaMethodInvocation --|> tReceiver.
-	
+
 
 	javaNullLiteral --|> tNullPointerLiteral.
 
@@ -823,6 +824,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaNewClassExpression --|> javaNewExpression.
 	javaNewClassExpression --|> tWithDeclarations.
+	javaNewClassExpression --|> #TWithArguments.
 
 	javaNewArray --|> javaNewExpression.
 	javaConditionalExpression --|> tExpression.
@@ -855,7 +857,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaMethodReference --|> tExpression.
 	javaMethodReference --|> tNamedEntity.
-	
+
 	javaSynchronizedStatement --|> tStatement.
 
 	"types name"
@@ -877,7 +879,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLongTypeExpression --|> javaPrimitiveTypeExpression.
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
-	
+
 	javaBooleanLiteral --|> tLiteral.
 	javaBooleanLiteral --|> tReceiver.
 
@@ -889,18 +891,18 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaAnnotationExpression --|> tExpression.
 	javaAnnotationExpression --|> tModifier.
-	
+
 	javaParameterExpression --|> tExpression.
-	
+
 	javaConditionalExpression --|> tReceiver.
-	
+
 	javaStatementBlock --|> tStatementBlock.
-	
+
 	javaReturnStatement --|> tReturnStatement.
-	
-	javaExpressionStatement  --|> tExpressionStatement.
-	
-	javaStatement --|> tStatement.
+
+	javaExpressionStatement --|> tExpressionStatement.
+
+	javaStatement --|> tStatement
 ]
 
 { #category : #definition }

@@ -17,8 +17,8 @@ new SecureAsyncCallback<Void>() {
 Class {
 	#name : #FASTJavaNewClassExpression,
 	#superclass : #FASTJavaNewExpression,
-	#traits : 'FASTJavaTWithDeclarations',
-	#classTraits : 'FASTJavaTWithDeclarations classTrait',
+	#traits : 'FASTJavaTWithDeclarations + FASTTWithArguments',
+	#classTraits : 'FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

@@ -226,12 +226,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: aVariableDeclaration [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression [
+
 	currentFASTEntity := self addToModel: FASTJavaInfixOperation new.
 	self generalVisitActionForNodeEntity: aBinaryExpression.
-	currentFASTEntity
-		leftOperand: (self clone accept: aBinaryExpression leftExpression).
-	currentFASTEntity
-		rightOperand: (self clone accept: aBinaryExpression rightExpression).
+	currentFASTEntity leftOperand:
+		(self clone accept: aBinaryExpression leftExpression).
+	currentFASTEntity rightOperand:
+		(self clone accept: aBinaryExpression rightExpression).
 	currentFASTEntity operator: aBinaryExpression op value.
 	^ currentFASTEntity
 ]
