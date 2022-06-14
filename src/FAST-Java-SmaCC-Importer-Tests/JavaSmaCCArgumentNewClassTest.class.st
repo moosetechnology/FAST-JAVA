@@ -1,5 +1,5 @@
 Class {
-	#name : #JavaSmaCCInnerNewClassTest,
+	#name : #JavaSmaCCArgumentNewClassTest,
 	#superclass : #JavaSmaCCImporterTest,
 	#instVars : [
 		'methodNew'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #resources }
-JavaSmaCCInnerNewClassTest >> methodInnerNewClass [
+JavaSmaCCArgumentNewClassTest >> methodArgumentNewClass [
 	^ 'void innerNewClass() {
 	new Hello(new Patate() {
 		public void onSuccess(){
@@ -23,32 +23,32 @@ JavaSmaCCInnerNewClassTest >> methodInnerNewClass [
 ]
 
 { #category : #running }
-JavaSmaCCInnerNewClassTest >> setUp [
+JavaSmaCCArgumentNewClassTest >> setUp [
 	super setUp.
-	methodNew := (self parseMethod: 'innerNewClass')
+	methodNew := (self parseMethod: 'argumentNewClass')
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassTest >> testDeclaredMethodSize [
+JavaSmaCCArgumentNewClassTest >> testDeclaredMethodSize [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassTest >> testNewName [
+JavaSmaCCArgumentNewClassTest >> testNewName [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassTest >> testNewParent [
+JavaSmaCCArgumentNewClassTest >> testNewParent [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne parentNode equals: (methodNew allWithType: FASTJavaNewExpression) anyOne
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassTest >> testNewParentChildren [
+JavaSmaCCArgumentNewClassTest >> testNewParentChildren [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne equals: (methodNew allWithType: FASTJavaNewExpression) anyOne arguments anyOne
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassTest >> testNumberOfMethod [
+JavaSmaCCArgumentNewClassTest >> testNumberOfMethod [
 	self assert: methodNew allFASTJavaMethodEntity size equals: 3
 ]
