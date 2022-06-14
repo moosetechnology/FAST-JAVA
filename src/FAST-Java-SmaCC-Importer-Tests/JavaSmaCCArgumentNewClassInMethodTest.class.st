@@ -1,5 +1,5 @@
 Class {
-	#name : #JavaSmaCCInnerNewClassInMethodTest,
+	#name : #JavaSmaCCArgumentNewClassInMethodTest,
 	#superclass : #JavaSmaCCImporterTest,
 	#instVars : [
 		'methodNew'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #resources }
-JavaSmaCCInnerNewClassInMethodTest >> methodInnerNewClass [
+JavaSmaCCArgumentNewClassInMethodTest >> methodArgumentNewClass [
 	^ 'void innerNewClass() {
 	hello.say(new Patate() {
 		public void onSuccess(){
@@ -23,32 +23,32 @@ JavaSmaCCInnerNewClassInMethodTest >> methodInnerNewClass [
 ]
 
 { #category : #running }
-JavaSmaCCInnerNewClassInMethodTest >> setUp [
+JavaSmaCCArgumentNewClassInMethodTest >> setUp [
 	super setUp.
-	methodNew := (self parseMethod: 'innerNewClass')
+	methodNew := (self parseMethod: 'argumentNewClass')
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassInMethodTest >> testDeclaredMethodSize [
+JavaSmaCCArgumentNewClassInMethodTest >> testDeclaredMethodSize [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassInMethodTest >> testNewName [
+JavaSmaCCArgumentNewClassInMethodTest >> testNewName [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassInMethodTest >> testNewParent [
+JavaSmaCCArgumentNewClassInMethodTest >> testNewParent [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne parentNode equals: (methodNew allWithType: FASTJavaMethodInvocation) anyOne
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassInMethodTest >> testNewParentChildren [
+JavaSmaCCArgumentNewClassInMethodTest >> testNewParentChildren [
 	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne equals: (methodNew allWithType: FASTJavaMethodInvocation) anyOne arguments anyOne
 ]
 
 { #category : #tests }
-JavaSmaCCInnerNewClassInMethodTest >> testNumberOfMethod [
+JavaSmaCCArgumentNewClassInMethodTest >> testNumberOfMethod [
 	self assert: methodNew allFASTJavaMethodEntity size equals: 3
 ]

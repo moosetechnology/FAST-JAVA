@@ -746,18 +746,24 @@ JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNew: aNewNode [
+
 	currentFASTEntity := self addToModel: FASTJavaNewExpression new.
 	self generalVisitActionForNodeEntity: aNewNode.
-	aNewNode expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
-	
+	aNewNode expressions do: [ :expression | 
+		currentFASTEntity arguments add: (self clone accept: expression) ].
+
+	aNewNode primary ifNotNil: [ :primary | 
+		currentFASTEntity receiver: (self clone accept: primary) ].
 	"
 in the following 'InnerClass' is considered as a Name in FAST but should be considered as a Type in FASTJava	
 public void onClick(ClickEvent event) {
   view.setDisplayView(view.new InnerClass());
 }"
 	aNewNode type
-		ifNotNil: [ currentFASTEntity type: (self clone accept: aNewNode type) ]
-		ifNil: [ currentFASTEntity type: (self clone createTypeName: aNewNode name) ].
+		ifNotNil: [ 
+		currentFASTEntity type: (self clone accept: aNewNode type) ]
+		ifNil: [ 
+		currentFASTEntity type: (self clone createTypeName: aNewNode name) ].
 	^ currentFASTEntity
 ]
 
