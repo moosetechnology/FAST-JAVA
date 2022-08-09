@@ -107,7 +107,12 @@ Class {
 		'tReturnStatement',
 		'tBooleanLiteral',
 		'javaEnumDeclaration',
-		'javaInterfaceDeclaration'
+		'javaInterfaceDeclaration',
+		'fileDeclaration',
+		'packageDeclaration',
+		'importDeclaration',
+		'multiImportDeclaration',
+		'qualifiedName'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -722,6 +727,12 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaStatement := builder newClassNamed: #Statement.
 	
 	javaBooleanLiteral := builder newClassNamed: #BooleanLiteral.
+	
+	fileDeclaration := builder newClassNamed: #FileDeclaration.
+	packageDeclaration := builder newClassNamed: #PackageDeclaration.
+	importDeclaration := builder newClassNamed: #ImportDeclaration.
+	multiImportDeclaration := builder newClassNamed: #MultiImportDeclaration.
+	qualifiedName := builder newClassNamed: #QualifiedName.
 ]
 
 { #category : #definition }
@@ -902,7 +913,14 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaExpressionStatement --|> tExpressionStatement.
 
-	javaStatement --|> tStatement
+	javaStatement --|> tStatement.
+	
+	packageDeclaration --|> fileDeclaration.
+	importDeclaration --|> fileDeclaration.
+	multiImportDeclaration --|> importDeclaration.
+	qualifiedName --|> tNamedEntity.
+	qualifiedName --|> tEntity.
+	fileDeclaration --|> tEntity
 ]
 
 { #category : #definition }
@@ -1238,7 +1256,16 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((tWithReceiver property: #receiver) comment: 'My variable')
 	<>- ((tReceiver property: #receiverOwner) comment:
-			 'The owner of the receiver')
+			 'The owner of the receiver').
+
+	((fileDeclaration property: #declarationName) comment:
+		 'the first part of the qualified name of the declarationName')
+	<>- (qualifiedName property: #fileDeclaration).
+
+	((qualifiedName property: #namespace) comment:
+		 'The namespace that qualified me')
+	<>- ((qualifiedName property: #qualifyNamespaceOwner) comment:
+			 'The namespace qualified I qualify').
 ]
 
 { #category : #definition }

@@ -80,6 +80,17 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	model := FASTJavaModel new
 ]
 
+{ #category : #creating }
+JavaSmaCCProgramNodeImporterVisitor >> isInDocumentContext [
+
+	((self currentFASTEntity isKindOf: FASTJavaClassDeclaration) or: [ 
+		 self currentFASTEntity isKindOf: FASTJavaMethodEntity ]) ifTrue: [ 
+		^ false ].
+	^ self parentFASTVisitor
+		  ifNil: [ ^ true ]
+		  ifNotNil: [ self parentFASTVisitor isInDocumentContext ]
+]
+
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> model [
 	^ model
@@ -739,7 +750,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModifier: aModifier [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
-	currentFASTEntity := self create: FASTJavaVariableExpression from: aName.
+
+	self isInDocumentContext
+		ifTrue: [ 
+			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
+			self generalVisitActionForNodeEntity: aName ]
+		ifFalse: [ 
+			currentFASTEntity := self
+				                     create: FASTJavaVariableExpression
+				                     from: aName ].
 	currentFASTEntity name: aName name value.
 	^ currentFASTEntity
 ]
@@ -823,8 +842,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclaration [
-	self flag: 'ignore in current version. Please make a PR if you need this feature or contact us'.
-	^ self visitExpression: aPackageDeclaration
+	currentFASTEntity := self addToModel: FASTJavaPackageDeclaration new.
+	self generalVisitActionForNodeEntity: aPackageDeclaration.
+	currentFASTEntity declarationName: (self clone accept: aPackageDeclaration name).
 ]
 
 { #category : #visitor }
@@ -893,10 +913,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
-	currentFASTEntity := self addToModel: FASTJavaClassProperty new.
-	self generalVisitActionForNodeEntity: aQualifiedName.
-	currentFASTEntity type: (self clone accept: aQualifiedName nspace).
-	currentFASTEntity fieldName: aQualifiedName name value.
+
+	self isInDocumentContext
+		ifTrue: [
+			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
+			self generalVisitActionForNodeEntity: aQualifiedName.
+			currentFASTEntity namespace: (self clone accept: aQualifiedName nspace).
+			currentFASTEntity name: aQualifiedName name value ]
+		ifFalse: [ 
+			currentFASTEntity := self addToModel: FASTJavaClassProperty new.
+			self generalVisitActionForNodeEntity: aQualifiedName.
+			currentFASTEntity type: (self clone accept: aQualifiedName nspace).
+			currentFASTEntity fieldName: aQualifiedName name value ].
 	^ currentFASTEntity
 ]
 
@@ -933,8 +961,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingleTypeImportDeclaration [
-	self flag: 'ignore in current version. Please make a PR if you need this feature or contact us'.
-	^ self visitExpression: aSingleTypeImportDeclaration
+	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
+	self generalVisitActionForNodeEntity: aSingleTypeImportDeclaration.
+	currentFASTEntity declarationName: (self clone accept: aSingleTypeImportDeclaration name).
 ]
 
 { #category : #visitor }
@@ -1043,6 +1072,16 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 		do:
 			[ :aCatchBlock | currentFASTEntity catches add: (self clone accept: aCatchBlock) ].
 	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aTypeImportOnDemandDeclaration [
+
+	currentFASTEntity := self addToModel:
+		                     FASTJavaMultiImportDeclaration new.
+	self generalVisitActionForNodeEntity: aTypeImportOnDemandDeclaration.
+	currentFASTEntity declarationName:
+		(self clone accept: aTypeImportOnDemandDeclaration name)
 ]
 
 { #category : #visitor }
