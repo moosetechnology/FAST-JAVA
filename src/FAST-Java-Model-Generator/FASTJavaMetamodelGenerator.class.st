@@ -814,6 +814,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVarDeclStatement --|> tStatement.
 	javaVarDeclStatement --|> tDeclaration.
 	javaVarDeclStatement --|> tScopableEntity.
+	javaVarDeclStatement --|> tWithModifiers.
 
 	javaVariableDeclarator --|> tEntity.
 	javaWhileStatement --|> tStatement.
@@ -914,7 +915,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaExpressionStatement --|> tExpressionStatement.
 
 	javaStatement --|> tStatement.
-	
+
 	packageDeclaration --|> fileDeclaration.
 	importDeclaration --|> fileDeclaration.
 	multiImportDeclaration --|> importDeclaration.

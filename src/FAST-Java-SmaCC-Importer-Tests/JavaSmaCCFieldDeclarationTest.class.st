@@ -12,7 +12,7 @@ JavaSmaCCFieldDeclarationTest >> methodFieldDeclaration [
 	
 	^ 'String fieldDeclaration() {
 		Patate p = new Patate() { 
-			int i = 3, j;
+			public final int i = 3, j;
 		};
 	}'
 ]
@@ -22,6 +22,15 @@ JavaSmaCCFieldDeclarationTest >> setUp [
 	super setUp.
 	fieldDeclaration := (self parseMethod: 'fieldDeclaration') allFASTJavaMethodEntity
 		first
+]
+
+{ #category : #tests }
+JavaSmaCCFieldDeclarationTest >> testFieldDeclarationModifiers [
+
+	self
+		assert:
+		(fieldDeclaration mooseModel allWithType: FASTJavaModifier) size
+		equals: 2 "public final"
 ]
 
 { #category : #tests }

@@ -11,8 +11,8 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 Class {
 	#name : #FASTJavaVarDeclStatement,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTDeclaration + FASTTScopableEntity + FASTTStatement',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTTScopableEntity classTrait + FASTTStatement classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTTScopableEntity + FASTTStatement',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTScopableEntity classTrait + FASTTStatement classTrait',
 	#instVars : [
 		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner'
