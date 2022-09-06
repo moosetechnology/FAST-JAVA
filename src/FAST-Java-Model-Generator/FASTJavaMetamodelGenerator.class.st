@@ -1231,6 +1231,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeExpression property: #javaClassDeclarationInterfaceOwnver) 
 			 comment: 'The class that own me').
 
+	((javaEnumDeclaration property: #interfaces) comment: 'My superclass')
+	<>-*
+		((javaTypeExpression property: #javaEnumDeclarationInterfaceOwnver) 
+			 comment: 'The class that own me').
+
 	((javaInterfaceDeclaration property: #interfaces) comment:
 		 'My super interfaces') <>-* ((javaTypeExpression property:
 		  #javaInterfaceDeclarationInterfaceOwnver) comment:
@@ -1266,7 +1271,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((qualifiedName property: #namespace) comment:
 		 'The namespace that qualified me')
 	<>- ((qualifiedName property: #qualifyNamespaceOwner) comment:
-			 'The namespace qualified I qualify').
+			 'The namespace qualified I qualify')
 ]
 
 { #category : #definition }

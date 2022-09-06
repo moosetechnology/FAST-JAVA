@@ -7,6 +7,7 @@ Class {
 	#instVars : [
 		'#javaClassDeclarationInterfaceOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
 		'#javaClassDeclarationSuperclassOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
+		'#javaEnumDeclarationInterfaceOwnver => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaInterfaceDeclarationInterfaceOwnver => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -68,6 +69,30 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnverGroup [
 	<generated>
 	<navigation: 'JavaClassDeclarationSuperclassOwnver'>
 	^ MooseSpecializedGroup with: self javaClassDeclarationSuperclassOwnver
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnver [
+	"Relation named: #javaEnumDeclarationInterfaceOwnver type: #FASTJavaEnumDeclaration opposite: #interfaces"
+
+	<generated>
+	<FMComment: 'The class that own me'>
+	<container>
+	^ javaEnumDeclarationInterfaceOwnver
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnver: anObject [
+
+	<generated>
+	javaEnumDeclarationInterfaceOwnver := anObject
+]
+
+{ #category : #navigation }
+FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnverGroup [
+	<generated>
+	<navigation: 'JavaEnumDeclarationInterfaceOwnver'>
+	^ MooseSpecializedGroup with: self javaEnumDeclarationInterfaceOwnver
 ]
 
 { #category : #accessing }
