@@ -7,6 +7,7 @@ Class {
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
+		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -19,6 +20,36 @@ FASTJavaMethodEntity class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
+]
+
+{ #category : #adding }
+FASTJavaMethodEntity >> addThrow: anObject [
+	<generated>
+	^ self throws add: anObject
+]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> throws [
+	"Relation named: #throws type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner"
+
+	<generated>
+	<FMComment: 'The list of throws exception'>
+	<derived>
+	^ throws
+]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> throws: anObject [
+
+	<generated>
+	throws value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaMethodEntity >> throwsGroup [
+	<generated>
+	<navigation: 'Throws'>
+	^ MooseSpecializedGroup withAll: self throws asSet
 ]
 
 { #category : #accessing }

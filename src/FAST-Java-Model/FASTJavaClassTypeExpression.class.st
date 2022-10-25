@@ -5,6 +5,7 @@ Class {
 	#name : #FASTJavaClassTypeExpression,
 	#superclass : #FASTJavaTypeExpression,
 	#instVars : [
+		'#javaMethodThrowsOwner => FMOne type: #FASTJavaMethodEntity opposite: #throws',
 		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -17,6 +18,30 @@ FASTJavaClassTypeExpression class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^self
+]
+
+{ #category : #accessing }
+FASTJavaClassTypeExpression >> javaMethodThrowsOwner [
+	"Relation named: #javaMethodThrowsOwner type: #FASTJavaMethodEntity opposite: #throws"
+
+	<generated>
+	<FMComment: 'The method that throws me'>
+	<container>
+	^ javaMethodThrowsOwner
+]
+
+{ #category : #accessing }
+FASTJavaClassTypeExpression >> javaMethodThrowsOwner: anObject [
+
+	<generated>
+	javaMethodThrowsOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaClassTypeExpression >> javaMethodThrowsOwnerGroup [
+	<generated>
+	<navigation: 'JavaMethodThrowsOwner'>
+	^ MooseSpecializedGroup with: self javaMethodThrowsOwner
 ]
 
 { #category : #accessing }

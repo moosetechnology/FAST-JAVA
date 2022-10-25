@@ -1179,6 +1179,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaVariableExpression property: #javaMethodTypeOwner) comment:
 			 'The variable expression owner (if possible)').
 
+	((javaMethodEntity property: #throws) comment:
+		 'The list of throws exception')
+	<>-*
+		((javaClassTypeExpression property: #javaMethodThrowsOwner) 
+			 comment: 'The method that throws me').
+
 	((javaParameterExpression property: #type) comment:
 		 'The type of the parameter')
 	<>-
