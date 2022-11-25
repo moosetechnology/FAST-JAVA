@@ -300,6 +300,11 @@ FASTJavaVisitor >> visitFASTJavaPrimitiveTypeExpression: aFASTJavaPrimitiveTypeE
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
+	^ self visitFASTTEntity: aFASTJavaQualifiedName
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
 	^ self visitFASTJavaTypeName: aFASTJavaQualifiedTypeName
 ]

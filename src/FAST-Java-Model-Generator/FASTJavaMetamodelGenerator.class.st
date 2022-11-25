@@ -921,7 +921,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	multiImportDeclaration --|> importDeclaration.
 	qualifiedName --|> tNamedEntity.
 	qualifiedName --|> tEntity.
-	fileDeclaration --|> tEntity
+	qualifiedName --|> tAssigneable.
+	fileDeclaration --|> tEntity.
+	
+
 ]
 
 { #category : #definition }
