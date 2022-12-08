@@ -4,9 +4,10 @@ I contains the generator to create the Java FAST Metamodel
 
 Use this to re generate the metamodel.
 
-
+```st
 FASTJavaMetamodelGenerator new generate.
 FASTJavaMetamodelGenerator resetMetamodel.
+```
 "
 Class {
 	#name : #FASTJavaMetamodelGenerator,
@@ -112,7 +113,8 @@ Class {
 		'packageDeclaration',
 		'importDeclaration',
 		'multiImportDeclaration',
-		'qualifiedName'
+		'qualifiedName',
+		'javaLabeledStatement'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -726,6 +728,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	
 	javaStatement := builder newClassNamed: #Statement.
 	
+	javaLabeledStatement := builder newClassNamed: #LabeledStatement.
+	
 	javaBooleanLiteral := builder newClassNamed: #BooleanLiteral.
 	
 	fileDeclaration := builder newClassNamed: #FileDeclaration.
@@ -924,21 +928,33 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	qualifiedName --|> tAssigneable.
 	fileDeclaration --|> tEntity.
 	
+	javaLabeledStatement --|> tStatement
 
 ]
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineProperties [
+
 	super defineProperties.
-	(javaFieldAccess property: #fieldName type: #String) comment: 'Name of accessed field'.
-	(javaInfixOperation property: #operator type: #String) comment: 'operator s symbol'.
-	(javaClassProperty property: #fieldName type: #String) comment: 'Name of accessed field'.
-	
-	(javaUnaryExpression property: #operator type: #String) comment: 'The operator string to apply to the expression'.
-	(javaUnaryExpression property: #isPrefixedUnaryExpression type: #Boolean) comment: 'true if the expression is prefixed (ex. ++i) else false'.
-	
-	(javaModifier property: #token type: #String) comment: 'The modifier value'.
-	
+	(javaFieldAccess property: #fieldName type: #String) comment:
+		'Name of accessed field'.
+	(javaInfixOperation property: #operator type: #String) comment:
+		'operator s symbol'.
+	(javaClassProperty property: #fieldName type: #String) comment:
+		'Name of accessed field'.
+
+	(javaUnaryExpression property: #operator type: #String) comment:
+		'The operator string to apply to the expression'.
+	(javaUnaryExpression
+		 property: #isPrefixedUnaryExpression
+		 type: #Boolean) comment:
+		'true if the expression is prefixed (ex. ++i) else false'.
+
+	(javaModifier property: #token type: #String) comment:
+		'The modifier value'.
+
+	(javaLabeledStatement property: #label type: #String) comment:
+		'The label of the labeled statement'
 ]
 
 { #category : #definition }
@@ -1146,6 +1162,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'Statements block of the behavioural entity')
 	<>- ((tStatementBlock property: #javaInitializerOwner) comment:
 			 'Behavioural entity containing the statement block.').
+			
+	((javaLabeledStatement property: #statementBlock) comment:
+		 'Statements block of the behavioural entity')
+	<>- ((tStatementBlock property: #javaLabaledStatementOwner) comment:
+			 'Label Statement entity containing the statement block.').
 
 	((javaNewArray property: #initializer) comment:
 		 'The initializer of the array')

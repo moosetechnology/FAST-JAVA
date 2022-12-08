@@ -637,6 +637,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInterfaceDeclaration: anInterfaceDec
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitLabeledStatement: aLabeledStatement [
+
+	currentFASTEntity := self addToModel: (FASTJavaLabeledStatement new
+			                      label: aLabeledStatement identifier value;
+			                      yourself).
+	self generalVisitActionForNodeEntity: aLabeledStatement.
+	currentFASTEntity statementBlock:	(self clone accept: aLabeledStatement statement).
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression [
 	currentFASTEntity := self
 		addToModel: FASTJavaLambdaExpression new.
