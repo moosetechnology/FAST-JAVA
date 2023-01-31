@@ -3,7 +3,7 @@ A visitor to export the AST as Java source code
 
 to use it:
 ```
-FASTJavaExportVisitor new generateCode: aFASTJavaNode
+FASTJavaExportVisitor new export: aFASTJavaNode
 ```
 "
 Class {
@@ -28,7 +28,7 @@ FASTJavaExportVisitor >> endOfStatement [
 ]
 
 { #category : #api }
-FASTJavaExportVisitor >> generateCode: aFASTNode [
+FASTJavaExportVisitor >> export: aFASTNode [
 	^String streamContents: [ :st |
 		stream := st.
 		indent := 0.
@@ -121,22 +121,6 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	aFASTJavaInfixOperation rightOperand accept: self.
 ]
 
-{ #category : #'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaInvocationArguments: aFASTJavaMethodInvocationArguments [
-	self noIndent: $( .
-	self
-		visitNodeList: aFASTJavaMethodInvocationArguments 
-		separatedBy: [ self noIndent: ', ' ].
-	self noIndent: $) .
-]
-
-{ #category : #'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaInvocationReceiver: aFASTJavaMethodInvocation [
-	aFASTJavaMethodInvocation ifNil: [ ^self ].
-	aFASTJavaMethodInvocation accept: self.
-	self noIndent: $.
-]
-
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self withIndent: ''.
@@ -151,9 +135,25 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocation [
-	self visitFASTJavaInvocationReceiver: aFASTJavaMethodInvocation receiver.
+	self visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation receiver.
 	self noIndent: aFASTJavaMethodInvocation name.
-	self visitFASTJavaInvocationArguments: aFASTJavaMethodInvocation arguments
+	self visitFASTJavaMethodInvocationArguments: aFASTJavaMethodInvocation arguments
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaMethodInvocationArguments: aFASTJavaMethodInvocationArguments [
+	self noIndent: $( .
+	self
+		visitNodeList: aFASTJavaMethodInvocationArguments 
+		separatedBy: [ self noIndent: ', ' ].
+	self noIndent: $) .
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation [
+	aFASTJavaMethodInvocation ifNil: [ ^self ].
+	aFASTJavaMethodInvocation accept: self.
+	self noIndent: $.
 ]
 
 { #category : #visiting }
@@ -194,6 +194,13 @@ FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 		separatedBy: [ self noIndent:  ', ' ].
 	self noIndent:  ') '.
 
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
+	self noIndent: $".
+	self noIndent: aFASTJavaStringLiteral primitiveValue.
+	self noIndent: $".
 ]
 
 { #category : #'visiting statement' }
