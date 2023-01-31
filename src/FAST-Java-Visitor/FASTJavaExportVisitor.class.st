@@ -1,5 +1,7 @@
 "
-A visitor to export the AST as Java source code
+A visitor to export the AST as Java source code.
+The export is based solely on the AST, so some information is missing
+(comments, indentation, ...)
 
 to use it:
 ```
