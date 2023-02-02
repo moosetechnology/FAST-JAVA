@@ -15,7 +15,7 @@ Class {
 		'stream',
 		'indent'
 	],
-	#category : #'FAST-Java-Visitor'
+	#category : #'FAST-Java-Visitor-export'
 }
 
 { #category : #outputting }
@@ -112,8 +112,6 @@ FASTJavaExportVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self noIndent: ') '.
 	self visitFASTJavaThenPartStatement: aFASTJavaIfStatement thenPart.
 	self visitFASTJavaElsePartStatement: aFASTJavaIfStatement elsePart.
-
-
 ]
 
 { #category : #'visiting expression' }
@@ -240,7 +238,7 @@ FASTJavaExportVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpre
 	self noIndent: aFASTJavaVariableExpression name
 ]
 
-{ #category : #'visiting expression' }
+{ #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
 	aFASTTExpressionStatement expression accept: self.
 	self endOfStatement
