@@ -385,6 +385,11 @@ FASTJavaVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator 
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
+	^ self visitFASTEntity: aFASTJavaVariableExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaVoidTypeExpression [
 	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaVoidTypeExpression
 ]
