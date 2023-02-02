@@ -1,10 +1,13 @@
+"
+A null-object signaling the declaration of a 'name' was not found
+"
 Class {
 	#name : #FASTJavaNonLocalDeclaration,
 	#superclass : #FASTJavaEntity,
 	#instVars : [
 		'name'
 	],
-	#category : #'FAST-Java-Visitor-resolver'
+	#category : #'FAST-Java-Tools-resolver'
 }
 
 { #category : #accessing }

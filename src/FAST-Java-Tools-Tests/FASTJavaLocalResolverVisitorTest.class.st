@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'localResolver'
 	],
-	#category : #'FAST-Java-Visitor-Tests-resolver'
+	#category : #'FAST-Java-Tools-Tests-resolver'
 }
 
 { #category : #running }
@@ -66,13 +66,14 @@ FASTJavaLocalResolverVisitorTest >> testLocalDeclarationFor [
 	| declNode refNode |
 	declNode := FASTJavaVariableDeclarator new. 
 	refNode := FASTJavaVariableExpression new.
+	declNode resetLocalUses.
 	localResolver localDeclaration: declNode for: refNode.
 
-	self assert: (refNode attributeAt: #declaration ifAbsent: [nil]) notNil.
-	self assert: (refNode attributeAt: #declaration ifAbsent: [nil]) equals: declNode.
+	self assert: refNode localDeclaration notNil.
+	self assert: refNode localDeclaration equals: declNode.
 
-	self assert: (declNode attributeAt: #uses ifAbsent: [nil]) size equals: 1.
-	self assert: (declNode attributeAt: #uses ifAbsent: [nil]) first equals: refNode
+	self assert: declNode localUses size equals: 1.
+	self assert: declNode localUses first equals: refNode
 ]
 
 { #category : #tests }
@@ -81,9 +82,9 @@ FASTJavaLocalResolverVisitorTest >> testNonLocalDeclarationWithName [
 	node := FASTJavaVariableExpression new name: 'blah'.
 	localResolver nonLocalDeclaration: node withName: 'blah'.
 
-	self assert: (node attributeAt: #declaration ifAbsent: [nil]) notNil.
-	self assert: (node attributeAt: #declaration ifAbsent: [nil]) class equals: FASTJavaNonLocalDeclaration.
-	self assert: (node attributeAt: #declaration ifAbsent: [nil]) name equals: 'blah'
+	self assert: node localDeclaration notNil.
+	self assert: node localDeclaration class equals: FASTJavaNonLocalDeclaration.
+	self assert: node localDeclaration name equals: 'blah'
 ]
 
 { #category : #tests }

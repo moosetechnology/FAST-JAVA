@@ -1,7 +1,7 @@
 Class {
 	#name : #FASTJavaExportVisitorTest,
 	#superclass : #TestCase,
-	#category : #'FAST-Java-Visitor-Tests-export'
+	#category : #'FAST-Java-Tools-Tests-export'
 }
 
 { #category : #running }

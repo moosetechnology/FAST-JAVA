@@ -11,7 +11,7 @@ Class {
 	#instVars : [
 		'scopes'
 	],
-	#category : #'FAST-Java-Visitor-resolver'
+	#category : #'FAST-Java-Tools-resolver'
 }
 
 { #category : #accessing }
@@ -34,11 +34,6 @@ FASTJavaLocalResolverVisitor >> findDeclaration: aName [
 		]
 ]
 
-{ #category : #accessing }
-FASTJavaLocalResolverVisitor >> hasScopes [
-	^scopes size > 0
-]
-
 { #category : #initialization }
 FASTJavaLocalResolverVisitor >> initialize [ 
 	super initialize.
@@ -48,16 +43,13 @@ FASTJavaLocalResolverVisitor >> initialize [
 
 { #category : #accessing }
 FASTJavaLocalResolverVisitor >> localDeclaration: declarationNode for: referingNode [
-	referingNode attributeAt: #declaration put: declarationNode.
-	(declarationNode attributeAt: #uses ifAbsentPut: [OrderedCollection new])
-		add: referingNode
+	referingNode localDeclaration: declarationNode.
+	declarationNode addLocalUse: referingNode
 ]
 
 { #category : #accessing }
 FASTJavaLocalResolverVisitor >> nonLocalDeclaration: referingNode withName: name [
-	referingNode
-		attributeAt: #declaration
-		put: (FASTJavaNonLocalDeclaration new name: name)
+	referingNode localDeclaration: (FASTJavaNonLocalDeclaration new name: name)
 
 ]
 
@@ -71,7 +63,7 @@ FASTJavaLocalResolverVisitor >> on: aFASTJavaMethodEntity [
 { #category : #accessing }
 FASTJavaLocalResolverVisitor >> popScope [
 
-	scopes pop
+	^scopes pop
 ]
 
 { #category : #accessing }
@@ -102,10 +94,38 @@ FASTJavaLocalResolverVisitor >> scopeAdd: aName declaration: aFASTNode [
 		ifPresent: [ DuplicatedVariableError signal:
 			'local variable ' , aName , 'already found in this scope' ]
 		ifAbsent: [
-			self currentScope at: aName put: aFASTNode.
-			aFASTNode attributeAt: #uses put: OrderedCollection new
+			aFASTNode resetLocalUses.
+			self currentScope at: aName put: aFASTNode
 		].
 	
+]
+
+{ #category : #visiting }
+FASTJavaLocalResolverVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
+
+	(self findDeclaration: aFASTJavaIdentifier name)
+	ifNil: [
+		self
+			nonLocalDeclaration: aFASTJavaIdentifier
+			withName: aFASTJavaIdentifier name
+	]
+	ifNotNil: [ :decl |
+		self 
+			localDeclaration: decl
+			for: aFASTJavaIdentifier
+		 ]
+]
+
+{ #category : #visiting }
+FASTJavaLocalResolverVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
+	"cannot trust in visit children because order of parameters and statementBlock is not guaranteed"
+
+	"aFASTJavaMethodEntity modifiers"
+	"aFASTJavaMethodEntity type"
+	"aFASTJavaMethodEntity name"
+	aFASTJavaMethodEntity parameters do: [: node | node accept: self ].
+	"aFASTJavaMethodEntity throws"
+	aFASTJavaMethodEntity statementBlock accept: self.
 ]
 
 { #category : #visiting }
@@ -117,12 +137,12 @@ FASTJavaLocalResolverVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 FASTJavaLocalResolverVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	self
 		scopeAdd: aFASTJavaVariableDeclarator variable name
-		declaration: aFASTJavaVariableDeclarator varDeclOwner 
+		declaration: aFASTJavaVariableDeclarator.
+	aFASTJavaVariableDeclarator expression ifNotNil: [ :expr | expr accept: self ]
 ]
 
 { #category : #visiting }
 FASTJavaLocalResolverVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
-
 	(self findDeclaration: aFASTJavaVariableExpression name)
 	ifNil: [
 		self
@@ -139,6 +159,10 @@ FASTJavaLocalResolverVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariab
 { #category : #visiting }
 FASTJavaLocalResolverVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	self pushScope.
-	super visitFASTTStatementBlock: aFASTJavaStatementBlock.
+
+	"visit order is important to ensure declarations are visited before statements"
+	(aFASTJavaStatementBlock statements sorted: [:a :b | a startPos < b startPos])
+		do: [ :node | node accept: self ].
+
 	self popScope
 ]

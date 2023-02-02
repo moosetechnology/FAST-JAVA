@@ -12,7 +12,7 @@ Class {
 		'dvariables',
 		'controlEdges'
 	],
-	#category : #'FAST-Java-Visitor-Slicing'
+	#category : #'FAST-Java-Tools-slicing'
 }
 
 { #category : #accessing }

@@ -15,7 +15,7 @@ Class {
 		'stream',
 		'indent'
 	],
-	#category : #'FAST-Java-Visitor-export'
+	#category : #'FAST-Java-Tools-export'
 }
 
 { #category : #outputting }

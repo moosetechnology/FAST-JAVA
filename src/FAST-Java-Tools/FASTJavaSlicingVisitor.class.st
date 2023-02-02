@@ -14,7 +14,7 @@ Class {
 		'profiles',
 		'currentIndex'
 	],
-	#category : #'FAST-Java-Visitor-Slicing'
+	#category : #'FAST-Java-Tools-slicing'
 }
 
 { #category : #initialization }
