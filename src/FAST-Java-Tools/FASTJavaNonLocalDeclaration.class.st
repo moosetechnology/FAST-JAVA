@@ -1,5 +1,5 @@
 "
-A null-object signaling the declaration of a 'name' was not found
+A ""null-object"" signaling the declaration of a 'name' was not found
 "
 Class {
 	#name : #FASTJavaNonLocalDeclaration,

@@ -1,6 +1,11 @@
 "
 A FASTJavaVisitor that links local variables used to their (local) declaration)
 
+- Puts in the declaration nodes' #localUses their list of referencing nodes
+- Puts in the referencing nodes' #localDeclaration their corresponding declaration node
+- Puts in the referencing nodes' #localDeclaration a FASTNonLocalDeclaration if a declaration node could not be found
+
+Invoking:
 ```
 FASTJavaLocalResolverVisitor new on: aFASTJavaMethodEntity
 ```
@@ -32,6 +37,11 @@ FASTJavaLocalResolverVisitor >> findDeclaration: aName [
 			self pushScope: scope.
 			^decl
 		]
+]
+
+{ #category : #accessing }
+FASTJavaLocalResolverVisitor >> hasScopes [
+	^scopes isNotEmpty
 ]
 
 { #category : #initialization }
