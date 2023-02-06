@@ -36,16 +36,19 @@ BaselineOfFASTJava >> defineDependencies: spec [
 
 { #category : #baselines }
 BaselineOfFASTJava >> defineGroups: spec [
+
 	spec
 		group: 'core'
-			with: #('FAST-Java-Model-Extension' 'FAST-Java-Model' 'FAST-Java-Model-Generator');
-		group: 'smacc'
-			with: #('core' 'SmaCC' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests' 'TinyLogger');
-		group: 'visitor'
-			with: #('core' 'FAST-Java-Visitor');
-		group: 'highlighter' with: #('core' 'FAST-Java-Highlighter');
-		group: 'all' with: #('smacc' 'visitor' 'highlighter');
-		group: 'default' with: #('core')
+		with:
+			#( 'FAST-Java-Model-Extension' 'FAST-Java-Model' 'FAST-Java-Model-Generator' );
+		group: 'tools' with: #( 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
+		group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
+			   'FAST-Java-SmaCC-Importer-Tests'
+			   'TinyLogger' );
+		group: 'visitor' with: #( 'core' 'FAST-Java-Visitor' );
+		group: 'highlighter' with: #( 'core' 'FAST-Java-Highlighter' );
+		group: 'all' with: #( 'smacc' 'visitor' 'highlighter' 'tools' );
+		group: 'default' with: #( 'core' )
 ]
 
 { #category : #baselines }
