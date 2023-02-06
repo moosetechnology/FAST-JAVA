@@ -53,14 +53,25 @@ BaselineOfFASTJava >> defineGroups: spec [
 
 { #category : #baselines }
 BaselineOfFASTJava >> definePackages: spec [
+
 	spec
 		repository: 'https://github.com/moosetechnology/FAST';
 		package: 'BaselineOfFASTJava';
-		package: 'FAST-Java-Model' with: [ spec requires: #('FAST') ];
+		package: 'FAST-Java-Model' with: [ spec requires: #( 'FAST' ) ];
 		package: 'FAST-Java-Model-Generator';
-		package: 'FAST-Java-Model-Extension' with: [ spec requires: #('FAST-Java-Model') ];
+		package: 'FAST-Java-Model-Extension'
+		with: [ spec requires: #( 'FAST-Java-Model' ) ];
 		package: 'FAST-Java-SmaCC-Importer';
-		package: 'FAST-Java-SmaCC-Importer-Tests' with: [ spec requires: #('FAST-Java-SmaCC-Importer') ];
-		package: 'FAST-Java-Visitor' with: [ spec requires: #('FAST-Java-Model') ];
-		package: 'FAST-Java-Highlighter' with: [ spec requires: #('FAST-Java-Model') ]
+		package: 'FAST-Java-SmaCC-Importer-Tests'
+		with: [ spec requires: #( 'FAST-Java-SmaCC-Importer' ) ];
+		package: 'FAST-Java-Visitor'
+		with: [ spec requires: #( 'FAST-Java-Model' ) ];
+		package: 'FAST-Java-Highlighter'
+		with: [ spec requires: #( 'FAST-Java-Model' ) ].
+	"Tools"
+	spec
+		package: 'FAST-Java-Tools'
+		with: [ spec requires: #( 'FAST-Java-Visitor' ) ];
+		package: 'FAST-Java-Tools-Tests'
+		with: [ spec requires: #( 'FAST-Java-Tools' ) ]
 ]
