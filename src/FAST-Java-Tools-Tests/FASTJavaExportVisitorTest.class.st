@@ -6,7 +6,9 @@ Class {
 
 { #category : #running }
 FASTJavaExportVisitorTest >> export: aFASTJavaNode equals: aString [
-	self assert: (FASTJavaExportVisitor new export: aFASTJavaNode) equals: aString
+	self
+		assert: (FASTJavaExportVisitor new export: aFASTJavaNode)
+		equals: aString
 ]
 
 { #category : #tests }
