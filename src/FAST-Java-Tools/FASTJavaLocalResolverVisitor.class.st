@@ -1,9 +1,8 @@
 "
-A FASTJavaVisitor that links local variables used to their (local) declaration)
+A FASTJavaVisitor that links local variables used to their (local) declaration
 
-- Puts in the declaration nodes' #localUses their list of referencing nodes
-- Puts in the referencing nodes' #localDeclaration their corresponding declaration node
-- Puts in the referencing nodes' #localDeclaration a FASTNonLocalDeclaration if a declaration node could not be found
+- In the declaration nodes, `#localUses` lists all referencing nodes
+- In the referencing nodes, `#localDeclaration` lists the corresponding declaration node or a FASTNonLocalDeclaration if the declaration node could not be found
 
 Invoking:
 ```

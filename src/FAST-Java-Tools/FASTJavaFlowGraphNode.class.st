@@ -1,0 +1,110 @@
+Class {
+	#name : #FASTJavaFlowGraphNode,
+	#superclass : #FASTJavaVisitor,
+	#instVars : [
+		'predecessors',
+		'successors',
+		'statement',
+		'refs',
+		'defs'
+	],
+	#category : #'FAST-Java-Tools-dependencies'
+}
+
+{ #category : #'instance creation' }
+FASTJavaFlowGraphNode class >> on: aFASTStatement [
+	^self new
+		statement: aFASTStatement ;
+		yourself
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> addPredecessor: aFlowGraphNode [
+	self primitiveAddPredecessor: aFlowGraphNode.
+	aFlowGraphNode primitiveAddSuccessor: self
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> addSuccessor: aFlowGraphNode [
+	self primitiveAddSuccessor: aFlowGraphNode.
+	aFlowGraphNode primitiveAddPredecessor: self
+]
+
+{ #category : #converting }
+FASTJavaFlowGraphNode >> asFirstNodeInBlock [
+	| newNode |
+	newNode := FASTJavaFlowGraphFirstInBlockNode on: self statement.
+	newNode predecessors: predecessors.
+	predecessors do: [ :pred |
+		pred primitiveRemoveSuccessor: self.
+		pred primitiveAddSuccessor: newNode ].
+
+	newNode successors: successors.
+	successors do: [ :succ |
+		succ primitiveRemovePredecessor: self.
+		succ primitiveAddPredecessor: newNode ].
+
+	^newNode
+]
+
+{ #category : #initialization }
+FASTJavaFlowGraphNode >> initialize [ 
+	super initialize.
+	
+	predecessors := OrderedCollection new.
+	successors := OrderedCollection new.
+	defs := OrderedCollection new.
+	refs := OrderedCollection new.
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> predecessors [
+	^predecessors
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> predecessors: aCollection [
+	predecessors := aCollection
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> primitiveAddPredecessor: aFlowGraphNode [
+	predecessors add: aFlowGraphNode
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> primitiveAddSuccessor: aFlowGraphNode [
+	successors add: aFlowGraphNode.
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> primitiveRemovePredecessor: aFlowGraphNode [
+	predecessors remove: aFlowGraphNode
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> primitiveRemoveSuccessor: aFlowGraphNode [
+	successors remove: aFlowGraphNode
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphNode >> statement [
+
+	^ statement
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphNode >> statement: anObject [
+
+	statement := anObject
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> successors [
+	^successors
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphNode >> successors: aCollection [
+	successors := aCollection
+]
