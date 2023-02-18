@@ -5,8 +5,27 @@ It computes a control dependency graph as a collection of pairs: `#(parentNode d
 Class {
 	#name : #FASTJavaFlowGraphVisitor,
 	#superclass : #FASTJavaVisitor,
+	#instVars : [
+		'currentNode'
+	],
 	#category : #'FAST-Java-Tools-dependencies'
 }
+
+{ #category : #accessing }
+FASTJavaFlowGraphVisitor >> currentNode [
+	^currentNode top
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphVisitor >> currentNode: aFASTJavaFlowGraphNode [
+	currentNode push: aFASTJavaFlowGraphNode.
+	^aFASTJavaFlowGraphNode
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphVisitor >> exitCurrentNode [
+	^currentNode pop
+]
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> newNode: aStatement after: lastNode [
@@ -18,18 +37,22 @@ FASTJavaFlowGraphVisitor >> newNode: aStatement after: lastNode [
 
 { #category : #api }
 FASTJavaFlowGraphVisitor >> sdg: aFASTJavaNode [
+	currentNode := Stack new.
 	^aFASTJavaNode accept: self
 ]
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
-	| mainNode |
-	mainNode := FASTJavaFlowGraphIfNode on: aFASTJavaIfStatement.
-	mainNode addThenPart: (aFASTJavaIfStatement thenPart accept: self).
+	self currentNode: (FASTJavaFlowGraphIfNode on: aFASTJavaIfStatement).
+
+	aFASTJavaIfStatement condition accept: self.
+
+	self currentNode addThenPart: (aFASTJavaIfStatement thenPart accept: self).
+
 	aFASTJavaIfStatement elsePart ifNotNil: [ :elsePart |
-			mainNode addElsePart: (elsePart accept: self).
+			currentNode addElsePart: (elsePart accept: self).
 	].
-	^mainNode
+	^self exitCurrentNode
 
 ]
 
@@ -40,12 +63,15 @@ FASTJavaFlowGraphVisitor >> visitFASTTStatement: aFASTStatement [
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
-	| firstNode lastNode |
-	firstNode := nil.
+	| lastNode |
+	lastNode := true.
 	aFASTJavaStatementBlock statements do: [ :aStatement |
-		firstNode
-			ifNil: [ firstNode := lastNode := aStatement accept: self ]
+		lastNode
+			ifNil: [
+				lastNode := aStatement accept: self.
+				self currentNode: lastNode
+			]
 			ifNotNil: [ lastNode := self newNode: aStatement after: lastNode ]
 	].
-	^firstNode asFirstNodeInBlock
+	^self exitCurrentNode asFirstNodeInBlock
 ]

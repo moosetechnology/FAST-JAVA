@@ -6,7 +6,7 @@ Class {
 		'successors',
 		'statement',
 		'refs',
-		'defs'
+		'def'
 	],
 	#category : #'FAST-Java-Tools-dependencies'
 }
@@ -53,7 +53,6 @@ FASTJavaFlowGraphNode >> initialize [
 	
 	predecessors := OrderedCollection new.
 	successors := OrderedCollection new.
-	defs := OrderedCollection new.
 	refs := OrderedCollection new.
 ]
 
