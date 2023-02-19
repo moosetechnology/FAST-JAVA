@@ -42,6 +42,13 @@ FASTJavaFlowGraphVisitor >> sdg: aFASTJavaNode [
 ]
 
 { #category : #visiting }
+FASTJavaFlowGraphVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
+self flag: #todo.
+	aFASTJavaAssignementExpression variable accept: self.
+	aFASTJavaAssignementExpression expression accept: self
+]
+
+{ #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self currentNode: (FASTJavaFlowGraphIfNode on: aFASTJavaIfStatement).
 
@@ -50,7 +57,7 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self currentNode addThenPart: (aFASTJavaIfStatement thenPart accept: self).
 
 	aFASTJavaIfStatement elsePart ifNotNil: [ :elsePart |
-			currentNode addElsePart: (elsePart accept: self).
+			self currentNode addElsePart: (elsePart accept: self).
 	].
 	^self exitCurrentNode
 
@@ -58,13 +65,15 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTTStatement: aFASTStatement [
+	"should not come to this, all statements should have their own visit methods"
+
 	^FASTJavaFlowGraphNode on: aFASTStatement
 ]
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	| lastNode |
-	lastNode := true.
+	lastNode := nil.
 	aFASTJavaStatementBlock statements do: [ :aStatement |
 		lastNode
 			ifNil: [
