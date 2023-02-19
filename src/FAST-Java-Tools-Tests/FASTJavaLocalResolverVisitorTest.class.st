@@ -18,6 +18,21 @@ FASTJavaLocalResolverVisitorTest >> setUp [
 ]
 
 { #category : #tests }
+FASTJavaLocalResolverVisitorTest >> testAddNonLocalDeclaration [
+	"testing helper method #addNonLocalDeclaration:"
+	localResolver resetScopes.
+	localResolver pushScope.
+
+	localResolver scopeAddNonLocalDeclaration: 'blah'.
+
+	"second scope is empty"
+	self assert: localResolver popScope isEmpty.
+
+	"first scope contains NonLocalDeclaration"
+	self assert: (localResolver findDeclaration: 'blah') class equals: FASTJavaNonLocalDeclaration
+]
+
+{ #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testFindDeclarationInCurrentScope [
 	|node|
 	node := FASTJavaVariableDeclarator new.
@@ -63,6 +78,7 @@ FASTJavaLocalResolverVisitorTest >> testHasScopes [
 
 { #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testLocalDeclarationFor [
+	"testing helper method #localDeclaration:for:"
 	| declNode refNode |
 	declNode := FASTJavaVariableDeclarator new. 
 	refNode := FASTJavaVariableExpression new.
@@ -78,8 +94,11 @@ FASTJavaLocalResolverVisitorTest >> testLocalDeclarationFor [
 
 { #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testNonLocalDeclarationWithName [
+	"testing helper method #nonLocalDeclaration:withName:"
 	| node |
 	node := FASTJavaVariableExpression new name: 'blah'.
+	localResolver resetScopes.
+
 	localResolver nonLocalDeclaration: node withName: 'blah'.
 
 	self assert: node localDeclaration notNil.
@@ -92,4 +111,34 @@ FASTJavaLocalResolverVisitorTest >> testResetScopes [
 	localResolver resetScopes.
 	self assert: localResolver hasScopes.
 
+]
+
+{ #category : #tests }
+FASTJavaLocalResolverVisitorTest >> testScopeAddDeclarationTwiceRaisesError [
+	|node|
+	node := FASTJavaVariableDeclarator new.
+	localResolver resetScopes.
+
+	localResolver scopeAdd: 'blah' declaration: node.
+
+	self assert: localResolver currentScope size equals: 1.
+
+	self
+		should: [ localResolver scopeAdd: 'blah' declaration: node ]
+		raise: DuplicatedVariableError
+]
+
+{ #category : #tests }
+FASTJavaLocalResolverVisitorTest >> testScopeAddNonLocalDeclarationTwiceRaisesError [
+	|node|
+	node := FASTJavaVariableDeclarator new.
+	localResolver resetScopes.
+
+	localResolver scopeAddNonLocalDeclaration: 'blah'.
+
+	self assert: localResolver currentScope size equals: 1.
+
+	self
+		should: [ localResolver scopeAddNonLocalDeclaration: 'blah' ]
+		raise: DuplicatedVariableError
 ]
