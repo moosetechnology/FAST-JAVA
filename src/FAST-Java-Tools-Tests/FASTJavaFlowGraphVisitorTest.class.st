@@ -100,17 +100,14 @@ FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThen [
 { #category : #tests }
 FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThenElse [
 	"{ IF ... THEN declarationStmt; ELSE stmt; returnStmt; }"
-	| block flowGraph node |
+	| flowGraph node |
 	ifStmt
 		thenPart: declarationStmt ;
-		elsePart: FASTJavaVarDeclStatement new ;
-		yourself.
-	block := FASTJavaStatementBlock new
-		statements: { ifStmt . returnStmt } ;
-		yourself.
+		elsePart: FASTJavaVarDeclStatement new.
+	blockStmt statements: { ifStmt . returnStmt }.
 
 	flowGraph := FASTJavaFlowGraphVisitor new
-		sdg: block.
+		sdg: blockStmt.
 
 	self assert: flowGraph predecessors isEmpty.
 	self assert: flowGraph successors size equals: 2.
