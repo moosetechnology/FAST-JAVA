@@ -109,6 +109,38 @@ FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThen [
 ]
 
 { #category : #tests }
+FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThenBlock [
+	"{ IF ... THEN { declarationStmt; } returnStmt; }"
+	| flowGraph node |
+	ifStmt thenPart: (FASTJavaStatementBlock new
+		statements: { declarationStmt } ;
+		yourself).
+	blockStmt statements: { ifStmt . returnStmt }.
+
+	flowGraph := FASTJavaFlowGraphVisitor new
+		sdg: blockStmt.
+
+	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
+	self assert: flowGraph statement equals: ifStmt.
+	self assert: flowGraph predecessors isEmpty.
+	self assert: flowGraph successors size equals: 2.
+
+	node := flowGraph successors
+		detect: [ :n | n statement = declarationStmt ]
+		ifNone: [ self fail ].
+
+	self assertCollection: node predecessors hasSameElements: { flowGraph }.
+	self assert: node successors size equals: 1.
+
+	node := node successors anyOne.
+	self assert: node statement equals: returnStmt.
+	self assertCollection: node predecessors size equals: 2.
+	self assert: (node predecessors includes: flowGraph).
+	self assert: node successors isEmpty.
+
+]
+
+{ #category : #tests }
 FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThenElse [
 	"{ IF ... THEN declarationStmt; ELSE stmt; returnStmt; }"
 	| flowGraph node |
