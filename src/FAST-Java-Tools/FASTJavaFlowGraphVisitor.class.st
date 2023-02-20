@@ -14,10 +14,15 @@ Class {
 
 { #category : #private }
 FASTJavaFlowGraphVisitor >> acculmulateVariablesIn: aFASTNode [
-	^Array streamContents: [ :stream |
+	| allVariables |
+	allVariables := Array streamContents: [ :stream |
 		variableAccumulator := stream.
 		aFASTNode accept: self.
-	] 
+	].
+
+	"make sure we empty the accumulator (which is shared) before leaving"
+	variableAccumulator := nil.
+	^allVariables
 ]
 
 { #category : #private }
@@ -55,7 +60,12 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssigne
 	self currentNode
 		defVariable: (self acculmulateVariablesIn: aFASTJavaAssignementExpression variable) anyOne.
 	self currentNode
-		refVariables: (self acculmulateVariablesIn: aFASTJavaAssignementExpression expression)
+		refVariables: (self acculmulateVariablesIn: aFASTJavaAssignementExpression expression) asSet
+]
+
+{ #category : #visiting }
+FASTJavaFlowGraphVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
+	^aFASTJavaCastExpression expression accept: self
 ]
 
 { #category : #visiting }
@@ -67,13 +77,15 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self currentNode: (FASTJavaFlowGraphIfNode on: aFASTJavaIfStatement).
 
-	aFASTJavaIfStatement condition accept: self.
+	self currentNode
+		refVariables: (self acculmulateVariablesIn: aFASTJavaIfStatement condition) asSet.
 
 	self currentNode addThenPart: (aFASTJavaIfStatement thenPart accept: self).
 
 	aFASTJavaIfStatement elsePart ifNotNil: [ :elsePart |
 			self currentNode addElsePart: (elsePart accept: self).
 	].
+
 	^self exitCurrentNode
 
 ]
@@ -87,7 +99,8 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableEx
 FASTJavaFlowGraphVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
 	self currentNode: (FASTJavaFlowGraphNode on: aFASTTExpressionStatement).
 
-	aFASTTExpressionStatement expression accept: self.
+	self currentNode
+		refVariables: (self acculmulateVariablesIn: aFASTTExpressionStatement expression) asSet.
 
 	^self exitCurrentNode
 
