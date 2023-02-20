@@ -13,6 +13,14 @@ Class {
 }
 
 { #category : #private }
+FASTJavaFlowGraphVisitor >> acculmulateVariablesIn: aFASTNode [
+	^Array streamContents: [ :stream |
+		variableAccumulator := stream.
+		aFASTNode accept: self.
+	] 
+]
+
+{ #category : #private }
 FASTJavaFlowGraphVisitor >> currentNode [
 	^currentNode top
 ]
@@ -44,9 +52,15 @@ FASTJavaFlowGraphVisitor >> sdg: aFASTJavaNode [
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
-self flag: #todo.
-	aFASTJavaAssignementExpression variable accept: self.
-	aFASTJavaAssignementExpression expression accept: self
+	self currentNode
+		defVariable: (self acculmulateVariablesIn: aFASTJavaAssignementExpression variable) anyOne.
+	self currentNode
+		refVariables: (self acculmulateVariablesIn: aFASTJavaAssignementExpression expression)
+]
+
+{ #category : #visiting }
+FASTJavaFlowGraphVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
+	variableAccumulator << aFASTJavaIdentifier localDeclaration
 ]
 
 { #category : #visiting }
@@ -60,6 +74,21 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	aFASTJavaIfStatement elsePart ifNotNil: [ :elsePart |
 			self currentNode addElsePart: (elsePart accept: self).
 	].
+	^self exitCurrentNode
+
+]
+
+{ #category : #visiting }
+FASTJavaFlowGraphVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
+	variableAccumulator << aFASTJavaVariableExpression localDeclaration
+]
+
+{ #category : #visiting }
+FASTJavaFlowGraphVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
+	self currentNode: (FASTJavaFlowGraphNode on: aFASTTExpressionStatement).
+
+	aFASTTExpressionStatement expression accept: self.
+
 	^self exitCurrentNode
 
 ]

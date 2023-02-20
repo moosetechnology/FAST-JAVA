@@ -241,3 +241,35 @@ FASTJavaFlowGraphVisitorTest >> testSimpleStatement [
 	self assert: flowGraph predecessors isEmpty.
 	self assert: flowGraph successors isEmpty.
 ]
+
+{ #category : #tests }
+FASTJavaFlowGraphVisitorTest >> testVariableWroteInAssignement [
+	
+	| statement flowGraph |
+	statement := FASTJavaExpressionStatement new
+		expression: assignementExpr ;
+		yourself.
+
+	flowGraph := FASTJavaFlowGraphVisitor new
+		sdg: statement.
+
+	self assert: flowGraph defVariable equals: nonLocalDeclaration.
+
+
+]
+
+{ #category : #tests }
+FASTJavaFlowGraphVisitorTest >> testVariablesReadInAssignement [
+	
+	| statement flowGraph |
+	statement := FASTJavaExpressionStatement new
+		expression: assignementExpr ;
+		yourself.
+
+	flowGraph := FASTJavaFlowGraphVisitor new
+		sdg: statement.
+
+	self assertCollection: flowGraph refVariables hasSameElements: { nonLocalDeclaration }.
+
+
+]

@@ -24,6 +24,12 @@ FASTJavaFlowGraphNode >> addPredecessor: aFlowGraphNode [
 	aFlowGraphNode primitiveAddSuccessor: self
 ]
 
+{ #category : #accessing }
+FASTJavaFlowGraphNode >> addRefVariable: aVariable [
+
+	refs add: aVariable
+]
+
 { #category : #adding }
 FASTJavaFlowGraphNode >> addSuccessor: aFlowGraphNode [
 	self primitiveAddSuccessor: aFlowGraphNode.
@@ -45,6 +51,18 @@ FASTJavaFlowGraphNode >> asFirstNodeInBlock [
 		succ primitiveAddPredecessor: newNode ].
 
 	^newNode
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphNode >> defVariable [
+
+	^ def
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphNode >> defVariable: anObject [
+
+	def := anObject
 ]
 
 { #category : #initialization }
@@ -84,6 +102,18 @@ FASTJavaFlowGraphNode >> primitiveRemovePredecessor: aFlowGraphNode [
 { #category : #adding }
 FASTJavaFlowGraphNode >> primitiveRemoveSuccessor: aFlowGraphNode [
 	successors remove: aFlowGraphNode
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphNode >> refVariables [
+
+	^ refs
+]
+
+{ #category : #accessing }
+FASTJavaFlowGraphNode >> refVariables: aCollection [
+
+	refs := aCollection
 ]
 
 { #category : #accessing }
