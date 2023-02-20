@@ -6,28 +6,29 @@ Class {
 	#name : #FASTJavaFlowGraphVisitor,
 	#superclass : #FASTJavaVisitor,
 	#instVars : [
-		'currentNode'
+		'currentNode',
+		'variableAccumulator'
 	],
 	#category : #'FAST-Java-Tools-dependencies'
 }
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaFlowGraphVisitor >> currentNode [
 	^currentNode top
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaFlowGraphVisitor >> currentNode: aFASTJavaFlowGraphNode [
 	currentNode push: aFASTJavaFlowGraphNode.
 	^aFASTJavaFlowGraphNode
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaFlowGraphVisitor >> exitCurrentNode [
 	^currentNode pop
 ]
 
-{ #category : #visiting }
+{ #category : #private }
 FASTJavaFlowGraphVisitor >> newNode: aStatement after: lastNode [
 	| newNode |
 	newNode := aStatement accept: self.

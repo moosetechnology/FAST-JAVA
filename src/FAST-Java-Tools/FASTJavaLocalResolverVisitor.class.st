@@ -24,7 +24,7 @@ FASTJavaLocalResolverVisitor >> currentScope [
 	^ scopes top
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> findDeclaration: aName [
 	self currentScope
 		at: aName
@@ -50,13 +50,13 @@ FASTJavaLocalResolverVisitor >> initialize [
 	scopes := Stack new
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> localDeclaration: declarationNode for: referingNode [
 	referingNode localDeclaration: declarationNode.
 	declarationNode addLocalUse: referingNode
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> nonLocalDeclaration: referingNode withName: name [
 	self localDeclaration: (self scopeAddNonLocalDeclaration: name) for: referingNode
 
@@ -95,7 +95,7 @@ FASTJavaLocalResolverVisitor >> resetScopes [
 	self pushScope
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> scopeAdd: aName declaration: aFASTNode [
 
 	self currentScope
@@ -109,7 +109,7 @@ FASTJavaLocalResolverVisitor >> scopeAdd: aName declaration: aFASTNode [
 	
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> scopeAddNonLocalDeclaration: name [
 	"add FASTJavaNonLocalDeclaration to top scope"
 	| currentScope nonLocalDeclaration |

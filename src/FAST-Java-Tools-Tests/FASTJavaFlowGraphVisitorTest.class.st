@@ -2,37 +2,48 @@ Class {
 	#name : #FASTJavaFlowGraphVisitorTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'conditionExpr',
 		'ifStmt',
 		'declarationStmt',
 		'returnStmt',
-		'blockStmt'
+		'blockStmt',
+		'infixExpr',
+		'assignementExpr',
+		'variableExpr',
+		'nonLocalDeclaration'
 	],
 	#category : #'FAST-Java-Tools-Tests-dependencies'
 }
 
 { #category : #running }
 FASTJavaFlowGraphVisitorTest >> setUp [
-	| tmpExpression |
 	super setUp.
 
-	tmpExpression := FASTJavaVariableExpression new
+	nonLocalDeclaration := FASTJavaNonLocalDeclaration new name: 'i'.
+
+	variableExpr := FASTJavaVariableExpression new
 		name: 'i' ;
-		localDeclaration: (FASTJavaNonLocalDeclaration new name: 'i') ;
+		localDeclaration: nonLocalDeclaration ;
 		yourself.
 
-	conditionExpr := FASTJavaInfixOperation new
+	infixExpr := FASTJavaInfixOperation new
 		operator: '>' ;
-		leftOperand: tmpExpression ;
-		rightOperand: (FASTJavaIntegerLiteral new primitiveValue: '0' ; yourself) ;
+		leftOperand: variableExpr ;
+		rightOperand: (FASTJavaIntegerLiteral new
+			primitiveValue: '0' ;
+			yourself) ;
 		yourself.
 
-	declarationStmt	:= FASTJavaVarDeclStatement new.
+	assignementExpr := FASTJavaAssignementExpression new
+		variable: variableExpr ;
+		expression: infixExpr ;
+		yourself.
+
+	declarationStmt := FASTJavaVarDeclStatement new.
 	returnStmt := FASTJavaReturnStatement new.
 
 	ifStmt := FASTJavaIfStatement new
-		condition: conditionExpr ;
-		localDeclaration: (FASTJavaNonLocalDeclaration new name: 'i') ;
+		condition: infixExpr ;
+		localDeclaration: nonLocalDeclaration ;
 		yourself.
 
 	blockStmt := FASTJavaStatementBlock new
