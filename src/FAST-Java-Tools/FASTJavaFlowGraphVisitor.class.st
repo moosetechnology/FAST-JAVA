@@ -96,6 +96,11 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableEx
 ]
 
 { #category : #visiting }
+FASTJavaFlowGraphVisitor >> visitFASTTBehaviouralEntity: aFASTBehaviouralEntity [
+	^aFASTBehaviouralEntity statementBlock accept: self
+]
+
+{ #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
 	"FASTJavaExpressionStatement creates a FlowGraphNode and then delegates computation
 	of read/wrote variables to the expression"
