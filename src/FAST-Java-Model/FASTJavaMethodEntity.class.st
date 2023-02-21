@@ -8,7 +8,8 @@ Class {
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner',
+		'#typeParameters => FMMany type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -26,6 +27,12 @@ FASTJavaMethodEntity class >> annotation [
 FASTJavaMethodEntity >> addThrow: anObject [
 	<generated>
 	^ self throws add: anObject
+]
+
+{ #category : #adding }
+FASTJavaMethodEntity >> addTypeParameter: anObject [
+	<generated>
+	^ self typeParameters add: anObject
 ]
 
 { #category : #accessing }
@@ -73,4 +80,28 @@ FASTJavaMethodEntity >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
 	^ MooseSpecializedGroup with: self type
+]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> typeParameters [
+	"Relation named: #typeParameters type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner"
+
+	<generated>
+	<FMComment: 'The list of type parameter'>
+	<derived>
+	^ typeParameters
+]
+
+{ #category : #accessing }
+FASTJavaMethodEntity >> typeParameters: anObject [
+
+	<generated>
+	typeParameters value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaMethodEntity >> typeParametersGroup [
+	<generated>
+	<navigation: 'TypeParameters'>
+	^ MooseSpecializedGroup withAll: self typeParameters asSet
 ]

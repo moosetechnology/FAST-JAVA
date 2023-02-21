@@ -114,7 +114,8 @@ Class {
 		'importDeclaration',
 		'multiImportDeclaration',
 		'qualifiedName',
-		'javaLabeledStatement'
+		'javaLabeledStatement',
+		'javaTypeParameter'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -700,7 +701,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaArrayTypeExpression := builder newClassNamed: #ArrayTypeExpression comment: 'I represent an array type'.
 	javaClassTypeExpression := builder newClassNamed: #ClassTypeExpression comment: 'I represent a class type'.
 	javaPrimitiveTypeExpression := builder newClassNamed: #PrimitiveTypeExpression comment: 'I represent a primitive type'.
-	
+	javaTypeParameter := builder newClassNamed: #TypeParameterExpression comment: 'I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`'.
 	
 	javaBooleanTypeExpression := builder newClassNamed: #BooleanTypeExpression comment: 'I represent a boolean type'.
 	javaByteTypeExpression := builder newClassNamed: #ByteTypeExpression comment: 'I represent a byte type'.
@@ -895,6 +896,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLongTypeExpression --|> javaPrimitiveTypeExpression.
 	javaShortTypeExpression --|> javaPrimitiveTypeExpression.
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
+	
+	javaTypeParameter --|> tExpression.
 
 	javaBooleanLiteral --|> tLiteral.
 	javaBooleanLiteral --|> tReceiver.
@@ -1208,6 +1211,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-*
 		((javaClassTypeExpression property: #javaMethodThrowsOwner) 
 			 comment: 'The method that throws me').
+	
+	((javaMethodEntity property: #typeParameters) comment:
+		 'The list of type parameter')
+	<>-*
+		((javaTypeParameter property: #javaMethodTypeParameterOwner) 
+			 comment: 'The method that use me').
 
 	((javaParameterExpression property: #type) comment:
 		 'The type of the parameter')

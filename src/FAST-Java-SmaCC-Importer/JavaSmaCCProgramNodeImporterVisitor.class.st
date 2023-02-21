@@ -707,6 +707,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 	aMethodDeclaration throws ifNotNil: [ :throws | 
 		throws classTypes do: [ :classType | 
 			currentFASTEntity addThrow: (self clone accept: classType) ] ].
+	aMethodDeclaration typeParameters ifNotNil: [ :typeParameters | 
+		typeParameters parameters do: [ :typeParameter | 
+			currentFASTEntity addTypeParameter:
+				(self clone accept: typeParameter) ] ].
 	^ currentFASTEntity
 ]
 
@@ -1102,6 +1106,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeName: aTypeName [
 	currentFASTEntity := self addToModel: FASTJavaTypeName new.
 	currentFASTEntity name: aTypeName name value.
 	self generalVisitActionForNodeEntity: aTypeName.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitTypeParameter: aTypeParameter [
+	currentFASTEntity := self addToModel: FASTJavaTypeParameterExpression new.
+	self generalVisitActionForNodeEntity: aTypeParameter.
 	^ currentFASTEntity
 ]
 
