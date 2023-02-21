@@ -97,10 +97,11 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableEx
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
+	"FASTJavaExpressionStatement creates a FlowGraphNode and then delegates computation
+	of read/wrote variables to the expression"
 	self currentNode: (FASTJavaFlowGraphNode on: aFASTTExpressionStatement).
 
-	self currentNode
-		refVariables: (self acculmulateVariablesIn: aFASTTExpressionStatement expression) asSet.
+	aFASTTExpressionStatement expression accept: self.
 
 	^self exitCurrentNode
 
