@@ -1,3 +1,6 @@
+"
+A visitor to compute the flowgraph of a FAST method
+"
 Class {
 	#name : #FASTJavaControlDependencyVisitor,
 	#superclass : #FASTJavaVisitor,

@@ -1,3 +1,8 @@
+"
+A FlowGraphNode for an IF statement
+
+It is needed to treat adequatly the THEN and ELSE parts
+"
 Class {
 	#name : #FASTJavaFlowGraphIfNode,
 	#superclass : #FASTJavaFlowGraphNode,
@@ -6,37 +11,39 @@ Class {
 
 { #category : #adding }
 FASTJavaFlowGraphIfNode >> addElsePart: aFlowGraphNode [
-	"happens when visiting the ELSE part of the IF statement"
+	"ELSE part is 2nd successor of IF statement"
 	self primitiveAddSuccessor: aFlowGraphNode.
 	aFlowGraphNode primitiveAddPredecessor: self.
 ]
 
 { #category : #adding }
 FASTJavaFlowGraphIfNode >> addSuccessor: aFlowGraphNode [
-	successors first addSuccessor: aFlowGraphNode.
+	self addSuccessorToThen: aFlowGraphNode.
 	self addSuccessorToElse: aFlowGraphNode
 ]
 
 { #category : #adding }
-FASTJavaFlowGraphIfNode >> addSuccessorNoElse: aFlowGraphNode [
-	"if there is no ELSE part, the next statement is successor of the IF statement itself"
-	self addElsePart: aFlowGraphNode
-]
-
-{ #category : #adding }
 FASTJavaFlowGraphIfNode >> addSuccessorToElse: aFlowGraphNode [
+	"ELSE part (when it exists) is 2nd successor of IF
+	 when there is no ELSE part, aFlowGraphNode becomes 2nd successor of the IF statement itself"
 	(successors size = 2)
-	ifTrue: [ "else part"
+	ifTrue: [
 		successors second addSuccessor: aFlowGraphNode.
 	]
 	ifFalse: [
-		self addSuccessorNoElse: aFlowGraphNode
+		self addElsePart: aFlowGraphNode
 	]
+]
+
+{ #category : #adding }
+FASTJavaFlowGraphIfNode >> addSuccessorToThen: aFlowGraphNode [
+	"THEN part is 1st successor of IF statement"
+	successors first addSuccessor: aFlowGraphNode
 ]
 
 { #category : #adding }
 FASTJavaFlowGraphIfNode >> addThenPart: aFlowGraphNode [
-	"happens when visiting the THEN part of the IF statement"
+	"THEN part is first successor of IF statement"
 	self primitiveAddSuccessor: aFlowGraphNode.
 	aFlowGraphNode primitiveAddPredecessor: self.
 ]

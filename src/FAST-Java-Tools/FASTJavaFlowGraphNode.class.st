@@ -1,3 +1,11 @@
+"
+A node in a flowgraph. Each node corresponds to a FAST statement.
+
+A node has:
+- its FAST statement
+- predecessors and successors (FlowGraphNodes) in the flow graph
+- the FAST variables that are read or written in the FAST statement
+"
 Class {
 	#name : #FASTJavaFlowGraphNode,
 	#superclass : #FASTJavaVisitor,

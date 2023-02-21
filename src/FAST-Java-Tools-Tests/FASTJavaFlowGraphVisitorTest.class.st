@@ -134,7 +134,7 @@ FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThenBlock [
 
 	node := node successors anyOne.
 	self assert: node statement equals: returnStmt.
-	self assertCollection: node predecessors size equals: 2.
+	self assert: node predecessors size equals: 2.
 	self assert: (node predecessors includes: flowGraph).
 	self assert: node successors isEmpty.
 

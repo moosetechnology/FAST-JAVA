@@ -42,7 +42,7 @@ FASTJavaFlowGraphVisitor >> exitCurrentNode [
 ]
 
 { #category : #private }
-FASTJavaFlowGraphVisitor >> newNode: aStatement after: lastNode [
+FASTJavaFlowGraphVisitor >> newNodeInBlock: aStatement after: lastNode [
 	| newNode |
 	newNode := aStatement accept: self.
 	lastNode addSuccessor: newNode.
@@ -115,6 +115,7 @@ FASTJavaFlowGraphVisitor >> visitFASTTStatement: aFASTStatement [
 
 { #category : #visiting }
 FASTJavaFlowGraphVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
+	"BlockStatement are not recorded in the Flow graph. Instead their first statement is"
 	| lastNode |
 	lastNode := nil.
 	aFASTJavaStatementBlock statements do: [ :aStatement |
@@ -123,7 +124,7 @@ FASTJavaFlowGraphVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 				lastNode := aStatement accept: self.
 				self currentNode: lastNode
 			]
-			ifNotNil: [ lastNode := self newNode: aStatement after: lastNode ]
+			ifNotNil: [ lastNode := self newNodeInBlock: aStatement after: lastNode ]
 	].
 	^self exitCurrentNode asFirstNodeInBlock
 ]
