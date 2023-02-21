@@ -52,3 +52,39 @@ FASTJavaFlowGraphIfNode >> addThenPart: aFlowGraphNode [
 FASTJavaFlowGraphIfNode >> asFirstNodeInBlock [
 	^self
 ]
+
+{ #category : #traversing }
+FASTJavaFlowGraphIfNode >> traverse: visitor [
+	visitor visit: self.
+	self traverseThenPart: visitor.
+	self traverseElsePart: visitor.
+	self successors first traverseSuccessors: visitor
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphIfNode >> traverseElsePart: visitor [
+	"traverse ELSE part only, not its successors"
+	| elsePart |
+	(successors size = 2)
+		ifFalse: [ ^self ].
+
+	elsePart := successors second.
+	elsePart isBlockNode
+		ifTrue: [ elsePart traverse: visitor ]
+		ifFalse:  [ visitor visit: elsePart ]
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphIfNode >> traverseSuccessors: visitor [
+	successors first traverseSuccessors: visitor
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphIfNode >> traverseThenPart: visitor [
+	"traverse THEN part only, not its successors"
+	| thenPart |
+	thenPart := successors first.
+	thenPart isBlockNode
+		ifTrue: [ thenPart traverse: visitor ]
+		ifFalse:  [ visitor visit: thenPart ]
+]

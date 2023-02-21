@@ -14,7 +14,8 @@ Class {
 		'successors',
 		'statement',
 		'refs',
-		'def'
+		'def',
+		'slice'
 	],
 	#category : #'FAST-Java-Tools-dependencies'
 }
@@ -73,6 +74,27 @@ FASTJavaFlowGraphNode >> defVariable: anObject [
 	def := anObject
 ]
 
+{ #category : #slicing }
+FASTJavaFlowGraphNode >> findNodeWithStatement: aFASTStatement [
+	| found |
+	found := nil.
+	^(self statement = aFASTStatement)
+		ifTrue: [ self ]
+		ifFalse: [ self successors
+			detect: [ :succ |
+				found := succ findNodeWithStatement: aFASTStatement.
+				found notNil ]
+			ifFound: [ found ]
+			ifNone: [ nil ]
+		]
+]
+
+{ #category : #slicing }
+FASTJavaFlowGraphNode >> includeInSlice: aCollection [
+	^(aCollection includes: self defVariable) or:
+	[ self refVariables anySatisfy: [ :var | aCollection includes: var ] ]
+]
+
 { #category : #initialization }
 FASTJavaFlowGraphNode >> initialize [ 
 	super initialize.
@@ -80,6 +102,11 @@ FASTJavaFlowGraphNode >> initialize [
 	predecessors := OrderedCollection new.
 	successors := OrderedCollection new.
 	refs := OrderedCollection new.
+]
+
+{ #category : #testing }
+FASTJavaFlowGraphNode >> isBlockNode [
+	^false
 ]
 
 { #category : #adding }
@@ -124,6 +151,19 @@ FASTJavaFlowGraphNode >> refVariables: aCollection [
 	refs := aCollection
 ]
 
+{ #category : #slicing }
+FASTJavaFlowGraphNode >> sliceDownVariables: aCollection [
+	(self includeInSlice: aCollection)
+		ifTrue: [ slice add: self ].
+
+	self successors 
+]
+
+{ #category : #slicing }
+FASTJavaFlowGraphNode >> startSlice [
+	slice := OrderedCollection new
+]
+
 { #category : #accessing }
 FASTJavaFlowGraphNode >> statement [
 
@@ -144,4 +184,15 @@ FASTJavaFlowGraphNode >> successors [
 { #category : #adding }
 FASTJavaFlowGraphNode >> successors: aCollection [
 	successors := aCollection
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphNode >> traverse: visitor [
+	visitor visit: self.
+	self traverseSuccessors: visitor
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphNode >> traverseSuccessors: visitor [
+	self successors do: [ :succ | succ traverse: visitor ]
 ]

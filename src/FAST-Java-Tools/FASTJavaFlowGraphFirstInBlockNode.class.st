@@ -33,3 +33,31 @@ FASTJavaFlowGraphFirstInBlockNode >> initialize [
 
 	lastInblock := self
 ]
+
+{ #category : #testing }
+FASTJavaFlowGraphFirstInBlockNode >> isBlockNode [
+	^true
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphFirstInBlockNode >> traverse: visitor [
+	"traverse only the statements in the block,
+	if there is a successor to the block, its 'parent' should take care of traversing it
+	by calling #traverseSuccessors:"
+	self traverse: visitor stoppingAt: lastInblock
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphFirstInBlockNode >> traverse: visitor stoppingAt: lastStatementInBlock [
+	"traverse only the statements in the block, until the lastStatementInBlock"
+	visitor visit: self.
+	(self == lastStatementInBlock)
+		ifFalse: [ self traverseSuccessors: visitor ]
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphFirstInBlockNode >> traverseSuccessor: visitor [
+	"#traverse: only goes through the statements in the block,
+	this methods goes after the last statement of the block"
+	lastInblock traverseSuccessors: visitor
+]
