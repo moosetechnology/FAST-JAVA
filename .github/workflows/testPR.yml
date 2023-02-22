@@ -8,7 +8,7 @@ env:
 on:
   pull_request:
     branches: 
-      - v2
+      - v*
 
 jobs:
   build:
