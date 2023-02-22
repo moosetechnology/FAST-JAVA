@@ -12,6 +12,12 @@ Class {
 	#category : #'FAST-Java-Tools-flowgraph'
 }
 
+{ #category : #'instance creation' }
+FASTJavaFlowGraphBuilder class >> on: aFASTJavaEntity [
+	^self new
+		on: aFASTJavaEntity
+]
+
 { #category : #private }
 FASTJavaFlowGraphBuilder >> acculmulateVariablesIn: aFASTNode [
 	| allVariables |
