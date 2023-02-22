@@ -49,10 +49,10 @@ FASTJavaFlowGraphBuilder >> exitCurrentNode [
 
 { #category : #private }
 FASTJavaFlowGraphBuilder >> newNodeInBlock: aStatement after: lastNode [
-	| newNode |
-	newNode := aStatement accept: self.
-	lastNode addSuccessor: newNode.
-	^newNode
+	| tmpNode |
+	tmpNode := aStatement accept: self.
+	lastNode addSuccessor: tmpNode.
+	^tmpNode
 ]
 
 { #category : #api }
@@ -128,15 +128,15 @@ FASTJavaFlowGraphBuilder >> visitFASTTStatement: aFASTStatement [
 { #category : #visiting }
 FASTJavaFlowGraphBuilder >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	"BlockStatement are not recorded in the Flow graph. Instead their first statement is"
-	| lastNode |
-	lastNode := nil.
+	| tmpNode |
+	tmpNode := nil.
 	aFASTJavaStatementBlock statements do: [ :aStatement |
-		lastNode
+		tmpNode
 			ifNil: [
-				lastNode := aStatement accept: self.
-				self currentNode: lastNode
+				tmpNode := aStatement accept: self.
+				self currentNode: tmpNode
 			]
-			ifNotNil: [ lastNode := self newNodeInBlock: aStatement after: lastNode ]
+			ifNotNil: [ tmpNode := self newNodeInBlock: aStatement after: tmpNode ]
 	].
 	^self exitCurrentNode asFirstNodeInBlock
 ]

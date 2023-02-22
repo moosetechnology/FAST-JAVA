@@ -56,19 +56,20 @@ FASTJavaFlowGraphNode >> addSuccessor: aFlowGraphNode [
 
 { #category : #converting }
 FASTJavaFlowGraphNode >> asFirstNodeInBlock [
-	| newNode |
-	newNode := FASTJavaFlowGraphFirstInBlockNode on: self statement.
-	newNode predecessors: predecessors.
+	| tmpNode |
+	tmpNode := FASTJavaFlowGraphFirstInBlockNode on: self statement.
+	tmpNode predecessors: predecessors.
 	predecessors do: [ :pred |
 		pred primitiveRemoveSuccessor: self.
-		pred primitiveAddSuccessor: newNode ].
+		pred primitiveAddSuccessor: tmpNode ].
 
-	newNode successors: successors.
+	tmpNode successors: successors.
 	successors do: [ :succ |
 		succ primitiveRemovePredecessor: self.
-		succ primitiveAddPredecessor: newNode ].
+		succ primitiveAddPredecessor: tmpNode ].
 
-	^newNode
+	"updates #lastInBlock instance variable of the newly created FASTJavaFlowGraphFirstInBlockNode"
+	^tmpNode asFirstNodeInBlock 
 ]
 
 { #category : #accessing }

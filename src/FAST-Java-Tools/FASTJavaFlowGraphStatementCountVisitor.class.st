@@ -12,6 +12,11 @@ Class {
 	#category : #'FAST-Java-Tools-flowgraph'
 }
 
+{ #category : #accessing }
+FASTJavaFlowGraphStatementCountVisitor >> statementCount [
+	^count 
+]
+
 { #category : #traversing }
 FASTJavaFlowGraphStatementCountVisitor >> traverse: aFlowGraphNode [
 	count := 0.

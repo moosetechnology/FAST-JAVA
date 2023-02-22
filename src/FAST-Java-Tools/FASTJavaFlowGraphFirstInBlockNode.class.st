@@ -7,7 +7,7 @@ Class {
 	#name : #FASTJavaFlowGraphFirstInBlockNode,
 	#superclass : #FASTJavaFlowGraphNode,
 	#instVars : [
-		'lastInblock'
+		'lastInBlock'
 	],
 	#category : #'FAST-Java-Tools-flowgraph'
 }
@@ -15,7 +15,7 @@ Class {
 { #category : #traversing }
 FASTJavaFlowGraphFirstInBlockNode >> accept: visitor [
 	^(self acceptToEnd: visitor)
-		ifTrue: [ lastInblock successorsAccept: visitor ]
+		ifTrue: [ lastInBlock successorsAccept: visitor ]
 		ifFalse: [ false ]
 ]
 
@@ -31,22 +31,26 @@ FASTJavaFlowGraphFirstInBlockNode >> accept: visitor toEnd: lastStatementInBlock
 { #category : #traversing }
 FASTJavaFlowGraphFirstInBlockNode >> acceptToEnd: visitor [
 	"traverse only to the end of the block"
-	^self accept: visitor toEnd: lastInblock
+	^self accept: visitor toEnd: lastInBlock
 ]
 
 { #category : #adding }
 FASTJavaFlowGraphFirstInBlockNode >> addSuccessor: aFlowGraphNode [
 	"successor of the block is set as the successor of the last statement of the block
 	 if there is only 1 statement in the block (lastInblock = self), avoid infinite recursive call"
-	(lastInblock = self)
+	(lastInBlock == self)
 	ifTrue:  [
-		lastInblock primitiveAddSuccessor: aFlowGraphNode.
-		aFlowGraphNode primitiveAddPredecessor: lastInblock ]
-	ifFalse: [ lastInblock addSuccessor: aFlowGraphNode ]
+		lastInBlock primitiveAddSuccessor: aFlowGraphNode.
+		aFlowGraphNode primitiveAddPredecessor: lastInBlock ]
+	ifFalse: [ lastInBlock addSuccessor: aFlowGraphNode ]
 ]
 
 { #category : #converting }
 FASTJavaFlowGraphFirstInBlockNode >> asFirstNodeInBlock [
+	lastInBlock := self.
+	[ lastInBlock successors isEmpty ]
+		whileFalse: [ lastInBlock := lastInBlock successors anyOne ].
+	
 	^self
 ]
 
@@ -54,10 +58,16 @@ FASTJavaFlowGraphFirstInBlockNode >> asFirstNodeInBlock [
 FASTJavaFlowGraphFirstInBlockNode >> initialize [ 
 	super initialize.
 
-	lastInblock := self
+	lastInBlock := self
 ]
 
 { #category : #testing }
 FASTJavaFlowGraphFirstInBlockNode >> isBlockNode [
 	^true
+]
+
+{ #category : #'private -testing' }
+FASTJavaFlowGraphFirstInBlockNode >> lastInBlock [
+
+	^ lastInBlock
 ]
