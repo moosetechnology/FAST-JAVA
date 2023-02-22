@@ -2,9 +2,9 @@ Class {
 	#name : #FASTJavaFlowGraphAbstractVisitorTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'ifnode',
 		'blockNode',
-		'simpleNode'
+		'simpleNode',
+		'ifNode'
 	],
 	#category : #'FAST-Java-Tools-Tests-flowgraph'
 }
@@ -23,7 +23,7 @@ FASTJavaFlowGraphAbstractVisitorTest >> setUp [
 			yourself) ;
 		asFirstNodeInBlock.
 
-	ifnode := FASTJavaFlowGraphIfNode new
+	ifNode := FASTJavaFlowGraphIfNode new
 		statement: 'if node' ;
 		yourself.
 		

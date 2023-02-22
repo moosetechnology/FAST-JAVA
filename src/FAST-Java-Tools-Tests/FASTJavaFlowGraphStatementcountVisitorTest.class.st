@@ -5,12 +5,45 @@ Class {
 }
 
 { #category : #tests }
-FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseBlockNodeEquals_2 [
+FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseBlockNode [
 	self traverse: blockNode returns: 2
 ]
 
 { #category : #tests }
-FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseSimpleNodeEquals_1 [
+FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseBlockWithTwoNodesAndIfNodeAndOtherNode [
+	"{ node1 -> node2 -> ifNode -> otherNode
+	and ifNode contains only simpleNode in its THEN part"
+	| otherNode |
+	otherNode := FASTJavaFlowGraphNode new
+		statement: 'stmt after if' ;
+		yourself.
+	ifNode thenPart: simpleNode.
+	ifNode addSuccessor: otherNode.
+	blockNode lastInBlock addSuccessor: ifNode.
+	blockNode lastInBlock: otherNode.
+	
+	self traverse: blockNode  returns: 5
+]
+
+{ #category : #tests }
+FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseIfNodeWithThen [
+	ifNode thenPart: blockNode.
+	self traverse: ifNode  returns: 3
+]
+
+{ #category : #tests }
+FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseIfNodeWithThenAndElse [
+	| otherNode |
+	otherNode := FASTJavaFlowGraphNode new
+		statement: 'stmt in else' ;
+		yourself.
+	ifNode thenPart: blockNode.
+	ifNode elsePart: otherNode.
+	self traverse: ifNode  returns: 4
+]
+
+{ #category : #tests }
+FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseSimpleNode [
 	self traverse: simpleNode returns: 1
 ]
 

@@ -22,10 +22,14 @@ FASTJavaFlowGraphAbstractVisitor >> visitFlowGraphBlockNode: aFlowGraphFirstInBl
 
 { #category : #traversing }
 FASTJavaFlowGraphAbstractVisitor >> visitFlowGraphIfNode: aFlowGraphIfNode [
-	^self visitFlowGraphNode: aFlowGraphIfNode
+	(aFlowGraphIfNode thenPart accept: self) ifFalse: [ ^ false ].
+	(aFlowGraphIfNode elsePart accept: self) ifFalse: [ ^ false ].
+	(aFlowGraphIfNode successorsAccept: self) ifFalse: [ ^ false ].
+	^true
+
 ]
 
 { #category : #traversing }
 FASTJavaFlowGraphAbstractVisitor >> visitFlowGraphNode: aFlowGraphNode [
-	^true
+	^aFlowGraphNode successorsAccept: self
 ]

@@ -31,15 +31,8 @@ FASTJavaFlowGraphNode class >> on: aFASTStatement [
 { #category : #traversing }
 FASTJavaFlowGraphNode >> accept: visitor [
 	"returns whether the graph traversal should continue or not"
-	^(visitor visitFlowGraphBlockNode: self)
-		ifTrue: [ self successorsAccept: visitor ]
-		ifFalse: [ false ]
-]
+	^visitor visitFlowGraphBlockNode: self
 
-{ #category : #adding }
-FASTJavaFlowGraphNode >> addPredecessor: aFlowGraphNode [
-	self primitiveAddPredecessor: aFlowGraphNode.
-	aFlowGraphNode primitiveAddSuccessor: self
 ]
 
 { #category : #accessing }
@@ -48,28 +41,10 @@ FASTJavaFlowGraphNode >> addRefVariable: aVariable [
 	refs add: aVariable
 ]
 
-{ #category : #adding }
+{ #category : #accessing }
 FASTJavaFlowGraphNode >> addSuccessor: aFlowGraphNode [
 	self primitiveAddSuccessor: aFlowGraphNode.
 	aFlowGraphNode primitiveAddPredecessor: self
-]
-
-{ #category : #converting }
-FASTJavaFlowGraphNode >> asFirstNodeInBlock [
-	| tmpNode |
-	tmpNode := FASTJavaFlowGraphFirstInBlockNode on: self statement.
-	tmpNode predecessors: predecessors.
-	predecessors do: [ :pred |
-		pred primitiveRemoveSuccessor: self.
-		pred primitiveAddSuccessor: tmpNode ].
-
-	tmpNode successors: successors.
-	successors do: [ :succ |
-		succ primitiveRemovePredecessor: self.
-		succ primitiveAddPredecessor: tmpNode ].
-
-	"updates #lastInBlock instance variable of the newly created FASTJavaFlowGraphFirstInBlockNode"
-	^tmpNode asFirstNodeInBlock 
 ]
 
 { #category : #accessing }
@@ -84,7 +59,7 @@ FASTJavaFlowGraphNode >> defVariable: anObject [
 	def := anObject
 ]
 
-{ #category : #slicing }
+{ #category : #'to deprecate' }
 FASTJavaFlowGraphNode >> findNodeWithStatement: aFASTStatement [
 	| found |
 	found := nil.
@@ -99,7 +74,7 @@ FASTJavaFlowGraphNode >> findNodeWithStatement: aFASTStatement [
 		]
 ]
 
-{ #category : #slicing }
+{ #category : #'to deprecate' }
 FASTJavaFlowGraphNode >> includeInSlice: aCollection [
 	^(aCollection includes: self defVariable) or:
 	[ self refVariables anySatisfy: [ :var | aCollection includes: var ] ]
@@ -114,37 +89,32 @@ FASTJavaFlowGraphNode >> initialize [
 	refs := OrderedCollection new.
 ]
 
-{ #category : #testing }
-FASTJavaFlowGraphNode >> isBlockNode [
-	^false
-]
-
-{ #category : #adding }
+{ #category : #accessing }
 FASTJavaFlowGraphNode >> predecessors [
 	^predecessors
 ]
 
-{ #category : #adding }
+{ #category : #accessing }
 FASTJavaFlowGraphNode >> predecessors: aCollection [
 	predecessors := aCollection
 ]
 
-{ #category : #adding }
+{ #category : #private }
 FASTJavaFlowGraphNode >> primitiveAddPredecessor: aFlowGraphNode [
 	predecessors add: aFlowGraphNode
 ]
 
-{ #category : #adding }
+{ #category : #private }
 FASTJavaFlowGraphNode >> primitiveAddSuccessor: aFlowGraphNode [
 	successors add: aFlowGraphNode.
 ]
 
-{ #category : #adding }
+{ #category : #'to deprecate' }
 FASTJavaFlowGraphNode >> primitiveRemovePredecessor: aFlowGraphNode [
 	predecessors remove: aFlowGraphNode
 ]
 
-{ #category : #adding }
+{ #category : #'to deprecate' }
 FASTJavaFlowGraphNode >> primitiveRemoveSuccessor: aFlowGraphNode [
 	successors remove: aFlowGraphNode
 ]
@@ -161,7 +131,7 @@ FASTJavaFlowGraphNode >> refVariables: aCollection [
 	refs := aCollection
 ]
 
-{ #category : #slicing }
+{ #category : #'to deprecate' }
 FASTJavaFlowGraphNode >> sliceDownVariables: aCollection [
 	(self includeInSlice: aCollection)
 		ifTrue: [ slice add: self ].
@@ -169,7 +139,7 @@ FASTJavaFlowGraphNode >> sliceDownVariables: aCollection [
 	self successors 
 ]
 
-{ #category : #slicing }
+{ #category : #'to deprecate' }
 FASTJavaFlowGraphNode >> startSlice [
 	slice := OrderedCollection new
 ]
@@ -186,12 +156,12 @@ FASTJavaFlowGraphNode >> statement: anObject [
 	statement := anObject
 ]
 
-{ #category : #adding }
+{ #category : #accessing }
 FASTJavaFlowGraphNode >> successors [
 	^successors
 ]
 
-{ #category : #adding }
+{ #category : #accessing }
 FASTJavaFlowGraphNode >> successors: aCollection [
 	successors := aCollection
 ]

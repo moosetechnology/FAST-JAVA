@@ -49,7 +49,7 @@ FASTJavaFlowGraphBuilderTest >> setUp [
 	blockStmt := FASTJavaStatementBlock new
 ]
 
-{ #category : #tests }
+{ #category : #'as yet unclassified' }
 FASTJavaFlowGraphBuilderTest >> testBlockStatement [
 	"{ declarationStmt ; otherStmt; returnStmt; }"
 	| otherStmt flowGraph node |
@@ -58,22 +58,28 @@ FASTJavaFlowGraphBuilderTest >> testBlockStatement [
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
 
-	self assert: flowGraph class equals: FASTJavaFlowGraphFirstInBlockNode.
-	self assert: flowGraph statement equals: declarationStmt.
+	self assert: flowGraph class equals: FASTJavaFlowGraphBlockNode.
 	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 1.
-	self assert: flowGraph lastInBlock statement equals: returnStmt.
-
-	node := flowGraph successors anyOne.
-	self assert: node class equals: FASTJavaFlowGraphNode.
-	self assert: node statement equals: otherStmt.
-	self assertCollection: node predecessors hasSameElements: { flowGraph }.
+	self assert: flowGraph successors isEmpty.
+	
+	"declarationStmt node"
+	node := flowGraph firstNode.
+	self assert: node statement equals: declarationStmt.
+	self assert: node predecessors isEmpty.
 	self assert: node successors size equals: 1.
 
+	"otherStmt node"
+	node := node successors anyOne.
+	self assert: node class equals: FASTJavaFlowGraphNode.
+	self assert: node statement equals: otherStmt.
+	self assert: node predecessors size equals: 1.
+	self assert: node successors size equals: 1.
+
+	"returnStmt node"
 	node := node successors anyOne.
 	self assert: node class equals: FASTJavaFlowGraphNode.
 	self assert: node statement equals: returnStmt.
-	self assertCollection: node predecessors size equals: 1.
+	self assert: node predecessors size equals: 1.
 	self assert: node successors isEmpty.
 
 ]
@@ -87,22 +93,27 @@ FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThen [
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
 
-	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
-	self assert: flowGraph statement equals: ifStmt.
+	self assert: flowGraph class equals: FASTJavaFlowGraphBlockNode.
 	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 2.
+	self assert: flowGraph successors isEmpty.
 
-	node := flowGraph successors
-		detect: [ :n | n statement = declarationStmt ]
-		ifNone: [ self fail ].
+	"ifStmt node"
+	node := flowGraph firstNode.
+	self assert: node statement equals: ifStmt.
+	self assert: node thenPart notNil.
+	self assert: node elsePart isNil.
+	self assert: flowGraph predecessors isEmpty.
+	self assert: flowGraph successors isEmpty.
 
-	self assertCollection: node predecessors hasSameElements: { flowGraph }.
-	self assert: node successors size equals: 1.
+	node := flowGraph firstNode thenPart.
+	self assert: node statement equals: declarationStmt.
+	self assert: node predecessors isEmpty.
+	self assert: node successors isEmpty.
 
-	node := node successors anyOne.
+	"returnStmt node (succesor of ifStmt)"
+	node := flowGraph firstNode successors anyOne.
 	self assert: node statement equals: returnStmt.
-	self assertCollection: node predecessors size equals: 2.
-	self assert: (node predecessors includes: flowGraph).
+	self assertCollection: node predecessors hasSameElements: { flowGraph firstNode }.
 	self assert: node successors isEmpty.
 
 ]
@@ -119,150 +130,80 @@ FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThenBlock [
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
 
-	"statementBlock node = #ifStmt node"
-	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
-	self assert: flowGraph statement equals: ifStmt.
+	"ifStmt node"
+	node := flowGraph firstNode.
+	self assert: node statement equals: ifStmt.
+	self assert: node thenPart notNil.
+	self assert: node elsePart isNil.
 	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 2.
+	self assert: flowGraph successors isEmpty.
 
-	"#declarationStmt node"
-	node := flowGraph successors
-		detect: [ :n | n statement = declarationStmt ]
-		ifNone: [ self fail ].
-
-	self assertCollection: node predecessors hasSameElements: { flowGraph }.
+	"ifStmt node, then part"
+	node := flowGraph firstNode thenPart.
+	self assert: node class equals: FASTJavaFlowGraphBlockNode.
+	self assert: node predecessors isEmpty.
+	self assert: node successors isEmpty.
+	
+	"#declarationStmt node in THEN part"
+	node := node firstNode.
+	self assert: node class equals: FASTJavaFlowGraphNode.
+	self assert: node statement equals: declarationStmt.
+	self assert: node predecessors isEmpty.
 	self assert: node successors size equals: 1.
 
-	"#otherStmt node"
+	"#otherStmt node in THEN part"
 	node := node successors anyOne.
 	self assert: node statement equals: otherStmt.
 	self assert: node predecessors size equals: 1.
-	self assert: node successors size equals: 1.
+	self assert: node successors isEmpty.
 
-	"#returnStmt Node"
-	node := node successors anyOne.
+	"returnStmt node (succesor of ifStmt)"
+	node := flowGraph firstNode successors anyOne.
 	self assert: node statement equals: returnStmt.
-	self assert: node predecessors size equals: 2.
-	self assert: (node predecessors includes: flowGraph).
+	self assertCollection: node predecessors hasSameElements: { flowGraph firstNode }.
 	self assert: node successors isEmpty.
 
 ]
 
 { #category : #tests }
 FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThenElse [
-	"{ IF ... THEN declarationStmt; ELSE stmt; returnStmt; }"
-	| flowGraph node |
+	"{ IF ... THEN declarationStmt; ELSE otherStmt; returnStmt; }"
+	| flowGraph otherStmt node |
+	otherStmt := FASTJavaVarDeclStatement new.
 	ifStmt
 		thenPart: declarationStmt ;
-		elsePart: FASTJavaVarDeclStatement new.
+		elsePart: otherStmt.
 	blockStmt statements: { ifStmt . returnStmt }.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
 
+	self assert: flowGraph class equals: FASTJavaFlowGraphBlockNode.
 	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 2.
+	self assert: flowGraph successors isEmpty.
 
-	flowGraph successors do: [ :n |
-		self assertCollection: n predecessors hasSameElements: { flowGraph }.
-		self assert: n successors size equals: 1
-	].
-
-	node := flowGraph successors anyOne successors anyOne.
-	self assert: node statement equals: returnStmt.
-	self assertCollection: node predecessors size equals: 2.
-	self assert: node successors isEmpty.
-
-]
-
-{ #category : #tests }
-FASTJavaFlowGraphBuilderTest >> testIfStatementDependenciesBlockThen [
-	"IF ... THEN { declarationStmt ; returnStmt; }"
-	| flowGraph node |
-	blockStmt statements: { declarationStmt . returnStmt }.
-	ifStmt thenPart: blockStmt.
-	flowGraph := FASTJavaFlowGraphBuilder on: ifStmt.
-
+	"ifStmt node"
+	node := flowGraph firstNode.
+	self assert: node statement equals: ifStmt.
+	self assert: node thenPart notNil.
+	self assert: node elsePart notNil.
 	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 1.
-	
-	node := flowGraph successors anyOne.
-	self assert: node class equals: FASTJavaFlowGraphFirstInBlockNode.
-	self assertCollection: node predecessors hasSameElements: { flowGraph }.
-	self assert: node successors size equals: 1.
+	self assert: flowGraph successors isEmpty.
 
-	node := node successors anyOne.
-	self assert: node statement equals: returnStmt.
-	self assertCollection: node predecessors size equals: 1.
-	self assert: node successors isEmpty.
-
-]
-
-{ #category : #tests }
-FASTJavaFlowGraphBuilderTest >> testIfStatementDependenciesSingleThen [
-	"IF ... THEN declarationStmt;"
-	| flowGraph node |
-	ifStmt thenPart: declarationStmt.
-	flowGraph := FASTJavaFlowGraphBuilder on: ifStmt.
-
-	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
-	self assert: flowGraph statement equals: ifStmt.
-	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 1.
-	
-	node := flowGraph successors anyOne.
+	node := flowGraph firstNode thenPart.
 	self assert: node statement equals: declarationStmt.
-	self assertCollection: node predecessors hasSameElements: { flowGraph }.
+	self assert: node predecessors isEmpty.
 	self assert: node successors isEmpty.
 
-]
+	node := flowGraph firstNode elsePart.
+	self assert: node statement equals: otherStmt.
+	self assert: node predecessors isEmpty.
+	self assert: node successors isEmpty.
 
-{ #category : #tests }
-FASTJavaFlowGraphBuilderTest >> testIfStatementDependenciesSingleThenBlockElse [
-	"IF ... THEN declarationStmt; ELSE { declarationStmt ; returnStmt; }"
-	| flowGraph node |
-	blockStmt statements: { declarationStmt . returnStmt }.
-	ifStmt
-		thenPart: FASTJavaVarDeclStatement new ;
-		elsePart: blockStmt.
-
-	flowGraph := FASTJavaFlowGraphBuilder on: ifStmt.
-
-	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 2.
-
-	node := flowGraph successors
-		detect: [ :n | n class = FASTJavaFlowGraphFirstInBlockNode ]
-		ifNone: [ self fail ].
-	
-	self assertCollection: node predecessors hasSameElements: { flowGraph }.
-	self assert: node statement equals: declarationStmt.
-	self assert: node successors size equals: 1.
-
-	node := node successors anyOne.
+	"returnStmt node (succesor of ifStmt)"
+	node := flowGraph firstNode successors anyOne.
 	self assert: node statement equals: returnStmt.
-	self assertCollection: node predecessors size equals: 1.
+	self assertCollection: node predecessors hasSameElements: { flowGraph firstNode }.
 	self assert: node successors isEmpty.
-
-]
-
-{ #category : #tests }
-FASTJavaFlowGraphBuilderTest >> testIfStatementDependenciesSingleThenSingleElse [
-	"IF ... THEN declarationStmt; ELSE returnStmt;"
-	| flowGraph |
-	ifStmt
-		thenPart: declarationStmt ;
-		elsePart: returnStmt.
-	flowGraph := FASTJavaFlowGraphBuilder on: ifStmt.
-
-	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
-	self assert: flowGraph statement equals: ifStmt.
-	self assert: flowGraph predecessors isEmpty.
-	self assert: flowGraph successors size equals: 2.
-
-	flowGraph successors do: [ :node |
-		self assertCollection: node predecessors hasSameElements: { flowGraph }.
-		self assert: node successors isEmpty
-	]
 
 ]
 
