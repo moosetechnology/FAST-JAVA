@@ -1,6 +1,6 @@
 # FAST-JAVA
 
-![CI](https://github.com/moosetechnology/FAST-Java/workflows/CI/badge.svg)
+[![CI](https://github.com/moosetechnology/FAST-JAVA/actions/workflows/testAndBuild.yml/badge.svg?branch=v3)](https://github.com/moosetechnology/FAST-JAVA/actions/workflows/testAndBuild.yml)
 [![Coverage Status](https://coveralls.io/repos/github/moosetechnology/FAST-JAVA/badge.svg?branch=v3)](https://coveralls.io/github/moosetechnology/FAST-JAVA?branch=v3)
 [![Moose version](https://img.shields.io/badge/Moose-10-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 
