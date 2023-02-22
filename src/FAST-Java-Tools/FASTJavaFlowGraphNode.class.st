@@ -2,9 +2,10 @@
 A node in a flowgraph. Each node corresponds to a FAST statement.
 
 A node has:
-- its FAST statement
-- predecessors and successors (FlowGraphNodes) in the flow graph
-- the FAST variables that are read or written in the FAST statement
+- its FAST `#statement`
+- `predecessors` and `successors` (FlowGraphNodes) in the flow graph (not in API)
+- the FAST variables that are read (`#refVariables`) or written (`#defVariable`) in the FAST statement
+- `#accept:` method to allow a visitor to traverse the flow graph
 "
 Class {
 	#name : #FASTJavaFlowGraphNode,
@@ -25,6 +26,14 @@ FASTJavaFlowGraphNode class >> on: aFASTStatement [
 	^self new
 		statement: aFASTStatement ;
 		yourself
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphNode >> accept: visitor [
+	"returns whether the graph traversal should continue or not"
+	^(visitor visitFlowGraphBlockNode: self)
+		ifTrue: [ self successorsAccept: visitor ]
+		ifFalse: [ false ]
 ]
 
 { #category : #adding }
@@ -187,12 +196,7 @@ FASTJavaFlowGraphNode >> successors: aCollection [
 ]
 
 { #category : #traversing }
-FASTJavaFlowGraphNode >> traverse: visitor [
-	visitor visit: self.
-	self traverseSuccessors: visitor
-]
-
-{ #category : #traversing }
-FASTJavaFlowGraphNode >> traverseSuccessors: visitor [
-	self successors do: [ :succ | succ traverse: visitor ]
+FASTJavaFlowGraphNode >> successorsAccept: visitor [
+	"returns TRUE (continue visit) only if all successors return TRUE"
+	^self successors allSatisfy: [ :succ | succ accept: visitor ]
 ]

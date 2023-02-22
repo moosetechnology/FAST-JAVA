@@ -9,6 +9,19 @@ Class {
 	#category : #'FAST-Java-Tools-dependencies'
 }
 
+{ #category : #traversing }
+FASTJavaFlowGraphIfNode >> accept: visitor [
+
+	"visit the node itself, THEN part, ELSE part. If they all return TRUE,
+	then visit successors of THEN part (which are the same as successors of ELSE part)"
+
+	(visitor visitFlowGraphIfNode: self) ifFalse: [ ^ false ].
+	(self thenPartAccept: visitor) ifFalse: [ ^ false ].
+	(self elsePartAccept: visitor) ifFalse: [ ^ false ].
+	(self thenPart successorsAccept: visitor) ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #adding }
 FASTJavaFlowGraphIfNode >> addElsePart: aFlowGraphNode [
 	"ELSE part is 2nd successor of IF statement"
@@ -18,27 +31,10 @@ FASTJavaFlowGraphIfNode >> addElsePart: aFlowGraphNode [
 
 { #category : #adding }
 FASTJavaFlowGraphIfNode >> addSuccessor: aFlowGraphNode [
-	self addSuccessorToThen: aFlowGraphNode.
-	self addSuccessorToElse: aFlowGraphNode
-]
-
-{ #category : #adding }
-FASTJavaFlowGraphIfNode >> addSuccessorToElse: aFlowGraphNode [
-	"ELSE part (when it exists) is 2nd successor of IF
-	 when there is no ELSE part, aFlowGraphNode becomes 2nd successor of the IF statement itself"
-	(successors size = 2)
-	ifTrue: [
-		successors second addSuccessor: aFlowGraphNode.
-	]
-	ifFalse: [
-		self addElsePart: aFlowGraphNode
-	]
-]
-
-{ #category : #adding }
-FASTJavaFlowGraphIfNode >> addSuccessorToThen: aFlowGraphNode [
-	"THEN part is 1st successor of IF statement"
-	successors first addSuccessor: aFlowGraphNode
+	self thenPart addSuccessor: aFlowGraphNode.
+	self elsePart
+		ifNil: [ self addElsePart: aFlowGraphNode ]
+		ifNotNil: [ :elsePart | elsePart addSuccessor: aFlowGraphNode ]
 ]
 
 { #category : #adding }
@@ -53,38 +49,36 @@ FASTJavaFlowGraphIfNode >> asFirstNodeInBlock [
 	^self
 ]
 
-{ #category : #traversing }
-FASTJavaFlowGraphIfNode >> traverse: visitor [
-	visitor visit: self.
-	self traverseThenPart: visitor.
-	self traverseElsePart: visitor.
-	self successors first traverseSuccessors: visitor
+{ #category : #accessing }
+FASTJavaFlowGraphIfNode >> elsePart [
+
+	^(self successors size == 2)
+		ifTrue: [ self successors second ]
+		ifFalse: [ nil ]
 ]
 
 { #category : #traversing }
-FASTJavaFlowGraphIfNode >> traverseElsePart: visitor [
+FASTJavaFlowGraphIfNode >> elsePartAccept: visitor [
 	"traverse ELSE part only, not its successors"
-	| elsePart |
-	(successors size = 2)
-		ifFalse: [ ^self ].
+	^self elsePart
+		ifNil:  [ true ]
+		ifNotNil: [ :elsePart |
+			elsePart isBlockNode
+				ifTrue: [ self elsePart acceptToEnd: visitor ]
+				ifFalse: [ self elsePart accept: visitor ]
+		]
+]
 
-	elsePart := successors second.
-	elsePart isBlockNode
-		ifTrue: [ elsePart traverse: visitor ]
-		ifFalse:  [ visitor visit: elsePart ]
+{ #category : #accessing }
+FASTJavaFlowGraphIfNode >> thenPart [
+
+	^ self successors first
 ]
 
 { #category : #traversing }
-FASTJavaFlowGraphIfNode >> traverseSuccessors: visitor [
-	successors first traverseSuccessors: visitor
-]
-
-{ #category : #traversing }
-FASTJavaFlowGraphIfNode >> traverseThenPart: visitor [
+FASTJavaFlowGraphIfNode >> thenPartAccept: visitor [
 	"traverse THEN part only, not its successors"
-	| thenPart |
-	thenPart := successors first.
-	thenPart isBlockNode
-		ifTrue: [ thenPart traverse: visitor ]
-		ifFalse:  [ visitor visit: thenPart ]
+	^self thenPart isBlockNode
+		ifTrue: [ self thenPart acceptToEnd: visitor ]
+		ifFalse: [ self thenPart accept: visitor ]
 ]

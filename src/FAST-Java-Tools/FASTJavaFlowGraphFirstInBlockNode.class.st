@@ -1,6 +1,7 @@
 "
 A flowGraphNode that represents the first statement in a block (since blocks themselves are not represented in the flow graph)
-They have a reference to the last statement in the block and any successor of the block will be set as a successor of the last statement
+They have a reference to the last statement in the block and any successor of the block will be set as a successor of the last statement.
+
 "
 Class {
 	#name : #FASTJavaFlowGraphFirstInBlockNode,
@@ -10,6 +11,28 @@ Class {
 	],
 	#category : #'FAST-Java-Tools-dependencies'
 }
+
+{ #category : #traversing }
+FASTJavaFlowGraphFirstInBlockNode >> accept: visitor [
+	^(self acceptToEnd: visitor)
+		ifTrue: [ lastInblock successorsAccept: visitor ]
+		ifFalse: [ false ]
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphFirstInBlockNode >> accept: visitor toEnd: lastStatementInBlock [
+	"visit only up to the `lastStatementInBlock`"
+	^((visitor visitFlowGraphBlockNode: self) and:
+	[self ~= lastStatementInBlock])
+		ifTrue: [ self successorsAccept: visitor ]
+		ifFalse: [ false ]
+]
+
+{ #category : #traversing }
+FASTJavaFlowGraphFirstInBlockNode >> acceptToEnd: visitor [
+	"traverse only to the end of the block"
+	^self accept: visitor toEnd: lastInblock
+]
 
 { #category : #adding }
 FASTJavaFlowGraphFirstInBlockNode >> addSuccessor: aFlowGraphNode [
@@ -37,27 +60,4 @@ FASTJavaFlowGraphFirstInBlockNode >> initialize [
 { #category : #testing }
 FASTJavaFlowGraphFirstInBlockNode >> isBlockNode [
 	^true
-]
-
-{ #category : #traversing }
-FASTJavaFlowGraphFirstInBlockNode >> traverse: visitor [
-	"traverse only the statements in the block,
-	if there is a successor to the block, its 'parent' should take care of traversing it
-	by calling #traverseSuccessors:"
-	self traverse: visitor stoppingAt: lastInblock
-]
-
-{ #category : #traversing }
-FASTJavaFlowGraphFirstInBlockNode >> traverse: visitor stoppingAt: lastStatementInBlock [
-	"traverse only the statements in the block, until the lastStatementInBlock"
-	visitor visit: self.
-	(self == lastStatementInBlock)
-		ifFalse: [ self traverseSuccessors: visitor ]
-]
-
-{ #category : #traversing }
-FASTJavaFlowGraphFirstInBlockNode >> traverseSuccessor: visitor [
-	"#traverse: only goes through the statements in the block,
-	this methods goes after the last statement of the block"
-	lastInblock traverseSuccessors: visitor
 ]
