@@ -7,7 +7,7 @@ Class {
 { #category : #running }
 FASTJavaControlDependencyVisitorTest >> dependencies: aFASTJavaNode equal: aCollection [
 	self
-		assertCollection: (FASTJavaFlowGraphVisitor new sdg: aFASTJavaNode)
+		assertCollection: (FASTJavaFlowGraphBuilder new sdg: aFASTJavaNode)
 		hasSameElements: aCollection
 ]
 

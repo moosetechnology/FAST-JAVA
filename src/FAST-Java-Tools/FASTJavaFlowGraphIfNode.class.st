@@ -6,7 +6,7 @@ It is needed to treat adequatly the THEN and ELSE parts
 Class {
 	#name : #FASTJavaFlowGraphIfNode,
 	#superclass : #FASTJavaFlowGraphNode,
-	#category : #'FAST-Java-Tools-dependencies'
+	#category : #'FAST-Java-Tools-flowgraph'
 }
 
 { #category : #traversing }

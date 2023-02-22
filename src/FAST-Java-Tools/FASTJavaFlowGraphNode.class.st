@@ -18,7 +18,7 @@ Class {
 		'def',
 		'slice'
 	],
-	#category : #'FAST-Java-Tools-dependencies'
+	#category : #'FAST-Java-Tools-flowgraph'
 }
 
 { #category : #'instance creation' }

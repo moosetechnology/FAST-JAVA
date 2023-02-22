@@ -1,19 +1,19 @@
 "
-A visitor computing control dependencies between statements in a FASTJavaMethodEntity.
-It computes a control dependency graph as a collection of pairs: `#(parentNode dependentNode)`
+A visitor on a FAST Java method that builds a FlowGraph from it
+
 "
 Class {
-	#name : #FASTJavaFlowGraphVisitor,
+	#name : #FASTJavaFlowGraphBuilder,
 	#superclass : #FASTJavaVisitor,
 	#instVars : [
 		'currentNode',
 		'variableAccumulator'
 	],
-	#category : #'FAST-Java-Tools-dependencies'
+	#category : #'FAST-Java-Tools-flowgraph'
 }
 
 { #category : #private }
-FASTJavaFlowGraphVisitor >> acculmulateVariablesIn: aFASTNode [
+FASTJavaFlowGraphBuilder >> acculmulateVariablesIn: aFASTNode [
 	| allVariables |
 	allVariables := Array streamContents: [ :stream |
 		variableAccumulator := stream.
@@ -26,23 +26,23 @@ FASTJavaFlowGraphVisitor >> acculmulateVariablesIn: aFASTNode [
 ]
 
 { #category : #private }
-FASTJavaFlowGraphVisitor >> currentNode [
+FASTJavaFlowGraphBuilder >> currentNode [
 	^currentNode top
 ]
 
 { #category : #private }
-FASTJavaFlowGraphVisitor >> currentNode: aFASTJavaFlowGraphNode [
+FASTJavaFlowGraphBuilder >> currentNode: aFASTJavaFlowGraphNode [
 	currentNode push: aFASTJavaFlowGraphNode.
 	^aFASTJavaFlowGraphNode
 ]
 
 { #category : #private }
-FASTJavaFlowGraphVisitor >> exitCurrentNode [
+FASTJavaFlowGraphBuilder >> exitCurrentNode [
 	^currentNode pop
 ]
 
 { #category : #private }
-FASTJavaFlowGraphVisitor >> newNodeInBlock: aStatement after: lastNode [
+FASTJavaFlowGraphBuilder >> newNodeInBlock: aStatement after: lastNode [
 	| newNode |
 	newNode := aStatement accept: self.
 	lastNode addSuccessor: newNode.
@@ -50,13 +50,13 @@ FASTJavaFlowGraphVisitor >> newNodeInBlock: aStatement after: lastNode [
 ]
 
 { #category : #api }
-FASTJavaFlowGraphVisitor >> sdg: aFASTJavaNode [
+FASTJavaFlowGraphBuilder >> on: aFASTJavaNode [
 	currentNode := Stack new.
 	^aFASTJavaNode accept: self
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
+FASTJavaFlowGraphBuilder >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
 	self currentNode
 		defVariable: (self acculmulateVariablesIn: aFASTJavaAssignementExpression variable) anyOne.
 	self currentNode
@@ -64,17 +64,17 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssigne
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
+FASTJavaFlowGraphBuilder >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	^aFASTJavaCastExpression expression accept: self
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
+FASTJavaFlowGraphBuilder >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 	variableAccumulator << aFASTJavaIdentifier localDeclaration
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
+FASTJavaFlowGraphBuilder >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self currentNode: (FASTJavaFlowGraphIfNode on: aFASTJavaIfStatement).
 
 	self currentNode
@@ -91,17 +91,17 @@ FASTJavaFlowGraphVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
+FASTJavaFlowGraphBuilder >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
 	variableAccumulator << aFASTJavaVariableExpression localDeclaration
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTTBehaviouralEntity: aFASTBehaviouralEntity [
+FASTJavaFlowGraphBuilder >> visitFASTTBehaviouralEntity: aFASTBehaviouralEntity [
 	^aFASTBehaviouralEntity statementBlock accept: self
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
+FASTJavaFlowGraphBuilder >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
 	"FASTJavaExpressionStatement creates a FlowGraphNode and then delegates computation
 	of read/wrote variables to the expression"
 	self currentNode: (FASTJavaFlowGraphNode on: aFASTTExpressionStatement).
@@ -113,14 +113,14 @@ FASTJavaFlowGraphVisitor >> visitFASTTExpressionStatement: aFASTTExpressionState
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTTStatement: aFASTStatement [
+FASTJavaFlowGraphBuilder >> visitFASTTStatement: aFASTStatement [
 	"should not come to this, all statements should have their own visit methods"
 
 	^FASTJavaFlowGraphNode on: aFASTStatement
 ]
 
 { #category : #visiting }
-FASTJavaFlowGraphVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
+FASTJavaFlowGraphBuilder >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	"BlockStatement are not recorded in the Flow graph. Instead their first statement is"
 	| lastNode |
 	lastNode := nil.

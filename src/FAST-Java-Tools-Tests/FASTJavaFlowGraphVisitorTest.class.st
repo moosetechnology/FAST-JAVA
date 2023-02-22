@@ -11,7 +11,7 @@ Class {
 		'variableExpr',
 		'nonLocalDeclaration'
 	],
-	#category : #'FAST-Java-Tools-Tests-dependencies'
+	#category : #'FAST-Java-Tools-Tests-flowgraph'
 }
 
 { #category : #running }
@@ -56,7 +56,7 @@ FASTJavaFlowGraphVisitorTest >> testBlockStatement [
 	otherStmt := FASTJavaVarDeclStatement new.
 	blockStmt statements: { declarationStmt . otherStmt . returnStmt }.
 
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: blockStmt.
 
 	self assert: flowGraph class equals: FASTJavaFlowGraphFirstInBlockNode.
@@ -85,7 +85,7 @@ FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThen [
 	ifStmt thenPart: declarationStmt.
 	blockStmt statements: { ifStmt . returnStmt }.
 
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: blockStmt.
 
 	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
@@ -117,7 +117,7 @@ FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThenBlock [
 		yourself).
 	blockStmt statements: { ifStmt . returnStmt }.
 
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: blockStmt.
 
 	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
@@ -149,7 +149,7 @@ FASTJavaFlowGraphVisitorTest >> testBlockStatementWithIfThenElse [
 		elsePart: FASTJavaVarDeclStatement new.
 	blockStmt statements: { ifStmt . returnStmt }.
 
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: blockStmt.
 
 	self assert: flowGraph predecessors isEmpty.
@@ -173,7 +173,7 @@ FASTJavaFlowGraphVisitorTest >> testIfStatementDependenciesBlockThen [
 	| flowGraph node |
 	blockStmt statements: { declarationStmt . returnStmt }.
 	ifStmt thenPart: blockStmt.
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: ifStmt.
 
 	self assert: flowGraph predecessors isEmpty.
@@ -196,7 +196,7 @@ FASTJavaFlowGraphVisitorTest >> testIfStatementDependenciesSingleThen [
 	"IF ... THEN declarationStmt;"
 	| flowGraph node |
 	ifStmt thenPart: declarationStmt.
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: ifStmt.
 
 	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
@@ -219,7 +219,7 @@ FASTJavaFlowGraphVisitorTest >> testIfStatementDependenciesSingleThenBlockElse [
 	ifStmt
 		thenPart: FASTJavaVarDeclStatement new ;
 		elsePart: blockStmt.
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: ifStmt.
 
 	self assert: flowGraph predecessors isEmpty.
@@ -247,7 +247,7 @@ FASTJavaFlowGraphVisitorTest >> testIfStatementDependenciesSingleThenSingleElse 
 	ifStmt
 		thenPart: declarationStmt ;
 		elsePart: returnStmt.
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: ifStmt.
 
 	self assert: flowGraph class equals: FASTJavaFlowGraphIfNode.
@@ -265,7 +265,7 @@ FASTJavaFlowGraphVisitorTest >> testIfStatementDependenciesSingleThenSingleElse 
 { #category : #tests }
 FASTJavaFlowGraphVisitorTest >> testSimpleStatement [
 	| flowGraph |
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: declarationStmt.
 
 	self assert: flowGraph class equals: FASTJavaFlowGraphNode.
@@ -282,7 +282,7 @@ FASTJavaFlowGraphVisitorTest >> testVariableWroteInAssignement [
 		expression: assignementExpr ;
 		yourself.
 
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: statement.
 
 	self assert: flowGraph defVariable equals: nonLocalDeclaration.
@@ -298,7 +298,7 @@ FASTJavaFlowGraphVisitorTest >> testVariablesReadInAssignement [
 		expression: assignementExpr ;
 		yourself.
 
-	flowGraph := FASTJavaFlowGraphVisitor new
+	flowGraph := FASTJavaFlowGraphBuilder new
 		sdg: statement.
 
 	self assertCollection: flowGraph refVariables hasSameElements: { nonLocalDeclaration }.

@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'lastInblock'
 	],
-	#category : #'FAST-Java-Tools-dependencies'
+	#category : #'FAST-Java-Tools-flowgraph'
 }
 
 { #category : #traversing }

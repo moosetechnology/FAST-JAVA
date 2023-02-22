@@ -7,7 +7,7 @@ Traversal is kind-a breadth first because both THEN and ELSE parts of a IF are t
 Class {
 	#name : #FASTJavaFlowGraphAbstractVisitor,
 	#superclass : #FASTJavaVisitor,
-	#category : #'FAST-Java-Tools-dependencies'
+	#category : #'FAST-Java-Tools-flowgraph'
 }
 
 { #category : #traversing }

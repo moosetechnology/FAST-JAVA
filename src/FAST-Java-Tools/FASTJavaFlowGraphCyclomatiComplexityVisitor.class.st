@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'complexity'
 	],
-	#category : #'FAST-Java-Tools-dependencies'
+	#category : #'FAST-Java-Tools-flowgraph'
 }
 
 { #category : #traversing }
