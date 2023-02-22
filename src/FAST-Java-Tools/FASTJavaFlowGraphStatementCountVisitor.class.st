@@ -24,6 +24,12 @@ FASTJavaFlowGraphStatementCountVisitor >> traverse: aFlowGraphNode [
 ]
 
 { #category : #traversing }
+FASTJavaFlowGraphStatementCountVisitor >> visitFlowGraphIfNode: aFlowGraphIfNode [
+	count := count + 1.
+	^super visitFlowGraphIfNode: aFlowGraphIfNode
+]
+
+{ #category : #traversing }
 FASTJavaFlowGraphStatementCountVisitor >> visitFlowGraphNode: aFlowGraphNode [
 	count := count + 1.
 	^super visitFlowGraphNode: aFlowGraphNode

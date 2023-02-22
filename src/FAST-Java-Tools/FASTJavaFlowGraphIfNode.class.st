@@ -14,7 +14,7 @@ Class {
 	#category : #'FAST-Java-Tools-flowgraph'
 }
 
-{ #category : #traversing }
+{ #category : #visiting }
 FASTJavaFlowGraphIfNode >> accept: visitor [
 
 	^visitor visitFlowGraphIfNode: self

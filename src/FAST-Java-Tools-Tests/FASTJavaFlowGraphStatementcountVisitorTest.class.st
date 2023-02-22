@@ -11,16 +11,15 @@ FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseBlockNode [
 
 { #category : #tests }
 FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseBlockWithTwoNodesAndIfNodeAndOtherNode [
-	"{ node1 -> node2 -> ifNode -> otherNode
+	"{ node1 -> node2 -> ifNode -> otherNode }
 	and ifNode contains only simpleNode in its THEN part"
 	| otherNode |
 	otherNode := FASTJavaFlowGraphNode new
-		statement: 'stmt after if' ;
+		statement: 'other stmt' ;
 		yourself.
 	ifNode thenPart: simpleNode.
-	ifNode addSuccessor: otherNode.
-	blockNode lastInBlock addSuccessor: ifNode.
-	blockNode lastInBlock: otherNode.
+	blockNode addNode: ifNode.
+	blockNode addNode: otherNode.
 	
 	self traverse: blockNode  returns: 5
 ]
@@ -35,7 +34,7 @@ FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseIfNodeWithThen [
 FASTJavaFlowGraphStatementcountVisitorTest >> testTraverseIfNodeWithThenAndElse [
 	| otherNode |
 	otherNode := FASTJavaFlowGraphNode new
-		statement: 'stmt in else' ;
+		statement: 'other stmt' ;
 		yourself.
 	ifNode thenPart: blockNode.
 	ifNode elsePart: otherNode.

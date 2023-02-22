@@ -28,10 +28,10 @@ FASTJavaFlowGraphNode class >> on: aFASTStatement [
 		yourself
 ]
 
-{ #category : #traversing }
+{ #category : #visiting }
 FASTJavaFlowGraphNode >> accept: visitor [
 	"returns whether the graph traversal should continue or not"
-	^visitor visitFlowGraphBlockNode: self
+	^visitor visitFlowGraphNode: self
 
 ]
 
@@ -166,7 +166,7 @@ FASTJavaFlowGraphNode >> successors: aCollection [
 	successors := aCollection
 ]
 
-{ #category : #traversing }
+{ #category : #visiting }
 FASTJavaFlowGraphNode >> successorsAccept: visitor [
 	"returns TRUE (continue visit) only if all successors return TRUE"
 	^self successors allSatisfy: [ :succ | succ accept: visitor ]

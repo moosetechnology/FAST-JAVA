@@ -16,16 +16,16 @@ FASTJavaFlowGraphAbstractVisitorTest >> setUp [
 	simpleNode := FASTJavaFlowGraphNode new
 		statement: 'simple node' ;
 		yourself.
-	blockNode := FASTJavaFlowGraphNode new
-		statement: '1st in block' ;
-		addSuccessor: (FASTJavaFlowGraphNode new
+	blockNode := FASTJavaFlowGraphBlockNode new
+		addNode: (FASTJavaFlowGraphNode new
+			statement: '1st in block' ;
+			yourself) ;
+		addNode: (FASTJavaFlowGraphNode new
 			statement: '2nd in block' ;
 			yourself) ;
-		asFirstNodeInBlock.
-
-	ifNode := FASTJavaFlowGraphIfNode new
-		statement: 'if node' ;
 		yourself.
+
+	ifNode := FASTJavaFlowGraphIfNode new.
 		
 	 
 	

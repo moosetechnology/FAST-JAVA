@@ -16,17 +16,18 @@ FASTJavaFlowGraphAbstractVisitor >> traverse: aFlowGraphNode [
 ]
 
 { #category : #traversing }
-FASTJavaFlowGraphAbstractVisitor >> visitFlowGraphBlockNode: aFlowGraphFirstInBlockNode [
-	^self visitFlowGraphNode: aFlowGraphFirstInBlockNode
+FASTJavaFlowGraphAbstractVisitor >> visitFlowGraphBlockNode: aFlowGraphBlockNode [
+	^(aFlowGraphBlockNode firstNode accept: self)
+		ifTrue: [ aFlowGraphBlockNode successorsAccept: self ]
+		ifFalse: [ false ]
 ]
 
 { #category : #traversing }
 FASTJavaFlowGraphAbstractVisitor >> visitFlowGraphIfNode: aFlowGraphIfNode [
 	(aFlowGraphIfNode thenPart accept: self) ifFalse: [ ^ false ].
-	(aFlowGraphIfNode elsePart accept: self) ifFalse: [ ^ false ].
-	(aFlowGraphIfNode successorsAccept: self) ifFalse: [ ^ false ].
-	^true
-
+	aFlowGraphIfNode elsePart
+		ifNotNil: [ :elsePart | (elsePart accept: self) ifFalse: [ ^ false ] ].
+	^aFlowGraphIfNode successorsAccept: self
 ]
 
 { #category : #traversing }
