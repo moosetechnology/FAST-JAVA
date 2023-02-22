@@ -6,7 +6,8 @@ Class {
 	#superclass : #FASTJavaTypeExpression,
 	#instVars : [
 		'#javaMethodThrowsOwner => FMOne type: #FASTJavaMethodEntity opposite: #throws',
-		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner'
+		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner',
+		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -65,4 +66,28 @@ FASTJavaClassTypeExpression >> typeNameGroup [
 	<generated>
 	<navigation: 'TypeName'>
 	^ MooseSpecializedGroup with: self typeName
+]
+
+{ #category : #accessing }
+FASTJavaClassTypeExpression >> typeParameterOwner [
+	"Relation named: #typeParameterOwner type: #FASTJavaTypeParameterExpression opposite: #types"
+
+	<generated>
+	<FMComment: 'The type parameter I specify'>
+	<container>
+	^ typeParameterOwner
+]
+
+{ #category : #accessing }
+FASTJavaClassTypeExpression >> typeParameterOwner: anObject [
+
+	<generated>
+	typeParameterOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaClassTypeExpression >> typeParameterOwnerGroup [
+	<generated>
+	<navigation: 'TypeParameterOwner'>
+	^ MooseSpecializedGroup with: self typeParameterOwner
 ]

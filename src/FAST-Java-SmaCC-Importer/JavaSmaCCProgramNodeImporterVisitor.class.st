@@ -1113,6 +1113,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeName: aTypeName [
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeParameter: aTypeParameter [
 	currentFASTEntity := self addToModel: FASTJavaTypeParameterExpression new.
 	self generalVisitActionForNodeEntity: aTypeParameter.
+	currentFASTEntity name: aTypeParameter name value.
+	aTypeParameter types do: [ :type |
+		currentFASTEntity addType: (self clone accept: type)
+		 ].
 	^ currentFASTEntity
 ]
 

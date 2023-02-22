@@ -370,6 +370,11 @@ FASTJavaVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaTypeParameter: aFASTJavaBooleanTypeExpression [
+	^ self visitFASTTExpression: aFASTJavaBooleanTypeExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
 	^ self visitFASTTExpression: aFASTJavaUnaryExpression
 ]

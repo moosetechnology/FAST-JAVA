@@ -898,6 +898,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 	
 	javaTypeParameter --|> tExpression.
+	javaTypeParameter --|> tNamedEntity.
 
 	javaBooleanLiteral --|> tLiteral.
 	javaBooleanLiteral --|> tReceiver.
@@ -1165,7 +1166,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'Statements block of the behavioural entity')
 	<>- ((tStatementBlock property: #javaInitializerOwner) comment:
 			 'Behavioural entity containing the statement block.').
-			
+
 	((javaLabeledStatement property: #statementBlock) comment:
 		 'Statements block of the behavioural entity')
 	<>- ((tStatementBlock property: #javaLabaledStatementOwner) comment:
@@ -1211,12 +1212,18 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-*
 		((javaClassTypeExpression property: #javaMethodThrowsOwner) 
 			 comment: 'The method that throws me').
-	
+
 	((javaMethodEntity property: #typeParameters) comment:
 		 'The list of type parameter')
 	<>-*
 		((javaTypeParameter property: #javaMethodTypeParameterOwner) 
 			 comment: 'The method that use me').
+
+	((javaTypeParameter property: #types) comment:
+		 'The list of types I extend or implements')
+	<>-*
+		((javaClassTypeExpression property: #typeParameterOwner) comment:
+			 'The type parameter I specify').
 
 	((javaParameterExpression property: #type) comment:
 		 'The type of the parameter')
