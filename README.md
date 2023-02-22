@@ -12,7 +12,7 @@ To load the FAST-Java project, execute in a playground
 
 ```st
 Metacello new
-  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v2' path: 'src';
+  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v3' path: 'src';
   baseline: 'FASTJava';
   load
 ```
@@ -21,7 +21,7 @@ If you want to load the SmaCC importer with the model (create a FAST Java model 
 
 ```st
 Metacello new
-  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v2' path: 'src';
+  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v3' path: 'src';
   baseline: 'FASTJava';
   load: 'all'
 ```

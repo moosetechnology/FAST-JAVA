@@ -67,7 +67,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
           # Destination branch to push changes
-          branch: v2-doc
+          branch: v3-doc
           # We have to push from the folder where files were generated.
           # Same were the new repo was initialized in the previous step
           directory: ./doc-uml
