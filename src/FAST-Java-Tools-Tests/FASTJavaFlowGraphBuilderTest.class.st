@@ -234,6 +234,25 @@ FASTJavaFlowGraphBuilderTest >> testVariableWroteInAssignement [
 ]
 
 { #category : #tests }
+FASTJavaFlowGraphBuilderTest >> testVariableWroteInDeclaration [
+	
+	| flowGraph declarator |
+	declarator := FASTJavaVariableDeclarator new.
+	declarator
+		variable: (	FASTJavaVariableExpression new
+			name: 'j' ;
+			localDeclaration: declarator
+			yourself ).
+	declarationStmt declarators: {declarator}.
+
+	flowGraph := FASTJavaFlowGraphBuilder on: declarationStmt.
+
+	self assert: flowGraph defVariable equals: declarator.
+
+
+]
+
+{ #category : #tests }
 FASTJavaFlowGraphBuilderTest >> testVariablesReadInAssignement [
 	
 	| statement flowGraph |

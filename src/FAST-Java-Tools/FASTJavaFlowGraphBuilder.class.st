@@ -19,7 +19,7 @@ FASTJavaFlowGraphBuilder class >> on: aFASTJavaEntity [
 ]
 
 { #category : #private }
-FASTJavaFlowGraphBuilder >> acculmulateVariablesIn: aFASTNode [
+FASTJavaFlowGraphBuilder >> accumulateVariablesFrom: aFASTNode [
 	| allVariables |
 	allVariables := Array streamContents: [ :stream |
 		variableAccumulator := stream.
@@ -56,9 +56,9 @@ FASTJavaFlowGraphBuilder >> on: aFASTJavaNode [
 { #category : #visiting }
 FASTJavaFlowGraphBuilder >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
 	self currentNode
-		defVariable: (self acculmulateVariablesIn: aFASTJavaAssignementExpression variable) anyOne.
+		defVariable: (self accumulateVariablesFrom: aFASTJavaAssignementExpression variable) anyOne.
 	self currentNode
-		refVariables: (self acculmulateVariablesIn: aFASTJavaAssignementExpression expression) asSet
+		refVariables: (self accumulateVariablesFrom: aFASTJavaAssignementExpression expression) asSet
 ]
 
 { #category : #visiting }
@@ -76,7 +76,7 @@ FASTJavaFlowGraphBuilder >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self currentNode: (FASTJavaFlowGraphIfNode on: aFASTJavaIfStatement).
 
 	self currentNode
-		refVariables: (self acculmulateVariablesIn: aFASTJavaIfStatement condition) asSet.
+		refVariables: (self accumulateVariablesFrom: aFASTJavaIfStatement condition) asSet.
 
 	self currentNode thenPart: (aFASTJavaIfStatement thenPart accept: self).
 
@@ -86,6 +86,25 @@ FASTJavaFlowGraphBuilder >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 
 	^self exitCurrentNode
 
+]
+
+{ #category : #visiting }
+FASTJavaFlowGraphBuilder >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
+	self currentNode: (FASTJavaFlowGraphNode on: aFASTJavaVarDeclStatement).
+
+	aFASTJavaVarDeclStatement declarators do: [ :declarator | declarator accept: self ].
+
+	^self exitCurrentNode
+
+]
+
+{ #category : #visiting }
+FASTJavaFlowGraphBuilder >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
+	self currentNode
+		defVariable: (self accumulateVariablesFrom: aFASTJavaVariableDeclarator variable) anyOne.
+	aFASTJavaVariableDeclarator expression ifNotNil: [ :initialization | 
+	self currentNode
+		refVariables: (self accumulateVariablesFrom: initialization) asSet ]
 ]
 
 { #category : #visiting }
@@ -121,8 +140,7 @@ FASTJavaFlowGraphBuilder >> visitFASTTStatement: aFASTStatement [
 FASTJavaFlowGraphBuilder >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	| tmpNode |
 	tmpNode := FASTJavaFlowGraphBlockNode new.
-	aFASTJavaStatementBlock statements do: [ :aStatement |
-		tmpNode addNode: (aStatement accept: self)
-	].
+	(aFASTJavaStatementBlock statements sorted: [:a :b | a startPos < b startPos])
+		do: [ :aStatement | tmpNode addNode: (aStatement accept: self) ].
 	^tmpNode
 ]

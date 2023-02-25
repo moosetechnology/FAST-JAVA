@@ -59,27 +59,6 @@ FASTJavaFlowGraphNode >> defVariable: anObject [
 	def := anObject
 ]
 
-{ #category : #'to deprecate' }
-FASTJavaFlowGraphNode >> findNodeWithStatement: aFASTStatement [
-	| found |
-	found := nil.
-	^(self statement = aFASTStatement)
-		ifTrue: [ self ]
-		ifFalse: [ self successors
-			detect: [ :succ |
-				found := succ findNodeWithStatement: aFASTStatement.
-				found notNil ]
-			ifFound: [ found ]
-			ifNone: [ nil ]
-		]
-]
-
-{ #category : #'to deprecate' }
-FASTJavaFlowGraphNode >> includeInSlice: aCollection [
-	^(aCollection includes: self defVariable) or:
-	[ self refVariables anySatisfy: [ :var | aCollection includes: var ] ]
-]
-
 { #category : #initialization }
 FASTJavaFlowGraphNode >> initialize [ 
 	super initialize.
@@ -109,16 +88,6 @@ FASTJavaFlowGraphNode >> primitiveAddSuccessor: aFlowGraphNode [
 	successors add: aFlowGraphNode.
 ]
 
-{ #category : #'to deprecate' }
-FASTJavaFlowGraphNode >> primitiveRemovePredecessor: aFlowGraphNode [
-	predecessors remove: aFlowGraphNode
-]
-
-{ #category : #'to deprecate' }
-FASTJavaFlowGraphNode >> primitiveRemoveSuccessor: aFlowGraphNode [
-	successors remove: aFlowGraphNode
-]
-
 { #category : #accessing }
 FASTJavaFlowGraphNode >> refVariables [
 
@@ -129,19 +98,6 @@ FASTJavaFlowGraphNode >> refVariables [
 FASTJavaFlowGraphNode >> refVariables: aCollection [
 
 	refs := aCollection
-]
-
-{ #category : #'to deprecate' }
-FASTJavaFlowGraphNode >> sliceDownVariables: aCollection [
-	(self includeInSlice: aCollection)
-		ifTrue: [ slice add: self ].
-
-	self successors 
-]
-
-{ #category : #'to deprecate' }
-FASTJavaFlowGraphNode >> startSlice [
-	slice := OrderedCollection new
 ]
 
 { #category : #accessing }

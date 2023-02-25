@@ -169,7 +169,7 @@ FASTJavaLocalResolverVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariab
 		scopeAdd: aFASTJavaVariableDeclarator variable name
 		declaration: aFASTJavaVariableDeclarator.
 
-	aFASTJavaVariableDeclarator localDeclaration: aFASTJavaVariableDeclarator.
+	aFASTJavaVariableDeclarator variable localDeclaration: aFASTJavaVariableDeclarator.
 	aFASTJavaVariableDeclarator expression ifNotNil: [ :expr | expr accept: self ]
 ]
 
