@@ -5,7 +5,8 @@ Class {
 	#name : #FASTJavaLocalResolverVisitorTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'localResolver'
+		'localResolver',
+		'builder'
 	],
 	#category : #'FAST-Java-Tools-Tests-resolver'
 }
@@ -14,6 +15,7 @@ Class {
 FASTJavaLocalResolverVisitorTest >> setUp [
 	super setUp.
 	
+	builder := FASTJavaTestNodeBuilder new.
 	localResolver := FASTJavaLocalResolverVisitor new
 ]
 
@@ -35,7 +37,7 @@ FASTJavaLocalResolverVisitorTest >> testAddNonLocalDeclaration [
 { #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testFindDeclarationInCurrentScope [
 	|node|
-	node := FASTJavaVariableDeclarator new.
+	node := builder declarator: nil init: nil.
 	localResolver resetScopes.
 	localResolver scopeAdd: 'blah' declaration: node.
 
@@ -52,7 +54,7 @@ FASTJavaLocalResolverVisitorTest >> testFindDeclarationInEmptyScope [
 { #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testFindDeclarationInParentScope [
 	|node|
-	node := FASTJavaVariableDeclarator new.
+	node := builder declarator: nil init: nil.
 	localResolver resetScopes.
 	localResolver scopeAdd: 'blah' declaration: node.
 	localResolver pushScope.
@@ -63,7 +65,7 @@ FASTJavaLocalResolverVisitorTest >> testFindDeclarationInParentScope [
 { #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testFindDeclarationNotInScope [
 	|node|
-	node := FASTJavaVariableDeclarator new.
+	node := builder declarator: nil init: nil.
 	localResolver resetScopes.
 	localResolver scopeAdd: 'blah' declaration: node.
 
@@ -80,8 +82,8 @@ FASTJavaLocalResolverVisitorTest >> testHasScopes [
 FASTJavaLocalResolverVisitorTest >> testLocalDeclarationFor [
 	"testing helper method #localDeclaration:for:"
 	| declNode refNode |
-	declNode := FASTJavaVariableDeclarator new. 
-	refNode := FASTJavaVariableExpression new.
+	declNode := builder declarator: nil init: nil. 
+	refNode := builder var: nil.
 	declNode resetLocalUses.
 	localResolver localDeclaration: declNode for: refNode.
 
@@ -96,7 +98,7 @@ FASTJavaLocalResolverVisitorTest >> testLocalDeclarationFor [
 FASTJavaLocalResolverVisitorTest >> testNonLocalDeclarationWithName [
 	"testing helper method #nonLocalDeclaration:withName:"
 	| node |
-	node := FASTJavaVariableExpression new name: 'blah'.
+	node := builder var: 'blah'.
 	localResolver resetScopes.
 
 	localResolver nonLocalDeclaration: node withName: 'blah'.
@@ -116,7 +118,7 @@ FASTJavaLocalResolverVisitorTest >> testResetScopes [
 { #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testScopeAddDeclarationTwiceRaisesError [
 	|node|
-	node := FASTJavaVariableDeclarator new.
+	node := builder declarator: nil init: nil.
 	localResolver resetScopes.
 
 	localResolver scopeAdd: 'blah' declaration: node.
@@ -131,7 +133,7 @@ FASTJavaLocalResolverVisitorTest >> testScopeAddDeclarationTwiceRaisesError [
 { #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testScopeAddNonLocalDeclarationTwiceRaisesError [
 	|node|
-	node := FASTJavaVariableDeclarator new.
+	node := builder declarator: nil init: nil. 
 	localResolver resetScopes.
 
 	localResolver scopeAddNonLocalDeclaration: 'blah'.

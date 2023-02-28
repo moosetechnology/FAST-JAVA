@@ -95,9 +95,9 @@ FASTJavaExportVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaIfPartStatement: aFASTJavaStatement [
-	"for 'then' and 'else' parts of the if-statement, put '{' on current line
-	if it's a block, or go to next line and indent if it's a simple statement.
-	Not very elegant solution but a simple"
+	"for 'then' and 'else' parts of the if-statement,
+	if it's a simple statement (not a block), go to next line and indent
+	Not very elegant solution but simple"
 	(aFASTJavaStatement isKindOf: FASTJavaStatementBlock)
 	ifFalse: [ self endOfLine. self withIndent: '' ].
 

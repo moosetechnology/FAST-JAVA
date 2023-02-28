@@ -2,7 +2,11 @@ Extension { #name : #FASTJavaEntity }
 
 { #category : #'*FAST-Java-Tools' }
 FASTJavaEntity >> addLocalUse: aFASTNode [
-	(self attributeAt: #localUses ifAbsent: [ nil ])
+	(self
+		attributeAt: #localUses
+		ifAbsent: [
+			"attribute should not be absent, was initalized elsewhere"
+			nil ])
 		add: aFASTNode
 ]
 

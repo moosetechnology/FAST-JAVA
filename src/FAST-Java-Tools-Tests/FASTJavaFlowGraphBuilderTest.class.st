@@ -9,7 +9,8 @@ Class {
 		'infixExpr',
 		'assignementExpr',
 		'variableExpr',
-		'nonLocalDeclaration'
+		'nonLocalDeclaration',
+		'builder'
 	],
 	#category : #'FAST-Java-Tools-Tests-flowgraph'
 }
@@ -18,42 +19,37 @@ Class {
 FASTJavaFlowGraphBuilderTest >> setUp [
 	super setUp.
 
+	builder := FASTJavaTestNodeBuilder new.
+
 	nonLocalDeclaration := FASTJavaNonLocalDeclaration new name: 'i'.
 
-	variableExpr := FASTJavaVariableExpression new
-		name: 'i' ;
+	variableExpr := (builder var: 'i')
 		localDeclaration: nonLocalDeclaration ;
 		yourself.
 
-	infixExpr := FASTJavaInfixOperation new
-		operator: '>' ;
-		leftOperand: variableExpr ;
-		rightOperand: (FASTJavaIntegerLiteral new
-			primitiveValue: '0' ;
-			yourself) ;
-		yourself.
+	infixExpr := builder infix: '>' lhs: variableExpr rhs: (builder literalInt: 0).
 
-	assignementExpr := FASTJavaAssignementExpression new
-		variable: variableExpr ;
-		expression: infixExpr ;
-		yourself.
+	assignementExpr := builder assignement: variableExpr value: infixExpr.
 
-	declarationStmt := FASTJavaVarDeclStatement new.
-	returnStmt := FASTJavaReturnStatement new.
+	declarationStmt := builder var: nil declaration: nil.
+	returnStmt :=  builder return: nil.
 
-	ifStmt := FASTJavaIfStatement new
-		condition: infixExpr ;
+	ifStmt := (builder if: infixExpr then: nil else: nil)
 		localDeclaration: nonLocalDeclaration ;
 		yourself.
 
-	blockStmt := FASTJavaStatementBlock new
+	blockStmt := builder block: #()
 ]
 
 { #category : #'as yet unclassified' }
 FASTJavaFlowGraphBuilderTest >> testBlockStatement [
 	"{ declarationStmt ; otherStmt; returnStmt; }"
 	| otherStmt flowGraph node |
-	otherStmt := FASTJavaVarDeclStatement new.
+	declarationStmt startPos: 1.
+	otherStmt := (builder var: nil declaration: nil)
+		startPos: 2 ;
+		yourself.
+	returnStmt startPos: 3.
 	blockStmt statements: { declarationStmt . otherStmt . returnStmt }.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
@@ -89,6 +85,8 @@ FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThen [
 	"{ IF ... THEN declarationStmt; returnStmt; }"
 	| flowGraph node |
 	ifStmt thenPart: declarationStmt.
+	ifStmt startPos: 1.
+	returnStmt startPos: 2.
 	blockStmt statements: { ifStmt . returnStmt }.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
@@ -122,10 +120,10 @@ FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThen [
 FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThenBlock [
 	"{ IF ... THEN { declarationStmt; otherStmt; } returnStmt; }"
 	| flowGraph node otherStmt |
-	otherStmt := FASTJavaVarDeclStatement new.
-	ifStmt thenPart: (FASTJavaStatementBlock new
-		statements: { declarationStmt . otherStmt } ;
-		yourself).
+	otherStmt := builder var: nil declaration: nil.
+	ifStmt thenPart: (builder block: { declarationStmt . otherStmt }).
+	ifStmt startPos: 0.
+	returnStmt startPos: 3.
 	blockStmt statements: { ifStmt . returnStmt }.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
@@ -169,10 +167,12 @@ FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThenBlock [
 FASTJavaFlowGraphBuilderTest >> testBlockStatementWithIfThenElse [
 	"{ IF ... THEN declarationStmt; ELSE otherStmt; returnStmt; }"
 	| flowGraph otherStmt node |
-	otherStmt := FASTJavaVarDeclStatement new.
+	otherStmt := builder var: nil declaration: nil.
 	ifStmt
 		thenPart: declarationStmt ;
 		elsePart: otherStmt.
+	ifStmt startPos: 1.
+	returnStmt startPos: 2.
 	blockStmt statements: { ifStmt . returnStmt }.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: blockStmt.
@@ -222,9 +222,7 @@ FASTJavaFlowGraphBuilderTest >> testSimpleStatement [
 FASTJavaFlowGraphBuilderTest >> testVariableWroteInAssignement [
 	
 	| statement flowGraph |
-	statement := FASTJavaExpressionStatement new
-		expression: assignementExpr ;
-		yourself.
+	statement := builder exprStatement: assignementExpr.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: statement.
 
@@ -235,14 +233,10 @@ FASTJavaFlowGraphBuilderTest >> testVariableWroteInAssignement [
 
 { #category : #tests }
 FASTJavaFlowGraphBuilderTest >> testVariableWroteInDeclaration [
-	
+
 	| flowGraph declarator |
-	declarator := FASTJavaVariableDeclarator new.
-	declarator
-		variable: (	FASTJavaVariableExpression new
-			name: 'j' ;
-			localDeclaration: declarator
-			yourself ).
+	declarator := builder declarator: 'j' init: nil.
+	declarator variable localDeclaration: declarator.
 	declarationStmt declarators: {declarator}.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: declarationStmt.
@@ -256,9 +250,7 @@ FASTJavaFlowGraphBuilderTest >> testVariableWroteInDeclaration [
 FASTJavaFlowGraphBuilderTest >> testVariablesReadInAssignement [
 	
 	| statement flowGraph |
-	statement := FASTJavaExpressionStatement new
-		expression: assignementExpr ;
-		yourself.
+	statement := builder exprStatement: assignementExpr.
 
 	flowGraph := FASTJavaFlowGraphBuilder on: statement.
 

@@ -12,7 +12,7 @@ Class {
 { #category : #running }
 FASTJavaFlowGraphAbstractVisitorTest >> setUp [
 	super setUp.
-	
+
 	simpleNode := FASTJavaFlowGraphNode new
 		statement: 'simple node' ;
 		yourself.
