@@ -1,9 +1,8 @@
 "
-A FASTJavaVisitor that links local variables used to their (local) declaration)
+A FASTJavaVisitor that links local variables used to their (local) declaration
 
-- Puts in the declaration nodes' #localUses their list of referencing nodes
-- Puts in the referencing nodes' #localDeclaration their corresponding declaration node
-- Puts in the referencing nodes' #localDeclaration a FASTNonLocalDeclaration if a declaration node could not be found
+- In the declaration nodes, `#localUses` lists all referencing nodes
+- In the referencing nodes, `#localDeclaration` lists the corresponding declaration node or a FASTNonLocalDeclaration if the declaration node could not be found
 
 Invoking:
 ```
@@ -25,7 +24,7 @@ FASTJavaLocalResolverVisitor >> currentScope [
 	^ scopes top
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> findDeclaration: aName [
 	self currentScope
 		at: aName
@@ -51,15 +50,15 @@ FASTJavaLocalResolverVisitor >> initialize [
 	scopes := Stack new
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> localDeclaration: declarationNode for: referingNode [
 	referingNode localDeclaration: declarationNode.
 	declarationNode addLocalUse: referingNode
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> nonLocalDeclaration: referingNode withName: name [
-	referingNode localDeclaration: (FASTJavaNonLocalDeclaration new name: name)
+	self localDeclaration: (self scopeAddNonLocalDeclaration: name) for: referingNode
 
 ]
 
@@ -96,7 +95,7 @@ FASTJavaLocalResolverVisitor >> resetScopes [
 	self pushScope
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FASTJavaLocalResolverVisitor >> scopeAdd: aName declaration: aFASTNode [
 
 	self currentScope
@@ -108,6 +107,27 @@ FASTJavaLocalResolverVisitor >> scopeAdd: aName declaration: aFASTNode [
 			self currentScope at: aName put: aFASTNode
 		].
 	
+]
+
+{ #category : #private }
+FASTJavaLocalResolverVisitor >> scopeAddNonLocalDeclaration: name [
+	"add FASTJavaNonLocalDeclaration to top scope"
+	| currentScope nonLocalDeclaration |
+	currentScope := self popScope.
+	scopes
+		ifEmpty: [
+			self pushScope: currentScope.
+			nonLocalDeclaration := FASTJavaNonLocalDeclaration new name: name.
+			self
+				scopeAdd: name
+				declaration: nonLocalDeclaration
+			]
+		ifNotEmpty: [
+			nonLocalDeclaration := self scopeAddNonLocalDeclaration: name.
+			self pushScope: currentScope.
+		].
+	^nonLocalDeclaration 
+		
 ]
 
 { #category : #visiting }
@@ -148,6 +168,8 @@ FASTJavaLocalResolverVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariab
 	self
 		scopeAdd: aFASTJavaVariableDeclarator variable name
 		declaration: aFASTJavaVariableDeclarator.
+
+	aFASTJavaVariableDeclarator variable localDeclaration: aFASTJavaVariableDeclarator.
 	aFASTJavaVariableDeclarator expression ifNotNil: [ :expr | expr accept: self ]
 ]
 
