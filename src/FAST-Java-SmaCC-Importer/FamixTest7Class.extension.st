@@ -4,7 +4,7 @@ Extension { #name : #FamixTest7Class }
 FamixTest7Class >> generateFastAndBind [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
-	fastModel := self generateFastJava
+	fastModel := self getFASTModel
 		metamodel: CRFModel metamodel;
 		yourself.
 	self bindFastModel: fastModel usingBinder: CRFBinderVisitor new.

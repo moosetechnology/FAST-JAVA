@@ -4,7 +4,7 @@ Extension { #name : #FamixTClass }
 FamixTClass >> generateFastAndBind [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
-	fastModel := self generateFastJava
+	fastModel := self getFASTModel
 		metamodel: CRFModel metamodel;
 		yourself.
 	self bindFastModel: fastModel usingBinder: CRFBinderVisitor new.
@@ -29,6 +29,6 @@ FamixTClass >> generateFastIfNotDoneAndBind [
 ]
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTClass >> generateFastJava [
+FamixTClass >> getFASTModel [
 	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeString: self sourceAnchor sourceText
 ]
