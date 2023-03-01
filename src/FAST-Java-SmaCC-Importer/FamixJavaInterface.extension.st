@@ -1,17 +1,6 @@
 Extension { #name : #FamixJavaInterface }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixJavaInterface >> bindFASTModel [
-	| fastModel |
-	self assert: self sourceAnchor isNotNil.
-	fastModel := self getFASTModel
-		metamodel: CRFModel metamodel;
-		yourself.
-	self bindFastModel: fastModel usingBinder: CRFBinderVisitor new.
-	^ fastModel
-]
-
-{ #category : #'*FAST-Java-SmaCC-Importer' }
 FamixJavaInterface >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 

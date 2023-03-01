@@ -1,17 +1,6 @@
 Extension { #name : #MooseMSEImporterTestClass }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-MooseMSEImporterTestClass >> bindFASTModel [
-	| fastModel |
-	self assert: self sourceAnchor isNotNil.
-	fastModel := self getFASTModel
-		metamodel: CRFModel metamodel;
-		yourself.
-	self bindFastModel: fastModel usingBinder: CRFBinderVisitor new.
-	^ fastModel
-]
-
-{ #category : #'*FAST-Java-SmaCC-Importer' }
 MooseMSEImporterTestClass >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 

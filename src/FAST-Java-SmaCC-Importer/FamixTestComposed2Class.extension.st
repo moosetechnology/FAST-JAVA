@@ -1,17 +1,6 @@
 Extension { #name : #FamixTestComposed2Class }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTestComposed2Class >> bindFASTModel [
-	| fastModel |
-	self assert: self sourceAnchor isNotNil.
-	fastModel := self getFASTModel
-		metamodel: CRFModel metamodel;
-		yourself.
-	self bindFastModel: fastModel usingBinder: CRFBinderVisitor new.
-	^ fastModel
-]
-
-{ #category : #'*FAST-Java-SmaCC-Importer' }
 FamixTestComposed2Class >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 
