@@ -1,7 +1,7 @@
-Extension { #name : #FamixTMethod }
+Extension { #name : #FamixTestComposed1Method }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTMethod >> generateFastAndBind [
+FamixTestComposed1Method >> generateFastAndBind [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
 	fastModel := self generateFastJava
@@ -12,12 +12,7 @@ FamixTMethod >> generateFastAndBind [
 ]
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTMethod >> generateFastIfNotDoneAndBind [
+FamixTestComposed1Method >> generateFastIfNotDoneAndBind [
 	self fast ifNotNil: [ ^ self fast mooseModel ].
 	^ self generateFastAndBind 
-]
-
-{ #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTMethod >> generateFastJava [
-	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeMethodString: self sourceAnchor sourceText
 ]

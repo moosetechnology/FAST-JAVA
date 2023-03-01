@@ -1,7 +1,7 @@
-Extension { #name : #FamixTClass }
+Extension { #name : #FamixTException }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTClass >> generateFastAndBind [
+FamixTException >> generateFastAndBind [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
 	fastModel := self generateFastJava
@@ -12,7 +12,7 @@ FamixTClass >> generateFastAndBind [
 ]
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTClass >> generateFastIfNotDoneAndBind [
+FamixTException >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 
 		^ self fastDeclaration anyOne mooseModel ].
@@ -26,9 +26,4 @@ FamixTClass >> generateFastIfNotDoneAndBind [
 				    until: [ :c | 
 				    (c isKindOf: FamixJavaClass) and: [ c isAnonymousClass not ] ])
 				   asOrderedCollection \ { self }) anyOne generateFastAndBind ]
-]
-
-{ #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTClass >> generateFastJava [
-	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeString: self sourceAnchor sourceText
 ]
