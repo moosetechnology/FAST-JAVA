@@ -1,7 +1,7 @@
 Extension { #name : #MooseMSEImporterTestMethod }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-MooseMSEImporterTestMethod >> generateFastAndBind [
+MooseMSEImporterTestMethod >> bindFASTModel [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
 	fastModel := self getFASTModel
@@ -14,5 +14,5 @@ MooseMSEImporterTestMethod >> generateFastAndBind [
 { #category : #'*FAST-Java-SmaCC-Importer' }
 MooseMSEImporterTestMethod >> generateFastIfNotDoneAndBind [
 	self fast ifNotNil: [ ^ self fast mooseModel ].
-	^ self generateFastAndBind 
+	^ self bindFASTModel 
 ]

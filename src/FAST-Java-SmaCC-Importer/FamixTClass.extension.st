@@ -1,7 +1,7 @@
 Extension { #name : #FamixTClass }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTClass >> generateFastAndBind [
+FamixTClass >> bindFASTModel [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
 	fastModel := self getFASTModel
@@ -19,13 +19,13 @@ FamixTClass >> generateFastIfNotDoneAndBind [
 	self fastTypeDefinition ifNotNil: [ 
 		^ self fastTypeDefinition mooseModel ].
 	^ self isAnonymousClass
-		  ifFalse: [ self generateFastAndBind ]
+		  ifFalse: [ self bindFASTModel ]
 		  ifTrue: [ 
 			  ((self
 				    allAtScope: FamixTClass
 				    until: [ :c | 
 				    (c isKindOf: FamixJavaClass) and: [ c isAnonymousClass not ] ])
-				   asOrderedCollection \ { self }) anyOne generateFastAndBind ]
+				   asOrderedCollection \ { self }) anyOne bindFASTModel ]
 ]
 
 { #category : #'*FAST-Java-SmaCC-Importer' }

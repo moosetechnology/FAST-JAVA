@@ -1,7 +1,7 @@
 Extension { #name : #FamixTestComposed1Class }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTestComposed1Class >> generateFastAndBind [
+FamixTestComposed1Class >> bindFASTModel [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
 	fastModel := self getFASTModel
@@ -19,11 +19,11 @@ FamixTestComposed1Class >> generateFastIfNotDoneAndBind [
 	self fastTypeDefinition ifNotNil: [ 
 		^ self fastTypeDefinition mooseModel ].
 	^ self isAnonymousClass
-		  ifFalse: [ self generateFastAndBind ]
+		  ifFalse: [ self bindFASTModel ]
 		  ifTrue: [ 
 			  ((self
 				    allAtScope: FamixTClass
 				    until: [ :c | 
 				    (c isKindOf: FamixJavaClass) and: [ c isAnonymousClass not ] ])
-				   asOrderedCollection \ { self }) anyOne generateFastAndBind ]
+				   asOrderedCollection \ { self }) anyOne bindFASTModel ]
 ]

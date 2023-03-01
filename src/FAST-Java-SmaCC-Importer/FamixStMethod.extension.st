@@ -1,7 +1,7 @@
 Extension { #name : #FamixStMethod }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixStMethod >> generateFastAndBind [
+FamixStMethod >> bindFASTModel [
 	| fastModel |
 	self assert: self sourceAnchor isNotNil.
 	fastModel := self getFASTModel
@@ -14,5 +14,5 @@ FamixStMethod >> generateFastAndBind [
 { #category : #'*FAST-Java-SmaCC-Importer' }
 FamixStMethod >> generateFastIfNotDoneAndBind [
 	self fast ifNotNil: [ ^ self fast mooseModel ].
-	^ self generateFastAndBind 
+	^ self bindFASTModel 
 ]
