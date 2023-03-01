@@ -16,8 +16,3 @@ FamixTClass >> generateFastIfNotDoneAndBind [
 				    (c isKindOf: FamixJavaClass) and: [ c isAnonymousClass not ] ])
 				   asOrderedCollection \ { self }) anyOne bindFASTModel ]
 ]
-
-{ #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTClass >> getFASTModel [
-	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeString: self sourceAnchor sourceText
-]
