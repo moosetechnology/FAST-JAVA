@@ -72,6 +72,11 @@ FASTJavaExportVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignemen
 	aFASTJavaAssignementExpression expression accept: self
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTypeExpression [
+	self noIndent: 'boolean'
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self noIndent: $(.
@@ -79,6 +84,12 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self noIndent: $).
 	aFASTJavaCastExpression expression accept: self.
 
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
+	aFASTJavaClassProperty type accept: self.
+	stream << $. << aFASTJavaClassProperty fieldName
 ]
 
 { #category : #'visiting statement' }
@@ -119,6 +130,11 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	aFASTJavaInfixOperation leftOperand accept: self.
 	self noIndent: aFASTJavaInfixOperation operator.
 	aFASTJavaInfixOperation rightOperand accept: self.
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
+	self noIndent: 'int'
 ]
 
 { #category : #visiting }
@@ -177,6 +193,18 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaMethodEntityCollection
 		visitNodeList: aFASTJavaMethodEntityCollection 
 		separatedBy: [ self space ].
 	aFASTJavaMethodEntityCollection ifNotEmpty: [ self space ]
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
+	self noIndent: 'new '.
+	aFASTJavaNewExpression type accept: self.
+	self noIndent: '()'
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
+	self noIndent: 'null'
 ]
 
 { #category : #visiting }
@@ -275,7 +303,6 @@ FASTJavaExportVisitor >> visitNodeList: aCollection separatedBy: separationBlock
 	aCollection
 		do: [ :node | node accept: self ]
 		separatedBy: separationBlock
-	
 ]
 
 { #category : #outputting }
