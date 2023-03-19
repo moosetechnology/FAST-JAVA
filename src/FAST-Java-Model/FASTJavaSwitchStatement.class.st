@@ -23,7 +23,7 @@ FASTJavaSwitchStatement class >> annotation [
 	<FMClass: #SwitchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

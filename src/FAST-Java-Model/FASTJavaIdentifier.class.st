@@ -15,5 +15,5 @@ FASTJavaIdentifier class >> annotation [
 	<FMClass: #Identifier super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

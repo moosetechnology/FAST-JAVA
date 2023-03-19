@@ -15,7 +15,7 @@ FASTJavaLabeledStatement class >> annotation [
 	<FMClass: #LabeledStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

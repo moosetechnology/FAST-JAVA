@@ -29,7 +29,7 @@ FASTJavaQualifiedTypeName class >> annotation [
 	<FMClass: #QualifiedTypeName super: #FASTJavaTypeName>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

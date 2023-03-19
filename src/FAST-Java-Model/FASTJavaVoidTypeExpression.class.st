@@ -13,5 +13,5 @@ FASTJavaVoidTypeExpression class >> annotation [
 	<FMClass: #VoidTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

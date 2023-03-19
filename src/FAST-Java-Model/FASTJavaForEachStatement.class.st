@@ -24,7 +24,7 @@ FASTJavaForEachStatement class >> annotation [
 	<FMClass: #ForEachStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

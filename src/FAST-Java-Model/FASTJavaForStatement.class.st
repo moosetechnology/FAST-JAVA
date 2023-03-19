@@ -20,7 +20,7 @@ FASTJavaForStatement class >> annotation [
 	<FMClass: #ForStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

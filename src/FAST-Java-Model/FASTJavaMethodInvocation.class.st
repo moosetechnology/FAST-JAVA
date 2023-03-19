@@ -15,5 +15,5 @@ FASTJavaMethodInvocation class >> annotation [
 	<FMClass: #MethodInvocation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

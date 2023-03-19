@@ -10,5 +10,5 @@ FASTJavaPackageDeclaration class >> annotation [
 	<FMClass: #PackageDeclaration super: #FASTJavaFileDeclaration>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

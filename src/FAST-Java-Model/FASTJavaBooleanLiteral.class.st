@@ -12,5 +12,5 @@ FASTJavaBooleanLiteral class >> annotation [
 	<FMClass: #BooleanLiteral super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

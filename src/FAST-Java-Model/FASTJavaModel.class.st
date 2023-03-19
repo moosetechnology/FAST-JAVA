@@ -16,9 +16,3 @@ FASTJavaModel class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]
-
-{ #category : #testing }
-FASTJavaModel class >> canBeImportedFromFile [
-	<generated>
-	^true
-]

@@ -20,7 +20,7 @@ FASTJavaDoWhileStatement class >> annotation [
 	<FMClass: #DoWhileStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

@@ -31,7 +31,7 @@ FASTJavaUnaryExpression class >> annotation [
 	<FMClass: #UnaryExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

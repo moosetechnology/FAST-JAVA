@@ -15,7 +15,7 @@ FASTJavaLambdaExpression class >> annotation [
 	<FMClass: #LambdaExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

@@ -15,7 +15,7 @@ FASTJavaFileDeclaration class >> annotation [
 	<FMClass: #FileDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

@@ -17,7 +17,7 @@ FASTJavaLabeledCaseStatement class >> annotation [
 	<FMClass: #LabeledCaseStatement super: #FASTJavaCaseStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

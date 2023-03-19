@@ -29,7 +29,7 @@ FASTJavaEnumDeclaration class >> annotation [
 	<FMClass: #EnumDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

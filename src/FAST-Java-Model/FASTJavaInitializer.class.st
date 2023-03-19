@@ -24,7 +24,7 @@ FASTJavaInitializer class >> annotation [
 	<FMClass: #Initializer super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

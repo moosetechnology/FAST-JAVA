@@ -18,7 +18,7 @@ FASTJavaTModifier classSide >> annotation [
 	<FMClass: #TModifier super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

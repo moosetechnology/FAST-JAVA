@@ -28,7 +28,7 @@ FASTJavaInterfaceDeclaration class >> annotation [
 	<FMClass: #InterfaceDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

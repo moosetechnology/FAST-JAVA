@@ -10,5 +10,5 @@ FASTJavaImportDeclaration class >> annotation [
 	<FMClass: #ImportDeclaration super: #FASTJavaFileDeclaration>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

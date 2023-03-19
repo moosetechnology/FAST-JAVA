@@ -10,7 +10,15 @@ FASTJavaEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FASTJavaEntity class >> isAbstract [
+
+	<generated>
+	^ self == FASTJavaEntity
 ]
 
 { #category : #meta }
@@ -25,4 +33,30 @@ FASTJavaEntity >> isStatement [
 
 	<generated>
 	^ false
+]
+
+{ #category : #'as yet unclassified' }
+FASTJavaEntity >> miASTExtension [
+
+	<inspectorPresentationOrder: 150 title: 'AST'>
+	^ SpTreeTablePresenter new
+		  addColumn: (SpCompositeTableColumn new
+				   addColumn: ((SpImageTableColumn evaluated: #midasIcon)
+						    width: 20;
+						    yourself);
+				   addColumn: (SpStringTableColumn evaluated: [ :node | 
+						    (node sourceText isNotNil and: [ 
+							     node startPos isNotNil and: [ node isNotNil ] ])
+							    ifFalse: [ node class name allButFirst: 8 ]
+							    ifTrue: [ 
+								    (node class name allButFirst: 8) , ': '
+								    ,
+								    (node sourceText copyFrom: node startPos to: node endPos) ] ]);
+				   yourself);
+		  children: [ :aClass | 
+			  aClass children asOrderedCollection sorted: [ :a :b | 
+				  (a startPos ifNil: 0) <= (b startPos ifNil: 0) ] ];
+		  beMultipleSelection;
+		  roots: { self };
+		  beResizable
 ]

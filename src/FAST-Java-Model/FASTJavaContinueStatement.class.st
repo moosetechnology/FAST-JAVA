@@ -15,5 +15,5 @@ FASTJavaContinueStatement class >> annotation [
 	<FMClass: #ContinueStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

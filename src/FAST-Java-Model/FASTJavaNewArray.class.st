@@ -16,7 +16,7 @@ FASTJavaNewArray class >> annotation [
 	<FMClass: #NewArray super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

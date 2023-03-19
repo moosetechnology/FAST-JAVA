@@ -15,5 +15,5 @@ FASTJavaBreakStatement class >> annotation [
 	<FMClass: #BreakStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

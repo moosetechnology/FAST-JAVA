@@ -15,7 +15,7 @@ FASTJavaTWithModifiers classSide >> annotation [
 	<FMClass: #TWithModifiers super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

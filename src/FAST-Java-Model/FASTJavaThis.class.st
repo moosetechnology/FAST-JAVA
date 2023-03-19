@@ -13,5 +13,5 @@ FASTJavaThis class >> annotation [
 	<FMClass: #This super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

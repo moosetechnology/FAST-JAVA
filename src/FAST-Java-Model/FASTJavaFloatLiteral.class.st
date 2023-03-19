@@ -20,5 +20,5 @@ FASTJavaFloatLiteral class >> annotation [
 	<FMClass: #FloatLiteral super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

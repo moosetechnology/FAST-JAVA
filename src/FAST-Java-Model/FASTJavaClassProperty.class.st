@@ -49,7 +49,7 @@ FASTJavaClassProperty class >> annotation [
 	<FMClass: #ClassProperty super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

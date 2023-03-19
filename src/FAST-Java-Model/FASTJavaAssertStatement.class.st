@@ -25,7 +25,7 @@ FASTJavaAssertStatement class >> annotation [
 	<FMClass: #AssertStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

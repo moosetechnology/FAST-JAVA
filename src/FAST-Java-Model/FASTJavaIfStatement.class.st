@@ -22,7 +22,7 @@ FASTJavaIfStatement class >> annotation [
 	<FMClass: #IfStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

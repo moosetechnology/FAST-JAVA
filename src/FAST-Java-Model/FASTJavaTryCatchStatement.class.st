@@ -31,7 +31,7 @@ FASTJavaTryCatchStatement class >> annotation [
 	<FMClass: #TryCatchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

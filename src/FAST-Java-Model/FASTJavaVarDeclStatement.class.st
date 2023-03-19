@@ -26,7 +26,7 @@ FASTJavaVarDeclStatement class >> annotation [
 	<FMClass: #VarDeclStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

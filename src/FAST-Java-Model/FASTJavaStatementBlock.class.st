@@ -12,5 +12,5 @@ FASTJavaStatementBlock class >> annotation [
 	<FMClass: #StatementBlock super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

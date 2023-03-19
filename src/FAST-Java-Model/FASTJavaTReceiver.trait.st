@@ -15,7 +15,7 @@ FASTJavaTReceiver classSide >> annotation [
 	<FMClass: #TReceiver super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

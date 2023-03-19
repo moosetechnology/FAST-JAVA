@@ -19,7 +19,7 @@ FASTJavaConditionalExpression class >> annotation [
 	<FMClass: #ConditionalExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

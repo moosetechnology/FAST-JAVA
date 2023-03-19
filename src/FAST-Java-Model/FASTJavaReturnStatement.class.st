@@ -12,5 +12,5 @@ FASTJavaReturnStatement class >> annotation [
 	<FMClass: #ReturnStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

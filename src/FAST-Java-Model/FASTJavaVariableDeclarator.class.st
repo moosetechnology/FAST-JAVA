@@ -26,7 +26,7 @@ FASTJavaVariableDeclarator class >> annotation [
 	<FMClass: #VariableDeclarator super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

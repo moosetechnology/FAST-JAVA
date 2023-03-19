@@ -13,7 +13,7 @@ FASTJavaArrayTypeExpression class >> annotation [
 	<FMClass: #ArrayTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

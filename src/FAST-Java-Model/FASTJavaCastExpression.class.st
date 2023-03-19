@@ -18,7 +18,7 @@ FASTJavaCastExpression class >> annotation [
 	<FMClass: #CastExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

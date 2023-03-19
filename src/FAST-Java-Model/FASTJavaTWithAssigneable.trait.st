@@ -15,7 +15,7 @@ FASTJavaTWithAssigneable classSide >> annotation [
 	<FMClass: #TWithAssigneable super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

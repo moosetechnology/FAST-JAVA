@@ -12,5 +12,5 @@ FASTJavaExpressionStatement class >> annotation [
 	<FMClass: #ExpressionStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

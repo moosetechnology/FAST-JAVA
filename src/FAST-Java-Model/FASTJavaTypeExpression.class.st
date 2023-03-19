@@ -19,7 +19,7 @@ FASTJavaTypeExpression class >> annotation [
 	<FMClass: #TypeExpression super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

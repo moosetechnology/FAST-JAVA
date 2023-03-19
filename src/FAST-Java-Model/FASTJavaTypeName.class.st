@@ -19,7 +19,7 @@ FASTJavaTypeName class >> annotation [
 	<FMClass: #TypeName super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

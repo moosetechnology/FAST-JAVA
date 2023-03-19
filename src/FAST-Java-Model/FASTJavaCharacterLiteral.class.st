@@ -15,5 +15,5 @@ FASTJavaCharacterLiteral class >> annotation [
 	<FMClass: #CharacterLiteral super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

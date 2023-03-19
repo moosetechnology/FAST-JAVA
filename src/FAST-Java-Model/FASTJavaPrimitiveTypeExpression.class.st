@@ -13,5 +13,5 @@ FASTJavaPrimitiveTypeExpression class >> annotation [
 	<FMClass: #PrimitiveTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]

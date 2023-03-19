@@ -19,7 +19,7 @@ FASTJavaTypeParameterExpression class >> annotation [
 	<FMClass: #TypeParameterExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

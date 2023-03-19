@@ -15,7 +15,7 @@ FASTJavaTWithDeclarations classSide >> annotation [
 	<FMClass: #TWithDeclarations super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

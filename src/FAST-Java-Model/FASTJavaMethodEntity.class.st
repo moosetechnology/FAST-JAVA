@@ -20,7 +20,7 @@ FASTJavaMethodEntity class >> annotation [
 	<FMClass: #MethodEntity super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }
