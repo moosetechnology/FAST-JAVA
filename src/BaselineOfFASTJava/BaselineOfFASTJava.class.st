@@ -41,7 +41,8 @@ BaselineOfFASTJava >> defineGroups: spec [
 		group: 'core'
 		with:
 			#( 'FAST-Java-Model-Extension' 'FAST-Java-Model' 'FAST-Java-Model-Generator' );
-		group: 'tools' with: #( 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
+		group: 'tools'
+		with: #( 'visitor' 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
 		group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
 			   'FAST-Java-SmaCC-Importer-Tests'
 			   'TinyLogger' );
