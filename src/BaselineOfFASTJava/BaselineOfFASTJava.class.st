@@ -29,7 +29,7 @@ BaselineOfFASTJava >> defineDependencies: spec [
 	spec
 		baseline: 'SmaCC'
 		with: [ spec
-				loads: #('Java' 'withSource');
+				loads: #('JavaParser' 'SmaCCRuntime');
 				repository: 'github://j-brant/SmaCC:master/src' ].
 	spec baseline: 'TinyLogger' with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ]
 ]
