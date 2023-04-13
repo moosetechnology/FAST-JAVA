@@ -1,6 +1,8 @@
 Class {
 	#name : #FASTJavaModel,
 	#superclass : #MooseModel,
+	#traits : 'FASTJavaTEntityCreator',
+	#classTraits : 'FASTJavaTEntityCreator classTrait',
 	#category : #'FAST-Java-Model-Model'
 }
 
