@@ -65,6 +65,12 @@ FASTJavaExportVisitor >> unindent [
 	indent := indent - 1
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
+	self noIndent: $@.
+	aFASTJavaAnnotation expression accept: self
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
 	aFASTJavaAssignementExpression variable accept: self.
@@ -142,6 +148,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self withIndent: ''.
 	self visitFASTJavaModifiers: aFASTJavaMethodEntity modifiers.
 	aFASTJavaMethodEntity type accept: self.
+	self space.
 	self noIndent: aFASTJavaMethodEntity name.
 	self visitFASTJavaParameters: aFASTJavaMethodEntity parameters.
 	self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.

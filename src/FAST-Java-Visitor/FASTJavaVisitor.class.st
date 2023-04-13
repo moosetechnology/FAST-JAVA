@@ -389,7 +389,7 @@ FASTJavaVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator 
 	^ self visitFASTEntity: aFASTJavaVariableDeclarator
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visiting expression' }
 FASTJavaVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
 	^ self visitFASTTVariableExpression: aFASTJavaVariableExpression
 ]
