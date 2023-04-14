@@ -4,6 +4,12 @@ Trait {
 }
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newAnnotation [
+
+	^ self add: FASTJavaAnnotation new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newBooleanLiteral [
 
 	^ self add: FASTJavaBooleanLiteral new
@@ -52,9 +58,21 @@ FASTJavaTEntityCreator >> newIntegerLiteral [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newMethodEntity [
+
+	^ self add: FASTJavaMethodEntity new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newMethodInvocation [
 
 	^ self add: FASTJavaMethodInvocation new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newModifier [
+
+	^ self add: FASTJavaModifier new
 ]
 
 { #category : #'entity creation' }
@@ -109,4 +127,10 @@ FASTJavaTEntityCreator >> newVariableDeclarator [
 FASTJavaTEntityCreator >> newVariableExpression [
 
 	^ self add: FASTJavaVariableExpression new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newVoidTypeExpression [
+
+	^ self add: FASTJavaVoidTypeExpression new
 ]

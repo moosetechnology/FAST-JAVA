@@ -68,7 +68,8 @@ FASTJavaExportVisitor >> unindent [
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self noIndent: $@.
-	aFASTJavaAnnotation expression accept: self
+	aFASTJavaAnnotation expression accept: self.
+	self endOfLine
 ]
 
 { #category : #'visiting expression' }
@@ -191,15 +192,14 @@ FASTJavaExportVisitor >> visitFASTJavaMethodThrows: aFASTJavaThrownExceptionsCol
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
-	self noIndent: aFASTJavaModifier token
+	self noIndent: aFASTJavaModifier token.
+	self space
 ]
 
 { #category : #visiting }
-FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaMethodEntityCollection [
-	self
-		visitNodeList: aFASTJavaMethodEntityCollection 
-		separatedBy: [ self space ].
-	aFASTJavaMethodEntityCollection ifNotEmpty: [ self space ]
+FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
+	aFASTJavaModifierCollection do: [ :aFASTJavaModifier | 
+		aFASTJavaModifier accept: self ]
 ]
 
 { #category : #'visiting expression' }
@@ -271,6 +271,11 @@ FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDecla
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
 	self noIndent: aFASTJavaVariableExpression name
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaBooleanTypeExpression [
+	self noIndent: 'void'
 ]
 
 { #category : #'visiting statement' }
