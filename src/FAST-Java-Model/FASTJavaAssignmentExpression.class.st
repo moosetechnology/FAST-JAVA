@@ -4,48 +4,48 @@ An assignment expression mode.
 Contains a referances to an assignee assignee and the expression that's being assigned.
 "
 Class {
-	#name : #FASTJavaAssignementExpression,
+	#name : #FASTJavaAssignmentExpression,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTWithAssigneable + FASTTExpression',
-	#classTraits : 'FASTJavaTWithAssigneable classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTWithAssignable + FASTTExpression',
+	#classTraits : 'FASTJavaTWithAssignable classTrait + FASTTExpression classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
-FASTJavaAssignementExpression class >> annotation [
+FASTJavaAssignmentExpression class >> annotation [
 
-	<FMClass: #AssignementExpression super: #FASTJavaEntity>
+	<FMClass: #AssignmentExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
 ]
 
 { #category : #accessing }
-FASTJavaAssignementExpression >> expression [
-	"Relation named: #expression type: #FASTTExpression opposite: #javaAssignementExpressionOwner"
+FASTJavaAssignmentExpression >> expression [
+	"Relation named: #expression type: #FASTTExpression opposite: #javaAssignmentExpressionOwner"
 
 	<generated>
 	<FMComment: 'Expression that s being assigned upon declaration to the var'>
-	<FMProperty: #expression type: #FASTTExpression opposite: #javaAssignementExpressionOwner>
+	<FMProperty: #expression type: #FASTTExpression opposite: #javaAssignmentExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
-FASTJavaAssignementExpression >> expression: anObject [
+FASTJavaAssignmentExpression >> expression: anObject [
 
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self expression.
 		self attributeAt: #expression put: anObject.
-		otherSide javaAssignementExpressionOwner: nil ]
+		otherSide javaAssignmentExpressionOwner: nil ]
 	ifNotNil: [ 
 		self attributeAt: #expression put: anObject.
-		anObject javaAssignementExpressionOwner: self ]
+		anObject javaAssignmentExpressionOwner: self ]
 ]
 
 { #category : #navigation }
-FASTJavaAssignementExpression >> expressionGroup [
+FASTJavaAssignmentExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression

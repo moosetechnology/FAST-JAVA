@@ -1,8 +1,8 @@
 Class {
 	#name : #FASTJavaQualifiedName,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTAssigneable + FASTTEntity + FASTTNamedEntity',
-	#classTraits : 'FASTJavaTAssigneable classTrait + FASTTEntity classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTAssignable + FASTTEntity + FASTTNamedEntity',
+	#classTraits : 'FASTJavaTAssignable classTrait + FASTTEntity classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#fileDeclaration => FMOne type: #FASTJavaFileDeclaration opposite: #declarationName',
 		'#namespace => FMOne type: #FASTJavaQualifiedName opposite: #qualifyNamespaceOwner',

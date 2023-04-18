@@ -13,7 +13,6 @@ Class {
 	#name : #FASTJavaMetamodelGenerator,
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
-		'javaAssignementExpression',
 		'javaBreakStatement',
 		'javaCaseStatement',
 		'javaCharacterLiteral',
@@ -86,8 +85,6 @@ Class {
 		'tWithDeclarations',
 		'tModifier',
 		'tWithModifiers',
-		'tAssigneable',
-		'tWithAssigneable',
 		'tWithReceiver',
 		'tReceiver',
 		'tNamedEntity',
@@ -115,7 +112,10 @@ Class {
 		'multiImportDeclaration',
 		'qualifiedName',
 		'javaLabeledStatement',
-		'javaTypeParameter'
+		'javaTypeParameter',
+		'javaAssignmentExpression',
+		'tAssignable',
+		'tWithAssignable'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -181,7 +181,7 @@ My initializers are
 ]
 
 { #category : #comments }
-FASTJavaMetamodelGenerator >> commentForJavaAssignementExpression [
+FASTJavaMetamodelGenerator >> commentForJavaAssignmentExpression [
 	^ 'An assignment expression mode.
 
 Contains a referances to an assignee assignee and the expression that''s being assigned.'
@@ -541,7 +541,7 @@ switch (_) {
 ]
 
 { #category : #comments }
-FASTJavaMetamodelGenerator >> commentForJavaTAssigneable [
+FASTJavaMetamodelGenerator >> commentForJavaTAssignable [
 	^ 'You can assign something to me
 example:
 
@@ -641,8 +641,8 @@ while(...) {
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineClasses [
-	super defineClasses. 
-	javaAssignementExpression := builder newClassNamed: #AssignementExpression comment: self commentForJavaAssignementExpression.
+	super defineClasses.
+	javaAssignmentExpression := builder newClassNamed: #AssignmentExpression comment: self commentForJavaAssignmentExpression.
 	javaBreakStatement := builder newClassNamed: #BreakStatement comment: self commentForJavaBreakStatement.
 	javaCaseStatement := builder newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
 	javaCharacterLiteral := builder newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
@@ -747,11 +747,11 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	super defineHierarchy.
 
-	javaAssignementExpression --|> tExpression.
-	javaAssignementExpression --|> tWithAssigneable.
+	javaAssignmentExpression --|> tExpression.
+	javaAssignmentExpression --|> tWithAssignable.
 
 	javaFieldAccess --|> tExpression.
-	javaFieldAccess --|> tAssigneable.
+	javaFieldAccess --|> tAssignable.
 	javaFieldAccess --|> tWithReceiver.
 	javaFieldAccess --|> tReceiver.
 
@@ -847,11 +847,11 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaConditionalExpression --|> tExpression.
 
 	javaArrayAccess --|> tExpression.
-	javaArrayAccess --|> tAssigneable.
+	javaArrayAccess --|> tAssignable.
 	javaArrayAccess --|> tReceiver.
 
 	javaVariableExpression --|> tVariableExpression.
-	javaVariableExpression --|> tAssigneable.
+	javaVariableExpression --|> tAssignable.
 	javaVariableExpression --|> tReceiver.
 
 	javaThrowStatement --|> tStatement.
@@ -929,7 +929,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	multiImportDeclaration --|> importDeclaration.
 	qualifiedName --|> tNamedEntity.
 	qualifiedName --|> tEntity.
-	qualifiedName --|> tAssigneable.
+	qualifiedName --|> tAssignable.
 	fileDeclaration --|> tEntity.
 	
 	javaLabeledStatement --|> tStatement
@@ -991,11 +991,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaVariableExpression property: #javaVariableDeclaratorOwner) 
 			 comment: 'The javaVariableDeclarator owner (if possible)').
 
-	((javaAssignementExpression property: #expression) comment:
+	((javaAssignmentExpression property: #expression) comment:
 		 'Expression that s being assigned upon declaration to the var')
 	<>-
-		((tExpression property: #javaAssignementExpressionOwner) comment:
-			 'The javaAssignementExpression owner (if possible)').
+		((tExpression property: #javaAssignmentExpressionOwner) comment:
+			 'The javaAssignmentExpression owner (if possible)').
 
 	((javaCastExpression property: #expression) comment:
 		 'The expression to cast')
@@ -1302,8 +1302,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			  #javaVariableExpressionOwnerIsAnnotation) comment:
 			 'The annotation that own me').
 
-	((tWithAssigneable property: #variable) comment: 'My variable')
-	<>- ((tAssigneable property: #javaVariableAssignementOwner) comment:
+	((tWithAssignable property: #variable) comment: 'My variable')
+	<>- ((tAssignable property: #javaVariableAssignmentOwner) comment:
 			 'The owner of the modifier').
 
 	((tWithReceiver property: #receiver) comment: 'My variable')
@@ -1329,8 +1329,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tModifier := builder newTraitNamed: #TModifier comment: self commentForJavaTModifier. 
 	tWithModifiers := builder newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
 	
-	tAssigneable := builder newTraitNamed: #TAssigneable comment: self commentForJavaTAssigneable. 
-	tWithAssigneable := builder newTraitNamed: #TWithAssigneable comment: 'I have an assigneable'.
+	tAssignable := builder newTraitNamed: #TAssignable comment: self commentForJavaTAssignable. 
+	tWithAssignable := builder newTraitNamed: #TWithAssignable comment: 'I have an assignable'.
 	
 	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send message to someone'.
 	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive message from someone'.

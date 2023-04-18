@@ -55,7 +55,7 @@ JavaSmaCCWhileWhileMethodTest >> testFirstWhileConditionType [
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileBodyContentType [
-	self assert: whileWhile statements third body statements first body children anyOne class equals: FASTJavaAssignementExpression
+	self assert: whileWhile statements third body statements first body children anyOne class equals: FASTJavaAssignmentExpression
 ]
 
 { #category : #tests }

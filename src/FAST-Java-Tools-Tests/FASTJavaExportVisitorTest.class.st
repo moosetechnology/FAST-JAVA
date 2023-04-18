@@ -22,9 +22,9 @@ FASTJavaExportVisitorTest >> setUp [
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaAssignementExpression [
+FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 	| node |
-	node := builder assignement: 'aVar' value: (builder literalInt: 42).
+	node := builder assignment: 'aVar' value: (builder literalInt: 42).
 
 	self
 		export: node

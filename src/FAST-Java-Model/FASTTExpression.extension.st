@@ -344,29 +344,29 @@ FASTTExpression >> javaArrayTypeNameOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> javaAssignementExpressionOwner [
-	"Relation named: #javaAssignementExpressionOwner type: #FASTJavaAssignementExpression opposite: #expression"
+FASTTExpression >> javaAssignmentExpressionOwner [
+	"Relation named: #javaAssignmentExpressionOwner type: #FASTJavaAssignmentExpression opposite: #expression"
 
 	<generated>
-	<FMComment: 'The javaAssignementExpression owner (if possible)'>
+	<FMComment: 'The javaAssignmentExpression owner (if possible)'>
 	<container>
 	<derived>
-	<FMProperty: #javaAssignementExpressionOwner type: #FASTJavaAssignementExpression opposite: #expression>
+	<FMProperty: #javaAssignmentExpressionOwner type: #FASTJavaAssignmentExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaAssignementExpressionOwner ifAbsent: [ nil ]
+	^ self attributeAt: #javaAssignmentExpressionOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> javaAssignementExpressionOwner: anObject [
+FASTTExpression >> javaAssignmentExpressionOwner: anObject [
 
 	<generated>
-	(self attributeAt: #javaAssignementExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #javaAssignmentExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaAssignementExpressionOwner.
-		self attributeAt: #javaAssignementExpressionOwner put: anObject.
+		otherSide :=  self javaAssignmentExpressionOwner.
+		self attributeAt: #javaAssignmentExpressionOwner put: anObject.
 		otherSide expression: nil ]
 	ifNotNil: [ 
-		self attributeAt: #javaAssignementExpressionOwner put: anObject.
+		self attributeAt: #javaAssignmentExpressionOwner put: anObject.
 		anObject expression: self ]
 ]
 

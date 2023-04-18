@@ -73,10 +73,10 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 ]
 
 { #category : #'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
-	aFASTJavaAssignementExpression variable accept: self.
+FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentExpression [
+	aFASTJavaAssignmentExpression variable accept: self.
 	self noIndent: ' = '.
-	aFASTJavaAssignementExpression expression accept: self
+	aFASTJavaAssignmentExpression expression accept: self
 ]
 
 { #category : #visiting }

@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-FASTJavaTestNodeBuilder >> assignement: aName value: aNode [
-	^FASTJavaAssignementExpression new
+FASTJavaTestNodeBuilder >> assignment: aName value: aNode [
+	^FASTJavaAssignmentExpression new
 		variable: (self var: aName) ;
 		expression: aNode ;
 		yourself

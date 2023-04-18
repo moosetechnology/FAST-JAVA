@@ -8,8 +8,8 @@ liste[i]
 Class {
 	#name : #FASTJavaArrayAccess,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTAssigneable + FASTJavaTReceiver + FASTTExpression',
-	#classTraits : 'FASTJavaTAssigneable classTrait + FASTJavaTReceiver classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

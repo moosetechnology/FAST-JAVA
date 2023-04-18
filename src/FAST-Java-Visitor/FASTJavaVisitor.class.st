@@ -30,8 +30,8 @@ FASTJavaVisitor >> visitFASTJavaAssertStatement: aFASTJavaAssertStatement [
 ]
 
 { #category : #generated }
-FASTJavaVisitor >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
-	^ self visitFASTTExpression: aFASTJavaAssignementExpression
+FASTJavaVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentExpression [
+	^ self visitFASTTExpression: aFASTJavaAssignmentExpression
 ]
 
 { #category : #generated }
