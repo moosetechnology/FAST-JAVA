@@ -10,6 +10,12 @@ FASTJavaTEntityCreator >> newAnnotation [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newAssignmentExpression [
+
+	^ self add: FASTJavaAssignmentExpression new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newBooleanLiteral [
 
 	^ self add: FASTJavaBooleanLiteral new
@@ -19,6 +25,18 @@ FASTJavaTEntityCreator >> newBooleanLiteral [
 FASTJavaTEntityCreator >> newBooleanTypeExpression [
 
 	^ self add: FASTJavaBooleanTypeExpression new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newByteTypeExpression [
+
+	^ self add: FASTJavaByteTypeExpression new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newCharTypeExpression [
+
+	^ self add: FASTJavaCharTypeExpression new
 ]
 
 { #category : #'entity creation' }
@@ -34,9 +52,21 @@ FASTJavaTEntityCreator >> newClassTypeExpression [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newDoubleTypeExpression [
+
+	^ self add: FASTJavaDoubleTypeExpression new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newExpressionStatement [
 
 	^ self add: FASTJavaExpressionStatement new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newFloatTypeExpression [
+
+	^ self add: FASTJavaFloatTypeExpression new
 ]
 
 { #category : #'entity creation' }
@@ -55,6 +85,12 @@ FASTJavaTEntityCreator >> newIntTypeExpression [
 FASTJavaTEntityCreator >> newIntegerLiteral [
 
 	^ self add: FASTJavaIntegerLiteral new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newLongTypeExpression [
+
+	^ self add: FASTJavaLongTypeExpression new
 ]
 
 { #category : #'entity creation' }
@@ -91,6 +127,12 @@ FASTJavaTEntityCreator >> newNewExpression [
 FASTJavaTEntityCreator >> newNullLiteral [
 
 	^ self add: FASTJavaNullLiteral new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newShortTypeExpression [
+
+	^ self add: FASTJavaShortTypeExpression new
 ]
 
 { #category : #'entity creation' }
