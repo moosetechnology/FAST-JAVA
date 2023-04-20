@@ -84,6 +84,11 @@ FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTyp
 	self noIndent: 'boolean'
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpression [
+	self noIndent: 'byte'
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self noIndent: $(.
@@ -93,10 +98,20 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpression [
+	self noIndent: 'char'
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 	aFASTJavaClassProperty type accept: self.
 	stream << $. << aFASTJavaClassProperty fieldName
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
+	self noIndent: 'double'
 ]
 
 { #category : #'visiting statement' }
@@ -104,6 +119,11 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 	aFASTJavaStatement ifNil: [ ^self ].
 	self withIndent: 'else '.
 	self visitFASTJavaIfPartStatement: aFASTJavaStatement
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExpression [
+	self noIndent: 'float'
 ]
 
 { #category : #'visiting expression' }
@@ -142,6 +162,11 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
 	self noIndent: 'int'
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
+	self noIndent: 'long'
 ]
 
 { #category : #visiting }
@@ -229,6 +254,11 @@ FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 		separatedBy: [ self noIndent:  ', ' ].
 	self noIndent:  ') '.
 
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExpression [
+	self noIndent: 'short'
 ]
 
 { #category : #'visiting expression' }
