@@ -194,9 +194,9 @@ FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpre
 FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self withIndent: ''.
 	self visitFASTJavaModifiers: aFASTJavaMethodEntity modifiers.
-	aFASTJavaMethodEntity type ifNotNil: [ "not constructor" 
-		aFASTJavaMethodEntity type accept: self ].
-	self space.
+	aFASTJavaMethodEntity type ifNotNil: [ "not constructor"
+		aFASTJavaMethodEntity type accept: self.
+		self space ].
 	self noIndent: aFASTJavaMethodEntity name.
 	self visitFASTJavaParameters: aFASTJavaMethodEntity parameters.
 	self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.
@@ -245,16 +245,12 @@ FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
-	| hasAnnotation |
-	hasAnnotation := false.
 	aFASTJavaModifierCollection
 		select: [ :modifier | modifier isKindOf: FASTJavaAnnotation ]
 		thenDo: [ :aFASTJavaAnnotation | 
-			hasAnnotation := true.
 			self visitFASTJavaAnnotation: aFASTJavaAnnotation.
-			self endOfLine ].
-	(hasAnnotation and: [ aFASTJavaModifierCollection isNotEmpty ]) 
-		ifTrue: [ self withIndent: '' ].
+			self endOfLine.
+			self withIndent: '' ].
 	aFASTJavaModifierCollection
 		select: [ :modifier | modifier isKindOf: FASTJavaModifier ]
 		thenDo: [ :aFASTJavaModifier | 
