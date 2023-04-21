@@ -68,8 +68,7 @@ FASTJavaExportVisitor >> unindent [
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self noIndent: $@.
-	aFASTJavaAnnotation expression accept: self.
-	self endOfLine
+	aFASTJavaAnnotation expression accept: self
 ]
 
 { #category : #'visiting expression' }
@@ -101,6 +100,28 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpression [
 	self noIndent: 'char'
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
+	self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
+	self noIndent: aFASTJavaClassDeclaration name.
+	aFASTJavaClassDeclaration superclass ifNotNil: [ 
+		self noIndent: ' extends '.
+		self noIndent: aFASTJavaClassDeclaration superclass name ].
+	aFASTJavaClassDeclaration interfaces ifNotEmpty: [ 
+		self noIndent: ' implements ' ].
+	aFASTJavaClassDeclaration interfaces
+		do: [ :interface | self noIndent: interface name ]
+		separatedBy: [ self noIndent: ', ' ].
+	self noIndent: ' {'.
+	self endOfLine.
+	self indent.
+	aFASTJavaClassDeclaration declarations do: [ :declaration | 
+		declaration accept: self ].
+	self noIndent: $}.
+	self endOfLine.
+	self unindent
 ]
 
 { #category : #'visiting expression' }
@@ -173,13 +194,15 @@ FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpre
 FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self withIndent: ''.
 	self visitFASTJavaModifiers: aFASTJavaMethodEntity modifiers.
-	aFASTJavaMethodEntity type accept: self.
+	aFASTJavaMethodEntity type ifNotNil: [ "not constructor" 
+		aFASTJavaMethodEntity type accept: self ].
 	self space.
 	self noIndent: aFASTJavaMethodEntity name.
 	self visitFASTJavaParameters: aFASTJavaMethodEntity parameters.
 	self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.
 	"missing a #visitFASTJavaStatementBlock: in FASTJavaVisitor"
-	"self visitFASTJavaStatementBlock: "aFASTJavaMethodEntity statementBlock accept: self.
+	"self visitFASTJavaStatementBlock: "
+	aFASTJavaMethodEntity statementBlock accept: self
 ]
 
 { #category : #'visiting expression' }
@@ -217,14 +240,26 @@ FASTJavaExportVisitor >> visitFASTJavaMethodThrows: aFASTJavaThrownExceptionsCol
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
-	self noIndent: aFASTJavaModifier token.
-	self space
+	self noIndent: aFASTJavaModifier token
 ]
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
-	aFASTJavaModifierCollection do: [ :aFASTJavaModifier | 
-		aFASTJavaModifier accept: self ]
+	| hasAnnotation |
+	hasAnnotation := false.
+	aFASTJavaModifierCollection
+		select: [ :modifier | modifier isKindOf: FASTJavaAnnotation ]
+		thenDo: [ :aFASTJavaAnnotation | 
+			hasAnnotation := true.
+			self visitFASTJavaAnnotation: aFASTJavaAnnotation.
+			self endOfLine ].
+	(hasAnnotation and: [ aFASTJavaModifierCollection isNotEmpty ]) 
+		ifTrue: [ self withIndent: '' ].
+	aFASTJavaModifierCollection
+		select: [ :modifier | modifier isKindOf: FASTJavaModifier ]
+		thenDo: [ :aFASTJavaModifier | 
+			self visitFASTJavaModifier: aFASTJavaModifier.
+			self space ]
 ]
 
 { #category : #'visiting expression' }
