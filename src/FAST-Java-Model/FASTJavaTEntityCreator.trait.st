@@ -40,6 +40,12 @@ FASTJavaTEntityCreator >> newCharTypeExpression [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newClassDeclaration [
+
+	^ self add: FASTJavaClassDeclaration new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newClassProperty [
 
 	^ self add: FASTJavaClassProperty new
