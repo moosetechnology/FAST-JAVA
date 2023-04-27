@@ -106,14 +106,14 @@ FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpre
 FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
 	self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
 	self noIndent: aFASTJavaClassDeclaration name.
-	aFASTJavaClassDeclaration superclass ifNotNil: [ 
+	aFASTJavaClassDeclaration superclass ifNotNil: [ :superclass | 
 		self noIndent: ' extends '.
-		self noIndent: aFASTJavaClassDeclaration superclass name ].
-	aFASTJavaClassDeclaration interfaces ifNotEmpty: [ 
-		self noIndent: ' implements ' ].
-	aFASTJavaClassDeclaration interfaces
-		do: [ :interface | self noIndent: interface name ]
-		separatedBy: [ self noIndent: ', ' ].
+		self noIndent: superclass name ].
+	aFASTJavaClassDeclaration interfaces ifNotEmpty: [ :interfaces | 
+		self noIndent: ' implements '.
+		interfaces
+			do: [ :interface | self noIndent: interface name ]
+			separatedBy: [ self noIndent: ', ' ] ].
 	self noIndent: ' {'.
 	self endOfLine.
 	self indent.
