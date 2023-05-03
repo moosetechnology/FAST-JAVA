@@ -1,7 +1,7 @@
-Extension { #name : #FamixTClass }
+Extension { #name : #FamixTest7Class }
 
 { #category : #'*FAST-Java-SmaCC-Importer' }
-FamixTClass >> generateFastIfNotDoneAndBind [
+FamixTest7Class >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 
 		^ self fastDeclaration anyOne mooseModel ].
