@@ -861,7 +861,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaPackageDeclaration new.
 	self generalVisitActionForNodeEntity: aPackageDeclaration.
-	currentFASTEntity declarationName: (self clone accept: aPackageDeclaration name).
+	currentFASTEntity qualifiedName: (self clone accept: aPackageDeclaration name).
 ]
 
 { #category : #visitor }
@@ -980,7 +980,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
 JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingleTypeImportDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self generalVisitActionForNodeEntity: aSingleTypeImportDeclaration.
-	currentFASTEntity declarationName: (self clone accept: aSingleTypeImportDeclaration name).
+	currentFASTEntity qualifiedName: (self clone accept: aSingleTypeImportDeclaration name).
 ]
 
 { #category : #visitor }
@@ -1097,7 +1097,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aType
 	currentFASTEntity := self addToModel:
 		                     FASTJavaMultiImportDeclaration new.
 	self generalVisitActionForNodeEntity: aTypeImportOnDemandDeclaration.
-	currentFASTEntity declarationName:
+	currentFASTEntity qualifiedName:
 		(self clone accept: aTypeImportOnDemandDeclaration name)
 ]
 

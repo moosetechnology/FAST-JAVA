@@ -16,5 +16,5 @@ JavaSmaCCImportDeclaration >> testImport [
 	| model |
 	model := self parseClassString: self classString.
 	self assert: (model allWithType: FASTJavaImportDeclaration) size equals: 1.
-	self assert: (model allWithType: FASTJavaImportDeclaration) anyOne declarationName fullName equals: 'fr.inria.fast.Hello'.
+	self assert: (model allWithType: FASTJavaImportDeclaration) anyOne qualifiedName fullName equals: 'fr.inria.fast.Hello'.
 ]

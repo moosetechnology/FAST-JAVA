@@ -4,8 +4,8 @@ Class {
 	#traits : 'FASTJavaTAssignable + FASTTEntity + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTTEntity classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
-		'#fileDeclaration => FMOne type: #FASTJavaFileDeclaration opposite: #declarationName',
 		'#namespace => FMOne type: #FASTJavaQualifiedName opposite: #qualifyNamespaceOwner',
+		'#qualifiedNameOwner => FMOne type: #FASTJavaTWithQualifiedName opposite: #qualifiedName',
 		'#qualifyNamespaceOwner => FMOne type: #FASTJavaQualifiedName opposite: #namespace'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -18,30 +18,6 @@ FASTJavaQualifiedName class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
-]
-
-{ #category : #accessing }
-FASTJavaQualifiedName >> fileDeclaration [
-	"Relation named: #fileDeclaration type: #FASTJavaFileDeclaration opposite: #declarationName"
-
-	<generated>
-	<container>
-	<derived>
-	^ fileDeclaration
-]
-
-{ #category : #accessing }
-FASTJavaQualifiedName >> fileDeclaration: anObject [
-
-	<generated>
-	fileDeclaration := anObject
-]
-
-{ #category : #navigation }
-FASTJavaQualifiedName >> fileDeclarationGroup [
-	<generated>
-	<navigation: 'FileDeclaration'>
-	^ MooseSpecializedGroup with: self fileDeclaration
 ]
 
 { #category : #accessing }
@@ -65,6 +41,31 @@ FASTJavaQualifiedName >> namespaceGroup [
 	<generated>
 	<navigation: 'Namespace'>
 	^ MooseSpecializedGroup with: self namespace
+]
+
+{ #category : #accessing }
+FASTJavaQualifiedName >> qualifiedNameOwner [
+	"Relation named: #qualifiedNameOwner type: #FASTJavaTWithQualifiedName opposite: #qualifiedName"
+
+	<generated>
+	<FMComment: 'The owner of the qualified name'>
+	<container>
+	<derived>
+	^ qualifiedNameOwner
+]
+
+{ #category : #accessing }
+FASTJavaQualifiedName >> qualifiedNameOwner: anObject [
+
+	<generated>
+	qualifiedNameOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaQualifiedName >> qualifiedNameOwnerGroup [
+	<generated>
+	<navigation: 'QualifiedNameOwner'>
+	^ MooseSpecializedGroup with: self qualifiedNameOwner
 ]
 
 { #category : #accessing }

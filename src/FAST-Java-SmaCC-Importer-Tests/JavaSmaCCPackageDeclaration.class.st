@@ -16,5 +16,5 @@ JavaSmaCCPackageDeclaration >> testImportPackage [
 	| model |
 	model := self parseClassString: self classString.
 	self assert: (model allWithType: FASTJavaPackageDeclaration) size equals: 1.
-	self assert: (model allWithType: FASTJavaPackageDeclaration) anyOne declarationName fullName equals: 'fr.inria.fast'.
+	self assert: (model allWithType: FASTJavaPackageDeclaration) anyOne qualifiedName fullName equals: 'fr.inria.fast'.
 ]

@@ -1,5 +1,5 @@
 "
-todo
+I represent a cast expression, e.g. `(int) 0.5`
 "
 Class {
 	#name : #FASTJavaCastExpression,

@@ -1,3 +1,6 @@
+"
+I represent a wildcard import declaration, e.g. `import java.util.*;`
+"
 Class {
 	#name : #FASTJavaMultiImportDeclaration,
 	#superclass : #FASTJavaImportDeclaration,
