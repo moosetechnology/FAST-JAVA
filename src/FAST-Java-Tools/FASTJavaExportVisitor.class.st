@@ -105,6 +105,7 @@ FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpre
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
 	self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
+	self noIndent: 'class '.
 	self noIndent: aFASTJavaClassDeclaration name.
 	aFASTJavaClassDeclaration superclass ifNotNil: [ :superclass | 
 		self noIndent: ' extends '.
