@@ -25,7 +25,7 @@ FASTJavaExportVisitor >> endOfLine [
 
 { #category : #outputting }
 FASTJavaExportVisitor >> endOfStatement [
-	self noIndent: $; .
+	self noIndent: $;.
 	self endOfLine
 ]
 
@@ -47,7 +47,6 @@ FASTJavaExportVisitor >> indent [
 FASTJavaExportVisitor >> indentPrefix [
 	^(String new: (indent * 2))
 		atAllPut: Character space
-	
 ]
 
 { #category : #outputting }
@@ -93,8 +92,7 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self noIndent: $(.
 	aFASTJavaCastExpression type accept: self.
 	self noIndent: $).
-	aFASTJavaCastExpression expression accept: self.
-
+	aFASTJavaCastExpression expression accept: self
 ]
 
 { #category : #visiting }
@@ -144,6 +142,19 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 ]
 
 { #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaFileDeclaration: aFASTJavaFileDeclaration [
+	aFASTJavaFileDeclaration declarations
+		detect: [ :decl | decl class == FASTJavaPackageDeclaration ]
+		ifOne: [ :decl | self visitFASTJavaPackageDeclaration: decl ];
+		select: [ :decl | decl isKindOf: FASTJavaImportDeclaration ]
+		thenDo: [ :decl | decl accept: self ];
+		select: [ :decl | decl class == FASTJavaInterfaceDeclaration ]
+		thenDo: [ :decl | self visitFASTJavaInterfaceDeclaration: decl ];
+		select: [ :decl | decl class == FASTJavaClassDeclaration ]
+		thenDo: [ :decl | self visitFASTJavaClassDeclaration: decl ]
+]
+
+{ #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExpression [
 	self noIndent: 'float'
 ]
@@ -172,6 +183,13 @@ FASTJavaExportVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self noIndent: ') '.
 	self visitFASTJavaThenPartStatement: aFASTJavaIfStatement thenPart.
 	self visitFASTJavaElsePartStatement: aFASTJavaIfStatement elsePart.
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclaration [ 
+	self noIndent: 'import '.
+	self visitFASTJavaQualifiedName: aFASTJavaImportDeclaration qualifiedName.
+	self endOfStatement
 ]
 
 { #category : #'visiting expression' }
@@ -259,6 +277,14 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 			self space ]
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaMultiImportDeclaration: aFASTJavaMultiImportDeclaration [
+	self noIndent: 'import '.
+	self visitFASTJavaQualifiedName: aFASTJavaMultiImportDeclaration qualifiedName.
+	self noIndent: '.*'.
+	self endOfStatement
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 	self noIndent: 'new '.
@@ -269,6 +295,13 @@ FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
 	self noIndent: 'null'
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [ 
+	self noIndent: 'package '.
+	self visitFASTJavaQualifiedName: aFASTJavaPackageDeclaration qualifiedName.
+	self endOfStatement
 ]
 
 { #category : #visiting }
@@ -286,6 +319,11 @@ FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 		separatedBy: [ self noIndent:  ', ' ].
 	self noIndent:  ') '.
 
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
+	self noIndent: aFASTJavaQualifiedName fullName
 ]
 
 { #category : #visiting }
