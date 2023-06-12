@@ -105,10 +105,8 @@ Class {
 		'tBooleanLiteral',
 		'javaEnumDeclaration',
 		'javaInterfaceDeclaration',
-		'fileDeclaration',
 		'packageDeclaration',
 		'importDeclaration',
-		'multiImportDeclaration',
 		'qualifiedName',
 		'javaLabeledStatement',
 		'javaTypeParameter',
@@ -116,7 +114,8 @@ Class {
 		'tAssignable',
 		'tWithAssignable',
 		'tWithQualifiedName',
-		'javaTryCatchStatement'
+		'javaTryCatchStatement',
+		'compilationUnit'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -731,10 +730,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaEnumDeclaration := builder newClassNamed: #EnumDeclaration comment: self commentForJavaEnumDeclaration.
 	javaInterfaceDeclaration := builder newClassNamed: #InterfaceDeclaration comment: self commentForJavaInterfaceDeclaration.
 	javaEmptyMethodDeclaration := builder newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
-	fileDeclaration := builder newClassNamed: #FileDeclaration comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and class or interface'.
+	compilationUnit := builder newClassNamed: #CompilationUnit comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and types'.
 	packageDeclaration := builder newClassNamed: #PackageDeclaration comment: 'I represent a package declaration, e.g. `package fr.inria;`'.
 	importDeclaration := builder newClassNamed: #ImportDeclaration comment: 'I represent an import declaration, e.g. `import java.util.List;`'.
-	multiImportDeclaration := builder newClassNamed: #MultiImportDeclaration comment: 'I represent a wildcard import declaration, e.g. `import java.util.*;`'.
 	qualifiedName := builder newClassNamed: #QualifiedName.
 ]
 
@@ -917,23 +915,18 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaExpressionStatement --|> tExpressionStatement.
 	javaLabeledStatement --|> tStatement.
 
-	fileDeclaration --|> tEntity.
-	fileDeclaration --|> tDeclaration.
-	fileDeclaration --|> tWithDeclarations.
-	fileDeclaration --|> tWithQualifiedName.
+	qualifiedName --|> tNamedEntity.
+	qualifiedName --|> tEntity.
+	qualifiedName --|> tAssignable.
 
+	compilationUnit --|> tEntity.
+
+	"package and import do not use TDeclaration on purpose: they are only contained in a compilation unit"
 	packageDeclaration --|> tEntity.
-	packageDeclaration --|> tDeclaration.
 	packageDeclaration --|> tWithQualifiedName.
 
 	importDeclaration --|> tEntity.
-	importDeclaration --|> tDeclaration.
-	importDeclaration --|> tWithQualifiedName.
-	multiImportDeclaration --|> importDeclaration.
-
-	qualifiedName --|> tNamedEntity.
-	qualifiedName --|> tEntity.
-	qualifiedName --|> tAssignable
+	importDeclaration --|> tWithQualifiedName
 ]
 
 { #category : #definition }
@@ -952,13 +945,23 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaUnaryExpression
 		 property: #isPrefixedUnaryExpression
 		 type: #Boolean) comment:
-		'true if the expression is prefixed (ex. ++i) else false'.
+		'True if the expression is prefixed (ex. ++i) else false'.
 
 	(javaModifier property: #token type: #String) comment:
 		'The modifier value'.
 
 	(javaLabeledStatement property: #label type: #String) comment:
-		'The label of the labeled statement'
+		'The label of the labeled statement'.
+
+	(importDeclaration
+		 property: #isStatic
+		 type: #Boolean
+		 defaultValue: false) comment: 'True if importing static members'.
+	(importDeclaration
+		 property: #isOnDemand
+		 type: #Boolean
+		 defaultValue: false) comment:
+		'Whether this import is on-demand (wildcard) or single-type'
 ]
 
 { #category : #definition }
@@ -976,23 +979,23 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The owner of the declarator').
 
 	((javaSwitchStatement property: #cases) comment:
-		 'The cases of the switch statements')
+		 'The cases of the switch statement')
 	<>-*
 		((javaCaseStatement property: #javaCaseStatementSwitchOwner) 
-			 comment: 'javaSwitch owner').
+			 comment: 'The switch owner').
 
 	((javaVariableDeclarator property: #expression) comment:
-		 'Expression that s being assigned upon declaration to the var')
+		 'Expression to be assigned to the var during declaration')
 	<>- ((tExpression property: #javaVariableDeclaratorExpressionOwner) 
 			 comment: 'The javaVariableDeclarator owner (if possible)').
 	((javaVariableDeclarator property: #variable) comment:
-		 'Variable that s being declared')
+		 'The variable that is being declared')
 	<>-
 		((javaVariableExpression property: #javaVariableDeclaratorOwner) 
 			 comment: 'The javaVariableDeclarator owner (if possible)').
 
 	((javaAssignmentExpression property: #expression) comment:
-		 'Expression that s being assigned upon declaration to the var')
+		 'Expression to be assigned to the var during declaration')
 	<>- ((tExpression property: #javaAssignmentExpressionOwner) comment:
 			 'The javaAssignmentExpression owner (if possible)').
 
@@ -1001,12 +1004,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaCastExpressionOwner) comment:
 			 'The javaCastExpression owner (if possible)').
 	((javaCastExpression property: #type) comment:
-		 'The type in witch the expression will be cast')
+		 'The type into which the expression will be cast')
 	<>-
 		((javaVariableExpression property: #javaCastExpressionTypeOwner) 
 			 comment: 'The javaCastExpression owner (if possible)').
 
-	((javaClassProperty property: #type) comment: 'The owner type')
+	((javaClassProperty property: #type) comment:
+		 'The type of the property')
 	<>-
 		((javaVariableExpression property: #javaClassPropertyOwner) 
 			 comment: 'The javaClassProperty owner (if possible)').
@@ -1034,7 +1038,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The javaOuterThis owner (if possible)').
 
 	((javaThrowStatement property: #expression) comment:
-		 'The throwed element')
+		 'The thrown element')
 	<>- ((tExpression property: #javaThrowStatementOwner) comment:
 			 'The javaThrowStatement owner (if possible)').
 
@@ -1044,27 +1048,24 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The javaLabeledCaseStatement owner (if possible)').
 
 	((javaForEachStatement property: #body) comment:
-		 'The body of the For Each statement')
+		 'The body of the for-each statement')
 	<>- ((tStatement property: #javaForEachStatementOwner) comment:
 			 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #list) comment:
-		 'The list the for each statement iterate on')
+		 'The list that the for-each statement iterates over')
 	<>- ((tExpression property: #javaForEachStatementOwner) comment:
 			 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #fieldname) comment:
-		 'The name of the created local variable')
-	<>-
-		((javaVariableExpression property:
-			  #javaForEachStatementFieldNameOwner) comment:
-			 'The javaForEachStatement owner (if possible)').
+		 'The identifier of the created local variable')
+	<>- ((javaIdentifier property: #javaForEachStatementFieldNameOwner) 
+			 comment: 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #type) comment:
-		 'The name of the type of the created local variable')
-	<>-
-		((javaVariableExpression property: #javaForEachStatementTypeOwner) 
+		 'The type of the created local variable')
+	<>- ((javaTypeExpression property: #javaForEachStatementTypeOwner) 
 			 comment: 'The javaForEachStatement owner (if possible)').
 
 	((javaCatchPartStatement property: #body) comment:
-		 'The body of the Catch part statement')
+		 'The body of the catch part')
 	<>- ((tStatement property: #javaCatchPartStatementOwner) comment:
 			 'The javaCatchPartStatementOwner owner (if possible)').
 	((javaCatchPartStatement property: #parameter) comment:
@@ -1077,15 +1078,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tStatement property: #javaTryCatchOwner) comment:
 			 'The javaTryCatch owner (if possible)').
 	((javaTryCatchStatement property: #catches) comment:
-		 'I contains all the catch statements')
-	<>-*
-	((javaCatchPartStatement property: #tryOwner) comment:
-		 'The try owner').
+		 'I contain all the catch statements')
+	<>-* ((javaCatchPartStatement property: #tryOwner) comment:
+			 'The try part that owns me').
 
 	((javaIfStatement property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #ifConditionOwner) comment:
-			 'I reprensent a condition for my owner').
+			 'I represent a condition for my owner').
 	((javaIfStatement property: #elsePart) comment: 'else part')
 	<>- ((tStatement property: #ifElsePartOwner) comment:
 			 'The if owner (if possible)').
@@ -1156,17 +1156,17 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaInitializer property: #statementBlock) comment:
 		 'Statements block of the behavioural entity')
 	<>- ((tStatementBlock property: #javaInitializerOwner) comment:
-			 'Behavioural entity containing the statement block.').
+			 'Behavioural entity containing the statement block').
 
 	((javaLabeledStatement property: #statementBlock) comment:
 		 'Statements block of the behavioural entity')
 	<>- ((tStatementBlock property: #javaLabaledStatementOwner) comment:
-			 'Label Statement entity containing the statement block.').
+			 'Label Statement entity containing the statement block').
 
 	((javaNewArray property: #initializer) comment:
 		 'The initializer of the array')
 	<>- ((tExpression property: #javaNewArrayInitialOwner) comment:
-			 'I belong to a new array initializations').
+			 'I belong to a new array initialization').
 
 	((javaLambdaExpression property: #expression) comment:
 		 'Expression to be executed as part of the lambda.')
@@ -1193,13 +1193,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-
 		((javaVariableExpression property: #javaMethodTypeOwner) comment:
 			 'The variable expression owner (if possible)').
-
 	((javaMethodEntity property: #throws) comment:
 		 'The list of throws exception')
 	<>-*
 		((javaClassTypeExpression property: #javaMethodThrowsOwner) 
 			 comment: 'The method that throws me').
-
 	((javaMethodEntity property: #typeParameters) comment:
 		 'The list of type parameter')
 	<>-*
@@ -1237,7 +1235,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The name of the type')
 	<>-
 		((javaTypeName property: #javaTypeNameTypeExpressionOwner) comment:
-			 'The type expression that own me').
+			 'The type expression that owns me').
 
 	((javaQualifiedTypeName property: #namespace) comment:
 		 'The namespace of the name')
@@ -1249,35 +1247,38 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #assertConditionOwner) comment:
 			 'I reprensent a condition for my owner').
 	((javaAssertStatement property: #message) comment:
-		 'The error message that is raised in case the condition is false')
+		 'The error message that is raised if the condition is false')
 	<>- ((javaStringLiteral property: #javaStringAssertStatementOwner) 
-			 comment: 'the assert that can raised me').
+			 comment: 'The assertion that can raise me').
 
 	((javaClassDeclaration property: #superclass) comment:
 		 'My superclass')
 	<>-
-		((javaTypeExpression property: #javaClassDeclarationSuperclassOwnver) 
-			 comment: 'The class that own me').
+		((javaTypeExpression property: #javaClassDeclarationSuperclassOwner) 
+			 comment: 'The class that extends me').
 	((javaClassDeclaration property: #interfaces) comment:
-		 'My superclass')
+		 'The interfaces I implement')
 	<>-*
-		((javaTypeExpression property: #javaClassDeclarationInterfaceOwnver) 
-			 comment: 'The class that own me').
+		((javaTypeExpression property: #javaClassDeclarationInterfaceOwner) 
+			 comment: 'The class that implements me').
 
-	((javaEnumDeclaration property: #interfaces) comment: 'My superclass')
+	((javaEnumDeclaration property: #interfaces) comment:
+		 'The interfaces I implement')
 	<>-*
-		((javaTypeExpression property: #javaEnumDeclarationInterfaceOwnver) 
-			 comment: 'The class that own me').
+		((javaTypeExpression property: #javaEnumDeclarationInterfaceOwner) 
+			 comment: 'The enum that implements me').
 
 	((javaInterfaceDeclaration property: #interfaces) comment:
-		 'My super interfaces') <>-* ((javaTypeExpression property:
-		  #javaInterfaceDeclarationInterfaceOwnver) comment:
-		 'The interface that own me').
+		 'My super interfaces')
+	<>-*
+		((javaTypeExpression property:
+			  #javaInterfaceDeclarationInterfaceOwner) comment:
+			 'The interface that extends me').
 
 	((tWithDeclarations property: #declarations) comment:
-		 'The element I declared')
+		 'The elements I declare')
 	<>-* ((tDeclaration property: #javaDeclarationOwner) comment:
-			 'The element that declared me').
+			 'The element that declares me').
 
 	((tWithModifiers property: #modifiers) comment: 'My modifiers')
 	<>-* ((tModifier property: #javaModifierOwner) comment:
@@ -1285,27 +1286,48 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaAnnotationExpression property: #expression) comment:
 		 'My expression (because annotation can be complex)')
-	<>- ((javaVariableExpression property:
-			  #javaVariableExpressionOwnerIsAnnotation) comment:
-			 'The annotation that own me').
+	<>- ((javaVariableExpression property: #annotationExpressionOwner) 
+			 comment: 'The annotation that owns me').
 
 	((tWithAssignable property: #variable) comment: 'My variable')
 	<>- ((tAssignable property: #javaVariableAssignmentOwner) comment:
-			 'The owner of the modifier').
+			 'The owner of the assignment').
 
-	((tWithReceiver property: #receiver) comment: 'My variable')
+	((tWithReceiver property: #receiver) comment: 'My receiver')
 	<>- ((tReceiver property: #receiverOwner) comment:
 			 'The owner of the receiver').
 
 	((qualifiedName property: #namespace) comment:
-		 'The namespace that qualified me')
-	<>- ((qualifiedName property: #qualifyNamespaceOwner) comment:
-			 'The namespace qualified I qualify').
+		 'The namespace that qualifies me')
+	<>- ((qualifiedName property: #namespaceOwner) comment:
+			 'The namespace I qualify').
 
 	((tWithQualifiedName property: #qualifiedName) comment:
 		 'The name that qualifies me')
 	<>- ((qualifiedName property: #qualifiedNameOwner) comment:
-			 'The owner of the qualified name')
+			 'The owner of the qualified name').
+
+	"do not use TDeclaration and TWithDeclaration on purpose: what a compilation unit can contain is strict"
+	((compilationUnit property: #packageDeclaration) comment:
+		 'My package declaration, or nil for the default package')
+	<>- ((packageDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #importDeclarations) comment:
+		 'My import declarations')
+	<>-* ((importDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #classDeclarations) comment:
+		 'My class declarations')
+	<>-* ((javaClassDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #interfaceDeclarations) comment:
+		 'My interface declarations')
+	<>-* ((javaInterfaceDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #enumDeclarations) comment:
+		 'My enum declaration')
+	<>-* ((javaEnumDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me')
 ]
 
 { #category : #definition }
@@ -1320,8 +1342,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tAssignable := builder newTraitNamed: #TAssignable comment: self commentForJavaTAssignable. 
 	tWithAssignable := builder newTraitNamed: #TWithAssignable comment: 'I have an assignable'.
 	
-	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive message from someone'.
-	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send message to someone'.
+	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive a message from someone'.
+	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send a message to someone'.
 	
 	tWithQualifiedName := builder newTraitNamed: #TWithQualifiedName comment: 'I have a qualified name.'.
 	

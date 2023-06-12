@@ -143,6 +143,13 @@ FASTJavaTEntityCreator >> newClassTypeExpression [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newCompilationUnit [
+
+	<generated>
+	^ self add: FASTJavaCompilationUnit new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newConditionalExpression [
 
 	<generated>
@@ -203,13 +210,6 @@ FASTJavaTEntityCreator >> newFieldAccess [
 
 	<generated>
 	^ self add: FASTJavaFieldAccess new
-]
-
-{ #category : #'entity creation' }
-FASTJavaTEntityCreator >> newFileDeclaration [
-
-	<generated>
-	^ self add: FASTJavaFileDeclaration new
 ]
 
 { #category : #'entity creation' }
@@ -350,13 +350,6 @@ FASTJavaTEntityCreator >> newModifier [
 
 	<generated>
 	^ self add: FASTJavaModifier new
-]
-
-{ #category : #'entity creation' }
-FASTJavaTEntityCreator >> newMultiImportDeclaration [
-
-	<generated>
-	^ self add: FASTJavaMultiImportDeclaration new
 ]
 
 { #category : #'entity creation' }

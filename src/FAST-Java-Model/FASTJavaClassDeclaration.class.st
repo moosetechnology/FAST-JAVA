@@ -16,8 +16,9 @@ Class {
 	#traits : '(FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
 	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver',
-		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver'
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #classDeclarations',
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwner',
+		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -38,11 +39,35 @@ FASTJavaClassDeclaration >> addInterface: anObject [
 ]
 
 { #category : #accessing }
-FASTJavaClassDeclaration >> interfaces [
-	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwnver"
+FASTJavaClassDeclaration >> compilationUnit [
+	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #classDeclarations"
 
 	<generated>
-	<FMComment: 'My superclass'>
+	<FMComment: 'The compilation unit that owns me'>
+	<container>
+	^ compilationUnit
+]
+
+{ #category : #accessing }
+FASTJavaClassDeclaration >> compilationUnit: anObject [
+
+	<generated>
+	compilationUnit := anObject
+]
+
+{ #category : #navigation }
+FASTJavaClassDeclaration >> compilationUnitGroup [
+	<generated>
+	<navigation: 'CompilationUnit'>
+	^ MooseSpecializedGroup with: self compilationUnit
+]
+
+{ #category : #accessing }
+FASTJavaClassDeclaration >> interfaces [
+	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwner"
+
+	<generated>
+	<FMComment: 'The interfaces I implement'>
 	<derived>
 	^ interfaces
 ]
@@ -63,7 +88,7 @@ FASTJavaClassDeclaration >> interfacesGroup [
 
 { #category : #accessing }
 FASTJavaClassDeclaration >> superclass [
-	"Relation named: #superclass type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwnver"
+	"Relation named: #superclass type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwner"
 
 	<generated>
 	<FMComment: 'My superclass'>

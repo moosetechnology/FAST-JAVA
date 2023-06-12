@@ -4,11 +4,10 @@ Class {
 	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTVariableExpression',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
+		'#annotationExpressionOwner => FMOne type: #FASTJavaAnnotation opposite: #expression',
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
 		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
 		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
-		'#javaForEachStatementFieldNameOwner => FMOne type: #FASTJavaForEachStatement opposite: #fieldname',
-		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
 		'#javaMethodReferenceOwner => FMOne type: #FASTJavaMethodReference opposite: #receiver',
 		'#javaMethodTypeOwner => FMOne type: #FASTJavaMethodEntity opposite: #type',
 		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
@@ -16,8 +15,7 @@ Class {
 		'#javaParameterTypeOwner => FMOne type: #FASTJavaParameter opposite: #type',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
 		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
-		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable',
-		'#javaVariableExpressionOwnerIsAnnotation => FMOne type: #FASTJavaAnnotation opposite: #expression'
+		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -29,6 +27,31 @@ FASTJavaVariableExpression class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
+]
+
+{ #category : #accessing }
+FASTJavaVariableExpression >> annotationExpressionOwner [
+	"Relation named: #annotationExpressionOwner type: #FASTJavaAnnotation opposite: #expression"
+
+	<generated>
+	<FMComment: 'The annotation that owns me'>
+	<container>
+	<derived>
+	^ annotationExpressionOwner
+]
+
+{ #category : #accessing }
+FASTJavaVariableExpression >> annotationExpressionOwner: anObject [
+
+	<generated>
+	annotationExpressionOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaVariableExpression >> annotationExpressionOwnerGroup [
+	<generated>
+	<navigation: 'AnnotationExpressionOwner'>
+	^ MooseSpecializedGroup with: self annotationExpressionOwner
 ]
 
 { #category : #accessing }
@@ -104,56 +127,6 @@ FASTJavaVariableExpression >> javaClassPropertyOwnerGroup [
 	<generated>
 	<navigation: 'JavaClassPropertyOwner'>
 	^ MooseSpecializedGroup with: self javaClassPropertyOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaForEachStatementFieldNameOwner [
-	"Relation named: #javaForEachStatementFieldNameOwner type: #FASTJavaForEachStatement opposite: #fieldname"
-
-	<generated>
-	<FMComment: 'The javaForEachStatement owner (if possible)'>
-	<container>
-	<derived>
-	^ javaForEachStatementFieldNameOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaForEachStatementFieldNameOwner: anObject [
-
-	<generated>
-	javaForEachStatementFieldNameOwner := anObject
-]
-
-{ #category : #navigation }
-FASTJavaVariableExpression >> javaForEachStatementFieldNameOwnerGroup [
-	<generated>
-	<navigation: 'JavaForEachStatementFieldNameOwner'>
-	^ MooseSpecializedGroup with: self javaForEachStatementFieldNameOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaForEachStatementTypeOwner [
-	"Relation named: #javaForEachStatementTypeOwner type: #FASTJavaForEachStatement opposite: #type"
-
-	<generated>
-	<FMComment: 'The javaForEachStatement owner (if possible)'>
-	<container>
-	<derived>
-	^ javaForEachStatementTypeOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaForEachStatementTypeOwner: anObject [
-
-	<generated>
-	javaForEachStatementTypeOwner := anObject
-]
-
-{ #category : #navigation }
-FASTJavaVariableExpression >> javaForEachStatementTypeOwnerGroup [
-	<generated>
-	<navigation: 'JavaForEachStatementTypeOwner'>
-	^ MooseSpecializedGroup with: self javaForEachStatementTypeOwner
 ]
 
 { #category : #accessing }
@@ -354,29 +327,4 @@ FASTJavaVariableExpression >> javaVariableDeclaratorOwnerGroup [
 	<generated>
 	<navigation: 'JavaVariableDeclaratorOwner'>
 	^ MooseSpecializedGroup with: self javaVariableDeclaratorOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaVariableExpressionOwnerIsAnnotation [
-	"Relation named: #javaVariableExpressionOwnerIsAnnotation type: #FASTJavaAnnotation opposite: #expression"
-
-	<generated>
-	<FMComment: 'The annotation that own me'>
-	<container>
-	<derived>
-	^ javaVariableExpressionOwnerIsAnnotation
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaVariableExpressionOwnerIsAnnotation: anObject [
-
-	<generated>
-	javaVariableExpressionOwnerIsAnnotation := anObject
-]
-
-{ #category : #navigation }
-FASTJavaVariableExpression >> javaVariableExpressionOwnerIsAnnotationGroup [
-	<generated>
-	<navigation: 'JavaVariableExpressionOwnerIsAnnotation'>
-	^ MooseSpecializedGroup with: self javaVariableExpressionOwnerIsAnnotation
 ]

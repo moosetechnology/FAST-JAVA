@@ -27,7 +27,7 @@ FASTJavaCatchPartStatement >> body [
 	"Relation named: #body type: #FASTTStatement opposite: #javaCatchPartStatementOwner"
 
 	<generated>
-	<FMComment: 'The body of the Catch part statement'>
+	<FMComment: 'The body of the catch part'>
 	<FMProperty: #body type: #FASTTStatement opposite: #javaCatchPartStatementOwner>
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
@@ -81,7 +81,7 @@ FASTJavaCatchPartStatement >> tryOwner [
 	"Relation named: #tryOwner type: #FASTJavaTryCatchStatement opposite: #catches"
 
 	<generated>
-	<FMComment: 'The try owner'>
+	<FMComment: 'The try part that owns me'>
 	<container>
 	^ tryOwner
 ]

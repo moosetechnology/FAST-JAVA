@@ -27,7 +27,7 @@ FASTJavaThrowStatement >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaThrowStatementOwner"
 
 	<generated>
-	<FMComment: 'The throwed element'>
+	<FMComment: 'The thrown element'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaThrowStatementOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]

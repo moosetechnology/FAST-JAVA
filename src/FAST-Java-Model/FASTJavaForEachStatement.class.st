@@ -12,8 +12,8 @@ Class {
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
-		'#fieldname => FMOne type: #FASTJavaVariableExpression opposite: #javaForEachStatementFieldNameOwner',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaForEachStatementTypeOwner'
+		'#fieldname => FMOne type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner',
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -32,7 +32,7 @@ FASTJavaForEachStatement >> body [
 	"Relation named: #body type: #FASTTStatement opposite: #javaForEachStatementOwner"
 
 	<generated>
-	<FMComment: 'The body of the For Each statement'>
+	<FMComment: 'The body of the for-each statement'>
 	<FMProperty: #body type: #FASTTStatement opposite: #javaForEachStatementOwner>
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
@@ -60,10 +60,10 @@ FASTJavaForEachStatement >> bodyGroup [
 
 { #category : #accessing }
 FASTJavaForEachStatement >> fieldname [
-	"Relation named: #fieldname type: #FASTJavaVariableExpression opposite: #javaForEachStatementFieldNameOwner"
+	"Relation named: #fieldname type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner"
 
 	<generated>
-	<FMComment: 'The name of the created local variable'>
+	<FMComment: 'The identifier of the created local variable'>
 	^ fieldname
 ]
 
@@ -86,7 +86,7 @@ FASTJavaForEachStatement >> list [
 	"Relation named: #list type: #FASTTExpression opposite: #javaForEachStatementOwner"
 
 	<generated>
-	<FMComment: 'The list the for each statement iterate on'>
+	<FMComment: 'The list that the for-each statement iterates over'>
 	<FMProperty: #list type: #FASTTExpression opposite: #javaForEachStatementOwner>
 	^ self attributeAt: #list ifAbsent: [ nil ]
 ]
@@ -114,10 +114,10 @@ FASTJavaForEachStatement >> listGroup [
 
 { #category : #accessing }
 FASTJavaForEachStatement >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaForEachStatementTypeOwner"
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner"
 
 	<generated>
-	<FMComment: 'The name of the type of the created local variable'>
+	<FMComment: 'The type of the created local variable'>
 	^ type
 ]
 

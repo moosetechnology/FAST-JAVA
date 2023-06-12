@@ -17,7 +17,8 @@ Class {
 	#traits : '(FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
 	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwnver'
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #interfaceDeclarations',
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -38,8 +39,32 @@ FASTJavaInterfaceDeclaration >> addInterface: anObject [
 ]
 
 { #category : #accessing }
+FASTJavaInterfaceDeclaration >> compilationUnit [
+	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #interfaceDeclarations"
+
+	<generated>
+	<FMComment: 'The compilation unit that owns me'>
+	<container>
+	^ compilationUnit
+]
+
+{ #category : #accessing }
+FASTJavaInterfaceDeclaration >> compilationUnit: anObject [
+
+	<generated>
+	compilationUnit := anObject
+]
+
+{ #category : #navigation }
+FASTJavaInterfaceDeclaration >> compilationUnitGroup [
+	<generated>
+	<navigation: 'CompilationUnit'>
+	^ MooseSpecializedGroup with: self compilationUnit
+]
+
+{ #category : #accessing }
 FASTJavaInterfaceDeclaration >> interfaces [
-	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwnver"
+	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner"
 
 	<generated>
 	<FMComment: 'My super interfaces'>

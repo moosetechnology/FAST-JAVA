@@ -26,7 +26,7 @@ FASTJavaTAssignable >> javaVariableAssignmentOwner [
 	"Relation named: #javaVariableAssignmentOwner type: #FASTJavaTWithAssignable opposite: #variable"
 
 	<generated>
-	<FMComment: 'The owner of the modifier'>
+	<FMComment: 'The owner of the assignment'>
 	<container>
 	<derived>
 	^ javaVariableAssignmentOwner

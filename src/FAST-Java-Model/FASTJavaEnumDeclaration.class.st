@@ -18,7 +18,8 @@ Class {
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait',
 	#instVars : [
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwnver'
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #enumDeclarations',
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -39,11 +40,35 @@ FASTJavaEnumDeclaration >> addInterface: anObject [
 ]
 
 { #category : #accessing }
-FASTJavaEnumDeclaration >> interfaces [
-	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwnver"
+FASTJavaEnumDeclaration >> compilationUnit [
+	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #enumDeclarations"
 
 	<generated>
-	<FMComment: 'My superclass'>
+	<FMComment: 'The compilation unit that owns me'>
+	<container>
+	^ compilationUnit
+]
+
+{ #category : #accessing }
+FASTJavaEnumDeclaration >> compilationUnit: anObject [
+
+	<generated>
+	compilationUnit := anObject
+]
+
+{ #category : #navigation }
+FASTJavaEnumDeclaration >> compilationUnitGroup [
+	<generated>
+	<navigation: 'CompilationUnit'>
+	^ MooseSpecializedGroup with: self compilationUnit
+]
+
+{ #category : #accessing }
+FASTJavaEnumDeclaration >> interfaces [
+	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner"
+
+	<generated>
+	<FMComment: 'The interfaces I implement'>
 	<derived>
 	^ interfaces
 ]

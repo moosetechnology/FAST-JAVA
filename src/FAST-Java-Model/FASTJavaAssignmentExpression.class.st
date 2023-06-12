@@ -25,7 +25,7 @@ FASTJavaAssignmentExpression >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaAssignmentExpressionOwner"
 
 	<generated>
-	<FMComment: 'Expression that s being assigned upon declaration to the var'>
+	<FMComment: 'Expression to be assigned to the var during declaration'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaAssignmentExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]

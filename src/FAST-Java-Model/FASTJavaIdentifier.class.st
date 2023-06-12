@@ -6,6 +6,9 @@ Class {
 	#superclass : #FASTJavaVariableExpression,
 	#traits : 'FASTJavaTReceiver',
 	#classTraits : 'FASTJavaTReceiver classTrait',
+	#instVars : [
+		'#javaForEachStatementFieldNameOwner => FMOne type: #FASTJavaForEachStatement opposite: #fieldname'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -16,4 +19,29 @@ FASTJavaIdentifier class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
+]
+
+{ #category : #accessing }
+FASTJavaIdentifier >> javaForEachStatementFieldNameOwner [
+	"Relation named: #javaForEachStatementFieldNameOwner type: #FASTJavaForEachStatement opposite: #fieldname"
+
+	<generated>
+	<FMComment: 'The javaForEachStatement owner (if possible)'>
+	<container>
+	<derived>
+	^ javaForEachStatementFieldNameOwner
+]
+
+{ #category : #accessing }
+FASTJavaIdentifier >> javaForEachStatementFieldNameOwner: anObject [
+
+	<generated>
+	javaForEachStatementFieldNameOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaIdentifier >> javaForEachStatementFieldNameOwnerGroup [
+	<generated>
+	<navigation: 'JavaForEachStatementFieldNameOwner'>
+	^ MooseSpecializedGroup with: self javaForEachStatementFieldNameOwner
 ]

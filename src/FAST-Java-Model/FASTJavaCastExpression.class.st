@@ -57,7 +57,7 @@ FASTJavaCastExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"
 
 	<generated>
-	<FMComment: 'The type in witch the expression will be cast'>
+	<FMComment: 'The type into which the expression will be cast'>
 	^ type
 ]
 

@@ -37,7 +37,7 @@ FASTJavaSwitchStatement >> cases [
 	"Relation named: #cases type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner"
 
 	<generated>
-	<FMComment: 'The cases of the switch statements'>
+	<FMComment: 'The cases of the switch statement'>
 	<derived>
 	^ cases
 ]

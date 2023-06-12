@@ -72,7 +72,7 @@ FASTJavaClassProperty >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner"
 
 	<generated>
-	<FMComment: 'The owner type'>
+	<FMComment: 'The type of the property'>
 	^ type
 ]
 

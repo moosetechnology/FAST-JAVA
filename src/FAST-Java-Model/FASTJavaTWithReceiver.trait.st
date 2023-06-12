@@ -1,5 +1,5 @@
 "
-I can send message to someone
+I can send a message to someone
 "
 Trait {
 	#name : #FASTJavaTWithReceiver,
@@ -23,7 +23,7 @@ FASTJavaTWithReceiver >> receiver [
 	"Relation named: #receiver type: #FASTJavaTReceiver opposite: #receiverOwner"
 
 	<generated>
-	<FMComment: 'My variable'>
+	<FMComment: 'My receiver'>
 	^ receiver
 ]
 

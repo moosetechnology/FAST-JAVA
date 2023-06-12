@@ -23,7 +23,7 @@ FASTJavaTDeclaration >> javaDeclarationOwner [
 	"Relation named: #javaDeclarationOwner type: #FASTJavaTWithDeclarations opposite: #declarations"
 
 	<generated>
-	<FMComment: 'The element that declared me'>
+	<FMComment: 'The element that declares me'>
 	<container>
 	^ javaDeclarationOwner
 ]

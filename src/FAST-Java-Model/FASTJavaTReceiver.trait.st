@@ -1,5 +1,5 @@
 "
-I receive message from someone
+I receive a message from someone
 "
 Trait {
 	#name : #FASTJavaTReceiver,

@@ -26,7 +26,7 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
 	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaSwitchStatement opposite: #cases"
 
 	<generated>
-	<FMComment: 'javaSwitch owner'>
+	<FMComment: 'The switch owner'>
 	<container>
 	^ javaCaseStatementSwitchOwner
 ]

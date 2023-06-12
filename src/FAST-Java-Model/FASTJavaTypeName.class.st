@@ -52,7 +52,7 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
 	"Relation named: #javaTypeNameTypeExpressionOwner type: #FASTJavaClassTypeExpression opposite: #typeName"
 
 	<generated>
-	<FMComment: 'The type expression that own me'>
+	<FMComment: 'The type expression that owns me'>
 	<container>
 	<derived>
 	^ javaTypeNameTypeExpressionOwner

@@ -11,7 +11,7 @@ Class {
 	#traits : 'FASTJavaTModifier + FASTTExpression',
 	#classTraits : 'FASTJavaTModifier classTrait + FASTTExpression classTrait',
 	#instVars : [
-		'#expression => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableExpressionOwnerIsAnnotation'
+		'#expression => FMOne type: #FASTJavaVariableExpression opposite: #annotationExpressionOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -27,7 +27,7 @@ FASTJavaAnnotation class >> annotation [
 
 { #category : #accessing }
 FASTJavaAnnotation >> expression [
-	"Relation named: #expression type: #FASTJavaVariableExpression opposite: #javaVariableExpressionOwnerIsAnnotation"
+	"Relation named: #expression type: #FASTJavaVariableExpression opposite: #annotationExpressionOwner"
 
 	<generated>
 	<FMComment: 'My expression (because annotation can be complex)'>

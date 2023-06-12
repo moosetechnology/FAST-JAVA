@@ -64,7 +64,7 @@ FASTJavaAssertStatement >> message [
 	"Relation named: #message type: #FASTJavaStringLiteral opposite: #javaStringAssertStatementOwner"
 
 	<generated>
-	<FMComment: 'The error message that is raised in case the condition is false'>
+	<FMComment: 'The error message that is raised if the condition is false'>
 	^ message
 ]
 

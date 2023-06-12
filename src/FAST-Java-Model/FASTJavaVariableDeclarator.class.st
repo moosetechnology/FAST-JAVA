@@ -34,7 +34,7 @@ FASTJavaVariableDeclarator >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaVariableDeclaratorExpressionOwner"
 
 	<generated>
-	<FMComment: 'Expression that s being assigned upon declaration to the var'>
+	<FMComment: 'Expression to be assigned to the var during declaration'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaVariableDeclaratorExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
@@ -89,7 +89,7 @@ FASTJavaVariableDeclarator >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner"
 
 	<generated>
-	<FMComment: 'Variable that s being declared'>
+	<FMComment: 'The variable that is being declared'>
 	^ variable
 ]
 

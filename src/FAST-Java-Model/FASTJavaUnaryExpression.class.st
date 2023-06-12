@@ -70,7 +70,7 @@ FASTJavaUnaryExpression >> isPrefixedUnaryExpression [
 
 	<FMProperty: #isPrefixedUnaryExpression type: #Boolean>
 	<generated>
-	<FMComment: 'true if the expression is prefixed (ex. ++i) else false'>
+	<FMComment: 'True if the expression is prefixed (ex. ++i) else false'>
 	^ isPrefixedUnaryExpression
 ]
 

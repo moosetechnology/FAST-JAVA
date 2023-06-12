@@ -5,10 +5,11 @@ Class {
 	#name : #FASTJavaTypeExpression,
 	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
-		'#javaClassDeclarationInterfaceOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
-		'#javaClassDeclarationSuperclassOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
-		'#javaEnumDeclarationInterfaceOwnver => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
-		'#javaInterfaceDeclarationInterfaceOwnver => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
+		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
+		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
+		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
+		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
+		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -23,98 +24,123 @@ FASTJavaTypeExpression class >> annotation [
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnver [
-	"Relation named: #javaClassDeclarationInterfaceOwnver type: #FASTJavaClassDeclaration opposite: #interfaces"
+FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner [
+	"Relation named: #javaClassDeclarationInterfaceOwner type: #FASTJavaClassDeclaration opposite: #interfaces"
 
 	<generated>
-	<FMComment: 'The class that own me'>
+	<FMComment: 'The class that implements me'>
 	<container>
-	^ javaClassDeclarationInterfaceOwnver
+	^ javaClassDeclarationInterfaceOwner
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnver: anObject [
+FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner: anObject [
 
 	<generated>
-	javaClassDeclarationInterfaceOwnver := anObject
+	javaClassDeclarationInterfaceOwner := anObject
 ]
 
 { #category : #navigation }
-FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnverGroup [
+FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnerGroup [
 	<generated>
-	<navigation: 'JavaClassDeclarationInterfaceOwnver'>
-	^ MooseSpecializedGroup with: self javaClassDeclarationInterfaceOwnver
+	<navigation: 'JavaClassDeclarationInterfaceOwner'>
+	^ MooseSpecializedGroup with: self javaClassDeclarationInterfaceOwner
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver [
-	"Relation named: #javaClassDeclarationSuperclassOwnver type: #FASTJavaClassDeclaration opposite: #superclass"
+FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner [
+	"Relation named: #javaClassDeclarationSuperclassOwner type: #FASTJavaClassDeclaration opposite: #superclass"
 
 	<generated>
-	<FMComment: 'The class that own me'>
+	<FMComment: 'The class that extends me'>
 	<container>
 	<derived>
-	^ javaClassDeclarationSuperclassOwnver
+	^ javaClassDeclarationSuperclassOwner
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnver: anObject [
+FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner: anObject [
 
 	<generated>
-	javaClassDeclarationSuperclassOwnver := anObject
+	javaClassDeclarationSuperclassOwner := anObject
 ]
 
 { #category : #navigation }
-FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnverGroup [
+FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnerGroup [
 	<generated>
-	<navigation: 'JavaClassDeclarationSuperclassOwnver'>
-	^ MooseSpecializedGroup with: self javaClassDeclarationSuperclassOwnver
+	<navigation: 'JavaClassDeclarationSuperclassOwner'>
+	^ MooseSpecializedGroup with: self javaClassDeclarationSuperclassOwner
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnver [
-	"Relation named: #javaEnumDeclarationInterfaceOwnver type: #FASTJavaEnumDeclaration opposite: #interfaces"
+FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner [
+	"Relation named: #javaEnumDeclarationInterfaceOwner type: #FASTJavaEnumDeclaration opposite: #interfaces"
 
 	<generated>
-	<FMComment: 'The class that own me'>
+	<FMComment: 'The enum that implements me'>
 	<container>
-	^ javaEnumDeclarationInterfaceOwnver
+	^ javaEnumDeclarationInterfaceOwner
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnver: anObject [
+FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner: anObject [
 
 	<generated>
-	javaEnumDeclarationInterfaceOwnver := anObject
+	javaEnumDeclarationInterfaceOwner := anObject
 ]
 
 { #category : #navigation }
-FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnverGroup [
+FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnerGroup [
 	<generated>
-	<navigation: 'JavaEnumDeclarationInterfaceOwnver'>
-	^ MooseSpecializedGroup with: self javaEnumDeclarationInterfaceOwnver
+	<navigation: 'JavaEnumDeclarationInterfaceOwner'>
+	^ MooseSpecializedGroup with: self javaEnumDeclarationInterfaceOwner
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnver [
-	"Relation named: #javaInterfaceDeclarationInterfaceOwnver type: #FASTJavaInterfaceDeclaration opposite: #interfaces"
+FASTJavaTypeExpression >> javaForEachStatementTypeOwner [
+	"Relation named: #javaForEachStatementTypeOwner type: #FASTJavaForEachStatement opposite: #type"
 
 	<generated>
-	<FMComment: 'The interface that own me'>
+	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
-	^ javaInterfaceDeclarationInterfaceOwnver
+	<derived>
+	^ javaForEachStatementTypeOwner
 ]
 
 { #category : #accessing }
-FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnver: anObject [
+FASTJavaTypeExpression >> javaForEachStatementTypeOwner: anObject [
 
 	<generated>
-	javaInterfaceDeclarationInterfaceOwnver := anObject
+	javaForEachStatementTypeOwner := anObject
 ]
 
 { #category : #navigation }
-FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnverGroup [
+FASTJavaTypeExpression >> javaForEachStatementTypeOwnerGroup [
 	<generated>
-	<navigation: 'JavaInterfaceDeclarationInterfaceOwnver'>
-	^ MooseSpecializedGroup with: self javaInterfaceDeclarationInterfaceOwnver
+	<navigation: 'JavaForEachStatementTypeOwner'>
+	^ MooseSpecializedGroup with: self javaForEachStatementTypeOwner
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner [
+	"Relation named: #javaInterfaceDeclarationInterfaceOwner type: #FASTJavaInterfaceDeclaration opposite: #interfaces"
+
+	<generated>
+	<FMComment: 'The interface that extends me'>
+	<container>
+	^ javaInterfaceDeclarationInterfaceOwner
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
+
+	<generated>
+	javaInterfaceDeclarationInterfaceOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnerGroup [
+	<generated>
+	<navigation: 'JavaInterfaceDeclarationInterfaceOwner'>
+	^ MooseSpecializedGroup with: self javaInterfaceDeclarationInterfaceOwner
 ]

@@ -26,7 +26,7 @@ FASTJavaStringLiteral >> javaStringAssertStatementOwner [
 	"Relation named: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message"
 
 	<generated>
-	<FMComment: 'the assert that can raised me'>
+	<FMComment: 'The assertion that can raise me'>
 	<container>
 	<derived>
 	^ javaStringAssertStatementOwner

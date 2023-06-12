@@ -186,9 +186,11 @@ FASTJavaExportVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 ]
 
 { #category : #'visiting statement' }
-FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclaration [ 
+FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclaration [
 	self noIndent: 'import '.
+	aFASTJavaImportDeclaration isStatic ifTrue: [ self noIndent: 'static ' ].
 	self visitFASTJavaQualifiedName: aFASTJavaImportDeclaration qualifiedName.
+	aFASTJavaImportDeclaration isOnDemand ifTrue: [ self noIndent: '.*' ].
 	self endOfStatement
 ]
 
@@ -233,16 +235,16 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodInvocationArguments: aFASTJavaMethodInvocationArguments [
-	self noIndent: $( .
+	self noIndent: $(.
 	self
-		visitNodeList: aFASTJavaMethodInvocationArguments 
+		visitNodeList: aFASTJavaMethodInvocationArguments
 		separatedBy: [ self noIndent: ', ' ].
-	self noIndent: $) .
+	self noIndent: $)
 ]
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation [
-	aFASTJavaMethodInvocation ifNil: [ ^self ].
+	aFASTJavaMethodInvocation ifNil: [ ^ self ].
 	aFASTJavaMethodInvocation accept: self.
 	self noIndent: $.
 ]
@@ -275,14 +277,6 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 		thenDo: [ :aFASTJavaModifier | 
 			self visitFASTJavaModifier: aFASTJavaModifier.
 			self space ]
-]
-
-{ #category : #visiting }
-FASTJavaExportVisitor >> visitFASTJavaMultiImportDeclaration: aFASTJavaMultiImportDeclaration [
-	self noIndent: 'import '.
-	self visitFASTJavaQualifiedName: aFASTJavaMultiImportDeclaration qualifiedName.
-	self noIndent: '.*'.
-	self endOfStatement
 ]
 
 { #category : #'visiting expression' }

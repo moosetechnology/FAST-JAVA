@@ -45,7 +45,7 @@ FASTJavaTryCatchStatement >> catches [
 	"Relation named: #catches type: #FASTJavaCatchPartStatement opposite: #tryOwner"
 
 	<generated>
-	<FMComment: 'I contains all the catch statements'>
+	<FMComment: 'I contain all the catch statements'>
 	<derived>
 	^ catches
 ]
