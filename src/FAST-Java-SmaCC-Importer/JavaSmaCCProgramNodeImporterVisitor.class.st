@@ -523,13 +523,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
 JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement [
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
 	self generalVisitActionForNodeEntity: aForEachStatement.
-	currentFASTEntity
-		body: (self clone accept: aForEachStatement statement).
-	currentFASTEntity
-		fieldname: (self clone accept: aForEachStatement name).
+	currentFASTEntity body:
+		(self clone accept: aForEachStatement statement).
+	currentFASTEntity fieldname:
+		(self clone visitIdentifier: aForEachStatement name).
 	currentFASTEntity type: (self clone accept: aForEachStatement type).
-	currentFASTEntity
-		list: (self clone accept: aForEachStatement expression).
+	currentFASTEntity list:
+		(self clone accept: aForEachStatement expression).
 	^ currentFASTEntity
 ]
 
@@ -1094,11 +1094,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aTypeImportOnDemandDeclaration [
 
-	currentFASTEntity := self addToModel:
-		                     FASTJavaMultiImportDeclaration new.
+	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self generalVisitActionForNodeEntity: aTypeImportOnDemandDeclaration.
-	currentFASTEntity qualifiedName:
-		(self clone accept: aTypeImportOnDemandDeclaration name)
+	currentFASTEntity
+		isOnDemand: true;
+		qualifiedName:
+			(self clone accept: aTypeImportOnDemandDeclaration name)
 ]
 
 { #category : #visitor }

@@ -130,6 +130,19 @@ FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 ]
 
 { #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
+
+	aFASTJavaCompilationUnit packageDeclaration ifNotNil: [ :decl | 
+		self visitFASTJavaPackageDeclaration: decl ].
+	aFASTJavaCompilationUnit importDeclarations do: [ :decl | 
+		self visitFASTJavaImportDeclaration: decl ].
+	aFASTJavaCompilationUnit interfaceDeclarations do: [ :decl | 
+		self visitFASTJavaInterfaceDeclaration: decl ].
+	aFASTJavaCompilationUnit classDeclarations do: [ :decl | 
+		self visitFASTJavaClassDeclaration: decl ]
+]
+
+{ #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
 	self noIndent: 'double'
 ]
@@ -139,19 +152,6 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 	aFASTJavaStatement ifNil: [ ^self ].
 	self withIndent: 'else '.
 	self visitFASTJavaIfPartStatement: aFASTJavaStatement
-]
-
-{ #category : #visiting }
-FASTJavaExportVisitor >> visitFASTJavaFileDeclaration: aFASTJavaFileDeclaration [
-	aFASTJavaFileDeclaration declarations
-		detect: [ :decl | decl class == FASTJavaPackageDeclaration ]
-		ifOne: [ :decl | self visitFASTJavaPackageDeclaration: decl ];
-		select: [ :decl | decl isKindOf: FASTJavaImportDeclaration ]
-		thenDo: [ :decl | decl accept: self ];
-		select: [ :decl | decl class == FASTJavaInterfaceDeclaration ]
-		thenDo: [ :decl | self visitFASTJavaInterfaceDeclaration: decl ];
-		select: [ :decl | decl class == FASTJavaClassDeclaration ]
-		thenDo: [ :decl | self visitFASTJavaClassDeclaration: decl ]
 ]
 
 { #category : #visiting }

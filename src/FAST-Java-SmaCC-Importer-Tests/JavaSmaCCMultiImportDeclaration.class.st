@@ -15,5 +15,5 @@ class A {
 JavaSmaCCMultiImportDeclaration >> testImport [
 	| model |
 	model := self parseClassString: self classString.
-	self assert: (model allWithType: FASTJavaMultiImportDeclaration) size equals: 1.
+	self assert: (model allWithType: FASTJavaImportDeclaration) size equals: 1.
 ]
