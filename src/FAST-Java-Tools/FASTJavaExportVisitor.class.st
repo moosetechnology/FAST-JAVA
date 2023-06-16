@@ -303,7 +303,7 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 	self noIndent: 'new '.
 	aFASTJavaNewExpression type accept: self.
-	self noIndent: '()'
+	self visitFASTJavaMethodInvocationArguments: aFASTJavaNewExpression arguments
 ]
 
 { #category : #'visiting expression' }
