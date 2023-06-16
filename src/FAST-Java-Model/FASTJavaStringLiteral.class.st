@@ -1,5 +1,5 @@
 "
-A string in Java
+I represent a string literal node.
 "
 Class {
 	#name : #FASTJavaStringLiteral,

@@ -1,3 +1,6 @@
+"
+I represent a boolean literal node.
+"
 Class {
 	#name : #FASTJavaBooleanLiteral,
 	#superclass : #FASTJavaEntity,

@@ -115,7 +115,9 @@ Class {
 		'tWithAssignable',
 		'tWithQualifiedName',
 		'javaTryCatchStatement',
-		'compilationUnit'
+		'compilationUnit',
+		'javaLongLiteral',
+		'javaDoubleLiteral'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -188,6 +190,11 @@ Contains a referances to an assignee assignee and the expression that''s being a
 ]
 
 { #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaBooleanLiteral [
+	^ 'I represent a boolean literal node.'
+]
+
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaBreakStatement [
 	^ 'A node representing break statement in java'
 ]
@@ -199,7 +206,12 @@ FASTJavaMetamodelGenerator >> commentForJavaCaseStatement [
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaCharacterLiteral [
-	^ 'A character in Java code'
+	^ 'I represent a character literal node.
+example:
+```java
+char c = ''a'';
+```
+`''a''` is the literal'
 ]
 
 { #category : #comments }
@@ -285,6 +297,17 @@ do {
 ]
 
 { #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaDoubleLiteral [
+	^ 'I represent a double literal node.
+example:
+```java
+double d1 = 12.3;
+double d2 = 12.3d;
+```
+`12.3` and `12.3d` are double literals'
+]
+
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaEmptyMethodDeclaration [
 	^ 'I reprensent an empty method declaration
 	
@@ -321,12 +344,12 @@ FASTJavaMetamodelGenerator >> commentForJavaFieldAccess [
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaFloatLiteral [
-	^ 'I represent a Float Literal
+	^ 'I represent a float literal node.
 example:
-
-float f = 12.3;
-
-12.3 is the float literal'
+```java
+float f = 12.3f;
+```
+`12.3f` is the literal'
 ]
 
 { #category : #comments }
@@ -392,7 +415,7 @@ new Button(){
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaIntegerLiteral [
-	^ 'Java integer literal node'
+	^ 'I represent an integer literal node.'
 ]
 
 { #category : #comments }
@@ -417,6 +440,16 @@ FASTJavaMetamodelGenerator >> commentForJavaLabeledCaseStatement [
 ex.:
 
 case LABEL:'
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaLongLiteral [
+	^ 'I represent a long literal node.
+example:
+```java
+long l = 2147483648L;
+```
+`2147483648L` is the literal'
 ]
 
 { #category : #comments }
@@ -495,7 +528,7 @@ new Patate()'
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaNullLiteral [
-	^ '''null'' literal in Java'
+	^ 'I represent a `null` literal node.'
 ]
 
 { #category : #comments }
@@ -527,7 +560,7 @@ new Canard.Poulet(){
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
-	^ 'A string in Java'
+	^ 'I represent a string literal node.'
 ]
 
 { #category : #comments }
@@ -671,7 +704,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaIntegerLiteral := builder newClassNamed: #IntegerLiteral comment: self commentForJavaIntegerLiteral.
 	javaNullLiteral := builder newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
 	javaStringLiteral := builder newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
-	javaBooleanLiteral := builder newClassNamed: #BooleanLiteral.
+	javaBooleanLiteral := builder newClassNamed: #BooleanLiteral comment: self commentForJavaBooleanLiteral.
+	javaLongLiteral := builder newClassNamed: #LongLiteral comment: self commentForJavaLongLiteral.
+	javaDoubleLiteral := builder newClassNamed: #DoubleLiteral comment: self commentForJavaDoubleLiteral.
 
 	"type expressions"
 	javaTypeExpression := builder newClassNamed: #TypeExpression comment: 'I represent a type'.
@@ -756,20 +791,30 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaBreakStatement --|> tStatement.
 	javaCaseStatement --|> tStatementBlock.
-	javaCharacterLiteral --|> tCharacterLiteral.
-	javaCharacterLiteral --|> tReceiver.
 	javaContinueStatement --|> tStatement.
 	javaDoWhileStatement --|> tStatement.
-	javaFloatLiteral --|> tLiteral.
-	javaFloatLiteral --|> tReceiver.
 	javaForStatement --|> tStatement.
 
 	javaIdentifier --|> javaVariableExpression.
 	javaIdentifier --|> tReceiver.
 
 	javaIfStatement --|> tStatement.
+
+	javaNullLiteral --|> tNullPointerLiteral.
+	javaCharacterLiteral --|> tCharacterLiteral.
+	javaCharacterLiteral --|> tReceiver.
+	javaStringLiteral --|> tStringLiteral.
+	javaStringLiteral --|> tReceiver.
 	javaIntegerLiteral --|> tLiteral.
 	javaIntegerLiteral --|> tReceiver.
+	javaFloatLiteral --|> tLiteral.
+	javaFloatLiteral --|> tReceiver.
+	javaBooleanLiteral --|> tLiteral.
+	javaBooleanLiteral --|> tReceiver.
+	javaLongLiteral --|> tLiteral.
+	javaLongLiteral --|> tReceiver.
+	javaDoubleLiteral --|> tLiteral.
+	javaDoubleLiteral --|> tReceiver.
 
 	javaMethodEntity --|> tNamedBehaviouralEntity.
 	javaMethodEntity --|> #THasImmediateSource.
@@ -802,12 +847,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodInvocation --|> #TWithArguments.
 	javaMethodInvocation --|> tWithReceiver.
 	javaMethodInvocation --|> tReceiver.
-
-
-	javaNullLiteral --|> tNullPointerLiteral.
-
-	javaStringLiteral --|> tStringLiteral.
-	javaStringLiteral --|> tReceiver.
 
 	javaSwitchStatement --|> tStatement.
 	javaThis --|> javaVariableExpression.
@@ -895,9 +934,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaTypeParameter --|> tExpression.
 	javaTypeParameter --|> tNamedEntity.
-
-	javaBooleanLiteral --|> tLiteral.
-	javaBooleanLiteral --|> tReceiver.
 
 	javaModifier --|> tModifier.
 	javaModifier --|> tExpression.

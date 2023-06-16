@@ -220,6 +220,12 @@ FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpress
 	self noIndent: 'int'
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
+	self noIndent: aFASTJavaLongLiteral primitiveValue.
+	self noIndent: 'L'
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
 	self noIndent: 'long'

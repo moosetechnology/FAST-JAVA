@@ -178,6 +178,13 @@ FASTJavaTEntityCreator >> newDoWhileStatement [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newDoubleLiteral [
+
+	<generated>
+	^ self add: FASTJavaDoubleLiteral new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newDoubleTypeExpression [
 
 	<generated>
@@ -315,6 +322,13 @@ FASTJavaTEntityCreator >> newLambdaExpression [
 
 	<generated>
 	^ self add: FASTJavaLambdaExpression new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newLongLiteral [
+
+	<generated>
+	^ self add: FASTJavaLongLiteral new
 ]
 
 { #category : #'entity creation' }
