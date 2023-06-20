@@ -1,5 +1,5 @@
 "
-'null' literal in Java
+I represent a `null` literal node.
 "
 Class {
 	#name : #FASTJavaNullLiteral,

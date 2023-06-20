@@ -1,5 +1,10 @@
 "
-A character in Java code
+I represent a character literal node.
+example:
+```java
+char c = 'a';
+```
+`'a'` is the literal
 "
 Class {
 	#name : #FASTJavaCharacterLiteral,

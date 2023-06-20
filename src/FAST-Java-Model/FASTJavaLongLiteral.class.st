@@ -1,13 +1,13 @@
 "
-I represent a float literal node.
+I represent a long literal node.
 example:
 ```java
-float f = 12.3f;
+long l = 2147483648L;
 ```
-`12.3f` is the literal
+`2147483648L` is the literal
 "
 Class {
-	#name : #FASTJavaFloatLiteral,
+	#name : #FASTJavaLongLiteral,
 	#superclass : #FASTJavaEntity,
 	#traits : 'FASTJavaTReceiver + FASTTLiteral',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTLiteral classTrait',
@@ -15,9 +15,9 @@ Class {
 }
 
 { #category : #meta }
-FASTJavaFloatLiteral class >> annotation [
+FASTJavaLongLiteral class >> annotation [
 
-	<FMClass: #FloatLiteral super: #FASTJavaEntity>
+	<FMClass: #LongLiteral super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self

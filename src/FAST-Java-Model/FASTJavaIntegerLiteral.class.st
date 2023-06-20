@@ -1,5 +1,5 @@
 "
-Java integer literal node
+I represent an integer literal node.
 "
 Class {
 	#name : #FASTJavaIntegerLiteral,

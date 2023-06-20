@@ -100,6 +100,13 @@ FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpre
 	self noIndent: 'char'
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
+	self noIndent: $'.
+	self noIndent: aFASTJavaCharacterLiteral primitiveValue.
+	self noIndent: $'
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
 	self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
@@ -131,11 +138,12 @@ FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
-
 	aFASTJavaCompilationUnit packageDeclaration ifNotNil: [ :decl | 
-		self visitFASTJavaPackageDeclaration: decl ].
-	aFASTJavaCompilationUnit importDeclarations do: [ :decl | 
-		self visitFASTJavaImportDeclaration: decl ].
+		self visitFASTJavaPackageDeclaration: decl.
+		self endOfLine ].
+	aFASTJavaCompilationUnit importDeclarations ifNotEmpty: [ :decls | 
+		decls do: [ :decl | self visitFASTJavaImportDeclaration: decl ].
+		self endOfLine ].
 	aFASTJavaCompilationUnit interfaceDeclarations do: [ :decl | 
 		self visitFASTJavaInterfaceDeclaration: decl ].
 	aFASTJavaCompilationUnit classDeclarations do: [ :decl | 
@@ -152,6 +160,12 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 	aFASTJavaStatement ifNil: [ ^self ].
 	self withIndent: 'else '.
 	self visitFASTJavaIfPartStatement: aFASTJavaStatement
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
+	self noIndent: aFASTJavaFloatLiteral primitiveValue.
+	self noIndent: 'f'
 ]
 
 { #category : #visiting }
@@ -182,7 +196,7 @@ FASTJavaExportVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	aFASTJavaIfStatement condition accept: self.
 	self noIndent: ') '.
 	self visitFASTJavaThenPartStatement: aFASTJavaIfStatement thenPart.
-	self visitFASTJavaElsePartStatement: aFASTJavaIfStatement elsePart.
+	self visitFASTJavaElsePartStatement: aFASTJavaIfStatement elsePart
 ]
 
 { #category : #'visiting statement' }
@@ -198,12 +212,18 @@ FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclarat
 FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	aFASTJavaInfixOperation leftOperand accept: self.
 	self noIndent: aFASTJavaInfixOperation operator.
-	aFASTJavaInfixOperation rightOperand accept: self.
+	aFASTJavaInfixOperation rightOperand accept: self
 ]
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
 	self noIndent: 'int'
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
+	self noIndent: aFASTJavaLongLiteral primitiveValue.
+	self noIndent: 'L'
 ]
 
 { #category : #visiting }
@@ -283,7 +303,7 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 	self noIndent: 'new '.
 	aFASTJavaNewExpression type accept: self.
-	self noIndent: '()'
+	self visitFASTJavaMethodInvocationArguments: aFASTJavaNewExpression arguments
 ]
 
 { #category : #'visiting expression' }
@@ -292,7 +312,7 @@ FASTJavaExportVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
 ]
 
 { #category : #'visiting statement' }
-FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [ 
+FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [
 	self noIndent: 'package '.
 	self visitFASTJavaQualifiedName: aFASTJavaPackageDeclaration qualifiedName.
 	self endOfStatement
@@ -307,12 +327,11 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
-	self noIndent:  $(.
+	self noIndent: $(.
 	self
 		visitNodeList: aFASTJavaParameterCollection
-		separatedBy: [ self noIndent:  ', ' ].
-	self noIndent:  ') '.
-
+		separatedBy: [ self noIndent: ', ' ].
+	self noIndent: ') '
 ]
 
 { #category : #visiting }
@@ -329,7 +348,7 @@ FASTJavaExportVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExp
 FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self noIndent: $".
 	self noIndent: aFASTJavaStringLiteral primitiveValue.
-	self noIndent: $".
+	self noIndent: $"
 ]
 
 { #category : #'visiting statement' }
@@ -349,9 +368,7 @@ FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatemen
 	self
 		visitNodeList: aFASTJavaVarDeclStatement declarators
 		separatedBy: [ self noIndent: ', ' ].
-	
-		self endOfStatement
-	
+	self endOfStatement
 ]
 
 { #category : #'visiting statement' }
