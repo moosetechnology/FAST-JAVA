@@ -188,7 +188,7 @@ FASTJavaLocalResolverVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariab
 		 ]
 ]
 
-{ #category : #visiting }
+{ #category : #generated }
 FASTJavaLocalResolverVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	self pushScope.
 
@@ -196,5 +196,5 @@ FASTJavaLocalResolverVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBloc
 	(aFASTJavaStatementBlock statements sorted: [:a :b | a startPos < b startPos])
 		do: [ :node | node accept: self ].
 
-	self popScope
+	^self popScope
 ]
