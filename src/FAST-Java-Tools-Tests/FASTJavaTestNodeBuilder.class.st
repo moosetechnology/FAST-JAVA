@@ -115,6 +115,16 @@ FASTJavaTestNodeBuilder >> type: aName [
 ]
 
 { #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> unaryOp: anOperator prefix: aBoolean expr: anExpr [
+
+	^ FASTJavaUnaryExpression new
+		  operator: anOperator;
+		  isPrefixedUnaryExpression: aBoolean;
+		  expression: anExpr;
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
 FASTJavaTestNodeBuilder >> var: aName [
 	^FASTJavaVariableExpression new
 		name: aName ;

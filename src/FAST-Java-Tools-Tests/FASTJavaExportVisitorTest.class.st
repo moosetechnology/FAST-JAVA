@@ -93,6 +93,24 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
+
+	| nodeVar nodeInt |
+	nodeVar := builder
+		              unaryOp: '!'
+		              prefix: true
+		              expr: (builder var: 'isPrefix').
+
+	nodeInt := builder
+		              unaryOp: '++'
+		              prefix: false
+		              expr: (builder literalInt: 42).
+
+	self export: nodeVar equals: '!isPrefix'.
+	self export: nodeInt equals: '42++'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVariableExpression [
 	self
 		export: (builder var: 'aVar')

@@ -361,6 +361,18 @@ FASTJavaExportVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 	self noIndent: aFASTJavaTypeName name
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
+
+	aFASTJavaUnaryExpression isPrefixedUnaryExpression
+		ifTrue: [ 
+			self noIndent: aFASTJavaUnaryExpression operator.
+			self visitFASTTExpression: aFASTJavaUnaryExpression ]
+		ifFalse: [ 
+			self visitFASTTExpression: aFASTJavaUnaryExpression.
+			self noIndent: aFASTJavaUnaryExpression operator ]
+]
+
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 	aFASTJavaVarDeclStatement type accept: self.
