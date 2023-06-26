@@ -1,5 +1,5 @@
 "
-A node representing method imvocation
+A node representing method invocation
 "
 Class {
 	#name : #FASTJavaMethodInvocation,

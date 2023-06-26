@@ -1,5 +1,5 @@
 "
-Represents a method in FastJava
+Represents a Java method
 "
 Class {
 	#name : #FASTJavaMethodEntity,

@@ -1,5 +1,5 @@
 "
-I represent a java outer this (only a call to 'this' to a class
+I represent a java outer this (only a call to 'this' to a class)
 	
 ex.:
 

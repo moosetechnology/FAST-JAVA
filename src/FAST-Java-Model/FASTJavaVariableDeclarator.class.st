@@ -1,7 +1,6 @@
 "
 A part of variable declaration statement containing a variable (named entity) and an expression (optional) that is assigned to it.
-
-Variables declaration statement can contain several declarators.
+A variable declaration statement can contain several declarators.
 
 eg.
 

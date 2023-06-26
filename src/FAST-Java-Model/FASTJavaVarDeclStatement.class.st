@@ -1,7 +1,6 @@
 "
-A statement of variable declaration
-
-Variables declaration statement can contain several declarators.
+A statement of variable declaration.
+A variable declaration statement can contain several declarators.
 
 eg.
 

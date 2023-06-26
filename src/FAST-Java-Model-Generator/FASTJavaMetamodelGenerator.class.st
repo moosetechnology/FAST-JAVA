@@ -454,12 +454,12 @@ long l = 2147483648L;
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaMethodEntity [
-	^ 'Represents a method in FastJava'
+	^ 'Represents a Java method'
 ]
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaMethodInvocation [
-	^ 'A node representing method imvocation'
+	^ 'A node representing method invocation'
 ]
 
 { #category : #comments }
@@ -533,7 +533,7 @@ FASTJavaMetamodelGenerator >> commentForJavaNullLiteral [
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaOuterThis [
-	^ 'I represent a java outer this (only a call to ''this'' to a class
+	^ 'I represent a java outer this (only a call to ''this'' to a class)
 	
 ex.:
 
@@ -565,7 +565,7 @@ FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaSwitchStatement [
-	^ 'A node representing switch stetement
+	^ 'A node representing switch statement
 
 eg.
 switch (_) {
@@ -640,9 +640,8 @@ see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html'
 
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaVarDeclStatement [
-	^ 'A statement of variable declaration
-
-Variables declaration statement can contain several declarators.
+	^ 'A statement of variable declaration.
+A variable declaration statement can contain several declarators.
 
 eg.
 
@@ -653,8 +652,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 { #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaVariableDeclarator [
 	^ 'A part of variable declaration statement containing a variable (named entity) and an expression (optional) that is assigned to it.
-
-Variables declaration statement can contain several declarators.
+A variable declaration statement can contain several declarators.
 
 eg.
 
@@ -1132,7 +1130,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaConditionalExpression property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #conditionalConditionOwner) comment:
-			 'I reprensent a condition for my owner').
+			 'I represent a condition for my owner').
 	((javaConditionalExpression property: #elsePart) comment: 'else part')
 	<>- ((tExpression property: #conditionalElsePartOwner) comment:
 			 'The if owner (if possible)').
@@ -1152,7 +1150,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaForStatement property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #forConditionOwner) comment:
-			 'I reprensent a condition for my owner').
+			 'I represent a condition for my owner').
 	((javaForStatement property: #incrementor) comment:
 		 'Expression evaluated at the end of each loop')
 	<>- ((tStatement property: #forIncrementorOwner) comment:
@@ -1169,12 +1167,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaSwitchStatement property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #switchConditionOwner) comment:
-			 'I reprensent a condition for my owner').
+			 'I represent a condition for my owner').
 
 	((javaDoWhileStatement property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #doConditionOwner) comment:
-			 'I reprensent a condition for my owner').
+			 'I represent a condition for my owner').
 	((javaDoWhileStatement property: #body) comment:
 		 'A statement to be evaluated in the loop')
 	<>- ((tStatement property: #doBodyOwner) comment:
@@ -1183,7 +1181,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaWhileStatement property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #whileConditionOwner) comment:
-			 'I reprensent a condition for my owner').
+			 'I represent a condition for my owner').
 	((javaWhileStatement property: #body) comment:
 		 'A statement to be evaluated in the loop')
 	<>- ((tStatement property: #whileBodyOwner) comment:
@@ -1281,7 +1279,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaAssertStatement property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #assertConditionOwner) comment:
-			 'I reprensent a condition for my owner').
+			 'I represent a condition for my owner').
 	((javaAssertStatement property: #message) comment:
 		 'The error message that is raised if the condition is false')
 	<>- ((javaStringLiteral property: #javaStringAssertStatementOwner) 
