@@ -40,6 +40,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
+
+	| expr |
+	expr := builder
+		        conditionalExpr: (builder var: 'aVar')
+		        then: (builder literalInt: 0)
+		        else: (builder literalInt: 1).
+
+	self export: expr equals: 'aVar ? 0 : 1'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 	| node |
 	node := builder
