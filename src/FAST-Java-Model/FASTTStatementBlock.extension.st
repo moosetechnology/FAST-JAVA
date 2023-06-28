@@ -5,7 +5,7 @@ FASTTStatementBlock >> javaInitializerOwner [
 	"Relation named: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock"
 
 	<generated>
-	<FMComment: 'Behavioural entity containing the statement block.'>
+	<FMComment: 'Behavioural entity containing the statement block'>
 	<container>
 	<derived>
 	<FMProperty: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock>
@@ -32,7 +32,7 @@ FASTTStatementBlock >> javaLabaledStatementOwner [
 	"Relation named: #javaLabaledStatementOwner type: #FASTJavaLabeledStatement opposite: #statementBlock"
 
 	<generated>
-	<FMComment: 'Label Statement entity containing the statement block.'>
+	<FMComment: 'Label Statement entity containing the statement block'>
 	<container>
 	<derived>
 	<FMProperty: #javaLabaledStatementOwner type: #FASTJavaLabeledStatement opposite: #statementBlock>

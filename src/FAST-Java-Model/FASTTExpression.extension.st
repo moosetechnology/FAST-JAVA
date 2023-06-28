@@ -5,7 +5,7 @@ FASTTExpression >> assertConditionOwner [
 	"Relation named: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition"
 
 	<generated>
-	<FMComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I represent a condition for my owner'>
 	<container>
 	<derived>
 	<FMProperty: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition>
@@ -32,7 +32,7 @@ FASTTExpression >> conditionalConditionOwner [
 	"Relation named: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition"
 
 	<generated>
-	<FMComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I represent a condition for my owner'>
 	<container>
 	<derived>
 	<FMProperty: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition>
@@ -113,7 +113,7 @@ FASTTExpression >> doConditionOwner [
 	"Relation named: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition"
 
 	<generated>
-	<FMComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I represent a condition for my owner'>
 	<container>
 	<derived>
 	<FMProperty: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition>
@@ -140,7 +140,7 @@ FASTTExpression >> forConditionOwner [
 	"Relation named: #forConditionOwner type: #FASTJavaForStatement opposite: #condition"
 
 	<generated>
-	<FMComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I represent a condition for my owner'>
 	<container>
 	<derived>
 	<FMProperty: #forConditionOwner type: #FASTJavaForStatement opposite: #condition>
@@ -167,7 +167,7 @@ FASTTExpression >> ifConditionOwner [
 	"Relation named: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition"
 
 	<generated>
-	<FMComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I represent a condition for my owner'>
 	<container>
 	<derived>
 	<FMProperty: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition>
@@ -456,7 +456,7 @@ FASTTExpression >> javaNewArrayInitialOwner [
 	"Relation named: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer"
 
 	<generated>
-	<FMComment: 'I belong to a new array initializations'>
+	<FMComment: 'I belong to a new array initialization'>
 	<container>
 	<derived>
 	<FMProperty: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer>
@@ -591,7 +591,7 @@ FASTTExpression >> switchConditionOwner [
 	"Relation named: #switchConditionOwner type: #FASTJavaSwitchStatement opposite: #condition"
 
 	<generated>
-	<FMComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I represent a condition for my owner'>
 	<container>
 	<derived>
 	<FMProperty: #switchConditionOwner type: #FASTJavaSwitchStatement opposite: #condition>
@@ -618,7 +618,7 @@ FASTTExpression >> whileConditionOwner [
 	"Relation named: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition"
 
 	<generated>
-	<FMComment: 'I reprensent a condition for my owner'>
+	<FMComment: 'I represent a condition for my owner'>
 	<container>
 	<derived>
 	<FMProperty: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition>
