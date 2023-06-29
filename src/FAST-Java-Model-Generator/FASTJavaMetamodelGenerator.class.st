@@ -117,7 +117,8 @@ Class {
 		'javaTryCatchStatement',
 		'compilationUnit',
 		'javaLongLiteral',
-		'javaDoubleLiteral'
+		'javaDoubleLiteral',
+		'tInvocation'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -841,8 +842,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInterfaceDeclaration --|> #THasImmediateSource.
 	javaInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
 
-	javaMethodInvocation --|> tExpression.
-	javaMethodInvocation --|> #TWithArguments.
+	javaMethodInvocation --|> tInvocation.
 	javaMethodInvocation --|> tWithReceiver.
 	javaMethodInvocation --|> tReceiver.
 
@@ -1399,4 +1399,5 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
 	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
 	tBooleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
+	tInvocation := self remoteTrait: #TInvocation withPrefix: #FAST
 ]
