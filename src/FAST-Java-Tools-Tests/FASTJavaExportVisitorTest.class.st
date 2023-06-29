@@ -40,6 +40,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
+
+	| expr |
+	expr := builder
+		        conditionalExpr: (builder var: 'aVar')
+		        then: (builder literalInt: 0)
+		        else: (builder literalInt: 1).
+
+	self export: expr equals: 'aVar ? 0 : 1'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 	| node |
 	node := builder
@@ -90,6 +102,24 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 		export: (builder type: 'bool')
 		equals: 'bool'.
 
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
+
+	| nodeVar nodeInt |
+	nodeVar := builder
+		              unaryOp: '!'
+		              prefix: true
+		              expr: (builder var: 'isPrefix').
+
+	nodeInt := builder
+		              unaryOp: '++'
+		              prefix: false
+		              expr: (builder literalInt: 42).
+
+	self export: nodeVar equals: '!isPrefix'.
+	self export: nodeInt equals: '42++'
 ]
 
 { #category : #tests }

@@ -34,6 +34,16 @@ FASTJavaTestNodeBuilder >> cast: aName expression: aNode [
 ]
 
 { #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> conditionalExpr: anExpr then: aThenPart else: anElsePart [
+
+	^ FASTJavaConditionalExpression new
+		  condition: anExpr;
+		  thenPart: aThenPart;
+		  elsePart: anElsePart;
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
 FASTJavaTestNodeBuilder >> declarator: aName init: aNode [
 	^FASTJavaVariableDeclarator new
 		variable: (self var: aName) ;
@@ -112,6 +122,16 @@ FASTJavaTestNodeBuilder >> type: aName [
 	^FASTJavaTypeName new
 		name: aName ;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> unaryOp: anOperator prefix: aBoolean expr: anExpr [
+
+	^ FASTJavaUnaryExpression new
+		  operator: anOperator;
+		  isPrefixedUnaryExpression: aBoolean;
+		  expression: anExpr;
+		  yourself
 ]
 
 { #category : #'as yet unclassified' }
