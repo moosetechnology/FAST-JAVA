@@ -70,6 +70,20 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	aFASTJavaAnnotation expression accept: self
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
+	aFASTJavaArrayAccess array accept: self.
+	self noIndent: '['.
+	aFASTJavaArrayAccess expression accept: self.
+	self noIndent: ']'.
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExpression [
+	aFASTJavaArrayTypeExpression baseType accept: self.
+	self noIndent: '[]'.
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentExpression [
 	aFASTJavaAssignmentExpression variable accept: self.

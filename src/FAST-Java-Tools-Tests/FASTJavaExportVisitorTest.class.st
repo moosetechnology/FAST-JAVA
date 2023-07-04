@@ -22,6 +22,30 @@ FASTJavaExportVisitorTest >> setUp [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaArrayAccess [
+
+	| exprUni exprBi |
+	exprUni := builder array: 'testArray' accessAtIndex: 6.
+	exprBi := builder array: 'testArray' accessAtFirstDimensionIndex: 4 andSecondDimensionIndex: 2. 
+	
+	self export: exprUni equals: 'testArray[6]'.
+	self export: exprBi equals: 'testArray[4][2]'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
+
+	| exprStr exprDouble exprBiStr |
+	exprStr := builder stringArrayType.
+	exprDouble := builder doubleArrayType.
+	exprBiStr := builder stringTwoDimensionalArrayType.
+	
+	self export: exprStr equals: 'String[]'.
+	self export: exprDouble equals: 'double[]'.
+	self export: exprBiStr equals: 'String[][]'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 	| node |
 	node := builder assignment: 'aVar' value: (builder literalInt: 42).
