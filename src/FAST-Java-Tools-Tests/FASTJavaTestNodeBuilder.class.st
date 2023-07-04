@@ -5,6 +5,24 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> array: aName accessAtFirstDimensionIndex: firstInt andSecondDimensionIndex: secondInt [  
+
+	^ FASTJavaArrayAccess new
+		  array: (self array: aName accessAtIndex: firstInt); 
+		  expression: (self literalInt: secondInt);
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> array: aName accessAtIndex: anInt [
+
+	^ FASTJavaArrayAccess new
+		  array: (self var: aName);
+		  expression: (self literalInt: anInt);
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
 FASTJavaTestNodeBuilder >> assignment: aName value: aNode [
 	^FASTJavaAssignmentExpression new
 		variable: (self var: aName) ;
@@ -49,6 +67,13 @@ FASTJavaTestNodeBuilder >> declarator: aName init: aNode [
 		variable: (self var: aName) ;
 		expression: aNode ;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> doubleArrayType [
+	^ FASTJavaArrayTypeExpression new
+		  baseType: FASTJavaDoubleTypeExpression new;
+		  yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -115,6 +140,22 @@ FASTJavaTestNodeBuilder >> return: aNode [
 	^FASTJavaReturnStatement new
 		expression: aNode ;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> stringArrayType [
+
+	^ FASTJavaArrayTypeExpression new
+		  baseType: (FASTJavaTypeName new name: 'String');
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> stringTwoDimensionalArrayType [
+
+	^ FASTJavaArrayTypeExpression new
+		  baseType: self stringArrayType;
+		  yourself
 ]
 
 { #category : #'as yet unclassified' }
