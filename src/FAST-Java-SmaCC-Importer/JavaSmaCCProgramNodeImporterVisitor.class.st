@@ -11,7 +11,9 @@ Class {
 	#instVars : [
 		'model',
 		'currentFASTEntity',
-		'parentFASTVisitor'
+		'parentFASTVisitor',
+		'withComments',
+		'parser'
 	],
 	#classInstVars : [
 		'hello'
@@ -30,6 +32,22 @@ JavaSmaCCProgramNodeImporterVisitor >> addToModel: anEntity [
 	^ anEntity
 ]
 
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> attach: aFastComment [
+	(aFastComment isBlockComment
+		ifTrue: [ self closestNextNode: aFastComment ]
+		ifFalse:  [ self closestPreviousNode: aFastComment ])
+	ifNotNil: [ :node | aFastComment container: node ]
+]
+
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> attachComments: aCodeString [
+	parser scanner comments do: [ :pos || fastComment |
+		fastComment := self createComment: aCodeString from: pos first to: pos second.
+		self attach: fastComment.
+	]
+]
+
 { #category : #copying }
 JavaSmaCCProgramNodeImporterVisitor >> clone [
 	^ self class new
@@ -38,11 +56,56 @@ JavaSmaCCProgramNodeImporterVisitor >> clone [
 			yourself.
 ]
 
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> closestNextNode: aFastComment [
+	^self closestNodeTo: aFastComment relation: #>
+]
+
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> closestNodeTo: aFastComment relation: comparator [
+	| closest |
+	closest := nil.
+	aFastComment mooseModel entities do: [ :node |
+		(self compare: node to: aFastComment comparator: comparator)
+		ifTrue: [
+			closest
+				ifNil: [ closest := node ]
+				ifNotNil: [ (self compare: closest to: node comparator: comparator)
+					ifTrue: [ closest := node ]
+				]
+		]
+	].
+	^closest
+]
+
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> closestPreviousNode: aFastComment [
+	^self closestNodeTo: aFastComment relation: #<
+]
+
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> compare: node1 to: node2 comparator: comparator [
+	^node1 startPos perform: comparator with: node2 startPos
+]
+
 { #category : #creating }
 JavaSmaCCProgramNodeImporterVisitor >> create: anEntity from: aNodeEntity [
 	currentFASTEntity := self addToModel: anEntity new.
 	self generalVisitActionForNodeEntity: aNodeEntity.
 	^ currentFASTEntity
+]
+
+{ #category : #creating }
+JavaSmaCCProgramNodeImporterVisitor >> createComment: aCodeString from: start to: end [
+	| comment |
+	comment := FASTJavaComment new
+		content: (aCodeString copyFrom: start to: end) ;
+		startPos: start ;
+		endPos: end ;
+		yourself.
+	
+	self addToModel: comment.
+	^comment
 ]
 
 { #category : #visitor }
@@ -122,7 +185,11 @@ JavaSmaCCProgramNodeImporterVisitor >> parentFASTVisitor: anObject [
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 	| ast |
-	[ ast := JavaParser parse: aCodeString startingAt: JavaParser startingStateForclass_or_interface_body_declaration ]
+	parser := JavaParser createParserOnStream: (ReadStream on: aCodeString) startingAt: JavaParser startingStateForclass_or_interface_body_declaration.
+	
+	[ ast := parser parse.
+	 (ast isKindOf: SmaCCParseNode) ifTrue: [ ast completeSource: aCodeString ]
+	]
 		on: Error
 		do: [ :err | 
 			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
@@ -133,6 +200,9 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 		do: [ :err | 
 			('FAST Err parsing: ' , String crlf , aCodeString) record.
 			err signal ].
+
+	withComments ifTrue: [self attachComments: aCodeString].
+		
 	^ self model
 ]
 
@@ -1201,4 +1271,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitWhileStatement: aWhileStatementNode 
 	currentFASTEntity
 		body: (self clone accept: aWhileStatementNode statement).
 	^ currentFASTEntity
+]
+
+{ #category : #initialization }
+JavaSmaCCProgramNodeImporterVisitor >> withComments [
+	withComments := true
 ]

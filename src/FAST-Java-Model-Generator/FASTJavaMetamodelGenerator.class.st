@@ -118,7 +118,11 @@ Class {
 		'compilationUnit',
 		'javaLongLiteral',
 		'javaDoubleLiteral',
-		'tInvocation'
+		'tInvocation',
+		'tComment',
+		'tWithComments',
+		'javaEntity',
+		'javaComment'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -262,6 +266,11 @@ class Enclosing {
     }
 }
 '
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaComment [
+	^ 'I represent a Java comment (block or line comment)'
 ]
 
 { #category : #comments }
@@ -674,6 +683,10 @@ while(...) {
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineClasses [
 	super defineClasses.
+	
+	javaEntity  := builder newClassNamed: #Entity.
+
+	javaComment := builder newClassNamed: #Comment comment: self commentForJavaComment.
 	javaFieldAccess := builder newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
 	javaIdentifier := builder newClassNamed: #Identifier comment: self commentForJavaIdentifier.
 	javaInfixOperation := builder newClassNamed: #InfixOperation comment: self commentForJavaInfixOperation.
@@ -776,6 +789,11 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"define class hierarchy"
 
 	super defineHierarchy.
+
+	javaEntity --|> tEntity.
+	javaEntity --|> tWithComments.
+
+	javaComment --|> tComment.
 
 	javaAssignmentExpression --|> tExpression.
 	javaAssignmentExpression --|> tWithAssignable.
@@ -1382,7 +1400,9 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tWithQualifiedName := builder newTraitNamed: #TWithQualifiedName comment: 'I have a qualified name.'.
 	
 	"From FAST"
-	tEntity := self remoteTrait: #TEntity withPrefix: #FAST. 
+	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.
+	tComment := self remoteTrait: #TComment withPrefix: #FAST.
+	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
 	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
 	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
 	tCharacterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.

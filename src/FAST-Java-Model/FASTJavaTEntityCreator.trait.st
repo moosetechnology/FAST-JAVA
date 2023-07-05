@@ -143,6 +143,13 @@ FASTJavaTEntityCreator >> newClassTypeExpression [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newComment [
+
+	<generated>
+	^ self add: FASTJavaComment new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newCompilationUnit [
 
 	<generated>

@@ -18,8 +18,8 @@ Class {
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait',
 	#instVars : [
-		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #enumDeclarations',
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner'
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner',
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #enumDeclarations'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
