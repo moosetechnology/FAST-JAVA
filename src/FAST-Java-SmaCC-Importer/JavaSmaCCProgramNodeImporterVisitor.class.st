@@ -11,7 +11,9 @@ Class {
 	#instVars : [
 		'model',
 		'currentFASTEntity',
-		'parentFASTVisitor'
+		'parentFASTVisitor',
+		'parser',
+		'withComments'
 	],
 	#classInstVars : [
 		'hello'
@@ -28,6 +30,18 @@ JavaSmaCCProgramNodeImporterVisitor class >> parseCodeMethodString: aCodeString 
 JavaSmaCCProgramNodeImporterVisitor >> addToModel: anEntity [
 	self model silentlyAdd: anEntity.
 	^ anEntity
+]
+
+{ #category : #'as yet unclassified' }
+JavaSmaCCProgramNodeImporterVisitor >> attachComments: aCodeString [
+	parser scanner comments do: [ :pos || fastComment |
+		fastComment := FASTJavaComment new
+			content: (aCodeString copyFrom: pos first to: pos second) ;
+			startPos: pos first ;
+			endPos: pos second ;
+			yourself.
+		self addToModel: fastComment 
+	]
 ]
 
 { #category : #copying }
@@ -77,7 +91,8 @@ JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEnt
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	super initialize.
-	model := FASTJavaModel new
+	withComments := false.
+	model := FASTJavaModel new.
 ]
 
 { #category : #creating }
@@ -122,7 +137,11 @@ JavaSmaCCProgramNodeImporterVisitor >> parentFASTVisitor: anObject [
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 	| ast |
-	[ ast := JavaParser parse: aCodeString startingAt: JavaParser startingStateForclass_or_interface_body_declaration ]
+	parser := JavaParser createParserOnStream: (ReadStream on: aCodeString) startingAt: JavaParser startingStateForclass_or_interface_body_declaration.
+	
+	[ ast := parser parse.
+	 (ast isKindOf: SmaCCParseNode) ifTrue: [ ast completeSource: aCodeString ]
+	]
 		on: Error
 		do: [ :err | 
 			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
@@ -133,6 +152,9 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
 		do: [ :err | 
 			('FAST Err parsing: ' , String crlf , aCodeString) record.
 			err signal ].
+	
+	withComments ifTrue: [self attachComments: aCodeString].
+		
 	^ self model
 ]
 
@@ -1200,4 +1222,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitWhileStatement: aWhileStatementNode 
 	currentFASTEntity
 		body: (self clone accept: aWhileStatementNode statement).
 	^ currentFASTEntity
+]
+
+{ #category : #initialization }
+JavaSmaCCProgramNodeImporterVisitor >> withComments [
+	withComments := true
 ]
