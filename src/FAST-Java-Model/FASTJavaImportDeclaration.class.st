@@ -7,9 +7,9 @@ Class {
 	#traits : 'FASTJavaTWithQualifiedName + FASTTEntity',
 	#classTraits : 'FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
 	#instVars : [
-		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #importDeclarations',
+		'#isStatic => FMProperty defaultValue: false',
 		'#isOnDemand => FMProperty defaultValue: false',
-		'#isStatic => FMProperty defaultValue: false'
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #importDeclarations'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

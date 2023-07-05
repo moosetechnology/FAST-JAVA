@@ -1,6 +1,8 @@
 Class {
 	#name : #FASTJavaEntity,
 	#superclass : #MooseEntity,
+	#traits : 'FASTTEntity + FASTTWithComments',
+	#classTraits : 'FASTTEntity classTrait + FASTTWithComments classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
