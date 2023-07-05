@@ -14,6 +14,12 @@ void blah() { }
 '
 ]
 
+{ #category : #running }
+JavaSmaCCJavadocCommentTest >> setUp [
+	super setUp.
+	fastModel := (self parseMethod: 'javadocComment')
+]
+
 { #category : #tests }
 JavaSmaCCJavadocCommentTest >> testCommentIsAttached [
 	| fastComment |

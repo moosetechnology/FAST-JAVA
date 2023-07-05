@@ -14,6 +14,12 @@ JavaSmaCCBlockCommentTest >> methodBlockComment [
 }'
 ]
 
+{ #category : #running }
+JavaSmaCCBlockCommentTest >> setUp [
+	super setUp.
+	fastModel := (self parseMethod: 'blockComment')
+]
+
 { #category : #tests }
 JavaSmaCCBlockCommentTest >> testCommentIsAttached [
 	| fastComment |

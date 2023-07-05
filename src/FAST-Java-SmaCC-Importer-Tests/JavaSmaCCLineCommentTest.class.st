@@ -13,6 +13,12 @@ JavaSmaCCLineCommentTest >> methodLineComment [
 }'
 ]
 
+{ #category : #running }
+JavaSmaCCLineCommentTest >> setUp [
+	super setUp.
+	fastModel := (self parseMethod: 'lineComment')
+]
+
 { #category : #tests }
 JavaSmaCCLineCommentTest >> testCommentIsAttached [
 	| fastComment |
