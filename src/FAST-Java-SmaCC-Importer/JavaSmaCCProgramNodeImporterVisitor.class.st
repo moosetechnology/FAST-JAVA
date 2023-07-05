@@ -32,15 +32,19 @@ JavaSmaCCProgramNodeImporterVisitor >> addToModel: anEntity [
 	^ anEntity
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> attach: aFastComment [
+	(aFastComment isBlockComment
+		ifTrue: [ self closestNextNode: aFastComment ]
+		ifFalse:  [ self closestPreviousNode: aFastComment ])
+	ifNotNil: [ :node | aFastComment attachedTo: node ]
+]
+
+{ #category : #'private - comments' }
 JavaSmaCCProgramNodeImporterVisitor >> attachComments: aCodeString [
 	parser scanner comments do: [ :pos || fastComment |
-		fastComment := FASTJavaComment new
-			content: (aCodeString copyFrom: pos first to: pos second) ;
-			startPos: pos first ;
-			endPos: pos second ;
-			yourself.
-		self addToModel: fastComment 
+		fastComment := self createComment: aCodeString from: pos first to: pos second.
+		self attach: fastComment.
 	]
 ]
 
@@ -52,11 +56,56 @@ JavaSmaCCProgramNodeImporterVisitor >> clone [
 			yourself.
 ]
 
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> closestNextNode: aFastComment [
+	^self closestNodeTo: aFastComment relation: #>
+]
+
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> closestNodeTo: aFastComment relation: comparator [
+	| closest |
+	closest := nil.
+	aFastComment mooseModel entities do: [ :node |
+		(self compare: node to: aFastComment comparator: comparator)
+		ifTrue: [
+			closest
+				ifNil: [ closest := node ]
+				ifNotNil: [ (self compare: closest to: node comparator: comparator)
+					ifTrue: [ closest := node ]
+				]
+		]
+	].
+	^closest
+]
+
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> closestPreviousNode: aFastComment [
+	^self closestNodeTo: aFastComment relation: #<
+]
+
+{ #category : #'private - comments' }
+JavaSmaCCProgramNodeImporterVisitor >> compare: node1 to: node2 comparator: comparator [
+	^node1 startPos perform: comparator with: node2 startPos
+]
+
 { #category : #creating }
 JavaSmaCCProgramNodeImporterVisitor >> create: anEntity from: aNodeEntity [
 	currentFASTEntity := self addToModel: anEntity new.
 	self generalVisitActionForNodeEntity: aNodeEntity.
 	^ currentFASTEntity
+]
+
+{ #category : #creating }
+JavaSmaCCProgramNodeImporterVisitor >> createComment: aCodeString from: start to: end [
+	| comment |
+	comment := FASTJavaComment new
+		content: (aCodeString copyFrom: start to: end) ;
+		startPos: start ;
+		endPos: end ;
+		yourself.
+	
+	self addToModel: comment.
+	^comment
 ]
 
 { #category : #visitor }

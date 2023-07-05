@@ -11,6 +11,7 @@ JavaSmaCCBlockCommentTest >> methodBlockComment [
 'void blah() {
   /* the following is a declaration */
   String someVar;
+  /* block comment at the end */
 }'
 ]
 
@@ -23,14 +24,21 @@ JavaSmaCCBlockCommentTest >> setUp [
 { #category : #tests }
 JavaSmaCCBlockCommentTest >> testCommentIsAttached [
 	| fastComment |
-	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
+	fastComment := (fastModel allWithType: FASTJavaComment) first.
+
 	self assert: fastComment attachedTo isNotNil.
+	self assert: fastComment attachedTo class equals: FASTJavaVarDeclStatement.
+
+	fastComment := (fastModel allWithType: FASTJavaComment) second.
+
+	self assert: fastComment attachedTo isNil.
+
 ]
 
 { #category : #tests }
 JavaSmaCCBlockCommentTest >> testCommentProperties [
 	| fastComment |
-	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
+	fastComment := (fastModel allWithType: FASTJavaComment) first.
 
 	self assert: (fastModel allWithType: FASTJavaComment) first isBlockComment.
 	self deny: (fastModel allWithType: FASTJavaComment) first isJavadocComment.
@@ -44,5 +52,5 @@ JavaSmaCCBlockCommentTest >> testCommentProperties [
 
 { #category : #tests }
 JavaSmaCCBlockCommentTest >> testModelHasComments [
-	self assert: (fastModel allWithType: FASTJavaComment) size equals: 1.
+	self assert: (fastModel allWithType: FASTJavaComment) size equals: 2
 ]

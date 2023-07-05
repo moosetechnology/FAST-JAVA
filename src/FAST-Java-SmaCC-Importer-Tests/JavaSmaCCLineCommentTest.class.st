@@ -23,7 +23,9 @@ JavaSmaCCLineCommentTest >> setUp [
 JavaSmaCCLineCommentTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
+
 	self assert: fastComment attachedTo isNotNil.
+	self assert: fastComment attachedTo class equals: FASTJavaVariableDeclarator.
 ]
 
 { #category : #tests }
