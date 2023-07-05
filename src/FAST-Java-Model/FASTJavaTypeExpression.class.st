@@ -5,8 +5,8 @@ Class {
 	#name : #FASTJavaTypeExpression,
 	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
-		'#javaClassDeclarationInterfaceOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
 		'#javaClassDeclarationSuperclassOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
+		'#javaClassDeclarationInterfaceOwnver => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
 		'#javaEnumDeclarationInterfaceOwnver => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaInterfaceDeclarationInterfaceOwnver => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
 	],

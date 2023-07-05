@@ -115,7 +115,11 @@ Class {
 		'multiImportDeclaration',
 		'qualifiedName',
 		'javaLabeledStatement',
-		'javaTypeParameter'
+		'javaTypeParameter',
+		'javaComment',
+		'javaEntity',
+		'tWithComments',
+		'tComment'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -249,6 +253,11 @@ class Enclosing {
     }
 }
 '
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaComment [
+	^ 'A node representing a Java comment (block or line comment)'
 ]
 
 { #category : #comments }
@@ -642,11 +651,14 @@ while(...) {
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineClasses [
 	super defineClasses. 
+	javaEntity  := builder newClassNamed: #Entity.
+
 	javaAssignementExpression := builder newClassNamed: #AssignementExpression comment: self commentForJavaAssignementExpression.
 	javaBreakStatement := builder newClassNamed: #BreakStatement comment: self commentForJavaBreakStatement.
 	javaCaseStatement := builder newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
 	javaCharacterLiteral := builder newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
 	javaContinueStatement := builder newClassNamed: #ContinueStatement comment: self commentForJavaContinueStatement.
+	javaComment := builder newClassNamed: #Comment comment: self commentForJavaComment.
 	javaDoWhileStatement := builder newClassNamed: #DoWhileStatement comment: self commentForJavaDoWhileStatement.
 	javaFieldAccess := builder newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
 	javaFloatLiteral := builder newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
@@ -746,9 +758,14 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"define class hierarchy"
 
 	super defineHierarchy.
+	
+	javaEntity --|> tWithComments.
+	javaEntity --|> tEntity.
 
 	javaAssignementExpression --|> tExpression.
 	javaAssignementExpression --|> tWithAssigneable.
+
+	javaComment --|> tComment.
 
 	javaFieldAccess --|> tExpression.
 	javaFieldAccess --|> tAssigneable.
@@ -1334,7 +1351,9 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	
 	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send message to someone'.
 	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive message from someone'.
-	
+
+	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
+	tComment := self remoteTrait: #TComment withPrefix: #FAST.
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST. 
 	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 

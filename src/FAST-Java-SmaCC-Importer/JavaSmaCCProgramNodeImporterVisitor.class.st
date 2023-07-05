@@ -37,7 +37,7 @@ JavaSmaCCProgramNodeImporterVisitor >> attach: aFastComment [
 	(aFastComment isBlockComment
 		ifTrue: [ self closestNextNode: aFastComment ]
 		ifFalse:  [ self closestPreviousNode: aFastComment ])
-	ifNotNil: [ :node | aFastComment attachedTo: node ]
+	ifNotNil: [ :node | aFastComment container: node ]
 ]
 
 { #category : #'private - comments' }

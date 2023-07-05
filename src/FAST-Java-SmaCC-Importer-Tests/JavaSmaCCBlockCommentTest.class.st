@@ -26,12 +26,12 @@ JavaSmaCCBlockCommentTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) first.
 
-	self assert: fastComment attachedTo isNotNil.
-	self assert: fastComment attachedTo class equals: FASTJavaVarDeclStatement.
+	self assert: fastComment container isNotNil.
+	self assert: fastComment container class equals: FASTJavaVarDeclStatement.
 
 	fastComment := (fastModel allWithType: FASTJavaComment) second.
 
-	self assert: fastComment attachedTo isNil.
+	self assert: fastComment container isNil.
 
 ]
 

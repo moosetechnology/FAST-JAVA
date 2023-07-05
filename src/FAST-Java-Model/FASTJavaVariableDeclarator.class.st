@@ -36,6 +36,7 @@ FASTJavaVariableDeclarator >> expression [
 	<generated>
 	<FMComment: 'Expression that s being assigned upon declaration to the var'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaVariableDeclaratorExpressionOwner>
+	<package: #'Carrefour-Model'>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 

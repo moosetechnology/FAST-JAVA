@@ -6,8 +6,8 @@ Class {
 	#superclass : #FASTJavaTypeExpression,
 	#instVars : [
 		'#javaMethodThrowsOwner => FMOne type: #FASTJavaMethodEntity opposite: #throws',
-		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner',
-		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types'
+		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types',
+		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
