@@ -140,7 +140,8 @@ JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEnt
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	super initialize.
-	model := FASTJavaModel new
+	model := FASTJavaModel new.
+	withComments := false
 ]
 
 { #category : #creating }
