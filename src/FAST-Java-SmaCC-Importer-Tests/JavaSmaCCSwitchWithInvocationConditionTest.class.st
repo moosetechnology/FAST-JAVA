@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCSwitchWithInvocationConditionTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'switchMethod'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCSwitchWithInvocationConditionTest >> methodSwitch [
+JavaSmaCCSwitchWithInvocationConditionTest >> javaMethod [
 	^ 
 'void switchMethod() {
 	switch(a.call()) { 
@@ -24,17 +21,11 @@ JavaSmaCCSwitchWithInvocationConditionTest >> methodSwitch [
 '
 ]
 
-{ #category : #running }
-JavaSmaCCSwitchWithInvocationConditionTest >> setUp [
-	super setUp.
-	switchMethod := (self parseMethod: 'switch') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCSwitchWithInvocationConditionTest >> testSwitchCondition [
 
 	| switchStatement |
-	switchStatement := (switchMethod mooseModel allWithType:
+	switchStatement := (fastModel allWithType:
 		                    FASTJavaSwitchStatement) anyOne.
 	self assert: switchStatement condition class equals: FASTJavaMethodInvocation
 ]

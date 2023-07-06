@@ -33,6 +33,11 @@ JavaSmaCCEnumDeclarationTest >> enumString [
 }' 
 ]
 
+{ #category : #running }
+JavaSmaCCEnumDeclarationTest >> setUp [
+	"not doing anything because we want to call parsing in the test itself"
+]
+
 { #category : #tests }
 JavaSmaCCEnumDeclarationTest >> testCanParseEnumDeclarationText [
 

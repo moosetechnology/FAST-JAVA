@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCFieldDeclarationTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'fieldDeclaration'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCFieldDeclarationTest >> methodFieldDeclaration [
+JavaSmaCCFieldDeclarationTest >> javaMethod [
 	
 	^ 'String fieldDeclaration() {
 		Patate p = new Patate() { 
@@ -17,34 +14,27 @@ JavaSmaCCFieldDeclarationTest >> methodFieldDeclaration [
 	}'
 ]
 
-{ #category : #running }
-JavaSmaCCFieldDeclarationTest >> setUp [
-	super setUp.
-	fieldDeclaration := (self parseMethod: 'fieldDeclaration') allFASTJavaMethodEntity
-		first
-]
-
 { #category : #tests }
 JavaSmaCCFieldDeclarationTest >> testFieldDeclarationModifiers [
 
 	self
 		assert:
-		(fieldDeclaration mooseModel allWithType: FASTJavaModifier) size
+		(fastMethod mooseModel allWithType: FASTJavaModifier) size
 		equals: 2 "public final"
 ]
 
 { #category : #tests }
 JavaSmaCCFieldDeclarationTest >> testFieldDeclarationParent [
 	self
-		assert: fieldDeclaration statements first declarators first expression parentNode
-		equals: fieldDeclaration statements first declarators first
+		assert: fastMethod statements first declarators first expression parentNode
+		equals: fastMethod statements first declarators first
 ]
 
 { #category : #tests }
 JavaSmaCCFieldDeclarationTest >> testFieldDeclarationSize [
 	"2 with Patate p"
-	self assert: (fieldDeclaration mooseModel allWithType: FASTJavaVarDeclStatement) size equals: 2.
+	self assert: (fastMethod mooseModel allWithType: FASTJavaVarDeclStatement) size equals: 2.
 	"3 with Patate p"
-	self assert: (fieldDeclaration mooseModel allWithType: FASTJavaVariableDeclarator) size equals: 3.
+	self assert: (fastMethod mooseModel allWithType: FASTJavaVariableDeclarator) size equals: 3.
 	
 ]

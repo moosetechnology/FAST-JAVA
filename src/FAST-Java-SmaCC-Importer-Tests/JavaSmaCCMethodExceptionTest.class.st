@@ -1,34 +1,23 @@
 Class {
 	#name : #JavaSmaCCMethodExceptionTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodException'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCMethodExceptionTest >> methodMethodReference [
+{ #category : #accessing }
+JavaSmaCCMethodExceptionTest >> javaMethod [
 	^ 'void method() throws MyException {
 }'
-]
-
-{ #category : #'as yet unclassified' }
-JavaSmaCCMethodExceptionTest >> setUp [
-
-	super setUp.
-	methodException := self parseMethodString:
-		                         self methodMethodReference
 ]
 
 { #category : #tests }
 JavaSmaCCMethodExceptionTest >> testOnlyOneThrowsEntity [
 
 	self
-		assert: (methodException allWithType: FASTJavaMethodEntity) size
+		assert: (fastModel allWithType: FASTJavaMethodEntity) size
 		equals: 1.
 	self
 		assert:
-		(methodException allWithType: FASTJavaMethodEntity) anyOne throws size
+		(fastModel allWithType: FASTJavaMethodEntity) anyOne throws size
 		equals: 1
 ]

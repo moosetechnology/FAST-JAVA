@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCArrayInitializationExpressionTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodArrayInitializationExpression'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #'as yet unclassified' }
-JavaSmaCCArrayInitializationExpressionTest >> methodArrayInitializationExpression [
+JavaSmaCCArrayInitializationExpressionTest >> javaMethod [
 	^ 'void arrayAccess() {
 		Veggies veggies[] = { new BlackOlives(), 
 		                      new Spinach(), 
@@ -16,13 +13,7 @@ JavaSmaCCArrayInitializationExpressionTest >> methodArrayInitializationExpressio
 }'
 ]
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCArrayInitializationExpressionTest >> setUp [
-	super setUp.
-	methodArrayInitializationExpression := (self parseMethod: 'ArrayInitializationExpression')
-]
-
 { #category : #tests }
 JavaSmaCCArrayInitializationExpressionTest >> testNumberOfInitializedElement [
-	self assert: (methodArrayInitializationExpression allWithType: FASTJavaNewExpression) size equals: 3 
+	self assert: (fastModel allWithType: FASTJavaNewExpression) size equals: 3 
 ]

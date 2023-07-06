@@ -5,18 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JavaSmaCCLineCommentTest >> methodLineComment [
+JavaSmaCCLineCommentTest >> javaMethod [
 
 	^ 
 'void blah() {
   String someVar; // this is a declaration
 }'
-]
-
-{ #category : #'as yet unclassified' }
-JavaSmaCCLineCommentTest >> setUp [
-	super setUp.
-	fastModel := (self parseMethod: 'lineComment')
 ]
 
 { #category : #'as yet unclassified' }

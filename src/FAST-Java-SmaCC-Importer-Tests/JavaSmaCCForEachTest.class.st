@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCForEachTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodForEach'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCForEachTest >> methodForEach [
+JavaSmaCCForEachTest >> javaMethod [
 	^ 'void forEachMethod() {
 	for(HandlerRegistration hr: SamplePageInputsAndLabels.hrList) {
 		hr.removeHandler();
@@ -16,58 +13,52 @@ JavaSmaCCForEachTest >> methodForEach [
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCForEachTest >> setUp [
-	super setUp.
-	methodForEach := (self parseMethod: 'forEach') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachBodyParentNode [
-		self assert: methodForEach statements first body parentNode equals: methodForEach statements first
+		self assert: fastMethod statements first body parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachBodyType [
-	self assert: methodForEach statements first body class equals: FASTJavaStatementBlock 
+	self assert: fastMethod statements first body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachFieldName [
-	self assert: methodForEach statements first fieldname name equals: 'hr'
+	self assert: fastMethod statements first fieldname name equals: 'hr'
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachFieldNameParent [
-	self assert: methodForEach statements first fieldname parentNode equals: methodForEach statements first
+	self assert: fastMethod statements first fieldname parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachFieldNameType [
-	self assert: methodForEach statements first fieldname class equals: FASTJavaIdentifier
+	self assert: fastMethod statements first fieldname class equals: FASTJavaIdentifier
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachListParent [
-	self assert: methodForEach statements first list parentNode equals: methodForEach statements first
+	self assert: fastMethod statements first list parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachListType [
-	self assert: methodForEach statements first list class equals: FASTJavaClassProperty
+	self assert: fastMethod statements first list class equals: FASTJavaClassProperty
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachType [
-	self assert: methodForEach statements first class equals: FASTJavaForEachStatement
+	self assert: fastMethod statements first class equals: FASTJavaForEachStatement
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachTypeName [
-	self assert: methodForEach statements first type fullName equals: 'HandlerRegistration'
+	self assert: fastMethod statements first type fullName equals: 'HandlerRegistration'
 ]
 
 { #category : #tests }
 JavaSmaCCForEachTest >> testForEachTypeType [
-	self assert: methodForEach statements first type class equals: FASTJavaClassTypeExpression
+	self assert: fastMethod statements first type class equals: FASTJavaClassTypeExpression
 ]

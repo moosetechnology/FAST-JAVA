@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCEmptyMethodDeclarationTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodNew'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
-JavaSmaCCEmptyMethodDeclarationTest >> methodNew [
+{ #category : #running }
+JavaSmaCCEmptyMethodDeclarationTest >> javaMethod [
 	^ 'void newMethod() {
 	new Patate() {
 		public void onSuccess(){
@@ -23,13 +20,7 @@ JavaSmaCCEmptyMethodDeclarationTest >> methodNew [
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCEmptyMethodDeclarationTest >> setUp [
-	super setUp.
-	methodNew := (self parseMethod: 'new')
-]
-
 { #category : #tests }
 JavaSmaCCEmptyMethodDeclarationTest >> testEmptyDeclaredMethodSize [
-	self assert: (methodNew allWithType: FASTJavaEmptyMethodDeclaration) size equals: 1
+	self assert: (fastModel allWithType: FASTJavaEmptyMethodDeclaration) size equals: 1
 ]

@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCInitializerTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodInitializer'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
-JavaSmaCCInitializerTest >> methodInitializer [
+{ #category : #running }
+JavaSmaCCInitializerTest >> javaMethod [
 	^ 'void initializer() {
 	Button b = new Button("param1") { 
 	{ addClickListener(new ClickListener(){}); }
@@ -16,34 +13,27 @@ JavaSmaCCInitializerTest >> methodInitializer [
 	}'
 ]
 
-{ #category : #running }
-JavaSmaCCInitializerTest >> setUp [
-	super setUp.
-	methodInitializer := (self parseMethod: 'initializer') allFASTJavaMethodEntity
-		first
-]
-
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerAsChild [
-	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne equals: methodInitializer statements anyOne declarators anyOne expression declarations anyOne
+	self assert: (fastMethod mooseModel allWithType: FASTJavaInitializer) anyOne equals: fastMethod statements anyOne declarators anyOne expression declarations anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerHasStatementBlock [
-	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne statementBlock isNotNil
+	self assert: (fastMethod mooseModel allWithType: FASTJavaInitializer) anyOne statementBlock isNotNil
 ]
 
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerHasStatementBlockMethodSize [
-	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne statementBlock statements size equals: 1
+	self assert: (fastMethod mooseModel allWithType: FASTJavaInitializer) anyOne statementBlock statements size equals: 1
 ]
 
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerParent [
-	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) anyOne parentNode equals: methodInitializer statements anyOne declarators anyOne expression
+	self assert: (fastMethod mooseModel allWithType: FASTJavaInitializer) anyOne parentNode equals: fastMethod statements anyOne declarators anyOne expression
 ]
 
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerSize [
-	self assert: (methodInitializer mooseModel allWithType: FASTJavaInitializer) size equals: 1 
+	self assert: (fastMethod mooseModel allWithType: FASTJavaInitializer) size equals: 1 
 ]

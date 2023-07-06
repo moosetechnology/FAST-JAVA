@@ -1,42 +1,32 @@
 Class {
 	#name : #JavaSmaCCSuperMethodInvocationTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodSuperConstructor',
-		'superMethodInvocation'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCSuperMethodInvocationTest >> methodSuperMethodInvocation [
+JavaSmaCCSuperMethodInvocationTest >> javaMethod [
 	^ 'void superMethodInvocation() {
   super.superMethodInvocation();
 }'
 ]
 
-{ #category : #resources }
-JavaSmaCCSuperMethodInvocationTest >> setUp [
-	super setUp.
-	superMethodInvocation := (self parseMethod: 'superMethodInvocation')
-]
-
 { #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiver [
-	self assert: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver name equals: 'super'
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver name equals: 'super'
 ]
 
 { #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverAsChild [
-	self assert: (superMethodInvocation allWithType: FASTJavaIdentifier) anyOne equals: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver
+	self assert: (fastModel allWithType: FASTJavaIdentifier) anyOne equals: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver
 ]
 
 { #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverParent [
-	self assert: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver parentNode equals: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver parentNode equals: (fastModel allWithType: FASTJavaMethodInvocation) anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverType [
-	self assert: (superMethodInvocation allWithType: FASTJavaMethodInvocation) anyOne receiver class equals: FASTJavaIdentifier
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver class equals: FASTJavaIdentifier
 ]

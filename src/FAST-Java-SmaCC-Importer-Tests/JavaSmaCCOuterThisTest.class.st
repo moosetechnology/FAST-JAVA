@@ -1,41 +1,32 @@
 Class {
 	#name : #JavaSmaCCOuterThisTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodOuterThis'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCOuterThisTest >> methodOuterThis [
+JavaSmaCCOuterThisTest >> javaMethod [
 	^ 'void outerThis() {
 	call(Hello.this);
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCOuterThisTest >> setUp [
-	super setUp.
-	methodOuterThis := (self parseMethod: 'OuterThis') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCOuterThisTest >> testOuterThisAsChild [
-	self assert: (methodOuterThis mooseModel allWithType: FASTJavaOuterThis) anyOne equals: methodOuterThis statements anyOne expression arguments anyOne
+	self assert: (fastModel allWithType: FASTJavaOuterThis) anyOne equals: fastMethod statements anyOne expression arguments anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCOuterThisTest >> testOuterThisParent [
-	self assert: (methodOuterThis mooseModel allWithType: FASTJavaOuterThis) anyOne parentNode equals: methodOuterThis statements anyOne expression
+	self assert: (fastModel allWithType: FASTJavaOuterThis) anyOne parentNode equals: fastMethod statements anyOne expression
 ]
 
 { #category : #tests }
 JavaSmaCCOuterThisTest >> testOuterThisSize [
-	self assert: (methodOuterThis mooseModel allWithType: FASTJavaOuterThis ) size equals: 1
+	self assert: (fastModel allWithType: FASTJavaOuterThis ) size equals: 1
 ]
 
 { #category : #tests }
 JavaSmaCCOuterThisTest >> testOuterThisType [
-	self assert: (methodOuterThis mooseModel allWithType: FASTJavaOuterThis) anyOne type name equals: 'Hello'
+	self assert: (fastModel allWithType: FASTJavaOuterThis) anyOne type name equals: 'Hello'
 ]

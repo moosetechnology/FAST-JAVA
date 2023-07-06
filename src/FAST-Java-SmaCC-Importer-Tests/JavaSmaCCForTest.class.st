@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCForTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodFor'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
-JavaSmaCCForTest >> methodFor [
+{ #category : #running }
+JavaSmaCCForTest >> javaMethod [
 	^ 'void forMethod() {
 	for (int i = 0;i< 3;++i){
 		i++;
@@ -16,38 +13,32 @@ JavaSmaCCForTest >> methodFor [
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCForTest >> setUp [
-	super setUp.
-	methodFor := (self parseMethod: 'for') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCForTest >> testForEachBodyParentNode [
-	self assert: methodFor statements first body parentNode equals: methodFor statements first
+	self assert: fastMethod statements first body parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachBodyType [
-	self assert: methodFor statements first body class equals: FASTJavaStatementBlock 
+	self assert: fastMethod statements first body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachConditionParentNode [
-	self assert: methodFor statements first condition parentNode equals: methodFor statements first
+	self assert: fastMethod statements first condition parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachConditionType [
-	self assert: methodFor statements first condition class equals: FASTJavaInfixOperation 
+	self assert: fastMethod statements first condition class equals: FASTJavaInfixOperation 
 ]
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachIncrementorsType [
-	self assert: methodFor statements first incrementor class equals: FASTJavaExpressionStatement 
+	self assert: fastMethod statements first incrementor class equals: FASTJavaExpressionStatement 
 ]
 
 { #category : #tests }
 JavaSmaCCForTest >> testForEachInitializersType [
-	self assert: methodFor statements first initializer class equals: FASTJavaVarDeclStatement
+	self assert: fastMethod statements first initializer class equals: FASTJavaVarDeclStatement
 ]

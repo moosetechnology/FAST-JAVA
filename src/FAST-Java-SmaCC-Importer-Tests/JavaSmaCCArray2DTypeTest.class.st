@@ -1,23 +1,14 @@
 Class {
 	#name : #JavaSmaCCArray2DTypeTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodArrayType'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #'as yet unclassified' }
-JavaSmaCCArray2DTypeTest >> methodArrayType [
+JavaSmaCCArray2DTypeTest >> javaMethod [
 	^ 'method() {
           byte[][] buffer;
 	}'
-]
-
-{ #category : #'as yet unclassified' }
-JavaSmaCCArray2DTypeTest >> setUp [
-	super setUp.
-	methodArrayType := (self parseMethod: 'arrayType')
 ]
 
 { #category : #tests }
@@ -25,7 +16,7 @@ JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeBaseTypeType [
 
 	self
 		assert:
-			(methodArrayType allWithType: FASTJavaArrayTypeExpression) second
+			(fastModel allWithType: FASTJavaArrayTypeExpression) second
 				baseType baseType class
 		equals: FASTJavaByteTypeExpression
 ]
@@ -35,9 +26,9 @@ JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeParentNode [
 
 	self
 		assert:
-		(methodArrayType allWithType: FASTJavaArrayTypeExpression) second
+		(fastModel allWithType: FASTJavaArrayTypeExpression) second
 		equals:
-			(methodArrayType allWithType: FASTJavaArrayTypeExpression) first
+			(fastModel allWithType: FASTJavaArrayTypeExpression) first
 				parentNode
 ]
 
@@ -46,7 +37,7 @@ JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeType [
 
 	self
 		assert:
-			(methodArrayType allWithType: FASTJavaArrayTypeExpression) second
+			(fastModel allWithType: FASTJavaArrayTypeExpression) second
 				baseType class
 		equals: FASTJavaArrayTypeExpression
 ]
@@ -56,6 +47,6 @@ JavaSmaCCArray2DTypeTest >> testArrayTypeInModelSize [
 
 	self
 		assert:
-		(methodArrayType allWithType: FASTJavaArrayTypeExpression) size
+		(fastModel allWithType: FASTJavaArrayTypeExpression) size
 		equals: 2
 ]

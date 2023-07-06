@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCNewClassTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodNew'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCNewClassTest >> methodNew [
+JavaSmaCCNewClassTest >> javaMethod [
 	^ 'void newMethod() {
 	new Patate() {
 		public void onSuccess(){
@@ -22,20 +19,14 @@ JavaSmaCCNewClassTest >> methodNew [
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCNewClassTest >> setUp [
-	super setUp.
-	methodNew := (self parseMethod: 'new')
-]
-
 { #category : #tests }
 JavaSmaCCNewClassTest >> testDeclaredMethodSize [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
+	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
 ]
 
 { #category : #tests }
 JavaSmaCCNewClassTest >> testNewName [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
+	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
 ]
 
 { #category : #tests }
@@ -43,14 +34,14 @@ JavaSmaCCNewClassTest >> testNewParent [
 
 	self
 		assert:
-		(methodNew allWithType: FASTJavaNewClassExpression) anyOne
+		(fastModel allWithType: FASTJavaNewClassExpression) anyOne
 			parentNode
 		equals:
-			(methodNew detect: [ :entity | entity mooseName = 'newMethod' ])
+			(fastModel detect: [ :entity | entity mooseName = 'newMethod' ])
 				statements anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCNewClassTest >> testNumberOfMethod [
-	self assert: methodNew allFASTJavaMethodEntity size equals: 3
+	self assert: fastModel allFASTJavaMethodEntity size equals: 3
 ]

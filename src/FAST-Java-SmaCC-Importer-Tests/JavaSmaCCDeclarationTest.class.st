@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCDeclarationTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'declaration'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
-JavaSmaCCDeclarationTest >> methodDeclaration [
+{ #category : #running }
+JavaSmaCCDeclarationTest >> javaMethod [
 	
 	^ 
 'public Declaration(int parameter1, double parameter2){
@@ -16,18 +13,12 @@ JavaSmaCCDeclarationTest >> methodDeclaration [
 '
 ]
 
-{ #category : #running }
-JavaSmaCCDeclarationTest >> setUp [
-	super setUp.
-	declaration := (self parseMethod: 'Declaration')
-]
-
 { #category : #tests }
 JavaSmaCCDeclarationTest >> testNumberOfModifier [
-	self assert: (declaration allWithType: FASTJavaMethodEntity) anyOne modifiers size equals: 1
+	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne modifiers size equals: 1
 ]
 
 { #category : #tests }
 JavaSmaCCDeclarationTest >> testNumberOfParameters [
-	self assert: (declaration allWithType: FASTJavaMethodEntity) anyOne parameters size equals: 2
+	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne parameters size equals: 2
 ]

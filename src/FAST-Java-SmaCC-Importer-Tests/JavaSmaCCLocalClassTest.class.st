@@ -2,14 +2,13 @@ Class {
 	#name : #JavaSmaCCLocalClassTest,
 	#superclass : #JavaSmaCCImporterTest,
 	#instVars : [
-		'throwMethod',
-		'methodLocalClass'
+		'throwMethod'
 	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCLocalClassTest >> methodLocalClass [
+{ #category : #accessing }
+JavaSmaCCLocalClassTest >> javaMethod [
 	
 	^ 'methodLocalClass() {
         TestMethod t = new TestMethod() { 
@@ -21,13 +20,7 @@ JavaSmaCCLocalClassTest >> methodLocalClass [
 }'
 ]
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCLocalClassTest >> setUp [
-	super setUp.
-	methodLocalClass := (self parseMethod: 'localClass')
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JavaSmaCCLocalClassTest >> testLocalClassExists [
-	self assert: (methodLocalClass allWithType: FASTJavaClassDeclaration) size equals: 1
+	self assert: (fastModel allWithType: FASTJavaClassDeclaration) size equals: 1
 ]

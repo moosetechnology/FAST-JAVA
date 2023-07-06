@@ -2,26 +2,19 @@ Class {
 	#name : #JavaSmaCCArrayInitializationTest,
 	#superclass : #JavaSmaCCImporterTest,
 	#instVars : [
-		'methodNewArray',
-		'methodArrayInitialization'
+		'methodNewArray'
 	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCArrayInitializationTest >> methodArrayInitialization [
+{ #category : #accessing }
+JavaSmaCCArrayInitializationTest >> javaMethod [
 	^ 'void arrayAccess() {
    String[] hello = {"hello", "world"};
 }'
 ]
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCArrayInitializationTest >> setUp [
-	super setUp.
-	methodArrayInitialization := (self parseMethod: 'ArrayInitialization')
-]
-
 { #category : #tests }
 JavaSmaCCArrayInitializationTest >> testNumberOfInitializedElement [
-	self assert: (methodArrayInitialization allWithType: FASTJavaArrayInitializer) first initializers size equals: 2
+	self assert: (fastModel allWithType: FASTJavaArrayInitializer) first initializers size equals: 2
 ]

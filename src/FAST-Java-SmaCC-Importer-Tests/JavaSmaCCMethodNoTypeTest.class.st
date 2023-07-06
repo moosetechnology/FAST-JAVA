@@ -1,24 +1,15 @@
 Class {
 	#name : #JavaSmaCCMethodNoTypeTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodType'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCMethodNoTypeTest >> methodType [
+{ #category : #accessing }
+JavaSmaCCMethodNoTypeTest >> javaMethod [
 	 ^ 'hello(){}'
-]
-
-{ #category : #'as yet unclassified' }
-JavaSmaCCMethodNoTypeTest >> setUp [
-	super setUp.
-	methodType := (self parseMethod: 'Type')
 ]
 
 { #category : #tests }
 JavaSmaCCMethodNoTypeTest >> testMethodTypeType [
-	self assert: (methodType allWithType: FASTJavaMethodEntity) anyOne type equals: nil
+	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne type equals: nil
 ]

@@ -1,24 +1,15 @@
 Class {
 	#name : #JavaSmaCCMethodVoidTypeTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodType'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCMethodVoidTypeTest >> methodType [
+{ #category : #accessing }
+JavaSmaCCMethodVoidTypeTest >> javaMethod [
 	 ^ 'void hello(){}'
-]
-
-{ #category : #'as yet unclassified' }
-JavaSmaCCMethodVoidTypeTest >> setUp [
-	super setUp.
-	methodType := (self parseMethod: 'Type')
 ]
 
 { #category : #tests }
 JavaSmaCCMethodVoidTypeTest >> testMethodTypeType [
-	self assert: (methodType allWithType: FASTJavaMethodEntity) anyOne type class equals: FASTJavaVoidTypeExpression
+	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne type class equals: FASTJavaVoidTypeExpression
 ]
