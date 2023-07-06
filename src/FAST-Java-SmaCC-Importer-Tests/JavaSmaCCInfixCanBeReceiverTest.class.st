@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 JavaSmaCCInfixCanBeReceiverTest >> javaMethod [
 	^ 'void method() {
-	final int length = ("hello" + " world").length();
+	int length = ("hello" + " world").length();
 }'
 ]
 

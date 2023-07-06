@@ -3,7 +3,9 @@ I parse a java method string and convert it into a FASTJava model.
 
 API:
 
-JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString: 'TheString'
+JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString: 'TheString'.
+
+A stack of created entities (used to set the #parentNode) is created by cloning the visitor and calling the clone on child nodes
 "
 Class {
 	#name : #JavaSmaCCProgramNodeImporterVisitor,
@@ -746,8 +748,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: a
 
 	aLocalVariableDeclarationStatement declaration type ifNotNil: [ :declaredType |
 		currentFASTEntity type: (self clone accept: declaredType) ].
-	aLocalVariableDeclarationStatement declaration modifiers ifNotNil: [ :modifiers |
-		currentFASTEntity modifiers: (self clone accept: modifiers) ].
+	aLocalVariableDeclarationStatement declaration modifiers do: [ :modifier | 
+		currentFASTEntity addModifier: (self clone accept: modifier) ].
 	aLocalVariableDeclarationStatement declaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 
