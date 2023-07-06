@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCConditionalStatementTest >> javaMethod [
+	^ 'void arrayAccess() {
+   int result = (1>2) ? 4 :  5;
+}'
+]
+
 { #category : #tests }
 JavaSmaCCConditionalStatementTest >> testConditionalContidionParent [
 	self assert: fastMethod statements anyOne declarators anyOne expression condition parentNode equals: fastMethod statements anyOne declarators anyOne expression 

@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #accessing }
+JavaSmaCCArrayTypeNameTest >> javaMethod [
+	^ 'method() {
+          Byte[] buffer = newExchange.getIn().getMandatoryBody(Byte[].class);
+	}'
+]
+
 { #category : #tests }
 JavaSmaCCArrayTypeNameTest >> testArrayTypeBaseTypeName [
 	self assert: (fastModel allWithType: FASTJavaArrayTypeExpression) first baseType name equals: 'Byte'.

@@ -8,6 +8,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCMethodInvocationWithParamAndReceiverTest >> javaMethod [
+	^ 'public void onClick(ClickEvent arg0) {
+		x = hello(a,b).hello2(1,2);
+	}'
+]
+
 { #category : #resources }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> methodInvocationWithClassPropertyAsReceiver [
 	^ 'public void onClick(final ClickEvent event) {
@@ -24,13 +31,13 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> methodInvocationWithVariabl
 
 { #category : #running }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> setUp [
-	super setUp.
-	methodInvocationWithParamAndReceiver := (self
-		parseMethod: 'InvocationWithParamAndReceiver') allFASTJavaMethodEntity first.
+
+	fastModel := (self
+		parseMethodString: self javaMethod) allFASTJavaMethodEntity first.
 	methodInvocationWithVariableAsReceiver := (self
-		parseMethod: 'InvocationWithVariableAsReceiver') allFASTJavaMethodEntity first.
+		parseMethodString: self methodInvocationWithVariableAsReceiver) allFASTJavaMethodEntity first.
 	methodInvocationWithClassPropertyAsReceiver := (self
-		parseMethod: 'InvocationWithClassPropertyAsReceiver') allFASTJavaMethodEntity first
+		parseMethodString: self methodInvocationWithClassPropertyAsReceiver) allFASTJavaMethodEntity first
 ]
 
 { #category : #tests }

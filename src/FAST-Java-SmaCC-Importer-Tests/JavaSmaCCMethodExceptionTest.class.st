@@ -4,6 +4,12 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #accessing }
+JavaSmaCCMethodExceptionTest >> javaMethod [
+	^ 'void method() throws MyException {
+}'
+]
+
 { #category : #tests }
 JavaSmaCCMethodExceptionTest >> testOnlyOneThrowsEntity [
 

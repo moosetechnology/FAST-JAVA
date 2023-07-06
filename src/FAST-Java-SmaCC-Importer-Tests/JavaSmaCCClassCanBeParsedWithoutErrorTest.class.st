@@ -18,6 +18,16 @@ class A {
 }' 
 ]
 
+{ #category : #accessing }
+JavaSmaCCClassCanBeParsedWithoutErrorTest >> javaMethod [
+	^ self shouldBeImplemented
+]
+
+{ #category : #running }
+JavaSmaCCClassCanBeParsedWithoutErrorTest >> setUp [
+	"not doing anything because we want to call parsing in the test itself"
+]
+
 { #category : #tests }
 JavaSmaCCClassCanBeParsedWithoutErrorTest >> testAccessToClassSourceText [
 	self shouldnt: [ self parseClassString: self classString ]  raise: Error

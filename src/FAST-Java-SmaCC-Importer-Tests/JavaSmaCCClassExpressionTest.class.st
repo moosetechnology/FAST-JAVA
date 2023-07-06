@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCClassExpressionTest >> javaMethod [
+	^ 'void arrayAccess() {
+   int i = Hello.property;
+}'
+]
+
 { #category : #tests }
 JavaSmaCCClassExpressionTest >> testClassExpressionFieldName [
 	self assert: fastMethod statements anyOne declarators anyOne expression fieldName equals: 'property' 

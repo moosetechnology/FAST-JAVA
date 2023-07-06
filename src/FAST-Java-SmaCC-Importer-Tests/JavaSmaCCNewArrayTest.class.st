@@ -4,6 +4,14 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCNewArrayTest >> javaMethod [
+	^ 'void innerNewClass() {
+	String[] s2 = new String[] { "a", "b", "c"};
+	String[] s3 = new String[3];
+}'
+]
+
 { #category : #tests }
 JavaSmaCCNewArrayTest >> testNewArrayAutoCreatedArrayInitializersParent [
 	self assert: (fastModel allWithType: FASTJavaNewArray) first initializer initializers anyOne parentNode

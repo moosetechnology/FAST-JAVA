@@ -4,6 +4,23 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCSwitchTest >> javaMethod [
+	^ 
+'void switchMethod() {
+	switch(hello) { 
+		case HELLO:
+			doStuff();
+			break;
+		case WORLD:
+			doing();
+		default:
+			done();
+	}
+}
+'
+]
+
 { #category : #tests }
 JavaSmaCCSwitchTest >> testCaseSize [
 	self assert: (fastMethod mooseModel allWithSubTypesOf: FASTJavaCaseStatement) size equals: 3

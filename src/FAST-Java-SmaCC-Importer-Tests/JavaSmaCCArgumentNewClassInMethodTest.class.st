@@ -4,6 +4,21 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCArgumentNewClassInMethodTest >> javaMethod [
+	^ 'void innerNewClass() {
+	hello.say(new Patate() {
+		public void onSuccess(){
+			System.out.println("Success");
+		}
+		
+		public void onFail(){
+			System.out.println("Fail");
+		}
+	});
+}'
+]
+
 { #category : #tests }
 JavaSmaCCArgumentNewClassInMethodTest >> testDeclaredMethodSize [
 	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2

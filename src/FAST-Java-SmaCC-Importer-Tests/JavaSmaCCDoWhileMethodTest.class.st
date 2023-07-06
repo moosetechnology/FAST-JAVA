@@ -4,6 +4,18 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCDoWhileMethodTest >> javaMethod [
+	
+	^ 
+'void doWhile() {
+ 	do {
+      something();
+   } while (ReactiveHelper.executeFromQueue());
+}
+'
+]
+
 { #category : #tests }
 JavaSmaCCDoWhileMethodTest >> testDoWhileBodyParentNode [
 	self assert: (fastModel allWithType: FASTJavaDoWhileStatement) first body parentNode equals: (fastModel allWithType: FASTJavaDoWhileStatement) first 

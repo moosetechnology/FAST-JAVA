@@ -4,6 +4,15 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCInitializerTest >> javaMethod [
+	^ 'void initializer() {
+	Button b = new Button("param1") { 
+	{ addClickListener(new ClickListener(){}); }
+	 };
+	}'
+]
+
 { #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerAsChild [
 	self assert: (fastMethod mooseModel allWithType: FASTJavaInitializer) anyOne equals: fastMethod statements anyOne declarators anyOne expression declarations anyOne

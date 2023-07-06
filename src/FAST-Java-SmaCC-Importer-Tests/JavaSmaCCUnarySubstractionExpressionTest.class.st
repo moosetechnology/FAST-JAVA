@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCUnarySubstractionExpressionTest >> javaMethod [
+	^ 'public void patate () {
+	int i = -i;	
+}'
+]
+
 { #category : #tests }
 JavaSmaCCUnarySubstractionExpressionTest >> testUnaryExpressionIsPrefixed [
 	self

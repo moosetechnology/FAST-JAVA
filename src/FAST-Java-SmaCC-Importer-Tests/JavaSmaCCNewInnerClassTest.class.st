@@ -7,6 +7,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCNewInnerClassTest >> javaMethod [
+	^ 'public void onClick(ClickEvent event) {
+  view.setDisplayView(view.new InnerClass());
+}'
+]
+
 { #category : #tests }
 JavaSmaCCNewInnerClassTest >> testNewClassType [
 	self assert: fastMethod statements first children anyOne arguments anyOne class equals: FASTJavaNewExpression

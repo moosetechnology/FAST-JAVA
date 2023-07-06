@@ -7,7 +7,20 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
+JavaSmaCCLocalClassTest >> javaMethod [
+	
+	^ 'methodLocalClass() {
+        TestMethod t = new TestMethod() { 
+            class DummyClass {};
+            void implementMe() { 
+                DummyClass dummy = new DummyClass();
+            }
+        };
+}'
+]
+
+{ #category : #accessing }
 JavaSmaCCLocalClassTest >> testLocalClassExists [
-	self assert: (methodLocalClass allWithType: FASTJavaClassDeclaration) size equals: 1
+	self assert: (fastModel allWithType: FASTJavaClassDeclaration) size equals: 1
 ]

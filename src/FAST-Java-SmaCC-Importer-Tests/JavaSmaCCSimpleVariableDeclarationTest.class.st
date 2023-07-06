@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCSimpleVariableDeclarationTest >> javaMethod [
+	^ 'void forMethod() {
+	int x;
+}'
+]
+
 { #category : #tests }
 JavaSmaCCSimpleVariableDeclarationTest >> testVariableDeclaratorExpressionName [
 	self

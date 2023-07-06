@@ -4,6 +4,15 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCLocalVariableIntegerTest >> javaMethod [
+	
+	^ 'int aLittleOfVariables() {
+		int x = 5;	
+		return x;
+	}'
+]
+
 { #category : #tests }
 JavaSmaCCLocalVariableIntegerTest >> testBlockScope [
 	self flag: 'Should we keep the fastScope ? '

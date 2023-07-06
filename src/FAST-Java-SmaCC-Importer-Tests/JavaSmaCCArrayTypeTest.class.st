@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #accessing }
+JavaSmaCCArrayTypeTest >> javaMethod [
+	^ 'method() {
+          byte[] buffer = newExchange.getIn().getMandatoryBody(byte[].class);
+	}'
+]
+
 { #category : #tests }
 JavaSmaCCArrayTypeTest >> testArrayTypeBaseTypeParentNode [
 	self assert: (fastModel allWithType: FASTJavaArrayTypeExpression) first baseType parentNode equals: (fastModel allWithType: FASTJavaArrayTypeExpression) first.

@@ -7,6 +7,15 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #accessing }
+JavaSmaCCSynchronizedStatementTest >> javaMethod [
+	^ 'method() {
+		synchronized(theInstance) { 
+			theInstance.reset();
+		}
+}'
+]
+
 { #category : #initialization }
 JavaSmaCCSynchronizedStatementTest >> setUp [
 	super setUp.

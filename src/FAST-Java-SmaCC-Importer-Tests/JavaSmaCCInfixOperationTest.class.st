@@ -4,6 +4,14 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCInfixOperationTest >> javaMethod [
+	^ 'void infixOperationMethod() {
+	if ((1 > 2) != true )
+		return 4 + 5;
+	}'
+]
+
 { #category : #tests }
 JavaSmaCCInfixOperationTest >> testInfixOperationLeftPartType [
 	self assert: fastMethod statements first condition leftOperand leftOperand class equals: FASTJavaIntegerLiteral

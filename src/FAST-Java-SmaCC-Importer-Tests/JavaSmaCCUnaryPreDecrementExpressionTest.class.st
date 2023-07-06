@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCUnaryPreDecrementExpressionTest >> javaMethod [
+	^ 'public void patate () {
+	--i;		
+}'
+]
+
 { #category : #tests }
 JavaSmaCCUnaryPreDecrementExpressionTest >> testUnaryExpressionIsPrefixed [
 	self assert: fastMethod statements first children anyOne isPrefixedUnaryExpression

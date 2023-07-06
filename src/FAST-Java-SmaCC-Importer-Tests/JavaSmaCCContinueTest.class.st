@@ -4,6 +4,15 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCContinueTest >> javaMethod [
+	^ 'public void ifContinue() {
+		if (true){
+			continue;
+		}
+}'
+]
+
 { #category : #tests }
 JavaSmaCCContinueTest >> testContinueParent [
 	self assert: (fastMethod mooseModel allWithType: FASTJavaContinueStatement) anyOne parentNode equals: fastMethod statements anyOne thenPart

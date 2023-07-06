@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #resources }
+JavaSmaCCLambdaTest >> javaMethod [
+	^ 'method() {
+		a.method(() -> anImvocation().anotherOne());
+	}'
+]
+
 { #category : #tests }
 JavaSmaCCLambdaTest >> testLambdaExpressionParentNode [
 	self assert: (fastModel allWithType: FASTJavaLambdaExpression) first expression parentNode equals: (fastModel allWithType: FASTJavaLambdaExpression) first.

@@ -11,6 +11,11 @@ class A {
 }' 
 ]
 
+{ #category : #accessing }
+JavaSmaCCImportDeclaration >> javaMethod [
+	^ self shouldBeImplemented
+]
+
 { #category : #tests }
 JavaSmaCCImportDeclaration >> setUp [
 

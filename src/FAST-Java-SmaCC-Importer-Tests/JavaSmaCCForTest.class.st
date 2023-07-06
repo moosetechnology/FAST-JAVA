@@ -4,6 +4,15 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCForTest >> javaMethod [
+	^ 'void forMethod() {
+	for (int i = 0;i< 3;++i){
+		i++;
+	}
+}'
+]
+
 { #category : #tests }
 JavaSmaCCForTest >> testForEachBodyParentNode [
 	self assert: fastMethod statements first body parentNode equals: fastMethod statements first

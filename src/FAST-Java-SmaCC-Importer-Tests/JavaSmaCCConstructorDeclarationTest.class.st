@@ -4,6 +4,14 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCConstructorDeclarationTest >> javaMethod [
+	^ 'ArrayAccess() {
+		int i = 3;
+		hello.hello();
+}'
+]
+
 { #category : #tests }
 JavaSmaCCConstructorDeclarationTest >> testConstructorName [
 	self assert: fastMethod name equals: 'ArrayAccess'

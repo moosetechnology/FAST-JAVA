@@ -11,6 +11,11 @@ class A {
 }' 
 ]
 
+{ #category : #accessing }
+JavaSmaCCMultiImportDeclaration >> javaMethod [
+	^ self shouldBeImplemented
+]
+
 { #category : #tests }
 JavaSmaCCMultiImportDeclaration >> setUp [
 

@@ -4,6 +4,15 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCEmptyMethodBodyTest >> javaMethod [
+	
+	^ 
+'class A {
+	native void doWhile();
+}'
+]
+
 { #category : #resources }
 JavaSmaCCEmptyMethodBodyTest >> testEmptyDeclaredMethodSize [
 	self assert: (fastModel allWithType: FASTJavaMethodEntity) size equals: 1.

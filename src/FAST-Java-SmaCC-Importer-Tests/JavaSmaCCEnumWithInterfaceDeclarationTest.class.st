@@ -33,6 +33,16 @@ JavaSmaCCEnumWithInterfaceDeclarationTest >> enumString [
 }' 
 ]
 
+{ #category : #accessing }
+JavaSmaCCEnumWithInterfaceDeclarationTest >> javaMethod [
+	^ self shouldBeImplemented
+]
+
+{ #category : #running }
+JavaSmaCCEnumWithInterfaceDeclarationTest >> setUp [
+	"not doing anything because we want to call parsing in the test itself"
+]
+
 { #category : #tests }
 JavaSmaCCEnumWithInterfaceDeclarationTest >> testCanParseEnumDeclarationText [
 

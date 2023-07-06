@@ -4,6 +4,13 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCUnaryNotExpressionTest >> javaMethod [
+	^ 'public void patate () {
+	boolean b = !b;	
+}'
+]
+
 { #category : #tests }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionIsPrefixed [
 	self assert: fastMethod statements first declarators first expression isPrefixedUnaryExpression

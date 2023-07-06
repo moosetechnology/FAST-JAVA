@@ -4,6 +4,15 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : #running }
+JavaSmaCCSuperSimpleMethodTest >> javaMethod [
+	^ 
+'boolean supersimple() {
+  return true;
+}
+'
+]
+
 { #category : #tests }
 JavaSmaCCSuperSimpleMethodTest >> testExpressionParent [
 	self assert: fastMethod statements last expression parentNode equals: fastMethod statements last

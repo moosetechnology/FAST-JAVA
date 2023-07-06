@@ -11,10 +11,15 @@ JavaSmaCCCAbstractMethodTest >> abstractMethod [
 }'
 ]
 
-{ #category : #resources }
+{ #category : #accessing }
+JavaSmaCCCAbstractMethodTest >> javaMethod [
+	^ self shouldBeImplemented
+]
+
+{ #category : #running }
 JavaSmaCCCAbstractMethodTest >> setUp [
-	super setUp.
-	method := (self parseClassString: self abstractMethod)
+
+	fastModel := (self parseClassString: self abstractMethod)
 		allFASTJavaMethodEntity first
 ]
 
