@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCWhileWhileMethodTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'whileWhile'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCWhileWhileMethodTest >> methodWhileWhile [
+JavaSmaCCWhileWhileMethodTest >> javaMethod [
 	
 	^ 
 'void whileWhile() {
@@ -27,94 +24,88 @@ JavaSmaCCWhileWhileMethodTest >> methodWhileWhile [
 '
 ]
 
-{ #category : #running }
-JavaSmaCCWhileWhileMethodTest >> setUp [
-	super setUp.
-	whileWhile := (self parseMethod: 'whileWhile') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testFirstWhileBodyParent [
-	self assert: whileWhile statements second body parentNode equals: whileWhile statements second
+	self assert: fastMethod statements second body parentNode equals: fastMethod statements second
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testFirstWhileBodyType [
-	self assert: whileWhile statements second body class equals: FASTJavaStatementBlock 
+	self assert: fastMethod statements second body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testFirstWhileConditionParent [
-	self assert: whileWhile statements second condition parentNode equals: whileWhile statements second
+	self assert: fastMethod statements second condition parentNode equals: fastMethod statements second
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testFirstWhileConditionType [
-	self assert: whileWhile statements second condition class equals: FASTJavaBooleanLiteral
+	self assert: fastMethod statements second condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileBodyContentType [
-	self assert: whileWhile statements third body statements first body children anyOne class equals: FASTJavaAssignmentExpression
+	self assert: fastMethod statements third body statements first body children anyOne class equals: FASTJavaAssignmentExpression
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileBodyParent [
-	self assert: whileWhile statements third body statements first body parentNode equals: whileWhile statements third body statements first 
+	self assert: fastMethod statements third body statements first body parentNode equals: fastMethod statements third body statements first 
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileBodyType [
-	self assert: whileWhile statements third body statements first body class equals: FASTJavaExpressionStatement
+	self assert: fastMethod statements third body statements first body class equals: FASTJavaExpressionStatement
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionParent [
-	self assert: whileWhile statements third body statements first condition parentNode equals: whileWhile statements third body statements first 
+	self assert: fastMethod statements third body statements first condition parentNode equals: fastMethod statements third body statements first 
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testNestedWhileConditionType [
 	
-	self assert: whileWhile statements third body statements first condition class equals: FASTJavaBooleanLiteral
+	self assert: fastMethod statements third body statements first condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testSecondWhileBodyParent [
-	self assert: whileWhile statements third body parentNode equals: whileWhile statements third 
+	self assert: fastMethod statements third body parentNode equals: fastMethod statements third 
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testSecondWhileBodyType [
-	self assert: whileWhile statements third body class equals: FASTJavaStatementBlock 
+	self assert: fastMethod statements third body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testSecondWhileConditionParent [
-	self assert: whileWhile statements third condition parentNode equals: whileWhile statements third 
+	self assert: fastMethod statements third condition parentNode equals: fastMethod statements third 
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testSecondWhileConditionType [
-	self assert: whileWhile statements third condition class equals: FASTJavaInfixOperation
+	self assert: fastMethod statements third condition class equals: FASTJavaInfixOperation
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testStatementsCount [
-	self assert: whileWhile statements size equals: 5
+	self assert: fastMethod statements size equals: 5
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testStatementsParent [
-	whileWhile statements do: [ :each | self assert: each parentNode equals: whileWhile statementBlock ]
+	fastMethod statements do: [ :each | self assert: each parentNode equals: fastMethod statementBlock ]
 ]
 
 { #category : #tests }
 JavaSmaCCWhileWhileMethodTest >> testStatementsType [
 	self
-		assert: whileWhile statements first class equals: FASTJavaVarDeclStatement;
-		assert: whileWhile statements second class equals: FASTJavaWhileStatement;
-		assert: whileWhile statements third class equals: FASTJavaWhileStatement;
-		assert: (whileWhile statements at: 4) class equals: FASTJavaVarDeclStatement;
-		assert: whileWhile statements last class equals: FASTJavaReturnStatement
+		assert: fastMethod statements first class equals: FASTJavaVarDeclStatement;
+		assert: fastMethod statements second class equals: FASTJavaWhileStatement;
+		assert: fastMethod statements third class equals: FASTJavaWhileStatement;
+		assert: (fastMethod statements at: 4) class equals: FASTJavaVarDeclStatement;
+		assert: fastMethod statements last class equals: FASTJavaReturnStatement
 ]

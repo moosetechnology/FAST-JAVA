@@ -1,47 +1,37 @@
 Class {
 	#name : #JavaSmaCCThisConstructorInvocationTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodSuperConstructor'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCThisConstructorInvocationTest >> methodThisConstructor [
+JavaSmaCCThisConstructorInvocationTest >> javaMethod [
 	^ 'Patate () {
 	this("Hello");
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCThisConstructorInvocationTest >> setUp [
-	super setUp.
-	methodSuperConstructor := (self parseMethod: 'ThisConstructor') allFASTJavaMethodEntity
-		first
-]
-
 { #category : #tests }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorArgumentsParent [
-	self assert: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) anyOne arguments anyOne parentNode equals: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) anyOne
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne arguments anyOne parentNode equals: (fastModel allWithType: FASTJavaMethodInvocation) anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorArgumentsSize [
-	self assert: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) anyOne arguments size equals: 1
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne arguments size equals: 1
 ]
 
 { #category : #tests }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorName [
-	self assert: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) anyOne name equals: 'this'
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne name equals: 'this'
 ]
 
 { #category : #tests }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorParent [
-	self assert: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) anyOne parentNode  parentNode equals: methodSuperConstructor statementBlock 
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne parentNode  parentNode equals: fastMethod statementBlock 
 ]
 
 { #category : #tests }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorSize [
-	self assert: (methodSuperConstructor mooseModel allWithType: FASTJavaMethodInvocation) size equals: 1
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) size equals: 1
 ]

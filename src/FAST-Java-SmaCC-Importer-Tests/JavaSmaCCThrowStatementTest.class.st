@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCThrowStatementTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'throwMethod'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCThrowStatementTest >> methodThrow [
+JavaSmaCCThrowStatementTest >> javaMethod [
 	^ 
 'boolean methodThrow() {
   if(true) { 
@@ -18,23 +15,17 @@ JavaSmaCCThrowStatementTest >> methodThrow [
 '
 ]
 
-{ #category : #running }
-JavaSmaCCThrowStatementTest >> setUp [
-	super setUp.
-	throwMethod := (self parseMethod: 'throw') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCThrowStatementTest >> testThrowStatementParent [
-	self assert: (throwMethod mooseModel allWithType: FASTJavaThrowStatement) anyOne parentNode equals: throwMethod statements anyOne thenPart
+	self assert: (fastModel allWithType: FASTJavaThrowStatement) anyOne parentNode equals: fastMethod statements anyOne thenPart
 ]
 
 { #category : #tests }
 JavaSmaCCThrowStatementTest >> testThrowStatementParentAsChild [
-	self assert: (throwMethod mooseModel allWithType: FASTJavaThrowStatement) anyOne equals: throwMethod statements anyOne thenPart children anyOne
+	self assert: (fastModel allWithType: FASTJavaThrowStatement) anyOne equals: fastMethod statements anyOne thenPart children anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCThrowStatementTest >> testThrowStatementSize [
-	self assert: (throwMethod mooseModel allWithType: FASTJavaThrowStatement) size equals: 1 
+	self assert: (fastModel allWithType: FASTJavaThrowStatement) size equals: 1 
 ]

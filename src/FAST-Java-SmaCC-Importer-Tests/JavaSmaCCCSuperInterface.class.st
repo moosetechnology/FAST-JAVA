@@ -1,9 +1,6 @@
 Class {
 	#name : #JavaSmaCCCSuperInterface,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'interface'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 

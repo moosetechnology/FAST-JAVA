@@ -5,19 +5,13 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JavaSmaCCJavadocCommentTest >> methodJavadocComment [
+JavaSmaCCJavadocCommentTest >> javaMethod [
 
 	^ 
 '/** Blah ! Not doing much
 */
 void blah() { }
 '
-]
-
-{ #category : #'as yet unclassified' }
-JavaSmaCCJavadocCommentTest >> setUp [
-	super setUp.
-	fastModel := (self parseMethod: 'javadocComment')
 ]
 
 { #category : #'as yet unclassified' }

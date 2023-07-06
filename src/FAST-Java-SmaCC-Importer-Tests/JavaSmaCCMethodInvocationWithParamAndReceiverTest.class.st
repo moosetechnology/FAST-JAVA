@@ -3,7 +3,6 @@ Class {
 	#superclass : #JavaSmaCCImporterTest,
 	#instVars : [
 		'methodInvocationWithClassPropertyAsReceiver',
-		'methodInvocationWithParamAndReceiver',
 		'methodInvocationWithVariableAsReceiver'
 	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
@@ -14,13 +13,6 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> methodInvocationWithClassPr
 	^ 'public void onClick(final ClickEvent event) {
 	SampleCustomizableTableDefinitionRH.editableTablelist.refreshAfterRemovingRow(removedRowValues);
 }'
-]
-
-{ #category : #resources }
-JavaSmaCCMethodInvocationWithParamAndReceiverTest >> methodInvocationWithParamAndReceiver [
-	^ 'public void onClick(ClickEvent arg0) {
-		x = hello(a,b).hello2(1,2);
-	}'
 ]
 
 { #category : #resources }
@@ -48,15 +40,15 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testClassPropertyReceiverMe
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfArguments [
-	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression arguments size equals: 2.
-	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver arguments size equals: 2
+	self assert: fastModel statementBlock children anyOne children anyOne expression arguments size equals: 2.
+	self assert: fastModel statementBlock children anyOne children anyOne expression receiver arguments size equals: 2
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfMethodInvocations [
-	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression class equals: FASTJavaMethodInvocation.
-	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
-	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver receiver equals: nil
+	self assert: fastModel statementBlock children anyOne children anyOne expression class equals: FASTJavaMethodInvocation.
+	self assert: fastModel statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
+	self assert: fastModel statementBlock children anyOne children anyOne expression receiver receiver equals: nil
 ]
 
 { #category : #tests }
@@ -75,18 +67,18 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverKnowTheCallingM
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverMethodInvocations [
-	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
-	self assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression receiver receiver equals: nil.
+	self assert: fastModel statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
+	self assert: fastModel statementBlock children anyOne children anyOne expression receiver receiver equals: nil.
 	self assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver class equals: FASTJavaIdentifier
 ]
 
 { #category : #tests }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testTypeOfArguments [
 	self
-		assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression arguments first class
+		assert: fastModel statementBlock children anyOne children anyOne expression arguments first class
 		equals: FASTJavaIntegerLiteral.
 	self
-		assert: methodInvocationWithParamAndReceiver statementBlock children anyOne children anyOne expression arguments second class
+		assert: fastModel statementBlock children anyOne children anyOne expression arguments second class
 		equals: FASTJavaIntegerLiteral
 ]
 

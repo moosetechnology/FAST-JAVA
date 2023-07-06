@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCArgumentNewClassTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodNew'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCArgumentNewClassTest >> methodArgumentNewClass [
+JavaSmaCCArgumentNewClassTest >> javaMethod [
 	^ 'void innerNewClass() {
 	new Hello(new Patate() {
 		public void onSuccess(){
@@ -22,33 +19,27 @@ JavaSmaCCArgumentNewClassTest >> methodArgumentNewClass [
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCArgumentNewClassTest >> setUp [
-	super setUp.
-	methodNew := (self parseMethod: 'argumentNewClass')
-]
-
 { #category : #tests }
 JavaSmaCCArgumentNewClassTest >> testDeclaredMethodSize [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
+	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
 ]
 
 { #category : #tests }
 JavaSmaCCArgumentNewClassTest >> testNewName [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
+	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
 ]
 
 { #category : #tests }
 JavaSmaCCArgumentNewClassTest >> testNewParent [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne parentNode equals: (methodNew allWithType: FASTJavaNewExpression) anyOne
+	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne parentNode equals: (fastModel allWithType: FASTJavaNewExpression) anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCArgumentNewClassTest >> testNewParentChildren [
-	self assert: (methodNew allWithType: FASTJavaNewClassExpression) anyOne equals: (methodNew allWithType: FASTJavaNewExpression) anyOne arguments anyOne
+	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne equals: (fastModel allWithType: FASTJavaNewExpression) anyOne arguments anyOne
 ]
 
 { #category : #tests }
 JavaSmaCCArgumentNewClassTest >> testNumberOfMethod [
-	self assert: methodNew allFASTJavaMethodEntity size equals: 3
+	self assert: fastModel allFASTJavaMethodEntity size equals: 3
 ]

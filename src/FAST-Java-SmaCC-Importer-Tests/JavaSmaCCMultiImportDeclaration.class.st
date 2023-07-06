@@ -12,8 +12,13 @@ class A {
 ]
 
 { #category : #tests }
+JavaSmaCCMultiImportDeclaration >> setUp [
+
+	fastModel := self parseClassString: self classString
+]
+
+{ #category : #tests }
 JavaSmaCCMultiImportDeclaration >> testImport [
-	| model |
-	model := self parseClassString: self classString.
-	self assert: (model allWithType: FASTJavaImportDeclaration) size equals: 1.
+
+	self assert: (fastModel allWithType: FASTJavaImportDeclaration) size equals: 1.
 ]

@@ -12,9 +12,14 @@ class A {
 ]
 
 { #category : #tests }
+JavaSmaCCImportDeclaration >> setUp [
+
+	fastModel := self parseClassString: self classString.
+]
+
+{ #category : #tests }
 JavaSmaCCImportDeclaration >> testImport [
-	| model |
-	model := self parseClassString: self classString.
-	self assert: (model allWithType: FASTJavaImportDeclaration) size equals: 1.
-	self assert: (model allWithType: FASTJavaImportDeclaration) anyOne qualifiedName fullName equals: 'fr.inria.fast.Hello'.
+
+	self assert: (fastModel allWithType: FASTJavaImportDeclaration) size equals: 1.
+	self assert: (fastModel allWithType: FASTJavaImportDeclaration) anyOne qualifiedName fullName equals: 'fr.inria.fast.Hello'.
 ]

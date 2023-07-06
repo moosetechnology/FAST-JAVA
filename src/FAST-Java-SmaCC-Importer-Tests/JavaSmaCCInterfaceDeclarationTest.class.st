@@ -16,6 +16,11 @@ JavaSmaCCInterfaceDeclarationTest >> interfaceString [
 ]
 
 { #category : #tests }
+JavaSmaCCInterfaceDeclarationTest >> setUp [
+	"not doing anything because we want to call parsing in the test itself"
+]
+
+{ #category : #tests }
 JavaSmaCCInterfaceDeclarationTest >> testCanParseInterfaceDeclarationText [
 
 "	self

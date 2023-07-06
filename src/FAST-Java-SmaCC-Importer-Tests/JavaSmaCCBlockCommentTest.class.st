@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JavaSmaCCBlockCommentTest >> methodBlockComment [
+JavaSmaCCBlockCommentTest >> javaMethod [
 
 	^ 
 'void blah() {
@@ -13,12 +13,6 @@ JavaSmaCCBlockCommentTest >> methodBlockComment [
   String someVar;
   /* block comment at the end */
 }'
-]
-
-{ #category : #'as yet unclassified' }
-JavaSmaCCBlockCommentTest >> setUp [
-	super setUp.
-	fastModel := (self parseMethod: 'blockComment')
 ]
 
 { #category : #tests }

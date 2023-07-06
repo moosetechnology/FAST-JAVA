@@ -1,34 +1,15 @@
 Class {
 	#name : #JavaSmaCCContinueTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodContinue'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
-JavaSmaCCContinueTest >> methodContinue [
-	^ 'public void ifContinue() {
-		if (true){
-			continue;
-		}
-}'
-]
-
-{ #category : #running }
-JavaSmaCCContinueTest >> setUp [
-	super setUp.
-	methodContinue := (self parseMethod: 'Continue')
-		allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCContinueTest >> testContinueParent [
-	self assert: (methodContinue mooseModel allWithType: FASTJavaContinueStatement) anyOne parentNode equals: methodContinue statements anyOne thenPart
+	self assert: (fastMethod mooseModel allWithType: FASTJavaContinueStatement) anyOne parentNode equals: fastMethod statements anyOne thenPart
 ]
 
 { #category : #tests }
 JavaSmaCCContinueTest >> testContinueSize [
-	self assert: (methodContinue mooseModel allWithType: FASTJavaContinueStatement) size equals: 1 
+	self assert: (fastMethod mooseModel allWithType: FASTJavaContinueStatement) size equals: 1 
 ]

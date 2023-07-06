@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCIfMethodTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'ifMethod'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCIfMethodTest >> methodIfMethod [
+JavaSmaCCIfMethodTest >> javaMethod [
 	^ 'void ifMethod() {
 	if (true)
 		return 4 + 5;
@@ -19,83 +16,77 @@ JavaSmaCCIfMethodTest >> methodIfMethod [
 	}'
 ]
 
-{ #category : #running }
-JavaSmaCCIfMethodTest >> setUp [
-	super setUp.
-	ifMethod := (self parseMethod: 'ifMethod') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfConditionParent [
-	self assert: ifMethod statements first condition parentNode equals: ifMethod statements first
+	self assert: fastMethod statements first condition parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfConditionType [
-	self assert: ifMethod statements first condition class equals: FASTJavaBooleanLiteral
+	self assert: fastMethod statements first condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfElseAbsence [
-	self assert: ifMethod statements first elsePart isNil 
+	self assert: fastMethod statements first elsePart isNil 
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfThenParent [
-	self assert: ifMethod statements first thenPart parentNode equals: ifMethod statements first
+	self assert: fastMethod statements first thenPart parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstIfThenType [
-	self assert: ifMethod statements first thenPart class equals: FASTJavaReturnStatement 
+	self assert: fastMethod statements first thenPart class equals: FASTJavaReturnStatement 
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstSecondConditionParent [
-	self assert: ifMethod statements last condition parentNode equals: ifMethod statements last 
+	self assert: fastMethod statements last condition parentNode equals: fastMethod statements last 
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testFirstSecondConditionType [
-	self assert: ifMethod statements last condition class equals: FASTJavaBooleanLiteral
+	self assert: fastMethod statements last condition class equals: FASTJavaBooleanLiteral
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testSecondIfElseParent [
-	self assert: ifMethod statements last elsePart parentNode equals: ifMethod statements last
+	self assert: fastMethod statements last elsePart parentNode equals: fastMethod statements last
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testSecondIfElseType [
-	self assert: ifMethod statements last elsePart class equals: FASTJavaReturnStatement
+	self assert: fastMethod statements last elsePart class equals: FASTJavaReturnStatement
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testSecondIfThenParent [
-	self assert: ifMethod statements last thenPart parentNode equals: ifMethod statements last 
+	self assert: fastMethod statements last thenPart parentNode equals: fastMethod statements last 
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testSecondIfThenType [
-	self assert: ifMethod statements last thenPart class equals: FASTJavaStatementBlock 
+	self assert: fastMethod statements last thenPart class equals: FASTJavaStatementBlock 
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testStatementsCount [
-	self assert: ifMethod statements size equals: 2
+	self assert: fastMethod statements size equals: 2
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testStatementsParent [
 	self
-		assert: ifMethod statements first parentNode equals: ifMethod statementBlock;
-		assert: ifMethod statements last  parentNode equals: ifMethod statementBlock;
-		assert: ifMethod statementBlock parentNode equals: ifMethod 
+		assert: fastMethod statements first parentNode equals: fastMethod statementBlock;
+		assert: fastMethod statements last  parentNode equals: fastMethod statementBlock;
+		assert: fastMethod statementBlock parentNode equals: fastMethod 
 ]
 
 { #category : #tests }
 JavaSmaCCIfMethodTest >> testStatementsType [
 	self
-		assert: ifMethod statements first class equals: FASTJavaIfStatement;
-		assert: ifMethod statements last class equals: FASTJavaIfStatement
+		assert: fastMethod statements first class equals: FASTJavaIfStatement;
+		assert: fastMethod statements last class equals: FASTJavaIfStatement
 ]

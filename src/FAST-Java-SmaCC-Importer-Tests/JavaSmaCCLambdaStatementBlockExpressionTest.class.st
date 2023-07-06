@@ -1,14 +1,11 @@
 Class {
 	#name : #JavaSmaCCLambdaStatementBlockExpressionTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'methodLambda'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #'as yet unclassified' }
-JavaSmaCCLambdaStatementBlockExpressionTest >> methodLambda [
+JavaSmaCCLambdaStatementBlockExpressionTest >> javaMethod [
 	^ 'method() {
 		a.method( (file) -> {
                 String onlyName = file.getName();
@@ -22,33 +19,27 @@ JavaSmaCCLambdaStatementBlockExpressionTest >> methodLambda [
 }'
 ]
 
-{ #category : #'as yet unclassified' }
-JavaSmaCCLambdaStatementBlockExpressionTest >> setUp [
-	super setUp.
-	methodLambda := (self parseMethod: 'lambda')
-]
-
 { #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaExpressionParentNode [
-	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression parentNode equals: (methodLambda allWithType: FASTJavaLambdaExpression) first.
+	self assert: (fastModel allWithType: FASTJavaLambdaExpression) first expression parentNode equals: (fastModel allWithType: FASTJavaLambdaExpression) first.
 ]
 
 { #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaExpressionType [
-	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first expression class equals: FASTJavaStatementBlock .
+	self assert: (fastModel allWithType: FASTJavaLambdaExpression) first expression class equals: FASTJavaStatementBlock .
 ]
 
 { #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaInModelSize [
-	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) size equals: 1
+	self assert: (fastModel allWithType: FASTJavaLambdaExpression) size equals: 1
 ]
 
 { #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaParentNode [
-	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first parentNode class equals: FASTJavaMethodInvocation.
+	self assert: (fastModel allWithType: FASTJavaLambdaExpression) first parentNode class equals: FASTJavaMethodInvocation.
 ]
 
 { #category : #tests }
 JavaSmaCCLambdaStatementBlockExpressionTest >> testLambdaParentNodeArguments [
-	self assert: (methodLambda allWithType: FASTJavaLambdaExpression) first parentNode arguments first equals: (methodLambda allWithType: FASTJavaLambdaExpression) first.
+	self assert: (fastModel allWithType: FASTJavaLambdaExpression) first parentNode arguments first equals: (fastModel allWithType: FASTJavaLambdaExpression) first.
 ]

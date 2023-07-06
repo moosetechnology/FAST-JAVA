@@ -1,9 +1,6 @@
 Class {
 	#name : #JavaSmaCCCAbstractMethodTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'method'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
@@ -24,5 +21,5 @@ JavaSmaCCCAbstractMethodTest >> setUp [
 { #category : #resources }
 JavaSmaCCCAbstractMethodTest >> testAbstractMethodName [
 
-	self assert: method name equals: #anAbstractMethod
+	self assert: fastModel name equals: #anAbstractMethod
 ]

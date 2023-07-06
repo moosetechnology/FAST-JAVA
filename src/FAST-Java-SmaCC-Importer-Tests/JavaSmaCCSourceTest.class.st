@@ -14,7 +14,7 @@ JavaSmaCCSourceTest >> classString [
 ]
 
 { #category : #tests }
-JavaSmaCCSourceTest >> methodString [
+JavaSmaCCSourceTest >> javaMethod [
 	^ 'void hello() {
 	int i = 0;
 }' 
@@ -34,6 +34,6 @@ JavaSmaCCSourceTest >> testAccessToClassSourceText [
 { #category : #tests }
 JavaSmaCCSourceTest >> testAccessToMethodSourceText [
 	| model |
-	model := self parseMethodString: self methodString.
-	self assert: (model allWithType: FASTJavaMethodEntity) anyOne sourceText equals: self methodString
+	model := self parseMethodString: self javaMethod.
+	self assert: (model allWithType: FASTJavaMethodEntity) anyOne sourceText equals: self javaMethod
 ]

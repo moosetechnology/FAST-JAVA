@@ -1,48 +1,39 @@
 Class {
 	#name : #JavaSmaCCUnaryAdditionExpressionTest,
 	#superclass : #JavaSmaCCImporterTest,
-	#instVars : [
-		'unaryAdditionMethod'
-	],
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCUnaryAdditionExpressionTest >> methodUnaryAddition [
+JavaSmaCCUnaryAdditionExpressionTest >> javaMethod [
 	^ 'public void patate () {
 	int i = +i;	
 }'
 ]
 
-{ #category : #running }
-JavaSmaCCUnaryAdditionExpressionTest >> setUp [
-	super setUp.
-	unaryAdditionMethod := (self parseMethod: 'unaryAddition') allFASTJavaMethodEntity first
-]
-
 { #category : #tests }
 JavaSmaCCUnaryAdditionExpressionTest >> testUnaryExpressionIsPrefixed [
 	self
-		assert: unaryAdditionMethod statements first declarators first expression isPrefixedUnaryExpression
+		assert: fastMethod statements first declarators first expression isPrefixedUnaryExpression
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryAdditionExpressionTest >> testUnaryExpressionOperator [
 	self
-		assert: unaryAdditionMethod statements first declarators first expression operator
+		assert: fastMethod statements first declarators first expression operator
 		equals: '+'
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryAdditionExpressionTest >> testUnaryExpressionOperatorType [
 	self
-		assert: unaryAdditionMethod statements first declarators first expression operator class
+		assert: fastMethod statements first declarators first expression operator class
 		equals: ByteString
 ]
 
 { #category : #tests }
 JavaSmaCCUnaryAdditionExpressionTest >> testUnaryExpressionType [
 	self
-		assert: unaryAdditionMethod statements first declarators first expression class
+		assert: fastMethod statements first declarators first expression class
 		equals: FASTJavaUnaryExpression
 ]
