@@ -8,17 +8,15 @@ Class {
 JavaSmaCCLocalVariableStringWithModifiersTest >> javaMethod [
 	
 	^ 'String aLittleOfVariables5() {
-		String x = null;	
+		final String x = null;	
 		return x;
 	}'
 ]
 
 { #category : #tests }
-JavaSmaCCLocalVariableStringWithModifiersTest >> testVariableDeclaratorExpressionType5 [
-	self assert: fastMethod statementBlock statements first declarators first expression class equals: FASTJavaNullLiteral
-]
+JavaSmaCCLocalVariableStringWithModifiersTest >> testVariableDeclaratorHasModifier [
+	self assert: (fastModel allWithType: FASTJavaVarDeclStatement) anyOne modifiers size equals: 1.
+	self assert: (fastModel allWithType: FASTJavaVarDeclStatement) anyOne modifiers anyOne class equals: FASTJavaModifier.
+	self assert: (fastModel allWithType: FASTJavaVarDeclStatement) anyOne modifiers anyOne token equals: 'final'.
 
-{ #category : #tests }
-JavaSmaCCLocalVariableStringWithModifiersTest >> testVariableDeclaratorExpressionValue5 [
-	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: 'null'
 ]

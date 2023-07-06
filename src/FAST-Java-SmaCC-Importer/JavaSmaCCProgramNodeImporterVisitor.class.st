@@ -91,7 +91,7 @@ JavaSmaCCProgramNodeImporterVisitor >> compare: node1 to: node2 comparator: comp
 { #category : #creating }
 JavaSmaCCProgramNodeImporterVisitor >> create: anEntity from: aNodeEntity [
 	currentFASTEntity := self addToModel: anEntity new.
-	self generalVisitActionForNodeEntity: aNodeEntity.
+	self setStartEndPos: aNodeEntity.
 	^ currentFASTEntity
 ]
 
@@ -115,26 +115,20 @@ JavaSmaCCProgramNodeImporterVisitor >> createTypeName: aName [
 	| classTypeExpression |
 	classTypeExpression := self addToModel: FASTJavaClassTypeExpression new.
 	currentFASTEntity := classTypeExpression.
-	self generalVisitActionForNodeEntity: aName.
+	self setStartEndPos: aName.
 	currentFASTEntity
 		typeName:
 			((self addToModel: FASTJavaTypeName new)
 				name: aName value;
 				yourself).
 	currentFASTEntity := currentFASTEntity typeName.
-	self generalVisitActionForNodeEntity: aName.
+	self setStartEndPos: aName.
 	^ classTypeExpression
 ]
 
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity [
 	^ currentFASTEntity 
-]
-
-{ #category : #initialization }
-JavaSmaCCProgramNodeImporterVisitor >> generalVisitActionForNodeEntity: aNodeEntity [
-	currentFASTEntity startPos: aNodeEntity startPosition.
-	currentFASTEntity endPos: aNodeEntity stopPosition
 ]
 
 { #category : #initialization }
@@ -230,6 +224,12 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 	^ self model
 ]
 
+{ #category : #initialization }
+JavaSmaCCProgramNodeImporterVisitor >> setStartEndPos: aNodeEntity [
+	currentFASTEntity startPos: aNodeEntity startPosition.
+	currentFASTEntity endPos: aNodeEntity stopPosition
+]
+
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstractMethodDeclaration [
 
@@ -240,7 +240,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstrac
 			                     anAbstractMethodDeclaration declarator name
 				                     value;
 		                     yourself.
-	self generalVisitActionForNodeEntity: anAbstractMethodDeclaration.
+	self setStartEndPos: anAbstractMethodDeclaration.
 	anAbstractMethodDeclaration declarator parameters do: [ :parameter | 
 		currentFASTEntity addParameter: (self clone accept: parameter) ].
 	anAbstractMethodDeclaration modifiers do: [ :modifier | 
@@ -258,7 +258,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 	currentFASTEntity := self addToModel: FASTJavaArrayAccess new.
-	self generalVisitActionForNodeEntity: anArrayAccess.
+	self setStartEndPos: anArrayAccess.
 	currentFASTEntity array: (self clone accept: anArrayAccess array).
 	currentFASTEntity
 		expression: (self clone accept: anArrayAccess expression).
@@ -268,7 +268,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer [
 	currentFASTEntity := self addToModel: FASTJavaArrayInitializer new.
-	self generalVisitActionForNodeEntity: anArrayInitializer.
+	self setStartEndPos: anArrayInitializer.
 	anArrayInitializer initializers do: [ :initializer | currentFASTEntity initializers add: (self clone accept: initializer) ].
 	^ currentFASTEntity
 ]
@@ -306,7 +306,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayVariableName: anArrayVariableNa
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAssertStatement: anAssertStatement [
 	currentFASTEntity := self addToModel: FASTJavaAssertStatement new.
-	self generalVisitActionForNodeEntity: anAssertStatement.
+	self setStartEndPos: anAssertStatement.
 	currentFASTEntity condition: (self clone accept: anAssertStatement testExpression).
 	currentFASTEntity message: (self clone accept: anAssertStatement messageExpression).
 	^ currentFASTEntity
@@ -324,7 +324,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: aVariableDeclaration [
 JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression [
 
 	currentFASTEntity := self addToModel: FASTJavaInfixOperation new.
-	self generalVisitActionForNodeEntity: aBinaryExpression.
+	self setStartEndPos: aBinaryExpression.
 	currentFASTEntity leftOperand:
 		(self clone accept: aBinaryExpression leftExpression).
 	currentFASTEntity rightOperand:
@@ -336,7 +336,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
 	currentFASTEntity := self addToModel: FASTJavaStatementBlock new.
-	self generalVisitActionForNodeEntity: aBlock.
+	self setStartEndPos: aBlock.
 	aBlock statements
 		do: [ :each | currentFASTEntity statements add: (self clone accept: each) ].
 	^ currentFASTEntity
@@ -349,7 +349,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 			(FASTJavaBooleanLiteral new
 				primitiveValue: aBooleanLiteral token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aBooleanLiteral.
+	self setStartEndPos: aBooleanLiteral.
 	^ currentFASTEntity
 ]
 
@@ -360,14 +360,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aBooleanType [
 			(FASTJavaBooleanTypeExpression new
 				name: aBooleanType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aBooleanType.
+	self setStartEndPos: aBooleanType.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBreakStatement: aBreakStatement [
 	currentFASTEntity := self addToModel: FASTJavaContinueStatement new.
-	self generalVisitActionForNodeEntity: aBreakStatement.
+	self setStartEndPos: aBreakStatement.
 	^ currentFASTEntity
 ]
 
@@ -378,14 +378,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitByteType: aByteType [
 			(FASTJavaByteTypeExpression new
 				name: aByteType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitCastExpression: aCastExpression [
 	currentFASTEntity := self addToModel: FASTJavaCastExpression new.
-	self generalVisitActionForNodeEntity: aCastExpression.
+	self setStartEndPos: aCastExpression.
 	currentFASTEntity type: (self clone accept: aCastExpression type).
 	currentFASTEntity
 		expression: (self clone accept: aCastExpression expression).
@@ -395,7 +395,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCastExpression: aCastExpression [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitCatchClause: aCatchClause [
 	currentFASTEntity := self addToModel: FASTJavaCatchPartStatement new.
-	self generalVisitActionForNodeEntity: aCatchClause.
+	self setStartEndPos: aCatchClause.
 	self clone accept: aCatchClause parameter.
 	currentFASTEntity body: (self clone accept: aCatchClause block).
 	^ currentFASTEntity
@@ -416,7 +416,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharType: aByteType [
 			(FASTJavaCharTypeExpression new
 				name: aByteType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
 
@@ -427,7 +427,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 			(FASTJavaCharacterLiteral new
 				primitiveValue: aCharacterLiteral token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aCharacterLiteral.
+	self setStartEndPos: aCharacterLiteral.
 	^ currentFASTEntity
 ]
 
@@ -445,7 +445,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 	currentFASTEntity := self addToModel: FASTJavaClassProperty new.
-	self generalVisitActionForNodeEntity: aClassExpression.
+	self setStartEndPos: aClassExpression.
 	currentFASTEntity type: (self clone accept: aClassExpression type).
 	currentFASTEntity fieldName: aClassExpression classToken value.
 	^ currentFASTEntity
@@ -454,7 +454,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
-	self generalVisitActionForNodeEntity: aClassType.
+	self setStartEndPos: aClassType.
 	currentFASTEntity typeName: (self clone accept: aClassType name).
 	^ currentFASTEntity
 ]
@@ -463,7 +463,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 JavaSmaCCProgramNodeImporterVisitor >> visitConditionalExpression: aConditionalExpression [
 	currentFASTEntity := self
 		addToModel: FASTJavaConditionalExpression new.
-	self generalVisitActionForNodeEntity: aConditionalExpression.
+	self setStartEndPos: aConditionalExpression.
 	currentFASTEntity
 		condition: (self clone accept: aConditionalExpression testExpression).
 	currentFASTEntity
@@ -477,7 +477,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitConditionalExpression: aConditionalE
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitContinueStatement: aContinueStatement [
 	currentFASTEntity := self addToModel: FASTJavaContinueStatement new.
-	self generalVisitActionForNodeEntity: aContinueStatement.
+	self setStartEndPos: aContinueStatement.
 	^ currentFASTEntity
 ]
 
@@ -486,7 +486,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 	currentFASTEntity := (self create: FASTJavaMethodEntity from: aConstructorDeclaration)
 		name: aConstructorDeclaration name name value;
 		yourself.
-	self generalVisitActionForNodeEntity: aConstructorDeclaration.
+	self setStartEndPos: aConstructorDeclaration.
 	aConstructorDeclaration parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
 	currentFASTEntity statementBlock: (self clone accept: aConstructorDeclaration body).
 	aConstructorDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
@@ -496,7 +496,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitDoWhileStatement: aDoWhileStatement [
 	currentFASTEntity := self addToModel: FASTJavaDoWhileStatement new.
-	self generalVisitActionForNodeEntity: aDoWhileStatement.
+	self setStartEndPos: aDoWhileStatement.
 	currentFASTEntity
 		condition: (self clone accept: aDoWhileStatement expression).
 	currentFASTEntity
@@ -511,21 +511,21 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
 			(FASTJavaDoubleTypeExpression new
 				name: aByteType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaEmptyMethodDeclaration new.
-	self generalVisitActionForNodeEntity: anEmptyDeclaration.
+	self setStartEndPos: anEmptyDeclaration.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 	currentFASTEntity := self addToModel: FASTJavaStatement new.
-	self generalVisitActionForNodeEntity: anEmptyStatement.
+	self setStartEndPos: anEmptyStatement.
 	^ currentFASTEntity
 ]
 
@@ -543,7 +543,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEnumDeclaration: anEnumDeclaration [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionStatement [
 	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
-	self generalVisitActionForNodeEntity: anExpressionStatement.
+	self setStartEndPos: anExpressionStatement.
 	currentFASTEntity
 		expression: (self clone accept: anExpressionStatement expression).
 	^ currentFASTEntity
@@ -552,7 +552,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionSta
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 	currentFASTEntity := self addToModel: FASTJavaFieldAccess new.
-	self generalVisitActionForNodeEntity: aFieldAccess.
+	self setStartEndPos: aFieldAccess.
 	aFieldAccess receiver ifNotNil: [ :receiver | currentFASTEntity receiver: (self clone accept: receiver) ].
 	currentFASTEntity fieldName: aFieldAccess name value.
 	^ currentFASTEntity
@@ -561,7 +561,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldDeclaration: aFieldDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
-	self generalVisitActionForNodeEntity: aFieldDeclaration.
+	self setStartEndPos: aFieldDeclaration.
 	aFieldDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aFieldDeclaration type) ].
 	aFieldDeclaration variableDeclarations do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 		aFieldDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
@@ -575,7 +575,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatLiteral: aFloatLiteral [
 			(FASTJavaFloatLiteral new
 				primitiveValue: aFloatLiteral token value;
 				yourself).
-		self generalVisitActionForNodeEntity: aFloatLiteral.
+		self setStartEndPos: aFloatLiteral.
 	^ currentFASTEntity
 ]
 
@@ -586,14 +586,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
 			(FASTJavaFloatTypeExpression new
 				name: aByteType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement [
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
-	self generalVisitActionForNodeEntity: aForEachStatement.
+	self setStartEndPos: aForEachStatement.
 	currentFASTEntity body:
 		(self clone accept: aForEachStatement statement).
 	currentFASTEntity fieldname:
@@ -607,7 +607,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 	currentFASTEntity := self addToModel: FASTJavaForStatement new.
-	self generalVisitActionForNodeEntity: aForStatement.
+	self setStartEndPos: aForStatement.
 	aForStatement test
 		ifNotNil: [ :test | currentFASTEntity condition: (self clone accept: test) ].
 	aForStatement _update
@@ -625,7 +625,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIdentifier: aNameNode [
 	currentFASTEntity := self addToModel: FASTJavaIdentifier new.
-	self generalVisitActionForNodeEntity: aNameNode.
+	self setStartEndPos: aNameNode.
 	currentFASTEntity name: aNameNode name value.
 	^ currentFASTEntity
 ]
@@ -633,7 +633,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIdentifier: aNameNode [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIfElseStatement: anIfStatementNode [
 	currentFASTEntity := self addToModel: FASTJavaIfStatement new.
-	self generalVisitActionForNodeEntity: anIfStatementNode.
+	self setStartEndPos: anIfStatementNode.
 	currentFASTEntity
 		condition: (self clone accept: anIfStatementNode expression).
 	currentFASTEntity
@@ -647,7 +647,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIfElseStatement: anIfStatementNode [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIfStatement: anIfStatementNode [
 	currentFASTEntity := self addToModel: FASTJavaIfStatement new.
-		self generalVisitActionForNodeEntity: anIfStatementNode.
+		self setStartEndPos: anIfStatementNode.
 	currentFASTEntity
 		condition: (self clone accept: anIfStatementNode expression).
 	currentFASTEntity
@@ -658,7 +658,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIfStatement: anIfStatementNode [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anInitializedVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
-	self generalVisitActionForNodeEntity: anInitializedVariableDeclaration.
+	self setStartEndPos: anInitializedVariableDeclaration.
 	currentFASTEntity
 		variable: (self clone accept: anInitializedVariableDeclaration variable).
 	currentFASTEntity
@@ -669,7 +669,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anIn
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitInitializer: aInitializer [
 	currentFASTEntity := FASTJavaInitializer new.
-	self generalVisitActionForNodeEntity: aInitializer.
+	self setStartEndPos: aInitializer.
 	currentFASTEntity statementBlock: (self clone accept: aInitializer block).
 	self addToModel: currentFASTEntity.
 	^ currentFASTEntity
@@ -682,7 +682,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntType: aByteType [
 			(FASTJavaIntTypeExpression new
 				name: aByteType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
 
@@ -693,7 +693,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
 			(FASTJavaIntegerLiteral new
 				primitiveValue: anIntegerLiteral token value;
 				yourself).
-	self generalVisitActionForNodeEntity: anIntegerLiteral.
+	self setStartEndPos: anIntegerLiteral.
 	^ currentFASTEntity
 ]
 
@@ -713,7 +713,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLabeledStatement: aLabeledStatement 
 	currentFASTEntity := self addToModel: (FASTJavaLabeledStatement new
 			                      label: aLabeledStatement identifier value;
 			                      yourself).
-	self generalVisitActionForNodeEntity: aLabeledStatement.
+	self setStartEndPos: aLabeledStatement.
 	currentFASTEntity statementBlock:	(self clone accept: aLabeledStatement statement).
 	^ currentFASTEntity
 ]
@@ -722,7 +722,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLabeledStatement: aLabeledStatement 
 JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression [
 	currentFASTEntity := self
 		addToModel: FASTJavaLambdaExpression new.
-	self generalVisitActionForNodeEntity: aLambdaExpression.
+	self setStartEndPos: aLambdaExpression.
 	aLambdaExpression parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
 	currentFASTEntity
 		expression: (self clone accept: aLambdaExpression value).
@@ -732,7 +732,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
-	self generalVisitActionForNodeEntity: aLocalVariableDeclaration.
+	self setStartEndPos: aLocalVariableDeclaration.
 	aLocalVariableDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aLocalVariableDeclaration type) ].
 	aLocalVariableDeclaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
@@ -742,10 +742,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVari
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: aLocalVariableDeclarationStatement [
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
-	self generalVisitActionForNodeEntity: aLocalVariableDeclarationStatement.
-	aLocalVariableDeclarationStatement declaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aLocalVariableDeclarationStatement declaration type) ].
+	self setStartEndPos: aLocalVariableDeclarationStatement.
+
+	aLocalVariableDeclarationStatement declaration type ifNotNil: [ :declaredType |
+		currentFASTEntity type: (self clone accept: declaredType) ].
+	aLocalVariableDeclarationStatement declaration modifiers ifNotNil: [ :modifiers |
+		currentFASTEntity modifiers: (self clone accept: modifiers) ].
 	aLocalVariableDeclarationStatement declaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
+
 	^ currentFASTEntity
 ]
 
@@ -756,7 +761,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLongType: aByteType [
 			(FASTJavaLongTypeExpression new
 				name: aByteType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
 
@@ -788,7 +793,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation [
 	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
-	self generalVisitActionForNodeEntity: aMethodInvocation.
+	self setStartEndPos: aMethodInvocation.
 	aMethodInvocation expressions do: [ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
 	aMethodInvocation receiver
 		ifNotNil: [ :receiver | 
@@ -821,7 +826,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodReference: aMethodReference [
 	currentFASTEntity := self
 		addToModel: FASTJavaMethodReference new.
-	self generalVisitActionForNodeEntity: aMethodReference.
+	self setStartEndPos: aMethodReference.
 	currentFASTEntity
 		receiver: (self clone accept: aMethodReference receiver).
 	currentFASTEntity
@@ -842,7 +847,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 	self isInDocumentContext
 		ifTrue: [ 
 			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
-			self generalVisitActionForNodeEntity: aName ]
+			self setStartEndPos: aName ]
 		ifFalse: [ 
 			currentFASTEntity := self
 				                     create: FASTJavaVariableExpression
@@ -855,7 +860,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 JavaSmaCCProgramNodeImporterVisitor >> visitNew: aNewNode [
 
 	currentFASTEntity := self addToModel: FASTJavaNewExpression new.
-	self generalVisitActionForNodeEntity: aNewNode.
+	self setStartEndPos: aNewNode.
 	aNewNode expressions do: [ :expression | 
 		currentFASTEntity arguments add: (self clone accept: expression) ].
 
@@ -877,7 +882,7 @@ public void onClick(ClickEvent event) {
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 	currentFASTEntity := self addToModel: FASTJavaNewArray new.
-		self generalVisitActionForNodeEntity: aNewArray.
+		self setStartEndPos: aNewArray.
 
 	currentFASTEntity type: (self clone accept: aNewArray type).
 	aNewArray initializer
@@ -894,7 +899,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 
 	currentFASTEntity := self addToModel: FASTJavaNewClassExpression new.
-	self generalVisitActionForNodeEntity: aNewClass.
+	self setStartEndPos: aNewClass.
 	aNewClass expressions do: [ :expression | 
 		currentFASTEntity arguments add: (self clone accept: expression) ].
 	aNewClass type
@@ -915,14 +920,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNull: aNull [
 			(FASTJavaNullLiteral new
 				primitiveValue: aNull token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aNull.
+	self setStartEndPos: aNull.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 	currentFASTEntity := FASTJavaOuterThis new.
-	self generalVisitActionForNodeEntity: aFASTJavaOuterThis.
+	self setStartEndPos: aFASTJavaOuterThis.
 	currentFASTEntity type: (self clone accept: aFASTJavaOuterThis name).
 	self addToModel: currentFASTEntity.
 	^ currentFASTEntity
@@ -931,14 +936,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaPackageDeclaration new.
-	self generalVisitActionForNodeEntity: aPackageDeclaration.
+	self setStartEndPos: aPackageDeclaration.
 	currentFASTEntity qualifiedName: (self clone accept: aPackageDeclaration name).
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	currentFASTEntity := self addToModel: FASTJavaParameter new.
-	self generalVisitActionForNodeEntity: aParameter.
+	self setStartEndPos: aParameter.
 	currentFASTEntity variable: (self clone accept: aParameter variable).
 	currentFASTEntity type: (self clone accept: aParameter type).
 	^ currentFASTEntity
@@ -951,7 +956,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPostDecrementExpression: aPostDecrem
 		expression: (self clone accept: aPostDecrementExpression expression).
 	currentFASTEntity operator: aPostDecrementExpression minusMinus value.
 	currentFASTEntity isPrefixedUnaryExpression: false.
-	self generalVisitActionForNodeEntity: aPostDecrementExpression.
+	self setStartEndPos: aPostDecrementExpression.
 	^ currentFASTEntity
 ]
 
@@ -962,7 +967,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPostIncrementExpression: aPostIncrem
 		expression: (self clone accept: aPostIncrementExpression expression).
 	currentFASTEntity operator: aPostIncrementExpression plusPlus value.
 	currentFASTEntity isPrefixedUnaryExpression: false.
-	self generalVisitActionForNodeEntity: aPostIncrementExpression.
+	self setStartEndPos: aPostIncrementExpression.
 	^ currentFASTEntity
 ]
 
@@ -973,7 +978,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPreDecrementExpression: aPreDecremen
 		expression: (self clone accept: aPreDecrementExpression expression).
 	currentFASTEntity operator: aPreDecrementExpression minusMinus value.
 	currentFASTEntity isPrefixedUnaryExpression: true.
-	self generalVisitActionForNodeEntity: aPreDecrementExpression.
+	self setStartEndPos: aPreDecrementExpression.
 	^ currentFASTEntity
 ]
 
@@ -984,7 +989,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPreIncrementExpression: aPreIncremen
 		expression: (self clone accept: aPreIncrementExpression expression).
 	currentFASTEntity operator: aPreIncrementExpression plusPlus value.
 	currentFASTEntity isPrefixedUnaryExpression: true.
-	self generalVisitActionForNodeEntity: aPreIncrementExpression.
+	self setStartEndPos: aPreIncrementExpression.
 	^ currentFASTEntity
 ]
 
@@ -995,7 +1000,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
 			(FASTJavaPrimitiveTypeExpression new
 				name: aPrimitiveType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aPrimitiveType.
+	self setStartEndPos: aPrimitiveType.
 	^ currentFASTEntity
 ]
 
@@ -1005,12 +1010,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 	self isInDocumentContext
 		ifTrue: [
 			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
-			self generalVisitActionForNodeEntity: aQualifiedName.
+			self setStartEndPos: aQualifiedName.
 			currentFASTEntity namespace: (self clone accept: aQualifiedName nspace).
 			currentFASTEntity name: aQualifiedName name value ]
 		ifFalse: [ 
 			currentFASTEntity := self addToModel: FASTJavaClassProperty new.
-			self generalVisitActionForNodeEntity: aQualifiedName.
+			self setStartEndPos: aQualifiedName.
 			currentFASTEntity type: (self clone accept: aQualifiedName nspace).
 			currentFASTEntity fieldName: aQualifiedName name value ].
 	^ currentFASTEntity
@@ -1019,7 +1024,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeName [
 	currentFASTEntity := self addToModel: FASTJavaQualifiedTypeName new.
-	self generalVisitActionForNodeEntity: aQualifiedTypeName.
+	self setStartEndPos: aQualifiedTypeName.
 	currentFASTEntity name: aQualifiedTypeName name value.
 	currentFASTEntity namespace: (self clone accept: aQualifiedTypeName nspace).
 	^ currentFASTEntity
@@ -1028,7 +1033,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeNam
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
 	currentFASTEntity := self addToModel: FASTJavaReturnStatement new.
-	self generalVisitActionForNodeEntity: aReturnStatement.
+	self setStartEndPos: aReturnStatement.
 	(aReturnStatement expression isKindOf: JavaNameNode)
 		ifTrue:
 			[ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer" currentFASTEntity expression: (self addToModel: (self clone visitIdentifier: aReturnStatement expression)) ]
@@ -1043,21 +1048,21 @@ JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
 			(FASTJavaShortTypeExpression new
 				name: aByteType token value;
 				yourself).
-	self generalVisitActionForNodeEntity: aByteType.
+	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingleTypeImportDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
-	self generalVisitActionForNodeEntity: aSingleTypeImportDeclaration.
+	self setStartEndPos: aSingleTypeImportDeclaration.
 	currentFASTEntity qualifiedName: (self clone accept: aSingleTypeImportDeclaration name).
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitStatementExpressionList: aStatementExpressionList [
 	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
-	self generalVisitActionForNodeEntity: aStatementExpressionList.
+	self setStartEndPos: aStatementExpressionList.
 	aStatementExpressionList expressions
 		do:
 			[ :expression | currentFASTEntity expression: (self clone accept: expression) ].
@@ -1071,7 +1076,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStringLiteral: aStringLiteral [
 			(FASTJavaStringLiteral new
 				primitiveValue: ((aStringLiteral token value removePrefix: '"') removeSuffix: '"');
 				yourself).
-	self generalVisitActionForNodeEntity: aStringLiteral.
+	self setStartEndPos: aStringLiteral.
 	^ currentFASTEntity
 ]
 
@@ -1080,11 +1085,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperCo
 	| expressionStatement |
 	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
 	expressionStatement := currentFASTEntity. 
-	self generalVisitActionForNodeEntity: aSuperConstructorInvocation.
+	self setStartEndPos: aSuperConstructorInvocation.
 	"we encasulate the call inside a fast expression statement"
 	currentFASTEntity expression: (self addToModel: FASTJavaMethodInvocation new).
 	currentFASTEntity := currentFASTEntity expression.
-	self generalVisitActionForNodeEntity: aSuperConstructorInvocation.
+	self setStartEndPos: aSuperConstructorInvocation.
 	aSuperConstructorInvocation expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity name: aSuperConstructorInvocation superToken value.
 	^ expressionStatement
@@ -1099,7 +1104,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 						label: (self clone accept: aSwitchBlockStatementGroup labels anyOne constant);
 						yourself ]
 				ifFalse: [ FASTJavaDefaultCaseStatement new ]).
-	self generalVisitActionForNodeEntity: aSwitchBlockStatementGroup.
+	self setStartEndPos: aSwitchBlockStatementGroup.
 	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity statements add: (self clone accept: statement) ].
 	^ currentFASTEntity
 ]
@@ -1107,7 +1112,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 	currentFASTEntity := self addToModel: FASTJavaSwitchStatement new.
-	self generalVisitActionForNodeEntity: aSwitchStatement.
+	self setStartEndPos: aSwitchStatement.
 	aSwitchStatement block statementGroups do: [ :aStatementGroup |
 		 currentFASTEntity cases add: (self clone accept: aStatementGroup) ].
 	currentFASTEntity condition: (self clone accept: aSwitchStatement expression).
@@ -1118,7 +1123,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 JavaSmaCCProgramNodeImporterVisitor >> visitSynchronizedStatement: aSynchronizedStatement [
 	currentFASTEntity := self
 		addToModel: FASTJavaSynchronizedStatement new.
-	self generalVisitActionForNodeEntity: aSynchronizedStatement.
+	self setStartEndPos: aSynchronizedStatement.
 	currentFASTEntity
 		expression: (self clone accept: aSynchronizedStatement expression).
 	currentFASTEntity
@@ -1131,11 +1136,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThisConstructorInvocation: aThisCons
 	| expressionStatement | 
 	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
 	expressionStatement := currentFASTEntity. 
-	self generalVisitActionForNodeEntity: aThisConstructorInvocation.
+	self setStartEndPos: aThisConstructorInvocation.
 	"we encasulate the call inside a fast expression statement"
 	currentFASTEntity expression: (self addToModel: FASTJavaMethodInvocation new).
 	currentFASTEntity := currentFASTEntity expression.
-	self generalVisitActionForNodeEntity: aThisConstructorInvocation.
+	self setStartEndPos: aThisConstructorInvocation.
 	aThisConstructorInvocation expressions
 		do:
 			[ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
@@ -1146,7 +1151,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThisConstructorInvocation: aThisCons
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitThrowStatement: aThrowStatement [
 	currentFASTEntity := self addToModel: FASTJavaThrowStatement new.
-	self generalVisitActionForNodeEntity: aThrowStatement.
+	self setStartEndPos: aThrowStatement.
 	currentFASTEntity expression: (self clone accept: aThrowStatement expression).
 	^ currentFASTEntity
 ]
@@ -1154,7 +1159,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThrowStatement: aThrowStatement [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 	currentFASTEntity := self addToModel: FASTJavaTryCatchStatement new.
-	self generalVisitActionForNodeEntity: aTryStatement.
+	self setStartEndPos: aTryStatement.
 	currentFASTEntity try: (self clone accept: aTryStatement block).
 	aTryStatement catches
 		do:
@@ -1166,7 +1171,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aTypeImportOnDemandDeclaration [
 
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
-	self generalVisitActionForNodeEntity: aTypeImportOnDemandDeclaration.
+	self setStartEndPos: aTypeImportOnDemandDeclaration.
 	currentFASTEntity
 		isOnDemand: true;
 		qualifiedName:
@@ -1177,14 +1182,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aType
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeName: aTypeName [
 	currentFASTEntity := self addToModel: FASTJavaTypeName new.
 	currentFASTEntity name: aTypeName name value.
-	self generalVisitActionForNodeEntity: aTypeName.
+	self setStartEndPos: aTypeName.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeParameter: aTypeParameter [
 	currentFASTEntity := self addToModel: FASTJavaTypeParameterExpression new.
-	self generalVisitActionForNodeEntity: aTypeParameter.
+	self setStartEndPos: aTypeParameter.
 	currentFASTEntity name: aTypeParameter name value.
 	aTypeParameter types do: [ :type |
 		currentFASTEntity addType: (self clone accept: type)
@@ -1199,7 +1204,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnaryAddition: anUnaryAddition [
 		expression: (self clone accept: anUnaryAddition expression).
 	currentFASTEntity operator: anUnaryAddition plus value.
 	currentFASTEntity isPrefixedUnaryExpression: true.
-	self generalVisitActionForNodeEntity: anUnaryAddition.
+	self setStartEndPos: anUnaryAddition.
 	^ currentFASTEntity
 ]
 
@@ -1210,7 +1215,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnaryBitInvert: anUnaryBitInvert [
 		expression: (self clone accept: anUnaryBitInvert expression).
 	currentFASTEntity operator: anUnaryBitInvert tilde value.
 	currentFASTEntity isPrefixedUnaryExpression: true.
-	self generalVisitActionForNodeEntity: anUnaryBitInvert.
+	self setStartEndPos: anUnaryBitInvert.
 	^ currentFASTEntity
 ]
 
@@ -1221,7 +1226,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnaryNot: aUnaryNotExpression [
 		expression: (self clone accept: aUnaryNotExpression expression).
 	currentFASTEntity operator: aUnaryNotExpression bang value.
 	currentFASTEntity isPrefixedUnaryExpression: true.
-	self generalVisitActionForNodeEntity: aUnaryNotExpression.
+	self setStartEndPos: aUnaryNotExpression.
 	^ currentFASTEntity
 ]
 
@@ -1232,14 +1237,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnarySubtraction: anUnarySubtraction
 		expression: (self clone accept: anUnarySubtraction expression).
 	currentFASTEntity operator: anUnarySubtraction minus value.
 	currentFASTEntity isPrefixedUnaryExpression: true.
-	self generalVisitActionForNodeEntity: anUnarySubtraction.
+	self setStartEndPos: anUnarySubtraction.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
-	self generalVisitActionForNodeEntity: aVariableDeclaration.
+	self setStartEndPos: aVariableDeclaration.
 	currentFASTEntity
 		variable: (self clone accept: aVariableDeclaration variable).
 	^ currentFASTEntity
@@ -1259,14 +1264,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVoidType: aVoidType [
 			(FASTJavaVoidTypeExpression new
 				name: aVoidType voidToken value;
 				yourself).
-	self generalVisitActionForNodeEntity: aVoidType.
+	self setStartEndPos: aVoidType.
 	^ currentFASTEntity
 ]
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitWhileStatement: aWhileStatementNode [
 	currentFASTEntity := self addToModel: FASTJavaWhileStatement new.
-	self generalVisitActionForNodeEntity: aWhileStatementNode.
+	self setStartEndPos: aWhileStatementNode.
 	currentFASTEntity
 		condition: (self clone accept: aWhileStatementNode expression).
 	currentFASTEntity
