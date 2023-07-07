@@ -721,7 +721,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaDoubleLiteral := builder newClassNamed: #DoubleLiteral comment: self commentForJavaDoubleLiteral.
 
 	"type expressions"
-	javaTypeExpression := builder newClassNamed: #TypeExpression comment: 'I represent a type'.
+	javaTypeExpression := builder newClassNamed: #TypeExpression comment: 'I am an abstract class representing a type'.
 	javaArrayTypeExpression := builder newClassNamed: #ArrayTypeExpression comment: 'I represent an array type'.
 	javaClassTypeExpression := builder newClassNamed: #ClassTypeExpression comment: 'I represent a class type'.
 	javaPrimitiveTypeExpression := builder newClassNamed: #PrimitiveTypeExpression comment: 'I represent a primitive type'.
@@ -1116,15 +1116,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((javaTypeExpression property: #javaForEachStatementTypeOwner) 
 			 comment: 'The javaForEachStatement owner (if possible)').
 
-	((javaCatchPartStatement property: #body) comment:
-		 'The body of the catch part')
-	<>- ((tStatement property: #javaCatchPartStatementOwner) comment:
-			 'The javaCatchPartStatementOwner owner (if possible)').
-	((javaCatchPartStatement property: #parameter) comment:
-		 'The parameter of the catch part')
-	<>- ((javaVariableExpression property: #javaCatchParameterOwnler) 
-			 comment: 'The javaCatchPartParameterOwner owner (if possible)').
-
 	((javaTryCatchStatement property: #try) comment:
 		 'I represent the ''try'' part of the TryCatch Statement')
 	<>- ((tStatement property: #javaTryCatchOwner) comment:
@@ -1133,6 +1124,19 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'I contain all the catch statements')
 	<>-* ((javaCatchPartStatement property: #tryOwner) comment:
 			 'The try part that owns me').
+
+	((javaCatchPartStatement property: #body) comment:
+		 'The body of the catch part')
+	<>- ((tStatement property: #javaCatchPartStatementOwner) comment:
+			 'The javaCatchPartStatementOwner owner (if possible)').
+	((javaCatchPartStatement property: #catchedTypes) comment:
+			 'The types (exception) that are catched')
+	<>-* ((javaTypeExpression property: #catchOwner) comment:
+			 'The catch part that owns me (ie. where I am catched)').
+	((javaCatchPartStatement property: #parameter) comment:
+		 'The parameter of the catch part')
+	<>- ((javaVariableExpression property: #javaCatchParameterOwnler) 
+			 comment: 'The javaCatchPartParameterOwner owner (if possible)').
 
 	((javaIfStatement property: #condition) comment:
 		 'The condition of the statement')

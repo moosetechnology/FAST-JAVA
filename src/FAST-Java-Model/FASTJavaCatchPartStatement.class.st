@@ -7,8 +7,9 @@ Class {
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
-		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler',
-		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches'
+		'#catchedTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
+		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches',
+		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -20,6 +21,12 @@ FASTJavaCatchPartStatement class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
+]
+
+{ #category : #adding }
+FASTJavaCatchPartStatement >> addCatchedType: anObject [
+	<generated>
+	^ self catchedTypes add: anObject
 ]
 
 { #category : #accessing }
@@ -51,6 +58,30 @@ FASTJavaCatchPartStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
 	^ MooseSpecializedGroup with: self body
+]
+
+{ #category : #accessing }
+FASTJavaCatchPartStatement >> catchedTypes [
+	"Relation named: #catchedTypes type: #FASTJavaTypeExpression opposite: #catchOwner"
+
+	<generated>
+	<FMComment: 'The types (exception) that are catched'>
+	<derived>
+	^ catchedTypes
+]
+
+{ #category : #accessing }
+FASTJavaCatchPartStatement >> catchedTypes: anObject [
+
+	<generated>
+	catchedTypes value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaCatchPartStatement >> catchedTypesGroup [
+	<generated>
+	<navigation: 'CatchedTypes'>
+	^ MooseSpecializedGroup withAll: self catchedTypes asSet
 ]
 
 { #category : #accessing }

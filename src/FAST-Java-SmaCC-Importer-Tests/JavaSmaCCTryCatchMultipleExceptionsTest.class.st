@@ -1,61 +1,62 @@
 Class {
-	#name : #JavaSmaCCTryCatchTest,
+	#name : #JavaSmaCCTryCatchMultipleExceptionsTest,
 	#superclass : #JavaSmaCCImporterTest,
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #resources }
-JavaSmaCCTryCatchTest >> javaMethod [
+JavaSmaCCTryCatchMultipleExceptionsTest >> javaMethod [
 	^ 'void tryCatch() {
 	int x;
 	try {
 		x = 1;
-   } catch (Exception e) {
-		Patate.displayError(e.getMessage());
+   } catch (Exception | PatateException e) {
+		e.getMessage();
 	};
 }
 '
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchTest >> testTryCatchCatchBodyType [
+JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchCatchBodyType [
 	self assert: fastMethod statements second catches first body class equals: FASTJavaStatementBlock
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchTest >> testTryCatchCatchNumber [
+JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchCatchNumber [
 	self assert: fastMethod statements second catches size equals: 1
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchTest >> testTryCatchCatchParametersName [
+JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchCatchParametersName [
 	self
 		assert: fastMethod statements second catches first parameter name
 		equals: 'e'
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchTest >> testTryCatchCatchParametersType [
+JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchCatchParametersType [
 	self
 		assert: fastMethod statements second catches first parameter class
 		equals: FASTJavaVariableExpression
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchTest >> testTryCatchCatchedType [
+JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchCatchedType [
 	| catchedTypes |
 	catchedTypes := fastMethod statements second catches first catchedTypes.
 
-	self assert: catchedTypes size equals: 1.
-	self assert: catchedTypes anyOne typeName name equals: 'Exception'
+	self assert: catchedTypes size equals: 2.
+	self assert: catchedTypes first typeName name equals: 'Exception'.
+	self assert: catchedTypes second typeName name equals: 'PatateException'
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchTest >> testTryCatchTryPartType [
+JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchTryPartType [
 	self assert: fastMethod statements second try class equals: FASTJavaStatementBlock
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchTest >> testTryCatchType [
+JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchType [
 	self assert: fastMethod statements second class equals: FASTJavaTryCatchStatement
 ]

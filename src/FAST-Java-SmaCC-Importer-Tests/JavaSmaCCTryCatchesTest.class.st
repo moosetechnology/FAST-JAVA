@@ -11,11 +11,11 @@ JavaSmaCCTryCatchesTest >> javaMethod [
 	try {
 		x = 1;
    }
-	catch (PatateException e) {
-		Patate.displayError(e.getMessage());
+	catch (PatateException pe) {
+		Patate.displayError(pe.getMessage());
 	} 
-	catch (Exception e) {
-		Patate.displayError(e.getMessage());
+	catch (Exception ex) {
+		Patate.displayError(ex.getMessage());
 	};
 }
 '
@@ -34,17 +34,29 @@ JavaSmaCCTryCatchesTest >> testTryCatchCatchNumber [
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchCatchParametersName [
-	self assert: fastMethod statements second catches first parameter name equals: 'e'
+	self assert: fastMethod statements second catches first parameter name equals: 'pe'.
+	self assert: fastMethod statements second catches second parameter name equals: 'ex'.
 ]
 
 { #category : #tests }
 JavaSmaCCTryCatchesTest >> testTryCatchCatchParametersType [
-	self assert: fastMethod statements second catches first parameter class equals: FASTJavaVariableExpression
+	self assert: fastMethod statements second catches first parameter class equals: FASTJavaVariableExpression.
+	self assert: fastMethod statements second catches second parameter class equals: FASTJavaVariableExpression.
 ]
 
 { #category : #tests }
-JavaSmaCCTryCatchesTest >> testTryCatchTryPartType [
-	self assert: fastMethod statements second try class equals: FASTJavaStatementBlock
+JavaSmaCCTryCatchesTest >> testTryCatchCatchedType [
+	| catchedTypes |
+	catchedTypes := fastMethod statements second catches first catchedTypes.
+
+	self assert: catchedTypes size equals: 1.
+	self assert: catchedTypes anyOne typeName name equals: 'PatateException'.
+	
+	catchedTypes := fastMethod statements second catches second catchedTypes.
+
+	self assert: catchedTypes size equals: 1.
+	self assert: catchedTypes anyOne typeName name equals: 'Exception'.
+
 ]
 
 { #category : #tests }
