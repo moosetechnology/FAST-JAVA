@@ -52,6 +52,13 @@ FASTJavaTestNodeBuilder >> cast: aName expression: aNode [
 ]
 
 { #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> comment: aString [
+	^FASTJavaComment new
+		content: aString ;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 FASTJavaTestNodeBuilder >> conditionalExpr: anExpr then: aThenPart else: anElsePart [
 
 	^ FASTJavaConditionalExpression new
@@ -59,6 +66,15 @@ FASTJavaTestNodeBuilder >> conditionalExpr: anExpr then: aThenPart else: anElseP
 		  thenPart: aThenPart;
 		  elsePart: anElsePart;
 		  yourself
+]
+
+{ #category : #'as yet unclassified' }
+FASTJavaTestNodeBuilder >> declaration: declarators type: aType modifiers: modifiers [
+	^FASTJavaVarDeclStatement new
+		modifiers: modifiers ;
+		type: aType ;
+		declarators: declarators ;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -190,11 +206,9 @@ FASTJavaTestNodeBuilder >> var: aVarName declaration: aTypeName [
 
 { #category : #'as yet unclassified' }
 FASTJavaTestNodeBuilder >> varDeclarations: aTypeName declarators: aNodeCollection [
-	| node |
-	node := FASTJavaVarDeclStatement new
-		type: (FASTJavaClassTypeExpression new typeName: aTypeName ; yourself) ;
-		yourself.
-	aNodeCollection do: [ :aDeclaratorNode | node addDeclarator: aDeclaratorNode ].
-	^node
-		
+	^self
+		declaration: aNodeCollection
+		type: (FASTJavaClassTypeExpression new typeName: (self type: aTypeName) ; yourself)
+		modifiers: #()
+
 ]
