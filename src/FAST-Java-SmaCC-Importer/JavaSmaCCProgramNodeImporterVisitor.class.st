@@ -408,6 +408,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
 	| param |
 	param := self visitName: aCatchParameter variable.
 	self parentFASTEntity parameter: param.
+	aCatchParameter types do: [ :catchedType |
+		self parentFASTEntity addCatchedType: (self clone accept: catchedType)
+	].
 	^ param
 ]
 

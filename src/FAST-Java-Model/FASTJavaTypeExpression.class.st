@@ -1,14 +1,15 @@
 "
-I represent a type
+I am an abstract class representing a type
 "
 Class {
 	#name : #FASTJavaTypeExpression,
 	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
-		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
-		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
+		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
 		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
+		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
 		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
+		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
 		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -21,6 +22,30 @@ FASTJavaTypeExpression class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> catchOwner [
+	"Relation named: #catchOwner type: #FASTJavaCatchPartStatement opposite: #catchedTypes"
+
+	<generated>
+	<FMComment: 'The catch part that owns me (ie. where I am catched)'>
+	<container>
+	^ catchOwner
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> catchOwner: anObject [
+
+	<generated>
+	catchOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaTypeExpression >> catchOwnerGroup [
+	<generated>
+	<navigation: 'CatchOwner'>
+	^ MooseSpecializedGroup with: self catchOwner
 ]
 
 { #category : #accessing }
