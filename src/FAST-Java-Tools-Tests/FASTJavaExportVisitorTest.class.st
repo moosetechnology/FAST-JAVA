@@ -147,6 +147,79 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclStatement [
+
+	| stmt |
+	stmt := builder var: 's' declaration: 'String'.
+	
+	self export: stmt equals: 'String s;
+'.
+
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWith2BlockComments [
+
+	| stmt cmt |
+	stmt := builder var: 's' declaration: 'String'.
+	cmt := builder comment: '/* this is a var declaration */'.
+	cmt  startPos: 0.
+	stmt addComment: cmt.
+	cmt := builder comment: '/* But it is never used */'.
+	cmt  startPos: 50.
+	stmt addComment: cmt.
+
+	self export: stmt equals: '/* this is a var declaration */
+/* But it is never used */
+String s;
+'.
+
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithBlockAndLineComments [
+
+	| stmt cmt |
+	stmt := builder var: 's' declaration: 'String'.
+	cmt := builder comment: '/* this is a var declaration */'.
+	cmt  startPos: 0.
+	stmt addComment: cmt.
+	cmt := builder comment: '// this is the same declaration'.
+	cmt  startPos: 50.
+	stmt addComment: cmt.
+
+	self export: stmt equals: '/* this is a var declaration */
+String s;// this is the same declaration
+'.
+
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithBlockComment [
+
+	| stmt |
+	stmt := builder var: 's' declaration: 'String'.
+	stmt addComment: (builder comment: '/* this is a var declaration */').
+	
+	self export: stmt equals: '/* this is a var declaration */
+String s;
+'.
+
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithLineComment [
+
+	| stmt |
+	stmt := builder var: 's' declaration: 'String'.
+	stmt addComment: (builder comment: '// this is a var declaration').
+	
+	self export: stmt equals: 'String s;// this is a var declaration
+'.
+
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVariableExpression [
 	self
 		export: (builder var: 'aVar')
