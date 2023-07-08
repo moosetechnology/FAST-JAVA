@@ -22,6 +22,15 @@ FASTJavaExportVisitorTest >> setUp [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotation [
+
+	| anno |
+	anno := builder annotation: 'Deprecated'.
+
+	self export: anno equals: '@Deprecated'.
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaArrayAccess [
 
 	| exprUni exprBi |
@@ -64,6 +73,66 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCharacterLiteral [
+	| node |
+	node := builder literal: FASTJavaCharacterLiteral value: '#'.
+	self export: node equals: '''#'''
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclaration [
+	| node |
+	node := builder class: 'Blah'.
+	self export: node equals: 'class Blah {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithInterfaces [
+	| node |
+	node := builder class: 'Blah'.
+	node addInterface:  (builder typeExpression: 'IBlah').
+	node addInterface:  (builder typeExpression: 'Iterator').
+	self export: node equals: 'class Blah implements IBlah, Iterator {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithModifiers [
+	| node |
+	node := builder class: 'Blah'.
+	node addModifier:  (builder modifier: 'public').
+	node addModifier:  (builder modifier: 'final').
+	self export: node equals: 'public final class Blah {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclass [
+	| node |
+	node := builder class: 'Blah'.
+	node superclass: (builder typeExpression: 'String').
+	self export: node equals: 'class Blah extends String {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndInterfaces [
+	| node |
+	node := builder class: 'Blah'.
+	node superclass: (builder typeExpression: 'String').
+	node addInterface:  (builder typeExpression: 'IBlah').
+	node addInterface:  (builder typeExpression: 'Iterator').
+	self export: node equals: 'class Blah extends String implements IBlah, Iterator {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 
 	| expr |
@@ -73,6 +142,13 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 		        else: (builder literalInt: 1).
 
 	self export: expr equals: 'aVar ? 0 : 1'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
+	| node |
+	node := builder literal: FASTJavaFloatLiteral value: '37.2'.
+	self export: node equals: '37.2f'
 ]
 
 { #category : #tests }
@@ -87,6 +163,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 		export: node
 		equals: 'aVar==42'.
 
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaIntegerLiteral [
+	| node |
+	node := builder literal: FASTJavaIntegerLiteral value: '42'.
+	self export: node equals: '42'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
+	| node |
+	node := builder literal: FASTJavaLongLiteral value: '42'.
+	self export: node equals: '42L'
 ]
 
 { #category : #tests }
@@ -117,6 +207,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiver [
 		export: node
 		equals: 'aVar.methodA()'.
 
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNullLiteral [
+	| node |
+	node := builder literal: FASTJavaNullLiteral value: nil.
+	self export: node equals: 'null'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
+	| node |
+	node := builder literal: FASTJavaStringLiteral value: 'This is a String'.
+	self export: node equals: '"This is a String"'
 ]
 
 { #category : #tests }

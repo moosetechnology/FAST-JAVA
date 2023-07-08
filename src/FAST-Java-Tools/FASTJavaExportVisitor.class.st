@@ -218,7 +218,9 @@ FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaratio
 FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 	self checkForComments: aFASTJavaClassProperty andDo: [
 	aFASTJavaClassProperty type accept: self.
-	stream << $. << aFASTJavaClassProperty fieldName
+	stream
+		<< $.
+		<< aFASTJavaClassProperty fieldName
 ]
 
 ]
