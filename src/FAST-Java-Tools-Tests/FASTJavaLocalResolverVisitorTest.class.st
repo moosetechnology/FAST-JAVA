@@ -1,6 +1,3 @@
-"
-A FASTJavaLocalResolverVisitorTest is a test class for testing the behavior of FASTJavaLocalResolverVisitor
-"
 Class {
 	#name : #FASTJavaLocalResolverVisitorTest,
 	#superclass : #TestCase,
@@ -31,7 +28,7 @@ FASTJavaLocalResolverVisitorTest >> testAddNonLocalDeclaration [
 	self assert: localResolver popScope isEmpty.
 
 	"first scope contains NonLocalDeclaration"
-	self assert: (localResolver findDeclaration: 'blah') class equals: FASTJavaNonLocalDeclaration
+	self assert: (localResolver findDeclaration: 'blah') class equals: FASTNonLocalDeclaration
 ]
 
 { #category : #tests }
@@ -104,7 +101,7 @@ FASTJavaLocalResolverVisitorTest >> testNonLocalDeclarationWithName [
 	localResolver nonLocalDeclaration: node withName: 'blah'.
 
 	self assert: node localDeclaration notNil.
-	self assert: node localDeclaration class equals: FASTJavaNonLocalDeclaration.
+	self assert: node localDeclaration class equals: FASTNonLocalDeclaration.
 	self assert: node localDeclaration name equals: 'blah'
 ]
 

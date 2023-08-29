@@ -1,7 +1,7 @@
 Class {
 	#name : #FASTJavaTestNodeBuilder,
 	#superclass : #TestCase,
-	#category : #'FAST-Java-Tools-Tests'
+	#category : #'FAST-Java-Tools-Tests-utils'
 }
 
 { #category : #'api - building' }
