@@ -1,6 +1,6 @@
 Extension { #name : #FamixRepTestMethod }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : #'*Carrefour-FastAndBindingGenerator' }
 FamixRepTestMethod >> generateFastIfNotDoneAndBind [
 	self fast ifNotNil: [ ^ self fast mooseModel ].
 	^ self bindFASTModel 

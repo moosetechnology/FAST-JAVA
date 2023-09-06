@@ -1,6 +1,6 @@
 Extension { #name : #FamixTException }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : #'*Carrefour-FastAndBindingGenerator' }
 FamixTException >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 

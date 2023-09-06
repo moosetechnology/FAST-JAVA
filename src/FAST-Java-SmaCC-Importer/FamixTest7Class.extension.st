@@ -1,6 +1,6 @@
 Extension { #name : #FamixTest7Class }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : #'*Carrefour-FastAndBindingGenerator' }
 FamixTest7Class >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 

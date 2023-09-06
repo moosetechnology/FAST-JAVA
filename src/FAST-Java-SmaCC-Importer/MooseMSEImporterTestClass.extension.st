@@ -1,6 +1,6 @@
 Extension { #name : #MooseMSEImporterTestClass }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : #'*Carrefour-FastAndBindingGenerator' }
 MooseMSEImporterTestClass >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 

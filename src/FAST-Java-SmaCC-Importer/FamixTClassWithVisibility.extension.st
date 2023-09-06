@@ -1,6 +1,6 @@
 Extension { #name : #FamixTClassWithVisibility }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : #'*Carrefour-FastAndBindingGenerator' }
 FamixTClassWithVisibility >> generateFastIfNotDoneAndBind [
 
 	self fastDeclaration ifNotEmpty: [ 
