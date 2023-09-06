@@ -13,7 +13,7 @@ FASTJavaLocalResolverVisitorTest >> setUp [
 	super setUp.
 	
 	builder := FASTJavaTestNodeBuilder new.
-	localResolver := FASTJavaLocalResolverVisitor new
+	localResolver := FASTLocalResolverVisitor new
 ]
 
 { #category : #tests }
