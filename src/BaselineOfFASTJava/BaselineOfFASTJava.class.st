@@ -21,17 +21,24 @@ BaselineOfFASTJava >> baseline: spec [
 
 { #category : #baselines }
 BaselineOfFASTJava >> defineDependencies: spec [
+
+	spec baseline: 'FAST' with: [ 
+		spec
+			loads: #( 'default' );
+			repository: 'github://moosetechnology/FAST:v2/src' ].
 	spec
-		baseline: 'FAST'
-		with: [ spec
-				loads: #('default');
-				repository: 'github://moosetechnology/FAST:v2/src' ].
+		project: 'FASTTool'
+		copyFrom: 'FAST'
+		with: [ spec loads: #( 'core' 'tools' ) ].
+
+
+	spec baseline: 'SmaCC' with: [ 
+		spec
+			loads: #( 'JavaParser' 'SmaCCRuntime' );
+			repository: 'github://j-brant/SmaCC:master/src' ].
 	spec
-		baseline: 'SmaCC'
-		with: [ spec
-				loads: #('JavaParser' 'SmaCCRuntime');
-				repository: 'github://j-brant/SmaCC:master/src' ].
-	spec baseline: 'TinyLogger' with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ]
+		baseline: 'TinyLogger'
+		with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ]
 ]
 
 { #category : #baselines }
@@ -72,7 +79,7 @@ BaselineOfFASTJava >> definePackages: spec [
 	"Tools"
 	spec
 		package: 'FAST-Java-Tools'
-		with: [ spec requires: #( 'FAST-Java-Visitor' ) ];
+		with: [ spec requires: #( 'FAST-Java-Visitor' 'FASTTool' ) ];
 		package: 'FAST-Java-Tools-Tests'
 		with: [ spec requires: #( 'FAST-Java-Tools' ) ]
 ]
