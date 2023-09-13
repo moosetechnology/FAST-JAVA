@@ -19,6 +19,15 @@ BaselineOfFASTJava >> baseline: spec [
 			self defineGroups: spec ]
 ]
 
+{ #category : #accessing }
+BaselineOfFASTJava >> customProjectAttributes [
+
+	^ RPackageOrganizer default packages
+		  detect: [ :package | package name = 'BaselineOfFamix' ]
+		  ifFound: [ #(  ) ]
+		  ifNone: [ #( #NeedsMoose ) ]
+]
+
 { #category : #baselines }
 BaselineOfFASTJava >> defineDependencies: spec [
 
@@ -38,7 +47,13 @@ BaselineOfFASTJava >> defineDependencies: spec [
 			repository: 'github://j-brant/SmaCC:master/src' ].
 	spec
 		baseline: 'TinyLogger'
-		with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ]
+		with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ].
+		
+	spec for: #NeedsMoose do: [ 
+		spec baseline: 'Famix' with: [ 
+			spec
+				loads: #( 'Core' 'Basic' );
+				repository: 'github://moosetechnology/Famix:development/src' ] ]
 ]
 
 { #category : #baselines }
@@ -81,5 +96,11 @@ BaselineOfFASTJava >> definePackages: spec [
 		package: 'FAST-Java-Tools'
 		with: [ spec requires: #( 'FAST-Java-Visitor' 'FASTTool' ) ];
 		package: 'FAST-Java-Tools-Tests'
-		with: [ spec requires: #( 'FAST-Java-Tools' ) ]
+		with: [ spec requires: #( 'FAST-Java-Tools' ) ].
+
+	"In case of no Famix loaded"
+	spec for: #NeedsMoose do: [ 
+		spec
+			package: 'FAST-Java-Model'
+			with: [ spec requires: #( 'FAST' 'Famix' ) ] ]
 ]
