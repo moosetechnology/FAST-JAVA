@@ -199,6 +199,13 @@ FASTJavaTEntityCreator >> newDoubleTypeExpression [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newEmptyDimExpression [
+
+	<generated>
+	^ self add: FASTJavaEmptyDimExpression new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newEmptyMethodDeclaration [
 
 	<generated>

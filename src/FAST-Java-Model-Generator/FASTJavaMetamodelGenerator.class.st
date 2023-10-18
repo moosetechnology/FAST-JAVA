@@ -122,7 +122,8 @@ Class {
 		'tComment',
 		'tWithComments',
 		'javaEntity',
-		'javaComment'
+		'javaComment',
+		'javaEmptyDimExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -315,6 +316,13 @@ double d1 = 12.3;
 double d2 = 12.3d;
 ```
 `12.3` and `12.3d` are double literals'
+]
+
+{ #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaEmptyDimExpression [
+	^ 'A node representing an empty expression when creating an array, for example:
+	
+	new String[] {"a"};'
 ]
 
 { #category : #comments }
@@ -748,6 +756,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaConditionalExpression := builder newClassNamed: #ConditionalExpression comment: self commentForJavaConditionalStatement.
 	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
 	javaVariableExpression := builder newClassNamed: #VariableExpression.
+	javaEmptyDimExpression := builder newClassNamed: #EmptyDimExpression comment: self commentForJavaEmptyDimExpression.
 
 	"statements"
 	javaStatement := builder newClassNamed: #Statement.
@@ -895,6 +904,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaNewClassExpression --|> #TWithArguments.
 
 	javaNewArray --|> javaNewExpression.
+	javaEmptyDimExpression --|> tExpression.
 	javaConditionalExpression --|> tExpression.
 
 	javaArrayAccess --|> tExpression.

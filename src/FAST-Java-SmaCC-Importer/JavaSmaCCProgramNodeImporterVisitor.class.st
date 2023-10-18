@@ -528,6 +528,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDimExpression: aToken [
+	currentFASTEntity := self
+		addToModel: FASTJavaEmptyDimExpression new.
+	self setStartEndPos: aToken.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 	currentFASTEntity := self addToModel: FASTJavaStatement new.
 	self setStartEndPos: anEmptyStatement.
@@ -886,6 +894,7 @@ public void onClick(ClickEvent event) {
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
+	| dimExprs emptyExprs |
 	currentFASTEntity := self addToModel: FASTJavaNewArray new.
 		self setStartEndPos: aNewArray.
 
@@ -893,10 +902,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 	aNewArray initializer
 		ifNotNil: [ :initialize | 
 			currentFASTEntity initializer: (self clone accept: initialize) ].
-	aNewArray dimExpressions
-		do: [ :dimExpression | 
-			currentFASTEntity
-				arguments add: (self clone accept: dimExpression expression) ].
+
+	dimExprs := aNewArray dimExpressions
+		collect: [ :dimExpression | self clone accept: dimExpression expression ].
+	"for empty dim, no dimExpression is generated but tokens in 'leftBrackets' collection"
+	emptyExprs := aNewArray leftBrackets
+		collect: [ :emptyDimExpression | self clone visitEmptyDimExpression: emptyDimExpression ].
+
+	"put them in correct order following their startPos"
+	currentFASTEntity arguments:
+		((dimExprs , emptyExprs) sorted: [ :a :b | a startPos < b startPos ]).
+
 	^ currentFASTEntity
 ]
 
