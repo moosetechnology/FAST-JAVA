@@ -8,6 +8,9 @@ Class {
 	#superclass : #FASTJavaEntity,
 	#traits : 'FASTJavaTWithAssignable + FASTTExpression',
 	#classTraits : 'FASTJavaTWithAssignable classTrait + FASTTExpression classTrait',
+	#instVars : [
+		'#operator => FMProperty'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -49,4 +52,19 @@ FASTJavaAssignmentExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
+]
+
+{ #category : #accessing }
+FASTJavaAssignmentExpression >> operator [
+
+	<FMProperty: #operator type: #String>
+	<generated>
+	<FMComment: 'The assignement operator: =, +=, /=, ...'>
+	^ operator
+]
+
+{ #category : #accessing }
+FASTJavaAssignmentExpression >> operator: anObject [
+	<generated>
+	operator := anObject
 ]

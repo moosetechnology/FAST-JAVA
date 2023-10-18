@@ -137,7 +137,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExp
 FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentExpression [
 	self checkForComments: aFASTJavaAssignmentExpression andDo: [
 	aFASTJavaAssignmentExpression variable accept: self.
-	self noIndent: ' = '.
+	self noIndent: ' ' , aFASTJavaAssignmentExpression operator , ' '.
 	aFASTJavaAssignmentExpression expression accept: self
 ]
 

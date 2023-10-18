@@ -15,8 +15,24 @@ JavaSmaCCAssignementTest >> javaMethod [
         mapPanel = mapView;
         archivePanel = archiveView;
         this.var = 5;
-        array[3] = 5.3;
+        array[3] += 5.3;
 	}'
+]
+
+{ #category : #tests }
+JavaSmaCCAssignementTest >> testAssignementOperator [
+	| sortedAssignements |
+
+	self assert: (fastModel allWithType: FASTJavaAssignmentExpression) size equals: 6.
+
+	sortedAssignements := (fastModel allWithType: FASTJavaAssignmentExpression)
+		sorted: [ :a :b | a startPos < b startPos ].
+
+	sortedAssignements allButLast do: [ :assign |
+		self assert: assign operator equals: '='
+	].
+
+	self assert: sortedAssignements last operator equals: '+='
 ]
 
 { #category : #tests }
