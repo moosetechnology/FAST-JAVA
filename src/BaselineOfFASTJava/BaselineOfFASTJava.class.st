@@ -45,15 +45,15 @@ BaselineOfFASTJava >> defineDependencies: spec [
 		spec
 			loads: #( 'JavaParser' 'SmaCCRuntime' );
 			repository: 'github://j-brant/SmaCC:master/src' ].
-	spec
-		baseline: 'TinyLogger'
-		with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ].
-		
+
 	spec for: #NeedsMoose do: [ 
 		spec baseline: 'Famix' with: [ 
 			spec
 				loads: #( 'Core' 'Basic' );
-				repository: 'github://moosetechnology/Famix:development/src' ] ]
+				repository: 'github://moosetechnology/Famix:development/src' ].
+		spec
+			baseline: 'TinyLogger'
+			with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ] ]
 ]
 
 { #category : #baselines }
