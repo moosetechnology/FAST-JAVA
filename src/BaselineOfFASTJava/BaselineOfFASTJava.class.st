@@ -66,12 +66,18 @@ BaselineOfFASTJava >> defineGroups: spec [
 		group: 'tools'
 		with: #( 'visitor' 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
 		group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
-			   'FAST-Java-SmaCC-Importer-Tests'
-			   'TinyLogger' );
+			   'FAST-Java-SmaCC-Importer-Tests' );
 		group: 'visitor' with: #( 'core' 'FAST-Java-Visitor' );
 		group: 'highlighter' with: #( 'core' 'FAST-Java-Highlighter' );
 		group: 'all' with: #( 'smacc' 'visitor' 'highlighter' 'tools' );
-		group: 'default' with: #( 'core' )
+		group: 'default' with: #( 'core' ).
+
+	spec for: #NeedsMoose do: [ 
+		spec
+			group: 'smacc'
+			with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
+				   'FAST-Java-SmaCC-Importer-Tests'
+				   'TinyLogger' ) ]
 ]
 
 { #category : #baselines }
