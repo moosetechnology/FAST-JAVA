@@ -32,6 +32,7 @@ FASTJavaTestNodeBuilder >> array: aName accessAtIndex: anInt [
 { #category : #'api - building' }
 FASTJavaTestNodeBuilder >> assignment: aName value: aNode [
 	^FASTJavaAssignmentExpression new
+		operator: '=' ;
 		variable: (self var: aName) ;
 		expression: aNode ;
 		yourself

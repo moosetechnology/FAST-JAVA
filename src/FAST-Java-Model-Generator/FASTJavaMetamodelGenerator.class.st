@@ -995,6 +995,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 FASTJavaMetamodelGenerator >> defineProperties [
 
 	super defineProperties.
+
+	(javaAssignmentExpression property: #operator type: #String) comment:
+		'The assignement operator: =, +=, /=, ...'.
+
 	(javaFieldAccess property: #fieldName type: #String) comment:
 		'Name of accessed field'.
 	(javaInfixOperation property: #operator type: #String) comment:
