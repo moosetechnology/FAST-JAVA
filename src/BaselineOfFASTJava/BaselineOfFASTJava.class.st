@@ -45,15 +45,15 @@ BaselineOfFASTJava >> defineDependencies: spec [
 		spec
 			loads: #( 'JavaParser' 'SmaCCRuntime' );
 			repository: 'github://j-brant/SmaCC:master/src' ].
-	spec
-		baseline: 'TinyLogger'
-		with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ].
-		
+
 	spec for: #NeedsMoose do: [ 
 		spec baseline: 'Famix' with: [ 
 			spec
 				loads: #( 'Core' 'Basic' );
-				repository: 'github://moosetechnology/Famix:development/src' ] ]
+				repository: 'github://moosetechnology/Famix:development/src' ].
+		spec
+			baseline: 'TinyLogger'
+			with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ] ]
 ]
 
 { #category : #baselines }
@@ -66,12 +66,18 @@ BaselineOfFASTJava >> defineGroups: spec [
 		group: 'tools'
 		with: #( 'visitor' 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
 		group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
-			   'FAST-Java-SmaCC-Importer-Tests'
-			   'TinyLogger' );
+			   'FAST-Java-SmaCC-Importer-Tests' );
 		group: 'visitor' with: #( 'core' 'FAST-Java-Visitor' );
 		group: 'highlighter' with: #( 'core' 'FAST-Java-Highlighter' );
 		group: 'all' with: #( 'smacc' 'visitor' 'highlighter' 'tools' );
-		group: 'default' with: #( 'core' )
+		group: 'default' with: #( 'core' ).
+
+	spec for: #NeedsMoose do: [ 
+		spec
+			group: 'smacc'
+			with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
+				   'FAST-Java-SmaCC-Importer-Tests'
+				   'TinyLogger' ) ]
 ]
 
 { #category : #baselines }
