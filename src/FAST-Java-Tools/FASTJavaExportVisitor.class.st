@@ -65,6 +65,15 @@ FASTJavaExportVisitor >> indentPrefix [
 		atAllPut: Character space
 ]
 
+{ #category : #initialization }
+FASTJavaExportVisitor >> initialize [ 
+	super initialize.
+
+	indent := 0.
+	stream := WriteStream on: ''
+	
+]
+
 { #category : #outputting }
 FASTJavaExportVisitor >> newLine [
 	stream cr
@@ -121,6 +130,18 @@ FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 	aFASTJavaArrayAccess expression accept: self.
 	self noIndent: ']'.
 ]
+
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitializer [
+	self checkForComments: aFASTJavaArrayInitializer andDo: [
+		self noIndent: '{ '.
+		self
+			visitNodeList: aFASTJavaArrayInitializer initializers
+			separatedBy: [ self noIndent: ', ' ].
+		self noIndent: ' }'.
+	]
 
 ]
 
@@ -457,6 +478,26 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 			self space ]
 ]
 
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
+
+	self checkForComments: aFASTJavaNewArray andDo: [
+		self noIndent: 'new '.
+		aFASTJavaNewArray type accept: self.
+		aFASTJavaNewArray arguments do: [ :arg |
+			self noIndent: $[.
+			arg accept: self.
+			self noIndent: $].
+		].
+
+		aFASTJavaNewArray initializer
+		ifNotNil: [ :init |
+			self noIndent: ' '.
+			init accept: self
+		]
+	]
 ]
 
 { #category : #'visiting expression' }
