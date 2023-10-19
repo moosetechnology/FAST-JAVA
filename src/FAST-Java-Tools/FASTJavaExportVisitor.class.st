@@ -65,6 +65,15 @@ FASTJavaExportVisitor >> indentPrefix [
 		atAllPut: Character space
 ]
 
+{ #category : #initialization }
+FASTJavaExportVisitor >> initialize [ 
+	super initialize.
+
+	indent := 0.
+	stream := WriteStream on: ''
+	
+]
+
 { #category : #outputting }
 FASTJavaExportVisitor >> newLine [
 	stream cr
