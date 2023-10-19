@@ -30,6 +30,14 @@ FASTJavaTestNodeBuilder >> array: aName accessAtIndex: anInt [
 ]
 
 { #category : #'api - building' }
+FASTJavaTestNodeBuilder >> arrayInitializer: aCollection [
+
+	^FASTJavaArrayInitializer new
+		initializers: aCollection ;
+		yourself
+]
+
+{ #category : #'api - building' }
 FASTJavaTestNodeBuilder >> assignment: aName value: aNode [
 	^FASTJavaAssignmentExpression new
 		operator: '=' ;
@@ -173,6 +181,15 @@ FASTJavaTestNodeBuilder >> modifier: aName [
 ]
 
 { #category : #'api - building' }
+FASTJavaTestNodeBuilder >> newStringArrayExpression: args [
+
+	^FASTJavaNewArray new
+		type: (FASTJavaClassTypeExpression new typeName: (self type: 'String'));
+		arguments: args;
+		yourself
+]
+
+{ #category : #'api - building' }
 FASTJavaTestNodeBuilder >> return: aNode [
 	^FASTJavaReturnStatement new
 		expression: aNode ;
@@ -228,15 +245,17 @@ FASTJavaTestNodeBuilder >> var: aName [
 
 { #category : #'api - building' }
 FASTJavaTestNodeBuilder >> var: aVarName declaration: aTypeName [
-	^self varDeclarations: aTypeName declarators: { self declarator: aVarName init: nil }
+	^self
+		varDeclarations: ((FASTJavaClassTypeExpression new typeName: (self type: aTypeName)))
+		declarators: { self declarator: aVarName init: nil }
 		
 ]
 
 { #category : #'api - building' }
-FASTJavaTestNodeBuilder >> varDeclarations: aTypeName declarators: aNodeCollection [
+FASTJavaTestNodeBuilder >> varDeclarations: aType declarators: aNodeCollection [
 	^self
 		declaration: aNodeCollection
-		type: (FASTJavaClassTypeExpression new typeName: (self type: aTypeName) ; yourself)
+		type: aType
 		modifiers: #()
 
 ]

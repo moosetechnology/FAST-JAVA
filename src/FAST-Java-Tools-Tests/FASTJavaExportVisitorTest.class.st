@@ -210,6 +210,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiver [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayIntArg [
+	| node |
+	node := builder newStringArrayExpression: { builder literalInt: 5 }.
+	self export: node equals: 'new String[5]'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayNoArg [
+	| node |
+	node := builder newStringArrayExpression:  {FASTJavaEmptyDimExpression new}.
+	self export: node equals: 'new String[]'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNullLiteral [
 	| node |
 	node := builder literal: FASTJavaNullLiteral value: nil.
@@ -248,6 +262,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
 
 	self export: nodeVar equals: '!isPrefix'.
 	self export: nodeInt equals: '42++'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclArrayWithInitializer [
+
+	| stmt type |
+	type := builder newStringArrayExpression:  {FASTJavaEmptyDimExpression new}.
+	type initializer: (builder arrayInitializer: { builder literalString: 'a' }).
+	stmt := builder
+		declarator: 'strArray'
+		init: type.
+	
+	self export: stmt equals: 'strArray = new String[] { "a" }'.
+
 ]
 
 { #category : #tests }

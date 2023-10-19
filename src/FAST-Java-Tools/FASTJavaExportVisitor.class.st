@@ -125,6 +125,18 @@ FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 ]
 
 { #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitializer [
+	self checkForComments: aFASTJavaArrayInitializer andDo: [
+		self noIndent: '{ '.
+		self
+			visitNodeList: aFASTJavaArrayInitializer initializers
+			separatedBy: [ self noIndent: ', ' ].
+		self noIndent: ' }'.
+	]
+
+]
+
+{ #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExpression [
 	self checkForComments: aFASTJavaArrayTypeExpression andDo: [
 	aFASTJavaArrayTypeExpression baseType accept: self.
@@ -457,6 +469,26 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 			self space ]
 ]
 
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
+
+	self checkForComments: aFASTJavaNewArray andDo: [
+		self noIndent: 'new '.
+		aFASTJavaNewArray type accept: self.
+		aFASTJavaNewArray arguments do: [ :arg |
+			self noIndent: $[.
+			arg accept: self.
+			self noIndent: $].
+		].
+
+		aFASTJavaNewArray initializer
+		ifNotNil: [ :init |
+			self noIndent: ' '.
+			init accept: self
+		]
+	]
 ]
 
 { #category : #'visiting expression' }
