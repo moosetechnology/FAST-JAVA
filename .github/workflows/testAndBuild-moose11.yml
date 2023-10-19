@@ -35,7 +35,7 @@ jobs:
       
       - name: Build meta-model planuml image
         run: |
-          $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'fast-java.puml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: FASTModel; withModel: FASTJavaModel andColor: Color lightBlue; generatePlantUMLModelWithout: { FASTModel. FASTJavaModel })]."
+          $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE st ./ci/generateUML.st
       
       - name: Generate SVG Diagrams
         uses: cloudbees/plantuml-github-action@master
