@@ -44,4 +44,4 @@ JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString: 'void hello() {
 
 ## UML
 
-![meta-model image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/8ceb4e8d23bda1c57a151879b7fae50cd6fdb290/fast-java.svg)
+![meta-model image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v3-doc/fast-java.svg)
