@@ -92,8 +92,8 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclaration [
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithInterfaces [
 	| node |
 	node := builder class: 'Blah'.
-	node addInterface:  (builder typeExpression: 'IBlah').
-	node addInterface:  (builder typeExpression: 'Iterator').
+	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'IBlah')).
+	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'Iterator')).
 	self export: node equals: 'class Blah implements IBlah, Iterator {
 }
 '
@@ -125,8 +125,8 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndI
 	| node |
 	node := builder class: 'Blah'.
 	node superclass: (FASTJavaClassTypeExpression new typeName: (builder type: 'String')).
-	node addInterface:  (builder typeExpression: 'IBlah').
-	node addInterface:  (builder typeExpression: 'Iterator').
+	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'IBlah')).
+	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'Iterator')).
 	self export: node equals: 'class Blah extends String implements IBlah, Iterator {
 }
 '
