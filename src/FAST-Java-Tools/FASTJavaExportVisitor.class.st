@@ -223,7 +223,7 @@ FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaratio
 		aFASTJavaClassDeclaration interfaces ifNotEmpty: [ :interfaces | 
 			self noIndent: ' implements '.
 			interfaces
-				do: [ :interface | self noIndent: interface name ]
+				do: [ :interface | interface accept: self ]
 				separatedBy: [ self noIndent: ', ' ] ].
 
 		self noIndent: ' {'.
