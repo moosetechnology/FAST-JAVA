@@ -212,25 +212,30 @@ FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLitera
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
 	self checkForComments: aFASTJavaClassDeclaration andDo: [
-	self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
-	self noIndent: 'class '.
-	self noIndent: aFASTJavaClassDeclaration name.
-	aFASTJavaClassDeclaration superclass ifNotNil: [ :superclass | 
-		self noIndent: ' extends '.
-		self noIndent: superclass name ].
-	aFASTJavaClassDeclaration interfaces ifNotEmpty: [ :interfaces | 
-		self noIndent: ' implements '.
-		interfaces
-			do: [ :interface | self noIndent: interface name ]
-			separatedBy: [ self noIndent: ', ' ] ].
-	self noIndent: ' {'.
-	self newLine.
-	self indent.
-	aFASTJavaClassDeclaration declarations do: [ :declaration | 
-		declaration accept: self ].
-	self noIndent: $}.
-	self newLine.
-	self unindent
+		self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
+		self noIndent: 'class '.
+		self noIndent: aFASTJavaClassDeclaration name.
+
+		aFASTJavaClassDeclaration superclass ifNotNil: [ :superclass | 
+			self noIndent: ' extends '.
+			superclass accept: self ].
+
+		aFASTJavaClassDeclaration interfaces ifNotEmpty: [ :interfaces | 
+			self noIndent: ' implements '.
+			interfaces
+				do: [ :interface | self noIndent: interface name ]
+				separatedBy: [ self noIndent: ', ' ] ].
+
+		self noIndent: ' {'.
+		self newLine.
+
+		self indent.
+		aFASTJavaClassDeclaration declarations do: [ :declaration | 
+			declaration accept: self ].
+		self noIndent: $}.
+		self newLine.
+
+		self unindent
 ]
 
 ]
