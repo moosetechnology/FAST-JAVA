@@ -114,7 +114,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithModifiers [
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclass [
 	| node |
 	node := builder class: 'Blah'.
-	node superclass: (builder typeExpression: 'String').
+	node superclass: (FASTJavaClassTypeExpression new typeName: (builder type: 'String')).
 	self export: node equals: 'class Blah extends String {
 }
 '
@@ -124,7 +124,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclass [
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndInterfaces [
 	| node |
 	node := builder class: 'Blah'.
-	node superclass: (builder typeExpression: 'String').
+	node superclass: (FASTJavaClassTypeExpression new typeName: (builder type: 'String')).
 	node addInterface:  (builder typeExpression: 'IBlah').
 	node addInterface:  (builder typeExpression: 'Iterator').
 	self export: node equals: 'class Blah extends String implements IBlah, Iterator {
