@@ -8,10 +8,35 @@ Class {
 }
 
 { #category : #running }
+FASTJavaExportVisitorTest >> astFor: sourceCode withRule: rule [
+
+	^JavaSmaCCProgramNodeImporterVisitor new
+		accept: (JavaParser
+			createParserOnStream:  (ReadStream on: sourceCode)
+			startingAt: (JavaParser perform: rule))
+			parse
+]
+
+{ #category : #running }
+FASTJavaExportVisitorTest >> blockAST: sourceCode [
+
+	^self astFor: sourceCode withRule: #startingStateForblock_statement
+
+
+]
+
+{ #category : #running }
 FASTJavaExportVisitorTest >> export: aFASTJavaNode equals: aString [
 	self
 		assert: (FASTJavaExportVisitor new export: aFASTJavaNode)
 		equals: aString
+]
+
+{ #category : #running }
+FASTJavaExportVisitorTest >> methodAST: sourceCode [
+
+	^self astFor: sourceCode withRule: #startingStateForclass_or_interface_body_declaration
+
 ]
 
 { #category : #running }
@@ -136,12 +161,10 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndI
 FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 
 	| expr |
-	expr := builder
-		        conditionalExpr: (builder var: 'aVar')
-		        then: (builder literalInt: 0)
-		        else: (builder literalInt: 1).
+	expr := self methodAST: 'public void mth() { a = aVar ? 0 : 1; }'.
 
-	self export: expr equals: 'aVar ? 0 : 1'
+	self export: expr statements first equals: 'a = aVar ? 0 : 1;
+'
 ]
 
 { #category : #tests }
@@ -149,6 +172,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 	| node |
 	node := builder literal: FASTJavaFloatLiteral value: '37.2'.
 	self export: node equals: '37.2f'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopEmpty [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { for (int i=0; i<10; i++) ; }'.
+
+	self export: expr statements first equals: 'for (int i=0; i<10; i++)
+	;
+'
 ]
 
 { #category : #tests }
@@ -161,7 +195,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 
 	self
 		export: node
-		equals: 'aVar==42'.
+		equals: '(aVar==42)'.
 
 ]
 
