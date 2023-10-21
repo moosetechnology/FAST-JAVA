@@ -19,7 +19,7 @@ FASTJavaExportVisitorTest >> astFor: sourceCode withRule: rule [
 
 { #category : #running }
 FASTJavaExportVisitorTest >> blockAST: sourceCode [
-
+	"does not seem to work correctly ?!?"
 	^self astFor: sourceCode withRule: #startingStateForblock_statement
 
 
@@ -175,13 +175,43 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopBlockStatement [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { for (int i=0; i<=10; i++) {
+    i = 0;
+    j = 0;
+  }
+}'.
+
+	self export: expr statements first equals: 'for (int i = 0; i<=10; i++) {
+    i = 0;
+    j = 0;
+  }
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopEmpty [
 
 	| expr |
-	expr := self methodAST: 'public void mth() { for (int i=0; i<10; i++) ; }'.
+	expr := self methodAST: 'public void mth() { for (int i=0; i<=10; i++) ; }'.
 
-	self export: expr statements first equals: 'for (int i=0; i<10; i++)
-	;
+	self export: expr statements first equals: 'for (int i = 0; i<=10; i++) 
+  ;
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSingleStatement [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { for (int i=0; i<=10; i++)
+  i = 0;
+}'.
+
+	self export: expr statements first equals: 'for (int i = 0; i<=10; i++) 
+  i = 0;
 '
 ]
 
@@ -195,7 +225,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 
 	self
 		export: node
-		equals: '(aVar==42)'.
+		equals: 'aVar==42'.
 
 ]
 

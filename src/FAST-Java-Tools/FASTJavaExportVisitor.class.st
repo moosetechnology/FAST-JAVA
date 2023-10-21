@@ -54,6 +54,16 @@ FASTJavaExportVisitor >> export: aFASTNode [
 	]
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> goBack: aNumber [
+
+	"go back aNumber characters in the output stream"
+
+	(stream position <= aNumber)
+		ifTrue:  [ stream position: 0 ]
+		ifFalse: [ stream position: (stream position - aNumber) ]
+]
+
 { #category : #outputting }
 FASTJavaExportVisitor >> indent [
 	indent := indent + 1
@@ -160,6 +170,20 @@ FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentE
 	aFASTJavaAssignmentExpression variable accept: self.
 	self noIndent: ' ' , aFASTJavaAssignmentExpression operator , ' '.
 	aFASTJavaAssignmentExpression expression accept: self
+]
+
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaBlockOrStatement: aFASTJavaStatement [
+	self checkForComments: aFASTJavaStatement andDo: [
+	"for 'then' and 'else' parts of the if-statement,
+	if it's a simple statement (not a block), go to next line and indent
+	Not very elegant solution but simple"
+	(aFASTJavaStatement isKindOf: FASTJavaStatementBlock)
+	ifFalse: [ self newLine ].
+
+	aFASTJavaStatement accept: self
 ]
 
 ]
@@ -294,7 +318,7 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 	aFASTJavaStatement ifNil: [ ^self ].
 	self withIndent: 'else '.
-	self visitFASTJavaIfPartStatement: aFASTJavaStatement
+	self visitFASTJavaBlockOrStatement: aFASTJavaStatement
 ]
 
 ]
@@ -316,6 +340,25 @@ FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExp
 
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
+	self checkForComments: aFASTJavaForStatement andDo: [
+		self withIndent: 'for ('.
+		aFASTJavaForStatement initializer accept: self.
+		self goBack: 1. "'initializer' is a statement that prints a \n"
+		self space.
+		aFASTJavaForStatement condition accept: self.
+		self noIndent: '; '.
+		aFASTJavaForStatement incrementor accept: self.
+		self goBack: 2. "'incrementor' is a statement that prints ';\n' "
+		self noIndent: ') '.
+		self indent.
+		self visitFASTJavaBlockOrStatement: aFASTJavaForStatement body.
+		self unindent.
+]
+
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 	self checkForComments: aFASTJavaIdentifier andDo: [
@@ -325,23 +368,9 @@ FASTJavaExportVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 ]
 
 { #category : #'visiting statement' }
-FASTJavaExportVisitor >> visitFASTJavaIfPartStatement: aFASTJavaStatement [
-	self checkForComments: aFASTJavaStatement andDo: [
-	"for 'then' and 'else' parts of the if-statement,
-	if it's a simple statement (not a block), go to next line and indent
-	Not very elegant solution but simple"
-	(aFASTJavaStatement isKindOf: FASTJavaStatementBlock)
-	ifFalse: [ self newLine. self withIndent: '' ].
-
-	aFASTJavaStatement accept: self
-]
-
-]
-
-{ #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self checkForComments: aFASTJavaIfStatement andDo: [
-	self noIndent: 'if ('.
+	self withIndent: 'if ('.
 	aFASTJavaIfStatement condition accept: self.
 	self noIndent: ') '.
 	self visitFASTJavaThenPartStatement: aFASTJavaIfStatement thenPart.
@@ -571,6 +600,17 @@ FASTJavaExportVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExp
 
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaStatement: aFASTJavaStatement [
+	"empty statement ?"
+
+	self checkForComments: aFASTJavaStatement andDo: [
+		self withIndent: ''.
+		self endOfStatement
+]
+
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self checkForComments: aFASTJavaStringLiteral andDo: [
@@ -584,7 +624,7 @@ FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
-	self visitFASTJavaIfPartStatement: aFASTJavaStatement
+		self visitFASTJavaBlockOrStatement: aFASTJavaStatement
 ]
 
 ]
@@ -628,10 +668,10 @@ FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatemen
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	self checkForComments: aFASTJavaVariableDeclarator andDo: [
-	aFASTJavaVariableDeclarator variable accept: self.
-	aFASTJavaVariableDeclarator expression ifNil: [ ^ self ].
-	self noIndent: ' = '.
-	aFASTJavaVariableDeclarator expression accept: self
+		aFASTJavaVariableDeclarator variable accept: self.
+		aFASTJavaVariableDeclarator expression ifNil: [ ^ self ].
+		self noIndent: ' = '.
+		aFASTJavaVariableDeclarator expression accept: self
 ]
 
 ]
@@ -654,6 +694,7 @@ FASTJavaExportVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaBooleanTypeEx
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
+	self withIndent: ''.
 	aFASTTExpressionStatement expression accept: self.
 	self endOfStatement
 ]
@@ -665,7 +706,7 @@ FASTJavaExportVisitor >> visitFASTTLiteral: aFASTTLiteral [
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTReturnStatement: aFASTTReturnStatement [
-	self noIndent: 'return '.
+	self withIndent: 'return '.
 	aFASTTReturnStatement expression accept: self.
 	self endOfStatement
 ]
@@ -676,7 +717,6 @@ FASTJavaExportVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	self newLine.
 	self indent.
 	aFASTJavaStatementBlock statements do: [ :node |
-		self withIndent: ''.
 		node accept: self
 	].
 	self unindent.
