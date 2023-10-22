@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #running }
+FASTJavaExportVisitorTest >> astFor: sourceCode [
+
+	^JavaSmaCCProgramNodeImporterVisitor new
+		accept: (JavaParser parse: sourceCode)
+			typeDeclarations anyOne
+]
+
+{ #category : #running }
 FASTJavaExportVisitorTest >> astFor: sourceCode withRule: rule [
 
 	^JavaSmaCCProgramNodeImporterVisitor new
@@ -129,6 +137,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeAccess [
 	expr := self methodAST: 'public void mth() { this.att = 5; }'.
 
 	self export: expr statements first equals: 'this.att = 5;
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeModifiers [
+
+	| ast |
+	ast := self astFor: 'class Blah { private static final int CONST = 42; }'.
+
+	self export: ast equals: 'class Blah {
+private static final int CONST = 42;
+}
 '
 ]
 
@@ -333,6 +353,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiver [
 		export: node
 		equals: 'aVar.methodA()'.
 
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodModifiers [
+
+	| ast |
+	ast := self methodAST: 'private static final void mth() { }'.
+
+	self export: ast equals: 'private static final void mth() {
+}
+'
 ]
 
 { #category : #tests }
