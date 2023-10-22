@@ -244,33 +244,23 @@ FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLitera
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
+
 	self checkForComments: aFASTJavaClassDeclaration andDo: [
 		self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
 		self noIndent: 'class '.
 		self noIndent: aFASTJavaClassDeclaration name.
-
-		aFASTJavaClassDeclaration superclass ifNotNil: [ :superclass | 
+		aFASTJavaClassDeclaration superclass ifNotNil: [ :superclass |
 			self noIndent: ' extends '.
 			superclass accept: self ].
-
-		aFASTJavaClassDeclaration interfaces ifNotEmpty: [ :interfaces | 
+		aFASTJavaClassDeclaration interfaces ifNotEmpty: [ :interfaces |
 			self noIndent: ' implements '.
 			interfaces
 				do: [ :interface | interface accept: self ]
 				separatedBy: [ self noIndent: ', ' ] ].
 
-		self noIndent: ' {'.
-		self newLine.
-
-		self indent.
-		aFASTJavaClassDeclaration declarations do: [ :declaration | 
-			declaration accept: self ].
-		self noIndent: $}.
-		self newLine.
-
-		self unindent
-]
-
+		self visitJavaClassMemberDeclarations: aFASTJavaClassDeclaration declarations.
+		self newLine
+	]
 ]
 
 { #category : #'visiting expression' }
@@ -528,6 +518,18 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 			init accept: self
 		]
 	]
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
+	self checkForComments: aFASTJavaNewClassExpression andDo: [
+		self noIndent: 'new '.
+		aFASTJavaNewClassExpression type accept: self.
+		self visitFASTJavaArgumentsList: aFASTJavaNewClassExpression arguments.
+
+		self visitJavaClassMemberDeclarations: aFASTJavaNewClassExpression declarations
+	]
+
 ]
 
 { #category : #'visiting expression' }

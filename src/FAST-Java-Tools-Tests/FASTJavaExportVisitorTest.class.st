@@ -56,6 +56,30 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotation [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnonymousClassDeclaration [
+
+	| expr |
+	expr := self blockAST: '{ var = new AClass() { }; }'.
+
+	self export: expr statements first equals: 'var = new AClass() {
+};
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnonymousClassDeclarationWithMethod [
+
+	| expr |
+	expr := self blockAST: '{ var = new AClass() { void m() {} }; }'.
+
+	self export: expr statements first equals: 'var = new AClass() {
+  void m() {
+  }
+};
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaArrayAccess [
 
 	| exprUni exprBi |
