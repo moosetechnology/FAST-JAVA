@@ -340,6 +340,23 @@ FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExp
 ]
 
 { #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatement [
+	self checkForComments: aFASTJavaForEachStatement andDo: [
+		self withIndent: 'for ('.
+		aFASTJavaForEachStatement type accept: self.
+		self space.
+		aFASTJavaForEachStatement fieldname accept: self.
+		self noIndent: ' : '.
+		aFASTJavaForEachStatement list accept: self.
+		self noIndent: ') '.
+		self indent.
+		self visitFASTJavaBlockOrStatement: aFASTJavaForEachStatement body.
+		self unindent.
+]
+
+]
+
+{ #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 	self checkForComments: aFASTJavaForStatement andDo: [
 		self withIndent: 'for ('.

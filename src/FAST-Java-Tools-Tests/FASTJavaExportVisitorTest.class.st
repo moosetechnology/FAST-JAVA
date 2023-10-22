@@ -199,6 +199,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForEachLoop [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { for (String s : collection) ; }'.
+
+	self export: expr statements first equals: 'for (String s : collection) 
+  ;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopBlockStatement [
 
 	| expr |
