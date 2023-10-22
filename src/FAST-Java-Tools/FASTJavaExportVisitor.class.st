@@ -719,6 +719,20 @@ FASTJavaExportVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaBooleanTypeEx
 ]
 
 { #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
+	
+	self checkForComments: aFASTJavaWhileStatement andDo: [
+		self withIndent: 'while ('.
+		aFASTJavaWhileStatement condition accept: self.
+		self noIndent: ') '.
+		self indent.
+		self visitFASTJavaBlockOrStatement: aFASTJavaWhileStatement body.
+		self unindent.
+]
+
+]
+
+{ #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
 	self withIndent: ''.
 	aFASTTExpressionStatement expression accept: self.
