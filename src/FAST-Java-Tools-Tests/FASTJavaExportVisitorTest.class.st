@@ -19,7 +19,7 @@ FASTJavaExportVisitorTest >> astFor: sourceCode withRule: rule [
 
 { #category : #running }
 FASTJavaExportVisitorTest >> blockAST: sourceCode [
-	"does not seem to work correctly ?!?"
+
 	^self astFor: sourceCode withRule: #startingStateForblock_statement
 
 
@@ -30,6 +30,14 @@ FASTJavaExportVisitorTest >> export: aFASTJavaNode equals: aString [
 	self
 		assert: (FASTJavaExportVisitor new export: aFASTJavaNode)
 		equals: aString
+]
+
+{ #category : #running }
+FASTJavaExportVisitorTest >> expressionAST: sourceCode [
+
+	^self astFor: sourceCode withRule: #startingStateForexpression
+
+
 ]
 
 { #category : #running }
@@ -118,7 +126,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 	| node |
 	node := builder cast: 'float' expression: (builder var: 'aVar').
-	self export: node equals: '(float)aVar'
+	self export: node equals: '((float) aVar)'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithParentheses [
+
+	| expr |
+	expr := self expressionAST: '((AClass) obj.m1()).m2()'.
+
+	self export: expr equals: '((AClass) obj.m1()).m2()'
 ]
 
 { #category : #tests }

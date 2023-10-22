@@ -216,11 +216,12 @@ FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpre
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self checkForComments: aFASTJavaCastExpression andDo: [
-	self noIndent: $(.
-	aFASTJavaCastExpression type accept: self.
-	self noIndent: $).
-	aFASTJavaCastExpression expression accept: self
-]
+		self noIndent: '(('.
+		aFASTJavaCastExpression type accept: self.
+		self noIndent: ') '.
+		aFASTJavaCastExpression expression accept: self.
+		self noIndent: $)
+	]
 
 ]
 

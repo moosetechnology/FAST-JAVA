@@ -37,7 +37,7 @@ FASTJavaValidator >> getAST: aFileReference [
 	| model |
 	aFileReference readStreamDo: [ :stream |
 		self gotoClassDeclaration: stream.
-		model := JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString: stream contents
+		model := JavaSmaCCProgramNodeImporterVisitor new parseCodeString: stream contents
 	].
 	^model
 ]
