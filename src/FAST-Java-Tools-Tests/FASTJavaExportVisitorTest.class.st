@@ -123,6 +123,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeAccess [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { this.att = 5; }'.
+
+	self export: expr statements first equals: 'this.att = 5;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 	| node |
 	node := builder cast: 'float' expression: (builder var: 'aVar').
