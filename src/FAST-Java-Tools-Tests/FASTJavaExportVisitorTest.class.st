@@ -516,6 +516,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVariableExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaWhileLoopEmpty [
+
+	| ast |
+	ast := self blockAST: '{ while (iter.hasNext()) iter.next(); }'.
+
+	self export: ast statements first equals: 'while (iter.hasNext()) 
+  iter.next();
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTTExpressionStatement [
 	| node |
 	node := builder exprStatement: (builder invocation: 'methodA' recvr: nil args: #()).
