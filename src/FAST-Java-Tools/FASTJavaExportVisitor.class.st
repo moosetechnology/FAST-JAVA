@@ -54,7 +54,7 @@ FASTJavaExportVisitor >> export: aFASTNode [
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : #outputting }
 FASTJavaExportVisitor >> goBack: aNumber [
 
 	"go back aNumber characters in the output stream"
@@ -132,6 +132,16 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
+	self checkForComments: aFASTJavaArgumentList andDo: [
+		self noIndent: $(.
+		self visitNodeListSeparatedByCommas: aFASTJavaArgumentList.
+		self noIndent: $)
+	]
+
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 	self checkForComments: aFASTJavaArrayAccess andDo: [
@@ -148,8 +158,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitialize
 	self checkForComments: aFASTJavaArrayInitializer andDo: [
 		self noIndent: '{ '.
 		self
-			visitNodeList: aFASTJavaArrayInitializer initializers
-			separatedBy: [ self noIndent: ', ' ].
+			visitNodeListSeparatedByCommas: aFASTJavaArrayInitializer initializers.
 		self noIndent: ' }'.
 	]
 
@@ -449,19 +458,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 	self checkForComments: aFASTJavaMethodInvocation andDo: [
 	self visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation receiver.
 	self noIndent: aFASTJavaMethodInvocation name.
-	self visitFASTJavaMethodInvocationArguments: aFASTJavaMethodInvocation arguments
-]
-
-]
-
-{ #category : #'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaMethodInvocationArguments: aFASTJavaMethodInvocationArguments [
-	self checkForComments: aFASTJavaMethodInvocationArguments andDo: [
-	self noIndent: $(.
-	self
-		visitNodeList: aFASTJavaMethodInvocationArguments
-		separatedBy: [ self noIndent: ', ' ].
-	self noIndent: $)
+	self visitFASTJavaArgumentsList: aFASTJavaMethodInvocation arguments
 ]
 
 ]
@@ -482,8 +479,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodThrows: aFASTJavaThrownExceptionsCol
 	aFASTJavaThrownExceptionsCollection ifEmpty: [ ^self ].
 	self noIndent: ' throws '.
 	self
-		visitNodeList: aFASTJavaThrownExceptionsCollection
-		separatedBy: [ self noIndent: ', ' ]
+		visitNodeListSeparatedByCommas: aFASTJavaThrownExceptionsCollection
 ]
 
 ]
@@ -537,10 +533,10 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 	self checkForComments: aFASTJavaNewExpression andDo: [
-	self noIndent: 'new '.
-	aFASTJavaNewExpression type accept: self.
-	self visitFASTJavaMethodInvocationArguments: aFASTJavaNewExpression arguments
-]
+		self noIndent: 'new '.
+		aFASTJavaNewExpression type accept: self.
+		self visitFASTJavaArgumentsList: aFASTJavaNewExpression arguments
+	]
 
 ]
 
@@ -576,9 +572,7 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 	self checkForComments: aFASTJavaParameterCollection andDo: [
 	self noIndent: $(.
-	self
-		visitNodeList: aFASTJavaParameterCollection
-		separatedBy: [ self noIndent: ', ' ].
+	self visitNodeListSeparatedByCommas: aFASTJavaParameterCollection.
 	self noIndent: ') '
 ]
 
@@ -657,9 +651,7 @@ FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatemen
 	self checkForComments: aFASTJavaVarDeclStatement andDo: [
 	aFASTJavaVarDeclStatement type accept: self.
 	self space.
-	self
-		visitNodeList: aFASTJavaVarDeclStatement declarators
-		separatedBy: [ self noIndent: ', ' ].
+	self visitNodeListSeparatedByCommas: aFASTJavaVarDeclStatement declarators.
 	self endOfStatement
 ]
 
@@ -725,10 +717,24 @@ FASTJavaExportVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 ]
 
 { #category : #visiting }
-FASTJavaExportVisitor >> visitNodeList: aCollection separatedBy: separationBlock [
+FASTJavaExportVisitor >> visitJavaClassMemberDeclarations: classDeclarationsList [
+
+	self noIndent: ' {'.
+	self newLine.
+
+	self indent.
+	classDeclarationsList do: [ :declaration |
+		declaration accept: self ].
+	self noIndent: $}.
+
+	^ self unindent
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitNodeListSeparatedByCommas: aCollection [
 	aCollection
 		do: [ :node | node accept: self ]
-		separatedBy: separationBlock
+		separatedBy: [ self noIndent: ', ' ]
 ]
 
 { #category : #outputting }
