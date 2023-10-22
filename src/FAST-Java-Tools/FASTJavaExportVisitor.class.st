@@ -323,6 +323,16 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
+	self checkForComments: aFASTJavaFieldAccess andDo: [
+		aFASTJavaFieldAccess receiver accept: self.
+		self noIndent: $. .
+		self noIndent: aFASTJavaFieldAccess fieldName.
+	]
+
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 	self checkForComments: aFASTJavaFloatLiteral andDo: [
@@ -379,8 +389,8 @@ FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 	self checkForComments: aFASTJavaIdentifier andDo: [
-	self noIndent: aFASTJavaIdentifier name
-]
+		self noIndent: aFASTJavaIdentifier name
+	]
 
 ]
 
