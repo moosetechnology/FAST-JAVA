@@ -312,6 +312,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperationInstanceof [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { aBool = obj instanceof AClass; }'.
+
+	self export: expr statements first equals: 'aBool = obj instanceof AClass;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaIntegerLiteral [
 	| node |
 	node := builder literal: FASTJavaIntegerLiteral value: '42'.
