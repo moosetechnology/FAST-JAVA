@@ -89,6 +89,8 @@ FASTJavaValidator >> runOnFileReference: aFileReference [
 FASTJavaValidator >> runOnJavaFile: aFileReference [
 
 	| astOrig astBis |
+	aFileReference fullName traceCr.
+
 	astOrig := self getRootNode: (self getAST: aFileReference).
 	astBis := self getRootNode:
 		(JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString:
