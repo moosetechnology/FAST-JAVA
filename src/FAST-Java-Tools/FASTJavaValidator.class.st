@@ -36,10 +36,15 @@ FASTJavaValidator >> getAST: aFileReference [
 
 	| model |
 	aFileReference readStreamDo: [ :stream |
-		self gotoClassDeclaration: stream.
-		model := JavaSmaCCProgramNodeImporterVisitor new parseCodeString: stream contents
+		model := JavaSmaCCProgramNodeImporterVisitor new
+			accept: (JavaParser parse: stream contents) ;
+			model
 	].
-	^model
+
+	^model allWithSubTypesOfAny: { 
+		FASTJavaClassDeclaration .
+		FASTJavaInterfaceDeclaration .
+		FASTJavaEnumDeclaration  }
 ]
 
 { #category : #'instance creation' }
