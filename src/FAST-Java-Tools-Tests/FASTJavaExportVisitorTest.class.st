@@ -133,10 +133,10 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 { #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeAccess [
 
-	| expr |
-	expr := self methodAST: 'public void mth() { this.att = 5; }'.
+	| ast |
+	ast := self methodAST: 'public void mth() { this.att = 5; }'.
 
-	self export: expr statements first equals: 'this.att = 5;
+	self export: ast statements first equals: 'this.att = 5;
 '
 ]
 
@@ -309,6 +309,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 		export: node
 		equals: 'aVar==42'.
 
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperationInstanceof [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { aBool = obj instanceof AClass; }'.
+
+	self export: expr statements first equals: 'aBool = obj instanceof AClass;
+'
 ]
 
 { #category : #tests }

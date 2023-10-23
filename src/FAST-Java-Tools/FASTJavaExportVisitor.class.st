@@ -422,7 +422,9 @@ FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclarat
 FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	self checkForComments: aFASTJavaInfixOperation andDo: [
 	aFASTJavaInfixOperation leftOperand accept: self.
-	self noIndent: aFASTJavaInfixOperation operator.
+	(aFASTJavaInfixOperation operator = 'instanceof')
+		ifTrue:  [ self space ; noIndent: aFASTJavaInfixOperation operator ; space ]
+		ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
 	aFASTJavaInfixOperation rightOperand accept: self
 ]
 
