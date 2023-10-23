@@ -133,10 +133,10 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 { #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeAccess [
 
-	| expr |
-	expr := self methodAST: 'public void mth() { this.att = 5; }'.
+	| ast |
+	ast := self methodAST: 'public void mth() { this.att = 5; }'.
 
-	self export: expr statements first equals: 'this.att = 5;
+	self export: ast statements first equals: 'this.att = 5;
 '
 ]
 
