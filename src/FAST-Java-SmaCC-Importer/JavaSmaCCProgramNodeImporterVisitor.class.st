@@ -431,7 +431,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 	currentFASTEntity := self
 		addToModel:
 			(FASTJavaCharacterLiteral new
-				primitiveValue: aCharacterLiteral token value;
+				primitiveValue: aCharacterLiteral token value second ;
 				yourself).
 	self setStartEndPos: aCharacterLiteral.
 	^ currentFASTEntity

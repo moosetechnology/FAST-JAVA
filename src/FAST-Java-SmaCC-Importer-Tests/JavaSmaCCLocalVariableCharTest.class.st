@@ -27,5 +27,5 @@ JavaSmaCCLocalVariableCharTest >> testVariableDeclaratorExpressionType3 [
 
 { #category : #tests }
 JavaSmaCCLocalVariableCharTest >> testVariableDeclaratorExpressionValue3 [
-	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: '''c'''
+	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: $c
 ]

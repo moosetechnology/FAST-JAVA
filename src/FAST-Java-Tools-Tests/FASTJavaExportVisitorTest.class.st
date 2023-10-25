@@ -176,6 +176,13 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCharacterLiteral [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCharcaterLiteral [
+	| node |
+	node := builder literal: FASTJavaCharacterLiteral value: $A.
+	self export: node equals: '''A'''
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclaration [
 	| node |
 	node := builder class: 'Blah'.
@@ -423,6 +430,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
 	node := builder literal: FASTJavaStringLiteral value: 'This is a String'.
 	self export: node equals: '"This is a String"'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTestOnCharacter [
+
+	| ast |
+	ast := self methodAST: 'void mth() { if ( a == ''A'') ; }'.
+
+	self export: ast statements first equals: 'if (a==''A'') 
+;
+'
 ]
 
 { #category : #tests }
