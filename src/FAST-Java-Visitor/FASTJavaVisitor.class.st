@@ -295,6 +295,11 @@ FASTJavaVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [ 
+	^ self visitFASTTEntity: aFASTJavaPackageDeclaration
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	^ self visitFASTTVariableExpression: aFASTJavaParameter
 ]
@@ -322,6 +327,11 @@ FASTJavaVisitor >> visitFASTJavaSeparator: aFASTJavaSeparator [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExpression [
 	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaShortTypeExpression
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaStatement: aFASTJavaStatement [
+	^ self visitFASTTEntity: aFASTJavaStatement
 ]
 
 { #category : #generated }
