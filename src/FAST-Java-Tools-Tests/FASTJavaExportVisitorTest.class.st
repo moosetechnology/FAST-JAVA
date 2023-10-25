@@ -348,6 +348,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodAbstract [
+
+	| ast |
+	ast := self methodAST: 'public abstract void mth();'.
+
+	self export: ast equals: 'public abstract void mth() ;'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocation [
 
 	| node |
