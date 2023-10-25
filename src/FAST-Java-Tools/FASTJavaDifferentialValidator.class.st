@@ -7,13 +7,13 @@ checks completnwess of FAST-Java by
 - finally comparing the 2 models (they should be the same)
 "
 Class {
-	#name : #FASTJavaValidator,
+	#name : #FASTJavaDifferentialValidator,
 	#superclass : #FASTJavaVisitor,
 	#category : #'FAST-Java-Tools-export'
 }
 
 { #category : #'instance creation' }
-FASTJavaValidator >> childrenNodes: astNode [
+FASTJavaDifferentialValidator >> childrenNodes: astNode [
 
 	^OrderedCollection withAll:
 		(astNode children sorted: [:a :b | a startPos <= b startPos])
@@ -21,7 +21,7 @@ FASTJavaValidator >> childrenNodes: astNode [
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> compare: ast1 to: ast2 [
+FASTJavaDifferentialValidator >> compare: ast1 to: ast2 [
 
 	(ast1 class = ast2 class)
 		ifFalse: [ Exception signal: 'ASTs differ' ].
@@ -32,29 +32,34 @@ FASTJavaValidator >> compare: ast1 to: ast2 [
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> getAST: aFileReference [
+FASTJavaDifferentialValidator >> getASTFromFileReference: aFileReference [
 
 	| model |
 	aFileReference readStreamDo: [ :stream |
-		model := JavaSmaCCProgramNodeImporterVisitor new
-			accept: (JavaParser parse: stream contents) ;
-			model
-	].
+		model := self getASTFromString: stream ].
 
-	^model allWithSubTypesOfAny: { 
-		FASTJavaClassDeclaration .
-		FASTJavaInterfaceDeclaration .
-		FASTJavaEnumDeclaration  }
+	^ model allWithSubTypesOfAny: {
+			  FASTJavaClassDeclaration.
+			  FASTJavaInterfaceDeclaration.
+			  FASTJavaEnumDeclaration }
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> getRootNode: aFamixModel [
+FASTJavaDifferentialValidator >> getASTFromString: stream [
+
+	^ JavaSmaCCProgramNodeImporterVisitor new
+		  accept: (JavaParser parse: stream contents);
+		  model
+]
+
+{ #category : #'instance creation' }
+FASTJavaDifferentialValidator >> getRootNode: aFamixModel [
 
 	^aFamixModel detect: [ : e | e allParents isEmpty ]
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> gotoClassDeclaration: stream [
+FASTJavaDifferentialValidator >> gotoClassDeclaration: stream [
 	"put the stream at the start of a Java class declaration"
 	
 	| pattern |
@@ -65,13 +70,13 @@ FASTJavaValidator >> gotoClassDeclaration: stream [
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> on: aDirectoryName [
+FASTJavaDifferentialValidator >> on: aDirectoryName [
 
 	self runOnDirectory: aDirectoryName asFileReference
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> runOnDirectory: aDirectory [
+FASTJavaDifferentialValidator >> runOnDirectory: aDirectory [
 
 	aDirectory isDirectory
 		ifFalse: [ Exception signal: aDirectory fullName , ' not a directory' ].
@@ -80,7 +85,7 @@ FASTJavaValidator >> runOnDirectory: aDirectory [
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> runOnFileReference: aFileReference [
+FASTJavaDifferentialValidator >> runOnFileReference: aFileReference [
 
 	aFileReference isDirectory
 		ifTrue: [ ^self runOnDirectory: aFileReference ].
@@ -91,15 +96,14 @@ FASTJavaValidator >> runOnFileReference: aFileReference [
 ]
 
 { #category : #'instance creation' }
-FASTJavaValidator >> runOnJavaFile: aFileReference [
+FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 
 	| astOrig astBis |
 	aFileReference fullName traceCr.
 
-	astOrig := self getRootNode: (self getAST: aFileReference).
+	astOrig := self getRootNode: (self getASTFromFileReference: aFileReference).
 	astBis := self getRootNode:
-		(JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString:
-			(FASTJavaExportVisitor new export: astOrig)).
+		(self getASTFromString: (FASTJavaExportVisitor new export: astOrig)).
 	
 	self compare: astOrig to: astBis
 ]
