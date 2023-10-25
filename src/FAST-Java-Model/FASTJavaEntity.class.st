@@ -3,7 +3,7 @@ Class {
 	#superclass : #MooseEntity,
 	#traits : 'FASTTEntity + FASTTWithComments',
 	#classTraits : 'FASTTEntity classTrait + FASTTWithComments classTrait',
-	#category : #'FAST-Java-Model'
+	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }

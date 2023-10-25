@@ -4,9 +4,9 @@ Class {
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #tests }
-JavaSmaCCEnumDeclarationTest >> enumString [
-	^ 'class A {
+{ #category : #running }
+JavaSmaCCEnumDeclarationTest >> javaMethod [
+	^ 'void method() {
 	private enum MyEnum { 
 		
 		INFORMATION_EMPTY("INFO_EMPTY");
@@ -33,15 +33,27 @@ JavaSmaCCEnumDeclarationTest >> enumString [
 }' 
 ]
 
-{ #category : #running }
-JavaSmaCCEnumDeclarationTest >> setUp [
-	"not doing anything because we want to call parsing in the test itself"
+{ #category : #tests }
+JavaSmaCCEnumDeclarationTest >> testConstantNameInEnum [
+	self assert: (fastMethod mooseModel allWithType: FASTJavaEnumConstant) anyOne name equals: 'INFORMATION_EMPTY'
 ]
 
 { #category : #tests }
-JavaSmaCCEnumDeclarationTest >> testCanParseEnumDeclarationText [
+JavaSmaCCEnumDeclarationTest >> testEnumDeclarationName [
+	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) anyOne name equals: 'MyEnum' 
+]
 
-	self
-		shouldnt: [ self parseClassString: self enumString ]
-		raise: Error
+{ #category : #tests }
+JavaSmaCCEnumDeclarationTest >> testNumberOfConstantsInEnum [
+	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) anyOne constants size equals: 1
+]
+
+{ #category : #tests }
+JavaSmaCCEnumDeclarationTest >> testNumberOfDeclarationsInEnum [
+	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) anyOne declarations size equals: 4
+]
+
+{ #category : #tests }
+JavaSmaCCEnumDeclarationTest >> testNumberOfEnumDeclaration [
+	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) size equals: 1
 ]

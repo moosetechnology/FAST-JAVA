@@ -213,6 +213,13 @@ FASTJavaTEntityCreator >> newEmptyMethodDeclaration [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newEnumConstant [
+
+	<generated>
+	^ self add: FASTJavaEnumConstant new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newEnumDeclaration [
 
 	<generated>
