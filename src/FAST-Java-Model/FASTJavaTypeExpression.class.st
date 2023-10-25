@@ -5,11 +5,11 @@ Class {
 	#name : #FASTJavaTypeExpression,
 	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
-		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
-		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
-		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
-		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
+		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
+		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
+		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
+		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
 	],
 	#category : #'FAST-Java-Model-Entities'

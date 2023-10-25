@@ -7,8 +7,8 @@ Class {
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
-		'#catchedTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
 		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches',
+		'#catchedTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
 		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler'
 	],
 	#category : #'FAST-Java-Model-Entities'

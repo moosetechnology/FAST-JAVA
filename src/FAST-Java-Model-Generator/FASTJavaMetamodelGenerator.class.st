@@ -123,7 +123,8 @@ Class {
 		'tWithComments',
 		'javaEntity',
 		'javaComment',
-		'javaEmptyDimExpression'
+		'javaEmptyDimExpression',
+		'javaEnumConstant'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -709,6 +710,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaInitializer := builder newClassNamed: #Initializer comment: self commentForJavaInitializer.
 	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
 	javaModifier := builder newClassNamed: #Modifier comment: self commentForJavaModifier.	
+	javaEnumConstant := builder newClassNamed: #EnumConstant.
 
 	javaLambdaExpression := builder newClassNamed: #LambdaExpression comment: 'I represent a lambda expression'.
 	javaMethodReference := builder newClassNamed: #MethodReference comment: 'I represent a method reference'.
@@ -860,6 +862,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaEnumDeclaration --|> tWithDeclarations.
 	javaEnumDeclaration --|> tWithModifiers.
 	javaEnumDeclaration --|> tNamedEntity.
+
+	javaEnumConstant --|> javaVariableExpression.
 
 	javaInterfaceDeclaration --|> tStatement.
 	javaInterfaceDeclaration --|> tDeclaration.
@@ -1337,6 +1341,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-*
 		((javaTypeExpression property: #javaEnumDeclarationInterfaceOwner) 
 			 comment: 'The enum that implements me').
+
+	((javaEnumDeclaration property: #constants) comment:
+		 'The constants I define')
+	<>-*
+		((javaEnumConstant property: #parentEnum) 
+			 comment: 'The enum type that contains me').
 
 	((javaInterfaceDeclaration property: #interfaces) comment:
 		 'My super interfaces')

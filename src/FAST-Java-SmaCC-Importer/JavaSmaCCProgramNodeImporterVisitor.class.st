@@ -544,13 +544,27 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitEnumConstant: anEnumConstant [
+	"treat EnumConstant as a Field"
+
+	currentFASTEntity := self addToModel: FASTJavaEnumConstant new.
+	self setStartEndPos: anEnumConstant.
+	currentFASTEntity
+			name: anEnumConstant name value.
+
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEnumDeclaration: anEnumDeclaration [
 
 	self create: FASTJavaEnumDeclaration from: anEnumDeclaration.
+	currentFASTEntity name: anEnumDeclaration name value.
+
+	anEnumDeclaration constants do: [ :constant | currentFASTEntity addConstant: (self clone accept: constant) ].
 	anEnumDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
 	anEnumDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
 	anEnumDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
-	currentFASTEntity name: anEnumDeclaration name value.
 	^ currentFASTEntity
 ]
 
