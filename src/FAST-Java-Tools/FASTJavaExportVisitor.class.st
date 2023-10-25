@@ -225,6 +225,19 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStatement [
+
+	self checkForComments: aFASTJavaCatchPartStatement andDo: [ 
+		self withIndent: 'catch ('.
+		self visitNodeListSeparatedByCommas: aFASTJavaCatchPartStatement catchedTypes.
+		self space.
+		aFASTJavaCatchPartStatement parameter accept: self.
+		self noIndent: ') '.
+		aFASTJavaCatchPartStatement body accept: self
+	]
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpression [
 	self checkForComments: aFASTJavaCharTypeExpression andDo: [
@@ -696,6 +709,18 @@ FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 		self visitFASTJavaBlockOrStatement: aFASTJavaStatement
 ]
+
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
+	self checkForComments: aFASTJavaTryCatchStatement andDo: [
+		self withIndent: 'try '.
+		aFASTJavaTryCatchStatement try accept: self.
+		aFASTJavaTryCatchStatement catches do: [ :catchStatement |
+			catchStatement accept: self
+		]
+	]
 
 ]
 
