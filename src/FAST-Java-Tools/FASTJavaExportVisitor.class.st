@@ -323,6 +323,49 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 
 ]
 
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
+
+	self checkForComments: aFASTJavaEnumConstant andDo: [
+		self noIndent: aFASTJavaEnumConstant name
+	]
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration [
+
+	self checkForComments: aFASTJavaEnumDeclaration andDo: [
+		self visitFASTJavaModifiers: aFASTJavaEnumDeclaration modifiers.
+		self
+			noIndent: 'enum ' ;
+			noIndent: aFASTJavaEnumDeclaration name.
+
+		aFASTJavaEnumDeclaration interfaces ifNotEmpty: [ :interfaces |
+			self noIndent: ' implements '.
+			interfaces
+				do: [ :interface | interface accept: self ]
+				separatedBy: [ self noIndent: ', ' ] ].
+
+		self
+			noIndent: ' {' ;
+			newLine ;
+			indent.
+
+		self withIndent: ''.
+		self visitNodeListSeparatedByCommas: aFASTJavaEnumDeclaration constants.
+		self noIndent: $;.
+		self newLine.
+
+		aFASTJavaEnumDeclaration declarations do: [ :declaration |
+			declaration accept: self ].
+
+		self
+			unindent ;
+			withIndent: $} ;
+			newLine.
+	]
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 	self checkForComments: aFASTJavaFieldAccess andDo: [

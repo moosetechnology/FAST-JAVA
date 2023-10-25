@@ -239,6 +239,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
+
+	| ast |
+	ast := self astFor: 'enum Blah { A, B; }'.
+
+	self export: ast equals: 'enum Blah {
+  A, B;
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 	| node |
 	node := builder literal: FASTJavaFloatLiteral value: '37.2'.
