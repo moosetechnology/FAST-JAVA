@@ -426,6 +426,24 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatch [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  try { }
+  catch (SomeError err) { }
+}'.
+
+	self export: ast equals: 'void mth() {
+  try {
+  }
+  catch (SomeError err) {
+  }
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 
 	self
