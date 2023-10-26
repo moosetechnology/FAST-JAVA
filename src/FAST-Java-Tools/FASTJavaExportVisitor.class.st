@@ -595,7 +595,11 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.
 
 	aFASTJavaMethodEntity statementBlock 
-		ifNil: [ "abstract method" self noIndent: $; ]
+		ifNil: [ "abstract method"
+			self
+				noIndent: $; ;
+				newLine
+		]
 		ifNotNil: [ :statementBlock | statementBlock accept: self ]
 ]
 
