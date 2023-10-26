@@ -235,18 +235,16 @@ JavaSmaCCProgramNodeImporterVisitor >> setStartEndPos: aNodeEntity [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstractMethodDeclaration [
 
-	currentFASTEntity := (self
-		                      create: FASTJavaMethodEntity
-		                      from: anAbstractMethodDeclaration)
-		                     name:
-			                     anAbstractMethodDeclaration declarator name
-				                     value;
-		                     yourself.
-	self setStartEndPos: anAbstractMethodDeclaration.
+	currentFASTEntity := (self create: FASTJavaMethodEntity from: anAbstractMethodDeclaration)
+		name: anAbstractMethodDeclaration declarator name value;
+		yourself.
+
 	anAbstractMethodDeclaration declarator parameters do: [ :parameter | 
 		currentFASTEntity addParameter: (self clone accept: parameter) ].
 	anAbstractMethodDeclaration modifiers do: [ :modifier | 
 		currentFASTEntity addModifier: (self clone accept: modifier) ].
+	currentFASTEntity type: (self clone accept: anAbstractMethodDeclaration type).
+
 	^ currentFASTEntity
 ]
 
@@ -728,10 +726,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitInterfaceDeclaration: anInterfaceDeclaration [
 	self create: FASTJavaInterfaceDeclaration from: anInterfaceDeclaration.
-	anInterfaceDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
-	anInterfaceDeclaration interfaceTypes do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
-	anInterfaceDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	currentFASTEntity name: anInterfaceDeclaration name value.
+
+	anInterfaceDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	anInterfaceDeclaration interfaceTypes do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
+	anInterfaceDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
+
 	^ currentFASTEntity
 ]
 
