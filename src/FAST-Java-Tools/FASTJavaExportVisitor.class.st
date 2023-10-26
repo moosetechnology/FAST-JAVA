@@ -13,7 +13,8 @@ Class {
 	#superclass : #FASTJavaVisitor,
 	#instVars : [
 		'stream',
-		'indent'
+		'indent',
+		'parenthesiseExpressions'
 	],
 	#category : #'FAST-Java-Tools-export'
 }
@@ -79,6 +80,7 @@ FASTJavaExportVisitor >> indentPrefix [
 FASTJavaExportVisitor >> initialize [ 
 	super initialize.
 
+	parenthesiseExpressions := false.
 	indent := 0.
 	stream := WriteStream on: ''
 	
@@ -111,6 +113,11 @@ FASTJavaExportVisitor >> outputLineComment: aComment [
 
 	self noIndent: aComment content.
 	self newLine
+]
+
+{ #category : #accessing }
+FASTJavaExportVisitor >> parenthesiseExpressions [
+	parenthesiseExpressions := true
 ]
 
 { #category : #outputting }
@@ -202,6 +209,17 @@ FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTyp
 	self checkForComments: aFASTJavaBooleanTypeExpression andDo: [
 	self noIndent: 'boolean'
 ]
+
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
+
+	self checkForComments: aFASTJavaBreakStatement andDo: [
+		self
+			withIndent: 'break' ;
+			endOfStatement
+	]
 
 ]
 
@@ -316,6 +334,20 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 	aFASTJavaConditionalExpression elsePart accept: self
 ]
 
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatement [
+	self checkForComments: aFASTJavaDefaultCaseStatement andDo: [ 
+		self
+			withIndent: 'default:' ;
+			newLine ;
+			indent.
+		aFASTJavaDefaultCaseStatement statements do: [ :caseStatement |
+			caseStatement accept: self
+		].
+		self unindent 
+	]
 ]
 
 { #category : #visiting }
@@ -477,11 +509,13 @@ FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclarat
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	self checkForComments: aFASTJavaInfixOperation andDo: [
-	aFASTJavaInfixOperation leftOperand accept: self.
-	(aFASTJavaInfixOperation operator = 'instanceof')
-		ifTrue:  [ self space ; noIndent: aFASTJavaInfixOperation operator ; space ]
-		ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
-	aFASTJavaInfixOperation rightOperand accept: self
+		parenthesiseExpressions ifTrue: [ self noIndent: $( ].
+		aFASTJavaInfixOperation leftOperand accept: self.
+		(aFASTJavaInfixOperation operator = 'instanceof')
+			ifTrue:  [ self space ; noIndent: aFASTJavaInfixOperation operator ; space ]
+			ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
+		aFASTJavaInfixOperation rightOperand accept: self.
+		parenthesiseExpressions ifTrue: [ self noIndent: $) ]
 ]
 
 ]
@@ -492,6 +526,22 @@ FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpress
 	self noIndent: 'int'
 ]
 
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatement [
+	self checkForComments: aFASTJavaLabeledCaseStatement andDo: [ 
+		self withIndent: 'case '.
+		aFASTJavaLabeledCaseStatement label accept: self.
+		self
+			noIndent: ' :' ;
+			newLine ;
+			indent.
+		aFASTJavaLabeledCaseStatement statements do: [ :caseStatement |
+			caseStatement accept: self
+		].
+		self unindent
+	]
 ]
 
 { #category : #'visiting expression' }
@@ -702,6 +752,26 @@ FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self noIndent: $"
 ]
 
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
+
+	self checkForComments: aFASTJavaSwitchStatement andDo: [
+		self withIndent: 'switch ('.
+		aFASTJavaSwitchStatement condition accept: self.
+		self
+			noIndent: ') {' ;
+			newLine ;
+			indent.
+		aFASTJavaSwitchStatement cases do: [ :switchCase |
+			switchCase accept: self
+		].
+		self
+			unindent ;
+			withIndent: $} ;
+			newLine
+	]
 ]
 
 { #category : #'visiting statement' }
