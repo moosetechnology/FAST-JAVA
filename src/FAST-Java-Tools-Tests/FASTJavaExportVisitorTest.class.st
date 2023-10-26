@@ -85,21 +85,24 @@ void mth() {
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotation [
-
-	| anno |
-	anno := builder annotation: 'Deprecated'.
-
-	self export: anno equals: '@Deprecated'.
-]
-
-{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotattionWithArgument [
 	
 	| expr |
 	expr := self methodAST: '@Useless("an argument") void mth() { }'.
 
 	self export: expr equals: '@Useless("an argument")
+void mth() {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotattionWithNamedArguments [
+	
+	| expr |
+	expr := self methodAST: '@Useless(arg1="an argument",arg2=AClass.A_Constant) void mth() { }'.
+
+	self export: expr equals: '@Useless(arg1 = "an argument", arg2 = AClass.A_Constant)
 void mth() {
 }
 '
