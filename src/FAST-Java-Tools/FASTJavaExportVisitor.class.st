@@ -687,6 +687,14 @@ FASTJavaExportVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
 
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
+	self checkForComments: aFASTJavaOuterThis andDo: [
+		aFASTJavaOuterThis type accept: self.
+		self noIndent: '.this'
+	]
+]
+
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [
 	self checkForComments: aFASTJavaPackageDeclaration andDo: [
