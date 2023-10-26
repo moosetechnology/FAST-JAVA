@@ -133,9 +133,15 @@ FASTJavaExportVisitor >> unindent [
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self checkForComments: aFASTJavaAnnotation andDo: [
-	self noIndent: $@.
-	aFASTJavaAnnotation expression accept: self
-]
+		self
+			withIndent: $@ ;
+			noIndent: aFASTJavaAnnotation name.
+		aFASTJavaAnnotation arguments ifNotEmpty: [ :arguments |
+			self noIndent: $(.
+			self visitNodeListSeparatedByCommas: arguments.
+			self noIndent: $)
+		]
+	]
 
 ]
 
