@@ -968,8 +968,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaModifier --|> tModifier.
 	javaModifier --|> tExpression.
 
-	javaAnnotationExpression --|> tExpression.
+	javaAnnotationExpression --|> tNamedEntity.
 	javaAnnotationExpression --|> tModifier.
+	javaAnnotationExpression --|> #TWithArguments.
+
 	javaParameterExpression --|> tExpression.
 	javaParameterExpression --|> tVariableEntity.
 	javaConditionalExpression --|> tReceiver.
@@ -1363,11 +1365,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((tWithModifiers property: #modifiers) comment: 'My modifiers')
 	<>-* ((tModifier property: #javaModifierOwner) comment:
 			 'The owner of the modifier').
-
-	((javaAnnotationExpression property: #expression) comment:
-		 'My expression (because annotation can be complex)')
-	<>- ((javaVariableExpression property: #annotationExpressionOwner) 
-			 comment: 'The annotation that owns me').
 
 	((tWithAssignable property: #variable) comment: 'My variable')
 	<>- ((tAssignable property: #javaVariableAssignmentOwner) comment:

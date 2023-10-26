@@ -73,12 +73,36 @@ FASTJavaExportVisitorTest >> testVisitFASTEmptyReturn [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethod [
+	
+	| expr |
+	expr := self methodAST: '@Useless void mth() { }'.
+
+	self export: expr equals: '@Useless
+void mth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotation [
 
 	| anno |
 	anno := builder annotation: 'Deprecated'.
 
 	self export: anno equals: '@Deprecated'.
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotattionWithArgument [
+	
+	| expr |
+	expr := self methodAST: '@Useless("an argument") void mth() { }'.
+
+	self export: expr equals: '@Useless("an argument")
+void mth() {
+}
+'
 ]
 
 { #category : #tests }

@@ -251,7 +251,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstrac
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 	self create: FASTJavaAnnotation from: anAnnotation.
-	currentFASTEntity expression: (self clone accept: anAnnotation name).
+	currentFASTEntity name: anAnnotation name name value.
+
+	anAnnotation values do: [ :expression |
+		currentFASTEntity addArgument: (self clone accept: expression) ].
+
 	^ currentFASTEntity
 ]
 
@@ -438,11 +442,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration [
 	self create: FASTJavaClassDeclaration from: aClassDeclaration.
-	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
-	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
-	aClassDeclaration superclass ifNotNil: [ :superclass | currentFASTEntity superclass: (self clone accept: superclass) ].
-	aClassDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	currentFASTEntity name: aClassDeclaration name value.
+	
+	aClassDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	aClassDeclaration superclass ifNotNil: [ :superclass | currentFASTEntity superclass: (self clone accept: superclass) ].
+	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
+	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
+
 	^ currentFASTEntity
 ]
 
