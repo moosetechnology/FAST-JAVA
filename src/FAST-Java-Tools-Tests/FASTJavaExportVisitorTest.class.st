@@ -396,6 +396,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMet
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceWithAbstractMethod [
+
+	| ast |
+	ast := self astFor: 'interface IBlah {
+  int mth();
+}'.
+
+	self export: ast equals: 'interface IBlah {
+  int mth() ;
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 	| node |
 	node := builder literal: FASTJavaLongLiteral value: '42'.
@@ -408,7 +422,8 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodAbstract [
 	| ast |
 	ast := self methodAST: 'public abstract void mth();'.
 
-	self export: ast equals: 'public abstract void mth() ;'
+	self export: ast equals: 'public abstract void mth() ;
+'
 ]
 
 { #category : #tests }
