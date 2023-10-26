@@ -290,7 +290,8 @@ FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaratio
 				do: [ :interface | interface accept: self ]
 				separatedBy: [ self noIndent: ', ' ] ].
 
-		self visitJavaClassMemberDeclarations: aFASTJavaClassDeclaration declarations.
+		aFASTJavaClassDeclaration declarations
+			ifNotNil: [ :declarations | self visitJavaClassMemberDeclarations: declarations ].
 		self newLine
 	]
 ]
@@ -401,8 +402,9 @@ FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration 
 		self noIndent: $;.
 		self newLine.
 
-		aFASTJavaEnumDeclaration declarations do: [ :declaration |
-			declaration accept: self ].
+		aFASTJavaEnumDeclaration declarations
+			ifNotNil: [ :declarations |
+				declarations do: [ :declaration | declaration accept: self ]. ].
 
 		self
 			unindent ;
@@ -526,6 +528,25 @@ FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpress
 	self noIndent: 'int'
 ]
 
+]
+
+{ #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDeclaration [
+
+	self checkForComments: aFASTJavaInterfaceDeclaration andDo: [
+		self visitFASTJavaModifiers: aFASTJavaInterfaceDeclaration modifiers.
+		self noIndent: 'interface '.
+		self noIndent: aFASTJavaInterfaceDeclaration name.
+		aFASTJavaInterfaceDeclaration interfaces ifNotEmpty: [ :interfaces |
+			self noIndent: ' extends '.
+			interfaces
+				do: [ :interface | interface accept: self ]
+				separatedBy: [ self noIndent: ', ' ] ].
+
+		aFASTJavaInterfaceDeclaration declarations
+			ifNotNil: [ :declarations | self visitJavaClassMemberDeclarations: declarations ].
+		self newLine
+	]
 ]
 
 { #category : #'visiting statement' }
