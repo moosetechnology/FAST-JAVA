@@ -63,6 +63,16 @@ FASTJavaExportVisitorTest >> setUp [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTEmptyReturn [
+
+	| ast |
+	ast := self methodAST: 'void mth() { return; }'.
+
+	self export: ast statements first equals: 'return ;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotation [
 
 	| anno |

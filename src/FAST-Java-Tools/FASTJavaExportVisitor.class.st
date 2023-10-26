@@ -888,7 +888,8 @@ FASTJavaExportVisitor >> visitFASTTLiteral: aFASTTLiteral [
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTReturnStatement: aFASTTReturnStatement [
 	self withIndent: 'return '.
-	aFASTTReturnStatement expression accept: self.
+	aFASTTReturnStatement expression
+		ifNotNil: [ :returnedExpression | returnedExpression accept: self ].
 	self endOfStatement
 ]
 
