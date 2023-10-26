@@ -9,7 +9,7 @@ checks completnwess of FAST-Java by
 Class {
 	#name : #FASTJavaDifferentialValidator,
 	#superclass : #FASTJavaVisitor,
-	#category : #'FAST-Java-Tools-export'
+	#category : #'FAST-Java-Tools'
 }
 
 { #category : #'instance creation' }
@@ -103,7 +103,7 @@ FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 
 	astOrig := self getRootNode: (self getASTFromFileReference: aFileReference).
 	astBis := self getRootNode:
-		(self getASTFromString: (FASTJavaExportVisitor new export: astOrig)).
+		(self getASTFromString: (FASTJavaExportVisitor new parenthesiseExpressions ; export: astOrig)).
 	
 	self compare: astOrig to: astBis
 ]

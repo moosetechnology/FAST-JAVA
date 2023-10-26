@@ -13,7 +13,8 @@ Class {
 	#superclass : #FASTJavaVisitor,
 	#instVars : [
 		'stream',
-		'indent'
+		'indent',
+		'parenthesiseExpressions'
 	],
 	#category : #'FAST-Java-Tools-export'
 }
@@ -79,6 +80,7 @@ FASTJavaExportVisitor >> indentPrefix [
 FASTJavaExportVisitor >> initialize [ 
 	super initialize.
 
+	parenthesiseExpressions := false.
 	indent := 0.
 	stream := WriteStream on: ''
 	
@@ -111,6 +113,11 @@ FASTJavaExportVisitor >> outputLineComment: aComment [
 
 	self noIndent: aComment content.
 	self newLine
+]
+
+{ #category : #accessing }
+FASTJavaExportVisitor >> parenthesiseExpressions [
+	parenthesiseExpressions := true
 ]
 
 { #category : #outputting }
@@ -477,11 +484,13 @@ FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclarat
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	self checkForComments: aFASTJavaInfixOperation andDo: [
-	aFASTJavaInfixOperation leftOperand accept: self.
-	(aFASTJavaInfixOperation operator = 'instanceof')
-		ifTrue:  [ self space ; noIndent: aFASTJavaInfixOperation operator ; space ]
-		ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
-	aFASTJavaInfixOperation rightOperand accept: self
+		parenthesiseExpressions ifTrue: [ self noIndent: $( ].
+		aFASTJavaInfixOperation leftOperand accept: self.
+		(aFASTJavaInfixOperation operator = 'instanceof')
+			ifTrue:  [ self space ; noIndent: aFASTJavaInfixOperation operator ; space ]
+			ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
+		aFASTJavaInfixOperation rightOperand accept: self.
+		parenthesiseExpressions ifTrue: [ self noIndent: $) ]
 ]
 
 ]
