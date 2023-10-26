@@ -256,6 +256,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaContinueStatement [
+
+	| ast |
+	ast := self methodAST: 'public void mth() { continue; }'.
+
+	self export: ast statements first equals: 'continue;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 
 	| ast |
