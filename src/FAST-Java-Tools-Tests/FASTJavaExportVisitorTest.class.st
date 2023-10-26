@@ -358,6 +358,44 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaIntegerLiteral [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclaration [
+
+	| ast |
+	ast := self astFor: 'interface IBlah { }'.
+
+	self export: ast equals: 'interface IBlah {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationExtendsInterfaces [
+
+	| ast |
+	ast := self astFor: 'interface IBlah extends Intfce1, Intfce2 { }'.
+
+	self export: ast equals: 'interface IBlah extends Intfce1, Intfce2 {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMethod [
+
+	| ast |
+	ast := self astFor: 'interface IBlah { 
+  void defaultMth() { return 1; }
+}'.
+
+	self export: ast equals: 'interface IBlah {
+  void defaultMth() {
+    return 1;
+  }
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 	| node |
 	node := builder literal: FASTJavaLongLiteral value: '42'.
