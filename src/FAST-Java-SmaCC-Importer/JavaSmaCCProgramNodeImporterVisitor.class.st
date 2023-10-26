@@ -526,6 +526,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitElementValuePair: anElementValuePair [
+	"'key = value' as argument of an Annotation
+	 treat it as an Assignement Expression"
+
+	currentFASTEntity := self create: FASTJavaAssignmentExpression from: anElementValuePair.
+	currentFASTEntity variable: (self clone visitVariableName: anElementValuePair).
+	currentFASTEntity operator: '='.
+	currentFASTEntity expression: (self clone accept: anElementValuePair value).
+
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaEmptyMethodDeclaration new.
 	self setStartEndPos: anEmptyDeclaration.
