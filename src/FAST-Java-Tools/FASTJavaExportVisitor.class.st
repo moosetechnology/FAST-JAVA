@@ -338,6 +338,17 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 ]
 
 { #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatement [
+
+	self checkForComments: aFASTJavaContinueStatement andDo: [
+		self
+			withIndent: 'continue' ;
+			endOfStatement
+	]
+
+]
+
+{ #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatement [
 	self checkForComments: aFASTJavaDefaultCaseStatement andDo: [ 
 		self
