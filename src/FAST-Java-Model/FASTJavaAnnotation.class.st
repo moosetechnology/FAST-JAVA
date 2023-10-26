@@ -8,11 +8,8 @@ example:
 Class {
 	#name : #FASTJavaAnnotation,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTModifier + FASTTExpression',
-	#classTraits : 'FASTJavaTModifier classTrait + FASTTExpression classTrait',
-	#instVars : [
-		'#expression => FMOne type: #FASTJavaVariableExpression opposite: #annotationExpressionOwner'
-	],
+	#traits : 'FASTJavaTModifier + FASTTNamedEntity + FASTTWithArguments',
+	#classTraits : 'FASTJavaTModifier classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -23,27 +20,4 @@ FASTJavaAnnotation class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
-]
-
-{ #category : #accessing }
-FASTJavaAnnotation >> expression [
-	"Relation named: #expression type: #FASTJavaVariableExpression opposite: #annotationExpressionOwner"
-
-	<generated>
-	<FMComment: 'My expression (because annotation can be complex)'>
-	^ expression
-]
-
-{ #category : #accessing }
-FASTJavaAnnotation >> expression: anObject [
-
-	<generated>
-	expression := anObject
-]
-
-{ #category : #navigation }
-FASTJavaAnnotation >> expressionGroup [
-	<generated>
-	<navigation: 'Expression'>
-	^ MooseSpecializedGroup with: self expression
 ]

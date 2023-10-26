@@ -12,8 +12,10 @@ JavaSmaCCMethodModifiersTest >> javaMethod [
 ]
 
 { #category : #tests }
-JavaSmaCCMethodModifiersTest >> testMethodAnnotationExpression [
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne expression class equals: FASTJavaVariableExpression
+JavaSmaCCMethodModifiersTest >> testMethodModifiersAnnotationNumber [
+	self
+		assert: ((fastModel allWithType: FASTJavaMethodEntity) anyOne modifiers count: [ :mod | mod class = FASTJavaAnnotation ])
+		equals: 1
 ]
 
 { #category : #tests }

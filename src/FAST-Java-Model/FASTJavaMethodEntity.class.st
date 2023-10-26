@@ -7,8 +7,8 @@ Class {
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner',
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner',
 		'#typeParameters => FMMany type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
