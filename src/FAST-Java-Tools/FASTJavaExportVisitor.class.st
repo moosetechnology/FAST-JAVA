@@ -212,6 +212,17 @@ FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTyp
 
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
+
+	self checkForComments: aFASTJavaBreakStatement andDo: [
+		self
+			withIndent: 'break' ;
+			endOfStatement
+	]
+
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpression [
 	self checkForComments: aFASTJavaByteTypeExpression andDo: [
@@ -323,6 +334,20 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 	aFASTJavaConditionalExpression elsePart accept: self
 ]
 
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatement [
+	self checkForComments: aFASTJavaDefaultCaseStatement andDo: [ 
+		self
+			withIndent: 'default:' ;
+			newLine ;
+			indent.
+		aFASTJavaDefaultCaseStatement statements do: [ :caseStatement |
+			caseStatement accept: self
+		].
+		self unindent 
+	]
 ]
 
 { #category : #visiting }
@@ -501,6 +526,22 @@ FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpress
 	self noIndent: 'int'
 ]
 
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatement [
+	self checkForComments: aFASTJavaLabeledCaseStatement andDo: [ 
+		self withIndent: 'case '.
+		aFASTJavaLabeledCaseStatement label accept: self.
+		self
+			noIndent: ' :' ;
+			newLine ;
+			indent.
+		aFASTJavaLabeledCaseStatement statements do: [ :caseStatement |
+			caseStatement accept: self
+		].
+		self unindent
+	]
 ]
 
 { #category : #'visiting expression' }
@@ -711,6 +752,26 @@ FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self noIndent: $"
 ]
 
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
+
+	self checkForComments: aFASTJavaSwitchStatement andDo: [
+		self withIndent: 'switch ('.
+		aFASTJavaSwitchStatement condition accept: self.
+		self
+			noIndent: ') {' ;
+			newLine ;
+			indent.
+		aFASTJavaSwitchStatement cases do: [ :switchCase |
+			switchCase accept: self
+		].
+		self
+			unindent ;
+			withIndent: $} ;
+			newLine
+	]
 ]
 
 { #category : #'visiting statement' }

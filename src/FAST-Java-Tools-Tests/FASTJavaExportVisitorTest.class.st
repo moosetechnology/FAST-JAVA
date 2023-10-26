@@ -610,6 +610,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaWhileLoopEmpty [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTSwitchCaseDefault [
+
+	| ast |
+	ast := self methodAST: 'void mth() { switch (a) { case b: break; default: break; } }'.
+
+	self export: ast statements first equals: 'switch (a) {
+  case b :
+    break;
+  default:
+    break;
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTTExpressionStatement [
 	| node |
 	node := builder exprStatement: (builder invocation: 'methodA' recvr: nil args: #()).
