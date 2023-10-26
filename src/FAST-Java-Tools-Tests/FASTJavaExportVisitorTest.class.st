@@ -436,6 +436,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaNullLiteral [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaOuterThis [
+	| ast |
+	ast := self methodAST: 'void mth() { return EnclosingClass.this; }'.
+
+	self export: ast statements first equals: 'return EnclosingClass.this;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringConcatenation [
 
 	| ast |
