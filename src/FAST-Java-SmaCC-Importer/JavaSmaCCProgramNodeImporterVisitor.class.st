@@ -369,7 +369,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aBooleanType [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitBreakStatement: aBreakStatement [
-	currentFASTEntity := self addToModel: FASTJavaContinueStatement new.
+	currentFASTEntity := self addToModel: FASTJavaBreakStatement new.
 	self setStartEndPos: aBreakStatement.
 	^ currentFASTEntity
 ]
