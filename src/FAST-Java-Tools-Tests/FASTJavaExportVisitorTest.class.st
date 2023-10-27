@@ -317,7 +317,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 
 	| ast |
 	ast := self astFor: 'class Blah {
-	   void method() { };
+	   void method() { }
 	}'.
 
 	self export: ast equals: 'class Blah {
