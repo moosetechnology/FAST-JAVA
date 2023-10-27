@@ -729,6 +729,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTestOnCharacter [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaThrowStatement [
+
+	| expr |
+	expr := self methodAST: 'void mth() { throw new Exception(); }'.
+
+	self export: expr statements first equals: 'throw new Exception();
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatch [
 
 	| ast |

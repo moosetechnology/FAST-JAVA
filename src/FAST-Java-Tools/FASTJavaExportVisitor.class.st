@@ -1033,6 +1033,16 @@ FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 ]
 
 { #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaThrowStatement: aFASTJavaThrowStatement [
+
+	self checkForComments: aFASTJavaThrowStatement andDo: [
+		self withIndent: 'throw '.
+		aFASTJavaThrowStatement expression accept: self.
+		self endOfStatement
+	]
+]
+
+{ #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
 	self checkForComments: aFASTJavaTryCatchStatement andDo: [
 		self withIndent: 'try '.
