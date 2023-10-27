@@ -103,7 +103,7 @@ FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 
 	astOrig := self getRootNode: (self getASTFromFileReference: aFileReference).
 	astBis := self getRootNode:
-		(self getASTFromString: (FASTJavaExportVisitor new parenthesiseExpressions ; export: astOrig)).
+		(self getASTFromString: (FASTJavaExportVisitor new export: astOrig)).
 	
 	self compare: astOrig to: astBis
 ]
