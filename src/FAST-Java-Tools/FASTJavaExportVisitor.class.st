@@ -187,8 +187,8 @@ FASTJavaExportVisitor >> isStringConcatenation: aFASTJavaInfixOperation [
 
 	^(aFASTJavaInfixOperation operator = '+')
 	and: [
-		(aFASTJavaInfixOperation leftOperand class = FASTJavaStringLiteral)
-		or: [ aFASTJavaInfixOperation rightOperand class = FASTJavaStringLiteral ]
+		(self returnsAString: aFASTJavaInfixOperation leftOperand)
+		or: [ self returnsAString: aFASTJavaInfixOperation rightOperand ]
 	]
 ]
 
@@ -231,6 +231,20 @@ FASTJavaExportVisitor >> outputLineComment: aComment [
 
 	self noIndent: aComment content.
 	self newLine
+]
+
+{ #category : #precedence }
+FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
+	"not a real type inference checking, just deals with the simplest cases which seem
+	 to be the ones causing problem"
+
+	(aFASTJavaExpression class = FASTJavaStringLiteral)
+		ifTrue: [ ^true ].
+
+	(aFASTJavaExpression class = FASTJavaInfixOperation)
+		ifFalse: [ ^false ].
+
+	^self isStringConcatenation: aFASTJavaExpression	
 ]
 
 { #category : #outputting }
