@@ -542,6 +542,19 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 ]
 
 { #category : #visiting }
+FASTJavaExportVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
+	"An emptyMethodDeclaration is a semicolon where a MethodDeclaration is expected
+	eg: In this example, the class has a MethodDeclaration and an EmptyMethodDeclaration
+	`class Blah {
+	   void method() {
+	   };
+	}`
+	 This is assumed to be a mistake of the programmer and we propose to not replicate it.
+	 Therefore ignore the thing"
+
+]
+
+{ #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 
 	self checkForComments: aFASTJavaEnumConstant andDo: [
