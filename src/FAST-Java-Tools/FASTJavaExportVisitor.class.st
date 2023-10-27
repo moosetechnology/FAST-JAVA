@@ -28,19 +28,21 @@ FASTJavaExportVisitor class >> initialize [
 	
 	OperatorsPrecedence := Dictionary newFrom: {
 		"postfixOperator"
-		'unary++' -> 14 .
-		'unary--' -> 14 .
+		'unary++' -> 15 .
+		'unary--' -> 15 .
 		"unaryOperator"
-		'++unary' -> 13 .
-		'--unary' -> 13 .
-		'+unary' -> 13 .
-		'-unary' -> 13 .
-		'~unary' -> 13 .
-		'!unary' -> 13 .
+		'++unary' -> 14 .
+		'--unary' -> 14 .
+		'+unary' -> 14 .
+		'-unary' -> 14 .
+		'~unary' -> 14 .
+		'!unary' -> 14 .
 		"multiplicativeOperator"
-		'*' -> 12 .
-		'/' -> 12 .
-		'%' -> 12 .
+		'*' -> 13 .
+		'/' -> 13 .
+		'%' -> 13 .
+		"stringConcatenationOperator -- introduced to deal with string concatenation and numerical '+'"
+		'strConcat' -> 12 .
 		"additiveOperator"
 		'+' -> 11 .
 		'-' -> 11 .
@@ -178,6 +180,16 @@ FASTJavaExportVisitor >> initialize [
 	indent := 0.
 	stream := WriteStream on: ''
 	
+]
+
+{ #category : #precedence }
+FASTJavaExportVisitor >> isStringConcatenation: aFASTJavaInfixOperation [
+
+	^(aFASTJavaInfixOperation operator = '+')
+	and: [
+		(aFASTJavaInfixOperation leftOperand class = FASTJavaStringLiteral)
+		or: [ aFASTJavaInfixOperation rightOperand class = FASTJavaStringLiteral ]
+	]
 ]
 
 { #category : #precedence }
@@ -640,6 +652,13 @@ FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclarat
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
+
+	| operator |
+
+	operator := (self isStringConcatenation: aFASTJavaInfixOperation)
+		ifTrue: [ 'strConcat' ]
+		ifFalse: [ aFASTJavaInfixOperation operator ].
+
 	self checkForComments: aFASTJavaInfixOperation andDo: [
 		self
 			expression: [
@@ -649,7 +668,7 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 					ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
 				aFASTJavaInfixOperation rightOperand accept: self.
 			]
-			withOperator: aFASTJavaInfixOperation operator
+			withOperator: operator
 ]
 
 ]

@@ -314,6 +314,26 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesNone [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcatenationLeft [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a="string"+(b+1); }'.
+
+	self export: expr statements first equals: 'a = "string"+(b+1);
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcatenationRight [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a=(b+1)+"string"; }'.
+
+	self export: expr statements first equals: 'a = (b+1)+"string";
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasHigherPrecedence [
 	
 	| expr |
