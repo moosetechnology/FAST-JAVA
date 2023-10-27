@@ -351,6 +351,7 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 				self
 					expression: [ aFASTJavaCastExpression type accept: self ]
 					needsParentheses: true.
+				self space.
 				aFASTJavaCastExpression expression accept: self
 			]
 			needsParentheses: true
