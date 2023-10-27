@@ -549,9 +549,9 @@ FASTJavaExportVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMeth
 	   void method() {
 	   };
 	}`
-	 This is assumed to be a mistake of the programmer and we propose to not replicate it.
-	 Therefore ignore the thing"
+	 This is assumed probably a mistake of the but we keep it just in case"
 
+	self endOfStatement
 ]
 
 { #category : #visiting }
