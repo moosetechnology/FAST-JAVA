@@ -480,6 +480,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopEmpty [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopMissingElements [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { for (; ;) ; }'.
+
+	self export: expr statements first equals: 'for (;;) 
+  ;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSingleStatement [
 
 	| expr |

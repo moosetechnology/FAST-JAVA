@@ -615,20 +615,56 @@ FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatemen
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
-	self checkForComments: aFASTJavaForStatement andDo: [
-		self withIndent: 'for ('.
-		aFASTJavaForStatement initializer accept: self.
-		self goBack: 1. "'initializer' is a statement that prints a \n"
-		self space.
-		aFASTJavaForStatement condition accept: self.
-		self noIndent: '; '.
-		aFASTJavaForStatement incrementor accept: self.
-		self goBack: 2. "'incrementor' is a statement that prints ';\n' "
-		self noIndent: ') '.
-		self indent.
-		self visitFASTJavaBlockOrStatement: aFASTJavaForStatement body.
-		self unindent.
+
+	self
+		checkForComments: aFASTJavaForStatement
+		andDo: [
+			self withIndent: 'for ('.
+			
+			self visitFASTJavaForStatementInitializer: aFASTJavaForStatement initializer.
+			self visitFASTJavaForStatementCondition:   aFASTJavaForStatement condition.
+			self visitFASTJavaForStatementIncrementor: aFASTJavaForStatement incrementor.
+
+			self noIndent: ') '.
+			
+			self indent.
+			self visitFASTJavaBlockOrStatement: aFASTJavaForStatement body.
+			self unindent
+		]
 ]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaForStatementCondition: aFASTJavaForStatementCondition [
+
+	aFASTJavaForStatementCondition
+		ifNil: [ self noIndent: $; ]
+		ifNotNil: [
+			aFASTJavaForStatementCondition accept: self.
+			self noIndent: '; '
+		]
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaForStatementIncrementor: aFASTJavaForStatementIncrementor [
+
+	aFASTJavaForStatementIncrementor ifNil: [ ^self ].
+
+	aFASTJavaForStatementIncrementor accept: self.
+	"'incrementor' is a FASTJavaStatement that prints ';\n' "
+	self goBack: 2
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaForStatementInitializer: aFASTJavaForStatementInitializer [
+
+	aFASTJavaForStatementInitializer
+		ifNil: [ self noIndent: $; ]
+		ifNotNil: [
+			aFASTJavaForStatementInitializer accept: self.
+			"'initializer' is a FASTJavaStatement that prints a \n"
+			self goBack: 1.
+			self space
+		].
 
 ]
 
