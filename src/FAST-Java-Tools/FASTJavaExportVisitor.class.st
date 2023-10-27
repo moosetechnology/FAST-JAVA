@@ -988,6 +988,16 @@ FASTJavaExportVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
+
+	aFASTJavaQualifiedTypeName namespace accept: self.
+	self
+		noIndent: $. ;
+		noIndent: aFASTJavaQualifiedTypeName name .
+
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExpression [
 	self checkForComments: aFASTJavaShortTypeExpression andDo: [

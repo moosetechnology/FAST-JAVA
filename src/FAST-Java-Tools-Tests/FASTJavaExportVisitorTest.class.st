@@ -527,6 +527,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSingleStatement [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaFullyQualifiedName [
+
+	| ast |
+	ast := self methodAST: 'java.lang.String method() { }'.
+
+	self export: ast equals: 'java.lang.String method() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 	| node |
 	node := builder
