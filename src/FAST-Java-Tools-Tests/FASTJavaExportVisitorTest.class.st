@@ -316,10 +316,13 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaContinueStatement [
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 
 	| ast |
-	ast := self astFor: 'enum Blah { A, B; }'.
+	ast := self astFor: 'class Blah {
+	   void method() { };
+	}'.
 
-	self export: ast equals: 'enum Blah {
-  A, B;
+	self export: ast equals: 'class Blah {
+  void method() {
+  }
 }
 '
 ]
