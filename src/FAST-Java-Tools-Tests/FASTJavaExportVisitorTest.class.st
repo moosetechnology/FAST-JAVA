@@ -695,22 +695,6 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaOuterThis [
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaStringConcatenation [
-
-	| ast |
-	self skip: 'exporter need #parenthesiseExpressions option for this test'.
-
-	ast := self methodAST: 'void mth() {
-  return "next i=" + (i+1) + ".";
-}'.
-
-	self export: ast equals: 'void mth() {
-  return "next i=" +i+1+".";
-}
-'
-]
-
-{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
 	node := builder literal: FASTJavaStringLiteral value: 'This is a String'.
