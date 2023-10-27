@@ -334,6 +334,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcate
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcatenationTypeInference [
+	"A case of string concatenation where the string is the result of another expression (not a Literal)
+	 In the example, the first concatenation ('a+String') returns a string 
+	 that must be concatenated with the arithmetic operation"
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a=b+"string"+(c+1); }'.
+
+	self export: expr statements first equals: 'a = b+"string"+(c+1);
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasHigherPrecedence [
 	
 	| expr |
