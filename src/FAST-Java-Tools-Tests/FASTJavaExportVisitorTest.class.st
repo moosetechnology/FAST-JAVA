@@ -305,6 +305,102 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesNone [
+	
+	| expr |
+	expr := self expressionAST: '(4+5)'.
+
+	self export: expr equals: '4+5'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasHigherPrecedence [
+	
+	| expr |
+	expr := self expressionAST: '(4/5)-6'.
+
+	self export: expr equals: '4/5-6'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasLowerPrecedence [
+	
+	| expr |
+	expr := self expressionAST: '(4+5)*6'.
+
+	self export: expr equals: '(4+5)*6'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubUnary [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a = 2*(x++); }'.
+
+	self export: expr statements first equals: 'a = 2*x++;
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernaryIsSubWithHigherPrecedence [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a = (5>6 ? 7 : 8); }'.
+
+	self export: expr statements first equals: 'a = 5>6 ? 7 : 8;
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernaryIsSubWithLowerPrecedence [
+	
+	| expr |
+	expr := self expressionAST: '4 + (5>6 ? 7 : 8)'.
+
+	self export: expr equals: '4+(5>6 ? 7 : 8)'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHasHigherPrecedence [
+	
+	| expr |
+	expr := self expressionAST: '4>=5 ? 6<<7 : 8%9'.
+
+	self export: expr equals: '4>=5 ? 6<<7 : 8%9'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHasLowerPrecedence1 [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a = ((b=4) ? 5 : 6) ; }'.
+
+	self export: expr statements first equals: 'a = (b = 4) ? 5 : 6;
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHasLowerPrecedence2 [
+	"parentheses here are not really needed, but this is a consequence of the way we deal with precedence"
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a = (4>=5 ? b+=3 : b-=3) ; }'.
+
+	self export: expr statements first equals: 'a = 4>=5 ? (b += 3) : (b -= 3);
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesUnaryWithSub [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { a = (2*x)++; }'.
+
+	self export: expr statements first equals: 'a = (2*x)++;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 	| node |
 	node := builder literal: FASTJavaFloatLiteral value: '37.2'.

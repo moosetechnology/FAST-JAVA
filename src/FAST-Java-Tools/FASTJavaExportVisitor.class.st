@@ -14,10 +14,81 @@ Class {
 	#instVars : [
 		'stream',
 		'indent',
-		'parenthesiseExpressions'
+		'expressionContextOperator'
+	],
+	#classVars : [
+		'OperatorsPrecedence'
 	],
 	#category : #'FAST-Java-Tools-export'
 }
+
+{ #category : #'class initialization' }
+FASTJavaExportVisitor class >> initialize [
+	<script: 'FASTJavaExportVisitor initialize'>
+	
+	OperatorsPrecedence := Dictionary newFrom: {
+		"postfixOperator"
+		'unary++' -> 14 .
+		'unary--' -> 14 .
+		"unaryOperator"
+		'++unary' -> 13 .
+		'--unary' -> 13 .
+		'+unary' -> 13 .
+		'-unary' -> 13 .
+		'~unary' -> 13 .
+		'!unary' -> 13 .
+		"multiplicativeOperator"
+		'*' -> 12 .
+		'/' -> 12 .
+		'%' -> 12 .
+		"additiveOperator"
+		'+' -> 11 .
+		'-' -> 11 .
+		"shiftOperator"
+		'<<' -> 10 .
+		'>>' -> 10 .
+		'>>>' -> 10 .
+		"relationalOperator"
+		'<' -> 9 .
+		'>' -> 9 .
+		'<=' -> 9 .
+		'>=' -> 9 .
+		'instanceof' -> 9 .
+		"equalityOperator"
+		'==' -> 8 .
+		'!=' -> 8 .
+		"bitwiseAndOperator"
+		'&' -> 7 .
+		"bitwiseExclusiveOrOperator"
+		'^' -> 6 .
+		"bitwiseInclusiveOrOperator"
+		'|' -> 5 .
+		"logicalAndOperator"
+		'&&' -> 4 .
+		"logicalOrOperator"
+		'||' -> 3 .
+		"ternaryOperator"
+		'?:' -> 2 .
+		"assignmentOperator"
+		'=' ->  1.
+		'+=' -> 1 .
+		'-=' -> 1 .
+		'*=' -> 1 .
+		'/=' -> 1 .
+		'%=' -> 1 .
+		'&=' -> 1 .
+		'^=' -> 1 .
+		'|=' -> 1 .
+		'<<=' -> 1 .
+		'>>=' -> 1 .
+		'>>>=' -> 1
+	}
+]
+
+{ #category : #precedence }
+FASTJavaExportVisitor class >> operatorPrecedence: operator [
+	^OperatorsPrecedence at: operator
+]
 
 { #category : #outputting }
 FASTJavaExportVisitor >> checkForComments: aNode andDo: exportingBlock [
@@ -55,6 +126,29 @@ FASTJavaExportVisitor >> export: aFASTNode [
 	]
 ]
 
+{ #category : #precedence }
+FASTJavaExportVisitor >> expression: aBlock needsParentheses: needsParentheses [
+
+	needsParentheses ifTrue: [ self noIndent: $( ].
+	aBlock value.
+	needsParentheses ifTrue: [ self noIndent: $) ]
+]
+
+{ #category : #precedence }
+FASTJavaExportVisitor >> expression: aBlock withOperator: operator [
+	"execute aBlock possibly putting parenthesis around the result depending on the precedence of #operator
+	 But before executing a block, we need to push the operator on the context stack so that 
+	 precedence of possible sub-expressions be compared to it"
+
+	self
+		expression: [
+			expressionContextOperator push: operator.
+			aBlock value.
+			expressionContextOperator pop
+		]
+		needsParentheses: (self needsParentheses: operator)
+]
+
 { #category : #outputting }
 FASTJavaExportVisitor >> goBack: aNumber [
 
@@ -80,10 +174,22 @@ FASTJavaExportVisitor >> indentPrefix [
 FASTJavaExportVisitor >> initialize [ 
 	super initialize.
 
-	parenthesiseExpressions := false.
+	expressionContextOperator := Stack new.
 	indent := 0.
 	stream := WriteStream on: ''
 	
+]
+
+{ #category : #precedence }
+FASTJavaExportVisitor >> needsParentheses: operator [
+	"an expression containing #operator needs parentheses if it is inside another expression
+	 with an operator of higher precedence"
+
+	expressionContextOperator ifEmpty: [ ^false ].
+
+	^(self class operatorPrecedence: operator)
+		<
+		(self class operatorPrecedence: expressionContextOperator top)
 ]
 
 { #category : #outputting }
@@ -115,11 +221,6 @@ FASTJavaExportVisitor >> outputLineComment: aComment [
 	self newLine
 ]
 
-{ #category : #accessing }
-FASTJavaExportVisitor >> parenthesiseExpressions [
-	parenthesiseExpressions := true
-]
-
 { #category : #outputting }
 FASTJavaExportVisitor >> space [
 	stream space
@@ -145,7 +246,7 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 	self checkForComments: aFASTJavaArgumentList andDo: [
 		self noIndent: $(.
@@ -177,7 +278,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitialize
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExpression [
 	self checkForComments: aFASTJavaArrayTypeExpression andDo: [
 	aFASTJavaArrayTypeExpression baseType accept: self.
@@ -188,10 +289,15 @@ FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExp
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentExpression [
+
 	self checkForComments: aFASTJavaAssignmentExpression andDo: [
-	aFASTJavaAssignmentExpression variable accept: self.
-	self noIndent: ' ' , aFASTJavaAssignmentExpression operator , ' '.
-	aFASTJavaAssignmentExpression expression accept: self
+		self
+			expression: [
+				aFASTJavaAssignmentExpression variable accept: self.
+				self noIndent: ' ' , aFASTJavaAssignmentExpression operator , ' '.
+				aFASTJavaAssignmentExpression expression accept: self
+				]
+			withOperator: aFASTJavaAssignmentExpression operator
 ]
 
 ]
@@ -210,7 +316,7 @@ FASTJavaExportVisitor >> visitFASTJavaBlockOrStatement: aFASTJavaStatement [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTypeExpression [
 	self checkForComments: aFASTJavaBooleanTypeExpression andDo: [
 	self noIndent: 'boolean'
@@ -229,7 +335,7 @@ FASTJavaExportVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpression [
 	self checkForComments: aFASTJavaByteTypeExpression andDo: [
 	self noIndent: 'byte'
@@ -240,11 +346,14 @@ FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpre
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self checkForComments: aFASTJavaCastExpression andDo: [
-		self noIndent: '(('.
-		aFASTJavaCastExpression type accept: self.
-		self noIndent: ') '.
-		aFASTJavaCastExpression expression accept: self.
-		self noIndent: $)
+		self
+			expression: [
+				self
+					expression: [ aFASTJavaCastExpression type accept: self ]
+					needsParentheses: true.
+				aFASTJavaCastExpression expression accept: self
+			]
+			needsParentheses: true
 	]
 
 ]
@@ -262,7 +371,7 @@ FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStat
 	]
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpression [
 	self checkForComments: aFASTJavaCharTypeExpression andDo: [
 	self noIndent: 'char'
@@ -330,15 +439,18 @@ FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit 
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression [
 	self checkForComments: aFASTJavaConditionalExpression andDo: [
-
-	aFASTJavaConditionalExpression condition accept: self.
-	self noIndent: ' ? '.
-	aFASTJavaConditionalExpression thenPart accept: self.
-	self noIndent: ' : '.
-	aFASTJavaConditionalExpression elsePart accept: self
+		self
+			expression: [
+				aFASTJavaConditionalExpression condition accept: self.
+				self noIndent: ' ? '.
+				aFASTJavaConditionalExpression thenPart accept: self.
+				self noIndent: ' : '.
+				aFASTJavaConditionalExpression elsePart accept: self
+			]
+			withOperator: '?:'
 ]
 
 ]
@@ -368,7 +480,7 @@ FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCase
 	]
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
 	self checkForComments: aFASTJavaDoubleTypeExpression andDo: [
 	self noIndent: 'double'
@@ -440,7 +552,7 @@ FASTJavaExportVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 	self checkForComments: aFASTJavaFloatLiteral andDo: [
 	self noIndent: aFASTJavaFloatLiteral primitiveValue.
@@ -449,7 +561,7 @@ FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExpression [
 	self checkForComments: aFASTJavaFloatTypeExpression andDo: [
 	self noIndent: 'float'
@@ -528,18 +640,20 @@ FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclarat
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	self checkForComments: aFASTJavaInfixOperation andDo: [
-		parenthesiseExpressions ifTrue: [ self noIndent: $( ].
-		aFASTJavaInfixOperation leftOperand accept: self.
-		(aFASTJavaInfixOperation operator = 'instanceof')
-			ifTrue:  [ self space ; noIndent: aFASTJavaInfixOperation operator ; space ]
-			ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
-		aFASTJavaInfixOperation rightOperand accept: self.
-		parenthesiseExpressions ifTrue: [ self noIndent: $) ]
+		self
+			expression: [
+				aFASTJavaInfixOperation leftOperand accept: self.
+				(aFASTJavaInfixOperation operator = 'instanceof')
+					ifTrue:  [ self space ; noIndent: aFASTJavaInfixOperation operator ; space ]
+					ifFalse: [ self noIndent: aFASTJavaInfixOperation operator].
+				aFASTJavaInfixOperation rightOperand accept: self.
+			]
+			withOperator: aFASTJavaInfixOperation operator
 ]
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
 	self checkForComments: aFASTJavaIntTypeExpression andDo: [
 	self noIndent: 'int'
@@ -591,7 +705,7 @@ FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
 	self checkForComments: aFASTJavaLongTypeExpression andDo: [
 	self noIndent: 'long'
@@ -852,17 +966,25 @@ FASTJavaExportVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
-	self checkForComments: aFASTJavaUnaryExpression andDo: [
 
-	aFASTJavaUnaryExpression isPrefixedUnaryExpression
-		ifTrue: [ 
-			self noIndent: aFASTJavaUnaryExpression operator.
-			self visitFASTTExpression: aFASTJavaUnaryExpression ]
-		ifFalse: [ 
-			self visitFASTTExpression: aFASTJavaUnaryExpression.
-			self noIndent: aFASTJavaUnaryExpression operator ]
+	self checkForComments: aFASTJavaUnaryExpression andDo: [
+		aFASTJavaUnaryExpression isPrefixedUnaryExpression
+			ifTrue: [
+				self
+					expression: [
+						self noIndent: aFASTJavaUnaryExpression operator.
+						self visitFASTTExpression: aFASTJavaUnaryExpression ]
+					withOperator: (aFASTJavaUnaryExpression operator , 'unary')
+			]
+			ifFalse: [ 
+				self
+					expression: [
+						self visitFASTTExpression: aFASTJavaUnaryExpression.
+						self noIndent: aFASTJavaUnaryExpression operator ]
+					withOperator: ('unary' , aFASTJavaUnaryExpression operator)
+			]
 ]
 
 ]
@@ -901,7 +1023,7 @@ FASTJavaExportVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpre
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaBooleanTypeExpression [
 	self checkForComments: aFASTJavaBooleanTypeExpression andDo: [
 	self noIndent: 'void'
