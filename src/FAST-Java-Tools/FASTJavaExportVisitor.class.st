@@ -313,6 +313,22 @@ FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExp
 
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaAssertStatement: aFASTJavaAssertStatement [
+	self checkForComments: aFASTJavaAssertStatement andDo: [
+		self withIndent: 'assert '.
+		aFASTJavaAssertStatement condition accept: self.
+
+		aFASTJavaAssertStatement message
+		ifNotNil: [ :message |
+			self noIndent: ' : '.
+			message accept: self
+		].
+
+		self endOfStatement
+	]
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentExpression [
 

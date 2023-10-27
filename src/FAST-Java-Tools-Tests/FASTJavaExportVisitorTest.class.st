@@ -157,6 +157,26 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatement [
+
+	| expr |
+	expr := self blockAST: '{ assert 1>2 : "assertion did not work"; }'.
+
+	self export: expr statements first equals: 'assert 1>2 : "assertion did not work";
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatementNoExplanation [
+
+	| expr |
+	expr := self blockAST: '{ assert 1>2; }'.
+
+	self export: expr statements first equals: 'assert 1>2;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 	| node |
 	node := builder assignment: 'aVar' value: (builder literalInt: 42).
