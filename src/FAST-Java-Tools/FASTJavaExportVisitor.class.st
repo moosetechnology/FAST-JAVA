@@ -24,25 +24,36 @@ Class {
 
 { #category : #'class initialization' }
 FASTJavaExportVisitor class >> initialize [
+	"precedence of operators as defined in
+	 https://web.archive.org/web/20110716213410/www.uni-bonn.de/%7Emanfear/javaoperators.php
+	or
+	https://www.javatpoint.com/java-operator-precedence
+	also
+	https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html"
+
 	<script: 'FASTJavaExportVisitor initialize'>
 	
 	OperatorsPrecedence := Dictionary newFrom: {
+		"arrayIndex/messageSend/memberAccess"
+		#arrayIndex -> 17 .
+		#messageSend -> 17 .
+		#memberAccess -> 17 .
 		"postfixOperator"
 		#'unary++' -> 16 .
 		#'unary--' -> 16 .
-		"unaryOperator"
+		"prefixOperator"
 		#'++unary' -> 15 .
 		#'--unary' -> 15 .
 		#'+unary' -> 15 .
 		#'-unary' -> 15 .
 		#'~unary' -> 15 .
 		#'!unary' -> 15 .
+		"cast"
+		#cast -> 14 .
 		"multiplicativeOperator"
-		#'*' -> 14 .
-		#'/' -> 14 .
-		#'%' -> 14 .
-		"messageSend -- introduced to deal with: (String+String).length()"
-		#messageSend -> 13 .
+		#'*' -> 13 .
+		#'/' -> 13 .
+		#'%' -> 13 .
 		"stringConcatenationOperator -- introduced to deal with: String+(i+1)"
 		#stringConcatenation -> 12 .
 		"additiveOperator"
@@ -410,7 +421,7 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 				self space.
 				aFASTJavaCastExpression expression accept: self
 			]
-			needsParentheses: true
+			withOperator: #cast
 	]
 
 ]
