@@ -337,6 +337,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndArithm
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndAttributeAccess [
+	
+	| expr |
+	expr := self expressionAST: '((String)1).attr'.
+
+	self export: expr equals: '((String) 1).attr'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesClearStackOnTopLevelExpression [
 	"topLevelExpression
 	 Introduced to deal with an expression as argument of a method call because we are using a global stack,

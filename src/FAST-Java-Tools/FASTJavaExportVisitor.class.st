@@ -628,9 +628,13 @@ FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 	self checkForComments: aFASTJavaFieldAccess andDo: [
-		aFASTJavaFieldAccess receiver accept: self.
-		self noIndent: $. .
-		self noIndent: aFASTJavaFieldAccess fieldName.
+		self
+			expression: [
+				aFASTJavaFieldAccess receiver accept: self.
+				self noIndent: $. .
+				self noIndent: aFASTJavaFieldAccess fieldName
+			]
+			 withOperator: #memberAccess
 	]
 
 ]
