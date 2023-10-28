@@ -4,10 +4,12 @@ I represent a class type
 Class {
 	#name : #FASTJavaClassTypeExpression,
 	#superclass : #FASTJavaTypeExpression,
+	#traits : 'FASTTWithArguments',
+	#classTraits : 'FASTTWithArguments classTrait',
 	#instVars : [
 		'#javaMethodThrowsOwner => FMOne type: #FASTJavaMethodEntity opposite: #throws',
-		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types',
-		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner'
+		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner',
+		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
