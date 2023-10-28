@@ -328,6 +328,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesMessageOnStringConcatenation [
+	
+	| expr |
+	expr := self expressionAST: '("a"+"b").length()'.
+
+	self export: expr equals: '("a"+"b").length()'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesNone [
 	
 	| expr |
