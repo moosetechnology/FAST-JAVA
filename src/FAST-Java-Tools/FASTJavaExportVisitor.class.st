@@ -28,62 +28,64 @@ FASTJavaExportVisitor class >> initialize [
 	
 	OperatorsPrecedence := Dictionary newFrom: {
 		"postfixOperator"
-		'unary++' -> 15 .
-		'unary--' -> 15 .
+		#'unary++' -> 16 .
+		#'unary--' -> 16 .
 		"unaryOperator"
-		'++unary' -> 14 .
-		'--unary' -> 14 .
-		'+unary' -> 14 .
-		'-unary' -> 14 .
-		'~unary' -> 14 .
-		'!unary' -> 14 .
+		#'++unary' -> 15 .
+		#'--unary' -> 15 .
+		#'+unary' -> 15 .
+		#'-unary' -> 15 .
+		#'~unary' -> 15 .
+		#'!unary' -> 15 .
 		"multiplicativeOperator"
-		'*' -> 13 .
-		'/' -> 13 .
-		'%' -> 13 .
-		"stringConcatenationOperator -- introduced to deal with string concatenation and numerical '+'"
-		'strConcat' -> 12 .
+		#'*' -> 14 .
+		#'/' -> 14 .
+		#'%' -> 14 .
+		"messageSend -- introduced to deal with: (String+String).length()"
+		#messageSend -> 13 .
+		"stringConcatenationOperator -- introduced to deal with: String+(i+1)"
+		#stringConcatenation -> 12 .
 		"additiveOperator"
-		'+' -> 11 .
-		'-' -> 11 .
+		#'+' -> 11 .
+		#'-' -> 11 .
 		"shiftOperator"
-		'<<' -> 10 .
-		'>>' -> 10 .
-		'>>>' -> 10 .
+		#'<<' -> 10 .
+		#'>>' -> 10 .
+		#'>>>' -> 10 .
 		"relationalOperator"
-		'<' -> 9 .
-		'>' -> 9 .
-		'<=' -> 9 .
-		'>=' -> 9 .
-		'instanceof' -> 9 .
+		#'<' -> 9 .
+		#'>' -> 9 .
+		#'<=' -> 9 .
+		#'>=' -> 9 .
+		#instanceof -> 9 .
 		"equalityOperator"
-		'==' -> 8 .
-		'!=' -> 8 .
+		#'==' -> 8 .
+		#'!=' -> 8 .
 		"bitwiseAndOperator"
-		'&' -> 7 .
+		#'&' -> 7 .
 		"bitwiseExclusiveOrOperator"
-		'^' -> 6 .
+		#'^' -> 6 .
 		"bitwiseInclusiveOrOperator"
-		'|' -> 5 .
+		#'|' -> 5 .
 		"logicalAndOperator"
-		'&&' -> 4 .
+		#'&&' -> 4 .
 		"logicalOrOperator"
-		'||' -> 3 .
+		#'||' -> 3 .
 		"ternaryOperator"
-		'?:' -> 2 .
+		#'?:' -> 2 .
 		"assignmentOperator"
-		'=' ->  1.
-		'+=' -> 1 .
-		'-=' -> 1 .
-		'*=' -> 1 .
-		'/=' -> 1 .
-		'%=' -> 1 .
-		'&=' -> 1 .
-		'^=' -> 1 .
-		'|=' -> 1 .
-		'<<=' -> 1 .
-		'>>=' -> 1 .
-		'>>>=' -> 1
+		#'=' ->  1.
+		#'+=' -> 1 .
+		#'-=' -> 1 .
+		#'*=' -> 1 .
+		#'/=' -> 1 .
+		#'%=' -> 1 .
+		#'&=' -> 1 .
+		#'^=' -> 1 .
+		#'|=' -> 1 .
+		#'<<=' -> 1 .
+		#'>>=' -> 1 .
+		#'>>>=' -> 1
 	}
 ]
 
@@ -199,9 +201,9 @@ FASTJavaExportVisitor >> needsParentheses: operator [
 
 	expressionContextOperator ifEmpty: [ ^false ].
 
-	^(self class operatorPrecedence: operator)
+	^(self class operatorPrecedence: operator asSymbol)
 		<
-		(self class operatorPrecedence: expressionContextOperator top)
+		(self class operatorPrecedence: expressionContextOperator top asSymbol)
 ]
 
 { #category : #outputting }
@@ -735,7 +737,7 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 	| operator |
 
 	operator := (self isStringConcatenation: aFASTJavaInfixOperation)
-		ifTrue: [ 'strConcat' ]
+		ifTrue: [ #stringConcatenation ]
 		ifFalse: [ aFASTJavaInfixOperation operator ].
 
 	self checkForComments: aFASTJavaInfixOperation andDo: [
@@ -838,19 +840,24 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocation [
 	self checkForComments: aFASTJavaMethodInvocation andDo: [
-	self visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation receiver.
-	self noIndent: aFASTJavaMethodInvocation name.
-	self visitFASTJavaArgumentsList: aFASTJavaMethodInvocation arguments
-]
+		self
+			expression: [
+				self visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation receiver.
+				self noIndent: aFASTJavaMethodInvocation name.
+				self visitFASTJavaArgumentsList: aFASTJavaMethodInvocation arguments
+
+			]
+			withOperator: #messageSend
+	]
 
 ]
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation [
 	self checkForComments: aFASTJavaMethodInvocation andDo: [
-	aFASTJavaMethodInvocation ifNil: [ ^ self ].
-	aFASTJavaMethodInvocation accept: self.
-	self noIndent: $.
+		aFASTJavaMethodInvocation ifNil: [ ^ self ].
+		aFASTJavaMethodInvocation accept: self.
+		self noIndent: $.
 ]
 
 ]
