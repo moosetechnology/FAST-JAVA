@@ -328,6 +328,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesClearStackOnTopLevelExpression [
+	"topLevelExpression
+	 Introduced to deal with an expression as argument of a method call because we are using a global stack,
+	 it does not see the difference with a message send on a sub-expression"
+	
+	| expr |
+	expr := self expressionAST: 'meth("a"+"b")'.
+
+	self export: expr equals: 'meth("a"+"b")'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesMessageOnStringConcatenation [
 	
 	| expr |
@@ -446,12 +458,12 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHas
 
 { #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHasLowerPrecedence2 [
-	"parentheses here are not really needed, but this is a consequence of the way we deal with precedence"
+	"parentheses not needed between '?' and ':'"
 	
 	| expr |
 	expr := self methodAST: 'void mth() { a = (4>=5 ? b+=3 : b-=3) ; }'.
 
-	self export: expr statements first equals: 'a = 4>=5 ? (b += 3) : (b -= 3);
+	self export: expr statements first equals: 'a = 4>=5 ? b += 3 : (b -= 3);
 '
 ]
 

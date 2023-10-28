@@ -85,7 +85,11 @@ FASTJavaExportVisitor class >> initialize [
 		#'|=' -> 1 .
 		#'<<=' -> 1 .
 		#'>>=' -> 1 .
-		#'>>>=' -> 1
+		#'>>>=' -> 1 .
+		"topLevelExpression -- introduced to deal with an expression as argument of a method call
+		 because we are using a global stack, it does not see the difference with a message send
+		 on a sub-expression"
+		#topLevelExpression -> -1
 	}
 ]
 
@@ -252,6 +256,14 @@ FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
 { #category : #outputting }
 FASTJavaExportVisitor >> space [
 	stream space
+]
+
+{ #category : #precedence }
+FASTJavaExportVisitor >> topLevelExpression: aBlock [
+
+	expressionContextOperator push: #topLevelExpression.
+	aBlock value.
+	expressionContextOperator pop
 ]
 
 { #category : #outputting }
@@ -491,7 +503,9 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 			expression: [
 				aFASTJavaConditionalExpression condition accept: self.
 				self noIndent: ' ? '.
-				aFASTJavaConditionalExpression thenPart accept: self.
+				self topLevelExpression: [
+					aFASTJavaConditionalExpression thenPart accept: self
+				].
 				self noIndent: ' : '.
 				aFASTJavaConditionalExpression elsePart accept: self
 			]
@@ -844,8 +858,10 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 			expression: [
 				self visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation receiver.
 				self noIndent: aFASTJavaMethodInvocation name.
-				self visitFASTJavaArgumentsList: aFASTJavaMethodInvocation arguments
 
+				self topLevelExpression: [
+					self visitFASTJavaArgumentsList: aFASTJavaMethodInvocation arguments
+				]
 			]
 			withOperator: #messageSend
 	]
