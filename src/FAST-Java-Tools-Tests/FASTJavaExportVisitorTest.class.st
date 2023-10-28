@@ -213,7 +213,7 @@ private static final int CONST = 42;
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 	| node |
 	node := builder cast: 'float' expression: (builder var: 'aVar').
-	self export: node equals: '((float) aVar)'
+	self export: node equals: '(float) aVar'
 ]
 
 { #category : #tests }
@@ -325,6 +325,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
   }
 }
 '
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndArithmeticSubExpression [
+	
+	| expr |
+	expr := self expressionAST: '(int)(3*4)'.
+
+	self export: expr equals: '(int) (3*4)'
 ]
 
 { #category : #tests }
