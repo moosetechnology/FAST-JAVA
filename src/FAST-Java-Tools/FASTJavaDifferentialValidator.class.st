@@ -98,12 +98,15 @@ FASTJavaDifferentialValidator >> runOnFileReference: aFileReference [
 { #category : #'instance creation' }
 FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 
-	| astOrig astBis |
+	| astOrig astBis topLevelNodes |
 	aFileReference fullName traceCr.
 
-	astOrig := self getRootNode: (self getASTFromFileReference: aFileReference).
-	astBis := self getRootNode:
-		(self getASTFromString: (FASTJavaExportVisitor new export: astOrig)).
+	topLevelNodes := self getASTFromFileReference: aFileReference.
+	topLevelNodes ifNotEmpty: [
+		astOrig := self getRootNode: topLevelNodes.
+		astBis := self getRootNode:
+			(self getASTFromString: (FASTJavaExportVisitor new export: astOrig)).
 	
-	self compare: astOrig to: astBis
+		self compare: astOrig to: astBis
+	]
 ]
