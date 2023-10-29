@@ -814,6 +814,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterGenericMethod [
+	
+	| expr |
+	expr := self methodAST: 'public <K,V> IMap<K,V> meth() { }'.
+
+	self export: expr equals: 'public <K, V> IMap<K, V> meth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterOnMethod [
 	
 	| expr |
