@@ -677,6 +677,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodAbstract [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodDeclaration [
+
+	| ast |
+	ast := self methodAST: 'public String mth() { }'.
+
+	self export: ast equals: 'public String mth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocation [
 
 	| node |

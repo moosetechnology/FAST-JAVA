@@ -4,6 +4,8 @@ I represent a class type
 Class {
 	#name : #FASTJavaClassTypeExpression,
 	#superclass : #FASTJavaTypeExpression,
+	#traits : 'FASTTWithArguments',
+	#classTraits : 'FASTTWithArguments classTrait',
 	#instVars : [
 		'#javaMethodThrowsOwner => FMOne type: #FASTJavaMethodEntity opposite: #throws',
 		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types',
