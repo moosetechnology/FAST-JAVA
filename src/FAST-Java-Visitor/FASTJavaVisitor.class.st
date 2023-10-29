@@ -385,8 +385,8 @@ FASTJavaVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 ]
 
 { #category : #generated }
-FASTJavaVisitor >> visitFASTJavaTypeParameter: aFASTJavaBooleanTypeExpression [
-	^ self visitFASTTExpression: aFASTJavaBooleanTypeExpression
+FASTJavaVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpression [
+	^ self visitFASTTExpression: aFASTJavaTypeParameterExpression
 ]
 
 { #category : #generated }

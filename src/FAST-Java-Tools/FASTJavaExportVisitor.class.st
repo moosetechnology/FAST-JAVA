@@ -490,6 +490,19 @@ FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
+	self checkForComments: aFASTJavaClassTypeExpression andDo: [
+		aFASTJavaClassTypeExpression typeName accept: self.
+		aFASTJavaClassTypeExpression arguments
+			ifNotEmpty: [ :typeArguments |
+				self noIndent: $<.
+				self visitNodeListSeparatedByCommas: typeArguments.
+				self noIndent: $>.
+			]
+	]
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
 	self checkForComments: aFASTJavaCompilationUnit andDo: [
@@ -846,22 +859,33 @@ FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpre
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self checkForComments: aFASTJavaMethodEntity andDo: [
-	self withIndent: ''.
-	self visitFASTJavaModifiers: aFASTJavaMethodEntity modifiers.
-	aFASTJavaMethodEntity type ifNotNil: [ "not constructor"
-		aFASTJavaMethodEntity type accept: self.
-		self space ].
-	self noIndent: aFASTJavaMethodEntity name.
-	self visitFASTJavaParameters: aFASTJavaMethodEntity parameters.
-	self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.
+		self withIndent: ''.
+		self visitFASTJavaModifiers: aFASTJavaMethodEntity modifiers.
 
-	aFASTJavaMethodEntity statementBlock 
-		ifNil: [ "abstract method"
-			self
-				noIndent: $; ;
-				newLine
-		]
-		ifNotNil: [ :statementBlock | statementBlock accept: self ]
+		aFASTJavaMethodEntity typeParameters ifNotEmpty: [ :typeParameters |
+			self noIndent: $<.
+			self visitNodeListSeparatedByCommas: typeParameters.
+			self noIndent: '> '.
+		].
+
+		aFASTJavaMethodEntity type ifNotNil: [ :methodType |
+			"not a constructor method"
+			methodType accept: self.
+			self space
+		].
+
+		self noIndent: aFASTJavaMethodEntity name.
+		self visitFASTJavaParameters: aFASTJavaMethodEntity parameters.
+		self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.
+
+		aFASTJavaMethodEntity statementBlock
+			ifNil: [
+				"an abstract method"
+				self
+					noIndent: $; ;
+					newLine
+			]
+			ifNotNil: [ :statementBlock | statementBlock accept: self ]
 ]
 
 ]
@@ -1121,6 +1145,11 @@ FASTJavaExportVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 	self noIndent: aFASTJavaTypeName name
 ]
 
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpression [
+	self noIndent: aFASTJavaTypeParameterExpression name
 ]
 
 { #category : #'visiting expression' }
