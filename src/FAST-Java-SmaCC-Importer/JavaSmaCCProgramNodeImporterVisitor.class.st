@@ -456,8 +456,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration 
 JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 	currentFASTEntity := self addToModel: FASTJavaClassProperty new.
 	self setStartEndPos: aClassExpression.
+
 	currentFASTEntity type: (self clone accept: aClassExpression type).
 	currentFASTEntity fieldName: aClassExpression classToken value.
+
 	^ currentFASTEntity
 ]
 
@@ -466,6 +468,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	self setStartEndPos: aClassType.
 	currentFASTEntity typeName: (self clone accept: aClassType name).
+
+	aClassType name arguments do: [ :typeArgument |
+		currentFASTEntity addArgument: (self clone accept: typeArgument)
+	].
+
 	^ currentFASTEntity
 ]
 
@@ -818,22 +825,29 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 	| methodBody |
 	self create: FASTJavaMethodEntity from: aMethodDeclaration.
 	currentFASTEntity name: aMethodDeclaration declarator name value.
-	aMethodDeclaration type ifNotNil: [ 
-		currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
-	aMethodDeclaration declarator parameters do: [ :parameter | 
-		currentFASTEntity addParameter: (self clone accept: parameter) ].
-	methodBody := self clone accept: aMethodDeclaration body.
-	(methodBody isKindOf: JavaEmptyMethodBodyNode) ifFalse: [ 
-		currentFASTEntity statementBlock: (self clone accept: methodBody) ].
+
 	aMethodDeclaration modifiers do: [ :modifier | 
 		currentFASTEntity addModifier: (self clone accept: modifier) ].
-	aMethodDeclaration throws ifNotNil: [ :throws | 
-		throws classTypes do: [ :classType | 
-			currentFASTEntity addThrow: (self clone accept: classType) ] ].
+
+	aMethodDeclaration type ifNotNil: [ 
+		currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
+
 	aMethodDeclaration typeParameters ifNotNil: [ :typeParameters | 
 		typeParameters parameters do: [ :typeParameter | 
 			currentFASTEntity addTypeParameter:
 				(self clone accept: typeParameter) ] ].
+
+	aMethodDeclaration declarator parameters do: [ :parameter | 
+		currentFASTEntity addParameter: (self clone accept: parameter) ].
+
+	aMethodDeclaration throws ifNotNil: [ :throws | 
+		throws classTypes do: [ :classType | 
+			currentFASTEntity addThrow: (self clone accept: classType) ] ].
+
+	methodBody := self clone accept: aMethodDeclaration body.
+	(methodBody isKindOf: JavaEmptyMethodBodyNode) ifFalse: [ 
+		currentFASTEntity statementBlock: (self clone accept: methodBody) ].
+
 	^ currentFASTEntity
 ]
 
@@ -1220,6 +1234,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 		do:
 			[ :aCatchBlock | currentFASTEntity catches add: (self clone accept: aCatchBlock) ].
 	^ currentFASTEntity
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
+
+	^self accept: aTypeArgument type
 ]
 
 { #category : #visitor }
