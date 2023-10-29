@@ -836,6 +836,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterOnMethod [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
+	
+	| expr |
+	expr := self methodAST: 'public Collection<?> meth() {}'.
+
+	self export: expr equals: 'public Collection<?> meth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersOnMethod [
 	
 	| expr |
