@@ -814,6 +814,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterOnMethod [
+	
+	| expr |
+	expr := self methodAST: 'IMap<String,Integer> meth() { }'.
+
+	self export: expr equals: 'IMap<String, Integer> meth() {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersOnMethod [
+	
+	| expr |
+	expr := self methodAST: 'IMap<String,Iterator<String>> meth() { }'.
+
+	self export: expr equals: 'IMap<String, Iterator<String>> meth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
 
 	| nodeVar nodeInt |
