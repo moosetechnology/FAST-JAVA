@@ -1239,7 +1239,16 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
 
-	^self accept: aTypeArgument type
+	self flag: 'Would probably be better to introduce a FASTJavaTypeWildCardParameterExpression'.
+
+	^aTypeArgument questionMark
+		ifNil: [  self accept: aTypeArgument type ]
+		ifNotNil: [
+			currentFASTEntity := self create: FASTJavaTypeParameterExpression  from: aTypeArgument.
+			currentFASTEntity
+				name: '?' ;
+				yourself
+		]
 ]
 
 { #category : #visitor }
