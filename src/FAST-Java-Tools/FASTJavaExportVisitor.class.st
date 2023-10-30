@@ -450,10 +450,10 @@ FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpre
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
 	self checkForComments: aFASTJavaCharacterLiteral andDo: [
-	self noIndent: $'.
-	self noIndent: aFASTJavaCharacterLiteral primitiveValue.
-	self noIndent: $'
-]
+		self noIndent: $'.
+		super visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral.
+		self noIndent: $'
+	]
 
 ]
 
@@ -655,9 +655,8 @@ FASTJavaExportVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 	self checkForComments: aFASTJavaFloatLiteral andDo: [
-	self noIndent: aFASTJavaFloatLiteral primitiveValue.
-	self noIndent: 'f'
-]
+		super visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral
+	]
 
 ]
 
@@ -842,9 +841,8 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCase
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 	self checkForComments: aFASTJavaLongLiteral andDo: [
-	self noIndent: aFASTJavaLongLiteral primitiveValue.
-	self noIndent: 'L'
-]
+		super visitFASTTLiteral: aFASTJavaLongLiteral
+	]
 
 ]
 
@@ -999,8 +997,8 @@ FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
 	self checkForComments: aFASTJavaNullLiteral andDo: [
-	self noIndent: 'null'
-]
+		self noIndent: 'null'
+	]
 
 ]
 
@@ -1082,10 +1080,10 @@ FASTJavaExportVisitor >> visitFASTJavaStatement: aFASTJavaStatement [
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self checkForComments: aFASTJavaStringLiteral andDo: [
-	self noIndent: $".
-	self noIndent: aFASTJavaStringLiteral primitiveValue.
-	self noIndent: $"
-]
+		self noIndent: $".
+		super visitFASTJavaStringLiteral: aFASTJavaStringLiteral.
+		self noIndent: $"
+	]
 
 ]
 

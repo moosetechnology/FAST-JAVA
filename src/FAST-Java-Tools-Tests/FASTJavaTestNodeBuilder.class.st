@@ -159,6 +159,11 @@ FASTJavaTestNodeBuilder >> literal: aClass value: aString [
 ]
 
 { #category : #'api - building' }
+FASTJavaTestNodeBuilder >> literalFloat: aValue [
+	^self literal: FASTJavaFloatLiteral value: aValue asString
+]
+
+{ #category : #'api - building' }
 FASTJavaTestNodeBuilder >> literalInt: aValue [
 	^self literal: FASTJavaIntegerLiteral value: aValue asString
 ]
