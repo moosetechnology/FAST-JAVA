@@ -847,6 +847,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersExtendingSomeType [
+	
+	| expr |
+	expr := self methodAST: '<X extends Object> X meth() { }'.
+
+	self export: expr equals: '<X extends Object> X meth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersOnMethod [
 	
 	| expr |
