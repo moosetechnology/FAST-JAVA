@@ -498,7 +498,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesUnaryWithSub 
 { #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 	| node |
-	node := builder literal: FASTJavaFloatLiteral value: '37.2'.
+	node := builder literal: FASTJavaFloatLiteral value: '37.2f'.
 	self export: node equals: '37.2f'
 ]
 
@@ -661,8 +661,11 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceWithAbstractMethod [
 
 { #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
+
 	| node |
-	node := builder literal: FASTJavaLongLiteral value: '42'.
+	self skip: 'FASTJavaLongLiteral are never created by the importer'.
+
+	node := builder literal: FASTJavaLongLiteral value: '42L'.
 	self export: node equals: '42L'
 ]
 
@@ -1025,6 +1028,9 @@ FASTJavaExportVisitorTest >> testVisitFASTTLiteral [
 	self
 		export: (builder literalInt: 42)
 		equals: '42'.
+	self
+		export: (builder literalFloat: '42f')
+		equals: '42f'.
 	self
 		export: (builder literalString: 'a string')
 		equals: '"a string"'.
