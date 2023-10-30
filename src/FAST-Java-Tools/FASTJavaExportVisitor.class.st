@@ -1149,7 +1149,13 @@ FASTJavaExportVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpression [
-	self noIndent: aFASTJavaTypeParameterExpression name
+	self checkForComments: aFASTJavaTypeParameterExpression andDo: [
+		self noIndent: aFASTJavaTypeParameterExpression name.
+		aFASTJavaTypeParameterExpression types ifNotEmpty: [ :typeArgumentSuperclasses |
+			self noIndent: ' extends '.
+			self visitNodeListSeparatedByCommas: typeArgumentSuperclasses
+		]
+	]
 ]
 
 { #category : #'visiting expression' }
