@@ -20,7 +20,7 @@ JavaSmaCCLabeledStatementBlockTest >> testLabeledStatementInnerStatementType [
 
 	self
 		assert: fastMethod statements first labeledStatement class
-		equals: FASTJavaReturnStatement
+		equals: FASTJavaStatementBlock
 ]
 
 { #category : #tests }

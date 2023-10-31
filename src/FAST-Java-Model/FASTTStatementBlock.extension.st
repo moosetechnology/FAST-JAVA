@@ -28,33 +28,6 @@ FASTTStatementBlock >> javaInitializerOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTTStatementBlock >> javaLabaledStatementOwner [
-	"Relation named: #javaLabaledStatementOwner type: #FASTJavaLabeledStatement opposite: #statementBlock"
-
-	<generated>
-	<FMComment: 'Label Statement entity containing the statement block'>
-	<container>
-	<derived>
-	<FMProperty: #javaLabaledStatementOwner type: #FASTJavaLabeledStatement opposite: #statementBlock>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaLabaledStatementOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatementBlock >> javaLabaledStatementOwner: anObject [
-
-	<generated>
-	(self attributeAt: #javaLabaledStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaLabaledStatementOwner.
-		self attributeAt: #javaLabaledStatementOwner put: anObject.
-		otherSide statementBlock: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaLabaledStatementOwner put: anObject.
-		anObject statementBlock: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTTStatementBlock >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block"
 
