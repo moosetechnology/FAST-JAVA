@@ -1237,10 +1237,10 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tStatementBlock property: #javaInitializerOwner) comment:
 			 'Behavioural entity containing the statement block').
 
-	((javaLabeledStatement property: #statementBlock) comment:
-		 'Statements block of the behavioural entity')
-	<>- ((tStatementBlock property: #javaLabaledStatementOwner) comment:
-			 'Label Statement entity containing the statement block').
+	((javaLabeledStatement property: #labeledStatement) comment:
+		 'Inner statement that is labeled')
+	<>- ((tStatement property: #labelStatementOwner) comment:
+			 'Label Statement entity containing this statement').
 
 	((javaNewArray property: #initializer) comment:
 		 'The initializer of the array')
