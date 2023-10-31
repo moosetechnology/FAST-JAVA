@@ -721,6 +721,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiver [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignementExpression [
+
+	| ast |
+	ast := self expressionAST: '(x = "a"+"b").length()'.
+
+	self export: ast equals: '(x = "a"+"b").length()'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodModifiers [
 
 	| ast |
