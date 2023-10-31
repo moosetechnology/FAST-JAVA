@@ -6,8 +6,8 @@ Contains a referances to an assignee assignee and the expression that's being as
 Class {
 	#name : #FASTJavaAssignmentExpression,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTWithAssignable + FASTTExpression',
-	#classTraits : 'FASTJavaTWithAssignable classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithAssignable + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithAssignable classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty'
 	],

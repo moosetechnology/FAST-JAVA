@@ -807,6 +807,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaComment --|> tComment.
 
 	javaAssignmentExpression --|> tExpression.
+	javaAssignmentExpression --|> tReceiver.
 	javaAssignmentExpression --|> tWithAssignable.
 
 	javaFieldAccess --|> tExpression.
