@@ -7,16 +7,29 @@ Class {
 { #category : #resources }
 JavaSmaCCLabeledStatementTest >> javaMethod [
 	
-	^ 'String methodWithLabeledStatement() {
-		 myLabel: {
-			int i = 3;
-			break myLabel; 
-    }
+	^ 'void methodWithLabeledStatement() {
+		 myLabel: return;
 	}'
 ]
 
 { #category : #tests }
+JavaSmaCCLabeledStatementTest >> testLabeledStatementInnerStatementType [
+
+	self
+		assert: fastMethod statements first labeledStatement class
+		equals: FASTJavaReturnStatement
+]
+
+{ #category : #tests }
 JavaSmaCCLabeledStatementTest >> testLabeledStatementLabelValue [
+
+	self
+		assert: fastMethod statements first label
+		equals: 'myLabel'
+]
+
+{ #category : #tests }
+JavaSmaCCLabeledStatementTest >> testLabeledStatementType [
 
 	self
 		assert: fastMethod statements first class

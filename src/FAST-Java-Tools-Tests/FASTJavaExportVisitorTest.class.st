@@ -660,6 +660,31 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceWithAbstractMethod [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledReturnStatement [
+
+	| ast |
+	ast := self methodAST: 'void meth() { label: return; }'.
+
+	self export: ast equals: 'void meth() {
+  label:  return ;
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledStatementBlock [
+
+	| ast |
+	ast := self methodAST: 'void meth() { label: { } }'.
+
+	self export: ast equals: 'void meth() {
+  label:{
+  }
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 
 	| node |

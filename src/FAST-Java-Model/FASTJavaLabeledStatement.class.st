@@ -34,32 +34,32 @@ FASTJavaLabeledStatement >> label: anObject [
 ]
 
 { #category : #accessing }
-FASTJavaLabeledStatement >> statementBlock [
-	"Relation named: #statementBlock type: #FASTTStatementBlock opposite: #javaLabaledStatementOwner"
+FASTJavaLabeledStatement >> labeledStatement [
+	"Relation named: #labeledStatement type: #FASTTStatement opposite: #labelStatementOwner"
 
 	<generated>
-	<FMComment: 'Statements block of the behavioural entity'>
-	<FMProperty: #statementBlock type: #FASTTStatementBlock opposite: #javaLabaledStatementOwner>
-	^ self attributeAt: #statementBlock ifAbsent: [ nil ]
+	<FMComment: 'Inner statement that is labeled'>
+	<FMProperty: #labeledStatement type: #FASTTStatement opposite: #labelStatementOwner>
+	^ self attributeAt: #labeledStatement ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
-FASTJavaLabeledStatement >> statementBlock: anObject [
+FASTJavaLabeledStatement >> labeledStatement: anObject [
 
 	<generated>
-	(self attributeAt: #statementBlock ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #labeledStatement ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
-		otherSide :=  self statementBlock.
-		self attributeAt: #statementBlock put: anObject.
-		otherSide javaLabaledStatementOwner: nil ]
+		otherSide :=  self labeledStatement.
+		self attributeAt: #labeledStatement put: anObject.
+		otherSide labelStatementOwner: nil ]
 	ifNotNil: [ 
-		self attributeAt: #statementBlock put: anObject.
-		anObject javaLabaledStatementOwner: self ]
+		self attributeAt: #labeledStatement put: anObject.
+		anObject labelStatementOwner: self ]
 ]
 
 { #category : #navigation }
-FASTJavaLabeledStatement >> statementBlockGroup [
+FASTJavaLabeledStatement >> labeledStatementGroup [
 	<generated>
-	<navigation: 'StatementBlock'>
-	^ MooseSpecializedGroup with: self statementBlock
+	<navigation: 'LabeledStatement'>
+	^ MooseSpecializedGroup with: self labeledStatement
 ]

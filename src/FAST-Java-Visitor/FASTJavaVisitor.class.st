@@ -225,6 +225,11 @@ FASTJavaVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatem
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaLabeledStatement: aFASTJavaLabeledStatement [
+	^ self visitFASTTStatement: aFASTJavaLabeledStatement
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpression [
 	^ self visitFASTTExpression: aFASTJavaLambdaExpression
 ]

@@ -768,7 +768,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLabeledStatement: aLabeledStatement 
 			                      label: aLabeledStatement identifier value;
 			                      yourself).
 	self setStartEndPos: aLabeledStatement.
-	currentFASTEntity statementBlock:	(self clone accept: aLabeledStatement statement).
+	currentFASTEntity labeledStatement:	(self clone accept: aLabeledStatement statement).
 	^ currentFASTEntity
 ]
 

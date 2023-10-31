@@ -244,6 +244,33 @@ FASTTStatement >> javaTryCatchOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTTStatement >> labelStatementOwner [
+	"Relation named: #labelStatementOwner type: #FASTJavaLabeledStatement opposite: #labeledStatement"
+
+	<generated>
+	<FMComment: 'Label Statement entity containing this statement'>
+	<container>
+	<derived>
+	<FMProperty: #labelStatementOwner type: #FASTJavaLabeledStatement opposite: #labeledStatement>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #labelStatementOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTTStatement >> labelStatementOwner: anObject [
+
+	<generated>
+	(self attributeAt: #labelStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self labelStatementOwner.
+		self attributeAt: #labelStatementOwner put: anObject.
+		otherSide labeledStatement: nil ]
+	ifNotNil: [ 
+		self attributeAt: #labelStatementOwner put: anObject.
+		anObject labeledStatement: self ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTTStatement >> whileBodyOwner [
 	"Relation named: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body"
 
