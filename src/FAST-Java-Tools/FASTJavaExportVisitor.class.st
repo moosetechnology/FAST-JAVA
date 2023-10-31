@@ -838,6 +838,20 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCase
 	]
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaLabeledStatement: aFASTJavaLabeledStatement [
+	"Note on indentation: the 'inner statement' in aFASTJavaLabeledStatement
+	 will be displayed with leading indentation except if it is a block statement
+	 The result is not very consistent or pretty, but it will do for now"
+
+	self checkForComments: aFASTJavaLabeledStatement andDo: [ 
+		self
+			withIndent: aFASTJavaLabeledStatement label ;
+			noIndent: $:.
+		aFASTJavaLabeledStatement labeledStatement accept: self
+	]
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 	self checkForComments: aFASTJavaLongLiteral andDo: [
