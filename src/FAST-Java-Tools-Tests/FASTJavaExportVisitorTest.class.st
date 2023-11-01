@@ -102,7 +102,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArrayArgument [
 	| expr |
 	expr := self methodAST: '@Useless( { "anArgument" } ) void mth() { }'.
 
-	self export: expr equals: '@Useless({"anArgument"})
+	self export: expr equals: '@Useless({ "anArgument" })
 void mth() {
 }
 '
