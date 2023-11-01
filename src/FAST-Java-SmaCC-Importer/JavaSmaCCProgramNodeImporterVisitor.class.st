@@ -152,6 +152,27 @@ JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
 		ifNotNil: [ self parentFASTVisitor isOutsideTypeDeclaration ]
 ]
 
+{ #category : #creating }
+JavaSmaCCProgramNodeImporterVisitor >> mapCharacter: aString [
+	"receives a string representing a Java character like: 'a' 
+	 interpret special characters: \', \"", \\, \t, \r, \n, \f, \b
+	 and could also be a three digit number or unicodeCharcater 'u0000', ..."
+	
+	| escapedCharacters translatedCharacters indexEscapedCharacter |
+
+	(aString second = $\)
+		ifFalse: [ ^ aString second ].
+
+	escapedCharacters := '"''\trnfb'.
+	translatedCharacters := { $" . $' . $\ . Character tab . Character cr . Character lf . Character newPage . Character backspace }.
+	indexEscapedCharacter := escapedCharacters indexOf: aString third.
+	
+	(indexEscapedCharacter = 0)
+		ifTrue: [ Exception signal: ('Unknown escaped character: ' , aString) ]
+		ifFalse: [ ^translatedCharacters at: indexEscapedCharacter ]
+
+]
+
 { #category : #initialization }
 JavaSmaCCProgramNodeImporterVisitor >> model [
 	^ model
@@ -435,7 +456,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 	currentFASTEntity := self
 		addToModel:
 			(FASTJavaCharacterLiteral new
-				primitiveValue: aCharacterLiteral token value second ;
+				primitiveValue: (self mapCharacter: aCharacterLiteral token value) ;
 				yourself).
 	self setStartEndPos: aCharacterLiteral.
 	^ currentFASTEntity
