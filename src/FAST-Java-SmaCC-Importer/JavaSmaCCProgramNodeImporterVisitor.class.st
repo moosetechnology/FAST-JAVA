@@ -533,6 +533,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitElementArrayInitializer: anElementArrayInitializer [
+
+	currentFASTEntity := self create: FASTJavaArrayInitializer from: anElementArrayInitializer.
+	anElementArrayInitializer values do: [ :value |
+		currentFASTEntity initializers add: (self clone accept: value) ].
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitElementValuePair: anElementValuePair [
 	"'key = value' as argument of an Annotation
 	 treat it as an Assignement Expression"
