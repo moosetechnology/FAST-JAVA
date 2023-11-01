@@ -9,6 +9,9 @@ checks completnwess of FAST-Java by
 Class {
 	#name : #FASTJavaDifferentialValidator,
 	#superclass : #FASTJavaVisitor,
+	#instVars : [
+		'skipPaths'
+	],
 	#category : #'FAST-Java-Tools'
 }
 
@@ -87,6 +90,9 @@ FASTJavaDifferentialValidator >> runOnDirectory: aDirectory [
 { #category : #'instance creation' }
 FASTJavaDifferentialValidator >> runOnFileReference: aFileReference [
 
+	(skipPaths includes: aFileReference fullName)
+		ifTrue: [ ^self ].
+
 	aFileReference isDirectory
 		ifTrue: [ ^self runOnDirectory: aFileReference ].
 
@@ -109,4 +115,16 @@ FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 	
 		self compare: astOrig to: astBis
 	]
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> skipPaths [
+
+	^ skipPaths
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> skipPaths: anObject [
+
+	skipPaths := anObject
 ]
