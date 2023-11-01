@@ -63,6 +63,26 @@ FASTJavaExportVisitorTest >> setUp [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTAssignementInMessageSend [
+
+	| expr |
+	expr := self methodAST: 'void meth() {
+  new Timer() {
+    public void run() { a = 5; }
+  }.schedule(2000);
+}'.
+
+	self export: expr equals: 'void meth() {
+  new Timer() {
+    public void run() {
+      a = 5;
+    }
+}.schedule(2000);
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTEmptyReturn [
 
 	| ast |
