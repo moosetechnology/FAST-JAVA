@@ -143,7 +143,7 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 { #category : #creating }
 JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
 
-	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration }
+	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaMethodEntity }
 		includes: currentFASTEntity class )
 		ifTrue: [ ^ false ].
 

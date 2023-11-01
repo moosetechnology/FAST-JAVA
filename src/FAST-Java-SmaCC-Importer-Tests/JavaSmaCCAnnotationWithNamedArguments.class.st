@@ -5,10 +5,23 @@ Class {
 }
 
 { #category : #running }
-JavaSmaCCAnnotationWithNamedArguments >> javaMethod [
-	^'@Useless(arg1="Argument 1",arg2=AClass.A_Constant)
+JavaSmaCCAnnotationWithNamedArguments >> javaClass [
+	^'class AClass {
+	@Useless(arg1="Argument 1",arg2=AClass.A_Constant)
 	void mth() {
-	}'
+	}
+}'
+]
+
+{ #category : #running }
+JavaSmaCCAnnotationWithNamedArguments >> javaMethod [
+	^self shouldNotImplement 
+]
+
+{ #category : #running }
+JavaSmaCCAnnotationWithNamedArguments >> setUp [
+
+	fastModel := self parseClassString: self javaClass
 ]
 
 { #category : #tests }
