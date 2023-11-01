@@ -15,12 +15,12 @@ public enum MyEnum {
 Class {
 	#name : #FASTJavaEnumDeclaration,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait',
+	#traits : '(FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
+	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner',
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #enumDeclarations',
 		'#constants => FMMany type: #FASTJavaEnumConstant opposite: #parentEnum',
-		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #enumDeclarations'
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
