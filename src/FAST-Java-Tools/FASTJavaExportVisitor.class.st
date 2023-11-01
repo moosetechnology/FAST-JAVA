@@ -1271,15 +1271,17 @@ FASTJavaExportVisitor >> visitFASTTReturnStatement: aFASTTReturnStatement [
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
-	self noIndent: ${.
-	self newLine.
-	self indent.
-	aFASTJavaStatementBlock statements do: [ :node |
-		node accept: self
-	].
-	self unindent.
-	self withIndent: $}.
-	self newLine
+	self topLevelExpression: [
+		self noIndent: ${.
+		self newLine.
+		self indent.
+		aFASTJavaStatementBlock statements do: [ :node |
+			node accept: self
+		].
+		self unindent.
+		self withIndent: $}.
+		self newLine
+	]
 ]
 
 { #category : #visiting }
