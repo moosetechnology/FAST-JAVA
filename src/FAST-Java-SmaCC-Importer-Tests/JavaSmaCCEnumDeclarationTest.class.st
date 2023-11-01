@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #running }
-JavaSmaCCEnumDeclarationTest >> javaMethod [
-	^ 'void method() {
-	private enum MyEnum { 
+JavaSmaCCEnumDeclarationTest >> enumString [
+
+	^ 'private enum MyEnum { 
 		
 		INFORMATION_EMPTY("INFO_EMPTY");
 		
@@ -29,31 +29,43 @@ JavaSmaCCEnumDeclarationTest >> javaMethod [
 		public String getLabel() {
 			return this.label;
 		}
-	}
 }' 
+]
+
+{ #category : #running }
+JavaSmaCCEnumDeclarationTest >> javaMethod [
+	^self shouldNotImplement
+]
+
+{ #category : #running }
+JavaSmaCCEnumDeclarationTest >> setUp [
+
+	fastModel := self parseClassString: self enumString
 ]
 
 { #category : #tests }
 JavaSmaCCEnumDeclarationTest >> testConstantNameInEnum [
-	self assert: (fastMethod mooseModel allWithType: FASTJavaEnumConstant) anyOne name equals: 'INFORMATION_EMPTY'
+	self assert: (fastModel allWithType: FASTJavaEnumConstant) anyOne name equals: 'INFORMATION_EMPTY'
 ]
 
 { #category : #tests }
 JavaSmaCCEnumDeclarationTest >> testEnumDeclarationName [
-	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) anyOne name equals: 'MyEnum' 
+	self assert: ( fastModel allWithType: FASTJavaEnumDeclaration) anyOne name equals: 'MyEnum' 
 ]
 
 { #category : #tests }
 JavaSmaCCEnumDeclarationTest >> testNumberOfConstantsInEnum [
-	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) anyOne constants size equals: 1
+	self assert: ( fastModel allWithType: FASTJavaEnumDeclaration) anyOne constants size equals: 1
 ]
 
 { #category : #tests }
 JavaSmaCCEnumDeclarationTest >> testNumberOfDeclarationsInEnum [
-	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) anyOne declarations size equals: 4
+	self
+		assert: ( fastModel allWithType: FASTJavaEnumDeclaration) anyOne declarations size
+		equals: 4
 ]
 
 { #category : #tests }
 JavaSmaCCEnumDeclarationTest >> testNumberOfEnumDeclaration [
-	self assert: ( fastMethod mooseModel allWithType: FASTJavaEnumDeclaration) size equals: 1
+	self assert: ( fastModel allWithType: FASTJavaEnumDeclaration) size equals: 1
 ]

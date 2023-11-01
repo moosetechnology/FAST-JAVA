@@ -141,14 +141,15 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 ]
 
 { #category : #creating }
-JavaSmaCCProgramNodeImporterVisitor >> isInDocumentContext [
+JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
 
-	((self currentFASTEntity isKindOf: FASTJavaClassDeclaration) or: [ 
-		 self currentFASTEntity isKindOf: FASTJavaMethodEntity ]) ifTrue: [ 
-		^ false ].
-	^ self parentFASTVisitor
-		  ifNil: [ ^ true ]
-		  ifNotNil: [ self parentFASTVisitor isInDocumentContext ]
+	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration }
+		includes: currentFASTEntity class )
+		ifTrue: [ ^ false ].
+
+	^self parentFASTVisitor
+		ifNil: [ true ]
+		ifNotNil: [ self parentFASTVisitor isOutsideTypeDeclaration ]
 ]
 
 { #category : #initialization }
@@ -215,8 +216,9 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 	[ 
 	self accept: ast.
 	((self model allWithSubTypesOfAny: { 
-			  FASTJavaClassDeclaration.
-			  FASTJavaInterfaceDeclaration }) detect: [ :classDeclaration | 
+			  FASTJavaClassDeclaration .
+			  FASTJavaInterfaceDeclaration .
+			  FASTJavaEnumDeclaration }) detect: [ :classDeclaration | 
 		 classDeclaration parentNode isNil ]) source:
 		ast completeSource asString ]
 		on: Error
@@ -914,7 +916,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModifier: aModifier [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 
-	self isInDocumentContext
+	self isOutsideTypeDeclaration
 		ifTrue: [ 
 			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
 			self setStartEndPos: aName ]
@@ -1085,7 +1087,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 
-	self isInDocumentContext
+	self isOutsideTypeDeclaration
 		ifTrue: [
 			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
 			self setStartEndPos: aQualifiedName.
