@@ -1196,6 +1196,7 @@ FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 	self checkForComments: aFASTJavaVarDeclStatement andDo: [
+		self withIndent: ''.
 		aFASTJavaVarDeclStatement modifiers do: [:modifier |
 			modifier accept: self.
 			self space.
