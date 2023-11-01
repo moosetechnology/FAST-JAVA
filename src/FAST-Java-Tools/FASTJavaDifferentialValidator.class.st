@@ -1,14 +1,23 @@
 "
-checks completnwess of FAST-Java by
+checks completness of FAST-Java by
 - going through a Java project,
 - extracting FAST of each class,
 - regenerating the source code from the FAST mode,
 - reextracting a new model from the new code, and
 - finally comparing the 2 models (they should be the same)
+
+This is not full-proof
+- Some ASTs can be different and the code be ""the same"" for example `a&&b&&c` has different AST from `a&&(b&&c)`
+- properties of nodes are nto tested, so `a==b` is considered equal to `a!=b` because the #operator is not tested
+
+Yet it proved useful to validate FASTJava importer and exporter
 "
 Class {
 	#name : #FASTJavaDifferentialValidator,
 	#superclass : #FASTJavaVisitor,
+	#instVars : [
+		'skipPaths'
+	],
 	#category : #'FAST-Java-Tools'
 }
 
@@ -87,6 +96,9 @@ FASTJavaDifferentialValidator >> runOnDirectory: aDirectory [
 { #category : #'instance creation' }
 FASTJavaDifferentialValidator >> runOnFileReference: aFileReference [
 
+	(skipPaths includes: aFileReference fullName)
+		ifTrue: [ ^self ].
+
 	aFileReference isDirectory
 		ifTrue: [ ^self runOnDirectory: aFileReference ].
 
@@ -109,4 +121,16 @@ FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 	
 		self compare: astOrig to: astBis
 	]
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> skipPaths [
+
+	^ skipPaths
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> skipPaths: anObject [
+
+	skipPaths := anObject
 ]
