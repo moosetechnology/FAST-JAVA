@@ -388,6 +388,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithInitializedFiel
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionBackslashNCharacter [
+
+	| expr |
+	expr := self expressionAST: '''\n'''.
+
+	self export: expr equals: '''\n'''
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndArithmeticSubExpression [
 	
 	| expr |
