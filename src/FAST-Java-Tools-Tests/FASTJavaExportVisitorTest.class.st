@@ -85,6 +85,30 @@ void mth() {
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArgument [
+	
+	| expr |
+	expr := self methodAST: '@Useless("anArgument") void mth() { }'.
+
+	self export: expr equals: '@Useless("anArgument")
+void mth() {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArrayArgument [
+	
+	| expr |
+	expr := self methodAST: '@Useless( { "anArgument" } ) void mth() { }'.
+
+	self export: expr equals: '@Useless({ "anArgument" })
+void mth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotattionWithArgument [
 	
 	| expr |
