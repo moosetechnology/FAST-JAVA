@@ -248,7 +248,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeModifiers [
 	ast := self astFor: 'class Blah { private static final int CONST = 42; }'.
 
 	self export: ast equals: 'class Blah {
-private static final int CONST = 42;
+  private static final int CONST = 42;
 }
 '
 ]
@@ -367,6 +367,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 	self export: ast equals: 'class Blah {
   void method() {
   }
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithInitializedField [
+
+	| ast |
+	ast := self astFor: 'enum AnEnum {
+  CONST1, CONST2;
+  AnEnum aField = CONST1;
+}'.
+
+	self export: ast equals: 'enum AnEnum {
+  CONST1, CONST2;
+  AnEnum aField = CONST1;
 }
 '
 ]

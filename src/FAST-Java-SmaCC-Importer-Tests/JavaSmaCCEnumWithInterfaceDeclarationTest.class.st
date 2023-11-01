@@ -35,7 +35,7 @@ JavaSmaCCEnumWithInterfaceDeclarationTest >> enumString [
 
 { #category : #accessing }
 JavaSmaCCEnumWithInterfaceDeclarationTest >> javaMethod [
-	^ self shouldBeImplemented
+	^ self shouldNotImplement
 ]
 
 { #category : #running }
