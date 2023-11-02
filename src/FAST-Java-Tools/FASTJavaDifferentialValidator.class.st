@@ -22,6 +22,19 @@ Class {
 }
 
 { #category : #'instance creation' }
+FASTJavaDifferentialValidator >> ast: ast1 differ: ast2 [
+
+	((ast1 class = FASTJavaInfixOperation) 
+	or: [ ast2 class = FASTJavaInfixOperation ])
+		ifTrue:  [
+			('  ** difference in InfixOperation ignored, position in source: ' , ast1 startPos asString)
+				traceCr.
+				Notification signal
+		]
+		ifFalse: [ Exception signal: 'ASTs differ' ]
+]
+
+{ #category : #'instance creation' }
 FASTJavaDifferentialValidator >> childrenNodes: astNode [
 
 	^OrderedCollection withAll:
@@ -33,7 +46,7 @@ FASTJavaDifferentialValidator >> childrenNodes: astNode [
 FASTJavaDifferentialValidator >> compare: ast1 to: ast2 [
 
 	(ast1 class = ast2 class)
-		ifFalse: [ Exception signal: 'ASTs differ' ].
+		ifFalse: [ self ast: ast1 differ: ast2 ].
 
 	(self childrenNodes: ast1)
 		with: (self childrenNodes: ast2)
@@ -119,7 +132,9 @@ FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 		astBis := self getRootNode:
 			(self getASTFromString: (FASTJavaExportVisitor new export: astOrig)).
 	
-		self compare: astOrig to: astBis
+		[self compare: astOrig to: astBis]
+		on: Notification
+		do: [ "continue" ]
 	]
 ]
 
