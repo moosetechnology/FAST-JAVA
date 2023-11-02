@@ -271,6 +271,25 @@ FASTTStatement >> labelStatementOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTTStatement >> tryFinallyOwner [
+	"Relation named: #tryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally"
+
+	<generated>
+	<FMComment: 'The try/finally part that owns me'>
+	<container>
+	<FMProperty: #tryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #tryFinallyOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTTStatement >> tryFinallyOwner: anObject [
+
+	<generated>
+	self attributeAt: #tryFinallyOwner put: (FMMultivalueLink on: self update: #finally from: self tryFinallyOwner to: anObject).
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTTStatement >> whileBodyOwner [
 	"Relation named: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body"
 
