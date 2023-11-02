@@ -565,6 +565,30 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesUnaryWithSub 
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnSuper [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { super.aField = 5; }'.
+
+	self export: expr equals: 'void mth() {
+  super.aField = 5;
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnThis [
+	
+	| expr |
+	expr := self methodAST: 'void mth() { this.aField = 5; }'.
+
+	self export: expr equals: 'void mth() {
+  this.aField = 5;
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 	| node |
 	node := builder literal: FASTJavaFloatLiteral value: '37.2f'.

@@ -637,7 +637,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionSta
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 	currentFASTEntity := self addToModel: FASTJavaFieldAccess new.
 	self setStartEndPos: aFieldAccess.
-	aFieldAccess receiver ifNotNil: [ :receiver | currentFASTEntity receiver: (self clone accept: receiver) ].
+	aFieldAccess receiver
+		ifNotNil: [ :receiver | currentFASTEntity receiver: (self clone accept: receiver) ]
+		ifNil: [
+			aFieldAccess superToken
+				ifNotNil: [ currentFASTEntity receiver: (self clone visitSuperMemberAcessor: aFieldAccess) ]
+		].
 	currentFASTEntity fieldName: aFieldAccess name value.
 	^ currentFASTEntity
 ]
@@ -1194,6 +1199,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperCo
 	aSuperConstructorInvocation expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity name: aSuperConstructorInvocation superToken value.
 	^ expressionStatement
+]
+
+{ #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitSuperMemberAcessor: aFieldAccess [
+	currentFASTEntity := self create: FASTJavaVariableExpression from: aFieldAccess superToken.
+	currentFASTEntity name: aFieldAccess superToken value.
+	^currentFASTEntity 
 ]
 
 { #category : #visitor }
