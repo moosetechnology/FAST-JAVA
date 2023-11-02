@@ -870,6 +870,16 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledStatement: aFASTJavaLabeledStatemen
 ]
 
 { #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpression [
+	self checkForComments: aFASTJavaLambdaExpression andDo: [
+		self noIndent: $(.
+		self visitNodeListSeparatedByCommas: aFASTJavaLambdaExpression parameters.
+		self noIndent: ') -> '.
+		aFASTJavaLambdaExpression expression accept: self
+	]
+]
+
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 	self checkForComments: aFASTJavaLongLiteral andDo: [
 		super visitFASTTLiteral: aFASTJavaLongLiteral
@@ -1054,20 +1064,24 @@ FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclar
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	self checkForComments: aFASTJavaParameter andDo: [
-	aFASTJavaParameter type accept: self.
-	self space.
-	aFASTJavaParameter variable accept: self
-]
+		aFASTJavaParameter type 
+			ifNotNil: [ :parameterType |
+				"Lambda parameters may be typeless"
+				parameterType accept: self.
+				self space
+			].
+		aFASTJavaParameter variable accept: self
+	]
 
 ]
 
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 	self checkForComments: aFASTJavaParameterCollection andDo: [
-	self noIndent: $(.
-	self visitNodeListSeparatedByCommas: aFASTJavaParameterCollection.
-	self noIndent: ') '
-]
+		self noIndent: $(.
+		self visitNodeListSeparatedByCommas: aFASTJavaParameterCollection.
+		self noIndent: ') '
+	]
 
 ]
 
