@@ -40,12 +40,6 @@ FASTJavaTryCatchStatement >> addCatch: anObject [
 	^ self catches add: anObject
 ]
 
-{ #category : #adding }
-FASTJavaTryCatchStatement >> addFinally: anObject [
-	<generated>
-	^ self finally add: anObject
-]
-
 { #category : #accessing }
 FASTJavaTryCatchStatement >> catches [
 	"Relation named: #catches type: #FASTJavaCatchPartStatement opposite: #tryOwner"
@@ -76,23 +70,29 @@ FASTJavaTryCatchStatement >> finally [
 
 	<generated>
 	<FMComment: 'I contain the ''finally'' part of the try/catch/finally'>
-	<derived>
 	<FMProperty: #finally type: #FASTTStatement opposite: #tryFinallyOwner>
-	^ self attributeAt: #finally ifAbsentPut: [ FMMultivalueLink on: self opposite: #tryFinallyOwner: ]
+	^ self attributeAt: #finally ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaTryCatchStatement >> finally: anObject [
 
 	<generated>
-	self finally value: anObject
+	(self attributeAt: #finally ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self finally.
+		self attributeAt: #finally put: anObject.
+		otherSide tryFinallyOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #finally put: anObject.
+		anObject tryFinallyOwner: self ]
 ]
 
 { #category : #navigation }
 FASTJavaTryCatchStatement >> finallyGroup [
 	<generated>
 	<navigation: 'Finally'>
-	^ MooseSpecializedGroup withAll: self finally asSet
+	^ MooseSpecializedGroup with: self finally
 ]
 
 { #category : #accessing }

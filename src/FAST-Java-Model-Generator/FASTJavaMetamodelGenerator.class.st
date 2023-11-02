@@ -1151,7 +1151,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The try part that owns me').
 	((javaTryCatchStatement property: #finally) comment:
 		 'I contain the ''finally'' part of the try/catch/finally')
-	<>-* ((tStatement property: #tryFinallyOwner) comment:
+	<>- ((tStatement property: #tryFinallyOwner) comment:
 			 'The try/finally part that owns me').
 
 	((javaCatchPartStatement property: #body) comment:
