@@ -163,33 +163,6 @@ FASTTStatement >> ifThenPartOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaCatchPartStatementOwner [
-	"Relation named: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body"
-
-	<generated>
-	<FMComment: 'The javaCatchPartStatementOwner owner (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaCatchPartStatementOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaCatchPartStatementOwner: anObject [
-
-	<generated>
-	(self attributeAt: #javaCatchPartStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaCatchPartStatementOwner.
-		self attributeAt: #javaCatchPartStatementOwner put: anObject.
-		otherSide body: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaCatchPartStatementOwner put: anObject.
-		anObject body: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTTStatement >> javaForEachStatementOwner [
 	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body"
 
@@ -214,33 +187,6 @@ FASTTStatement >> javaForEachStatementOwner: anObject [
 	ifNotNil: [ 
 		self attributeAt: #javaForEachStatementOwner put: anObject.
 		anObject body: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaTryCatchOwner [
-	"Relation named: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try"
-
-	<generated>
-	<FMComment: 'The javaTryCatch owner (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaTryCatchOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaTryCatchOwner: anObject [
-
-	<generated>
-	(self attributeAt: #javaTryCatchOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaTryCatchOwner.
-		self attributeAt: #javaTryCatchOwner put: anObject.
-		otherSide try: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaTryCatchOwner put: anObject.
-		anObject try: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }

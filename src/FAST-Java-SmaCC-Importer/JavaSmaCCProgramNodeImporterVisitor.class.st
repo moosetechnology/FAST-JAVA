@@ -658,6 +658,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldDeclaration: aFieldDeclaration 
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitFinallyClause: aFinallyClause [
+	^self accept: aFinallyClause block
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitFloatLiteral: aFloatLiteral [
 	currentFASTEntity := self
 		addToModel:
@@ -1277,6 +1282,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 	aTryStatement catches
 		do:
 			[ :aCatchBlock | currentFASTEntity catches add: (self clone accept: aCatchBlock) ].
+	currentFASTEntity finally: (self clone accept: aTryStatement finally).
+
 	^ currentFASTEntity
 ]
 

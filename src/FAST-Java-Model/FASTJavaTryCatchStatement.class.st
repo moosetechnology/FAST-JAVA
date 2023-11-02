@@ -20,7 +20,9 @@ Class {
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
-		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner'
+		'#try => FMOne type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner',
+		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner',
+		'#finally => FMOne type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -65,27 +67,42 @@ FASTJavaTryCatchStatement >> catchesGroup [
 ]
 
 { #category : #accessing }
+FASTJavaTryCatchStatement >> finally [
+	"Relation named: #finally type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner"
+
+	<generated>
+	<FMComment: 'I contain the ''finally'' part of the try/catch/finally'>
+	^ finally
+]
+
+{ #category : #accessing }
+FASTJavaTryCatchStatement >> finally: anObject [
+
+	<generated>
+	finally := anObject
+]
+
+{ #category : #navigation }
+FASTJavaTryCatchStatement >> finallyGroup [
+	<generated>
+	<navigation: 'Finally'>
+	^ MooseSpecializedGroup with: self finally
+]
+
+{ #category : #accessing }
 FASTJavaTryCatchStatement >> try [
-	"Relation named: #try type: #FASTTStatement opposite: #javaTryCatchOwner"
+	"Relation named: #try type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner"
 
 	<generated>
 	<FMComment: 'I represent the ''try'' part of the TryCatch Statement'>
-	<FMProperty: #try type: #FASTTStatement opposite: #javaTryCatchOwner>
-	^ self attributeAt: #try ifAbsent: [ nil ]
+	^ try
 ]
 
 { #category : #accessing }
 FASTJavaTryCatchStatement >> try: anObject [
 
 	<generated>
-	(self attributeAt: #try ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self try.
-		self attributeAt: #try put: anObject.
-		otherSide javaTryCatchOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #try put: anObject.
-		anObject javaTryCatchOwner: self ]
+	try := anObject
 ]
 
 { #category : #navigation }

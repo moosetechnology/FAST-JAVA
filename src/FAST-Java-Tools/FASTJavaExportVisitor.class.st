@@ -1163,6 +1163,11 @@ FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatem
 		aFASTJavaTryCatchStatement try accept: self.
 		aFASTJavaTryCatchStatement catches do: [ :catchStatement |
 			catchStatement accept: self
+		].
+		aFASTJavaTryCatchStatement finally
+			ifNotNil: [ :finallyPart |
+				self withIndent: 'finally '.
+				finallyPart accept: self
 		]
 	]
 

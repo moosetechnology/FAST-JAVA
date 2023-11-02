@@ -51,6 +51,11 @@ JavaSmaCCTryCatchTest >> testTryCatchCatchedType [
 ]
 
 { #category : #tests }
+JavaSmaCCTryCatchTest >> testTryCatchFinallyPartType [
+	self assert: fastMethod statements second finally equals: nil
+]
+
+{ #category : #tests }
 JavaSmaCCTryCatchTest >> testTryCatchTryPartType [
 	self assert: fastMethod statements second try class equals: FASTJavaStatementBlock
 ]

@@ -935,6 +935,24 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatch [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryFinally [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  try { }
+  finally { }
+}'.
+
+	self export: ast equals: 'void mth() {
+  try {
+  }
+  finally {
+  }
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 
 	self
