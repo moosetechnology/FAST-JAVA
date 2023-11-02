@@ -1143,7 +1143,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaTryCatchStatement property: #try) comment:
 		 'I represent the ''try'' part of the TryCatch Statement')
-	<>- ((tStatement property: #javaTryCatchOwner) comment:
+	<>- ((javaStatementBlock property: #javaTryCatchOwner) comment:
 			 'The javaTryCatch owner (if possible)').
 	((javaTryCatchStatement property: #catches) comment:
 		 'I contain all the catch statements')
@@ -1151,12 +1151,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The try part that owns me').
 	((javaTryCatchStatement property: #finally) comment:
 		 'I contain the ''finally'' part of the try/catch/finally')
-	<>- ((tStatement property: #tryFinallyOwner) comment:
+	<>- ((javaStatementBlock property: #javaTryFinallyOwner) comment:
 			 'The try/finally part that owns me').
 
 	((javaCatchPartStatement property: #body) comment:
 		 'The body of the catch part')
-	<>- ((tStatement property: #javaCatchPartStatementOwner) comment:
+	<>- ((javaStatementBlock property: #javaCatchPartStatementOwner) comment:
 			 'The javaCatchPartStatementOwner owner (if possible)').
 	((javaCatchPartStatement property: #catchedTypes) comment:
 			 'The types (exception) that are catched')

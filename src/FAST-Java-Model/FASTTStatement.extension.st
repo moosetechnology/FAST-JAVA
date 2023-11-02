@@ -163,33 +163,6 @@ FASTTStatement >> ifThenPartOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaCatchPartStatementOwner [
-	"Relation named: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body"
-
-	<generated>
-	<FMComment: 'The javaCatchPartStatementOwner owner (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaCatchPartStatementOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaCatchPartStatementOwner: anObject [
-
-	<generated>
-	(self attributeAt: #javaCatchPartStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaCatchPartStatementOwner.
-		self attributeAt: #javaCatchPartStatementOwner put: anObject.
-		otherSide body: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaCatchPartStatementOwner put: anObject.
-		anObject body: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTTStatement >> javaForEachStatementOwner [
 	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body"
 
@@ -217,33 +190,6 @@ FASTTStatement >> javaForEachStatementOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaTryCatchOwner [
-	"Relation named: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try"
-
-	<generated>
-	<FMComment: 'The javaTryCatch owner (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaTryCatchOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> javaTryCatchOwner: anObject [
-
-	<generated>
-	(self attributeAt: #javaTryCatchOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaTryCatchOwner.
-		self attributeAt: #javaTryCatchOwner put: anObject.
-		otherSide try: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaTryCatchOwner put: anObject.
-		anObject try: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTTStatement >> labelStatementOwner [
 	"Relation named: #labelStatementOwner type: #FASTJavaLabeledStatement opposite: #labeledStatement"
 
@@ -268,33 +214,6 @@ FASTTStatement >> labelStatementOwner: anObject [
 	ifNotNil: [ 
 		self attributeAt: #labelStatementOwner put: anObject.
 		anObject labeledStatement: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> tryFinallyOwner [
-	"Relation named: #tryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally"
-
-	<generated>
-	<FMComment: 'The try/finally part that owns me'>
-	<container>
-	<derived>
-	<FMProperty: #tryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #tryFinallyOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTStatement >> tryFinallyOwner: anObject [
-
-	<generated>
-	(self attributeAt: #tryFinallyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self tryFinallyOwner.
-		self attributeAt: #tryFinallyOwner put: anObject.
-		otherSide finally: nil ]
-	ifNotNil: [ 
-		self attributeAt: #tryFinallyOwner put: anObject.
-		anObject finally: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }

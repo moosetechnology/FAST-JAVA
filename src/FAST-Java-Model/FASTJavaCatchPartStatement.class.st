@@ -8,6 +8,7 @@ Class {
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches',
+		'#body => FMOne type: #FASTJavaStatementBlock opposite: #javaCatchPartStatementOwner',
 		'#catchedTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
 		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler'
 	],
@@ -31,26 +32,18 @@ FASTJavaCatchPartStatement >> addCatchedType: anObject [
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body [
-	"Relation named: #body type: #FASTTStatement opposite: #javaCatchPartStatementOwner"
+	"Relation named: #body type: #FASTJavaStatementBlock opposite: #javaCatchPartStatementOwner"
 
 	<generated>
 	<FMComment: 'The body of the catch part'>
-	<FMProperty: #body type: #FASTTStatement opposite: #javaCatchPartStatementOwner>
-	^ self attributeAt: #body ifAbsent: [ nil ]
+	^ body
 ]
 
 { #category : #accessing }
 FASTJavaCatchPartStatement >> body: anObject [
 
 	<generated>
-	(self attributeAt: #body ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self body.
-		self attributeAt: #body put: anObject.
-		otherSide javaCatchPartStatementOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #body put: anObject.
-		anObject javaCatchPartStatementOwner: self ]
+	body := anObject
 ]
 
 { #category : #navigation }
