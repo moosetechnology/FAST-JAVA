@@ -23,6 +23,11 @@ JavaSmaCCTryWithFinallyTest >> testTryCatchCatchNumber [
 ]
 
 { #category : #tests }
+JavaSmaCCTryWithFinallyTest >> testTryCatchFinallyPartType [
+	self assert: fastMethod statements second finally class equals: FASTJavaStatementBlock
+]
+
+{ #category : #tests }
 JavaSmaCCTryWithFinallyTest >> testTryCatchTryPartType [
 	self assert: fastMethod statements second try class equals: FASTJavaStatementBlock
 ]
