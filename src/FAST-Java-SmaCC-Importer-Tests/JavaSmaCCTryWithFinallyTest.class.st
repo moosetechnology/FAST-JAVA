@@ -18,18 +18,13 @@ JavaSmaCCTryWithFinallyTest >> javaMethod [
 ]
 
 { #category : #tests }
-JavaSmaCCTryWithFinallyTest >> testTryCatchCatchNumber [
-	self assert: fastMethod statements second catches size equals: 0
+JavaSmaCCTryWithFinallyTest >> testTryCatchFinallyPartNumberOfStatements [
+	self assert: fastMethod statements second finally statements size equals: 1
 ]
 
 { #category : #tests }
 JavaSmaCCTryWithFinallyTest >> testTryCatchFinallyPartType [
 	self assert: fastMethod statements second finally class equals: FASTJavaStatementBlock
-]
-
-{ #category : #tests }
-JavaSmaCCTryWithFinallyTest >> testTryCatchTryPartType [
-	self assert: fastMethod statements second try class equals: FASTJavaStatementBlock
 ]
 
 { #category : #tests }

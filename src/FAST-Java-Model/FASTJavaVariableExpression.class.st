@@ -4,17 +4,17 @@ Class {
 	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTVariableExpression',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
-		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable',
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
-		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
-		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
-		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
+		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
 		'#javaMethodReferenceOwner => FMOne type: #FASTJavaMethodReference opposite: #receiver',
 		'#javaMethodTypeOwner => FMOne type: #FASTJavaMethodEntity opposite: #type',
+		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
+		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaParameterTypeOwner => FMOne type: #FASTJavaParameter opposite: #type',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
-		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type'
+		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
+		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }

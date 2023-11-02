@@ -277,6 +277,7 @@ FASTTStatement >> tryFinallyOwner [
 	<generated>
 	<FMComment: 'The try/finally part that owns me'>
 	<container>
+	<derived>
 	<FMProperty: #tryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally>
 	<package: #'FAST-Java-Model'>
 	^ self attributeAt: #tryFinallyOwner ifAbsent: [ nil ]
@@ -286,7 +287,14 @@ FASTTStatement >> tryFinallyOwner [
 FASTTStatement >> tryFinallyOwner: anObject [
 
 	<generated>
-	self attributeAt: #tryFinallyOwner put: (FMMultivalueLink on: self update: #finally from: self tryFinallyOwner to: anObject).
+	(self attributeAt: #tryFinallyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self tryFinallyOwner.
+		self attributeAt: #tryFinallyOwner put: anObject.
+		otherSide finally: nil ]
+	ifNotNil: [ 
+		self attributeAt: #tryFinallyOwner put: anObject.
+		anObject finally: self ]
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
