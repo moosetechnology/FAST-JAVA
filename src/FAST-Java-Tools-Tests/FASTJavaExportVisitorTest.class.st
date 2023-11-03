@@ -963,6 +963,24 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatch [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatchMultipleExceptinoClasses [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  try { }
+  catch (SomeError | OtherError err) { }
+}'.
+
+	self export: ast equals: 'void mth() {
+  try {
+  }
+  catch (SomeError | OtherError err) {
+  }
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryFinally [
 
 	| ast |
