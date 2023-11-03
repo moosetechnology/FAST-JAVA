@@ -16,13 +16,16 @@ Class {
 	#name : #FASTJavaDifferentialValidator,
 	#superclass : #FASTJavaVisitor,
 	#instVars : [
-		'skipPaths'
+		'skipPaths',
+		'strict'
 	],
 	#category : #'FAST-Java-Tools'
 }
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> ast: ast1 differ: ast2 [
+
+	self strict ifTrue:  [ Exception signal: 'ASTs differ' ].
 
 	((ast1 class = FASTJavaInfixOperation) 
 	or: [ ast2 class = FASTJavaInfixOperation ])
@@ -34,7 +37,13 @@ FASTJavaDifferentialValidator >> ast: ast1 differ: ast2 [
 		ifFalse: [ Exception signal: 'ASTs differ' ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> beStrict [
+
+	self strict: true
+]
+
+{ #category : #running }
 FASTJavaDifferentialValidator >> childrenNodes: astNode [
 
 	^OrderedCollection withAll:
@@ -42,7 +51,7 @@ FASTJavaDifferentialValidator >> childrenNodes: astNode [
 
 ]
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> compare: ast1 to: ast2 [
 
 	(ast1 class = ast2 class)
@@ -53,7 +62,7 @@ FASTJavaDifferentialValidator >> compare: ast1 to: ast2 [
 		do: [ :a :b | self compare: a to: b ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> getASTFromFileReference: aFileReference [
 
 	| model |
@@ -66,7 +75,7 @@ FASTJavaDifferentialValidator >> getASTFromFileReference: aFileReference [
 			  FASTJavaEnumDeclaration }
 ]
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> getASTFromString: stream [
 
 	^ JavaSmaCCProgramNodeImporterVisitor new
@@ -74,13 +83,13 @@ FASTJavaDifferentialValidator >> getASTFromString: stream [
 		  model
 ]
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> getRootNode: aFamixModel [
 
 	^aFamixModel detect: [ : e | e allParents isEmpty ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> gotoClassDeclaration: stream [
 	"put the stream at the start of a Java class declaration"
 	
@@ -91,13 +100,21 @@ FASTJavaDifferentialValidator >> gotoClassDeclaration: stream [
 	stream position: (stream position - pattern size)
 ]
 
-{ #category : #'instance creation' }
+{ #category : #initialization }
+FASTJavaDifferentialValidator >> initialize [
+
+	super initialize.
+
+	strict := false
+]
+
+{ #category : #api }
 FASTJavaDifferentialValidator >> on: aDirectoryName [
 
 	self runOnDirectory: aDirectoryName asFileReference
 ]
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> runOnDirectory: aDirectory [
 
 	aDirectory isDirectory
@@ -106,7 +123,7 @@ FASTJavaDifferentialValidator >> runOnDirectory: aDirectory [
 	aDirectory children do: [ :fileRef | self runOnFileReference: fileRef ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : #api }
 FASTJavaDifferentialValidator >> runOnFileReference: aFileReference [
 
 	(skipPaths includes: aFileReference fullName)
@@ -120,7 +137,7 @@ FASTJavaDifferentialValidator >> runOnFileReference: aFileReference [
 
 ]
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> runOnJavaFile: aFileReference [
 
 	| astOrig astBis topLevelNodes |
@@ -148,4 +165,16 @@ FASTJavaDifferentialValidator >> skipPaths [
 FASTJavaDifferentialValidator >> skipPaths: anObject [
 
 	skipPaths := anObject
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> strict [
+
+	^ strict
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> strict: anObject [
+
+	strict := anObject
 ]
