@@ -1333,8 +1333,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'I represent a condition for my owner').
 	((javaAssertStatement property: #message) comment:
 		 'The error message that is raised if the condition is false')
-	<>- ((javaStringLiteral property: #javaStringAssertStatementOwner) 
-			 comment: 'The assertion that can raise me').
+	<>- ((tExpression property: #javaStringAssertStatementOwner) 
+			 comment: 'The assertion which I describe').
 
 	((javaClassDeclaration property: #superclass) comment:
 		 'My superclass')
