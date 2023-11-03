@@ -211,6 +211,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatement [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatementExplanationIsExpression [
+
+	| expr |
+	expr := self blockAST: '{ assert 1>2 : "number " + 1 + " is too big"; }'.
+
+	self export: expr statements first equals: 'assert 1>2 : "number "+1+" is too big";
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatementNoExplanation [
 
 	| expr |
