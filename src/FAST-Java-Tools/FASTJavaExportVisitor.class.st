@@ -583,6 +583,19 @@ FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCase
 	]
 ]
 
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
+	self checkForComments: aFASTJavaDoWhileStatement andDo: [
+		self withIndent: 'do '.
+		aFASTJavaDoWhileStatement body accept: self.
+		self withIndent: 'while ('.
+		aFASTJavaDoWhileStatement condition accept: self.
+		self
+			noIndent: ')' ;
+			endOfStatement.
+	]
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
 	self checkForComments: aFASTJavaDoubleTypeExpression andDo: [
