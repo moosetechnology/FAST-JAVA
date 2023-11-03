@@ -479,6 +479,33 @@ FASTTExpression >> javaNewArrayInitialOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
+FASTTExpression >> javaStringAssertStatementOwner [
+	"Relation named: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message"
+
+	<generated>
+	<FMComment: 'The assertion which I describe'>
+	<container>
+	<derived>
+	<FMProperty: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #javaStringAssertStatementOwner ifAbsent: [ nil ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
+FASTTExpression >> javaStringAssertStatementOwner: anObject [
+
+	<generated>
+	(self attributeAt: #javaStringAssertStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaStringAssertStatementOwner.
+		self attributeAt: #javaStringAssertStatementOwner put: anObject.
+		otherSide message: nil ]
+	ifNotNil: [ 
+		self attributeAt: #javaStringAssertStatementOwner put: anObject.
+		anObject message: self ]
+]
+
+{ #category : #'*FAST-Java-Model-accessing' }
 FASTTExpression >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #expression"
 

@@ -13,9 +13,6 @@ Class {
 	#superclass : #FASTJavaEntity,
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#instVars : [
-		'#message => FMOne type: #FASTJavaStringLiteral opposite: #javaStringAssertStatementOwner'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -61,18 +58,26 @@ FASTJavaAssertStatement >> conditionGroup [
 
 { #category : #accessing }
 FASTJavaAssertStatement >> message [
-	"Relation named: #message type: #FASTJavaStringLiteral opposite: #javaStringAssertStatementOwner"
+	"Relation named: #message type: #FASTTExpression opposite: #javaStringAssertStatementOwner"
 
 	<generated>
 	<FMComment: 'The error message that is raised if the condition is false'>
-	^ message
+	<FMProperty: #message type: #FASTTExpression opposite: #javaStringAssertStatementOwner>
+	^ self attributeAt: #message ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FASTJavaAssertStatement >> message: anObject [
 
 	<generated>
-	message := anObject
+	(self attributeAt: #message ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self message.
+		self attributeAt: #message put: anObject.
+		otherSide javaStringAssertStatementOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #message put: anObject.
+		anObject javaStringAssertStatementOwner: self ]
 ]
 
 { #category : #navigation }

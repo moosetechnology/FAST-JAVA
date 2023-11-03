@@ -6,9 +6,6 @@ Class {
 	#superclass : #FASTJavaEntity,
 	#traits : 'FASTJavaTReceiver + FASTTStringLiteral',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTStringLiteral classTrait',
-	#instVars : [
-		'#javaStringAssertStatementOwner => FMOne type: #FASTJavaAssertStatement opposite: #message'
-	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -19,29 +16,4 @@ FASTJavaStringLiteral class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
-]
-
-{ #category : #accessing }
-FASTJavaStringLiteral >> javaStringAssertStatementOwner [
-	"Relation named: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message"
-
-	<generated>
-	<FMComment: 'The assertion that can raise me'>
-	<container>
-	<derived>
-	^ javaStringAssertStatementOwner
-]
-
-{ #category : #accessing }
-FASTJavaStringLiteral >> javaStringAssertStatementOwner: anObject [
-
-	<generated>
-	javaStringAssertStatementOwner := anObject
-]
-
-{ #category : #navigation }
-FASTJavaStringLiteral >> javaStringAssertStatementOwnerGroup [
-	<generated>
-	<navigation: 'JavaStringAssertStatementOwner'>
-	^ MooseSpecializedGroup with: self javaStringAssertStatementOwner
 ]
