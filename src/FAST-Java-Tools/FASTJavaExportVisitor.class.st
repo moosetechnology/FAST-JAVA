@@ -447,10 +447,13 @@ FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStat
 
 	self checkForComments: aFASTJavaCatchPartStatement andDo: [ 
 		self withIndent: 'catch ('.
-		self visitNodeListSeparatedByCommas: aFASTJavaCatchPartStatement catchedTypes.
+
+		aFASTJavaCatchPartStatement catchedTypes do: [ :catchType | catchType accept: self ]
+			separatedBy: [ self noIndent: ' | ' ].
 		self space.
 		aFASTJavaCatchPartStatement parameter accept: self.
 		self noIndent: ') '.
+
 		aFASTJavaCatchPartStatement body accept: self
 	]
 ]
