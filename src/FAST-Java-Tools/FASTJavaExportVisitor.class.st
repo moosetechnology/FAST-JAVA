@@ -209,22 +209,6 @@ FASTJavaExportVisitor >> isStringConcatenation: aFASTJavaInfixOperation [
 	]
 ]
 
-{ #category : #outputting }
-FASTJavaExportVisitor >> mapCharacter: aCharacter [
-	"receives a Pharo charcater and returns its Java representation"
-	
-	| escapedCharacters pharoCharacters indexPharoCharacter |
-
-	escapedCharacters := '"''\trnfb'.
-	pharoCharacters := { $" . $' . $\ . Character tab . Character cr . Character lf . Character newPage . Character backspace }.
-	indexPharoCharacter := pharoCharacters indexOf: aCharacter.
-	
-	^(indexPharoCharacter = 0)
-		ifTrue: [ aCharacter "hope for the best" ]
-		ifFalse: [ String with: $\ with: (escapedCharacters at: indexPharoCharacter) ]
-
-]
-
 { #category : #precedence }
 FASTJavaExportVisitor >> needsParentheses: operator [
 	"an expression containing #operator needs parentheses if it is inside another expression
@@ -469,10 +453,9 @@ FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpre
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
 	self checkForComments: aFASTJavaCharacterLiteral andDo: [
-		self
-			noIndent: $' ;
-			noIndent: (self mapCharacter: aFASTJavaCharacterLiteral primitiveValue) ;
-			noIndent: $'
+		self noIndent: $'.
+		super visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral.
+		self noIndent: $'
 	]
 
 ]

@@ -270,17 +270,12 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithParentheses [
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaCharacterLiteral [
-	| node |
-	node := builder literal: FASTJavaCharacterLiteral value: '#'.
-	self export: node equals: '''#'''
-]
+FASTJavaExportVisitorTest >> testVisitFASTJavaCharacterLiterals [
 
-{ #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaCharcaterLiteral [
-	| node |
-	node := builder literal: FASTJavaCharacterLiteral value: $A.
-	self export: node equals: '''A'''
+	self export: (self expressionAST: '''a''') equals: '''a'''.
+	self export: (self expressionAST: '''\n''') equals: '''\n'''.
+	self export: (self expressionAST: '''\uABCD''') equals: '''\uABCD'''.
+	self export: (self expressionAST: '''\000''') equals: '''\000'''
 ]
 
 { #category : #tests }
@@ -399,15 +394,6 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithInitializedFiel
   AnEnum aField = CONST1;
 }
 '
-]
-
-{ #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionBackslashNCharacter [
-
-	| expr |
-	expr := self expressionAST: '''\n'''.
-
-	self export: expr equals: '''\n'''
 ]
 
 { #category : #tests }
@@ -1226,7 +1212,7 @@ FASTJavaExportVisitorTest >> testVisitFASTTExpressionStatement [
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTTLiteral [
+FASTJavaExportVisitorTest >> testVisitFASTTLiterals [
 	self
 		export: (builder literalNull)
 		equals: 'null'.
