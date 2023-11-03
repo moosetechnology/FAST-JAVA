@@ -357,6 +357,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaContinueStatement [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaDoWhile [
+
+	| ast |
+	ast := self methodAST: 'void mth() { do { } while (1==1); }'.
+
+	self export: ast equals: 'void mth() {
+  do {
+  }
+  while (1==1);
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 
 	| ast |
