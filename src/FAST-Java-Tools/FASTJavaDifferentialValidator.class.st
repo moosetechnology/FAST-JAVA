@@ -16,13 +16,16 @@ Class {
 	#name : #FASTJavaDifferentialValidator,
 	#superclass : #FASTJavaVisitor,
 	#instVars : [
-		'skipPaths'
+		'skipPaths',
+		'strict'
 	],
 	#category : #'FAST-Java-Tools'
 }
 
-{ #category : #'instance creation' }
+{ #category : #running }
 FASTJavaDifferentialValidator >> ast: ast1 differ: ast2 [
+
+	self strict ifTrue:  [ Exception signal: 'ASTs differ' ].
 
 	((ast1 class = FASTJavaInfixOperation) 
 	or: [ ast2 class = FASTJavaInfixOperation ])
@@ -32,6 +35,12 @@ FASTJavaDifferentialValidator >> ast: ast1 differ: ast2 [
 				Notification signal
 		]
 		ifFalse: [ Exception signal: 'ASTs differ' ]
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> beStrict [
+
+	self strict: true
 ]
 
 { #category : #'instance creation' }
@@ -91,6 +100,14 @@ FASTJavaDifferentialValidator >> gotoClassDeclaration: stream [
 	stream position: (stream position - pattern size)
 ]
 
+{ #category : #initialization }
+FASTJavaDifferentialValidator >> initialize [
+
+	super initialize.
+
+	strict := false
+]
+
 { #category : #'instance creation' }
 FASTJavaDifferentialValidator >> on: aDirectoryName [
 
@@ -148,4 +165,16 @@ FASTJavaDifferentialValidator >> skipPaths [
 FASTJavaDifferentialValidator >> skipPaths: anObject [
 
 	skipPaths := anObject
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> strict [
+
+	^ strict
+]
+
+{ #category : #accessing }
+FASTJavaDifferentialValidator >> strict: anObject [
+
+	strict := anObject
 ]
