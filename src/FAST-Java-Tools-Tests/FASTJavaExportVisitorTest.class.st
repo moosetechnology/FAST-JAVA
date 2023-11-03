@@ -927,10 +927,30 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaOuterThis [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPostIncrementAndSum [
+
+	| expr |
+	expr := self methodAST: 'void meth() { a = a++ + 12; }'.
+
+	self export: expr statements first equals: 'a = a++ +12;
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
 	node := builder literal: FASTJavaStringLiteral value: 'This is a String'.
 	self export: node equals: '"This is a String"'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
+
+	| expr |
+	expr := self methodAST: 'void meth() { a = 12 + ++a; }'.
+
+	self export: expr statements first equals: 'a = 12+ ++a;
+'
 ]
 
 { #category : #tests }
