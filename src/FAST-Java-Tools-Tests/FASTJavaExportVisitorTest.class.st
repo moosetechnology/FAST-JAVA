@@ -778,6 +778,34 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledStatementBlock [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionOneStatement [
+
+	| ast |
+	ast := self methodAST: 'void mth() { a = ( arg -> doSomething() ); }'.
+
+	self export: ast equals: 'void mth() {
+  a = (arg) -> doSomething();
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionStatementBlock [
+
+	| ast |
+	ast := self methodAST: 'void mth() { a = ( (arg1,arg2) -> { doSomething(); doOtherThing(); }); }'.
+
+	self export: ast equals: 'void mth() {
+  a = (arg1, arg2) -> {
+    doSomething();
+    doOtherThing();
+  }
+;
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 
 	| node |
