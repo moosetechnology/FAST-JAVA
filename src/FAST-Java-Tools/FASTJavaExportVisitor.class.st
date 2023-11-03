@@ -1207,13 +1207,19 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
+	"exports '++a' or 'a++'
+	 if '++a' has a infixOperationRightOperandOwner (resp. 'a++' has a infixOperationLeftOperandOwner)
+	 it could be in an addition 'x + ++a' to avoidhaving 'x+++a', we add an extra space."
 
 	self checkForComments: aFASTJavaUnaryExpression andDo: [
 		aFASTJavaUnaryExpression isPrefixedUnaryExpression
 			ifTrue: [
 				self
 					expression: [
+						aFASTJavaUnaryExpression infixOperationRightOperandOwner
+							ifNotNil: [ self space ].
 						self noIndent: aFASTJavaUnaryExpression operator.
+
 						self visitFASTTExpression: aFASTJavaUnaryExpression ]
 					withOperator: (aFASTJavaUnaryExpression operator , 'unary')
 			]
@@ -1221,7 +1227,10 @@ FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression 
 				self
 					expression: [
 						self visitFASTTExpression: aFASTJavaUnaryExpression.
-						self noIndent: aFASTJavaUnaryExpression operator ]
+						self noIndent: aFASTJavaUnaryExpression operator.
+						aFASTJavaUnaryExpression infixOperationLeftOperandOwner
+							ifNotNil: [ self space ].
+					]
 					withOperator: ('unary' , aFASTJavaUnaryExpression operator)
 			]
 ]
