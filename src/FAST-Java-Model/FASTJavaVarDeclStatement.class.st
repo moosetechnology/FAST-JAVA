@@ -14,6 +14,7 @@ Class {
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTScopableEntity classTrait + FASTTStatement classTrait',
 	#instVars : [
 		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner',
+		'#javaTryResourceOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #resources',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
@@ -56,6 +57,30 @@ FASTJavaVarDeclStatement >> declaratorsGroup [
 	<generated>
 	<navigation: 'Declarators'>
 	^ MooseSpecializedGroup withAll: self declarators asSet
+]
+
+{ #category : #accessing }
+FASTJavaVarDeclStatement >> javaTryResourceOwner [
+	"Relation named: #javaTryResourceOwner type: #FASTJavaTryCatchStatement opposite: #resources"
+
+	<generated>
+	<FMComment: 'The try-with-resource that owns me'>
+	<container>
+	^ javaTryResourceOwner
+]
+
+{ #category : #accessing }
+FASTJavaVarDeclStatement >> javaTryResourceOwner: anObject [
+
+	<generated>
+	javaTryResourceOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaVarDeclStatement >> javaTryResourceOwnerGroup [
+	<generated>
+	<navigation: 'JavaTryResourceOwner'>
+	^ MooseSpecializedGroup with: self javaTryResourceOwner
 ]
 
 { #category : #accessing }

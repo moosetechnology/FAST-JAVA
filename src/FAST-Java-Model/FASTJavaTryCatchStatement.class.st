@@ -22,7 +22,8 @@ Class {
 	#instVars : [
 		'#try => FMOne type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner',
 		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner',
-		'#finally => FMOne type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner'
+		'#finally => FMOne type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner',
+		'#resources => FMMany type: #FASTJavaVarDeclStatement opposite: #javaTryResourceOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -40,6 +41,12 @@ FASTJavaTryCatchStatement class >> annotation [
 FASTJavaTryCatchStatement >> addCatch: anObject [
 	<generated>
 	^ self catches add: anObject
+]
+
+{ #category : #adding }
+FASTJavaTryCatchStatement >> addResource: anObject [
+	<generated>
+	^ self resources add: anObject
 ]
 
 { #category : #accessing }
@@ -87,6 +94,30 @@ FASTJavaTryCatchStatement >> finallyGroup [
 	<generated>
 	<navigation: 'Finally'>
 	^ MooseSpecializedGroup with: self finally
+]
+
+{ #category : #accessing }
+FASTJavaTryCatchStatement >> resources [
+	"Relation named: #resources type: #FASTJavaVarDeclStatement opposite: #javaTryResourceOwner"
+
+	<generated>
+	<FMComment: 'I contain the resources in a try-with-resource statement'>
+	<derived>
+	^ resources
+]
+
+{ #category : #accessing }
+FASTJavaTryCatchStatement >> resources: anObject [
+
+	<generated>
+	resources value: anObject
+]
+
+{ #category : #navigation }
+FASTJavaTryCatchStatement >> resourcesGroup [
+	<generated>
+	<navigation: 'Resources'>
+	^ MooseSpecializedGroup withAll: self resources asSet
 ]
 
 { #category : #accessing }

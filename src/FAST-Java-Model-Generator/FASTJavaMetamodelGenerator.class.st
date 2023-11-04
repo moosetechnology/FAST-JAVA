@@ -1158,6 +1158,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The body of the catch part')
 	<>- ((javaStatementBlock property: #javaCatchPartStatementOwner) comment:
 			 'The javaCatchPartStatementOwner owner (if possible)').
+	((javaTryCatchStatement property: #resources) comment:
+		 'I contain the resources in a try-with-resource statement')
+	<>-* ((javaVarDeclStatement property: #javaTryResourceOwner) comment:
+			 'The try-with-resource that owns me').
+
 	((javaCatchPartStatement property: #catchedTypes) comment:
 			 'The types (exception) that are catched')
 	<>-* ((javaTypeExpression property: #catchOwner) comment:
