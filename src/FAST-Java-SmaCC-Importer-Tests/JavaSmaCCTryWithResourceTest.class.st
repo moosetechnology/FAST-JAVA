@@ -23,7 +23,7 @@ JavaSmaCCTryWithResourceTest >> testTryResourceNumber [
 
 { #category : #tests }
 JavaSmaCCTryWithResourceTest >> testTryResourcePartExpressionType [
-	self assert: fastMethod statements anyOne resources anyOne declarators anyOne initializer type equals: FASTJavaNewClassExpression 
+	self assert: fastMethod statements anyOne resources anyOne declarators anyOne expression class equals: FASTJavaNewExpression 
 ]
 
 { #category : #tests }
@@ -33,7 +33,7 @@ JavaSmaCCTryWithResourceTest >> testTryResourcePartType [
 
 { #category : #tests }
 JavaSmaCCTryWithResourceTest >> testTryResourcePartTypeName [
-	self assert: fastMethod statements anyOne resources anyOne type name equals: 'ACloseableType'
+	self assert: fastMethod statements anyOne resources anyOne type typeName name equals: 'ACloseableType'
 ]
 
 { #category : #tests }
