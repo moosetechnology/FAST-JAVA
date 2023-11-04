@@ -185,8 +185,11 @@ FASTJavaExportVisitor >> indent [
 
 { #category : #outputting }
 FASTJavaExportVisitor >> indentPrefix [
-	^(String new: (indent * 2))
-		atAllPut: Character space
+	^(indent > 0)
+		ifTrue: [ (String new: (indent * 2))
+			atAllPut: Character space ]
+		ifFalse: [ '' ]
+	
 ]
 
 { #category : #initialization }
@@ -1173,10 +1176,16 @@ FASTJavaExportVisitor >> visitFASTJavaThrowStatement: aFASTJavaThrowStatement [
 FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
 	self checkForComments: aFASTJavaTryCatchStatement andDo: [
 		self withIndent: 'try '.
+
+		aFASTJavaTryCatchStatement resources
+			ifNotEmpty: [ :tryResources | self visitTryResources: tryResources ].
+
 		aFASTJavaTryCatchStatement try accept: self.
+
 		aFASTJavaTryCatchStatement catches do: [ :catchStatement |
 			catchStatement accept: self
 		].
+
 		aFASTJavaTryCatchStatement finally
 			ifNotNil: [ :finallyPart |
 				self withIndent: 'finally '.
@@ -1348,6 +1357,24 @@ FASTJavaExportVisitor >> visitNodeListSeparatedByCommas: aCollection [
 	aCollection
 		do: [ :node | node accept: self ]
 		separatedBy: [ self noIndent: ', ' ]
+]
+
+{ #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitTryResources: tryResources [
+	"we need to fiddle with indent and endOfStatement because resources are FASTJavaVarDeclStatement"
+
+	| tmpIndent |
+	tmpIndent := indent.
+	indent := 0.
+
+	self noIndent: $(.
+	tryResources do: [ :aResource |
+		aResource accept: self.
+		self goBack: 2
+	].
+	self noIndent: ') '.
+	
+	indent := tmpIndent.
 ]
 
 { #category : #outputting }
