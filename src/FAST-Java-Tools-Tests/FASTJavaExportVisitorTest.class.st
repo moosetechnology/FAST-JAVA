@@ -1029,6 +1029,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryFinally [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithResource [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  try  (ACloseableType o = new ACloseableType()) { }
+}'.
+
+	self export: ast equals: 'void mth() {
+  try (ACloseableType o = new ACloseableType()) {
+  }
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 
 	self
