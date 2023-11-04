@@ -1255,12 +1255,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThrowStatement: aThrowStatement [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
-	currentFASTEntity := self addToModel: FASTJavaTryCatchStatement new.
-	self setStartEndPos: aTryStatement.
+	currentFASTEntity := self create: FASTJavaTryCatchStatement from: aTryStatement.
+
+	aTryStatement resources do: [ :tryResource |
+		currentFASTEntity addResource: (self clone accept: tryResource)
+	].
+
 	currentFASTEntity try: (self clone accept: aTryStatement block).
+
 	aTryStatement catches
 		do:
-			[ :aCatchBlock | currentFASTEntity catches add: (self clone accept: aCatchBlock) ].
+			[ :aCatchBlock | currentFASTEntity addCatch: (self clone accept: aCatchBlock) ].
+
 	currentFASTEntity finally: (self clone accept: aTryStatement finally).
 
 	^ currentFASTEntity
