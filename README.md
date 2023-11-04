@@ -42,6 +42,10 @@ JavaSmaCCProgramNodeImporterVisitor parseCodeMethodString: 'void hello() {
 }'
 ```
 
+## Full documentation
+
+A full documentation is available on [modularmoose.org](https://modularmoose.org/moose-wiki/Developers/Parsers/FAST-Java.html)
+
 ## UML
 
 ![meta-model image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v3-doc/fast-java.svg)
