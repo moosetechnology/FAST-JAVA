@@ -95,6 +95,12 @@ FASTJavaVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpressio
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
+
+	^ self visitFASTTEntity: aFASTJavaCompilationUnit
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaConditionStatement: aFASTJavaConditionStatement [
 	^ self visitFASTTStatement: aFASTJavaConditionStatement
 ]
@@ -182,6 +188,12 @@ FASTJavaVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	^ self visitFASTTStatement: aFASTJavaIfStatement
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclaration [
+
+	^ self visitFASTTEntity: aFASTJavaImportDeclaration
 ]
 
 { #category : #generated }
