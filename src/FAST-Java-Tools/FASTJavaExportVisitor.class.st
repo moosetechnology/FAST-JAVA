@@ -1361,18 +1361,27 @@ FASTJavaExportVisitor >> visitNodeListSeparatedByCommas: aCollection [
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitTryResources: tryResources [
-	"we need to fiddle with indent and endOfStatement because resources are FASTJavaVarDeclStatement"
+	"we need to fiddle with indent and endOfStatement because resources are FASTJavaVarDeclStatement
+	 #visitFASTJavaVariableDeclarator: ends with semicolon and newline (it's a statement), so:
+	 - first #goBack:1 removes newline at the end of each resource declaration
+	 - second #goBack:1 removes semicolon at the end of last resource declaration"
 
 	| tmpIndent |
 	tmpIndent := indent.
 	indent := 0.
 
 	self noIndent: $(.
-	tryResources do: [ :aResource |
-		aResource accept: self.
-		self goBack: 2
-	].
-	self noIndent: ') '.
+
+	tryResources
+		do: [ :aResource |
+			aResource accept: self.
+			self goBack: 1
+		]
+		separatedBy: [ self noIndent: Character space ].
+		
+	self
+		goBack: 1 ;
+		noIndent: ') '.
 	
 	indent := tmpIndent.
 ]
