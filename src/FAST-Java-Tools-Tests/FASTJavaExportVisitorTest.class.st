@@ -129,6 +129,18 @@ void mth() {
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArrayArgumentWithOtherAnnotation [
+	
+	| expr |
+	expr := self methodAST: '@Useless( { @OtherAnnotation } ) void mth() { }'.
+
+	self export: expr equals: '@Useless({ @OtherAnnotation })
+void mth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotattionWithArgument [
 	
 	| expr |

@@ -539,7 +539,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitElementArrayInitializer: anElementAr
 
 	currentFASTEntity := self create: FASTJavaArrayInitializer from: anElementArrayInitializer.
 	anElementArrayInitializer values do: [ :value |
-		currentFASTEntity initializers add: (self clone accept: value) ].
+		currentFASTEntity  addInitializer: (self clone accept: value) ].
 	^ currentFASTEntity
 ]
 
