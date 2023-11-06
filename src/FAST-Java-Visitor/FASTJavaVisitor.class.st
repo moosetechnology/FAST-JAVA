@@ -141,6 +141,11 @@ FASTJavaVisitor >> visitFASTJavaElsePartStatement: aFASTJavaElsePartStatement [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaEmptyDimExpression: aFASTJavaAssignmentExpression [
+	^ self visitFASTTExpression: aFASTJavaAssignmentExpression
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
 	^ self visitFASTJavaMethodEntity: aFASTJavaEmptyMethodDeclaration
 ]
