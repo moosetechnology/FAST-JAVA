@@ -291,7 +291,7 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 		self
 			withIndent: $@ ;
 			noIndent: aFASTJavaAnnotation name.
-		aFASTJavaAnnotation arguments ifNotEmpty: [ :arguments |
+		aFASTJavaAnnotation elements ifNotEmpty: [ :arguments |
 			self noIndent: $(.
 			self visitNodeListSeparatedByCommas: arguments.
 			self noIndent: $)

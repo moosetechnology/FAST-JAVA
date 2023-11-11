@@ -3,7 +3,7 @@ I represent a `null` literal node.
 "
 Class {
 	#name : #FASTJavaNullLiteral,
-	#superclass : #FASTJavaEntity,
+	#superclass : #FASTJavaLiteral,
 	#traits : 'FASTTNullPointerLiteral',
 	#classTraits : 'FASTTNullPointerLiteral classTrait',
 	#category : #'FAST-Java-Model-Entities'
@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 FASTJavaNullLiteral class >> annotation [
 
-	<FMClass: #NullLiteral super: #FASTJavaEntity>
+	<FMClass: #NullLiteral super: #FASTJavaLiteral>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self

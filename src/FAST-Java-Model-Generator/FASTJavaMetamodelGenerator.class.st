@@ -126,7 +126,8 @@ Class {
 		'javaEmptyDimExpression',
 		'javaEnumConstant',
 		'tAnnotationElement',
-		'javaLiteral'
+		'javaLiteral',
+		'javaArrayAnnotationElement'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -759,9 +760,10 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaCastExpression := builder newClassNamed: #CastExpression comment: 'I represent a cast expression, e.g. `(int) 0.5`'.
 	javaParameterExpression := builder newClassNamed: #Parameter comment: 'I represent a parameter of a method declaration'.
 	javaConditionalExpression := builder newClassNamed: #ConditionalExpression comment: self commentForJavaConditionalStatement.
-	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
 	javaVariableExpression := builder newClassNamed: #VariableExpression.
 	javaEmptyDimExpression := builder newClassNamed: #EmptyDimExpression comment: self commentForJavaEmptyDimExpression.
+	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
+	javaArrayAnnotationElement := builder newClassNamed: #ArrayAnnotationElement comment: 'I represent an array as argument of an annotationExpression'.
 
 	"statements"
 	javaStatement := builder newClassNamed: #Statement.
@@ -832,6 +834,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIdentifier --|> tReceiver.
 
 	javaIfStatement --|> tStatement.
+
+	javaArrayAnnotationElement --|> javaArrayInitializer.
+	javaArrayAnnotationElement --|> tAnnotationElement.
 
 	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
 	javaLiteral  --|> tReceiver.
@@ -1062,7 +1067,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-* ((tExpression property: #javaArrayInitializers) comment:
 			 'The owner of the expression').
 
-	((javaAnnotationExpression property: #Elements) comment:
+	((javaAnnotationExpression property: #elements) comment:
 		'"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")')
 		-* ((tAnnotationElement property: #parentAnnotation) comment:

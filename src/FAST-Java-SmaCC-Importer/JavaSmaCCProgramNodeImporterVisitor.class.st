@@ -256,7 +256,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 	currentFASTEntity name: anAnnotation name name value.
 
 	anAnnotation values do: [ :expression |
-		currentFASTEntity addArgument: (self clone accept: expression) ].
+		currentFASTEntity addElement: (self clone accept: expression) ].
 
 	^ currentFASTEntity
 ]

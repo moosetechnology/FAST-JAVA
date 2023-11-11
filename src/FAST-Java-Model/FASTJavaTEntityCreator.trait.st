@@ -346,6 +346,13 @@ FASTJavaTEntityCreator >> newLambdaExpression [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newLiteral [
+
+	<generated>
+	^ self add: FASTJavaLiteral new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newLongLiteral [
 
 	<generated>

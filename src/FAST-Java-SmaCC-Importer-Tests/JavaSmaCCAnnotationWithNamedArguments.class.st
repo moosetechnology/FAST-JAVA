@@ -43,5 +43,5 @@ JavaSmaCCAnnotationWithNamedArguments >> testNumberOfAnnotation [
 
 { #category : #tests }
 JavaSmaCCAnnotationWithNamedArguments >> testNumberOfArgumentsToAnnotation [
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne arguments size equals: 2
+	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 2
 ]

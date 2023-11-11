@@ -16,7 +16,7 @@ JavaSmaCCAnnotationWithArrayLiteralTest >> javaMethod [
 
 { #category : #tests }
 JavaSmaCCAnnotationWithArrayLiteralTest >> testNumberOfArgumentsToAnnotation [
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne arguments size equals: 1
+	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 1
 ]
 
 { #category : #tests }

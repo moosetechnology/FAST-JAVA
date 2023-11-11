@@ -4,8 +4,8 @@ I represent the name of a type
 Class {
 	#name : #FASTJavaTypeName,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTTExpression + FASTTNamedEntity',
-	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTAnnotationElement + FASTTExpression + FASTTNamedEntity',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName',
 		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace'
