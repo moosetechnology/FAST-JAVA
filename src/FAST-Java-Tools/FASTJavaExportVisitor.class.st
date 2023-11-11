@@ -300,7 +300,7 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 	self checkForComments: aFASTJavaArgumentList andDo: [
 		self noIndent: $(.
@@ -310,7 +310,7 @@ FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 	self checkForComments: aFASTJavaArrayAccess andDo: [
 	aFASTJavaArrayAccess array accept: self.
@@ -321,7 +321,19 @@ FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaArrayAnnotationElement: aFASTJavaArrayAnnotationElement [
+
+	self checkForComments: aFASTJavaArrayAnnotationElement andDo: [
+		self noIndent: '{ '.
+		self
+			visitNodeListSeparatedByCommas: aFASTJavaArrayAnnotationElement values.
+		self noIndent: ' }'.
+	]
+
+]
+
+{ #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitializer [
 	self checkForComments: aFASTJavaArrayInitializer andDo: [
 		self noIndent: '{ '.
