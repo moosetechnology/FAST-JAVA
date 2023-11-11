@@ -835,8 +835,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaIfStatement --|> tStatement.
 
-	javaArrayAnnotationElement --|> javaArrayInitializer.
 	javaArrayAnnotationElement --|> tAnnotationElement.
+	javaArrayAnnotationElement --|> tExpression.  "because annotationElement=value are modeled as assignement expression"
 
 	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
 	javaLiteral  --|> tReceiver.
@@ -1062,6 +1062,7 @@ FASTJavaMetamodelGenerator >> defineProperties [
 FASTJavaMetamodelGenerator >> defineRelations [
 
 	super defineRelations.
+
 	((javaArrayInitializer property: #initializers) comment:
 		 'My initializers')
 	<>-* ((tExpression property: #javaArrayInitializers) comment:
@@ -1073,6 +1074,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		-* ((tAnnotationElement property: #parentAnnotation) comment:
 			'An "argument" of an annotation, eg. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")').
+
+	((javaArrayAnnotationElement property: #values) comment:
+		 'Annotation elements in the Array')
+	<>-* ((tAnnotationElement property: #arrayOwner) comment:
+			 'The ArrayAnnotationElement I am an element of').
 
 	((javaVarDeclStatement property: #declarators) comment:
 		 'The declarators for the type')

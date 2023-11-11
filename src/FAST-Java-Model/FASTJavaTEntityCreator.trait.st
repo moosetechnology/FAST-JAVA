@@ -31,6 +31,13 @@ FASTJavaTEntityCreator >> newArrayAccess [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newArrayAnnotationElement [
+
+	<generated>
+	^ self add: FASTJavaArrayAnnotationElement new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newArrayInitializer [
 
 	<generated>
