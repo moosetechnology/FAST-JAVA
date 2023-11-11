@@ -31,6 +31,13 @@ FASTJavaTEntityCreator >> newArrayAccess [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newArrayAnnotationElement [
+
+	<generated>
+	^ self add: FASTJavaArrayAnnotationElement new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newArrayInitializer [
 
 	<generated>
@@ -343,6 +350,13 @@ FASTJavaTEntityCreator >> newLambdaExpression [
 
 	<generated>
 	^ self add: FASTJavaLambdaExpression new
+]
+
+{ #category : #'entity creation' }
+FASTJavaTEntityCreator >> newLiteral [
+
+	<generated>
+	^ self add: FASTJavaLiteral new
 ]
 
 { #category : #'entity creation' }

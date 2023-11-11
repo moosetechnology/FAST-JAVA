@@ -9,16 +9,16 @@ double d2 = 12.3d;
 "
 Class {
 	#name : #FASTJavaDoubleLiteral,
-	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTReceiver + FASTTLiteral',
-	#classTraits : 'FASTJavaTReceiver classTrait + FASTTLiteral classTrait',
+	#superclass : #FASTJavaLiteral,
+	#traits : 'FASTTLiteral',
+	#classTraits : 'FASTTLiteral classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
 FASTJavaDoubleLiteral class >> annotation [
 
-	<FMClass: #DoubleLiteral super: #FASTJavaEntity>
+	<FMClass: #DoubleLiteral super: #FASTJavaLiteral>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self

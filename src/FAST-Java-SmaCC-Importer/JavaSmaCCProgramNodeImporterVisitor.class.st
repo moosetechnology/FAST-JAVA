@@ -256,7 +256,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 	currentFASTEntity name: anAnnotation name name value.
 
 	anAnnotation values do: [ :expression |
-		currentFASTEntity addArgument: (self clone accept: expression) ].
+		currentFASTEntity addElement: (self clone accept: expression) ].
 
 	^ currentFASTEntity
 ]
@@ -273,8 +273,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer [
-	currentFASTEntity := self addToModel: FASTJavaArrayInitializer new.
-	self setStartEndPos: anArrayInitializer.
+	currentFASTEntity := self create: FASTJavaArrayInitializer from: anArrayInitializer.
 	anArrayInitializer initializers do: [ :initializer | currentFASTEntity initializers add: (self clone accept: initializer) ].
 	^ currentFASTEntity
 ]
@@ -537,9 +536,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitElementArrayInitializer: anElementArrayInitializer [
 
-	currentFASTEntity := self create: FASTJavaArrayInitializer from: anElementArrayInitializer.
+	currentFASTEntity := self create: FASTJavaArrayAnnotationElement from: anElementArrayInitializer.
 	anElementArrayInitializer values do: [ :value |
-		currentFASTEntity initializers add: (self clone accept: value) ].
+		currentFASTEntity  addValue: (self clone accept: value) ].
 	^ currentFASTEntity
 ]
 

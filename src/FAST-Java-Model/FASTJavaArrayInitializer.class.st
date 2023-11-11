@@ -13,8 +13,8 @@ My initializers are
 Class {
 	#name : #FASTJavaArrayInitializer,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTTExpression',
-	#classTraits : 'FASTTExpression classTrait',
+	#traits : 'FASTJavaTAnnotationElement + FASTTExpression',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 

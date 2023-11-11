@@ -1,34 +1,34 @@
 Class {
-	#name : #JavaSmaCCAnnotationWithUnnamedArgument,
+	#name : #JavaSmaCCAnnotationWithUnnamedElement,
 	#superclass : #JavaSmaCCImporterTest,
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #running }
-JavaSmaCCAnnotationWithUnnamedArgument >> javaMethod [
+JavaSmaCCAnnotationWithUnnamedElement >> javaMethod [
 	^'@Useless("Argument 1")
 	void mth() {
 	}'
 ]
 
 { #category : #tests }
-JavaSmaCCAnnotationWithUnnamedArgument >> testAnnotatedEntity [
+JavaSmaCCAnnotationWithUnnamedElement >> testAnnotatedEntity [
 	self
 		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne javaModifierOwner class
 		equals: FASTJavaMethodEntity
 ]
 
 { #category : #tests }
-JavaSmaCCAnnotationWithUnnamedArgument >> testNameOfAnnotation [
+JavaSmaCCAnnotationWithUnnamedElement >> testNameOfAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne name equals: 'Useless'
 ]
 
 { #category : #tests }
-JavaSmaCCAnnotationWithUnnamedArgument >> testNumberOfAnnotation [
+JavaSmaCCAnnotationWithUnnamedElement >> testNumberOfAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) size equals: 1
 ]
 
 { #category : #tests }
-JavaSmaCCAnnotationWithUnnamedArgument >> testNumberOfArgumentsToAnnotation [
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne arguments size equals: 1
+JavaSmaCCAnnotationWithUnnamedElement >> testNumberOfElementsToAnnotation [
+	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 1
 ]

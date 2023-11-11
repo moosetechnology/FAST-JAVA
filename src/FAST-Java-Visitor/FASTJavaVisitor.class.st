@@ -15,6 +15,11 @@ FASTJavaVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaArrayAnnotationElement: aFASTJavaArrayAnnotationElement [
+	^ self visitFASTTExpression: aFASTJavaArrayAnnotationElement
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitializer [
 	^ self visitFASTTExpression: aFASTJavaArrayInitializer
 ]
