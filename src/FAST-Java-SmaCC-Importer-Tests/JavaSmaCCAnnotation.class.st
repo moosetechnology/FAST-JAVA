@@ -29,6 +29,6 @@ JavaSmaCCAnnotation >> testNumberOfAnnotation [
 ]
 
 { #category : #tests }
-JavaSmaCCAnnotation >> testNumberOfArgumentsToAnnotation [
+JavaSmaCCAnnotation >> testNumberOfElementsToAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 0
 ]
