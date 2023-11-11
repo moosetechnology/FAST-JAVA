@@ -124,7 +124,9 @@ Class {
 		'javaEntity',
 		'javaComment',
 		'javaEmptyDimExpression',
-		'javaEnumConstant'
+		'javaEnumConstant',
+		'tAnnotationElement',
+		'javaLiteral'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -721,6 +723,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaQualifiedTypeName := builder newClassNamed: #QualifiedTypeName comment: self commentForJavaQualifiedTypeName.
 
 	"literals"
+	javaLiteral := builder newClassNamed: #Literal comment: 'abtract class for all literals'.
 	javaCharacterLiteral := builder newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
 	javaFloatLiteral := builder newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
 	javaIntegerLiteral := builder newClassNamed: #IntegerLiteral comment: self commentForJavaIntegerLiteral.
@@ -807,6 +810,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaComment --|> tComment.
 
 	javaAssignmentExpression --|> tExpression.
+	javaAssignmentExpression --|> tAnnotationElement.
 	javaAssignmentExpression --|> tReceiver.
 	javaAssignmentExpression --|> tWithAssignable.
 
@@ -829,21 +833,26 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaIfStatement --|> tStatement.
 
+	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
+	javaLiteral  --|> tReceiver.
+	javaLiteral --|> tAnnotationElement.
+
 	javaNullLiteral --|> tNullPointerLiteral.
+	javaNullLiteral --|> javaLiteral.
 	javaCharacterLiteral --|> tCharacterLiteral.
-	javaCharacterLiteral --|> tReceiver.
+	javaCharacterLiteral --|> javaLiteral.
 	javaStringLiteral --|> tStringLiteral.
-	javaStringLiteral --|> tReceiver.
+	javaStringLiteral --|> javaLiteral.
 	javaIntegerLiteral --|> tLiteral.
-	javaIntegerLiteral --|> tReceiver.
+	javaIntegerLiteral --|> javaLiteral.
 	javaFloatLiteral --|> tLiteral.
-	javaFloatLiteral --|> tReceiver.
+	javaFloatLiteral --|> javaLiteral.
 	javaBooleanLiteral --|> tLiteral.
-	javaBooleanLiteral --|> tReceiver.
+	javaBooleanLiteral --|> javaLiteral.
 	javaLongLiteral --|> tLiteral.
-	javaLongLiteral --|> tReceiver.
+	javaLongLiteral --|> javaLiteral.
 	javaDoubleLiteral --|> tLiteral.
-	javaDoubleLiteral --|> tReceiver.
+	javaDoubleLiteral --|> javaLiteral.
 
 	javaMethodEntity --|> tNamedBehaviouralEntity.
 	javaMethodEntity --|> #THasImmediateSource.
@@ -926,7 +935,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
 	javaEmptyMethodDeclaration --|> javaMethodEntity.
+
 	javaArrayInitializer --|> tExpression.
+	javaArrayInitializer --|> tAnnotationElement.
 
 	javaInitializer --|> tScopableEntity.
 	javaInitializer --|> #THasImmediateSource.
@@ -948,6 +959,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"types name"
 	javaTypeName --|> tNamedEntity.
 	javaTypeName --|> tExpression.
+	javaTypeName --|> tAnnotationElement.
 	javaQualifiedTypeName --|> javaTypeName.
 
 	"types"
@@ -975,7 +987,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaAnnotationExpression --|> tNamedEntity.
 	javaAnnotationExpression --|> tModifier.
-	javaAnnotationExpression --|> #TWithArguments.
+	javaAnnotationExpression --|> tAnnotationElement.
 
 	javaParameterExpression --|> tExpression.
 	javaParameterExpression --|> tVariableEntity.
@@ -1049,6 +1061,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'My initializers')
 	<>-* ((tExpression property: #javaArrayInitializers) comment:
 			 'The owner of the expression').
+
+	((javaAnnotationExpression property: #Elements) comment:
+		'"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
+	@Author(name="Benjamin Franklin", date="3/27/2003")')
+		-* ((tAnnotationElement property: #parentAnnotation) comment:
+			'An "argument" of an annotation, eg. "unchecked" in the following annotation:
+	@SuppressWarnings(value="unchecked")').
 
 	((javaVarDeclStatement property: #declarators) comment:
 		 'The declarators for the type')
@@ -1424,6 +1443,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineTraits [
 	super defineTraits. 
+
 	tDeclaration := builder newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
 	tWithDeclarations := builder newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
 	
@@ -1437,6 +1457,9 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send a message to someone'.
 	
 	tWithQualifiedName := builder newTraitNamed: #TWithQualifiedName comment: 'I have a qualified name.'.
+
+	tAnnotationElement := builder newTraitNamed: #TAnnotationElement comment: 'I can be used as an annotation "argument" eg: @SuppressWarnings(value="unchecked")
+	Acceptable annotation elements are: literal, Enum constant, Annotation, Class, an array of the preceding (out of laziness we use ArrayInitializer which is too permissive)'.
 	
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.
