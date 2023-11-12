@@ -117,7 +117,7 @@ void mth() {
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArrayArgument [
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithArrayElement [
 	
 	| expr |
 	expr := self methodAST: '@Useless( { "anArgument" } ) void mth() { }'.
@@ -129,7 +129,7 @@ void mth() {
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArrayArgumentWithOtherAnnotation [
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithArrayElementWithOtherAnnotation [
 	
 	| expr |
 	expr := self methodAST: '@Useless( { @OtherAnnotation } ) void mth() { }'.
@@ -141,7 +141,7 @@ void mth() {
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotattionWithArgument [
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithElement [
 	
 	| expr |
 	expr := self methodAST: '@Useless("an argument") void mth() { }'.
@@ -153,7 +153,7 @@ void mth() {
 ]
 
 { #category : #tests }
-FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotattionWithNamedArguments [
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithNamedElements [
 	
 	| expr |
 	expr := self methodAST: '@Useless(arg1="an argument",arg2=AClass.A_Constant) void mth() { }'.
