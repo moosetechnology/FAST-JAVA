@@ -910,6 +910,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaClassProperty --|> javaVariableExpression.
 	javaClassProperty --|> tReceiver.
+	javaClassProperty --|> tAnnotationElement.
 
 	javaTryCatchStatement --|> tStatement.
 	javaForEachStatement --|> tStatement.

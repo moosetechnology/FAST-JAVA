@@ -153,6 +153,18 @@ void mth() {
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithElementClassProperty [
+	
+	| expr |
+	expr := self methodAST: '@Useless(AClass.class) void mth() { }'.
+
+	self export: expr equals: '@Useless(ObjectFactory.class)
+void mth() {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithNamedElements [
 	
 	| expr |
