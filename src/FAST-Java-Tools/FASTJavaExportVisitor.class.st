@@ -1167,6 +1167,17 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement 
 ]
 
 { #category : #'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaSynchronizedStatement: aFASTJavaSynchronizedStatement [
+
+	self checkForComments: aFASTJavaSynchronizedStatement andDo: [
+		self withIndent: 'synchronized('.
+		aFASTJavaSynchronizedStatement expression accept: self.
+		self noIndent: ') '.
+		aFASTJavaSynchronizedStatement block accept: self.
+	]
+]
+
+{ #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 		self visitFASTJavaBlockOrStatement: aFASTJavaStatement

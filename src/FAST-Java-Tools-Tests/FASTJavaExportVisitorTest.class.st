@@ -978,6 +978,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 ]
 
 { #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSynchronizedBlock [
+
+	| expr |
+	expr := self methodAST: 'void meth() { synchronized(var) { } }'.
+
+	self export: expr statements first equals: 'synchronized(var) {
+}
+'
+]
+
+{ #category : #tests }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTestOnCharacter [
 
 	| ast |
