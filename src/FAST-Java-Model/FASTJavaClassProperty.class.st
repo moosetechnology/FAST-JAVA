@@ -34,8 +34,8 @@ class Enclosing {
 Class {
 	#name : #FASTJavaClassProperty,
 	#superclass : #FASTJavaVariableExpression,
-	#traits : 'FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTReceiver classTrait',
+	#traits : 'FASTJavaTAnnotationElement + FASTJavaTReceiver',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTReceiver classTrait',
 	#instVars : [
 		'#fieldName => FMProperty',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner'

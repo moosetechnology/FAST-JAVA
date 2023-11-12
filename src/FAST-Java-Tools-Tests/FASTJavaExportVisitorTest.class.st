@@ -158,7 +158,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithElementClassProperty
 	| expr |
 	expr := self methodAST: '@Useless(AClass.class) void mth() { }'.
 
-	self export: expr equals: '@Useless(ObjectFactory.class)
+	self export: expr equals: '@Useless(AClass.class)
 void mth() {
 }
 '
