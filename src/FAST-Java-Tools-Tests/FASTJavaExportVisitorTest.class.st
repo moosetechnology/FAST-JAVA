@@ -97,8 +97,6 @@ FASTJavaExportVisitorTest >> testVisitFASTEmptyReturn [
 FASTJavaExportVisitorTest >> testVisitFASTEmptyReturnAttributeAccess [
 
 	| ast |
-	
-	self skip: 'need work, skipping to let CI pass'.
 
 	ast := self methodAST: 'void mth() { return a.b; }'.
 
