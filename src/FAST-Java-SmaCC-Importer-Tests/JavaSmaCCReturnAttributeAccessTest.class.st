@@ -12,13 +12,10 @@ JavaSmaCCReturnAttributeAccessTest >> javaMethod [
 ]
 
 { #category : #tests }
-JavaSmaCCReturnAttributeAccessTest >> testReturnStatementExpressionType [
-
-	self skip: 'need work, skipping to let CI pass'.
-
+JavaSmaCCReturnAttributeAccessTest >> testReturnExpressionType [
 	self
 		assert: (fastModel allWithType: FASTJavaReturnStatement) anyOne expression class
-		equals: FASTJavaQualifiedName
+		equals: FASTJavaQualifiedName 
 ]
 
 { #category : #tests }

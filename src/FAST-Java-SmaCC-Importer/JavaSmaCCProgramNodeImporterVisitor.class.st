@@ -1121,12 +1121,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeNam
 
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
-	currentFASTEntity := self addToModel: FASTJavaReturnStatement new.
-	self setStartEndPos: aReturnStatement.
-	(aReturnStatement expression isKindOf: JavaNameNode)
-		ifTrue:
-			[ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer" currentFASTEntity expression: (self addToModel: (self clone visitIdentifier: aReturnStatement expression)) ]
-		ifFalse: [ aReturnStatement expression ifNotNil: [ :expression | currentFASTEntity expression: (self clone accept: expression) ] ].
+	currentFASTEntity := self create: FASTJavaReturnStatement from: aReturnStatement.
+
+	currentFASTEntity expression: (self clone accept: aReturnStatement expression).
+
 	^ currentFASTEntity
 ]
 

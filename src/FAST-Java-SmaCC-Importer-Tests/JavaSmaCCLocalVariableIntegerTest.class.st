@@ -32,7 +32,7 @@ JavaSmaCCLocalVariableIntegerTest >> testReturnStatementExpressionName [
 
 { #category : #tests }
 JavaSmaCCLocalVariableIntegerTest >> testReturnStatementExpressionType [
-	self assert: fastMethod statementBlock statements second expression class equals: FASTJavaIdentifier.
+	self assert: fastMethod statementBlock statements second expression class equals: FASTJavaVariableExpression.
 ]
 
 { #category : #tests }
