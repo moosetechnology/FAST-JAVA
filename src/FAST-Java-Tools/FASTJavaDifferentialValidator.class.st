@@ -26,10 +26,10 @@ FASTJavaDifferentialValidator >> acceptableAST: ast1 differentFrom: ast2 [
 ]
 
 { #category : #running }
-FASTJavaDifferentialValidator >> getASTFromString: stream [
+FASTJavaDifferentialValidator >> getASTFromString: string [
 
 	^ JavaSmaCCProgramNodeImporterVisitor new
-		  accept: (JavaParser parse: stream contents);
+		  accept: (JavaParser parse: string);
 		  model
 ]
 
