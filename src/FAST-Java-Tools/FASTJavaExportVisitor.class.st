@@ -896,9 +896,8 @@ FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpressio
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 	self checkForComments: aFASTJavaLongLiteral andDo: [
-		super visitFASTTLiteral: aFASTJavaLongLiteral
+		self visitFASTTLiteral: aFASTJavaLongLiteral
 	]
-
 ]
 
 { #category : #'visiting expression' }
