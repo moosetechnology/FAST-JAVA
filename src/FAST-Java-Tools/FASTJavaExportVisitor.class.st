@@ -1327,9 +1327,11 @@ FASTJavaExportVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
+	self checkForComments: aFASTTExpressionStatement andDo: [
 	self withIndent: ''.
 	aFASTTExpressionStatement expression accept: self.
 	self endOfStatement
+	]
 ]
 
 { #category : #'visiting expression' }
