@@ -842,9 +842,8 @@ FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpressio
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 	self checkForComments: aFASTJavaLongLiteral andDo: [
-		super visitFASTTLiteral: aFASTJavaLongLiteral
+		self visitFASTTLiteral: aFASTJavaLongLiteral
 	]
-
 ]
 
 { #category : #'visiting expression' }
@@ -1274,9 +1273,12 @@ FASTJavaExportVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 
 { #category : #'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
-	self indented: ''.
-	aFASTTExpressionStatement expression accept: self.
-	self endOfStatement
+
+	self checkForComments: aFASTTExpressionStatement andDo: [
+	  self indented: ''.
+	  aFASTTExpressionStatement expression accept: self.
+	  self endOfStatement
+	]
 ]
 
 { #category : #'visiting expression' }
