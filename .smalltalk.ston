@@ -4,7 +4,7 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'FASTJava',
       #directory : 'src',
-      #load : [ 'smacc', 'visitor' ],
+      #load : [ 'all' ],
       #platforms : [ #pharo ]
     }
   ],

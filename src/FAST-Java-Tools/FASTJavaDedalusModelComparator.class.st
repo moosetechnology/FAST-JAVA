@@ -3,7 +3,7 @@ A differential validator specialized for Dedalus code with files and position wh
 "
 Class {
 	#name : #FASTJavaDedalusModelComparator,
-	#superclass : #AnObsoleteFamixModelComparator,
+	#superclass : #FamixModelComparator,
 	#category : #'FAST-Java-Tools'
 }
 
