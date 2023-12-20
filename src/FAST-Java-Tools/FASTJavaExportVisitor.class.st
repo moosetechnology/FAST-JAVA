@@ -235,7 +235,7 @@ FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self checkForComments: aFASTJavaAnnotation andDo: [
 		self
-			indented: $@ ;
+			unindented: $@ ;
 			unindented: aFASTJavaAnnotation name.
 		aFASTJavaAnnotation elements ifNotEmpty: [ :arguments |
 			self unindented: $(.

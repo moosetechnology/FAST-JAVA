@@ -7,7 +7,7 @@ Class {
 { #category : #'api - building' }
 FASTJavaTestNodeBuilder >> annotation: aString [
 	^FASTJavaAnnotation new
-		expression: (FASTJavaVariableExpression new name: aString ; yourself) ;
+		name: aString ;
 		yourself
 ]
 
