@@ -334,12 +334,48 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclaration [
 ]
 
 { #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotatedMethod [
+	| node |
+	node := builder class: 'Blah'.
+	node addDeclaration: (self methodAST: '@Test void mth() { }').
+	self export: node equals: 'class Blah {
+  @Test
+  void mth() {
+  }
+}
+'
+]
+
+{ #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotation [
+	| node |
+	node := builder class: 'Blah'.
+	node addModifier: (builder annotation: 'Test').
+	self export: node equals: '@Test
+class Blah {
+}
+'
+]
+
+{ #category : #'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithInterfaces [
 	| node |
 	node := builder class: 'Blah'.
 	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'IBlah')).
 	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'Iterator')).
 	self export: node equals: 'class Blah implements IBlah, Iterator {
+}
+'
+]
+
+{ #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithMethod [
+	| node |
+	node := builder class: 'Blah'.
+	node addDeclaration: (self methodAST: 'void mth() { }').
+	self export: node equals: 'class Blah {
+  void mth() {
+  }
 }
 '
 ]
