@@ -1183,6 +1183,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 '
 ]
 
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithMultipleTypes [
+
+	| expr |
+	expr := self methodAST: '<T extends MyClass & Iterable> T mth() { }'.
+
+	self export: expr equals: '<T extends MyClass & Iterable> T mth() {
+}
+'
+]
+
 { #category : #'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersExtendingSomeType [
 	

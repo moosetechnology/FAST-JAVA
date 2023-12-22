@@ -1177,7 +1177,9 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 		self unindented: aFASTJavaTypeParameterExpression name.
 		aFASTJavaTypeParameterExpression types ifNotEmpty: [ :typeArgumentSuperclasses |
 			self unindented: ' extends '.
-			self visitNodeListSeparatedByCommas: typeArgumentSuperclasses
+			typeArgumentSuperclasses
+				do: [ :node | node accept: self ]
+				separatedBy: [ self unindented: ' & ' ]
 		]
 	]
 ]
