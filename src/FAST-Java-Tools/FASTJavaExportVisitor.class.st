@@ -1044,6 +1044,30 @@ FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaPostfixedUnaryExpression: aFASTJavaUnaryExpression [
+
+	self
+		outputExpression: [
+			self visitFASTTExpression: aFASTJavaUnaryExpression.
+			self unindented: aFASTJavaUnaryExpression operator.
+			aFASTJavaUnaryExpression infixOperationLeftOperandOwner ifNotNil: [
+				self space ] ]
+		withOperator: 'unary' , aFASTJavaUnaryExpression operator
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaPrefixedUnaryExpression: aFASTJavaUnaryExpression [
+
+	self
+		outputExpression: [
+			aFASTJavaUnaryExpression infixOperationRightOperandOwner ifNotNil: [
+				self space ].
+			self unindented: aFASTJavaUnaryExpression operator.
+			self visitFASTTExpression: aFASTJavaUnaryExpression ]
+		withOperator: aFASTJavaUnaryExpression operator , 'unary'
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 	self checkForComments: aFASTJavaQualifiedName andDo: [
@@ -1193,27 +1217,11 @@ FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression 
 	self checkForComments: aFASTJavaUnaryExpression andDo: [
 		aFASTJavaUnaryExpression isPrefixedUnaryExpression
 			ifTrue: [
-				self
-					outputExpression: [
-						aFASTJavaUnaryExpression infixOperationRightOperandOwner
-							ifNotNil: [ self space ].
-						self unindented: aFASTJavaUnaryExpression operator.
-
-						self visitFASTTExpression: aFASTJavaUnaryExpression ]
-					withOperator: (aFASTJavaUnaryExpression operator , 'unary')
-			]
-			ifFalse: [ 
-				self
-					outputExpression: [
-						self visitFASTTExpression: aFASTJavaUnaryExpression.
-						self unindented: aFASTJavaUnaryExpression operator.
-						aFASTJavaUnaryExpression infixOperationLeftOperandOwner
-							ifNotNil: [ self space ].
-					]
-					withOperator: ('unary' , aFASTJavaUnaryExpression operator)
-			]
-]
-
+				self visitFASTJavaPrefixedUnaryExpression:
+					aFASTJavaUnaryExpression ]
+			ifFalse: [
+				self visitFASTJavaPostfixedUnaryExpression:
+					aFASTJavaUnaryExpression ] ]
 ]
 
 { #category : #'visiting statement' }
