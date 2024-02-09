@@ -1009,6 +1009,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPostIncrementAndSum [
 ]
 
 { #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
+	"testing for operator precedence of operator '!'"
+	| ast |
+	ast := self methodAST: 'void mth() { boolean toto = false|!true; }'.
+	self
+		export:
+		ast statements first declarators first expression rightOperand
+		equals: ' !true'
+]
+
+{ #category : #'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
 	node := builder literal: FASTJavaStringLiteral value: 'This is a String'.
