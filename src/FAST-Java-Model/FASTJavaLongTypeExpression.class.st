@@ -1,5 +1,7 @@
 "
 I represent a long type
+
+
 "
 Class {
 	#name : #FASTJavaLongTypeExpression,

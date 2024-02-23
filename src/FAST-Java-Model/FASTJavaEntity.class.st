@@ -1,3 +1,27 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `comments` | `FASTTWithComments` | `container` | `FASTTComment` | list of comments defined in the entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `startPos` | `Number` | nil | |
+
+"
 Class {
 	#name : #FASTJavaEntity,
 	#superclass : #MooseEntity,
@@ -28,6 +52,13 @@ FASTJavaEntity class >> metamodel [
 
 	<generated>
 	^ FASTJavaModel metamodel
+]
+
+{ #category : #testing }
+FASTJavaEntity >> isQueryable [
+
+	<generated>
+	^ false
 ]
 
 { #category : #testing }

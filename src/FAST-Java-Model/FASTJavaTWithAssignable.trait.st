@@ -1,5 +1,16 @@
 "
 I have an assignable
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `variable` | `FASTJavaTWithAssignable` | `javaVariableAssignmentOwner` | `FASTJavaTAssignable` | My variable|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTWithAssignable,

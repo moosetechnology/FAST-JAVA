@@ -1,5 +1,7 @@
 "
 I represent a float type
+
+
 "
 Class {
 	#name : #FASTJavaFloatTypeExpression,

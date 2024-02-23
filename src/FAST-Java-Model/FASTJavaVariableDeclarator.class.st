@@ -6,6 +6,31 @@ eg.
 
 int d = 3, e, f = 5;
 statement has 3 declarators separated by commas. Second declarator has no expression.
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+| `varDeclOwner` | `FASTJavaVariableDeclarator` | `declarators` | `FASTJavaVarDeclStatement` | The owner of the declarator|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `expression` | `FASTJavaVariableDeclarator` | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | Expression to be assigned to the var during declaration|
+| `variable` | `FASTJavaVariableDeclarator` | `javaVariableDeclaratorOwner` | `FASTJavaVariableExpression` | The variable that is being declared|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `startPos` | `Number` | nil | |
+
 "
 Class {
 	#name : #FASTJavaVariableDeclarator,

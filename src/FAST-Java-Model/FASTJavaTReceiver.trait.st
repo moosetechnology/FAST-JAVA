@@ -1,5 +1,16 @@
 "
 I receive a message from someone
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTReceiver,

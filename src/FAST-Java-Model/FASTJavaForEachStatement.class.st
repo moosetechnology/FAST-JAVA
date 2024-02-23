@@ -5,6 +5,42 @@ eg.
 for(Patate p : list) {
 ...
 }
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `doBodyOwner` | `FASTTStatement` | `body` | `FASTJavaDoWhileStatement` | I am the body of the do|
+| `forBodyOwner` | `FASTTStatement` | `body` | `FASTJavaForStatement` | I am the body of the for|
+| `forIncrementorOwner` | `FASTTStatement` | `incrementor` | `FASTJavaForStatement` | I am the incrementor of the for|
+| `forIninitializerOwner` | `FASTTStatement` | `initializer` | `FASTJavaForStatement` | I am the initializer of the for|
+| `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
+| `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
+| `javaForEachStatementOwner` | `FASTTStatement` | `body` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
+| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+| `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
+| `statementContainer` | `FASTTStatement` | `statements` | `FASTTStatementBlock` | Block containing this statement.|
+| `whileBodyOwner` | `FASTTStatement` | `body` | `FASTJavaWhileStatement` | I am the body of the do|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `body` | `FASTJavaForEachStatement` | `javaForEachStatementOwner` | `FASTTStatement` | The body of the for-each statement|
+| `fieldname` | `FASTJavaForEachStatement` | `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | The identifier of the created local variable|
+| `list` | `FASTJavaForEachStatement` | `javaForEachStatementOwner` | `FASTTExpression` | The list that the for-each statement iterates over|
+| `type` | `FASTJavaForEachStatement` | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | The type of the created local variable|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `startPos` | `Number` | nil | |
+
 "
 Class {
 	#name : #FASTJavaForEachStatement,

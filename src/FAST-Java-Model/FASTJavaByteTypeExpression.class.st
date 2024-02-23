@@ -1,5 +1,7 @@
 "
 I represent a byte type
+
+
 "
 Class {
 	#name : #FASTJavaByteTypeExpression,

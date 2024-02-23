@@ -1,5 +1,31 @@
 "
 I represent an import declaration, e.g. `import java.util.List;`
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `compilationUnit` | `FASTJavaImportDeclaration` | `importDeclarations` | `FASTJavaCompilationUnit` | The compilation unit that owns me|
+| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `isOnDemand` | `Boolean` | false | Whether this import is on-demand (wildcard) or single-type|
+| `isStatic` | `Boolean` | false | True if importing static members|
+| `startPos` | `Number` | nil | |
+
 "
 Class {
 	#name : #FASTJavaImportDeclaration,

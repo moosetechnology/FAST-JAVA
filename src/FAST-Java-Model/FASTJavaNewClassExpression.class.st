@@ -13,6 +13,18 @@ new SecureAsyncCallback<Void>() {
 		super.onFailure(caught);
 	}
 }
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
+| `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
+
+
+
 "
 Class {
 	#name : #FASTJavaNewClassExpression,
