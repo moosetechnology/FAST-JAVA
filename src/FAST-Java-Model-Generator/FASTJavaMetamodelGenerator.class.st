@@ -852,7 +852,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIntegerLiteral --|> javaLiteral.
 	javaFloatLiteral --|> tLiteral.
 	javaFloatLiteral --|> javaLiteral.
-	javaBooleanLiteral --|> tLiteral.
+	javaBooleanLiteral --|> tBooleanLiteral.
 	javaBooleanLiteral --|> javaLiteral.
 	javaLongLiteral --|> tLiteral.
 	javaLongLiteral --|> javaLiteral.
