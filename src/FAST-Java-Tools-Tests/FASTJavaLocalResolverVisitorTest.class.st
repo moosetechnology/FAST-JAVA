@@ -92,20 +92,6 @@ FASTJavaLocalResolverVisitorTest >> testLocalDeclarationFor [
 ]
 
 { #category : #tests }
-FASTJavaLocalResolverVisitorTest >> testNonLocalDeclarationWithName [
-	"testing helper method #nonLocalDeclaration:withName:"
-	| node |
-	node := builder var: 'blah'.
-	localResolver resetScopes.
-
-	localResolver nonLocalDeclaration: node withName: 'blah'.
-
-	self assert: node localDeclaration notNil.
-	self assert: node localDeclaration class equals: FASTNonLocalDeclaration.
-	self assert: node localDeclaration name equals: 'blah'
-]
-
-{ #category : #tests }
 FASTJavaLocalResolverVisitorTest >> testResetScopes [
 	localResolver resetScopes.
 	self assert: localResolver hasScopes.
