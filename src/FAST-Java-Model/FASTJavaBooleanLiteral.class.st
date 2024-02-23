@@ -56,8 +56,8 @@ I represent a boolean literal node.
 Class {
 	#name : #FASTJavaBooleanLiteral,
 	#superclass : #FASTJavaLiteral,
-	#traits : 'FASTTLiteral',
-	#classTraits : 'FASTTLiteral classTrait',
+	#traits : 'FASTTBooleanLiteral',
+	#classTraits : 'FASTTBooleanLiteral classTrait',
 	#category : #'FAST-Java-Model-Entities'
 }
 
