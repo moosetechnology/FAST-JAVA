@@ -1,5 +1,7 @@
 "
 I represent an int type
+
+
 "
 Class {
 	#name : #FASTJavaIntTypeExpression,

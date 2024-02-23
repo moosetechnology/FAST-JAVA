@@ -9,6 +9,36 @@ new Button(){
 
 }
 
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaDeclarationOwner` | `FASTJavaTDeclaration` | `declarations` | `FASTJavaTWithDeclarations` | The element that declares me|
+| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `statementBlock` | `FASTJavaInitializer` | `javaInitializerOwner` | `FASTTStatementBlock` | Statements block of the behavioural entity|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `source` | `String` | nil | Actual source code of the source entity|
+| `startPos` | `Number` | nil | |
+
 "
 Class {
 	#name : #FASTJavaInitializer,

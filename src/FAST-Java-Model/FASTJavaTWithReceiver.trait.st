@@ -1,5 +1,16 @@
 "
 I can send a message to someone
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTWithReceiver,

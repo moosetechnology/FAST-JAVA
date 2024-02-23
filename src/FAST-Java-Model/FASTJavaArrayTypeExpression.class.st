@@ -1,5 +1,16 @@
 "
 I represent an array type
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `baseType` | `FASTJavaArrayTypeExpression` | `javaArrayTypeNameOwner` | `FASTTExpression` | The type of the array|
+
+
+
 "
 Class {
 	#name : #FASTJavaArrayTypeExpression,

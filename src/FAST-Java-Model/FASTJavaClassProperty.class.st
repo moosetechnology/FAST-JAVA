@@ -30,6 +30,31 @@ class Enclosing {
     }
 }
 
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
+| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation:
+	@SuppressWarnings(value=""unchecked"")|
+| `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `type` | `FASTJavaClassProperty` | `javaClassPropertyOwner` | `FASTJavaVariableExpression` | The type of the property|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `fieldName` | `String` | nil | Name of accessed field|
+
 "
 Class {
 	#name : #FASTJavaClassProperty,

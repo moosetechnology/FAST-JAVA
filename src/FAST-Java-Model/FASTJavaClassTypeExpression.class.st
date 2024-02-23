@@ -1,5 +1,23 @@
 "
 I represent a class type
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaMethodThrowsOwner` | `FASTJavaClassTypeExpression` | `throws` | `FASTJavaMethodEntity` | The method that throws me|
+| `typeParameterOwner` | `FASTJavaClassTypeExpression` | `types` | `FASTJavaTypeParameterExpression` | The type parameter I specify|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
+| `typeName` | `FASTJavaClassTypeExpression` | `javaTypeNameTypeExpressionOwner` | `FASTJavaTypeName` | The name of the type|
+
+
+
 "
 Class {
 	#name : #FASTJavaClassTypeExpression,

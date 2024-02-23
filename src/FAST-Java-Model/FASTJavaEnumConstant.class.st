@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `parentEnum` | `FASTJavaEnumConstant` | `constants` | `FASTJavaEnumDeclaration` | The enum type that contains me|
+
+
+
+"
 Class {
 	#name : #FASTJavaEnumConstant,
 	#superclass : #FASTJavaVariableExpression,

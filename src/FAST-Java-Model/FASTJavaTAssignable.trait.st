@@ -3,6 +3,17 @@ You can assign something to me
 example:
 
 this.hello = ""hello""
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaVariableAssignmentOwner` | `FASTJavaTAssignable` | `variable` | `FASTJavaTWithAssignable` | The owner of the assignment|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTAssignable,

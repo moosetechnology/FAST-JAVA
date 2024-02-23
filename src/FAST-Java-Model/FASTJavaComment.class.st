@@ -1,5 +1,22 @@
 "
 I represent a Java comment (block or line comment)
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `container` | `FASTTComment` | `comments` | `FASTTWithComments` | Source code entity containing the comment|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `content` | `String` | nil | Content of the comment as a String|
+
 "
 Class {
 	#name : #FASTJavaComment,

@@ -1,5 +1,17 @@
 "
 A FASTJavaIdentifier is an identifier in a Java program
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | `fieldname` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
+| `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
+
+
+
 "
 Class {
 	#name : #FASTJavaIdentifier,

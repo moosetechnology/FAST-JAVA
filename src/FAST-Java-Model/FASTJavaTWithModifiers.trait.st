@@ -1,5 +1,16 @@
 "
 I have modifiers
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTWithModifiers,

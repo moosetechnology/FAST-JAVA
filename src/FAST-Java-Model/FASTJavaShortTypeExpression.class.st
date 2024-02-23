@@ -1,5 +1,7 @@
 "
 I represent a short type
+
+
 "
 Class {
 	#name : #FASTJavaShortTypeExpression,

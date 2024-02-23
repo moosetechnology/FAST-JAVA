@@ -1,5 +1,7 @@
 "
 I represent a primitive type
+
+
 "
 Class {
 	#name : #FASTJavaPrimitiveTypeExpression,
