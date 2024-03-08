@@ -16,88 +16,6 @@ Class {
 	#category : #'FAST-Java-Tools-export'
 }
 
-{ #category : #'class initialization' }
-FASTJavaExportVisitor class >> initialize [
-	"precedence of operators as defined in
-	 https://web.archive.org/web/20110716213410/www.uni-bonn.de/%7Emanfear/javaoperators.php
-	or
-	https://www.javatpoint.com/java-operator-precedence
-	also
-	https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html"
-
-	<script: 'FASTJavaExportVisitor initialize'>
-	
-	OperatorsPrecedence := Dictionary newFrom: {
-		"arrayIndex/messageSend/memberAccess"
-		#arrayIndex -> 17 .
-		#messageSend -> 17 .
-		#memberAccess -> 17 .
-		"postfixOperator"
-		#'unary++' -> 16 .
-		#'unary--' -> 16 .
-		"prefixOperator"
-		#'++unary' -> 15 .
-		#'--unary' -> 15 .
-		#'+unary' -> 15 .
-		#'-unary' -> 15 .
-		#'~unary' -> 15 .
-		#'!unary' -> 15 .
-		"cast"
-		#cast -> 14 .
-		"multiplicativeOperator"
-		#'*' -> 13 .
-		#'/' -> 13 .
-		#'%' -> 13 .
-		"stringConcatenationOperator -- introduced to deal with: String+(i+1)"
-		#stringConcatenation -> 12 .
-		"additiveOperator"
-		#'+' -> 11 .
-		#'-' -> 11 .
-		"shiftOperator"
-		#'<<' -> 10 .
-		#'>>' -> 10 .
-		#'>>>' -> 10 .
-		"relationalOperator"
-		#'<' -> 9 .
-		#'>' -> 9 .
-		#'<=' -> 9 .
-		#'>=' -> 9 .
-		#instanceof -> 9 .
-		"equalityOperator"
-		#'==' -> 8 .
-		#'!=' -> 8 .
-		"bitwiseAndOperator"
-		#'&' -> 7 .
-		"bitwiseExclusiveOrOperator"
-		#'^' -> 6 .
-		"bitwiseInclusiveOrOperator"
-		#'|' -> 5 .
-		"logicalAndOperator"
-		#'&&' -> 4 .
-		"logicalOrOperator"
-		#'||' -> 3 .
-		"ternaryOperator"
-		#'?:' -> 2 .
-		"assignmentOperator"
-		#'=' ->  1.
-		#'+=' -> 1 .
-		#'-=' -> 1 .
-		#'*=' -> 1 .
-		#'/=' -> 1 .
-		#'%=' -> 1 .
-		#'&=' -> 1 .
-		#'^=' -> 1 .
-		#'|=' -> 1 .
-		#'<<=' -> 1 .
-		#'>>=' -> 1 .
-		#'>>>=' -> 1 .
-		"topLevelExpression -- introduced to deal with an expression as argument of a method call
-		 because we are using a global stack, it does not see the difference with a message send
-		 on a sub-expression"
-		#topLevelExpression -> -1
-	}
-]
-
 { #category : #outputting }
 FASTJavaExportVisitor >> checkForComments: aNode andDo: exportingBlock [
 	"checks whether the node as comments
@@ -1044,6 +962,30 @@ FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 
 ]
 
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaPostfixedUnaryExpression: aFASTJavaUnaryExpression [
+
+	self
+		outputExpression: [
+			self visitFASTTExpression: aFASTJavaUnaryExpression.
+			self unindented: aFASTJavaUnaryExpression operator.
+			aFASTJavaUnaryExpression infixOperationLeftOperandOwner ifNotNil: [
+				self space ] ]
+		withOperator: 'unary' , aFASTJavaUnaryExpression operator
+]
+
+{ #category : #'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaPrefixedUnaryExpression: aFASTJavaUnaryExpression [
+
+	self
+		outputExpression: [
+			aFASTJavaUnaryExpression infixOperationRightOperandOwner ifNotNil: [
+				self space ].
+			self unindented: aFASTJavaUnaryExpression operator.
+			self visitFASTTExpression: aFASTJavaUnaryExpression ]
+		withOperator: aFASTJavaUnaryExpression operator , 'unary'
+]
+
 { #category : #visiting }
 FASTJavaExportVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 	self checkForComments: aFASTJavaQualifiedName andDo: [
@@ -1193,27 +1135,11 @@ FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression 
 	self checkForComments: aFASTJavaUnaryExpression andDo: [
 		aFASTJavaUnaryExpression isPrefixedUnaryExpression
 			ifTrue: [
-				self
-					outputExpression: [
-						aFASTJavaUnaryExpression infixOperationRightOperandOwner
-							ifNotNil: [ self space ].
-						self unindented: aFASTJavaUnaryExpression operator.
-
-						self visitFASTTExpression: aFASTJavaUnaryExpression ]
-					withOperator: (aFASTJavaUnaryExpression operator , 'unary')
-			]
-			ifFalse: [ 
-				self
-					outputExpression: [
-						self visitFASTTExpression: aFASTJavaUnaryExpression.
-						self unindented: aFASTJavaUnaryExpression operator.
-						aFASTJavaUnaryExpression infixOperationLeftOperandOwner
-							ifNotNil: [ self space ].
-					]
-					withOperator: ('unary' , aFASTJavaUnaryExpression operator)
-			]
-]
-
+				self visitFASTJavaPrefixedUnaryExpression:
+					aFASTJavaUnaryExpression ]
+			ifFalse: [
+				self visitFASTJavaPostfixedUnaryExpression:
+					aFASTJavaUnaryExpression ] ]
 ]
 
 { #category : #'visiting statement' }
