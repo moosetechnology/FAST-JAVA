@@ -1,5 +1,7 @@
 "
 I represent a char type
+
+
 "
 Class {
 	#name : #FASTJavaCharTypeExpression,

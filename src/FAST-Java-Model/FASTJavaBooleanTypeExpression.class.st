@@ -1,5 +1,7 @@
 "
 I represent a boolean type
+
+
 "
 Class {
 	#name : #FASTJavaBooleanTypeExpression,

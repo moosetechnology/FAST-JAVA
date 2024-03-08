@@ -1,5 +1,16 @@
 "
 I have declarations
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTWithDeclarations,

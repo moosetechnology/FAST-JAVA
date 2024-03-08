@@ -4,6 +4,8 @@ I represent a default case
 ex.:
 
 default:
+
+
 "
 Class {
 	#name : #FASTJavaDefaultCaseStatement,

@@ -1,5 +1,7 @@
 "
 I represent a double type
+
+
 "
 Class {
 	#name : #FASTJavaDoubleTypeExpression,

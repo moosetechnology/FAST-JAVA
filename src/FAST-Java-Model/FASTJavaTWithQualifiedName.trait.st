@@ -1,5 +1,16 @@
 "
 I have a qualified name.
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTWithQualifiedName,

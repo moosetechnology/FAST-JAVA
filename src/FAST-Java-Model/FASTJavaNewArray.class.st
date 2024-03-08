@@ -3,6 +3,17 @@ I represent a java new array node.
 ex.
 
 new String()[""10px"", ""Hello world""]
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `initializer` | `FASTJavaNewArray` | `javaNewArrayInitialOwner` | `FASTTExpression` | The initializer of the array|
+
+
+
 "
 Class {
 	#name : #FASTJavaNewArray,

@@ -13,6 +13,17 @@ new Canard.Poulet(){
 
 ""Canard"" is the namespace of the main name 
 
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `namespace` | `FASTJavaQualifiedTypeName` | `javaTypeNameQualify` | `FASTJavaTypeName` | The namespace of the name|
+
+
+
 "
 Class {
 	#name : #FASTJavaQualifiedTypeName,

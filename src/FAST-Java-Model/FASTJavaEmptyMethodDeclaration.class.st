@@ -9,6 +9,8 @@ void newMethod() {
 		
 	};
 }
+
+
 "
 Class {
 	#name : #FASTJavaEmptyMethodDeclaration,

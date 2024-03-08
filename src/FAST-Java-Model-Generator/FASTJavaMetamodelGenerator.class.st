@@ -852,7 +852,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIntegerLiteral --|> javaLiteral.
 	javaFloatLiteral --|> tLiteral.
 	javaFloatLiteral --|> javaLiteral.
-	javaBooleanLiteral --|> tLiteral.
+	javaBooleanLiteral --|> tBooleanLiteral.
 	javaBooleanLiteral --|> javaLiteral.
 	javaLongLiteral --|> tLiteral.
 	javaLongLiteral --|> javaLiteral.
@@ -1072,7 +1072,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaAnnotationExpression property: #elements) comment:
 		'"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")')
-		-* ((tAnnotationElement property: #parentAnnotation) comment:
+		<>-* ((tAnnotationElement property: #parentAnnotation) comment:
 			'An "argument" of an annotation, eg. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")').
 

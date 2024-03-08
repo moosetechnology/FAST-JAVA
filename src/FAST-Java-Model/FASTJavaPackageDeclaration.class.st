@@ -1,5 +1,29 @@
 "
 I represent a package declaration, e.g. `package fr.inria;`
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `compilationUnit` | `FASTJavaPackageDeclaration` | `packageDeclaration` | `FASTJavaCompilationUnit` | The compilation unit that owns me|
+| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `startPos` | `Number` | nil | |
+
 "
 Class {
 	#name : #FASTJavaPackageDeclaration,

@@ -3,6 +3,17 @@ I am a modifier in java
 example:
 
 public, proctected, private
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaModifierOwner` | `FASTJavaTModifier` | `modifiers` | `FASTJavaTWithModifiers` | The owner of the modifier|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTModifier,

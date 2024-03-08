@@ -1,5 +1,16 @@
 "
 I am a declaration in java
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `javaDeclarationOwner` | `FASTJavaTDeclaration` | `declarations` | `FASTJavaTWithDeclarations` | The element that declares me|
+
+
+
 "
 Trait {
 	#name : #FASTJavaTDeclaration,

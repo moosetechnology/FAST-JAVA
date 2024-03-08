@@ -4,6 +4,17 @@ I represent a Labeled case
 ex.:
 
 case LABEL:
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `label` | `FASTJavaLabeledCaseStatement` | `javaLabeledCaseStatementOwner` | `FASTTExpression` | The label of the case statement|
+
+
+
 "
 Class {
 	#name : #FASTJavaLabeledCaseStatement,

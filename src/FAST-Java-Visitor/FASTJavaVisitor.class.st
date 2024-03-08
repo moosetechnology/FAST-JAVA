@@ -45,6 +45,11 @@ FASTJavaVisitor >> visitFASTJavaBodyStatement: aFASTJavaBodyStatement [
 ]
 
 { #category : #generated }
+FASTJavaVisitor >> visitFASTJavaBooleanLiteral: aFASTJavaBooleanLiteral [
+	^ self visitFASTTBooleanLiteral: aFASTJavaBooleanLiteral
+]
+
+{ #category : #generated }
 FASTJavaVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTypeExpression [
 	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaBooleanTypeExpression
 ]
@@ -133,6 +138,11 @@ FASTJavaVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatem
 { #category : #generated }
 FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	^ self visitFASTTStatement: aFASTJavaDoWhileStatement
+]
+
+{ #category : #generated }
+FASTJavaVisitor >> visitFASTJavaDoubleLiteral: aFASTJavaDoubleLiteral [
+	^ self visitFASTTLiteral: aFASTJavaDoubleLiteral
 ]
 
 { #category : #generated }
