@@ -1121,7 +1121,7 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 			self unindented: ' extends '.
 			typeArgumentSuperclasses
 				do: [ :node | node accept: self ]
-				separatedBy: [ self unindented: ' & ' ]
+				separatedBy: [ self << ' & ' ]
 		]
 	]
 ]
