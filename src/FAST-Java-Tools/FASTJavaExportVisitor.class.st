@@ -235,7 +235,7 @@ FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self checkForComments: aFASTJavaAnnotation andDo: [
 		self
-			indented: $@ ;
+			unindented: $@ ;
 			unindented: aFASTJavaAnnotation name.
 		aFASTJavaAnnotation elements ifNotEmpty: [ :arguments |
 			self unindented: $(.
@@ -1177,7 +1177,9 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 		self unindented: aFASTJavaTypeParameterExpression name.
 		aFASTJavaTypeParameterExpression types ifNotEmpty: [ :typeArgumentSuperclasses |
 			self unindented: ' extends '.
-			self visitNodeListSeparatedByCommas: typeArgumentSuperclasses
+			typeArgumentSuperclasses
+				do: [ :node | node accept: self ]
+				separatedBy: [ self << ' & ' ]
 		]
 	]
 ]
