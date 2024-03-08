@@ -334,12 +334,48 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclaration [
 ]
 
 { #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotatedMethod [
+	| node |
+	node := builder class: 'Blah'.
+	node addDeclaration: (self methodAST: '@Test void mth() { }').
+	self export: node equals: 'class Blah {
+  @Test
+  void mth() {
+  }
+}
+'
+]
+
+{ #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotation [
+	| node |
+	node := builder class: 'Blah'.
+	node addModifier: (builder annotation: 'Test').
+	self export: node equals: '@Test
+class Blah {
+}
+'
+]
+
+{ #category : #'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithInterfaces [
 	| node |
 	node := builder class: 'Blah'.
 	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'IBlah')).
 	node addInterface: (FASTJavaClassTypeExpression new typeName: (builder type: 'Iterator')).
 	self export: node equals: 'class Blah implements IBlah, Iterator {
+}
+'
+]
+
+{ #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithMethod [
+	| node |
+	node := builder class: 'Blah'.
+	node addDeclaration: (self methodAST: 'void mth() { }').
+	self export: node equals: 'class Blah {
+  void mth() {
+  }
 }
 '
 ]
@@ -973,6 +1009,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPostIncrementAndSum [
 ]
 
 { #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
+	"testing for operator precedence of operator '!'"
+	| ast |
+	ast := self methodAST: 'void mth() { boolean toto = false|!true; }'.
+	self
+		export:
+		ast statements first declarators first expression rightOperand
+		equals: ' !true'
+]
+
+{ #category : #'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
 	node := builder literal: FASTJavaStringLiteral value: 'This is a String'.
@@ -1143,6 +1190,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 	expr := self methodAST: 'public Collection<?> meth() {}'.
 
 	self export: expr equals: 'public Collection<?> meth() {
+}
+'
+]
+
+{ #category : #tests }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithMultipleTypes [
+
+	| expr |
+	expr := self methodAST: '<T extends MyClass & Iterable> T mth() { }'.
+
+	self export: expr equals: '<T extends MyClass & Iterable> T mth() {
 }
 '
 ]
