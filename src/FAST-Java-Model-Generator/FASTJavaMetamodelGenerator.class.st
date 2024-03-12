@@ -23,7 +23,6 @@ Class {
 		'javaForStatement',
 		'javaIdentifier',
 		'javaIfStatement',
-		'javaInfixOperation',
 		'javaIntegerLiteral',
 		'javaMethodEntity',
 		'javaMethodInvocation',
@@ -127,7 +126,10 @@ Class {
 		'javaEnumConstant',
 		'tAnnotationElement',
 		'javaLiteral',
-		'javaArrayAnnotationElement'
+		'javaArrayAnnotationElement',
+		'javaBinaryExpression',
+		'tBinaryExpression',
+		'tUnaryExpression'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -701,7 +703,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaComment := builder newClassNamed: #Comment comment: self commentForJavaComment.
 	javaFieldAccess := builder newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
 	javaIdentifier := builder newClassNamed: #Identifier comment: self commentForJavaIdentifier.
-	javaInfixOperation := builder newClassNamed: #InfixOperation comment: self commentForJavaInfixOperation.
+	javaBinaryExpression := builder newClassNamed: #InfixOperation comment: self commentForJavaInfixOperation.
 	javaMethodEntity := builder newClassNamed: #MethodEntity comment: self commentForJavaMethodEntity.
 	javaMethodInvocation := builder newClassNamed: #MethodInvocation comment: self commentForJavaMethodInvocation.
 	javaThis := builder newClassNamed: #This comment: self commentForJavaThis.
@@ -821,8 +823,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaFieldAccess --|> tWithReceiver.
 	javaFieldAccess --|> tReceiver.
 
-	javaInfixOperation --|> tExpression.
-	javaInfixOperation --|> tReceiver.
+	javaBinaryExpression --|> tBinaryExpression.
+	javaBinaryExpression --|> tReceiver.
 
 	javaBreakStatement --|> tStatement.
 	javaCaseStatement --|> tStatementBlock.
@@ -914,7 +916,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaTryCatchStatement --|> tStatement.
 	javaForEachStatement --|> tStatement.
-	javaUnaryExpression --|> tExpression.
+	javaUnaryExpression --|> tUnaryExpression.
 
 	javaNewExpression --|> tExpression.
 	javaNewExpression --|> #TWithArguments.
@@ -1030,13 +1032,10 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 	(javaFieldAccess property: #fieldName type: #String) comment:
 		'Name of accessed field'.
-	(javaInfixOperation property: #operator type: #String) comment:
-		'operator s symbol'.
+
 	(javaClassProperty property: #fieldName type: #String) comment:
 		'Name of accessed field'.
 
-	(javaUnaryExpression property: #operator type: #String) comment:
-		'The operator string to apply to the expression'.
 	(javaUnaryExpression
 		 property: #isPrefixedUnaryExpression
 		 type: #Boolean) comment:
@@ -1122,11 +1121,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-
 		((javaVariableExpression property: #javaClassPropertyOwner) 
 			 comment: 'The javaClassProperty owner (if possible)').
-
-	((javaUnaryExpression property: #expression) comment:
-		 'The affected expression')
-	<>- ((tExpression property: #javaUnaryExpressionOwner) comment:
-			 'The javaUnaryExpression owner (if possible)').
 
 	((javaNewExpression property: #type) comment: 'The type of the array')
 	<>-
@@ -1224,15 +1218,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaConditionalExpression property: #thenPart) comment: 'then part')
 	<>- ((tExpression property: #conditionalThenPartOwner) comment:
 			 'The if owner (if possible)').
-
-	((javaInfixOperation property: #leftOperand) comment: 'leftOperand')
-	<>-
-		((tExpression property: #infixOperationLeftOperandOwner) comment:
-			 'The left operand (if possible)').
-	((javaInfixOperation property: #rightOperand) comment: 'rightOperand')
-	<>-
-		((tExpression property: #infixOperationRightOperandOwner) comment:
-			 'The right operand (if possible)').
 
 	((javaForStatement property: #condition) comment:
 		 'The condition of the statement')
@@ -1475,23 +1460,25 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.
-	tComment := self remoteTrait: #TComment withPrefix: #FAST.
-	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
-	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
-	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
-	tCharacterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
-	tLiteral := self remoteTrait: #TLiteral withPrefix: #FAST.
-	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
-	tNamedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
-	tNullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
-	tStringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
-	tScopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
-	tVariableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
-	tStatementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
-	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
-	tWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
-	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
-	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
+	tBinaryExpression := self remoteTrait: #TBinaryExpression withPrefix: #FAST. 
 	tBooleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
-	tInvocation := self remoteTrait: #TInvocation withPrefix: #FAST
+	tCharacterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
+	tComment := self remoteTrait: #TComment withPrefix: #FAST.
+	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
+	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
+	tInvocation := self remoteTrait: #TInvocation withPrefix: #FAST.
+	tLiteral := self remoteTrait: #TLiteral withPrefix: #FAST.
+	tNamedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
+	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
+	tNullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
+	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
+	tScopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
+	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
+	tStatementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
+	tStringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
+	tUnaryExpression := self remoteTrait: #TUnaryExpression withPrefix: #FAST. 
+	tVariableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
+	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
+	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
+	tWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
 ]
