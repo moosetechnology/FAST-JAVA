@@ -969,7 +969,7 @@ FASTJavaExportVisitor >> visitFASTJavaPostfixedUnaryExpression: aFASTJavaUnaryEx
 		outputExpression: [
 			self visitFASTTExpression: aFASTJavaUnaryExpression.
 			self unindented: aFASTJavaUnaryExpression operator.
-			aFASTJavaUnaryExpression infixOperationLeftOperandOwner ifNotNil: [
+			aFASTJavaUnaryExpression parentExpressionLeft ifNotNil: [
 				self space ] ]
 		withOperator: 'unary' , aFASTJavaUnaryExpression operator
 ]
@@ -979,7 +979,7 @@ FASTJavaExportVisitor >> visitFASTJavaPrefixedUnaryExpression: aFASTJavaUnaryExp
 
 	self
 		outputExpression: [
-			aFASTJavaUnaryExpression infixOperationRightOperandOwner ifNotNil: [
+			aFASTJavaUnaryExpression parentExpressionRight ifNotNil: [
 				self space ].
 			self unindented: aFASTJavaUnaryExpression operator.
 			self visitFASTTExpression: aFASTJavaUnaryExpression ]
