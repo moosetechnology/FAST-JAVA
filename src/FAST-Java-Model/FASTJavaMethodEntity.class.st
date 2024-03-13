@@ -7,6 +7,7 @@ Represents a Java method
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaDeclarationOwner` | `FASTJavaTDeclaration` | `declarations` | `FASTJavaTWithDeclarations` | The element that declares me|
 | `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 
@@ -24,7 +25,6 @@ Represents a Java method
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
-| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 
 
 ## Properties

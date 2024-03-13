@@ -12,6 +12,7 @@ example:
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
+| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `javaModifierOwner` | `FASTJavaTModifier` | `modifiers` | `FASTJavaTWithModifiers` | The owner of the modifier|
 | `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation:
@@ -22,11 +23,6 @@ example:
 |---|
 | `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationElement` | ""Arguments"" of the annotation, eg. this @Author annotation has two annotation elements:
 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
-
-### Other
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 
 
 ## Properties

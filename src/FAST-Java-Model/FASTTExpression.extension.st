@@ -190,60 +190,6 @@ FASTTExpression >> ifConditionOwner: anObject [
 ]
 
 { #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> infixOperationLeftOperandOwner [
-	"Relation named: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand"
-
-	<generated>
-	<FMComment: 'The left operand (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #infixOperationLeftOperandOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> infixOperationLeftOperandOwner: anObject [
-
-	<generated>
-	(self attributeAt: #infixOperationLeftOperandOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self infixOperationLeftOperandOwner.
-		self attributeAt: #infixOperationLeftOperandOwner put: anObject.
-		otherSide leftOperand: nil ]
-	ifNotNil: [ 
-		self attributeAt: #infixOperationLeftOperandOwner put: anObject.
-		anObject leftOperand: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> infixOperationRightOperandOwner [
-	"Relation named: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand"
-
-	<generated>
-	<FMComment: 'The right operand (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #infixOperationRightOperandOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> infixOperationRightOperandOwner: anObject [
-
-	<generated>
-	(self attributeAt: #infixOperationRightOperandOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self infixOperationRightOperandOwner.
-		self attributeAt: #infixOperationRightOperandOwner put: anObject.
-		otherSide rightOperand: nil ]
-	ifNotNil: [ 
-		self attributeAt: #infixOperationRightOperandOwner put: anObject.
-		anObject rightOperand: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayAccessOwner [
 	"Relation named: #javaArrayAccessOwner type: #FASTJavaArrayAccess opposite: #expression"
 
@@ -556,33 +502,6 @@ FASTTExpression >> javaThrowStatementOwner: anObject [
 		otherSide expression: nil ]
 	ifNotNil: [ 
 		self attributeAt: #javaThrowStatementOwner put: anObject.
-		anObject expression: self ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> javaUnaryExpressionOwner [
-	"Relation named: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression"
-
-	<generated>
-	<FMComment: 'The javaUnaryExpression owner (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaUnaryExpressionOwner ifAbsent: [ nil ]
-]
-
-{ #category : #'*FAST-Java-Model-accessing' }
-FASTTExpression >> javaUnaryExpressionOwner: anObject [
-
-	<generated>
-	(self attributeAt: #javaUnaryExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaUnaryExpressionOwner.
-		self attributeAt: #javaUnaryExpressionOwner put: anObject.
-		otherSide expression: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaUnaryExpressionOwner put: anObject.
 		anObject expression: self ]
 ]
 
