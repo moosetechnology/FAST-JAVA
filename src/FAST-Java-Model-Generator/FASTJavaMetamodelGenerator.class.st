@@ -127,7 +127,8 @@ Class {
 		'javaEnumConstant',
 		'tAnnotationElement',
 		'javaLiteral',
-		'javaArrayAnnotationElement'
+		'javaArrayAnnotationElement',
+		'javaTypePattern'
 	],
 	#category : #'FAST-Java-Model-Generator'
 }
@@ -644,6 +645,21 @@ void tryCatch() {
 ]
 
 { #category : #comments }
+FASTJavaMetamodelGenerator >> commentForJavaTypePattern [
+
+	^ 'This code element defines a type pattern, introduced in Java 16 by [JEP 394](https://openjdk.java.net/jeps/394).
+Example:
+```language=text
+	Object obj = null;
+	boolean longerThanTwo = false;
+	// String s is the type pattern, declaring a local variable
+	if (obj instanceof String s) {
+		longerThanTwo = s.length() > 2;
+	}
+```'
+]
+
+{ #category : #comments }
 FASTJavaMetamodelGenerator >> commentForJavaUnaryExpression [
 	^ 'I represent a Java Unary Expression
 	
@@ -764,6 +780,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaEmptyDimExpression := builder newClassNamed: #EmptyDimExpression comment: self commentForJavaEmptyDimExpression.
 	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
 	javaArrayAnnotationElement := builder newClassNamed: #ArrayAnnotationElement comment: 'I represent an array as argument of an annotationExpression'.
+	javaTypePattern := builder newClassNamed: #TypePattern comment: self commentForJavaTypePattern.
 
 	"statements"
 	javaStatement := builder newClassNamed: #Statement.
@@ -801,7 +818,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 
 { #category : #definition }
 FASTJavaMetamodelGenerator >> defineHierarchy [
-
 	"define class hierarchy"
 
 	super defineHierarchy.
@@ -836,10 +852,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIfStatement --|> tStatement.
 
 	javaArrayAnnotationElement --|> tAnnotationElement.
-	javaArrayAnnotationElement --|> tExpression.  "because annotationElement=value are modeled as assignement expression"
+	javaArrayAnnotationElement --|> tExpression. "because annotationElement=value are modeled as assignement expression"
 
 	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
-	javaLiteral  --|> tReceiver.
+	javaLiteral --|> tReceiver.
 	javaLiteral --|> tAnnotationElement.
 
 	javaNullLiteral --|> tNullPointerLiteral.
@@ -1010,6 +1026,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	qualifiedName --|> tEntity.
 	qualifiedName --|> tAssignable.
 
+	javaTypePattern --|> tExpression.
+
 	compilationUnit --|> tEntity.
 
 	"package and import do not use TDeclaration on purpose: they are only contained in a compilation unit"
@@ -1070,10 +1088,10 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The owner of the expression').
 
 	((javaAnnotationExpression property: #elements) comment:
-		'"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
+		 '"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")')
-		<>-* ((tAnnotationElement property: #parentAnnotation) comment:
-			'An "argument" of an annotation, eg. "unchecked" in the following annotation:
+	<>-* ((tAnnotationElement property: #parentAnnotation) comment:
+			 'An "argument" of an annotation, eg. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")').
 
 	((javaArrayAnnotationElement property: #values) comment:
@@ -1089,17 +1107,16 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaSwitchStatement property: #cases) comment:
 		 'The cases of the switch statement')
 	<>-*
-		((javaCaseStatement property: #javaCaseStatementSwitchOwner) 
+		((javaCaseStatement property: #javaCaseStatementSwitchOwner)
 			 comment: 'The switch owner').
 
 	((javaVariableDeclarator property: #expression) comment:
 		 'Expression to be assigned to the var during declaration')
-	<>- ((tExpression property: #javaVariableDeclaratorExpressionOwner) 
+	<>- ((tExpression property: #javaVariableDeclaratorExpressionOwner)
 			 comment: 'The javaVariableDeclarator owner (if possible)').
 	((javaVariableDeclarator property: #variable) comment:
 		 'The variable that is being declared')
-	<>-
-		((javaVariableExpression property: #javaVariableDeclaratorOwner) 
+	<>- ((javaVariableExpression property: #javaVariableDeclaratorOwner)
 			 comment: 'The javaVariableDeclarator owner (if possible)').
 
 	((javaAssignmentExpression property: #expression) comment:
@@ -1113,14 +1130,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The javaCastExpression owner (if possible)').
 	((javaCastExpression property: #type) comment:
 		 'The type into which the expression will be cast')
-	<>-
-		((javaVariableExpression property: #javaCastExpressionTypeOwner) 
+	<>- ((javaVariableExpression property: #javaCastExpressionTypeOwner)
 			 comment: 'The javaCastExpression owner (if possible)').
 
 	((javaClassProperty property: #type) comment:
 		 'The type of the property')
 	<>-
-		((javaVariableExpression property: #javaClassPropertyOwner) 
+		((javaVariableExpression property: #javaClassPropertyOwner)
 			 comment: 'The javaClassProperty owner (if possible)').
 
 	((javaUnaryExpression property: #expression) comment:
@@ -1130,7 +1146,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaNewExpression property: #type) comment: 'The type of the array')
 	<>-
-		((javaVariableExpression property: #javaNewExpressionOwner) 
+		((javaVariableExpression property: #javaNewExpressionOwner)
 			 comment: 'The javaNewExpression owner (if possible)').
 
 	((javaArrayAccess property: #expression) comment:
@@ -1165,11 +1181,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #fieldname) comment:
 		 'The identifier of the created local variable')
-	<>- ((javaIdentifier property: #javaForEachStatementFieldNameOwner) 
+	<>- ((javaIdentifier property: #javaForEachStatementFieldNameOwner)
 			 comment: 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #type) comment:
 		 'The type of the created local variable')
-	<>- ((javaTypeExpression property: #javaForEachStatementTypeOwner) 
+	<>- ((javaTypeExpression property: #javaForEachStatementTypeOwner)
 			 comment: 'The javaForEachStatement owner (if possible)').
 
 	((javaTryCatchStatement property: #try) comment:
@@ -1187,20 +1203,22 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaCatchPartStatement property: #body) comment:
 		 'The body of the catch part')
-	<>- ((javaStatementBlock property: #javaCatchPartStatementOwner) comment:
-			 'The javaCatchPartStatementOwner owner (if possible)').
+	<>-
+		((javaStatementBlock property: #javaCatchPartStatementOwner)
+			 comment: 'The javaCatchPartStatementOwner owner (if possible)').
 	((javaTryCatchStatement property: #resources) comment:
 		 'I contain the resources in a try-with-resource statement')
-	<>-* ((javaVarDeclStatement property: #javaTryResourceOwner) comment:
+	<>-*
+		((javaVarDeclStatement property: #javaTryResourceOwner) comment:
 			 'The try-with-resource that owns me').
 
 	((javaCatchPartStatement property: #catchedTypes) comment:
-			 'The types (exception) that are catched')
+		 'The types (exception) that are catched')
 	<>-* ((javaTypeExpression property: #catchOwner) comment:
 			 'The catch part that owns me (ie. where I am catched)').
 	((javaCatchPartStatement property: #parameter) comment:
 		 'The parameter of the catch part')
-	<>- ((javaVariableExpression property: #javaCatchParameterOwnler) 
+	<>- ((javaVariableExpression property: #javaCatchParameterOwnler)
 			 comment: 'The javaCatchPartParameterOwner owner (if possible)').
 
 	((javaIfStatement property: #condition) comment:
@@ -1296,7 +1314,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaMethodReference property: #receiver) comment:
 		 'The method of the reference')
-	<>- ((javaVariableExpression property: #javaMethodReferenceOwner) 
+	<>- ((javaVariableExpression property: #javaMethodReferenceOwner)
 			 comment: 'The owner of the method reference (if possible)').
 
 	((javaSynchronizedStatement property: #expression) comment:
@@ -1307,7 +1325,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaSynchronizedStatement property: #block) comment:
 		 'The block that is synchronized')
 	<>-
-		((tStatementBlock property: #javaSynchronizedStatementOwner) 
+		((tStatementBlock property: #javaSynchronizedStatementOwner)
 			 comment: 'The owner of the synchronized block (if possible)').
 
 	((javaMethodEntity property: #type) comment: 'The type of the method')
@@ -1317,12 +1335,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaMethodEntity property: #throws) comment:
 		 'The list of throws exception')
 	<>-*
-		((javaClassTypeExpression property: #javaMethodThrowsOwner) 
+		((javaClassTypeExpression property: #javaMethodThrowsOwner)
 			 comment: 'The method that throws me').
 	((javaMethodEntity property: #typeParameters) comment:
 		 'The list of type parameter')
 	<>-*
-		((javaTypeParameter property: #javaMethodTypeParameterOwner) 
+		((javaTypeParameter property: #javaMethodTypeParameterOwner)
 			 comment: 'The method that use me').
 
 	((javaTypeParameter property: #types) comment:
@@ -1334,11 +1352,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaParameterExpression property: #type) comment:
 		 'The type of the parameter')
 	<>-
-		((javaVariableExpression property: #javaParameterTypeOwner) 
+		((javaVariableExpression property: #javaParameterTypeOwner)
 			 comment: 'The variable expression owner (if possible)').
 	((javaParameterExpression property: #variable) comment:
 		 'parameter variable')
-	<>- ((javaVariableExpression property: #javaParameterVariableOwner) 
+	<>- ((javaVariableExpression property: #javaParameterVariableOwner)
 			 comment: 'The variable expression owner (if possible)').
 
 	((javaVarDeclStatement property: #type) comment:
@@ -1369,31 +1387,31 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'I represent a condition for my owner').
 	((javaAssertStatement property: #message) comment:
 		 'The error message that is raised if the condition is false')
-	<>- ((tExpression property: #javaStringAssertStatementOwner) 
-			 comment: 'The assertion which I describe').
+	<>-
+		((tExpression property: #javaStringAssertStatementOwner) comment:
+			 'The assertion which I describe').
 
 	((javaClassDeclaration property: #superclass) comment:
 		 'My superclass')
 	<>-
-		((javaTypeExpression property: #javaClassDeclarationSuperclassOwner) 
+		((javaTypeExpression property: #javaClassDeclarationSuperclassOwner)
 			 comment: 'The class that extends me').
 	((javaClassDeclaration property: #interfaces) comment:
 		 'The interfaces I implement')
 	<>-*
-		((javaTypeExpression property: #javaClassDeclarationInterfaceOwner) 
+		((javaTypeExpression property: #javaClassDeclarationInterfaceOwner)
 			 comment: 'The class that implements me').
 
 	((javaEnumDeclaration property: #interfaces) comment:
 		 'The interfaces I implement')
 	<>-*
-		((javaTypeExpression property: #javaEnumDeclarationInterfaceOwner) 
+		((javaTypeExpression property: #javaEnumDeclarationInterfaceOwner)
 			 comment: 'The enum that implements me').
 
 	((javaEnumDeclaration property: #constants) comment:
 		 'The constants I define')
-	<>-*
-		((javaEnumConstant property: #parentEnum) 
-			 comment: 'The enum type that contains me').
+	<>-* ((javaEnumConstant property: #parentEnum) comment:
+			 'The enum type that contains me').
 
 	((javaInterfaceDeclaration property: #interfaces) comment:
 		 'My super interfaces')
@@ -1428,6 +1446,17 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The name that qualifies me')
 	<>- ((qualifiedName property: #qualifiedNameOwner) comment:
 			 'The owner of the qualified name').
+
+	"a type pattern declares a single variable"
+	((javaTypePattern property: #variable) comment:
+		 'The local variable declared by this type pattern')
+	<>-
+		((javaVariableExpression property: #javaTypePatternVariableOwner)
+			 comment: 'The javaTypePattern variable owner (if possible)').
+	((javaTypePattern property: #type) comment:
+		 'The type of the declared variable')
+	<>- ((javaVariableExpression property: #javaTypePatternTypeOwner)
+			 comment: 'The javaTypePattern type owner (if possible)').
 
 	"do not use TDeclaration and TWithDeclaration on purpose: what a compilation unit can contain is strict"
 	((compilationUnit property: #packageDeclaration) comment:

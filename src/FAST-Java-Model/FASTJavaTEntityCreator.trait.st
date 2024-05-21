@@ -565,6 +565,13 @@ FASTJavaTEntityCreator >> newTypeParameterExpression [
 ]
 
 { #category : #'entity creation' }
+FASTJavaTEntityCreator >> newTypePattern [
+
+	<generated>
+	^ self add: FASTJavaTypePattern new
+]
+
+{ #category : #'entity creation' }
 FASTJavaTEntityCreator >> newUnaryExpression [
 
 	<generated>

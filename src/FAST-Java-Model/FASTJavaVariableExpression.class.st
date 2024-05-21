@@ -7,6 +7,7 @@
 |---|
 | `argumentOwner` | `FASTTExpression` | `arguments` | `FASTTWithArguments` | my owner|
 | `assertConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaAssertStatement` | I represent a condition for my owner|
+| `assignedIn` | `FASTTExpression` | `expression` | `FASTTAssignment` | Optional assignment where this expression is used|
 | `conditionalConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaConditionalExpression` | I represent a condition for my owner|
 | `conditionalElsePartOwner` | `FASTTExpression` | `elsePart` | `FASTJavaConditionalExpression` | The if owner (if possible)|
 | `conditionalThenPartOwner` | `FASTTExpression` | `thenPart` | `FASTJavaConditionalExpression` | The if owner (if possible)|
@@ -16,6 +17,7 @@
 | `ifConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaIfStatement` | I represent a condition for my owner|
 | `infixOperationLeftOperandOwner` | `FASTTExpression` | `leftOperand` | `FASTJavaInfixOperation` | The left operand (if possible)|
 | `infixOperationRightOperandOwner` | `FASTTExpression` | `rightOperand` | `FASTJavaInfixOperation` | The right operand (if possible)|
+| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaArrayAccessOwner` | `FASTTExpression` | `expression` | `FASTJavaArrayAccess` | The javaArrayAccess owner (if possible)|
 | `javaArrayArrayAccessOwner` | `FASTTExpression` | `array` | `FASTJavaArrayAccess` | The javaArrayArrayAccess owner (if possible)|
 | `javaArrayInitializers` | `FASTTExpression` | `initializers` | `FASTJavaArrayInitializer` | The owner of the expression|
@@ -38,21 +40,20 @@
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
+| `javaTypePatternTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
+| `javaTypePatternVariableOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaTypePattern` | The javaTypePattern variable owner (if possible)|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVarDeclTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaVarDeclStatement` | The variable expression owner (if possible)|
 | `javaVariableAssignmentOwner` | `FASTJavaTAssignable` | `variable` | `FASTJavaTWithAssignable` | The owner of the assignment|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
 | `javaVariableDeclaratorOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
+| `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
+| `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
+| `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
 | `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
 | `returnOwner` | `FASTTExpression` | `expression` | `FASTTReturnStatement` | The return statement that own the expression (if it's the case)|
 | `switchConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchStatement` | I represent a condition for my owner|
 | `whileConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaWhileStatement` | I represent a condition for my owner|
-
-### Other
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `assignedIn` | `FASTTExpression` | `expression` | `FASTTAssignment` | Optional assignment where this expression is used|
-| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 
 
 ## Properties
@@ -71,17 +72,19 @@ Class {
 	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTVariableExpression',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
-		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable',
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
-		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
-		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
-		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
+		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
 		'#javaMethodReferenceOwner => FMOne type: #FASTJavaMethodReference opposite: #receiver',
 		'#javaMethodTypeOwner => FMOne type: #FASTJavaMethodEntity opposite: #type',
+		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
+		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaParameterTypeOwner => FMOne type: #FASTJavaParameter opposite: #type',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
-		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type'
+		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type',
+		'#javaTypePatternVariableOwner => FMOne type: #FASTJavaTypePattern opposite: #variable',
+		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
+		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -318,6 +321,56 @@ FASTJavaVariableExpression >> javaParameterVariableOwnerGroup [
 	<generated>
 	<navigation: 'JavaParameterVariableOwner'>
 	^ MooseSpecializedGroup with: self javaParameterVariableOwner
+]
+
+{ #category : #accessing }
+FASTJavaVariableExpression >> javaTypePatternTypeOwner [
+	"Relation named: #javaTypePatternTypeOwner type: #FASTJavaTypePattern opposite: #type"
+
+	<generated>
+	<FMComment: 'The javaTypePattern type owner (if possible)'>
+	<container>
+	<derived>
+	^ javaTypePatternTypeOwner
+]
+
+{ #category : #accessing }
+FASTJavaVariableExpression >> javaTypePatternTypeOwner: anObject [
+
+	<generated>
+	javaTypePatternTypeOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaVariableExpression >> javaTypePatternTypeOwnerGroup [
+	<generated>
+	<navigation: 'JavaTypePatternTypeOwner'>
+	^ MooseSpecializedGroup with: self javaTypePatternTypeOwner
+]
+
+{ #category : #accessing }
+FASTJavaVariableExpression >> javaTypePatternVariableOwner [
+	"Relation named: #javaTypePatternVariableOwner type: #FASTJavaTypePattern opposite: #variable"
+
+	<generated>
+	<FMComment: 'The javaTypePattern variable owner (if possible)'>
+	<container>
+	<derived>
+	^ javaTypePatternVariableOwner
+]
+
+{ #category : #accessing }
+FASTJavaVariableExpression >> javaTypePatternVariableOwner: anObject [
+
+	<generated>
+	javaTypePatternVariableOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaVariableExpression >> javaTypePatternVariableOwnerGroup [
+	<generated>
+	<navigation: 'JavaTypePatternVariableOwner'>
+	^ MooseSpecializedGroup with: self javaTypePatternVariableOwner
 ]
 
 { #category : #accessing }

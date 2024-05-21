@@ -747,6 +747,27 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInitializer: aInitializer [
 	^ currentFASTEntity
 ]
 
+{ #category : #generated }
+JavaSmaCCProgramNodeImporterVisitor >> visitInstanceofPatternExpression: anInstanceofPatternExpression [
+	"SmaCC gives a single node representing both the instanceof operation and the type pattern.
+	FAST splits it into an infix operation with the type pattern as the right operand."
+
+	self
+		create: FASTJavaInfixOperation
+		from: anInstanceofPatternExpression.
+	currentFASTEntity leftOperand:
+		(self clone accept: anInstanceofPatternExpression object).
+	currentFASTEntity rightOperand:
+		((self addToModel: FASTJavaTypePattern new)
+			 startPos: anInstanceofPatternExpression type startPosition;
+			 endPos: anInstanceofPatternExpression variable stopPosition;
+			 type: (self clone accept: anInstanceofPatternExpression type);
+			 variable:
+				 (self clone accept: anInstanceofPatternExpression variable)).
+	currentFASTEntity operator: 'instanceof'.
+	^ currentFASTEntity
+]
+
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitIntType: aByteType [
 	currentFASTEntity := self
