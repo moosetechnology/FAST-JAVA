@@ -53,7 +53,7 @@ Example:
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `type` | `FASTJavaTypePattern` | `javaTypePatternTypeOwner` | `FASTJavaVariableExpression` | The type of the declared variable|
+| `type` | `FASTJavaTypePattern` | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | The type of the declared variable|
 | `variable` | `FASTJavaTypePattern` | `javaTypePatternVariableOwner` | `FASTJavaVariableExpression` | The local variable declared by this type pattern|
 
 
@@ -72,8 +72,8 @@ Class {
 	#traits : 'FASTTExpression',
 	#classTraits : 'FASTTExpression classTrait',
 	#instVars : [
-		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaTypePatternTypeOwner'
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner',
+		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -89,7 +89,7 @@ FASTJavaTypePattern class >> annotation [
 
 { #category : #accessing }
 FASTJavaTypePattern >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaTypePatternTypeOwner"
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner"
 
 	<generated>
 	<FMComment: 'The type of the declared variable'>

@@ -40,7 +40,6 @@
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
-| `javaTypePatternTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
 | `javaTypePatternVariableOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaTypePattern` | The javaTypePattern variable owner (if possible)|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVarDeclTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaVarDeclStatement` | The variable expression owner (if possible)|
@@ -81,7 +80,6 @@ Class {
 		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaParameterTypeOwner => FMOne type: #FASTJavaParameter opposite: #type',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
-		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type',
 		'#javaTypePatternVariableOwner => FMOne type: #FASTJavaTypePattern opposite: #variable',
 		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
 		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
@@ -321,31 +319,6 @@ FASTJavaVariableExpression >> javaParameterVariableOwnerGroup [
 	<generated>
 	<navigation: 'JavaParameterVariableOwner'>
 	^ MooseSpecializedGroup with: self javaParameterVariableOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaTypePatternTypeOwner [
-	"Relation named: #javaTypePatternTypeOwner type: #FASTJavaTypePattern opposite: #type"
-
-	<generated>
-	<FMComment: 'The javaTypePattern type owner (if possible)'>
-	<container>
-	<derived>
-	^ javaTypePatternTypeOwner
-]
-
-{ #category : #accessing }
-FASTJavaVariableExpression >> javaTypePatternTypeOwner: anObject [
-
-	<generated>
-	javaTypePatternTypeOwner := anObject
-]
-
-{ #category : #navigation }
-FASTJavaVariableExpression >> javaTypePatternTypeOwnerGroup [
-	<generated>
-	<navigation: 'JavaTypePatternTypeOwner'>
-	^ MooseSpecializedGroup with: self javaTypePatternTypeOwner
 ]
 
 { #category : #accessing }

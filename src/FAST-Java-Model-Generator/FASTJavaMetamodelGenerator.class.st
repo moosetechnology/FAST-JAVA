@@ -1455,8 +1455,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 comment: 'The javaTypePattern variable owner (if possible)').
 	((javaTypePattern property: #type) comment:
 		 'The type of the declared variable')
-	<>- ((javaVariableExpression property: #javaTypePatternTypeOwner)
-			 comment: 'The javaTypePattern type owner (if possible)').
+	<>-
+		((javaTypeExpression property: #javaTypePatternTypeOwner) comment:
+			 'The javaTypePattern type owner (if possible)').
 
 	"do not use TDeclaration and TWithDeclaration on purpose: what a compilation unit can contain is strict"
 	((compilationUnit property: #packageDeclaration) comment:
