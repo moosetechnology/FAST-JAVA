@@ -28,7 +28,7 @@ JavaSmaCCAssignementTest >> testAssignementOperator [
 	sortedAssignements := (fastModel allWithType: FASTJavaAssignmentExpression)
 		sorted: [ :a :b | a startPos < b startPos ].
 
-	sortedAssignements allButLast do: [ :assign |
+	sortedAssignements entities allButLast do: [ :assign |
 		self assert: assign operator equals: '='
 	].
 
@@ -37,31 +37,41 @@ JavaSmaCCAssignementTest >> testAssignementOperator [
 
 { #category : #tests }
 JavaSmaCCAssignementTest >> testAssignmentInArrayAccess [
-	(fastModel allWithType: FASTJavaAssignmentExpression) detect:  [ :assignment | assignment expression class = FASTJavaFloatLiteral ]
-		 ifFound: [ :assignment | self assert: assignment variable class equals: FASTJavaArrayAccess ] ifNone: [ self fail ].
+
+	(fastModel allWithType: FASTJavaAssignmentExpression) entities
+		detect: [ :assignment |
+		assignment expression class = FASTJavaFloatLiteral ]
+		ifFound: [ :assignment |
+			self assert: assignment variable class equals: FASTJavaArrayAccess ]
+		ifNone: [ self fail ]
 ]
 
 { #category : #tests }
 JavaSmaCCAssignementTest >> testAssignmentInFieldAccess [
-	(fastModel allWithType: FASTJavaAssignmentExpression) detect:  [ :assignment | assignment expression class = FASTJavaIntegerLiteral ]
-		 ifFound: [ :assignment | self assert: assignment variable class equals: FASTJavaFieldAccess ] ifNone: [ self fail ]
+
+	(fastModel allWithType: FASTJavaAssignmentExpression) entities
+		detect: [ :assignment |
+		assignment expression class = FASTJavaIntegerLiteral ]
+		ifFound: [ :assignment |
+			self assert: assignment variable class equals: FASTJavaFieldAccess ]
+		ifNone: [ self fail ]
 ]
 
 { #category : #tests }
 JavaSmaCCAssignementTest >> testAssignmentParameter [
-	(fastModel allWithType: FASTJavaAssignmentExpression)
+	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment | assignment expression name = 'navView' ]
 		ifFound: [ :assignment | self assert: assignment variable name equals: 'navPanel' ]
 		ifNone: [ self fail ].
-	(fastModel allWithType: FASTJavaAssignmentExpression)
+	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment | assignment expression name = 'deviceView' ]
 		ifFound: [ :assignment | self assert: assignment variable name equals: 'devicePanel' ]
 		ifNone: [ self fail ].
-	(fastModel allWithType: FASTJavaAssignmentExpression)
+	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment | assignment expression name = 'mapView' ]
 		ifFound: [ :assignment | self assert: assignment variable name equals: 'mapPanel' ]
 		ifNone: [ self fail ].
-	(fastModel allWithType: FASTJavaAssignmentExpression)
+	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment | assignment expression name = 'archiveView' ]
 		ifFound: [ :assignment | self assert: assignment variable name equals: 'archivePanel' ]
 		ifNone: [ self fail ]

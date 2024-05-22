@@ -13,6 +13,7 @@ I am an abstract class representing a type
 | `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaEnumDeclaration` | The enum that implements me|
 | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaInterfaceDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaInterfaceDeclaration` | The interface that extends me|
+| `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
 
 
 
@@ -21,12 +22,13 @@ Class {
 	#name : #FASTJavaTypeExpression,
 	#superclass : #FASTJavaVariableExpression,
 	#instVars : [
-		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
-		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
 		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
+		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
 		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
-		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces'
+		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
+		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces',
+		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
@@ -184,4 +186,29 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnerGroup [
 	<generated>
 	<navigation: 'JavaInterfaceDeclarationInterfaceOwner'>
 	^ MooseSpecializedGroup with: self javaInterfaceDeclarationInterfaceOwner
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaTypePatternTypeOwner [
+	"Relation named: #javaTypePatternTypeOwner type: #FASTJavaTypePattern opposite: #type"
+
+	<generated>
+	<FMComment: 'The javaTypePattern type owner (if possible)'>
+	<container>
+	<derived>
+	^ javaTypePatternTypeOwner
+]
+
+{ #category : #accessing }
+FASTJavaTypeExpression >> javaTypePatternTypeOwner: anObject [
+
+	<generated>
+	javaTypePatternTypeOwner := anObject
+]
+
+{ #category : #navigation }
+FASTJavaTypeExpression >> javaTypePatternTypeOwnerGroup [
+	<generated>
+	<navigation: 'JavaTypePatternTypeOwner'>
+	^ MooseSpecializedGroup with: self javaTypePatternTypeOwner
 ]

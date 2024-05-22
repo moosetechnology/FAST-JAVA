@@ -5,6 +5,7 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `javaVariableAssignmentOwner` | `FASTJavaTAssignable` | `variable` | `FASTJavaTWithAssignable` | The owner of the assignment|
 | `namespaceOwner` | `FASTJavaQualifiedName` | `namespace` | `FASTJavaQualifiedName` | The namespace I qualify|
@@ -14,11 +15,6 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `namespace` | `FASTJavaQualifiedName` | `namespaceOwner` | `FASTJavaQualifiedName` | The namespace that qualifies me|
-
-### Other
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 
 
 ## Properties
