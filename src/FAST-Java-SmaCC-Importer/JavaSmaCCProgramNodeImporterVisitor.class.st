@@ -1216,7 +1216,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 		addToModel:
 			(aSwitchBlockStatementGroup labels anyOne class = JavaSwitchLabelNode
 				ifTrue: [ FASTJavaLabeledCaseStatement new
-						label: (self clone accept: aSwitchBlockStatementGroup labels anyOne constant);
+						label: (self clone accept: aSwitchBlockStatementGroup labels anyOne constants anyOne);
 						yourself ]
 				ifFalse: [ FASTJavaDefaultCaseStatement new ]).
 	self setStartEndPos: aSwitchBlockStatementGroup.
