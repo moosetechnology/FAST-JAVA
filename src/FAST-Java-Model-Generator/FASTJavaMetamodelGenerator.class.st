@@ -712,108 +712,108 @@ while(...) {
 FASTJavaMetamodelGenerator >> defineClasses [
 	super defineClasses.
 	
-	javaEntity  := builder newClassNamed: #Entity.
+	javaEntity  := self newClassNamed: #Entity.
 
-	javaComment := builder newClassNamed: #Comment comment: self commentForJavaComment.
-	javaFieldAccess := builder newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
-	javaIdentifier := builder newClassNamed: #Identifier comment: self commentForJavaIdentifier.
-	javaInfixOperation := builder newClassNamed: #InfixOperation comment: self commentForJavaInfixOperation.
-	javaMethodEntity := builder newClassNamed: #MethodEntity comment: self commentForJavaMethodEntity.
-	javaMethodInvocation := builder newClassNamed: #MethodInvocation comment: self commentForJavaMethodInvocation.
-	javaThis := builder newClassNamed: #This comment: self commentForJavaThis.
-	javaOuterThis := builder newClassNamed: #OuterThis comment: self commentForJavaOuterThis.
-	javaVariableDeclarator := builder newClassNamed: #VariableDeclarator comment: self commentForJavaVariableDeclarator.
-	javaClassProperty := builder newClassNamed: #ClassProperty comment: self commentForJavaClassProperty.
-	javaNewArray := builder newClassNamed: #NewArray comment: self commentForJavaNewArray.
-	javaArrayAccess := builder newClassNamed: #ArrayAccess comment: self commentForJavaArrayAccess.
-	javaInitializer := builder newClassNamed: #Initializer comment: self commentForJavaInitializer.
-	javaArrayInitializer :=  builder newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
-	javaModifier := builder newClassNamed: #Modifier comment: self commentForJavaModifier.	
-	javaEnumConstant := builder newClassNamed: #EnumConstant.
+	javaComment := self newClassNamed: #Comment comment: self commentForJavaComment.
+	javaFieldAccess := self newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
+	javaIdentifier := self newClassNamed: #Identifier comment: self commentForJavaIdentifier.
+	javaInfixOperation := self newClassNamed: #InfixOperation comment: self commentForJavaInfixOperation.
+	javaMethodEntity := self newClassNamed: #MethodEntity comment: self commentForJavaMethodEntity.
+	javaMethodInvocation := self newClassNamed: #MethodInvocation comment: self commentForJavaMethodInvocation.
+	javaThis := self newClassNamed: #This comment: self commentForJavaThis.
+	javaOuterThis := self newClassNamed: #OuterThis comment: self commentForJavaOuterThis.
+	javaVariableDeclarator := self newClassNamed: #VariableDeclarator comment: self commentForJavaVariableDeclarator.
+	javaClassProperty := self newClassNamed: #ClassProperty comment: self commentForJavaClassProperty.
+	javaNewArray := self newClassNamed: #NewArray comment: self commentForJavaNewArray.
+	javaArrayAccess := self newClassNamed: #ArrayAccess comment: self commentForJavaArrayAccess.
+	javaInitializer := self newClassNamed: #Initializer comment: self commentForJavaInitializer.
+	javaArrayInitializer :=  self newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
+	javaModifier := self newClassNamed: #Modifier comment: self commentForJavaModifier.	
+	javaEnumConstant := self newClassNamed: #EnumConstant.
 
-	javaLambdaExpression := builder newClassNamed: #LambdaExpression comment: 'I represent a lambda expression'.
-	javaMethodReference := builder newClassNamed: #MethodReference comment: 'I represent a method reference'.
-	javaSynchronizedStatement := builder newClassNamed: #SynchronizedStatement comment: 'I represent a ''synchronized'' statement'.
+	javaLambdaExpression := self newClassNamed: #LambdaExpression comment: 'I represent a lambda expression'.
+	javaMethodReference := self newClassNamed: #MethodReference comment: 'I represent a method reference'.
+	javaSynchronizedStatement := self newClassNamed: #SynchronizedStatement comment: 'I represent a ''synchronized'' statement'.
 
 	"type name"
-	javaTypeName := builder newClassNamed: #TypeName comment: 'I represent the name of a type'.
-	javaQualifiedTypeName := builder newClassNamed: #QualifiedTypeName comment: self commentForJavaQualifiedTypeName.
+	javaTypeName := self newClassNamed: #TypeName comment: 'I represent the name of a type'.
+	javaQualifiedTypeName := self newClassNamed: #QualifiedTypeName comment: self commentForJavaQualifiedTypeName.
 
 	"literals"
-	javaLiteral := builder newClassNamed: #Literal comment: 'abtract class for all literals'.
-	javaCharacterLiteral := builder newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
-	javaFloatLiteral := builder newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
-	javaIntegerLiteral := builder newClassNamed: #IntegerLiteral comment: self commentForJavaIntegerLiteral.
-	javaNullLiteral := builder newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
-	javaStringLiteral := builder newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
-	javaBooleanLiteral := builder newClassNamed: #BooleanLiteral comment: self commentForJavaBooleanLiteral.
-	javaLongLiteral := builder newClassNamed: #LongLiteral comment: self commentForJavaLongLiteral.
-	javaDoubleLiteral := builder newClassNamed: #DoubleLiteral comment: self commentForJavaDoubleLiteral.
+	javaLiteral := self newClassNamed: #Literal comment: 'abtract class for all literals'.
+	javaCharacterLiteral := self newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
+	javaFloatLiteral := self newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
+	javaIntegerLiteral := self newClassNamed: #IntegerLiteral comment: self commentForJavaIntegerLiteral.
+	javaNullLiteral := self newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
+	javaStringLiteral := self newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
+	javaBooleanLiteral := self newClassNamed: #BooleanLiteral comment: self commentForJavaBooleanLiteral.
+	javaLongLiteral := self newClassNamed: #LongLiteral comment: self commentForJavaLongLiteral.
+	javaDoubleLiteral := self newClassNamed: #DoubleLiteral comment: self commentForJavaDoubleLiteral.
 
 	"type expressions"
-	javaTypeExpression := builder newClassNamed: #TypeExpression comment: 'I am an abstract class representing a type'.
-	javaArrayTypeExpression := builder newClassNamed: #ArrayTypeExpression comment: 'I represent an array type'.
-	javaClassTypeExpression := builder newClassNamed: #ClassTypeExpression comment: 'I represent a class type'.
-	javaPrimitiveTypeExpression := builder newClassNamed: #PrimitiveTypeExpression comment: 'I represent a primitive type'.
-	javaTypeParameter := builder newClassNamed: #TypeParameterExpression comment: 'I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`'.
+	javaTypeExpression := self newClassNamed: #TypeExpression comment: 'I am an abstract class representing a type'.
+	javaArrayTypeExpression := self newClassNamed: #ArrayTypeExpression comment: 'I represent an array type'.
+	javaClassTypeExpression := self newClassNamed: #ClassTypeExpression comment: 'I represent a class type'.
+	javaPrimitiveTypeExpression := self newClassNamed: #PrimitiveTypeExpression comment: 'I represent a primitive type'.
+	javaTypeParameter := self newClassNamed: #TypeParameterExpression comment: 'I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`'.
 
 	"primitive type expressions"
-	javaBooleanTypeExpression := builder newClassNamed: #BooleanTypeExpression comment: 'I represent a boolean type'.
-	javaByteTypeExpression := builder newClassNamed: #ByteTypeExpression comment: 'I represent a byte type'.
-	javaCharTypeExpression := builder newClassNamed: #CharTypeExpression comment: 'I represent a char type'.
-	javaDoubleTypeExpression := builder newClassNamed: #DoubleTypeExpression comment: 'I represent a double type'.
-	javaFloatTypeExpression := builder newClassNamed: #FloatTypeExpression comment: 'I represent a float type'.
-	javaIntTypeExpression := builder newClassNamed: #IntTypeExpression comment: 'I represent an int type'.
-	javaLongTypeExpression := builder newClassNamed: #LongTypeExpression comment: 'I represent a long type'.
-	javaShortTypeExpression := builder newClassNamed: #ShortTypeExpression comment: 'I represent a short type'.
-	javaVoidTypeExpression := builder newClassNamed: #VoidTypeExpression comment: 'I represent a short type'.
+	javaBooleanTypeExpression := self newClassNamed: #BooleanTypeExpression comment: 'I represent a boolean type'.
+	javaByteTypeExpression := self newClassNamed: #ByteTypeExpression comment: 'I represent a byte type'.
+	javaCharTypeExpression := self newClassNamed: #CharTypeExpression comment: 'I represent a char type'.
+	javaDoubleTypeExpression := self newClassNamed: #DoubleTypeExpression comment: 'I represent a double type'.
+	javaFloatTypeExpression := self newClassNamed: #FloatTypeExpression comment: 'I represent a float type'.
+	javaIntTypeExpression := self newClassNamed: #IntTypeExpression comment: 'I represent an int type'.
+	javaLongTypeExpression := self newClassNamed: #LongTypeExpression comment: 'I represent a long type'.
+	javaShortTypeExpression := self newClassNamed: #ShortTypeExpression comment: 'I represent a short type'.
+	javaVoidTypeExpression := self newClassNamed: #VoidTypeExpression comment: 'I represent a short type'.
 
 	"expressions"
-	javaUnaryExpression := builder newClassNamed: #UnaryExpression comment: self commentForJavaUnaryExpression.
-	javaNewExpression := builder newClassNamed: #NewExpression comment: self commentForJavaNewExpression.
-	javaNewClassExpression := builder newClassNamed: #NewClassExpression comment: self commentForJavaNewClassExpression.
-	javaAssignmentExpression := builder newClassNamed: #AssignmentExpression comment: self commentForJavaAssignmentExpression.
-	javaCastExpression := builder newClassNamed: #CastExpression comment: 'I represent a cast expression, e.g. `(int) 0.5`'.
-	javaParameterExpression := builder newClassNamed: #Parameter comment: 'I represent a parameter of a method declaration'.
-	javaConditionalExpression := builder newClassNamed: #ConditionalExpression comment: self commentForJavaConditionalStatement.
-	javaVariableExpression := builder newClassNamed: #VariableExpression.
-	javaEmptyDimExpression := builder newClassNamed: #EmptyDimExpression comment: self commentForJavaEmptyDimExpression.
-	javaAnnotationExpression := builder newClassNamed: #Annotation comment: self commentForJavaAnnotation.
-	javaArrayAnnotationElement := builder newClassNamed: #ArrayAnnotationElement comment: 'I represent an array as argument of an annotationExpression'.
-	javaTypePattern := builder newClassNamed: #TypePattern comment: self commentForJavaTypePattern.
+	javaUnaryExpression := self newClassNamed: #UnaryExpression comment: self commentForJavaUnaryExpression.
+	javaNewExpression := self newClassNamed: #NewExpression comment: self commentForJavaNewExpression.
+	javaNewClassExpression := self newClassNamed: #NewClassExpression comment: self commentForJavaNewClassExpression.
+	javaAssignmentExpression := self newClassNamed: #AssignmentExpression comment: self commentForJavaAssignmentExpression.
+	javaCastExpression := self newClassNamed: #CastExpression comment: 'I represent a cast expression, e.g. `(int) 0.5`'.
+	javaParameterExpression := self newClassNamed: #Parameter comment: 'I represent a parameter of a method declaration'.
+	javaConditionalExpression := self newClassNamed: #ConditionalExpression comment: self commentForJavaConditionalStatement.
+	javaVariableExpression := self newClassNamed: #VariableExpression.
+	javaEmptyDimExpression := self newClassNamed: #EmptyDimExpression comment: self commentForJavaEmptyDimExpression.
+	javaAnnotationExpression := self newClassNamed: #Annotation comment: self commentForJavaAnnotation.
+	javaArrayAnnotationElement := self newClassNamed: #ArrayAnnotationElement comment: 'I represent an array as argument of an annotationExpression'.
+	javaTypePattern := self newClassNamed: #TypePattern comment: self commentForJavaTypePattern.
 
 	"statements"
-	javaStatement := builder newClassNamed: #Statement.
-	javaIfStatement := builder newClassNamed: #IfStatement comment: self commentForJavaIfStatement.
-	javaForStatement := builder newClassNamed: #ForStatement comment: self commentForJavaForStatement.
-	javaBreakStatement := builder newClassNamed: #BreakStatement comment: self commentForJavaBreakStatement.
-	javaSwitchStatement := builder newClassNamed: #SwitchStatement comment: self commentForJavaSwitchStatement.
-	javaCaseStatement := builder newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
-	javaContinueStatement := builder newClassNamed: #ContinueStatement comment: self commentForJavaContinueStatement.
-	javaWhileStatement := builder newClassNamed: #WhileStatement comment: self commentForJavaWhileStatement.
-	javaDoWhileStatement := builder newClassNamed: #DoWhileStatement comment: self commentForJavaDoWhileStatement.
-	javaThrowStatement := builder newClassNamed: #ThrowStatement comment: self commentForJavaThrowStatement.
-	javaTryCatchStatement := builder newClassNamed: #TryCatchStatement comment: self commentForJavaTryCatchStatement.
-	javaCatchPartStatement := builder newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
-	javaForEachStatement := builder newClassNamed: #ForEachStatement comment: self commentForJavaForEachStatement.
-	javaLabeledCaseStatement := builder newClassNamed: #LabeledCaseStatement comment: self commentForJavaLabeledCaseStatement.
-	javaDefaultCaseStatement := builder newClassNamed: #DefaultCaseStatement comment: self commentForJavaDefaultCaseStatement.
-	javaVarDeclStatement := builder newClassNamed: #VarDeclStatement comment: self commentForJavaVarDeclStatement.
-	javaAssertStatement := builder newClassNamed: #AssertStatement comment: self commentForAssertStatement. 
-	javaStatementBlock := builder newClassNamed: #StatementBlock.
-	javaReturnStatement := builder newClassNamed: #ReturnStatement.
-	javaExpressionStatement := builder newClassNamed: #ExpressionStatement.
-	javaLabeledStatement := builder newClassNamed: #LabeledStatement.
+	javaStatement := self newClassNamed: #Statement.
+	javaIfStatement := self newClassNamed: #IfStatement comment: self commentForJavaIfStatement.
+	javaForStatement := self newClassNamed: #ForStatement comment: self commentForJavaForStatement.
+	javaBreakStatement := self newClassNamed: #BreakStatement comment: self commentForJavaBreakStatement.
+	javaSwitchStatement := self newClassNamed: #SwitchStatement comment: self commentForJavaSwitchStatement.
+	javaCaseStatement := self newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
+	javaContinueStatement := self newClassNamed: #ContinueStatement comment: self commentForJavaContinueStatement.
+	javaWhileStatement := self newClassNamed: #WhileStatement comment: self commentForJavaWhileStatement.
+	javaDoWhileStatement := self newClassNamed: #DoWhileStatement comment: self commentForJavaDoWhileStatement.
+	javaThrowStatement := self newClassNamed: #ThrowStatement comment: self commentForJavaThrowStatement.
+	javaTryCatchStatement := self newClassNamed: #TryCatchStatement comment: self commentForJavaTryCatchStatement.
+	javaCatchPartStatement := self newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
+	javaForEachStatement := self newClassNamed: #ForEachStatement comment: self commentForJavaForEachStatement.
+	javaLabeledCaseStatement := self newClassNamed: #LabeledCaseStatement comment: self commentForJavaLabeledCaseStatement.
+	javaDefaultCaseStatement := self newClassNamed: #DefaultCaseStatement comment: self commentForJavaDefaultCaseStatement.
+	javaVarDeclStatement := self newClassNamed: #VarDeclStatement comment: self commentForJavaVarDeclStatement.
+	javaAssertStatement := self newClassNamed: #AssertStatement comment: self commentForAssertStatement. 
+	javaStatementBlock := self newClassNamed: #StatementBlock.
+	javaReturnStatement := self newClassNamed: #ReturnStatement.
+	javaExpressionStatement := self newClassNamed: #ExpressionStatement.
+	javaLabeledStatement := self newClassNamed: #LabeledStatement.
 	
 	"declarations"
-	javaClassDeclaration := builder newClassNamed: #ClassDeclaration comment: self commentForJavaClassDeclaration.
-	javaEnumDeclaration := builder newClassNamed: #EnumDeclaration comment: self commentForJavaEnumDeclaration.
-	javaInterfaceDeclaration := builder newClassNamed: #InterfaceDeclaration comment: self commentForJavaInterfaceDeclaration.
-	javaEmptyMethodDeclaration := builder newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
-	compilationUnit := builder newClassNamed: #CompilationUnit comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and types'.
-	packageDeclaration := builder newClassNamed: #PackageDeclaration comment: 'I represent a package declaration, e.g. `package fr.inria;`'.
-	importDeclaration := builder newClassNamed: #ImportDeclaration comment: 'I represent an import declaration, e.g. `import java.util.List;`'.
-	qualifiedName := builder newClassNamed: #QualifiedName.
+	javaClassDeclaration := self newClassNamed: #ClassDeclaration comment: self commentForJavaClassDeclaration.
+	javaEnumDeclaration := self newClassNamed: #EnumDeclaration comment: self commentForJavaEnumDeclaration.
+	javaInterfaceDeclaration := self newClassNamed: #InterfaceDeclaration comment: self commentForJavaInterfaceDeclaration.
+	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
+	compilationUnit := self newClassNamed: #CompilationUnit comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and types'.
+	packageDeclaration := self newClassNamed: #PackageDeclaration comment: 'I represent a package declaration, e.g. `package fr.inria;`'.
+	importDeclaration := self newClassNamed: #ImportDeclaration comment: 'I represent an import declaration, e.g. `import java.util.List;`'.
+	qualifiedName := self newClassNamed: #QualifiedName.
 ]
 
 { #category : #definition }
@@ -1486,21 +1486,21 @@ FASTJavaMetamodelGenerator >> defineRelations [
 FASTJavaMetamodelGenerator >> defineTraits [
 	super defineTraits. 
 
-	tDeclaration := builder newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
-	tWithDeclarations := builder newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
+	tDeclaration := self newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
+	tWithDeclarations := self newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
 	
-	tModifier := builder newTraitNamed: #TModifier comment: self commentForJavaTModifier. 
-	tWithModifiers := builder newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
+	tModifier := self newTraitNamed: #TModifier comment: self commentForJavaTModifier. 
+	tWithModifiers := self newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
 	
-	tAssignable := builder newTraitNamed: #TAssignable comment: self commentForJavaTAssignable. 
-	tWithAssignable := builder newTraitNamed: #TWithAssignable comment: 'I have an assignable'.
+	tAssignable := self newTraitNamed: #TAssignable comment: self commentForJavaTAssignable. 
+	tWithAssignable := self newTraitNamed: #TWithAssignable comment: 'I have an assignable'.
 	
-	tReceiver := builder newTraitNamed: #TReceiver comment: 'I receive a message from someone'.
-	tWithReceiver := builder newTraitNamed: #TWithReceiver comment: 'I can send a message to someone'.
+	tReceiver := self newTraitNamed: #TReceiver comment: 'I receive a message from someone'.
+	tWithReceiver := self newTraitNamed: #TWithReceiver comment: 'I can send a message to someone'.
 	
-	tWithQualifiedName := builder newTraitNamed: #TWithQualifiedName comment: 'I have a qualified name.'.
+	tWithQualifiedName := self newTraitNamed: #TWithQualifiedName comment: 'I have a qualified name.'.
 
-	tAnnotationElement := builder newTraitNamed: #TAnnotationElement comment: 'I can be used as an annotation "argument" eg: @SuppressWarnings(value="unchecked")
+	tAnnotationElement := self newTraitNamed: #TAnnotationElement comment: 'I can be used as an annotation "argument" eg: @SuppressWarnings(value="unchecked")
 	Acceptable annotation elements are: literal, Enum constant, Annotation, Class, an array of the preceding (out of laziness we use ArrayInitializer which is too permissive)'.
 	
 	"From FAST"
