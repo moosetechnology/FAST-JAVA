@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfFASTJava }
+Package { #name : 'BaselineOfFASTJava' }
