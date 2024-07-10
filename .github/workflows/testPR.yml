@@ -27,8 +27,19 @@ jobs:
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         shell: bash
         timeout-minutes: 15
-     
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Coveralls for ${{ matrix.smalltalk }}
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: ${{ github.ref_name }}-${{ matrix.smalltalk }}
+          parallel: true
+     
+  finish-coveralls:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Finish Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
