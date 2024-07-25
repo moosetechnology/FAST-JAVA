@@ -1,5 +1,14 @@
 "
-I represent a cast expression, e.g. `(int) 0.5`
+This code element defines a type pattern, introduced in Java 16 by [JEP 394](https://openjdk.java.net/jeps/394).
+Example:
+```language=text
+	Object obj = null;
+	boolean longerThanTwo = false;
+	// String s is the type pattern, declaring a local variable
+	if (obj instanceof String s) {
+		longerThanTwo = s.length() > 2;
+	}
+```
 
 ## Relations
 ======================
@@ -37,7 +46,6 @@ I represent a cast expression, e.g. `(int) 0.5`
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
-| `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
 | `returnOwner` | `FASTTExpression` | `expression` | `FASTTReturnStatement` | The return statement that own the expression (if it's the case)|
 | `switchConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchStatement` | I represent a condition for my owner|
 | `whileConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaWhileStatement` | I represent a condition for my owner|
@@ -45,8 +53,8 @@ I represent a cast expression, e.g. `(int) 0.5`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `expression` | `FASTJavaCastExpression` | `javaCastExpressionOwner` | `FASTTExpression` | The expression to cast|
-| `type` | `FASTJavaCastExpression` | `javaCastExpressionTypeOwner` | `FASTJavaVariableExpression` | The type into which the expression will be cast|
+| `type` | `FASTJavaTypePattern` | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | The type of the declared variable|
+| `variable` | `FASTJavaTypePattern` | `javaTypePatternVariableOwner` | `FASTJavaVariableExpression` | The local variable declared by this type pattern|
 
 
 ## Properties
@@ -59,75 +67,68 @@ I represent a cast expression, e.g. `(int) 0.5`
 
 "
 Class {
-	#name : #FASTJavaCastExpression,
+	#name : #FASTJavaTypePattern,
 	#superclass : #FASTJavaEntity,
-	#traits : 'FASTJavaTReceiver + FASTTExpression',
-	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#instVars : [
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner'
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner',
+		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner'
 	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
 { #category : #meta }
-FASTJavaCastExpression class >> annotation [
+FASTJavaTypePattern class >> annotation [
 
-	<FMClass: #CastExpression super: #FASTJavaEntity>
+	<FMClass: #TypePattern super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
 ]
 
 { #category : #accessing }
-FASTJavaCastExpression >> expression [
-	"Relation named: #expression type: #FASTTExpression opposite: #javaCastExpressionOwner"
+FASTJavaTypePattern >> type [
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner"
 
 	<generated>
-	<FMComment: 'The expression to cast'>
-	<FMProperty: #expression type: #FASTTExpression opposite: #javaCastExpressionOwner>
-	^ self attributeAt: #expression ifAbsent: [ nil ]
-]
-
-{ #category : #accessing }
-FASTJavaCastExpression >> expression: anObject [
-
-	<generated>
-	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self expression.
-		self attributeAt: #expression put: anObject.
-		otherSide javaCastExpressionOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #expression put: anObject.
-		anObject javaCastExpressionOwner: self ]
-]
-
-{ #category : #navigation }
-FASTJavaCastExpression >> expressionGroup [
-	<generated>
-	<navigation: 'Expression'>
-	^ MooseSpecializedGroup with: self expression
-]
-
-{ #category : #accessing }
-FASTJavaCastExpression >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"
-
-	<generated>
-	<FMComment: 'The type into which the expression will be cast'>
+	<FMComment: 'The type of the declared variable'>
 	^ type
 ]
 
 { #category : #accessing }
-FASTJavaCastExpression >> type: anObject [
+FASTJavaTypePattern >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
 { #category : #navigation }
-FASTJavaCastExpression >> typeGroup [
+FASTJavaTypePattern >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
 	^ MooseSpecializedGroup with: self type
+]
+
+{ #category : #accessing }
+FASTJavaTypePattern >> variable [
+	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner"
+
+	<generated>
+	<FMComment: 'The local variable declared by this type pattern'>
+	^ variable
+]
+
+{ #category : #accessing }
+FASTJavaTypePattern >> variable: anObject [
+
+	<generated>
+	variable := anObject
+]
+
+{ #category : #navigation }
+FASTJavaTypePattern >> variableGroup [
+	<generated>
+	<navigation: 'Variable'>
+	^ MooseSpecializedGroup with: self variable
 ]

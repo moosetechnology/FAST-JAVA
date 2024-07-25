@@ -4,7 +4,7 @@ I represent a Java comment (block or line comment)
 ## Relations
 ======================
 
-### Other
+### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `container` | `FASTTComment` | `comments` | `FASTTWithComments` | Source code entity containing the comment|

@@ -9,8 +9,7 @@ I can be used as an annotation ""argument"" eg: @SuppressWarnings(value=""unchec
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
-| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation:
-	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 
 

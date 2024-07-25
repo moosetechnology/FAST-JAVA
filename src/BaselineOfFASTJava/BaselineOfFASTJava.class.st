@@ -85,7 +85,6 @@ BaselineOfFASTJava >> defineGroups: spec [
 BaselineOfFASTJava >> definePackages: spec [
 
 	spec
-		package: 'BaselineOfFASTJava';
 		package: 'FAST-Java-Model' with: [ spec requires: #( 'FAST' ) ];
 		package: 'FAST-Java-Model-Generator';
 		package: 'FAST-Java-Model-Extension'
