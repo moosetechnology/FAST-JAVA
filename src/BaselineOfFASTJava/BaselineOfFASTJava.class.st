@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfFASTJava,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfFASTJava
+	#name : 'BaselineOfFASTJava',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfFASTJava',
+	#package : 'BaselineOfFASTJava'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFASTJava >> baseline: spec [
 	<baseline>
 	spec
@@ -19,7 +20,7 @@ BaselineOfFASTJava >> baseline: spec [
 			self defineGroups: spec ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfFASTJava >> customProjectAttributes [
 
 	^ RPackageOrganizer default packages
@@ -28,7 +29,7 @@ BaselineOfFASTJava >> customProjectAttributes [
 		  ifNone: [ #( #NeedsMoose ) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFASTJava >> defineDependencies: spec [
 
 	spec baseline: 'FAST' with: [ 
@@ -56,13 +57,13 @@ BaselineOfFASTJava >> defineDependencies: spec [
 			with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ] ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFASTJava >> defineGroups: spec [
 
 	spec
 		group: 'core'
 		with:
-			#( 'FAST-Java-Model-Extension' 'FAST-Java-Model' 'FAST-Java-Model-Generator' );
+			#( 'FAST-Java-Model' 'FAST-Java-Model-Extension' 'FAST-Java-Model-Generator' );
 		group: 'tools'
 		with: #( 'visitor' 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
 		group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
@@ -80,11 +81,10 @@ BaselineOfFASTJava >> defineGroups: spec [
 				   'TinyLogger' ) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFASTJava >> definePackages: spec [
 
 	spec
-		repository: 'https://github.com/moosetechnology/FAST';
 		package: 'BaselineOfFASTJava';
 		package: 'FAST-Java-Model' with: [ spec requires: #( 'FAST' ) ];
 		package: 'FAST-Java-Model-Generator';
