@@ -36,6 +36,7 @@ new Button(){
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `isStatic` | `Boolean` | false | Whether this initializer is static|
 | `source` | `String` | nil | Actual source code of the source entity|
 | `startPos` | `Number` | nil | |
 
@@ -45,6 +46,9 @@ Class {
 	#superclass : #FASTJavaEntity,
 	#traits : 'FASTJavaTDeclaration + FASTTScopableEntity + FamixTHasImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTTScopableEntity classTrait + FamixTHasImmediateSource classTrait',
+	#instVars : [
+		'#isStatic => FMProperty defaultValue: false'
+	],
 	#category : #'FAST-Java-Model-Entities'
 }
 
@@ -55,6 +59,21 @@ FASTJavaInitializer class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
+]
+
+{ #category : #accessing }
+FASTJavaInitializer >> isStatic [
+
+	<FMProperty: #isStatic type: #Boolean defaultValue: false>
+	<generated>
+	<FMComment: 'Whether this initializer is static'>
+	^ isStatic ifNil: [ isStatic := false ]
+]
+
+{ #category : #accessing }
+FASTJavaInitializer >> isStatic: anObject [
+	<generated>
+	isStatic := anObject
 ]
 
 { #category : #accessing }

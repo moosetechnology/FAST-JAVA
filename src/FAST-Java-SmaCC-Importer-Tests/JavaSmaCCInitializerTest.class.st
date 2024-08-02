@@ -29,6 +29,11 @@ JavaSmaCCInitializerTest >> testInitializerHasStatementBlockMethodSize [
 ]
 
 { #category : #tests }
+JavaSmaCCInitializerTest >> testInitializerNotStatic [
+	self deny: (fastMethod mooseModel allWithType: FASTJavaInitializer) anyOne isStatic
+]
+
+{ #category : #tests }
 JavaSmaCCInitializerTest >> testInitializerParent [
 	self assert: (fastMethod mooseModel allWithType: FASTJavaInitializer) anyOne parentNode equals: fastMethod statements anyOne declarators anyOne expression
 ]

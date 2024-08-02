@@ -59,7 +59,7 @@ Contains a referances to an assignee assignee and the expression that's being as
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
-| `operator` | `String` | nil | The assignement operator: =, +=, /=, ...|
+| `operator` | `String` | nil | The assignment operator: =, +=, /=, ...|
 | `startPos` | `Number` | nil | |
 
 "
@@ -119,7 +119,7 @@ FASTJavaAssignmentExpression >> operator [
 
 	<FMProperty: #operator type: #String>
 	<generated>
-	<FMComment: 'The assignement operator: =, +=, /=, ...'>
+	<FMComment: 'The assignment operator: =, +=, /=, ...'>
 	^ operator
 ]
 

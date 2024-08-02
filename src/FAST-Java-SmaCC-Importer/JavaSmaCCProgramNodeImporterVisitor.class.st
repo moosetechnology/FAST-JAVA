@@ -1178,6 +1178,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStatementExpressionList: aStatementE
 ]
 
 { #category : #visitor }
+JavaSmaCCProgramNodeImporterVisitor >> visitStaticInitializer: anInitializer [
+	self visitInitializer: anInitializer.
+	currentFASTEntity isStatic: true.
+	^ currentFASTEntity
+]
+
+{ #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitStringLiteral: aStringLiteral [
 	currentFASTEntity := self
 		addToModel:

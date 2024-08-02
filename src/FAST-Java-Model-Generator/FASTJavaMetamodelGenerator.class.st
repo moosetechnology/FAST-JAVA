@@ -1043,8 +1043,8 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 	super defineProperties.
 
-	(javaAssignmentExpression property: #operator type: #String) comment:
-		'The assignement operator: =, +=, /=, ...'.
+	(javaAssignmentExpression property: #operator type: #String)
+		comment: 'The assignment operator: =, +=, /=, ...'.
 
 	(javaFieldAccess property: #fieldName type: #String) comment:
 		'Name of accessed field'.
@@ -1074,7 +1074,12 @@ FASTJavaMetamodelGenerator >> defineProperties [
 		 property: #isOnDemand
 		 type: #Boolean
 		 defaultValue: false) comment:
-		'Whether this import is on-demand (wildcard) or single-type'
+		'Whether this import is on-demand (wildcard) or single-type'.
+
+	(javaInitializer
+		 property: #isStatic
+		 type: #Boolean
+		 defaultValue: false) comment: 'Whether this initializer is static'
 ]
 
 { #category : #definition }
