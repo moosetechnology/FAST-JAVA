@@ -690,6 +690,14 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 
 ]
 
+{ #category : #generated }
+FASTJavaExportVisitor >> visitFASTJavaInitializer: aFASTJavaInitializer [
+
+	self indented: ''.
+	aFASTJavaInitializer isStatic ifTrue: [ self unindented: 'static ' ].
+	self visitFASTTStatementBlock: aFASTJavaInitializer statementBlock
+]
+
 { #category : #'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
 	self checkForComments: aFASTJavaIntTypeExpression andDo: [

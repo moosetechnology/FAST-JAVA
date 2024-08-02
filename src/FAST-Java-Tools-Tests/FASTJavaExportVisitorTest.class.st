@@ -775,6 +775,32 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperationInstanceof [
 '
 ]
 
+{ #category : #'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInitializer [
+
+	| ast |
+	ast := self astFor: 'class C { { } }'.
+
+	self export: ast equals: 'class C {
+  {
+  }
+}
+'
+]
+
+{ #category : #'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInitializerStatic [
+
+	| ast |
+	ast := self astFor: 'class C { static { } }'.
+
+	self export: ast equals: 'class C {
+  static {
+  }
+}
+'
+]
+
 { #category : #'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaIntegerLiteral [
 	| node |
