@@ -64,7 +64,7 @@ FASTJavaExportVisitorTest >> setUp [
 ]
 
 { #category : #'test from source code' }
-FASTJavaExportVisitorTest >> testVisitFASTAssignementInMessageSend [
+FASTJavaExportVisitorTest >> testVisitFASTAssignmentInMessageSend [
 
 	| expr |
 	expr := self methodAST: 'void meth() {
@@ -949,7 +949,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiver [
 ]
 
 { #category : #'test from source code' }
-FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignementExpression [
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignmentExpression [
 
 	| ast |
 	ast := self expressionAST: '(x = "a"+"b").length()'.

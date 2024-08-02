@@ -1,11 +1,11 @@
 Class {
-	#name : #JavaSmaCCAssignementTest,
+	#name : #JavaSmaCCAssignmentTest,
 	#superclass : #JavaSmaCCImporterTest,
 	#category : #'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : #running }
-JavaSmaCCAssignementTest >> javaMethod [
+JavaSmaCCAssignmentTest >> javaMethod [
 	^ 'public ApplicationView(ContentPanel navView,
                            ContentPanel deviceView,
                            ContentPanel mapView,
@@ -20,23 +20,7 @@ JavaSmaCCAssignementTest >> javaMethod [
 ]
 
 { #category : #tests }
-JavaSmaCCAssignementTest >> testAssignementOperator [
-	| sortedAssignements |
-
-	self assert: (fastModel allWithType: FASTJavaAssignmentExpression) size equals: 6.
-
-	sortedAssignements := (fastModel allWithType: FASTJavaAssignmentExpression)
-		sorted: [ :a :b | a startPos < b startPos ].
-
-	sortedAssignements entities allButLast do: [ :assign |
-		self assert: assign operator equals: '='
-	].
-
-	self assert: sortedAssignements last operator equals: '+='
-]
-
-{ #category : #tests }
-JavaSmaCCAssignementTest >> testAssignmentInArrayAccess [
+JavaSmaCCAssignmentTest >> testAssignmentInArrayAccess [
 
 	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment |
@@ -47,7 +31,7 @@ JavaSmaCCAssignementTest >> testAssignmentInArrayAccess [
 ]
 
 { #category : #tests }
-JavaSmaCCAssignementTest >> testAssignmentInFieldAccess [
+JavaSmaCCAssignmentTest >> testAssignmentInFieldAccess [
 
 	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment |
@@ -58,7 +42,23 @@ JavaSmaCCAssignementTest >> testAssignmentInFieldAccess [
 ]
 
 { #category : #tests }
-JavaSmaCCAssignementTest >> testAssignmentParameter [
+JavaSmaCCAssignmentTest >> testAssignmentOperator [
+	| sortedAssignments |
+
+	self assert: (fastModel allWithType: FASTJavaAssignmentExpression) size equals: 6.
+
+	sortedAssignments := (fastModel allWithType: FASTJavaAssignmentExpression)
+		sorted: [ :a :b | a startPos < b startPos ].
+
+	sortedAssignments entities allButLast do: [ :assign |
+		self assert: assign operator equals: '='
+	].
+
+	self assert: sortedAssignments last operator equals: '+='
+]
+
+{ #category : #tests }
+JavaSmaCCAssignmentTest >> testAssignmentParameter [
 	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment | assignment expression name = 'navView' ]
 		ifFound: [ :assignment | self assert: assignment variable name equals: 'navPanel' ]
@@ -78,13 +78,13 @@ JavaSmaCCAssignementTest >> testAssignmentParameter [
 ]
 
 { #category : #tests }
-JavaSmaCCAssignementTest >> testExpressionParentNode [
+JavaSmaCCAssignmentTest >> testExpressionParentNode [
 	self assert: (fastModel allWithType: FASTJavaAssignmentExpression) size equals: 6.
 	(fastModel allWithType: FASTJavaAssignmentExpression) do: [ :assignment | self assert: assignment expression parentNode equals: assignment ]
 ]
 
 { #category : #tests }
-JavaSmaCCAssignementTest >> testVariableParentNode [
+JavaSmaCCAssignmentTest >> testVariableParentNode [
 	self assert: (fastModel allWithType: FASTJavaAssignmentExpression) size equals: 6.
 	(fastModel allWithType: FASTJavaAssignmentExpression) do: [ :assignment | self assert: assignment variable parentNode equals: assignment ]
 ]

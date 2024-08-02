@@ -318,11 +318,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAssertStatement: anAssertStatement [
 ]
 
 { #category : #visitor }
-JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: anAssignementExpression [
-	currentFASTEntity := self create: FASTJavaAssignmentExpression from: anAssignementExpression.
-	currentFASTEntity operator: anAssignementExpression op value.
-	currentFASTEntity variable: (self clone accept: anAssignementExpression variable).
-	currentFASTEntity expression: (self clone accept: anAssignementExpression value).
+JavaSmaCCProgramNodeImporterVisitor >> visitAssignment: anAssignmentExpression [
+	currentFASTEntity := self create: FASTJavaAssignmentExpression from: anAssignmentExpression.
+	currentFASTEntity operator: anAssignmentExpression op value.
+	currentFASTEntity variable: (self clone accept: anAssignmentExpression variable).
+	currentFASTEntity expression: (self clone accept: anAssignmentExpression value).
 	^ currentFASTEntity
 ]
 
@@ -545,7 +545,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitElementArrayInitializer: anElementAr
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitElementValuePair: anElementValuePair [
 	"'key = value' as argument of an Annotation
-	 treat it as an Assignement Expression"
+	 treat it as an Assignment Expression"
 
 	currentFASTEntity := self create: FASTJavaAssignmentExpression from: anElementValuePair.
 	currentFASTEntity variable: (self clone visitVariableName: anElementValuePair).

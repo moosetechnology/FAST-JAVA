@@ -852,7 +852,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIfStatement --|> tStatement.
 
 	javaArrayAnnotationElement --|> tAnnotationElement.
-	javaArrayAnnotationElement --|> tExpression. "because annotationElement=value are modeled as assignement expression"
+	javaArrayAnnotationElement --|> tExpression. "because annotationElement=value are modeled as assignment expression"
 
 	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
 	javaLiteral --|> tReceiver.
