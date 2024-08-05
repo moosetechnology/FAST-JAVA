@@ -55,7 +55,7 @@ JavaSmaCCParamsMethodTest >> testFirstParameterName [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testFourthParameterName [
-	self assert: fastMethod parameters fourth variable name equals: 'etc'
+	self assert: fastMethod parameters last variable name equals: 'etc'
 ]
 
 { #category : #tests }
@@ -63,7 +63,7 @@ JavaSmaCCParamsMethodTest >> testHasVariableArguments [
 	self deny: fastMethod parameters first hasVariableArguments.
 	self deny: fastMethod parameters second hasVariableArguments.
 	self deny: fastMethod parameters third hasVariableArguments.
-	self assert: fastMethod parameters fourth hasVariableArguments
+	self assert: fastMethod parameters last hasVariableArguments
 ]
 
 { #category : #tests }
