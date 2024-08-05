@@ -953,11 +953,13 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 			ifNotNil: [ :parameterType |
 				"Lambda parameters may be typeless"
 				parameterType accept: self.
+				aFASTJavaParameter hasVariableArguments ifTrue: [
+					self unindented: '...'
+				].
 				self space
 			].
 		aFASTJavaParameter variable accept: self
 	]
-
 ]
 
 { #category : #visiting }

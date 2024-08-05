@@ -1024,6 +1024,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaOuterThis [
 '
 ]
 
+{ #category : #'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaParameter [
+
+	| ast |
+	ast := self methodAST: 'void mth(String first, int... etc) {}'.
+	self export: ast equals: 'void mth(String first, int... etc) {
+}
+'
+]
+
 { #category : #'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaPostIncrementAndSum [
 

@@ -7,7 +7,7 @@ Class {
 { #category : #resources }
 JavaSmaCCParamsMethodTest >> javaMethod [
 	
-	^ 'void params(int a, float b, double c) {
+	^ 'void params(int a, float b, double c, int... etc) {
 		x = a + b + c;
 	}'
 ]
@@ -23,7 +23,7 @@ JavaSmaCCParamsMethodTest >> testBlockScope [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testExpressionParent [
-	self assert: fastMethod statements first expression parentNode equals: fastMethod statements first  
+	self assert: fastMethod statements first expression parentNode equals: fastMethod statements first
 ]
 
 { #category : #tests }
@@ -50,12 +50,25 @@ JavaSmaCCParamsMethodTest >> testExpressionType [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testFirstParameterName [
-	self assert: fastMethod parameters first variable name equals: 'a'.
+	self assert: fastMethod parameters first variable name equals: 'a'
+]
+
+{ #category : #tests }
+JavaSmaCCParamsMethodTest >> testFourthParameterName [
+	self assert: fastMethod parameters fourth variable name equals: 'etc'
+]
+
+{ #category : #tests }
+JavaSmaCCParamsMethodTest >> testHasVariableArguments [
+	self deny: fastMethod parameters first hasVariableArguments.
+	self deny: fastMethod parameters second hasVariableArguments.
+	self deny: fastMethod parameters third hasVariableArguments.
+	self assert: fastMethod parameters fourth hasVariableArguments
 ]
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testParametersCount [
-	self assert: fastMethod parameters size equals: 3
+	self assert: fastMethod parameters size equals: 4
 ]
 
 { #category : #tests }
@@ -78,7 +91,7 @@ JavaSmaCCParamsMethodTest >> testScope [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testSecondParameterName [
-	self assert: fastMethod parameters second variable name equals: 'b'.
+	self assert: fastMethod parameters second variable name equals: 'b'
 ]
 
 { #category : #tests }
@@ -88,15 +101,15 @@ JavaSmaCCParamsMethodTest >> testStatementsCount [
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testStatementsParent [
-	self assert: fastMethod statements last parentNode equals: fastMethod statementBlock 
+	self assert: fastMethod statements last parentNode equals: fastMethod statementBlock
 ]
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testStatementsType [
-	self assert: fastMethod statements last class equals: FASTJavaExpressionStatement 
+	self assert: fastMethod statements last class equals: FASTJavaExpressionStatement
 ]
 
 { #category : #tests }
 JavaSmaCCParamsMethodTest >> testThirdParameterName [
-	self assert: fastMethod parameters third variable name equals: 'c'.
+	self assert: fastMethod parameters third variable name equals: 'c'
 ]

@@ -57,6 +57,7 @@ I represent a parameter of a method declaration
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasVariableArguments` | `Boolean` | false | Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)|
 | `name` | `String` | nil | |
 | `startPos` | `Number` | nil | |
 
@@ -67,6 +68,7 @@ Class {
 	#traits : 'FASTTExpression + FASTTVariableEntity',
 	#classTraits : 'FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
+		'#hasVariableArguments => FMProperty defaultValue: false',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
 	],
@@ -80,6 +82,21 @@ FASTJavaParameter class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
+]
+
+{ #category : #accessing }
+FASTJavaParameter >> hasVariableArguments [
+
+	<FMProperty: #hasVariableArguments type: #Boolean defaultValue: false>
+	<generated>
+	<FMComment: 'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'>
+	^ hasVariableArguments ifNil: [ hasVariableArguments := false ]
+]
+
+{ #category : #accessing }
+FASTJavaParameter >> hasVariableArguments: anObject [
+	<generated>
+	hasVariableArguments := anObject
 ]
 
 { #category : #accessing }

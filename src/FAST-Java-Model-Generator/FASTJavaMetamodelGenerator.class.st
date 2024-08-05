@@ -1079,7 +1079,13 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaInitializer
 		 property: #isStatic
 		 type: #Boolean
-		 defaultValue: false) comment: 'Whether this initializer is static'
+		 defaultValue: false) comment: 'Whether this initializer is static'.
+
+	(javaParameterExpression
+		 property: #hasVariableArguments
+		 type: #Boolean
+		 defaultValue: false) comment:
+		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'
 ]
 
 { #category : #definition }

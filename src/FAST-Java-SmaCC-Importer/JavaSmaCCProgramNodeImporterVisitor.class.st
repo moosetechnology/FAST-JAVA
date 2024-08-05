@@ -1386,6 +1386,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnarySubtraction: anUnarySubtraction
 	^ currentFASTEntity
 ]
 
+{ #category : #generated }
+JavaSmaCCProgramNodeImporterVisitor >> visitVariableArgumentParameter: aVariableArgumentParameter [
+	self visitParameter: aVariableArgumentParameter.
+	currentFASTEntity hasVariableArguments: true.
+	^ currentFASTEntity
+]
+
 { #category : #visitor }
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
