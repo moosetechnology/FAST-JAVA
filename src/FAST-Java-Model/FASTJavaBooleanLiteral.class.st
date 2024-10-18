@@ -53,14 +53,16 @@ I represent a boolean literal node.
 
 "
 Class {
-	#name : #FASTJavaBooleanLiteral,
-	#superclass : #FASTJavaLiteral,
+	#name : 'FASTJavaBooleanLiteral',
+	#superclass : 'FASTJavaLiteral',
 	#traits : 'FASTTBooleanLiteral',
 	#classTraits : 'FASTTBooleanLiteral classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaBooleanLiteral class >> annotation [
 
 	<FMClass: #BooleanLiteral super: #FASTJavaLiteral>

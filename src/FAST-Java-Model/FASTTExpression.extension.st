@@ -1,6 +1,6 @@
-Extension { #name : #FASTTExpression }
+Extension { #name : 'FASTTExpression' }
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> assertConditionOwner [
 	"Relation named: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition"
 
@@ -13,7 +13,7 @@ FASTTExpression >> assertConditionOwner [
 	^ self attributeAt: #assertConditionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> assertConditionOwner: anObject [
 
 	<generated>
@@ -27,7 +27,7 @@ FASTTExpression >> assertConditionOwner: anObject [
 		anObject condition: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> conditionalConditionOwner [
 	"Relation named: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition"
 
@@ -40,7 +40,7 @@ FASTTExpression >> conditionalConditionOwner [
 	^ self attributeAt: #conditionalConditionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> conditionalConditionOwner: anObject [
 
 	<generated>
@@ -54,7 +54,7 @@ FASTTExpression >> conditionalConditionOwner: anObject [
 		anObject condition: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> conditionalElsePartOwner [
 	"Relation named: #conditionalElsePartOwner type: #FASTJavaConditionalExpression opposite: #elsePart"
 
@@ -67,7 +67,7 @@ FASTTExpression >> conditionalElsePartOwner [
 	^ self attributeAt: #conditionalElsePartOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> conditionalElsePartOwner: anObject [
 
 	<generated>
@@ -81,7 +81,7 @@ FASTTExpression >> conditionalElsePartOwner: anObject [
 		anObject elsePart: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> conditionalThenPartOwner [
 	"Relation named: #conditionalThenPartOwner type: #FASTJavaConditionalExpression opposite: #thenPart"
 
@@ -94,7 +94,7 @@ FASTTExpression >> conditionalThenPartOwner [
 	^ self attributeAt: #conditionalThenPartOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> conditionalThenPartOwner: anObject [
 
 	<generated>
@@ -108,7 +108,7 @@ FASTTExpression >> conditionalThenPartOwner: anObject [
 		anObject thenPart: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> doConditionOwner [
 	"Relation named: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition"
 
@@ -121,7 +121,7 @@ FASTTExpression >> doConditionOwner [
 	^ self attributeAt: #doConditionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> doConditionOwner: anObject [
 
 	<generated>
@@ -135,7 +135,7 @@ FASTTExpression >> doConditionOwner: anObject [
 		anObject condition: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> forConditionOwner [
 	"Relation named: #forConditionOwner type: #FASTJavaForStatement opposite: #condition"
 
@@ -148,7 +148,7 @@ FASTTExpression >> forConditionOwner [
 	^ self attributeAt: #forConditionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> forConditionOwner: anObject [
 
 	<generated>
@@ -162,7 +162,7 @@ FASTTExpression >> forConditionOwner: anObject [
 		anObject condition: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> ifConditionOwner [
 	"Relation named: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition"
 
@@ -175,7 +175,7 @@ FASTTExpression >> ifConditionOwner [
 	^ self attributeAt: #ifConditionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> ifConditionOwner: anObject [
 
 	<generated>
@@ -189,7 +189,7 @@ FASTTExpression >> ifConditionOwner: anObject [
 		anObject condition: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> infixOperationLeftOperandOwner [
 	"Relation named: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand"
 
@@ -202,7 +202,7 @@ FASTTExpression >> infixOperationLeftOperandOwner [
 	^ self attributeAt: #infixOperationLeftOperandOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> infixOperationLeftOperandOwner: anObject [
 
 	<generated>
@@ -216,7 +216,7 @@ FASTTExpression >> infixOperationLeftOperandOwner: anObject [
 		anObject leftOperand: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> infixOperationRightOperandOwner [
 	"Relation named: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand"
 
@@ -229,7 +229,7 @@ FASTTExpression >> infixOperationRightOperandOwner [
 	^ self attributeAt: #infixOperationRightOperandOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> infixOperationRightOperandOwner: anObject [
 
 	<generated>
@@ -243,7 +243,7 @@ FASTTExpression >> infixOperationRightOperandOwner: anObject [
 		anObject rightOperand: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayAccessOwner [
 	"Relation named: #javaArrayAccessOwner type: #FASTJavaArrayAccess opposite: #expression"
 
@@ -256,7 +256,7 @@ FASTTExpression >> javaArrayAccessOwner [
 	^ self attributeAt: #javaArrayAccessOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayAccessOwner: anObject [
 
 	<generated>
@@ -270,7 +270,7 @@ FASTTExpression >> javaArrayAccessOwner: anObject [
 		anObject expression: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayArrayAccessOwner [
 	"Relation named: #javaArrayArrayAccessOwner type: #FASTJavaArrayAccess opposite: #array"
 
@@ -283,7 +283,7 @@ FASTTExpression >> javaArrayArrayAccessOwner [
 	^ self attributeAt: #javaArrayArrayAccessOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayArrayAccessOwner: anObject [
 
 	<generated>
@@ -297,7 +297,7 @@ FASTTExpression >> javaArrayArrayAccessOwner: anObject [
 		anObject array: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayInitializers [
 	"Relation named: #javaArrayInitializers type: #FASTJavaArrayInitializer opposite: #initializers"
 
@@ -309,14 +309,14 @@ FASTTExpression >> javaArrayInitializers [
 	^ self attributeAt: #javaArrayInitializers ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayInitializers: anObject [
 
 	<generated>
 	self attributeAt: #javaArrayInitializers put: (FMMultivalueLink on: self update: #initializers from: self javaArrayInitializers to: anObject).
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayTypeNameOwner [
 	"Relation named: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType"
 
@@ -329,7 +329,7 @@ FASTTExpression >> javaArrayTypeNameOwner [
 	^ self attributeAt: #javaArrayTypeNameOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaArrayTypeNameOwner: anObject [
 
 	<generated>
@@ -343,7 +343,7 @@ FASTTExpression >> javaArrayTypeNameOwner: anObject [
 		anObject baseType: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaAssignmentExpressionOwner [
 	"Relation named: #javaAssignmentExpressionOwner type: #FASTJavaAssignmentExpression opposite: #expression"
 
@@ -356,7 +356,7 @@ FASTTExpression >> javaAssignmentExpressionOwner [
 	^ self attributeAt: #javaAssignmentExpressionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaAssignmentExpressionOwner: anObject [
 
 	<generated>
@@ -370,7 +370,7 @@ FASTTExpression >> javaAssignmentExpressionOwner: anObject [
 		anObject expression: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaCastExpressionOwner [
 	"Relation named: #javaCastExpressionOwner type: #FASTJavaCastExpression opposite: #expression"
 
@@ -383,7 +383,7 @@ FASTTExpression >> javaCastExpressionOwner [
 	^ self attributeAt: #javaCastExpressionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaCastExpressionOwner: anObject [
 
 	<generated>
@@ -397,7 +397,7 @@ FASTTExpression >> javaCastExpressionOwner: anObject [
 		anObject expression: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaForEachStatementOwner [
 	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #list"
 
@@ -410,7 +410,7 @@ FASTTExpression >> javaForEachStatementOwner [
 	^ self attributeAt: #javaForEachStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaForEachStatementOwner: anObject [
 
 	<generated>
@@ -424,7 +424,7 @@ FASTTExpression >> javaForEachStatementOwner: anObject [
 		anObject list: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaLabeledCaseStatementOwner [
 	"Relation named: #javaLabeledCaseStatementOwner type: #FASTJavaLabeledCaseStatement opposite: #label"
 
@@ -437,7 +437,7 @@ FASTTExpression >> javaLabeledCaseStatementOwner [
 	^ self attributeAt: #javaLabeledCaseStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaLabeledCaseStatementOwner: anObject [
 
 	<generated>
@@ -451,7 +451,7 @@ FASTTExpression >> javaLabeledCaseStatementOwner: anObject [
 		anObject label: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaNewArrayInitialOwner [
 	"Relation named: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer"
 
@@ -464,7 +464,7 @@ FASTTExpression >> javaNewArrayInitialOwner [
 	^ self attributeAt: #javaNewArrayInitialOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaNewArrayInitialOwner: anObject [
 
 	<generated>
@@ -478,7 +478,7 @@ FASTTExpression >> javaNewArrayInitialOwner: anObject [
 		anObject initializer: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaStringAssertStatementOwner [
 	"Relation named: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message"
 
@@ -491,7 +491,7 @@ FASTTExpression >> javaStringAssertStatementOwner [
 	^ self attributeAt: #javaStringAssertStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaStringAssertStatementOwner: anObject [
 
 	<generated>
@@ -505,7 +505,7 @@ FASTTExpression >> javaStringAssertStatementOwner: anObject [
 		anObject message: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #expression"
 
@@ -518,7 +518,7 @@ FASTTExpression >> javaSynchronizedStatementOwner [
 	^ self attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaSynchronizedStatementOwner: anObject [
 
 	<generated>
@@ -532,7 +532,7 @@ FASTTExpression >> javaSynchronizedStatementOwner: anObject [
 		anObject expression: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaThrowStatementOwner [
 	"Relation named: #javaThrowStatementOwner type: #FASTJavaThrowStatement opposite: #expression"
 
@@ -545,7 +545,7 @@ FASTTExpression >> javaThrowStatementOwner [
 	^ self attributeAt: #javaThrowStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaThrowStatementOwner: anObject [
 
 	<generated>
@@ -559,7 +559,7 @@ FASTTExpression >> javaThrowStatementOwner: anObject [
 		anObject expression: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaUnaryExpressionOwner [
 	"Relation named: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression"
 
@@ -572,7 +572,7 @@ FASTTExpression >> javaUnaryExpressionOwner [
 	^ self attributeAt: #javaUnaryExpressionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaUnaryExpressionOwner: anObject [
 
 	<generated>
@@ -586,7 +586,7 @@ FASTTExpression >> javaUnaryExpressionOwner: anObject [
 		anObject expression: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaVariableDeclaratorExpressionOwner [
 	"Relation named: #javaVariableDeclaratorExpressionOwner type: #FASTJavaVariableDeclarator opposite: #expression"
 
@@ -599,7 +599,7 @@ FASTTExpression >> javaVariableDeclaratorExpressionOwner [
 	^ self attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> javaVariableDeclaratorExpressionOwner: anObject [
 
 	<generated>
@@ -613,7 +613,7 @@ FASTTExpression >> javaVariableDeclaratorExpressionOwner: anObject [
 		anObject expression: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> switchConditionOwner [
 	"Relation named: #switchConditionOwner type: #FASTJavaSwitchStatement opposite: #condition"
 
@@ -626,7 +626,7 @@ FASTTExpression >> switchConditionOwner [
 	^ self attributeAt: #switchConditionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> switchConditionOwner: anObject [
 
 	<generated>
@@ -640,7 +640,7 @@ FASTTExpression >> switchConditionOwner: anObject [
 		anObject condition: self ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> whileConditionOwner [
 	"Relation named: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition"
 
@@ -653,7 +653,7 @@ FASTTExpression >> whileConditionOwner [
 	^ self attributeAt: #whileConditionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> whileConditionOwner: anObject [
 
 	<generated>

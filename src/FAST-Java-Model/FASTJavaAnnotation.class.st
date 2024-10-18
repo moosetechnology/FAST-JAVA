@@ -34,17 +34,19 @@ example:
 
 "
 Class {
-	#name : #FASTJavaAnnotation,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaAnnotation',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTJavaTModifier + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTModifier classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaAnnotation class >> annotation [
 
 	<FMClass: #Annotation super: #FASTJavaEntity>
@@ -53,13 +55,13 @@ FASTJavaAnnotation class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaAnnotation >> addElement: anObject [
 	<generated>
 	^ self elements add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAnnotation >> elements [
 	"Relation named: #elements type: #FASTJavaTAnnotationElement opposite: #parentAnnotation"
 
@@ -70,14 +72,14 @@ FASTJavaAnnotation >> elements [
 	^ elements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAnnotation >> elements: anObject [
 
 	<generated>
 	elements value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaAnnotation >> elementsGroup [
 	<generated>
 	<navigation: 'Elements'>

@@ -33,14 +33,16 @@
 
 "
 Class {
-	#name : #FASTJavaExpressionStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaExpressionStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpressionStatement',
 	#classTraits : 'FASTTExpressionStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaExpressionStatement class >> annotation [
 
 	<FMClass: #ExpressionStatement super: #FASTJavaEntity>

@@ -58,14 +58,16 @@ I represent a lambda expression
 
 "
 Class {
-	#name : #FASTJavaLambdaExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaLambdaExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpression + FASTTWithParameters',
 	#classTraits : 'FASTTExpression classTrait + FASTTWithParameters classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaLambdaExpression class >> annotation [
 
 	<FMClass: #LambdaExpression super: #FASTJavaEntity>
@@ -74,7 +76,7 @@ FASTJavaLambdaExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaLambdaExpression >> expression [
 	"Relation named: #expression type: #FASTTEntity opposite: #javaLambdaExpressionOwner"
 
@@ -84,7 +86,7 @@ FASTJavaLambdaExpression >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaLambdaExpression >> expression: anObject [
 
 	<generated>
@@ -98,7 +100,7 @@ FASTJavaLambdaExpression >> expression: anObject [
 		anObject javaLambdaExpressionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaLambdaExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>

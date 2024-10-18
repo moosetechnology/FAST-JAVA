@@ -26,15 +26,17 @@ new Canard.Poulet(){
 
 "
 Class {
-	#name : #FASTJavaQualifiedTypeName,
-	#superclass : #FASTJavaTypeName,
+	#name : 'FASTJavaQualifiedTypeName',
+	#superclass : 'FASTJavaTypeName',
 	#instVars : [
 		'#namespace => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameQualify'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaQualifiedTypeName class >> annotation [
 
 	<FMClass: #QualifiedTypeName super: #FASTJavaTypeName>
@@ -43,7 +45,7 @@ FASTJavaQualifiedTypeName class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaQualifiedTypeName >> namespace [
 	"Relation named: #namespace type: #FASTJavaTypeName opposite: #javaTypeNameQualify"
 
@@ -52,14 +54,14 @@ FASTJavaQualifiedTypeName >> namespace [
 	^ namespace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaQualifiedTypeName >> namespace: anObject [
 
 	<generated>
 	namespace := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaQualifiedTypeName >> namespaceGroup [
 	<generated>
 	<navigation: 'Namespace'>

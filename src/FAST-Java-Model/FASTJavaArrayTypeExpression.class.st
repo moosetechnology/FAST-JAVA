@@ -13,12 +13,14 @@ I represent an array type
 
 "
 Class {
-	#name : #FASTJavaArrayTypeExpression,
-	#superclass : #FASTJavaTypeExpression,
-	#category : #'FAST-Java-Model-Entities'
+	#name : 'FASTJavaArrayTypeExpression',
+	#superclass : 'FASTJavaTypeExpression',
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaArrayTypeExpression class >> annotation [
 
 	<FMClass: #ArrayTypeExpression super: #FASTJavaTypeExpression>
@@ -27,7 +29,7 @@ FASTJavaArrayTypeExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayTypeExpression >> baseType [
 	"Relation named: #baseType type: #FASTTExpression opposite: #javaArrayTypeNameOwner"
 
@@ -37,7 +39,7 @@ FASTJavaArrayTypeExpression >> baseType [
 	^ self attributeAt: #baseType ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayTypeExpression >> baseType: anObject [
 
 	<generated>
@@ -51,7 +53,7 @@ FASTJavaArrayTypeExpression >> baseType: anObject [
 		anObject javaArrayTypeNameOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaArrayTypeExpression >> baseTypeGroup [
 	<generated>
 	<navigation: 'BaseType'>

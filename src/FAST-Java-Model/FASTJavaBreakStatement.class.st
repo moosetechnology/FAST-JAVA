@@ -30,14 +30,16 @@ A node representing break statement in java
 
 "
 Class {
-	#name : #FASTJavaBreakStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaBreakStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaBreakStatement class >> annotation [
 
 	<FMClass: #BreakStatement super: #FASTJavaEntity>

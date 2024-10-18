@@ -33,18 +33,20 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 
 "
 Class {
-	#name : #FASTJavaVariableDeclarator,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaVariableDeclarator',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTEntity',
 	#classTraits : 'FASTTEntity classTrait',
 	#instVars : [
 		'#varDeclOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #declarators',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaVariableDeclarator class >> annotation [
 
 	<FMClass: #VariableDeclarator super: #FASTJavaEntity>
@@ -53,7 +55,7 @@ FASTJavaVariableDeclarator class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableDeclarator >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaVariableDeclaratorExpressionOwner"
 
@@ -63,7 +65,7 @@ FASTJavaVariableDeclarator >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableDeclarator >> expression: anObject [
 
 	<generated>
@@ -77,14 +79,14 @@ FASTJavaVariableDeclarator >> expression: anObject [
 		anObject javaVariableDeclaratorExpressionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableDeclarator >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableDeclarator >> varDeclOwner [
 	"Relation named: #varDeclOwner type: #FASTJavaVarDeclStatement opposite: #declarators"
 
@@ -94,21 +96,21 @@ FASTJavaVariableDeclarator >> varDeclOwner [
 	^ varDeclOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableDeclarator >> varDeclOwner: anObject [
 
 	<generated>
 	varDeclOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableDeclarator >> varDeclOwnerGroup [
 	<generated>
 	<navigation: 'VarDeclOwner'>
 	^ MooseSpecializedGroup with: self varDeclOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableDeclarator >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner"
 
@@ -117,14 +119,14 @@ FASTJavaVariableDeclarator >> variable [
 	^ variable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableDeclarator >> variable: anObject [
 
 	<generated>
 	variable := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableDeclarator >> variableGroup [
 	<generated>
 	<navigation: 'Variable'>

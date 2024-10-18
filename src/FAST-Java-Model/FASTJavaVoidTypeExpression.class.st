@@ -4,12 +4,14 @@ I represent a short type
 
 "
 Class {
-	#name : #FASTJavaVoidTypeExpression,
-	#superclass : #FASTJavaPrimitiveTypeExpression,
-	#category : #'FAST-Java-Model-Entities'
+	#name : 'FASTJavaVoidTypeExpression',
+	#superclass : 'FASTJavaPrimitiveTypeExpression',
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaVoidTypeExpression class >> annotation [
 
 	<FMClass: #VoidTypeExpression super: #FASTJavaPrimitiveTypeExpression>

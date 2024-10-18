@@ -59,8 +59,8 @@ public enum MyEnum {
 
 "
 Class {
-	#name : #FASTJavaEnumDeclaration,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaEnumDeclaration',
+	#superclass : 'FASTJavaEntity',
 	#traits : '(FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
 	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
@@ -68,10 +68,12 @@ Class {
 		'#constants => FMMany type: #FASTJavaEnumConstant opposite: #parentEnum',
 		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaEnumDeclaration class >> annotation [
 
 	<FMClass: #EnumDeclaration super: #FASTJavaEntity>
@@ -80,19 +82,19 @@ FASTJavaEnumDeclaration class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaEnumDeclaration >> addConstant: anObject [
 	<generated>
 	^ self constants add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaEnumDeclaration >> addInterface: anObject [
 	<generated>
 	^ self interfaces add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #enumDeclarations"
 
@@ -102,21 +104,21 @@ FASTJavaEnumDeclaration >> compilationUnit [
 	^ compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumDeclaration >> compilationUnit: anObject [
 
 	<generated>
 	compilationUnit := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaEnumDeclaration >> compilationUnitGroup [
 	<generated>
 	<navigation: 'CompilationUnit'>
 	^ MooseSpecializedGroup with: self compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumDeclaration >> constants [
 	"Relation named: #constants type: #FASTJavaEnumConstant opposite: #parentEnum"
 
@@ -126,21 +128,21 @@ FASTJavaEnumDeclaration >> constants [
 	^ constants
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumDeclaration >> constants: anObject [
 
 	<generated>
 	constants value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaEnumDeclaration >> constantsGroup [
 	<generated>
 	<navigation: 'Constants'>
 	^ MooseSpecializedGroup withAll: self constants asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner"
 
@@ -150,14 +152,14 @@ FASTJavaEnumDeclaration >> interfaces [
 	^ interfaces
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumDeclaration >> interfaces: anObject [
 
 	<generated>
 	interfaces value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaEnumDeclaration >> interfacesGroup [
 	<generated>
 	<navigation: 'Interfaces'>

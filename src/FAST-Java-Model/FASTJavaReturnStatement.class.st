@@ -33,14 +33,16 @@
 
 "
 Class {
-	#name : #FASTJavaReturnStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaReturnStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTReturnStatement',
 	#classTraits : 'FASTTReturnStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaReturnStatement class >> annotation [
 
 	<FMClass: #ReturnStatement super: #FASTJavaEntity>

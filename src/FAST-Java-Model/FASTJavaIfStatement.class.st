@@ -44,14 +44,16 @@ if(...) {
 
 "
 Class {
-	#name : #FASTJavaIfStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaIfStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaIfStatement class >> annotation [
 
 	<FMClass: #IfStatement super: #FASTJavaEntity>
@@ -60,7 +62,7 @@ FASTJavaIfStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaIfStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #ifConditionOwner"
 
@@ -70,7 +72,7 @@ FASTJavaIfStatement >> condition [
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaIfStatement >> condition: anObject [
 
 	<generated>
@@ -84,14 +86,14 @@ FASTJavaIfStatement >> condition: anObject [
 		anObject ifConditionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaIfStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaIfStatement >> elsePart [
 	"Relation named: #elsePart type: #FASTTStatement opposite: #ifElsePartOwner"
 
@@ -101,7 +103,7 @@ FASTJavaIfStatement >> elsePart [
 	^ self attributeAt: #elsePart ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaIfStatement >> elsePart: anObject [
 
 	<generated>
@@ -115,14 +117,14 @@ FASTJavaIfStatement >> elsePart: anObject [
 		anObject ifElsePartOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaIfStatement >> elsePartGroup [
 	<generated>
 	<navigation: 'ElsePart'>
 	^ MooseSpecializedGroup with: self elsePart
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaIfStatement >> thenPart [
 	"Relation named: #thenPart type: #FASTTStatement opposite: #ifThenPartOwner"
 
@@ -132,7 +134,7 @@ FASTJavaIfStatement >> thenPart [
 	^ self attributeAt: #thenPart ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaIfStatement >> thenPart: anObject [
 
 	<generated>
@@ -146,7 +148,7 @@ FASTJavaIfStatement >> thenPart: anObject [
 		anObject ifThenPartOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaIfStatement >> thenPartGroup [
 	<generated>
 	<navigation: 'ThenPart'>

@@ -15,15 +15,17 @@ I can be used as an annotation ""argument"" eg: @SuppressWarnings(value=""unchec
 
 "
 Trait {
-	#name : #FASTJavaTAnnotationElement,
+	#name : 'FASTJavaTAnnotationElement',
 	#instVars : [
 		'#arrayOwner => FMOne type: #FASTJavaArrayAnnotationElement opposite: #values',
 		'#parentAnnotation => FMOne type: #FASTJavaAnnotation opposite: #elements'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTAnnotationElement classSide >> annotation [
 
 	<FMClass: #TAnnotationElement super: #Object>
@@ -32,7 +34,7 @@ FASTJavaTAnnotationElement classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTAnnotationElement >> arrayOwner [
 	"Relation named: #arrayOwner type: #FASTJavaArrayAnnotationElement opposite: #values"
 
@@ -42,21 +44,21 @@ FASTJavaTAnnotationElement >> arrayOwner [
 	^ arrayOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTAnnotationElement >> arrayOwner: anObject [
 
 	<generated>
 	arrayOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTAnnotationElement >> arrayOwnerGroup [
 	<generated>
 	<navigation: 'ArrayOwner'>
 	^ MooseSpecializedGroup with: self arrayOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTAnnotationElement >> parentAnnotation [
 	"Relation named: #parentAnnotation type: #FASTJavaAnnotation opposite: #elements"
 
@@ -67,14 +69,14 @@ FASTJavaTAnnotationElement >> parentAnnotation [
 	^ parentAnnotation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTAnnotationElement >> parentAnnotation: anObject [
 
 	<generated>
 	parentAnnotation := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTAnnotationElement >> parentAnnotationGroup [
 	<generated>
 	<navigation: 'ParentAnnotation'>

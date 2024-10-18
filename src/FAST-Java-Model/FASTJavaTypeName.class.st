@@ -58,18 +58,20 @@ I represent the name of a type
 
 "
 Class {
-	#name : #FASTJavaTypeName,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaTypeName',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTTExpression + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName',
 		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTypeName class >> annotation [
 
 	<FMClass: #TypeName super: #FASTJavaEntity>
@@ -78,7 +80,7 @@ FASTJavaTypeName class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeName >> javaTypeNameQualify [
 	"Relation named: #javaTypeNameQualify type: #FASTJavaQualifiedTypeName opposite: #namespace"
 
@@ -89,21 +91,21 @@ FASTJavaTypeName >> javaTypeNameQualify [
 	^ javaTypeNameQualify
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeName >> javaTypeNameQualify: anObject [
 
 	<generated>
 	javaTypeNameQualify := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeName >> javaTypeNameQualifyGroup [
 	<generated>
 	<navigation: 'JavaTypeNameQualify'>
 	^ MooseSpecializedGroup with: self javaTypeNameQualify
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
 	"Relation named: #javaTypeNameTypeExpressionOwner type: #FASTJavaClassTypeExpression opposite: #typeName"
 
@@ -114,14 +116,14 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
 	^ javaTypeNameTypeExpressionOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwner: anObject [
 
 	<generated>
 	javaTypeNameTypeExpressionOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwnerGroup [
 	<generated>
 	<navigation: 'JavaTypeNameTypeExpressionOwner'>

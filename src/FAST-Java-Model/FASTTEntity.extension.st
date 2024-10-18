@@ -1,6 +1,6 @@
-Extension { #name : #FASTTEntity }
+Extension { #name : 'FASTTEntity' }
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTEntity >> javaLambdaExpressionOwner [
 	"Relation named: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression"
 
@@ -13,7 +13,7 @@ FASTTEntity >> javaLambdaExpressionOwner [
 	^ self attributeAt: #javaLambdaExpressionOwner ifAbsent: [ nil ]
 ]
 
-{ #category : #'*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-accessing' }
 FASTTEntity >> javaLambdaExpressionOwner: anObject [
 
 	<generated>

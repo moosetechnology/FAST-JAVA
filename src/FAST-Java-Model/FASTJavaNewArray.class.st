@@ -16,12 +16,14 @@ new String()[""10px"", ""Hello world""]
 
 "
 Class {
-	#name : #FASTJavaNewArray,
-	#superclass : #FASTJavaNewExpression,
-	#category : #'FAST-Java-Model-Entities'
+	#name : 'FASTJavaNewArray',
+	#superclass : 'FASTJavaNewExpression',
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaNewArray class >> annotation [
 
 	<FMClass: #NewArray super: #FASTJavaNewExpression>
@@ -30,7 +32,7 @@ FASTJavaNewArray class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaNewArray >> initializer [
 	"Relation named: #initializer type: #FASTTExpression opposite: #javaNewArrayInitialOwner"
 
@@ -40,7 +42,7 @@ FASTJavaNewArray >> initializer [
 	^ self attributeAt: #initializer ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaNewArray >> initializer: anObject [
 
 	<generated>
@@ -54,7 +56,7 @@ FASTJavaNewArray >> initializer: anObject [
 		anObject javaNewArrayInitialOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaNewArray >> initializerGroup [
 	<generated>
 	<navigation: 'Initializer'>

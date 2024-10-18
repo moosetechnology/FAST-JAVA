@@ -39,14 +39,16 @@ throw new Hello();
 
 "
 Class {
-	#name : #FASTJavaThrowStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaThrowStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaThrowStatement class >> annotation [
 
 	<FMClass: #ThrowStatement super: #FASTJavaEntity>
@@ -55,7 +57,7 @@ FASTJavaThrowStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaThrowStatement >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaThrowStatementOwner"
 
@@ -65,7 +67,7 @@ FASTJavaThrowStatement >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaThrowStatement >> expression: anObject [
 
 	<generated>
@@ -79,7 +81,7 @@ FASTJavaThrowStatement >> expression: anObject [
 		anObject javaThrowStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaThrowStatement >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>

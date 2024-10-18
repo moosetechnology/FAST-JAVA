@@ -11,15 +11,17 @@
 
 "
 Class {
-	#name : #FASTJavaEnumConstant,
-	#superclass : #FASTJavaVariableExpression,
+	#name : 'FASTJavaEnumConstant',
+	#superclass : 'FASTJavaVariableExpression',
 	#instVars : [
 		'#parentEnum => FMOne type: #FASTJavaEnumDeclaration opposite: #constants'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaEnumConstant class >> annotation [
 
 	<FMClass: #EnumConstant super: #FASTJavaVariableExpression>
@@ -28,7 +30,7 @@ FASTJavaEnumConstant class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumConstant >> parentEnum [
 	"Relation named: #parentEnum type: #FASTJavaEnumDeclaration opposite: #constants"
 
@@ -38,14 +40,14 @@ FASTJavaEnumConstant >> parentEnum [
 	^ parentEnum
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaEnumConstant >> parentEnum: anObject [
 
 	<generated>
 	parentEnum := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaEnumConstant >> parentEnumGroup [
 	<generated>
 	<navigation: 'ParentEnum'>

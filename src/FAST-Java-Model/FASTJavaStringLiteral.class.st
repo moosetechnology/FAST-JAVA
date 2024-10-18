@@ -53,14 +53,16 @@ I represent a string literal node.
 
 "
 Class {
-	#name : #FASTJavaStringLiteral,
-	#superclass : #FASTJavaLiteral,
+	#name : 'FASTJavaStringLiteral',
+	#superclass : 'FASTJavaLiteral',
 	#traits : 'FASTTStringLiteral',
 	#classTraits : 'FASTTStringLiteral classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaStringLiteral class >> annotation [
 
 	<FMClass: #StringLiteral super: #FASTJavaLiteral>

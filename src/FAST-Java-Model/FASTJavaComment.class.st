@@ -19,14 +19,16 @@ I represent a Java comment (block or line comment)
 
 "
 Class {
-	#name : #FASTJavaComment,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaComment',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTComment',
 	#classTraits : 'FASTTComment classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaComment class >> annotation [
 
 	<FMClass: #Comment super: #FASTJavaEntity>

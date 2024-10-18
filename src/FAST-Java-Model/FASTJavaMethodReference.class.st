@@ -59,17 +59,19 @@ I represent a method reference
 
 "
 Class {
-	#name : #FASTJavaMethodReference,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaMethodReference',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpression + FASTTNamedEntity',
 	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#receiver => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaMethodReference class >> annotation [
 
 	<FMClass: #MethodReference super: #FASTJavaEntity>
@@ -78,7 +80,7 @@ FASTJavaMethodReference class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaMethodReference >> receiver [
 	"Relation named: #receiver type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner"
 
@@ -87,14 +89,14 @@ FASTJavaMethodReference >> receiver [
 	^ receiver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaMethodReference >> receiver: anObject [
 
 	<generated>
 	receiver := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaMethodReference >> receiverGroup [
 	<generated>
 	<navigation: 'Receiver'>

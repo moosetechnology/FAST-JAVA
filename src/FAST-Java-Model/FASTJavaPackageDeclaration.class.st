@@ -26,17 +26,19 @@ I represent a package declaration, e.g. `package fr.inria;`
 
 "
 Class {
-	#name : #FASTJavaPackageDeclaration,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaPackageDeclaration',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTWithQualifiedName + FASTTEntity',
 	#classTraits : 'FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #packageDeclaration'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaPackageDeclaration class >> annotation [
 
 	<FMClass: #PackageDeclaration super: #FASTJavaEntity>
@@ -45,7 +47,7 @@ FASTJavaPackageDeclaration class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaPackageDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #packageDeclaration"
 
@@ -56,14 +58,14 @@ FASTJavaPackageDeclaration >> compilationUnit [
 	^ compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaPackageDeclaration >> compilationUnit: anObject [
 
 	<generated>
 	compilationUnit := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaPackageDeclaration >> compilationUnitGroup [
 	<generated>
 	<navigation: 'CompilationUnit'>

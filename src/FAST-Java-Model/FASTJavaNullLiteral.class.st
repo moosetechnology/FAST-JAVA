@@ -53,14 +53,16 @@ I represent a `null` literal node.
 
 "
 Class {
-	#name : #FASTJavaNullLiteral,
-	#superclass : #FASTJavaLiteral,
+	#name : 'FASTJavaNullLiteral',
+	#superclass : 'FASTJavaLiteral',
 	#traits : 'FASTTNullPointerLiteral',
 	#classTraits : 'FASTTNullPointerLiteral classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaNullLiteral class >> annotation [
 
 	<FMClass: #NullLiteral super: #FASTJavaLiteral>

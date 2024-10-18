@@ -13,14 +13,16 @@ I am a declaration in java
 
 "
 Trait {
-	#name : #FASTJavaTDeclaration,
+	#name : 'FASTJavaTDeclaration',
 	#instVars : [
 		'#javaDeclarationOwner => FMOne type: #FASTJavaTWithDeclarations opposite: #declarations'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTDeclaration classSide >> annotation [
 
 	<FMClass: #TDeclaration super: #Object>
@@ -29,7 +31,7 @@ FASTJavaTDeclaration classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTDeclaration >> javaDeclarationOwner [
 	"Relation named: #javaDeclarationOwner type: #FASTJavaTWithDeclarations opposite: #declarations"
 
@@ -39,14 +41,14 @@ FASTJavaTDeclaration >> javaDeclarationOwner [
 	^ javaDeclarationOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTDeclaration >> javaDeclarationOwner: anObject [
 
 	<generated>
 	javaDeclarationOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTDeclaration >> javaDeclarationOwnerGroup [
 	<generated>
 	<navigation: 'JavaDeclarationOwner'>

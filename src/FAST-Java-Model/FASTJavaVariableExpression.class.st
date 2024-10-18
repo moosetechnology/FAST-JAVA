@@ -66,8 +66,8 @@
 
 "
 Class {
-	#name : #FASTJavaVariableExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaVariableExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTVariableExpression',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
@@ -84,10 +84,12 @@ Class {
 		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
 		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaVariableExpression class >> annotation [
 
 	<FMClass: #VariableExpression super: #FASTJavaEntity>
@@ -96,7 +98,7 @@ FASTJavaVariableExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaCastExpressionTypeOwner [
 	"Relation named: #javaCastExpressionTypeOwner type: #FASTJavaCastExpression opposite: #type"
 
@@ -107,21 +109,21 @@ FASTJavaVariableExpression >> javaCastExpressionTypeOwner [
 	^ javaCastExpressionTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaCastExpressionTypeOwner: anObject [
 
 	<generated>
 	javaCastExpressionTypeOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaCastExpressionTypeOwnerGroup [
 	<generated>
 	<navigation: 'JavaCastExpressionTypeOwner'>
 	^ MooseSpecializedGroup with: self javaCastExpressionTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaCatchParameterOwnler [
 	"Relation named: #javaCatchParameterOwnler type: #FASTJavaCatchPartStatement opposite: #parameter"
 
@@ -132,21 +134,21 @@ FASTJavaVariableExpression >> javaCatchParameterOwnler [
 	^ javaCatchParameterOwnler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaCatchParameterOwnler: anObject [
 
 	<generated>
 	javaCatchParameterOwnler := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaCatchParameterOwnlerGroup [
 	<generated>
 	<navigation: 'JavaCatchParameterOwnler'>
 	^ MooseSpecializedGroup with: self javaCatchParameterOwnler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaClassPropertyOwner [
 	"Relation named: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type"
 
@@ -157,21 +159,21 @@ FASTJavaVariableExpression >> javaClassPropertyOwner [
 	^ javaClassPropertyOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaClassPropertyOwner: anObject [
 
 	<generated>
 	javaClassPropertyOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaClassPropertyOwnerGroup [
 	<generated>
 	<navigation: 'JavaClassPropertyOwner'>
 	^ MooseSpecializedGroup with: self javaClassPropertyOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaMethodReferenceOwner [
 	"Relation named: #javaMethodReferenceOwner type: #FASTJavaMethodReference opposite: #receiver"
 
@@ -182,21 +184,21 @@ FASTJavaVariableExpression >> javaMethodReferenceOwner [
 	^ javaMethodReferenceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaMethodReferenceOwner: anObject [
 
 	<generated>
 	javaMethodReferenceOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaMethodReferenceOwnerGroup [
 	<generated>
 	<navigation: 'JavaMethodReferenceOwner'>
 	^ MooseSpecializedGroup with: self javaMethodReferenceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaMethodTypeOwner [
 	"Relation named: #javaMethodTypeOwner type: #FASTJavaMethodEntity opposite: #type"
 
@@ -207,21 +209,21 @@ FASTJavaVariableExpression >> javaMethodTypeOwner [
 	^ javaMethodTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaMethodTypeOwner: anObject [
 
 	<generated>
 	javaMethodTypeOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaMethodTypeOwnerGroup [
 	<generated>
 	<navigation: 'JavaMethodTypeOwner'>
 	^ MooseSpecializedGroup with: self javaMethodTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaNewExpressionOwner [
 	"Relation named: #javaNewExpressionOwner type: #FASTJavaNewExpression opposite: #type"
 
@@ -232,21 +234,21 @@ FASTJavaVariableExpression >> javaNewExpressionOwner [
 	^ javaNewExpressionOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaNewExpressionOwner: anObject [
 
 	<generated>
 	javaNewExpressionOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaNewExpressionOwnerGroup [
 	<generated>
 	<navigation: 'JavaNewExpressionOwner'>
 	^ MooseSpecializedGroup with: self javaNewExpressionOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaOuterThisOwner [
 	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
 
@@ -257,21 +259,21 @@ FASTJavaVariableExpression >> javaOuterThisOwner [
 	^ javaOuterThisOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaOuterThisOwner: anObject [
 
 	<generated>
 	javaOuterThisOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaOuterThisOwnerGroup [
 	<generated>
 	<navigation: 'JavaOuterThisOwner'>
 	^ MooseSpecializedGroup with: self javaOuterThisOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaParameterTypeOwner [
 	"Relation named: #javaParameterTypeOwner type: #FASTJavaParameter opposite: #type"
 
@@ -282,21 +284,21 @@ FASTJavaVariableExpression >> javaParameterTypeOwner [
 	^ javaParameterTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaParameterTypeOwner: anObject [
 
 	<generated>
 	javaParameterTypeOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaParameterTypeOwnerGroup [
 	<generated>
 	<navigation: 'JavaParameterTypeOwner'>
 	^ MooseSpecializedGroup with: self javaParameterTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaParameterVariableOwner [
 	"Relation named: #javaParameterVariableOwner type: #FASTJavaParameter opposite: #variable"
 
@@ -307,21 +309,21 @@ FASTJavaVariableExpression >> javaParameterVariableOwner [
 	^ javaParameterVariableOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaParameterVariableOwner: anObject [
 
 	<generated>
 	javaParameterVariableOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaParameterVariableOwnerGroup [
 	<generated>
 	<navigation: 'JavaParameterVariableOwner'>
 	^ MooseSpecializedGroup with: self javaParameterVariableOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaTypePatternVariableOwner [
 	"Relation named: #javaTypePatternVariableOwner type: #FASTJavaTypePattern opposite: #variable"
 
@@ -332,21 +334,21 @@ FASTJavaVariableExpression >> javaTypePatternVariableOwner [
 	^ javaTypePatternVariableOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaTypePatternVariableOwner: anObject [
 
 	<generated>
 	javaTypePatternVariableOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaTypePatternVariableOwnerGroup [
 	<generated>
 	<navigation: 'JavaTypePatternVariableOwner'>
 	^ MooseSpecializedGroup with: self javaTypePatternVariableOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaVarDeclTypeOwner [
 	"Relation named: #javaVarDeclTypeOwner type: #FASTJavaVarDeclStatement opposite: #type"
 
@@ -357,21 +359,21 @@ FASTJavaVariableExpression >> javaVarDeclTypeOwner [
 	^ javaVarDeclTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaVarDeclTypeOwner: anObject [
 
 	<generated>
 	javaVarDeclTypeOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaVarDeclTypeOwnerGroup [
 	<generated>
 	<navigation: 'JavaVarDeclTypeOwner'>
 	^ MooseSpecializedGroup with: self javaVarDeclTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaVariableDeclaratorOwner [
 	"Relation named: #javaVariableDeclaratorOwner type: #FASTJavaVariableDeclarator opposite: #variable"
 
@@ -382,14 +384,14 @@ FASTJavaVariableExpression >> javaVariableDeclaratorOwner [
 	^ javaVariableDeclaratorOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVariableExpression >> javaVariableDeclaratorOwner: anObject [
 
 	<generated>
 	javaVariableDeclaratorOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVariableExpression >> javaVariableDeclaratorOwnerGroup [
 	<generated>
 	<navigation: 'JavaVariableDeclaratorOwner'>

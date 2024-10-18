@@ -43,14 +43,16 @@ for(_;_;_) {
 
 "
 Class {
-	#name : #FASTJavaForStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaForStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaForStatement class >> annotation [
 
 	<FMClass: #ForStatement super: #FASTJavaEntity>
@@ -59,7 +61,7 @@ FASTJavaForStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> body [
 	"Relation named: #body type: #FASTTStatement opposite: #forBodyOwner"
 
@@ -69,7 +71,7 @@ FASTJavaForStatement >> body [
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> body: anObject [
 
 	<generated>
@@ -83,14 +85,14 @@ FASTJavaForStatement >> body: anObject [
 		anObject forBodyOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
 	^ MooseSpecializedGroup with: self body
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #forConditionOwner"
 
@@ -100,7 +102,7 @@ FASTJavaForStatement >> condition [
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> condition: anObject [
 
 	<generated>
@@ -114,14 +116,14 @@ FASTJavaForStatement >> condition: anObject [
 		anObject forConditionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> incrementor [
 	"Relation named: #incrementor type: #FASTTStatement opposite: #forIncrementorOwner"
 
@@ -131,7 +133,7 @@ FASTJavaForStatement >> incrementor [
 	^ self attributeAt: #incrementor ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> incrementor: anObject [
 
 	<generated>
@@ -145,14 +147,14 @@ FASTJavaForStatement >> incrementor: anObject [
 		anObject forIncrementorOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForStatement >> incrementorGroup [
 	<generated>
 	<navigation: 'Incrementor'>
 	^ MooseSpecializedGroup with: self incrementor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> initializer [
 	"Relation named: #initializer type: #FASTTStatement opposite: #forIninitializerOwner"
 
@@ -162,7 +164,7 @@ FASTJavaForStatement >> initializer [
 	^ self attributeAt: #initializer ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForStatement >> initializer: anObject [
 
 	<generated>
@@ -176,7 +178,7 @@ FASTJavaForStatement >> initializer: anObject [
 		anObject forIninitializerOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForStatement >> initializerGroup [
 	<generated>
 	<navigation: 'Initializer'>

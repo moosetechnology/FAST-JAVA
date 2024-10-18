@@ -28,8 +28,8 @@ I represent an import declaration, e.g. `import java.util.List;`
 
 "
 Class {
-	#name : #FASTJavaImportDeclaration,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaImportDeclaration',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTWithQualifiedName + FASTTEntity',
 	#classTraits : 'FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
 	#instVars : [
@@ -37,10 +37,12 @@ Class {
 		'#isOnDemand => FMProperty defaultValue: false',
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #importDeclarations'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaImportDeclaration class >> annotation [
 
 	<FMClass: #ImportDeclaration super: #FASTJavaEntity>
@@ -49,7 +51,7 @@ FASTJavaImportDeclaration class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaImportDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #importDeclarations"
 
@@ -59,21 +61,21 @@ FASTJavaImportDeclaration >> compilationUnit [
 	^ compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaImportDeclaration >> compilationUnit: anObject [
 
 	<generated>
 	compilationUnit := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaImportDeclaration >> compilationUnitGroup [
 	<generated>
 	<navigation: 'CompilationUnit'>
 	^ MooseSpecializedGroup with: self compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaImportDeclaration >> isOnDemand [
 
 	<FMProperty: #isOnDemand type: #Boolean defaultValue: false>
@@ -82,13 +84,13 @@ FASTJavaImportDeclaration >> isOnDemand [
 	^ isOnDemand ifNil: [ isOnDemand := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaImportDeclaration >> isOnDemand: anObject [
 	<generated>
 	isOnDemand := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaImportDeclaration >> isStatic [
 
 	<FMProperty: #isStatic type: #Boolean defaultValue: false>
@@ -97,7 +99,7 @@ FASTJavaImportDeclaration >> isStatic [
 	^ isStatic ifNil: [ isStatic := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaImportDeclaration >> isStatic: anObject [
 	<generated>
 	isStatic := anObject

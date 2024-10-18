@@ -60,17 +60,19 @@ A FASTJavaFieldAccess corresponds to an access to an instance variable (field)
 
 "
 Class {
-	#name : #FASTJavaFieldAccess,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaFieldAccess',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#fieldName => FMProperty'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaFieldAccess class >> annotation [
 
 	<FMClass: #FieldAccess super: #FASTJavaEntity>
@@ -79,7 +81,7 @@ FASTJavaFieldAccess class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaFieldAccess >> fieldName [
 
 	<FMProperty: #fieldName type: #String>
@@ -88,7 +90,7 @@ FASTJavaFieldAccess >> fieldName [
 	^ fieldName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaFieldAccess >> fieldName: anObject [
 	<generated>
 	fieldName := anObject

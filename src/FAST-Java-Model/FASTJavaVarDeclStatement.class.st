@@ -45,8 +45,8 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 
 "
 Class {
-	#name : #FASTJavaVarDeclStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaVarDeclStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTTScopableEntity + FASTTStatement',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTScopableEntity classTrait + FASTTStatement classTrait',
 	#instVars : [
@@ -54,10 +54,12 @@ Class {
 		'#javaTryResourceOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #resources',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaVarDeclStatement class >> annotation [
 
 	<FMClass: #VarDeclStatement super: #FASTJavaEntity>
@@ -66,13 +68,13 @@ FASTJavaVarDeclStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaVarDeclStatement >> addDeclarator: anObject [
 	<generated>
 	^ self declarators add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVarDeclStatement >> declarators [
 	"Relation named: #declarators type: #FASTJavaVariableDeclarator opposite: #varDeclOwner"
 
@@ -82,21 +84,21 @@ FASTJavaVarDeclStatement >> declarators [
 	^ declarators
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVarDeclStatement >> declarators: anObject [
 
 	<generated>
 	declarators value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVarDeclStatement >> declaratorsGroup [
 	<generated>
 	<navigation: 'Declarators'>
 	^ MooseSpecializedGroup withAll: self declarators asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVarDeclStatement >> javaTryResourceOwner [
 	"Relation named: #javaTryResourceOwner type: #FASTJavaTryCatchStatement opposite: #resources"
 
@@ -106,21 +108,21 @@ FASTJavaVarDeclStatement >> javaTryResourceOwner [
 	^ javaTryResourceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVarDeclStatement >> javaTryResourceOwner: anObject [
 
 	<generated>
 	javaTryResourceOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVarDeclStatement >> javaTryResourceOwnerGroup [
 	<generated>
 	<navigation: 'JavaTryResourceOwner'>
 	^ MooseSpecializedGroup with: self javaTryResourceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVarDeclStatement >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner"
 
@@ -129,14 +131,14 @@ FASTJavaVarDeclStatement >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaVarDeclStatement >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaVarDeclStatement >> typeGroup [
 	<generated>
 	<navigation: 'Type'>

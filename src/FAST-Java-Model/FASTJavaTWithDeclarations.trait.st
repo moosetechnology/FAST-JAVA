@@ -13,14 +13,16 @@ I have declarations
 
 "
 Trait {
-	#name : #FASTJavaTWithDeclarations,
+	#name : 'FASTJavaTWithDeclarations',
 	#instVars : [
 		'#declarations => FMMany type: #FASTJavaTDeclaration opposite: #javaDeclarationOwner'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTWithDeclarations classSide >> annotation [
 
 	<FMClass: #TWithDeclarations super: #Object>
@@ -29,13 +31,13 @@ FASTJavaTWithDeclarations classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaTWithDeclarations >> addDeclaration: anObject [
 	<generated>
 	^ self declarations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithDeclarations >> declarations [
 	"Relation named: #declarations type: #FASTJavaTDeclaration opposite: #javaDeclarationOwner"
 
@@ -45,14 +47,14 @@ FASTJavaTWithDeclarations >> declarations [
 	^ declarations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithDeclarations >> declarations: anObject [
 
 	<generated>
 	declarations value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTWithDeclarations >> declarationsGroup [
 	<generated>
 	<navigation: 'Declarations'>

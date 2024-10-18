@@ -63,8 +63,8 @@ I represent a parameter of a method declaration
 
 "
 Class {
-	#name : #FASTJavaParameter,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaParameter',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpression + FASTTVariableEntity',
 	#classTraits : 'FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
@@ -72,10 +72,12 @@ Class {
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaParameter class >> annotation [
 
 	<FMClass: #Parameter super: #FASTJavaEntity>
@@ -84,7 +86,7 @@ FASTJavaParameter class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaParameter >> hasVariableArguments [
 
 	<FMProperty: #hasVariableArguments type: #Boolean defaultValue: false>
@@ -93,13 +95,13 @@ FASTJavaParameter >> hasVariableArguments [
 	^ hasVariableArguments ifNil: [ hasVariableArguments := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaParameter >> hasVariableArguments: anObject [
 	<generated>
 	hasVariableArguments := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaParameter >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner"
 
@@ -108,21 +110,21 @@ FASTJavaParameter >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaParameter >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaParameter >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
 	^ MooseSpecializedGroup with: self type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaParameter >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner"
 
@@ -131,14 +133,14 @@ FASTJavaParameter >> variable [
 	^ variable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaParameter >> variable: anObject [
 
 	<generated>
 	variable := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaParameter >> variableGroup [
 	<generated>
 	<navigation: 'Variable'>

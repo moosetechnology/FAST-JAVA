@@ -30,14 +30,16 @@ A node representing continue statement in java
 
 "
 Class {
-	#name : #FASTJavaContinueStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaContinueStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaContinueStatement class >> annotation [
 
 	<FMClass: #ContinueStatement super: #FASTJavaEntity>

@@ -19,8 +19,8 @@ I am an abstract class representing a type
 
 "
 Class {
-	#name : #FASTJavaTypeExpression,
-	#superclass : #FASTJavaVariableExpression,
+	#name : 'FASTJavaTypeExpression',
+	#superclass : 'FASTJavaVariableExpression',
 	#instVars : [
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
 		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
@@ -30,10 +30,12 @@ Class {
 		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces',
 		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTypeExpression class >> annotation [
 
 	<FMClass: #TypeExpression super: #FASTJavaVariableExpression>
@@ -42,7 +44,7 @@ FASTJavaTypeExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> catchOwner [
 	"Relation named: #catchOwner type: #FASTJavaCatchPartStatement opposite: #catchedTypes"
 
@@ -52,21 +54,21 @@ FASTJavaTypeExpression >> catchOwner [
 	^ catchOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> catchOwner: anObject [
 
 	<generated>
 	catchOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeExpression >> catchOwnerGroup [
 	<generated>
 	<navigation: 'CatchOwner'>
 	^ MooseSpecializedGroup with: self catchOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner [
 	"Relation named: #javaClassDeclarationInterfaceOwner type: #FASTJavaClassDeclaration opposite: #interfaces"
 
@@ -76,21 +78,21 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner [
 	^ javaClassDeclarationInterfaceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner: anObject [
 
 	<generated>
 	javaClassDeclarationInterfaceOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnerGroup [
 	<generated>
 	<navigation: 'JavaClassDeclarationInterfaceOwner'>
 	^ MooseSpecializedGroup with: self javaClassDeclarationInterfaceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner [
 	"Relation named: #javaClassDeclarationSuperclassOwner type: #FASTJavaClassDeclaration opposite: #superclass"
 
@@ -101,21 +103,21 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner [
 	^ javaClassDeclarationSuperclassOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner: anObject [
 
 	<generated>
 	javaClassDeclarationSuperclassOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnerGroup [
 	<generated>
 	<navigation: 'JavaClassDeclarationSuperclassOwner'>
 	^ MooseSpecializedGroup with: self javaClassDeclarationSuperclassOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner [
 	"Relation named: #javaEnumDeclarationInterfaceOwner type: #FASTJavaEnumDeclaration opposite: #interfaces"
 
@@ -125,21 +127,21 @@ FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner [
 	^ javaEnumDeclarationInterfaceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner: anObject [
 
 	<generated>
 	javaEnumDeclarationInterfaceOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnerGroup [
 	<generated>
 	<navigation: 'JavaEnumDeclarationInterfaceOwner'>
 	^ MooseSpecializedGroup with: self javaEnumDeclarationInterfaceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaForEachStatementTypeOwner [
 	"Relation named: #javaForEachStatementTypeOwner type: #FASTJavaForEachStatement opposite: #type"
 
@@ -150,21 +152,21 @@ FASTJavaTypeExpression >> javaForEachStatementTypeOwner [
 	^ javaForEachStatementTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaForEachStatementTypeOwner: anObject [
 
 	<generated>
 	javaForEachStatementTypeOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeExpression >> javaForEachStatementTypeOwnerGroup [
 	<generated>
 	<navigation: 'JavaForEachStatementTypeOwner'>
 	^ MooseSpecializedGroup with: self javaForEachStatementTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner [
 	"Relation named: #javaInterfaceDeclarationInterfaceOwner type: #FASTJavaInterfaceDeclaration opposite: #interfaces"
 
@@ -174,21 +176,21 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner [
 	^ javaInterfaceDeclarationInterfaceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
 
 	<generated>
 	javaInterfaceDeclarationInterfaceOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnerGroup [
 	<generated>
 	<navigation: 'JavaInterfaceDeclarationInterfaceOwner'>
 	^ MooseSpecializedGroup with: self javaInterfaceDeclarationInterfaceOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaTypePatternTypeOwner [
 	"Relation named: #javaTypePatternTypeOwner type: #FASTJavaTypePattern opposite: #type"
 
@@ -199,14 +201,14 @@ FASTJavaTypeExpression >> javaTypePatternTypeOwner [
 	^ javaTypePatternTypeOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaTypePatternTypeOwner: anObject [
 
 	<generated>
 	javaTypePatternTypeOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeExpression >> javaTypePatternTypeOwnerGroup [
 	<generated>
 	<navigation: 'JavaTypePatternTypeOwner'>

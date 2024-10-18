@@ -42,17 +42,19 @@ new Button(){
 
 "
 Class {
-	#name : #FASTJavaInitializer,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaInitializer',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTDeclaration + FASTTScopableEntity + FamixTHasImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTTScopableEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
 		'#isStatic => FMProperty defaultValue: false'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaInitializer class >> annotation [
 
 	<FMClass: #Initializer super: #FASTJavaEntity>
@@ -61,7 +63,7 @@ FASTJavaInitializer class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInitializer >> isStatic [
 
 	<FMProperty: #isStatic type: #Boolean defaultValue: false>
@@ -70,13 +72,13 @@ FASTJavaInitializer >> isStatic [
 	^ isStatic ifNil: [ isStatic := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInitializer >> isStatic: anObject [
 	<generated>
 	isStatic := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInitializer >> statementBlock [
 	"Relation named: #statementBlock type: #FASTTStatementBlock opposite: #javaInitializerOwner"
 
@@ -86,7 +88,7 @@ FASTJavaInitializer >> statementBlock [
 	^ self attributeAt: #statementBlock ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInitializer >> statementBlock: anObject [
 
 	<generated>
@@ -100,7 +102,7 @@ FASTJavaInitializer >> statementBlock: anObject [
 		anObject javaInitializerOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaInitializer >> statementBlockGroup [
 	<generated>
 	<navigation: 'StatementBlock'>

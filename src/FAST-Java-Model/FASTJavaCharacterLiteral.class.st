@@ -58,14 +58,16 @@ char c = 'a';
 
 "
 Class {
-	#name : #FASTJavaCharacterLiteral,
-	#superclass : #FASTJavaLiteral,
+	#name : 'FASTJavaCharacterLiteral',
+	#superclass : 'FASTJavaLiteral',
 	#traits : 'FASTTCharacterLiteral',
 	#classTraits : 'FASTTCharacterLiteral classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaCharacterLiteral class >> annotation [
 
 	<FMClass: #CharacterLiteral super: #FASTJavaLiteral>

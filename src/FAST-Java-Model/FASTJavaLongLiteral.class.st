@@ -58,14 +58,16 @@ long l = 2147483648L;
 
 "
 Class {
-	#name : #FASTJavaLongLiteral,
-	#superclass : #FASTJavaLiteral,
+	#name : 'FASTJavaLongLiteral',
+	#superclass : 'FASTJavaLiteral',
 	#traits : 'FASTTLiteral',
 	#classTraits : 'FASTTLiteral classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaLongLiteral class >> annotation [
 
 	<FMClass: #LongLiteral super: #FASTJavaLiteral>

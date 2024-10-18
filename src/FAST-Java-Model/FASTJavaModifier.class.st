@@ -78,17 +78,19 @@ for methods:
 
 "
 Class {
-	#name : #FASTJavaModifier,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaModifier',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTModifier + FASTTExpression',
 	#classTraits : 'FASTJavaTModifier classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#token => FMProperty'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaModifier class >> annotation [
 
 	<FMClass: #Modifier super: #FASTJavaEntity>
@@ -97,7 +99,7 @@ FASTJavaModifier class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaModifier >> token [
 
 	<FMProperty: #token type: #String>
@@ -106,7 +108,7 @@ FASTJavaModifier >> token [
 	^ token
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaModifier >> token: anObject [
 	<generated>
 	token := anObject

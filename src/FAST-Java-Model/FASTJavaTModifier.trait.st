@@ -16,14 +16,16 @@ public, proctected, private
 
 "
 Trait {
-	#name : #FASTJavaTModifier,
+	#name : 'FASTJavaTModifier',
 	#instVars : [
 		'#javaModifierOwner => FMOne type: #FASTJavaTWithModifiers opposite: #modifiers'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTModifier classSide >> annotation [
 
 	<FMClass: #TModifier super: #Object>
@@ -32,7 +34,7 @@ FASTJavaTModifier classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTModifier >> javaModifierOwner [
 	"Relation named: #javaModifierOwner type: #FASTJavaTWithModifiers opposite: #modifiers"
 
@@ -42,14 +44,14 @@ FASTJavaTModifier >> javaModifierOwner [
 	^ javaModifierOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTModifier >> javaModifierOwner: anObject [
 
 	<generated>
 	javaModifierOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTModifier >> javaModifierOwnerGroup [
 	<generated>
 	<navigation: 'JavaModifierOwner'>

@@ -13,14 +13,16 @@ I can send a message to someone
 
 "
 Trait {
-	#name : #FASTJavaTWithReceiver,
+	#name : 'FASTJavaTWithReceiver',
 	#instVars : [
 		'#receiver => FMOne type: #FASTJavaTReceiver opposite: #receiverOwner'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTWithReceiver classSide >> annotation [
 
 	<FMClass: #TWithReceiver super: #Object>
@@ -29,7 +31,7 @@ FASTJavaTWithReceiver classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithReceiver >> receiver [
 	"Relation named: #receiver type: #FASTJavaTReceiver opposite: #receiverOwner"
 
@@ -38,14 +40,14 @@ FASTJavaTWithReceiver >> receiver [
 	^ receiver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithReceiver >> receiver: anObject [
 
 	<generated>
 	receiver := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTWithReceiver >> receiverGroup [
 	<generated>
 	<navigation: 'Receiver'>

@@ -39,17 +39,19 @@ case part of switch statement
 
 "
 Class {
-	#name : #FASTJavaCaseStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaCaseStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatementBlock',
 	#classTraits : 'FASTTStatementBlock classTrait',
 	#instVars : [
 		'#javaCaseStatementSwitchOwner => FMOne type: #FASTJavaSwitchStatement opposite: #cases'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaCaseStatement class >> annotation [
 
 	<FMClass: #CaseStatement super: #FASTJavaEntity>
@@ -58,7 +60,7 @@ FASTJavaCaseStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
 	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaSwitchStatement opposite: #cases"
 
@@ -68,14 +70,14 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
 	^ javaCaseStatementSwitchOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwner: anObject [
 
 	<generated>
 	javaCaseStatementSwitchOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwnerGroup [
 	<generated>
 	<navigation: 'JavaCaseStatementSwitchOwner'>

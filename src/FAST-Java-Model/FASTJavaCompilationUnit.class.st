@@ -29,8 +29,8 @@ I represent a compilation unit, I can contain declarations for a package, import
 
 "
 Class {
-	#name : #FASTJavaCompilationUnit,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaCompilationUnit',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTEntity',
 	#classTraits : 'FASTTEntity classTrait',
 	#instVars : [
@@ -40,10 +40,12 @@ Class {
 		'#interfaceDeclarations => FMMany type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit',
 		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaCompilationUnit class >> annotation [
 
 	<FMClass: #CompilationUnit super: #FASTJavaEntity>
@@ -52,31 +54,31 @@ FASTJavaCompilationUnit class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaCompilationUnit >> addClassDeclaration: anObject [
 	<generated>
 	^ self classDeclarations add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaCompilationUnit >> addEnumDeclaration: anObject [
 	<generated>
 	^ self enumDeclarations add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaCompilationUnit >> addImportDeclaration: anObject [
 	<generated>
 	^ self importDeclarations add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaCompilationUnit >> addInterfaceDeclaration: anObject [
 	<generated>
 	^ self interfaceDeclarations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> classDeclarations [
 	"Relation named: #classDeclarations type: #FASTJavaClassDeclaration opposite: #compilationUnit"
 
@@ -86,21 +88,21 @@ FASTJavaCompilationUnit >> classDeclarations [
 	^ classDeclarations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> classDeclarations: anObject [
 
 	<generated>
 	classDeclarations value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCompilationUnit >> classDeclarationsGroup [
 	<generated>
 	<navigation: 'ClassDeclarations'>
 	^ MooseSpecializedGroup withAll: self classDeclarations asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> enumDeclarations [
 	"Relation named: #enumDeclarations type: #FASTJavaEnumDeclaration opposite: #compilationUnit"
 
@@ -110,21 +112,21 @@ FASTJavaCompilationUnit >> enumDeclarations [
 	^ enumDeclarations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> enumDeclarations: anObject [
 
 	<generated>
 	enumDeclarations value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCompilationUnit >> enumDeclarationsGroup [
 	<generated>
 	<navigation: 'EnumDeclarations'>
 	^ MooseSpecializedGroup withAll: self enumDeclarations asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> importDeclarations [
 	"Relation named: #importDeclarations type: #FASTJavaImportDeclaration opposite: #compilationUnit"
 
@@ -134,21 +136,21 @@ FASTJavaCompilationUnit >> importDeclarations [
 	^ importDeclarations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> importDeclarations: anObject [
 
 	<generated>
 	importDeclarations value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCompilationUnit >> importDeclarationsGroup [
 	<generated>
 	<navigation: 'ImportDeclarations'>
 	^ MooseSpecializedGroup withAll: self importDeclarations asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> interfaceDeclarations [
 	"Relation named: #interfaceDeclarations type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit"
 
@@ -158,21 +160,21 @@ FASTJavaCompilationUnit >> interfaceDeclarations [
 	^ interfaceDeclarations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> interfaceDeclarations: anObject [
 
 	<generated>
 	interfaceDeclarations value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCompilationUnit >> interfaceDeclarationsGroup [
 	<generated>
 	<navigation: 'InterfaceDeclarations'>
 	^ MooseSpecializedGroup withAll: self interfaceDeclarations asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> packageDeclaration [
 	"Relation named: #packageDeclaration type: #FASTJavaPackageDeclaration opposite: #compilationUnit"
 
@@ -181,14 +183,14 @@ FASTJavaCompilationUnit >> packageDeclaration [
 	^ packageDeclaration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> packageDeclaration: anObject [
 
 	<generated>
 	packageDeclaration := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCompilationUnit >> packageDeclarationGroup [
 	<generated>
 	<navigation: 'PackageDeclaration'>

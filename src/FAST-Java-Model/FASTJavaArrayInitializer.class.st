@@ -68,14 +68,16 @@ My initializers are
 
 "
 Class {
-	#name : #FASTJavaArrayInitializer,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaArrayInitializer',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTTExpression',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaArrayInitializer class >> annotation [
 
 	<FMClass: #ArrayInitializer super: #FASTJavaEntity>
@@ -84,13 +86,13 @@ FASTJavaArrayInitializer class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaArrayInitializer >> addInitializer: anObject [
 	<generated>
 	^ self initializers add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayInitializer >> initializers [
 	"Relation named: #initializers type: #FASTTExpression opposite: #javaArrayInitializers"
 
@@ -101,14 +103,14 @@ FASTJavaArrayInitializer >> initializers [
 	^ self attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #javaArrayInitializers: ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayInitializer >> initializers: anObject [
 
 	<generated>
 	self initializers value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaArrayInitializer >> initializersGroup [
 	<generated>
 	<navigation: 'Initializers'>

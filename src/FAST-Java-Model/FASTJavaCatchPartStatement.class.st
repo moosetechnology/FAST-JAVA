@@ -38,8 +38,8 @@ I represent the 'catch' part of the TryCatch Statement
 
 "
 Class {
-	#name : #FASTJavaCatchPartStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaCatchPartStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
@@ -48,10 +48,12 @@ Class {
 		'#catchedTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
 		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaCatchPartStatement class >> annotation [
 
 	<FMClass: #CatchPartStatement super: #FASTJavaEntity>
@@ -60,13 +62,13 @@ FASTJavaCatchPartStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaCatchPartStatement >> addCatchedType: anObject [
 	<generated>
 	^ self catchedTypes add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> body [
 	"Relation named: #body type: #FASTJavaStatementBlock opposite: #javaCatchPartStatementOwner"
 
@@ -75,21 +77,21 @@ FASTJavaCatchPartStatement >> body [
 	^ body
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> body: anObject [
 
 	<generated>
 	body := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCatchPartStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
 	^ MooseSpecializedGroup with: self body
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> catchedTypes [
 	"Relation named: #catchedTypes type: #FASTJavaTypeExpression opposite: #catchOwner"
 
@@ -99,21 +101,21 @@ FASTJavaCatchPartStatement >> catchedTypes [
 	^ catchedTypes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> catchedTypes: anObject [
 
 	<generated>
 	catchedTypes value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCatchPartStatement >> catchedTypesGroup [
 	<generated>
 	<navigation: 'CatchedTypes'>
 	^ MooseSpecializedGroup withAll: self catchedTypes asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> parameter [
 	"Relation named: #parameter type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler"
 
@@ -122,21 +124,21 @@ FASTJavaCatchPartStatement >> parameter [
 	^ parameter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> parameter: anObject [
 
 	<generated>
 	parameter := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCatchPartStatement >> parameterGroup [
 	<generated>
 	<navigation: 'Parameter'>
 	^ MooseSpecializedGroup with: self parameter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> tryOwner [
 	"Relation named: #tryOwner type: #FASTJavaTryCatchStatement opposite: #catches"
 
@@ -146,14 +148,14 @@ FASTJavaCatchPartStatement >> tryOwner [
 	^ tryOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCatchPartStatement >> tryOwner: anObject [
 
 	<generated>
 	tryOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCatchPartStatement >> tryOwnerGroup [
 	<generated>
 	<navigation: 'TryOwner'>

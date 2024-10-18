@@ -13,12 +13,14 @@ void newMethod() {
 
 "
 Class {
-	#name : #FASTJavaEmptyMethodDeclaration,
-	#superclass : #FASTJavaMethodEntity,
-	#category : #'FAST-Java-Model-Entities'
+	#name : 'FASTJavaEmptyMethodDeclaration',
+	#superclass : 'FASTJavaMethodEntity',
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaEmptyMethodDeclaration class >> annotation [
 
 	<FMClass: #EmptyMethodDeclaration super: #FASTJavaMethodEntity>

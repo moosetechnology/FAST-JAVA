@@ -16,14 +16,16 @@ this.hello = ""hello""
 
 "
 Trait {
-	#name : #FASTJavaTAssignable,
+	#name : 'FASTJavaTAssignable',
 	#instVars : [
 		'#javaVariableAssignmentOwner => FMOne type: #FASTJavaTWithAssignable opposite: #variable'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTAssignable classSide >> annotation [
 
 	<FMClass: #TAssignable super: #Object>
@@ -32,7 +34,7 @@ FASTJavaTAssignable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTAssignable >> javaVariableAssignmentOwner [
 	"Relation named: #javaVariableAssignmentOwner type: #FASTJavaTWithAssignable opposite: #variable"
 
@@ -43,14 +45,14 @@ FASTJavaTAssignable >> javaVariableAssignmentOwner [
 	^ javaVariableAssignmentOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTAssignable >> javaVariableAssignmentOwner: anObject [
 
 	<generated>
 	javaVariableAssignmentOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTAssignable >> javaVariableAssignmentOwnerGroup [
 	<generated>
 	<navigation: 'JavaVariableAssignmentOwner'>

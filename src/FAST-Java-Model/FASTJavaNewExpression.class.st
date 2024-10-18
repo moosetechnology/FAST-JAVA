@@ -64,17 +64,19 @@ new Patate()
 
 "
 Class {
-	#name : #FASTJavaNewExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaNewExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTExpression + FASTTWithArguments',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaNewExpression class >> annotation [
 
 	<FMClass: #NewExpression super: #FASTJavaEntity>
@@ -83,7 +85,7 @@ FASTJavaNewExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaNewExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner"
 
@@ -92,14 +94,14 @@ FASTJavaNewExpression >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaNewExpression >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaNewExpression >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
