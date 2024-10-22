@@ -86,6 +86,13 @@ FASTJavaArrayAnnotationElement >> addValue: anObject [
 	^ self values add: anObject
 ]
 
+{ #category : 'testing' }
+FASTJavaArrayAnnotationElement >> isArrayAnnotationElement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaArrayAnnotationElement >> values [
 	"Relation named: #values type: #FASTJavaTAnnotationElement opposite: #arrayOwner"

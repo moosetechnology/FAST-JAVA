@@ -43,6 +43,13 @@ FASTJavaClassTypeExpression class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaClassTypeExpression >> isClassTypeExpression [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaClassTypeExpression >> javaMethodThrowsOwner [
 	"Relation named: #javaMethodThrowsOwner type: #FASTJavaMethodEntity opposite: #throws"

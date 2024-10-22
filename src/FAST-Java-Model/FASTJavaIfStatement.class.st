@@ -124,6 +124,13 @@ FASTJavaIfStatement >> elsePartGroup [
 	^ MooseSpecializedGroup with: self elsePart
 ]
 
+{ #category : 'testing' }
+FASTJavaIfStatement >> isIfStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaIfStatement >> thenPart [
 	"Relation named: #thenPart type: #FASTTStatement opposite: #ifThenPartOwner"

@@ -134,6 +134,13 @@ FASTJavaTryCatchStatement >> finallyGroup [
 	^ MooseSpecializedGroup with: self finally
 ]
 
+{ #category : 'testing' }
+FASTJavaTryCatchStatement >> isTryCatchStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> resources [
 	"Relation named: #resources type: #FASTJavaVarDeclStatement opposite: #javaTryResourceOwner"

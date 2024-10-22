@@ -86,6 +86,13 @@ FASTJavaVariableDeclarator >> expressionGroup [
 	^ MooseSpecializedGroup with: self expression
 ]
 
+{ #category : 'testing' }
+FASTJavaVariableDeclarator >> isVariableDeclarator [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaVariableDeclarator >> varDeclOwner [
 	"Relation named: #varDeclOwner type: #FASTJavaVarDeclStatement opposite: #declarators"

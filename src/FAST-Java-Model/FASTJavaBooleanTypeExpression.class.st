@@ -19,3 +19,10 @@ FASTJavaBooleanTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaBooleanTypeExpression >> isBooleanTypeExpression [
+
+	<generated>
+	^ true
+]

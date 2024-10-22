@@ -120,3 +120,10 @@ FASTJavaWhileStatement >> conditionGroup [
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
 ]
+
+{ #category : 'testing' }
+FASTJavaWhileStatement >> isWhileStatement [
+
+	<generated>
+	^ true
+]

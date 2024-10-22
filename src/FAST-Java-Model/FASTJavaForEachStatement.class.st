@@ -119,6 +119,13 @@ FASTJavaForEachStatement >> fieldnameGroup [
 	^ MooseSpecializedGroup with: self fieldname
 ]
 
+{ #category : 'testing' }
+FASTJavaForEachStatement >> isForEachStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaForEachStatement >> list [
 	"Relation named: #list type: #FASTTExpression opposite: #javaForEachStatementOwner"

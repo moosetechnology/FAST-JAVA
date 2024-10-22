@@ -184,3 +184,10 @@ FASTJavaForStatement >> initializerGroup [
 	<navigation: 'Initializer'>
 	^ MooseSpecializedGroup with: self initializer
 ]
+
+{ #category : 'testing' }
+FASTJavaForStatement >> isForStatement [
+
+	<generated>
+	^ true
+]

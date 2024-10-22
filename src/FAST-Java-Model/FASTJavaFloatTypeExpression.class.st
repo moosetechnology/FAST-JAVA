@@ -19,3 +19,10 @@ FASTJavaFloatTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaFloatTypeExpression >> isFloatTypeExpression [
+
+	<generated>
+	^ true
+]

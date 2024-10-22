@@ -75,6 +75,13 @@ FASTJavaImportDeclaration >> compilationUnitGroup [
 	^ MooseSpecializedGroup with: self compilationUnit
 ]
 
+{ #category : 'testing' }
+FASTJavaImportDeclaration >> isImportDeclaration [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaImportDeclaration >> isOnDemand [
 

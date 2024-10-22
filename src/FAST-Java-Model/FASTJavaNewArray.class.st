@@ -62,3 +62,10 @@ FASTJavaNewArray >> initializerGroup [
 	<navigation: 'Initializer'>
 	^ MooseSpecializedGroup with: self initializer
 ]
+
+{ #category : 'testing' }
+FASTJavaNewArray >> isNewArray [
+
+	<generated>
+	^ true
+]

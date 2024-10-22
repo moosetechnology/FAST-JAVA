@@ -74,6 +74,13 @@ FASTJavaMethodEntity >> addTypeParameter: anObject [
 	^ self typeParameters add: anObject
 ]
 
+{ #category : 'testing' }
+FASTJavaMethodEntity >> isMethodEntity [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaMethodEntity >> throws [
 	"Relation named: #throws type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner"

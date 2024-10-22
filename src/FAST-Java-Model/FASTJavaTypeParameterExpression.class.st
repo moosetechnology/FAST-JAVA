@@ -88,6 +88,13 @@ FASTJavaTypeParameterExpression >> addType: anObject [
 	^ self types add: anObject
 ]
 
+{ #category : 'testing' }
+FASTJavaTypeParameterExpression >> isTypeParameterExpression [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner [
 	"Relation named: #javaMethodTypeParameterOwner type: #FASTJavaMethodEntity opposite: #typeParameters"

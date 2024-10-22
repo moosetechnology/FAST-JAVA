@@ -19,3 +19,10 @@ FASTJavaVoidTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaVoidTypeExpression >> isVoidTypeExpression [
+
+	<generated>
+	^ true
+]

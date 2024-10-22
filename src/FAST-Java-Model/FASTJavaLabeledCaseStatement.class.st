@@ -33,6 +33,13 @@ FASTJavaLabeledCaseStatement class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaLabeledCaseStatement >> isLabeledCaseStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaLabeledCaseStatement >> label [
 	"Relation named: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner"

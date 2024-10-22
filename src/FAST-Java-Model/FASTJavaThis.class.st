@@ -19,3 +19,10 @@ FASTJavaThis class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaThis >> isThis [
+
+	<generated>
+	^ true
+]

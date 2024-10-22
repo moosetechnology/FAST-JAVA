@@ -86,6 +86,13 @@ FASTJavaInfixOperation class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaInfixOperation >> isInfixOperation [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaInfixOperation >> leftOperand [
 	"Relation named: #leftOperand type: #FASTTExpression opposite: #infixOperationLeftOperandOwner"

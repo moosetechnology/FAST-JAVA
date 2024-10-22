@@ -19,3 +19,10 @@ FASTJavaLongTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaLongTypeExpression >> isLongTypeExpression [
+
+	<generated>
+	^ true
+]

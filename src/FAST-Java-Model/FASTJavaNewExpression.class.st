@@ -85,6 +85,13 @@ FASTJavaNewExpression class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaNewExpression >> isNewExpression [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaNewExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner"

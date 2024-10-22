@@ -59,3 +59,10 @@ FASTJavaArrayTypeExpression >> baseTypeGroup [
 	<navigation: 'BaseType'>
 	^ MooseSpecializedGroup with: self baseType
 ]
+
+{ #category : 'testing' }
+FASTJavaArrayTypeExpression >> isArrayTypeExpression [
+
+	<generated>
+	^ true
+]

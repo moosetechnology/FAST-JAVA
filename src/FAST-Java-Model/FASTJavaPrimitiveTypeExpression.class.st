@@ -19,3 +19,10 @@ FASTJavaPrimitiveTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaPrimitiveTypeExpression >> isPrimitiveTypeExpression [
+
+	<generated>
+	^ true
+]

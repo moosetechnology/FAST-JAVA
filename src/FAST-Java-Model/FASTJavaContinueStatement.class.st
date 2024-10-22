@@ -47,3 +47,10 @@ FASTJavaContinueStatement class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaContinueStatement >> isContinueStatement [
+
+	<generated>
+	^ true
+]

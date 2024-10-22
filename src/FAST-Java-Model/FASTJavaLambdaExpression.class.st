@@ -106,3 +106,10 @@ FASTJavaLambdaExpression >> expressionGroup [
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
+
+{ #category : 'testing' }
+FASTJavaLambdaExpression >> isLambdaExpression [
+
+	<generated>
+	^ true
+]

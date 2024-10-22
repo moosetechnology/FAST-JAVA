@@ -44,3 +44,10 @@ FASTJavaNewClassExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaNewClassExpression >> isNewClassExpression [
+
+	<generated>
+	^ true
+]

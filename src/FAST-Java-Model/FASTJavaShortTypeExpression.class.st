@@ -19,3 +19,10 @@ FASTJavaShortTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaShortTypeExpression >> isShortTypeExpression [
+
+	<generated>
+	^ true
+]

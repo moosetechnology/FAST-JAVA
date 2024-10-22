@@ -122,3 +122,10 @@ FASTJavaSwitchStatement >> conditionGroup [
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
 ]
+
+{ #category : 'testing' }
+FASTJavaSwitchStatement >> isSwitchStatement [
+
+	<generated>
+	^ true
+]

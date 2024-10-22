@@ -51,6 +51,13 @@ FASTJavaQualifiedName class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaQualifiedName >> isQualifiedName [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaQualifiedName >> namespace [
 	"Relation named: #namespace type: #FASTJavaQualifiedName opposite: #namespaceOwner"

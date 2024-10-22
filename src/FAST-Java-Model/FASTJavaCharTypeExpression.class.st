@@ -19,3 +19,10 @@ FASTJavaCharTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaCharTypeExpression >> isCharTypeExpression [
+
+	<generated>
+	^ true
+]

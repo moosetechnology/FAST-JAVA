@@ -116,3 +116,10 @@ FASTJavaArrayInitializer >> initializersGroup [
 	<navigation: 'Initializers'>
 	^ MooseSpecializedGroup withAll: self initializers asSet
 ]
+
+{ #category : 'testing' }
+FASTJavaArrayInitializer >> isArrayInitializer [
+
+	<generated>
+	^ true
+]

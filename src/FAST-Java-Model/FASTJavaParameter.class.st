@@ -101,6 +101,13 @@ FASTJavaParameter >> hasVariableArguments: anObject [
 	hasVariableArguments := anObject
 ]
 
+{ #category : 'testing' }
+FASTJavaParameter >> isParameter [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaParameter >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner"

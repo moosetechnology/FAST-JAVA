@@ -19,3 +19,10 @@ FASTJavaIntTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaIntTypeExpression >> isIntTypeExpression [
+
+	<generated>
+	^ true
+]

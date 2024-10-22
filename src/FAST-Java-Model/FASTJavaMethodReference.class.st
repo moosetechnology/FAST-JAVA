@@ -80,6 +80,13 @@ FASTJavaMethodReference class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaMethodReference >> isMethodReference [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaMethodReference >> receiver [
 	"Relation named: #receiver type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner"

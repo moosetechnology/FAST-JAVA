@@ -23,3 +23,10 @@ FASTJavaDefaultCaseStatement class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaDefaultCaseStatement >> isDefaultCaseStatement [
+
+	<generated>
+	^ true
+]

@@ -60,6 +60,13 @@ FASTJavaCaseStatement class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaCaseStatement >> isCaseStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
 	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaSwitchStatement opposite: #cases"

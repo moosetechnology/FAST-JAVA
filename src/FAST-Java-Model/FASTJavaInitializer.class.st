@@ -63,6 +63,13 @@ FASTJavaInitializer class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaInitializer >> isInitializer [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaInitializer >> isStatic [
 

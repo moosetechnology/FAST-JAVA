@@ -80,6 +80,13 @@ FASTJavaTypeName class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaTypeName >> isTypeName [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaTypeName >> javaTypeNameQualify [
 	"Relation named: #javaTypeNameQualify type: #FASTJavaQualifiedTypeName opposite: #namespace"

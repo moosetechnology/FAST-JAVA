@@ -68,6 +68,13 @@ FASTJavaTypeExpression >> catchOwnerGroup [
 	^ MooseSpecializedGroup with: self catchOwner
 ]
 
+{ #category : 'testing' }
+FASTJavaTypeExpression >> isTypeExpression [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner [
 	"Relation named: #javaClassDeclarationInterfaceOwner type: #FASTJavaClassDeclaration opposite: #interfaces"

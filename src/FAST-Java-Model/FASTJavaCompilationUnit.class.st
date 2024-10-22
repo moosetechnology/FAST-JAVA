@@ -174,6 +174,13 @@ FASTJavaCompilationUnit >> interfaceDeclarationsGroup [
 	^ MooseSpecializedGroup withAll: self interfaceDeclarations asSet
 ]
 
+{ #category : 'testing' }
+FASTJavaCompilationUnit >> isCompilationUnit [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> packageDeclaration [
 	"Relation named: #packageDeclaration type: #FASTJavaPackageDeclaration opposite: #compilationUnit"

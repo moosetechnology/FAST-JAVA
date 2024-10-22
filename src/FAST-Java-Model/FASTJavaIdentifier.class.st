@@ -35,6 +35,13 @@ FASTJavaIdentifier class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaIdentifier >> isIdentifier [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaIdentifier >> javaForEachStatementFieldNameOwner [
 	"Relation named: #javaForEachStatementFieldNameOwner type: #FASTJavaForEachStatement opposite: #fieldname"

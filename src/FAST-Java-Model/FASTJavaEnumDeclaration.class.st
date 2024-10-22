@@ -165,3 +165,10 @@ FASTJavaEnumDeclaration >> interfacesGroup [
 	<navigation: 'Interfaces'>
 	^ MooseSpecializedGroup withAll: self interfaces asSet
 ]
+
+{ #category : 'testing' }
+FASTJavaEnumDeclaration >> isEnumDeclaration [
+
+	<generated>
+	^ true
+]

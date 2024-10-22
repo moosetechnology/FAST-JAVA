@@ -71,3 +71,10 @@ FASTJavaPackageDeclaration >> compilationUnitGroup [
 	<navigation: 'CompilationUnit'>
 	^ MooseSpecializedGroup with: self compilationUnit
 ]
+
+{ #category : 'testing' }
+FASTJavaPackageDeclaration >> isPackageDeclaration [
+
+	<generated>
+	^ true
+]

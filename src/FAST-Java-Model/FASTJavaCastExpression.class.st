@@ -111,6 +111,13 @@ FASTJavaCastExpression >> expressionGroup [
 	^ MooseSpecializedGroup with: self expression
 ]
 
+{ #category : 'testing' }
+FASTJavaCastExpression >> isCastExpression [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaCastExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"

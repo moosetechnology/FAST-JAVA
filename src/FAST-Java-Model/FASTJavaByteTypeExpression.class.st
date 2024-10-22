@@ -19,3 +19,10 @@ FASTJavaByteTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaByteTypeExpression >> isByteTypeExpression [
+
+	<generated>
+	^ true
+]

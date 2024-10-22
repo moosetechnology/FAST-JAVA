@@ -95,3 +95,10 @@ FASTJavaFieldAccess >> fieldName: anObject [
 	<generated>
 	fieldName := anObject
 ]
+
+{ #category : 'testing' }
+FASTJavaFieldAccess >> isFieldAccess [
+
+	<generated>
+	^ true
+]

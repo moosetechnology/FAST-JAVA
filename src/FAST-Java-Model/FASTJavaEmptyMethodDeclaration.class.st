@@ -28,3 +28,10 @@ FASTJavaEmptyMethodDeclaration class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaEmptyMethodDeclaration >> isEmptyMethodDeclaration [
+
+	<generated>
+	^ true
+]

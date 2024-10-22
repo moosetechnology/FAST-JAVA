@@ -99,6 +99,13 @@ FASTJavaModifier class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaModifier >> isModifier [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaModifier >> token [
 

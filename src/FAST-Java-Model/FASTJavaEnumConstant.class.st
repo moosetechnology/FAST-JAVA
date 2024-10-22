@@ -30,6 +30,13 @@ FASTJavaEnumConstant class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaEnumConstant >> isEnumConstant [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaEnumConstant >> parentEnum [
 	"Relation named: #parentEnum type: #FASTJavaEnumDeclaration opposite: #constants"

@@ -47,3 +47,10 @@ FASTJavaBreakStatement class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaBreakStatement >> isBreakStatement [
+
+	<generated>
+	^ true
+]

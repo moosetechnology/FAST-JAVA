@@ -134,6 +134,13 @@ FASTJavaClassDeclaration >> interfacesGroup [
 	^ MooseSpecializedGroup withAll: self interfaces asSet
 ]
 
+{ #category : 'testing' }
+FASTJavaClassDeclaration >> isClassDeclaration [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> superclass [
 	"Relation named: #superclass type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwner"

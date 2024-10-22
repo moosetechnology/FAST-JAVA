@@ -55,6 +55,13 @@ FASTJavaLabeledStatement class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaLabeledStatement >> isLabeledStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaLabeledStatement >> label [
 

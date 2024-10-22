@@ -116,6 +116,13 @@ FASTJavaAssignmentExpression >> expressionGroup [
 	^ MooseSpecializedGroup with: self expression
 ]
 
+{ #category : 'testing' }
+FASTJavaAssignmentExpression >> isAssignmentExpression [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaAssignmentExpression >> operator [
 

@@ -115,3 +115,10 @@ FASTJavaSynchronizedStatement >> expressionGroup [
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
+
+{ #category : 'testing' }
+FASTJavaSynchronizedStatement >> isSynchronizedStatement [
+
+	<generated>
+	^ true
+]

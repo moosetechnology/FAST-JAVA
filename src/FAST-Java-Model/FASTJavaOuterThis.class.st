@@ -83,6 +83,13 @@ FASTJavaOuterThis class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaOuterThis >> isOuterThis [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaOuterThis >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner"

@@ -89,6 +89,13 @@ FASTJavaTypePattern class >> annotation [
 	^ self
 ]
 
+{ #category : 'testing' }
+FASTJavaTypePattern >> isTypePattern [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaTypePattern >> type [
 	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner"

@@ -98,6 +98,13 @@ FASTJavaVarDeclStatement >> declaratorsGroup [
 	^ MooseSpecializedGroup withAll: self declarators asSet
 ]
 
+{ #category : 'testing' }
+FASTJavaVarDeclStatement >> isVarDeclStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaVarDeclStatement >> javaTryResourceOwner [
 	"Relation named: #javaTryResourceOwner type: #FASTJavaTryCatchStatement opposite: #resources"

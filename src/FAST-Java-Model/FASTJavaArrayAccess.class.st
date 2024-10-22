@@ -143,3 +143,10 @@ FASTJavaArrayAccess >> expressionGroup [
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
+
+{ #category : 'testing' }
+FASTJavaArrayAccess >> isArrayAccess [
+
+	<generated>
+	^ true
+]

@@ -85,3 +85,10 @@ FASTJavaAnnotation >> elementsGroup [
 	<navigation: 'Elements'>
 	^ MooseSpecializedGroup withAll: self elements asSet
 ]
+
+{ #category : 'testing' }
+FASTJavaAnnotation >> isAnnotation [
+
+	<generated>
+	^ true
+]

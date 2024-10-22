@@ -132,3 +132,10 @@ FASTJavaInterfaceDeclaration >> interfacesGroup [
 	<navigation: 'Interfaces'>
 	^ MooseSpecializedGroup withAll: self interfaces asSet
 ]
+
+{ #category : 'testing' }
+FASTJavaInterfaceDeclaration >> isInterfaceDeclaration [
+
+	<generated>
+	^ true
+]

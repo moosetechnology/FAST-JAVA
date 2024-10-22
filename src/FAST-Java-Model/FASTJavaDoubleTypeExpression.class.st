@@ -19,3 +19,10 @@ FASTJavaDoubleTypeExpression class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : 'testing' }
+FASTJavaDoubleTypeExpression >> isDoubleTypeExpression [
+
+	<generated>
+	^ true
+]

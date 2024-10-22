@@ -115,6 +115,13 @@ FASTJavaCatchPartStatement >> catchedTypesGroup [
 	^ MooseSpecializedGroup withAll: self catchedTypes asSet
 ]
 
+{ #category : 'testing' }
+FASTJavaCatchPartStatement >> isCatchPartStatement [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> parameter [
 	"Relation named: #parameter type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler"

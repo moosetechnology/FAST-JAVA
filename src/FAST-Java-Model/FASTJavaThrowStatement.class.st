@@ -87,3 +87,10 @@ FASTJavaThrowStatement >> expressionGroup [
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
+
+{ #category : 'testing' }
+FASTJavaThrowStatement >> isThrowStatement [
+
+	<generated>
+	^ true
+]

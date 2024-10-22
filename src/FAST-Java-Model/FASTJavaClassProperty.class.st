@@ -93,6 +93,13 @@ FASTJavaClassProperty >> fieldName: anObject [
 	fieldName := anObject
 ]
 
+{ #category : 'testing' }
+FASTJavaClassProperty >> isClassProperty [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaClassProperty >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner"

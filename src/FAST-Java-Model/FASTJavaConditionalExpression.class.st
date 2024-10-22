@@ -144,6 +144,13 @@ FASTJavaConditionalExpression >> elsePartGroup [
 	^ MooseSpecializedGroup with: self elsePart
 ]
 
+{ #category : 'testing' }
+FASTJavaConditionalExpression >> isConditionalExpression [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FASTJavaConditionalExpression >> thenPart [
 	"Relation named: #thenPart type: #FASTTExpression opposite: #conditionalThenPartOwner"
