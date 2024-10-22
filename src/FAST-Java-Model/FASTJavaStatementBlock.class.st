@@ -39,8 +39,8 @@
 
 "
 Class {
-	#name : #FASTJavaStatementBlock,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaStatementBlock',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatementBlock',
 	#classTraits : 'FASTTStatementBlock classTrait',
 	#instVars : [
@@ -48,10 +48,12 @@ Class {
 		'#javaTryFinallyOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #finally',
 		'#javaCatchPartStatementOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #body'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaStatementBlock class >> annotation [
 
 	<FMClass: #StatementBlock super: #FASTJavaEntity>
@@ -60,7 +62,7 @@ FASTJavaStatementBlock class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaStatementBlock >> javaCatchPartStatementOwner [
 	"Relation named: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body"
 
@@ -71,21 +73,21 @@ FASTJavaStatementBlock >> javaCatchPartStatementOwner [
 	^ javaCatchPartStatementOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaStatementBlock >> javaCatchPartStatementOwner: anObject [
 
 	<generated>
 	javaCatchPartStatementOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaStatementBlock >> javaCatchPartStatementOwnerGroup [
 	<generated>
 	<navigation: 'JavaCatchPartStatementOwner'>
 	^ MooseSpecializedGroup with: self javaCatchPartStatementOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryCatchOwner [
 	"Relation named: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try"
 
@@ -96,21 +98,21 @@ FASTJavaStatementBlock >> javaTryCatchOwner [
 	^ javaTryCatchOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryCatchOwner: anObject [
 
 	<generated>
 	javaTryCatchOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaStatementBlock >> javaTryCatchOwnerGroup [
 	<generated>
 	<navigation: 'JavaTryCatchOwner'>
 	^ MooseSpecializedGroup with: self javaTryCatchOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryFinallyOwner [
 	"Relation named: #javaTryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally"
 
@@ -121,14 +123,14 @@ FASTJavaStatementBlock >> javaTryFinallyOwner [
 	^ javaTryFinallyOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryFinallyOwner: anObject [
 
 	<generated>
 	javaTryFinallyOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaStatementBlock >> javaTryFinallyOwnerGroup [
 	<generated>
 	<navigation: 'JavaTryFinallyOwner'>

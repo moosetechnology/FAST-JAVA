@@ -13,14 +13,16 @@ I have an assignable
 
 "
 Trait {
-	#name : #FASTJavaTWithAssignable,
+	#name : 'FASTJavaTWithAssignable',
 	#instVars : [
 		'#variable => FMOne type: #FASTJavaTAssignable opposite: #javaVariableAssignmentOwner'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTWithAssignable classSide >> annotation [
 
 	<FMClass: #TWithAssignable super: #Object>
@@ -29,7 +31,7 @@ FASTJavaTWithAssignable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithAssignable >> variable [
 	"Relation named: #variable type: #FASTJavaTAssignable opposite: #javaVariableAssignmentOwner"
 
@@ -38,14 +40,14 @@ FASTJavaTWithAssignable >> variable [
 	^ variable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithAssignable >> variable: anObject [
 
 	<generated>
 	variable := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTWithAssignable >> variableGroup [
 	<generated>
 	<navigation: 'Variable'>

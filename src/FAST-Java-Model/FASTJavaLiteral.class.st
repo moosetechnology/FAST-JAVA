@@ -15,14 +15,16 @@ abtract class for all literals
 
 "
 Class {
-	#name : #FASTJavaLiteral,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaLiteral',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTJavaTReceiver',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTReceiver classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaLiteral class >> annotation [
 
 	<FMClass: #Literal super: #FASTJavaEntity>

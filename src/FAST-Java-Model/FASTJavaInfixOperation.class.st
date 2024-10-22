@@ -65,17 +65,19 @@ ex:
 
 "
 Class {
-	#name : #FASTJavaInfixOperation,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaInfixOperation',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaInfixOperation class >> annotation [
 
 	<FMClass: #InfixOperation super: #FASTJavaEntity>
@@ -84,7 +86,14 @@ FASTJavaInfixOperation class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaInfixOperation >> isInfixOperation [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaInfixOperation >> leftOperand [
 	"Relation named: #leftOperand type: #FASTTExpression opposite: #infixOperationLeftOperandOwner"
 
@@ -94,7 +103,7 @@ FASTJavaInfixOperation >> leftOperand [
 	^ self attributeAt: #leftOperand ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInfixOperation >> leftOperand: anObject [
 
 	<generated>
@@ -108,14 +117,14 @@ FASTJavaInfixOperation >> leftOperand: anObject [
 		anObject infixOperationLeftOperandOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaInfixOperation >> leftOperandGroup [
 	<generated>
 	<navigation: 'LeftOperand'>
 	^ MooseSpecializedGroup with: self leftOperand
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInfixOperation >> operator [
 
 	<FMProperty: #operator type: #String>
@@ -124,13 +133,13 @@ FASTJavaInfixOperation >> operator [
 	^ operator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInfixOperation >> operator: anObject [
 	<generated>
 	operator := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInfixOperation >> rightOperand [
 	"Relation named: #rightOperand type: #FASTTExpression opposite: #infixOperationRightOperandOwner"
 
@@ -140,7 +149,7 @@ FASTJavaInfixOperation >> rightOperand [
 	^ self attributeAt: #rightOperand ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInfixOperation >> rightOperand: anObject [
 
 	<generated>
@@ -154,7 +163,7 @@ FASTJavaInfixOperation >> rightOperand: anObject [
 		anObject infixOperationRightOperandOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaInfixOperation >> rightOperandGroup [
 	<generated>
 	<navigation: 'RightOperand'>

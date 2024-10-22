@@ -60,18 +60,20 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 
 "
 Class {
-	#name : #FASTJavaTypeParameterExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaTypeParameterExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpression + FASTTNamedEntity',
 	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaMethodTypeParameterOwner => FMOne type: #FASTJavaMethodEntity opposite: #typeParameters',
 		'#types => FMMany type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTypeParameterExpression class >> annotation [
 
 	<FMClass: #TypeParameterExpression super: #FASTJavaEntity>
@@ -80,13 +82,20 @@ FASTJavaTypeParameterExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaTypeParameterExpression >> addType: anObject [
 	<generated>
 	^ self types add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaTypeParameterExpression >> isTypeParameterExpression [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner [
 	"Relation named: #javaMethodTypeParameterOwner type: #FASTJavaMethodEntity opposite: #typeParameters"
 
@@ -96,21 +105,21 @@ FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner [
 	^ javaMethodTypeParameterOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner: anObject [
 
 	<generated>
 	javaMethodTypeParameterOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwnerGroup [
 	<generated>
 	<navigation: 'JavaMethodTypeParameterOwner'>
 	^ MooseSpecializedGroup with: self javaMethodTypeParameterOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeParameterExpression >> types [
 	"Relation named: #types type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner"
 
@@ -120,14 +129,14 @@ FASTJavaTypeParameterExpression >> types [
 	^ types
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypeParameterExpression >> types: anObject [
 
 	<generated>
 	types value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypeParameterExpression >> typesGroup [
 	<generated>
 	<navigation: 'Types'>

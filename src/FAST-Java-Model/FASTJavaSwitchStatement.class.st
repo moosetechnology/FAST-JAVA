@@ -41,17 +41,19 @@ switch (_) {
 
 "
 Class {
-	#name : #FASTJavaSwitchStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaSwitchStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#cases => FMMany type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaSwitchStatement class >> annotation [
 
 	<FMClass: #SwitchStatement super: #FASTJavaEntity>
@@ -60,13 +62,13 @@ FASTJavaSwitchStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaSwitchStatement >> addCase: anObject [
 	<generated>
 	^ self cases add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSwitchStatement >> cases [
 	"Relation named: #cases type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner"
 
@@ -76,21 +78,21 @@ FASTJavaSwitchStatement >> cases [
 	^ cases
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSwitchStatement >> cases: anObject [
 
 	<generated>
 	cases value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaSwitchStatement >> casesGroup [
 	<generated>
 	<navigation: 'Cases'>
 	^ MooseSpecializedGroup withAll: self cases asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSwitchStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #switchConditionOwner"
 
@@ -100,7 +102,7 @@ FASTJavaSwitchStatement >> condition [
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSwitchStatement >> condition: anObject [
 
 	<generated>
@@ -114,9 +116,16 @@ FASTJavaSwitchStatement >> condition: anObject [
 		anObject switchConditionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaSwitchStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
+]
+
+{ #category : 'testing' }
+FASTJavaSwitchStatement >> isSwitchStatement [
+
+	<generated>
+	^ true
 ]

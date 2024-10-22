@@ -43,18 +43,20 @@ for(Patate p : list) {
 
 "
 Class {
-	#name : #FASTJavaForEachStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaForEachStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#fieldname => FMOne type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner',
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaForEachStatement class >> annotation [
 
 	<FMClass: #ForEachStatement super: #FASTJavaEntity>
@@ -63,7 +65,7 @@ FASTJavaForEachStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> body [
 	"Relation named: #body type: #FASTTStatement opposite: #javaForEachStatementOwner"
 
@@ -73,7 +75,7 @@ FASTJavaForEachStatement >> body [
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> body: anObject [
 
 	<generated>
@@ -87,14 +89,14 @@ FASTJavaForEachStatement >> body: anObject [
 		anObject javaForEachStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForEachStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
 	^ MooseSpecializedGroup with: self body
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> fieldname [
 	"Relation named: #fieldname type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner"
 
@@ -103,21 +105,28 @@ FASTJavaForEachStatement >> fieldname [
 	^ fieldname
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> fieldname: anObject [
 
 	<generated>
 	fieldname := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForEachStatement >> fieldnameGroup [
 	<generated>
 	<navigation: 'Fieldname'>
 	^ MooseSpecializedGroup with: self fieldname
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaForEachStatement >> isForEachStatement [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> list [
 	"Relation named: #list type: #FASTTExpression opposite: #javaForEachStatementOwner"
 
@@ -127,7 +136,7 @@ FASTJavaForEachStatement >> list [
 	^ self attributeAt: #list ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> list: anObject [
 
 	<generated>
@@ -141,14 +150,14 @@ FASTJavaForEachStatement >> list: anObject [
 		anObject javaForEachStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForEachStatement >> listGroup [
 	<generated>
 	<navigation: 'List'>
 	^ MooseSpecializedGroup with: self list
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> type [
 	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner"
 
@@ -157,14 +166,14 @@ FASTJavaForEachStatement >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaForEachStatement >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaForEachStatement >> typeGroup [
 	<generated>
 	<navigation: 'Type'>

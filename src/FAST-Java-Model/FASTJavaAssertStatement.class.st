@@ -43,14 +43,16 @@ void method (){
 
 "
 Class {
-	#name : #FASTJavaAssertStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaAssertStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaAssertStatement class >> annotation [
 
 	<FMClass: #AssertStatement super: #FASTJavaEntity>
@@ -59,7 +61,7 @@ FASTJavaAssertStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAssertStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #assertConditionOwner"
 
@@ -69,7 +71,7 @@ FASTJavaAssertStatement >> condition [
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAssertStatement >> condition: anObject [
 
 	<generated>
@@ -83,14 +85,14 @@ FASTJavaAssertStatement >> condition: anObject [
 		anObject assertConditionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaAssertStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAssertStatement >> message [
 	"Relation named: #message type: #FASTTExpression opposite: #javaStringAssertStatementOwner"
 
@@ -100,7 +102,7 @@ FASTJavaAssertStatement >> message [
 	^ self attributeAt: #message ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAssertStatement >> message: anObject [
 
 	<generated>
@@ -114,7 +116,7 @@ FASTJavaAssertStatement >> message: anObject [
 		anObject javaStringAssertStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaAssertStatement >> messageGroup [
 	<generated>
 	<navigation: 'Message'>

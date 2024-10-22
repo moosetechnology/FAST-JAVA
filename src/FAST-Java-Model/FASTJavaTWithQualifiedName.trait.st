@@ -13,14 +13,16 @@ I have a qualified name.
 
 "
 Trait {
-	#name : #FASTJavaTWithQualifiedName,
+	#name : 'FASTJavaTWithQualifiedName',
 	#instVars : [
 		'#qualifiedName => FMOne type: #FASTJavaQualifiedName opposite: #qualifiedNameOwner'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTWithQualifiedName classSide >> annotation [
 
 	<FMClass: #TWithQualifiedName super: #Object>
@@ -29,7 +31,7 @@ FASTJavaTWithQualifiedName classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithQualifiedName >> qualifiedName [
 	"Relation named: #qualifiedName type: #FASTJavaQualifiedName opposite: #qualifiedNameOwner"
 
@@ -38,14 +40,14 @@ FASTJavaTWithQualifiedName >> qualifiedName [
 	^ qualifiedName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithQualifiedName >> qualifiedName: anObject [
 
 	<generated>
 	qualifiedName := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTWithQualifiedName >> qualifiedNameGroup [
 	<generated>
 	<navigation: 'QualifiedName'>

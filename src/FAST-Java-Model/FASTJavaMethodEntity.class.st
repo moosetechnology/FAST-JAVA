@@ -39,8 +39,8 @@ Represents a Java method
 
 "
 Class {
-	#name : #FASTJavaMethodEntity,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaMethodEntity',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
@@ -48,10 +48,12 @@ Class {
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
 		'#typeParameters => FMMany type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaMethodEntity class >> annotation [
 
 	<FMClass: #MethodEntity super: #FASTJavaEntity>
@@ -60,19 +62,26 @@ FASTJavaMethodEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaMethodEntity >> addThrow: anObject [
 	<generated>
 	^ self throws add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaMethodEntity >> addTypeParameter: anObject [
 	<generated>
 	^ self typeParameters add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaMethodEntity >> isMethodEntity [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaMethodEntity >> throws [
 	"Relation named: #throws type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner"
 
@@ -82,21 +91,21 @@ FASTJavaMethodEntity >> throws [
 	^ throws
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaMethodEntity >> throws: anObject [
 
 	<generated>
 	throws value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaMethodEntity >> throwsGroup [
 	<generated>
 	<navigation: 'Throws'>
 	^ MooseSpecializedGroup withAll: self throws asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaMethodEntity >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner"
 
@@ -105,21 +114,21 @@ FASTJavaMethodEntity >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaMethodEntity >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaMethodEntity >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
 	^ MooseSpecializedGroup with: self type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaMethodEntity >> typeParameters [
 	"Relation named: #typeParameters type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner"
 
@@ -129,14 +138,14 @@ FASTJavaMethodEntity >> typeParameters [
 	^ typeParameters
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaMethodEntity >> typeParameters: anObject [
 
 	<generated>
 	typeParameters value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaMethodEntity >> typeParametersGroup [
 	<generated>
 	<navigation: 'TypeParameters'>

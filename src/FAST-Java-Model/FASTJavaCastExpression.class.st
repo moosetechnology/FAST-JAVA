@@ -59,17 +59,19 @@ I represent a cast expression, e.g. `(int) 0.5`
 
 "
 Class {
-	#name : #FASTJavaCastExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaCastExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaCastExpression class >> annotation [
 
 	<FMClass: #CastExpression super: #FASTJavaEntity>
@@ -78,7 +80,7 @@ FASTJavaCastExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCastExpression >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaCastExpressionOwner"
 
@@ -88,7 +90,7 @@ FASTJavaCastExpression >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCastExpression >> expression: anObject [
 
 	<generated>
@@ -102,14 +104,21 @@ FASTJavaCastExpression >> expression: anObject [
 		anObject javaCastExpressionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCastExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaCastExpression >> isCastExpression [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaCastExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"
 
@@ -118,14 +127,14 @@ FASTJavaCastExpression >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaCastExpression >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaCastExpression >> typeGroup [
 	<generated>
 	<navigation: 'Type'>

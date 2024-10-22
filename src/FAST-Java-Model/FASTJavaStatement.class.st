@@ -28,14 +28,16 @@
 
 "
 Class {
-	#name : #FASTJavaStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaStatement class >> annotation [
 
 	<FMClass: #Statement super: #FASTJavaEntity>

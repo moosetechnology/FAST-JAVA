@@ -64,17 +64,19 @@ Contains a referances to an assignee assignee and the expression that's being as
 
 "
 Class {
-	#name : #FASTJavaAssignmentExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaAssignmentExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTJavaTReceiver + FASTJavaTWithAssignable + FASTTExpression',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTReceiver classTrait + FASTJavaTWithAssignable classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaAssignmentExpression class >> annotation [
 
 	<FMClass: #AssignmentExpression super: #FASTJavaEntity>
@@ -83,7 +85,7 @@ FASTJavaAssignmentExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAssignmentExpression >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaAssignmentExpressionOwner"
 
@@ -93,7 +95,7 @@ FASTJavaAssignmentExpression >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAssignmentExpression >> expression: anObject [
 
 	<generated>
@@ -107,14 +109,21 @@ FASTJavaAssignmentExpression >> expression: anObject [
 		anObject javaAssignmentExpressionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaAssignmentExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaAssignmentExpression >> isAssignmentExpression [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaAssignmentExpression >> operator [
 
 	<FMProperty: #operator type: #String>
@@ -123,7 +132,7 @@ FASTJavaAssignmentExpression >> operator [
 	^ operator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaAssignmentExpression >> operator: anObject [
 	<generated>
 	operator := anObject

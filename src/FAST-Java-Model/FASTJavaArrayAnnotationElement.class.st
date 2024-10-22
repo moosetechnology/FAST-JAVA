@@ -59,17 +59,19 @@ I represent an array as argument of an annotationExpression
 
 "
 Class {
-	#name : #FASTJavaArrayAnnotationElement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaArrayAnnotationElement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTTExpression',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#values => FMMany type: #FASTJavaTAnnotationElement opposite: #arrayOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaArrayAnnotationElement class >> annotation [
 
 	<FMClass: #ArrayAnnotationElement super: #FASTJavaEntity>
@@ -78,13 +80,20 @@ FASTJavaArrayAnnotationElement class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaArrayAnnotationElement >> addValue: anObject [
 	<generated>
 	^ self values add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaArrayAnnotationElement >> isArrayAnnotationElement [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaArrayAnnotationElement >> values [
 	"Relation named: #values type: #FASTJavaTAnnotationElement opposite: #arrayOwner"
 
@@ -94,14 +103,14 @@ FASTJavaArrayAnnotationElement >> values [
 	^ values
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayAnnotationElement >> values: anObject [
 
 	<generated>
 	values value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaArrayAnnotationElement >> valuesGroup [
 	<generated>
 	<navigation: 'Values'>

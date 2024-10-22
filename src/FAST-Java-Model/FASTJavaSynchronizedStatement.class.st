@@ -36,14 +36,16 @@ I represent a 'synchronized' statement
 
 "
 Class {
-	#name : #FASTJavaSynchronizedStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaSynchronizedStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaSynchronizedStatement class >> annotation [
 
 	<FMClass: #SynchronizedStatement super: #FASTJavaEntity>
@@ -52,7 +54,7 @@ FASTJavaSynchronizedStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSynchronizedStatement >> block [
 	"Relation named: #block type: #FASTTStatementBlock opposite: #javaSynchronizedStatementOwner"
 
@@ -62,7 +64,7 @@ FASTJavaSynchronizedStatement >> block [
 	^ self attributeAt: #block ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSynchronizedStatement >> block: anObject [
 
 	<generated>
@@ -76,14 +78,14 @@ FASTJavaSynchronizedStatement >> block: anObject [
 		anObject javaSynchronizedStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaSynchronizedStatement >> blockGroup [
 	<generated>
 	<navigation: 'Block'>
 	^ MooseSpecializedGroup with: self block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSynchronizedStatement >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaSynchronizedStatementOwner"
 
@@ -93,7 +95,7 @@ FASTJavaSynchronizedStatement >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaSynchronizedStatement >> expression: anObject [
 
 	<generated>
@@ -107,9 +109,16 @@ FASTJavaSynchronizedStatement >> expression: anObject [
 		anObject javaSynchronizedStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaSynchronizedStatement >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
+]
+
+{ #category : 'testing' }
+FASTJavaSynchronizedStatement >> isSynchronizedStatement [
+
+	<generated>
+	^ true
 ]

@@ -20,8 +20,8 @@ I represent a class type
 
 "
 Class {
-	#name : #FASTJavaClassTypeExpression,
-	#superclass : #FASTJavaTypeExpression,
+	#name : 'FASTJavaClassTypeExpression',
+	#superclass : 'FASTJavaTypeExpression',
 	#traits : 'FASTTWithArguments',
 	#classTraits : 'FASTTWithArguments classTrait',
 	#instVars : [
@@ -29,10 +29,12 @@ Class {
 		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types',
 		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaClassTypeExpression class >> annotation [
 
 	<FMClass: #ClassTypeExpression super: #FASTJavaTypeExpression>
@@ -41,7 +43,14 @@ FASTJavaClassTypeExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaClassTypeExpression >> isClassTypeExpression [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaClassTypeExpression >> javaMethodThrowsOwner [
 	"Relation named: #javaMethodThrowsOwner type: #FASTJavaMethodEntity opposite: #throws"
 
@@ -51,21 +60,21 @@ FASTJavaClassTypeExpression >> javaMethodThrowsOwner [
 	^ javaMethodThrowsOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassTypeExpression >> javaMethodThrowsOwner: anObject [
 
 	<generated>
 	javaMethodThrowsOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaClassTypeExpression >> javaMethodThrowsOwnerGroup [
 	<generated>
 	<navigation: 'JavaMethodThrowsOwner'>
 	^ MooseSpecializedGroup with: self javaMethodThrowsOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassTypeExpression >> typeName [
 	"Relation named: #typeName type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner"
 
@@ -74,21 +83,21 @@ FASTJavaClassTypeExpression >> typeName [
 	^ typeName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassTypeExpression >> typeName: anObject [
 
 	<generated>
 	typeName := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaClassTypeExpression >> typeNameGroup [
 	<generated>
 	<navigation: 'TypeName'>
 	^ MooseSpecializedGroup with: self typeName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassTypeExpression >> typeParameterOwner [
 	"Relation named: #typeParameterOwner type: #FASTJavaTypeParameterExpression opposite: #types"
 
@@ -98,14 +107,14 @@ FASTJavaClassTypeExpression >> typeParameterOwner [
 	^ typeParameterOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassTypeExpression >> typeParameterOwner: anObject [
 
 	<generated>
 	typeParameterOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaClassTypeExpression >> typeParameterOwnerGroup [
 	<generated>
 	<navigation: 'TypeParameterOwner'>

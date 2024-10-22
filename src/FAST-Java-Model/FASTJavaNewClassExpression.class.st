@@ -27,18 +27,27 @@ new SecureAsyncCallback<Void>() {
 
 "
 Class {
-	#name : #FASTJavaNewClassExpression,
-	#superclass : #FASTJavaNewExpression,
+	#name : 'FASTJavaNewClassExpression',
+	#superclass : 'FASTJavaNewExpression',
 	#traits : 'FASTJavaTWithDeclarations + FASTTWithArguments',
 	#classTraits : 'FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaNewClassExpression class >> annotation [
 
 	<FMClass: #NewClassExpression super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
+]
+
+{ #category : 'testing' }
+FASTJavaNewClassExpression >> isNewClassExpression [
+
+	<generated>
+	^ true
 ]

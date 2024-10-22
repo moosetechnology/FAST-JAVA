@@ -41,14 +41,16 @@ while(...) {
 
 "
 Class {
-	#name : #FASTJavaWhileStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaWhileStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaWhileStatement class >> annotation [
 
 	<FMClass: #WhileStatement super: #FASTJavaEntity>
@@ -57,7 +59,7 @@ FASTJavaWhileStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaWhileStatement >> body [
 	"Relation named: #body type: #FASTTStatement opposite: #whileBodyOwner"
 
@@ -67,7 +69,7 @@ FASTJavaWhileStatement >> body [
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaWhileStatement >> body: anObject [
 
 	<generated>
@@ -81,14 +83,14 @@ FASTJavaWhileStatement >> body: anObject [
 		anObject whileBodyOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaWhileStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
 	^ MooseSpecializedGroup with: self body
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaWhileStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #whileConditionOwner"
 
@@ -98,7 +100,7 @@ FASTJavaWhileStatement >> condition [
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaWhileStatement >> condition: anObject [
 
 	<generated>
@@ -112,9 +114,16 @@ FASTJavaWhileStatement >> condition: anObject [
 		anObject whileConditionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaWhileStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
+]
+
+{ #category : 'testing' }
+FASTJavaWhileStatement >> isWhileStatement [
+
+	<generated>
+	^ true
 ]

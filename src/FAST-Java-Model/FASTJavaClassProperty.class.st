@@ -56,18 +56,20 @@ class Enclosing {
 
 "
 Class {
-	#name : #FASTJavaClassProperty,
-	#superclass : #FASTJavaVariableExpression,
+	#name : 'FASTJavaClassProperty',
+	#superclass : 'FASTJavaVariableExpression',
 	#traits : 'FASTJavaTAnnotationElement + FASTJavaTReceiver',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTReceiver classTrait',
 	#instVars : [
 		'#fieldName => FMProperty',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaClassProperty class >> annotation [
 
 	<FMClass: #ClassProperty super: #FASTJavaVariableExpression>
@@ -76,7 +78,7 @@ FASTJavaClassProperty class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassProperty >> fieldName [
 
 	<FMProperty: #fieldName type: #String>
@@ -85,13 +87,20 @@ FASTJavaClassProperty >> fieldName [
 	^ fieldName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassProperty >> fieldName: anObject [
 	<generated>
 	fieldName := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaClassProperty >> isClassProperty [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaClassProperty >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner"
 
@@ -100,14 +109,14 @@ FASTJavaClassProperty >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaClassProperty >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaClassProperty >> typeGroup [
 	<generated>
 	<navigation: 'Type'>

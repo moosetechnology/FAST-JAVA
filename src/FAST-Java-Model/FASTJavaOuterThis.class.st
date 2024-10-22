@@ -62,17 +62,19 @@ hello(MyClass.this)
 
 "
 Class {
-	#name : #FASTJavaOuterThis,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaOuterThis',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaOuterThis class >> annotation [
 
 	<FMClass: #OuterThis super: #FASTJavaEntity>
@@ -81,7 +83,14 @@ FASTJavaOuterThis class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaOuterThis >> isOuterThis [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaOuterThis >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner"
 
@@ -90,14 +99,14 @@ FASTJavaOuterThis >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaOuterThis >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaOuterThis >> typeGroup [
 	<generated>
 	<navigation: 'Type'>

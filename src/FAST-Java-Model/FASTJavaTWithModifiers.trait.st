@@ -13,14 +13,16 @@ I have modifiers
 
 "
 Trait {
-	#name : #FASTJavaTWithModifiers,
+	#name : 'FASTJavaTWithModifiers',
 	#instVars : [
 		'#modifiers => FMMany type: #FASTJavaTModifier opposite: #javaModifierOwner'
 	],
-	#category : #'FAST-Java-Model-Traits'
+	#category : 'FAST-Java-Model-Traits',
+	#package : 'FAST-Java-Model',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTWithModifiers classSide >> annotation [
 
 	<FMClass: #TWithModifiers super: #Object>
@@ -29,13 +31,13 @@ FASTJavaTWithModifiers classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaTWithModifiers >> addModifier: anObject [
 	<generated>
 	^ self modifiers add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithModifiers >> modifiers [
 	"Relation named: #modifiers type: #FASTJavaTModifier opposite: #javaModifierOwner"
 
@@ -45,14 +47,14 @@ FASTJavaTWithModifiers >> modifiers [
 	^ modifiers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTWithModifiers >> modifiers: anObject [
 
 	<generated>
 	modifiers value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTWithModifiers >> modifiersGroup [
 	<generated>
 	<navigation: 'Modifiers'>

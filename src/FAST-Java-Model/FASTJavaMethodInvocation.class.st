@@ -62,14 +62,16 @@ A node representing method invocation
 
 "
 Class {
-	#name : #FASTJavaMethodInvocation,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaMethodInvocation',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTInvocation + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTInvocation classTrait + FASTTNamedEntity classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaMethodInvocation class >> annotation [
 
 	<FMClass: #MethodInvocation super: #FASTJavaEntity>

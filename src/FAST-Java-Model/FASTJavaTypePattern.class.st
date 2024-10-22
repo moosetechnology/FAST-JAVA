@@ -67,18 +67,20 @@ Example:
 
 "
 Class {
-	#name : #FASTJavaTypePattern,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaTypePattern',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpression',
 	#classTraits : 'FASTTExpression classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaTypePattern class >> annotation [
 
 	<FMClass: #TypePattern super: #FASTJavaEntity>
@@ -87,7 +89,14 @@ FASTJavaTypePattern class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaTypePattern >> isTypePattern [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaTypePattern >> type [
 	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner"
 
@@ -96,21 +105,21 @@ FASTJavaTypePattern >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypePattern >> type: anObject [
 
 	<generated>
 	type := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypePattern >> typeGroup [
 	<generated>
 	<navigation: 'Type'>
 	^ MooseSpecializedGroup with: self type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypePattern >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner"
 
@@ -119,14 +128,14 @@ FASTJavaTypePattern >> variable [
 	^ variable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaTypePattern >> variable: anObject [
 
 	<generated>
 	variable := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaTypePattern >> variableGroup [
 	<generated>
 	<navigation: 'Variable'>

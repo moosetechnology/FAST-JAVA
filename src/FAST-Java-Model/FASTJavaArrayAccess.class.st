@@ -64,14 +64,16 @@ liste[i]
 
 "
 Class {
-	#name : #FASTJavaArrayAccess,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaArrayAccess',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTExpression classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaArrayAccess class >> annotation [
 
 	<FMClass: #ArrayAccess super: #FASTJavaEntity>
@@ -80,7 +82,7 @@ FASTJavaArrayAccess class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayAccess >> array [
 	"Relation named: #array type: #FASTTExpression opposite: #javaArrayArrayAccessOwner"
 
@@ -90,7 +92,7 @@ FASTJavaArrayAccess >> array [
 	^ self attributeAt: #array ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayAccess >> array: anObject [
 
 	<generated>
@@ -104,14 +106,14 @@ FASTJavaArrayAccess >> array: anObject [
 		anObject javaArrayArrayAccessOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaArrayAccess >> arrayGroup [
 	<generated>
 	<navigation: 'Array'>
 	^ MooseSpecializedGroup with: self array
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayAccess >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaArrayAccessOwner"
 
@@ -121,7 +123,7 @@ FASTJavaArrayAccess >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaArrayAccess >> expression: anObject [
 
 	<generated>
@@ -135,9 +137,16 @@ FASTJavaArrayAccess >> expression: anObject [
 		anObject javaArrayAccessOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaArrayAccess >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
+]
+
+{ #category : 'testing' }
+FASTJavaArrayAccess >> isArrayAccess [
+
+	<generated>
+	^ true
 ]

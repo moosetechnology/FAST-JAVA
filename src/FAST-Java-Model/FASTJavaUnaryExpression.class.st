@@ -71,18 +71,20 @@ see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html
 
 "
 Class {
-	#name : #FASTJavaUnaryExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaUnaryExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpression',
 	#classTraits : 'FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty',
 		'#isPrefixedUnaryExpression => FMProperty'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaUnaryExpression class >> annotation [
 
 	<FMClass: #UnaryExpression super: #FASTJavaEntity>
@@ -91,7 +93,7 @@ FASTJavaUnaryExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaUnaryExpression >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaUnaryExpressionOwner"
 
@@ -101,7 +103,7 @@ FASTJavaUnaryExpression >> expression [
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaUnaryExpression >> expression: anObject [
 
 	<generated>
@@ -115,14 +117,14 @@ FASTJavaUnaryExpression >> expression: anObject [
 		anObject javaUnaryExpressionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaUnaryExpression >> expressionGroup [
 	<generated>
 	<navigation: 'Expression'>
 	^ MooseSpecializedGroup with: self expression
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaUnaryExpression >> isPrefixedUnaryExpression [
 
 	<FMProperty: #isPrefixedUnaryExpression type: #Boolean>
@@ -131,13 +133,13 @@ FASTJavaUnaryExpression >> isPrefixedUnaryExpression [
 	^ isPrefixedUnaryExpression
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaUnaryExpression >> isPrefixedUnaryExpression: anObject [
 	<generated>
 	isPrefixedUnaryExpression := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaUnaryExpression >> operator [
 
 	<FMProperty: #operator type: #String>
@@ -146,7 +148,7 @@ FASTJavaUnaryExpression >> operator [
 	^ operator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaUnaryExpression >> operator: anObject [
 	<generated>
 	operator := anObject

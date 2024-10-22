@@ -34,17 +34,19 @@
 
 "
 Class {
-	#name : #FASTJavaLabeledStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaLabeledStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
 		'#label => FMProperty'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaLabeledStatement class >> annotation [
 
 	<FMClass: #LabeledStatement super: #FASTJavaEntity>
@@ -53,7 +55,14 @@ FASTJavaLabeledStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaLabeledStatement >> isLabeledStatement [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaLabeledStatement >> label [
 
 	<FMProperty: #label type: #String>
@@ -62,13 +71,13 @@ FASTJavaLabeledStatement >> label [
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaLabeledStatement >> label: anObject [
 	<generated>
 	label := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaLabeledStatement >> labeledStatement [
 	"Relation named: #labeledStatement type: #FASTTStatement opposite: #labelStatementOwner"
 
@@ -78,7 +87,7 @@ FASTJavaLabeledStatement >> labeledStatement [
 	^ self attributeAt: #labeledStatement ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaLabeledStatement >> labeledStatement: anObject [
 
 	<generated>
@@ -92,7 +101,7 @@ FASTJavaLabeledStatement >> labeledStatement: anObject [
 		anObject labelStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaLabeledStatement >> labeledStatementGroup [
 	<generated>
 	<navigation: 'LabeledStatement'>

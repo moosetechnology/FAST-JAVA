@@ -64,14 +64,16 @@ ex:
 
 "
 Class {
-	#name : #FASTJavaConditionalExpression,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaConditionalExpression',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaConditionalExpression class >> annotation [
 
 	<FMClass: #ConditionalExpression super: #FASTJavaEntity>
@@ -80,7 +82,7 @@ FASTJavaConditionalExpression class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaConditionalExpression >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #conditionalConditionOwner"
 
@@ -90,7 +92,7 @@ FASTJavaConditionalExpression >> condition [
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaConditionalExpression >> condition: anObject [
 
 	<generated>
@@ -104,14 +106,14 @@ FASTJavaConditionalExpression >> condition: anObject [
 		anObject conditionalConditionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaConditionalExpression >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaConditionalExpression >> elsePart [
 	"Relation named: #elsePart type: #FASTTExpression opposite: #conditionalElsePartOwner"
 
@@ -121,7 +123,7 @@ FASTJavaConditionalExpression >> elsePart [
 	^ self attributeAt: #elsePart ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaConditionalExpression >> elsePart: anObject [
 
 	<generated>
@@ -135,14 +137,21 @@ FASTJavaConditionalExpression >> elsePart: anObject [
 		anObject conditionalElsePartOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaConditionalExpression >> elsePartGroup [
 	<generated>
 	<navigation: 'ElsePart'>
 	^ MooseSpecializedGroup with: self elsePart
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaConditionalExpression >> isConditionalExpression [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaConditionalExpression >> thenPart [
 	"Relation named: #thenPart type: #FASTTExpression opposite: #conditionalThenPartOwner"
 
@@ -152,7 +161,7 @@ FASTJavaConditionalExpression >> thenPart [
 	^ self attributeAt: #thenPart ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaConditionalExpression >> thenPart: anObject [
 
 	<generated>
@@ -166,7 +175,7 @@ FASTJavaConditionalExpression >> thenPart: anObject [
 		anObject conditionalThenPartOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaConditionalExpression >> thenPartGroup [
 	<generated>
 	<navigation: 'ThenPart'>

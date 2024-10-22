@@ -57,18 +57,20 @@ public interface MyInterface {
 
 "
 Class {
-	#name : #FASTJavaInterfaceDeclaration,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaInterfaceDeclaration',
+	#superclass : 'FASTJavaEntity',
 	#traits : '(FASTJavaTDeclaration + FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTNamedEntity + FASTTStatement + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
 	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #interfaceDeclarations',
 		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner'
 	],
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaInterfaceDeclaration class >> annotation [
 
 	<FMClass: #InterfaceDeclaration super: #FASTJavaEntity>
@@ -77,13 +79,13 @@ FASTJavaInterfaceDeclaration class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FASTJavaInterfaceDeclaration >> addInterface: anObject [
 	<generated>
 	^ self interfaces add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInterfaceDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #interfaceDeclarations"
 
@@ -93,21 +95,21 @@ FASTJavaInterfaceDeclaration >> compilationUnit [
 	^ compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInterfaceDeclaration >> compilationUnit: anObject [
 
 	<generated>
 	compilationUnit := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaInterfaceDeclaration >> compilationUnitGroup [
 	<generated>
 	<navigation: 'CompilationUnit'>
 	^ MooseSpecializedGroup with: self compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInterfaceDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner"
 
@@ -117,16 +119,23 @@ FASTJavaInterfaceDeclaration >> interfaces [
 	^ interfaces
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaInterfaceDeclaration >> interfaces: anObject [
 
 	<generated>
 	interfaces value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaInterfaceDeclaration >> interfacesGroup [
 	<generated>
 	<navigation: 'Interfaces'>
 	^ MooseSpecializedGroup withAll: self interfaces asSet
+]
+
+{ #category : 'testing' }
+FASTJavaInterfaceDeclaration >> isInterfaceDeclaration [
+
+	<generated>
+	^ true
 ]

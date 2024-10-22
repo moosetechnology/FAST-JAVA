@@ -41,14 +41,16 @@ do {
 
 "
 Class {
-	#name : #FASTJavaDoWhileStatement,
-	#superclass : #FASTJavaEntity,
+	#name : 'FASTJavaDoWhileStatement',
+	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
-	#category : #'FAST-Java-Model-Entities'
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaDoWhileStatement class >> annotation [
 
 	<FMClass: #DoWhileStatement super: #FASTJavaEntity>
@@ -57,7 +59,7 @@ FASTJavaDoWhileStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaDoWhileStatement >> body [
 	"Relation named: #body type: #FASTTStatement opposite: #doBodyOwner"
 
@@ -67,7 +69,7 @@ FASTJavaDoWhileStatement >> body [
 	^ self attributeAt: #body ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaDoWhileStatement >> body: anObject [
 
 	<generated>
@@ -81,14 +83,14 @@ FASTJavaDoWhileStatement >> body: anObject [
 		anObject doBodyOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaDoWhileStatement >> bodyGroup [
 	<generated>
 	<navigation: 'Body'>
 	^ MooseSpecializedGroup with: self body
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaDoWhileStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #doConditionOwner"
 
@@ -98,7 +100,7 @@ FASTJavaDoWhileStatement >> condition [
 	^ self attributeAt: #condition ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaDoWhileStatement >> condition: anObject [
 
 	<generated>
@@ -112,9 +114,16 @@ FASTJavaDoWhileStatement >> condition: anObject [
 		anObject doConditionOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaDoWhileStatement >> conditionGroup [
 	<generated>
 	<navigation: 'Condition'>
 	^ MooseSpecializedGroup with: self condition
+]
+
+{ #category : 'testing' }
+FASTJavaDoWhileStatement >> isDoWhileStatement [
+
+	<generated>
+	^ true
 ]

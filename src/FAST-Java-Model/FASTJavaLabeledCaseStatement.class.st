@@ -17,12 +17,14 @@ case LABEL:
 
 "
 Class {
-	#name : #FASTJavaLabeledCaseStatement,
-	#superclass : #FASTJavaCaseStatement,
-	#category : #'FAST-Java-Model-Entities'
+	#name : 'FASTJavaLabeledCaseStatement',
+	#superclass : 'FASTJavaCaseStatement',
+	#category : 'FAST-Java-Model-Entities',
+	#package : 'FAST-Java-Model',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTJavaLabeledCaseStatement class >> annotation [
 
 	<FMClass: #LabeledCaseStatement super: #FASTJavaCaseStatement>
@@ -31,7 +33,14 @@ FASTJavaLabeledCaseStatement class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FASTJavaLabeledCaseStatement >> isLabeledCaseStatement [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FASTJavaLabeledCaseStatement >> label [
 	"Relation named: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner"
 
@@ -41,7 +50,7 @@ FASTJavaLabeledCaseStatement >> label [
 	^ self attributeAt: #label ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaLabeledCaseStatement >> label: anObject [
 
 	<generated>
@@ -55,7 +64,7 @@ FASTJavaLabeledCaseStatement >> label: anObject [
 		anObject javaLabeledCaseStatementOwner: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FASTJavaLabeledCaseStatement >> labelGroup [
 	<generated>
 	<navigation: 'Label'>
