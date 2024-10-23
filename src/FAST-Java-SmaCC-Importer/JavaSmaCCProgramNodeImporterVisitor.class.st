@@ -188,25 +188,31 @@ JavaSmaCCProgramNodeImporterVisitor >> parentFASTVisitor: anObject [
 
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> parseCodeMethodString: aCodeString [
+
 	| ast |
-	parser := JavaParser createParserOnStream: (ReadStream on: aCodeString) startingAt: JavaParser startingStateForclass_or_interface_body_declaration.
-	
-	[ ast := parser parse.
-	 (ast isKindOf: SmaCCParseNode) ifTrue: [ ast completeSource: aCodeString ]
-	]
+	parser := JavaParser
+		          createParserOnStream: (ReadStream on: aCodeString)
+		          startingAt:
+		          JavaParser
+			          startingStateForclass_or_interface_body_declaration.
+
+	[
+	ast := parser parse.
+	(ast isKindOf: SmaCCParseNode) ifTrue: [
+		ast completeSource: aCodeString ] ]
 		on: Error
-		do: [ :err | 
+		do: [ :err |
 			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
 			err signal ].
 
 	[ (self accept: ast) source: ast completeSource asString ]
 		on: Error
-		do: [ :err | 
+		do: [ :err |
 			('FAST Err parsing: ' , String crlf , aCodeString) record.
 			err signal ].
 
-	withComments ifTrue: [self attachComments: aCodeString].
-		
+	withComments ifTrue: [ self attachComments: aCodeString ].
+
 	^ self model
 ]
 
@@ -216,7 +222,7 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 	| ast |
 	parser := JavaParser on: (ReadStream on: aCodeString).
 
-	[ ast := parser parse ]
+	[ ast := parser parse. ast completeSource: aCodeString]
 		on: Error
 		do: [ :err |
 			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
