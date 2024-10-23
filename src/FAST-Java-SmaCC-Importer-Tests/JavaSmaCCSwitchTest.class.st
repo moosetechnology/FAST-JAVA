@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCSwitchTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCSwitchTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCSwitchTest >> javaMethod [
 	^ 
 'void switchMethod() {
@@ -21,35 +22,35 @@ JavaSmaCCSwitchTest >> javaMethod [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testCaseSize [
 	self assert: (fastMethod mooseModel allWithSubTypesOf: FASTJavaCaseStatement) size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testDefaultCaseSize [
 	self assert: (fastMethod mooseModel allWithType: FASTJavaDefaultCaseStatement) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testExpressionsSize [
 	self assert: ((fastModel allWithType: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'HELLO'  ]) anyOne statements size equals: 2. 
 	self assert: ((fastModel allWithType: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'WORLD'  ]) anyOne statements size equals: 1.
 	self assert: (fastModel allWithType: FASTJavaDefaultCaseStatement) anyOne statements size equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testLabeledCaseSize [
 	self assert: (fastModel allWithType: FASTJavaLabeledCaseStatement) size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testLabeledValue [
 	self assert: (fastModel allWithType: FASTJavaLabeledCaseStatement) first label name equals: 'HELLO'.
 	self assert: (fastModel allWithType: FASTJavaLabeledCaseStatement) second label name equals: 'WORLD'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testSwitchCondition [
 
 	| switchStatement |
@@ -58,7 +59,7 @@ JavaSmaCCSwitchTest >> testSwitchCondition [
 	self assert: switchStatement condition class equals: FASTJavaVariableExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testSwitchSize [
 	self assert: (fastModel allWithType: FASTJavaSwitchStatement) size equals: 1 
 ]

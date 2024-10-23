@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCParamsMethodTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCParamsMethodTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCParamsMethodTest >> javaMethod [
 	
 	^ 'void params(int a, float b, double c, int... etc) {
@@ -12,7 +13,7 @@ JavaSmaCCParamsMethodTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testBlockScope [
 	self skip.
 
@@ -21,44 +22,44 @@ JavaSmaCCParamsMethodTest >> testBlockScope [
 	self assert: symbols size equals: 0"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testExpressionParent [
 	self assert: fastMethod statements first expression parentNode equals: fastMethod statements first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testExpressionRHSContentType [
 	self assert: fastMethod statements first expression expression class equals: FASTJavaInfixOperation
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testExpressionRHSParent [
 	self
 		assert: fastMethod statements first expression expression rightOperand parentNode
 		equals: fastMethod statements first expression expression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testExpressionRHSType [
 	self assert: fastMethod statements first expression expression rightOperand class equals: FASTJavaVariableExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testExpressionType [
 	self assert: fastMethod statements first expression class equals: FASTJavaAssignmentExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testFirstParameterName [
 	self assert: fastMethod parameters first variable name equals: 'a'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testFourthParameterName [
 	self assert: fastMethod parameters last variable name equals: 'etc'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testHasVariableArguments [
 	self deny: fastMethod parameters first hasVariableArguments.
 	self deny: fastMethod parameters second hasVariableArguments.
@@ -66,17 +67,17 @@ JavaSmaCCParamsMethodTest >> testHasVariableArguments [
 	self assert: fastMethod parameters last hasVariableArguments
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testParametersCount [
 	self assert: fastMethod parameters size equals: 4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testParametersParent [
 	fastMethod parameters do: [ :each | self assert: each parentNode equals: fastMethod ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testScope [
 	self skip.
 	
@@ -89,27 +90,27 @@ JavaSmaCCParamsMethodTest >> testScope [
 	self assert: (symbols count: [:each | each name = 'c']) equals: 1."
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testSecondParameterName [
 	self assert: fastMethod parameters second variable name equals: 'b'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testStatementsCount [
 	self assert: fastMethod statements size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testStatementsParent [
 	self assert: fastMethod statements last parentNode equals: fastMethod statementBlock
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testStatementsType [
 	self assert: fastMethod statements last class equals: FASTJavaExpressionStatement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParamsMethodTest >> testThirdParameterName [
 	self assert: fastMethod parameters third variable name equals: 'c'
 ]

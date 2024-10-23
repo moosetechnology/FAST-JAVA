@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCInnerClassDeclaration,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCInnerClassDeclaration',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCInnerClassDeclaration >> javaMethod [
 	
 	^ 'void method() {
@@ -19,32 +20,32 @@ JavaSmaCCInnerClassDeclaration >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInnerClassDeclaration >> testClassDeclarationName [
 	self assert: ( fastMethod mooseModel allWithType: FASTJavaClassDeclaration) anyOne name equals: 'ClassA' 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclaration [
 	self assert: ( fastMethod mooseModel allWithType: FASTJavaClassDeclaration) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationDeclaration [
 	self assert: ( fastMethod mooseModel allWithType: FASTJavaClassDeclaration) anyOne declarations size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationInterfaces [
 	self assert: ( fastMethod mooseModel allWithType: FASTJavaClassDeclaration) anyOne interfaces size equals: 2 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationModifiers [
 	self assert: ( fastMethod mooseModel allWithType: FASTJavaClassDeclaration) anyOne modifiers size equals: 1 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInnerClassDeclaration >> testNumberOfClassDeclarationSuperClass [
 	self assert: ( fastMethod mooseModel allWithType: FASTJavaClassDeclaration) anyOne superclass class equals: FASTJavaClassTypeExpression 
 ]

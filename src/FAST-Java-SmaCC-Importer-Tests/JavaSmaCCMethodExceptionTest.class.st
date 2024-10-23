@@ -1,16 +1,17 @@
 Class {
-	#name : #JavaSmaCCMethodExceptionTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMethodExceptionTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCMethodExceptionTest >> javaMethod [
 	^ 'void method() throws MyException {
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodExceptionTest >> testOnlyOneThrowsEntity [
 
 	self

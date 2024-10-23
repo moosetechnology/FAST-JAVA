@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCTryWithFinallyTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCTryWithFinallyTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCTryWithFinallyTest >> javaMethod [
 	^ 'void tryCatch() {
 	int x;
@@ -17,17 +18,17 @@ JavaSmaCCTryWithFinallyTest >> javaMethod [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryWithFinallyTest >> testTryCatchFinallyPartNumberOfStatements [
 	self assert: fastMethod statements second finally statements size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryWithFinallyTest >> testTryCatchFinallyPartType [
 	self assert: fastMethod statements second finally class equals: FASTJavaStatementBlock
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryWithFinallyTest >> testTryCatchType [
 	self assert: fastMethod statements second class equals: FASTJavaTryCatchStatement
 ]

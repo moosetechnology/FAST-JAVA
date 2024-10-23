@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCLocalVariableStringInitNullTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCLocalVariableStringInitNullTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCLocalVariableStringInitNullTest >> javaMethod [
 	
 	^ 'String aLittleOfVariables5() {
@@ -13,12 +14,12 @@ JavaSmaCCLocalVariableStringInitNullTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableStringInitNullTest >> testVariableDeclaratorExpressionType5 [
 	self assert: fastMethod statementBlock statements first declarators first expression class equals: FASTJavaNullLiteral
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableStringInitNullTest >> testVariableDeclaratorExpressionValue5 [
 	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: 'null'
 ]

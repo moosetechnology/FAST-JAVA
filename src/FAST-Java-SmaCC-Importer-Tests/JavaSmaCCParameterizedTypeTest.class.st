@@ -1,15 +1,16 @@
 Class {
-	#name : #JavaSmaCCParameterizedTypeTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCParameterizedTypeTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCParameterizedTypeTest >> javaMethod [
 	^'IMap<String,Iterator<String>> meth() { }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParameterizedTypeTest >> testMethodTypeName [
 
 	self
@@ -18,7 +19,7 @@ JavaSmaCCParameterizedTypeTest >> testMethodTypeName [
 		equals: 'IMap'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParameterizedTypeTest >> testMethodTypeParametersNames [
 
 	self
@@ -32,7 +33,7 @@ JavaSmaCCParameterizedTypeTest >> testMethodTypeParametersNames [
 		equals: 'Iterator'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParameterizedTypeTest >> testMethodTypeParametersNumber [
 
 	self
@@ -41,7 +42,7 @@ JavaSmaCCParameterizedTypeTest >> testMethodTypeParametersNumber [
 		equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParameterizedTypeTest >> testMethodTypeParametersTypes [
 
 	self
@@ -55,7 +56,7 @@ JavaSmaCCParameterizedTypeTest >> testMethodTypeParametersTypes [
 		equals: FASTJavaClassTypeExpression.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCParameterizedTypeTest >> testMethodTypeType [
 	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne type class equals: FASTJavaClassTypeExpression
 ]

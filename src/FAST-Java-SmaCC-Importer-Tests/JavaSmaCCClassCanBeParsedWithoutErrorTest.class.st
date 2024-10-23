@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCClassCanBeParsedWithoutErrorTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCClassCanBeParsedWithoutErrorTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCClassCanBeParsedWithoutErrorTest >> classString [
 	^ 'package hello;
 
@@ -18,17 +19,17 @@ class A {
 }' 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCClassCanBeParsedWithoutErrorTest >> javaMethod [
 	^ self shouldBeImplemented
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCClassCanBeParsedWithoutErrorTest >> setUp [
 	"not doing anything because we want to call parsing in the test itself"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCClassCanBeParsedWithoutErrorTest >> testAccessToClassSourceText [
 	self shouldnt: [ self parseClassString: self classString ]  raise: Error
 ]

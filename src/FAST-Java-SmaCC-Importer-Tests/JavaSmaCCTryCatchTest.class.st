@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCTryCatchTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCTryCatchTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCTryCatchTest >> javaMethod [
 	^ 'void tryCatch() {
 	int x;
@@ -17,31 +18,31 @@ JavaSmaCCTryCatchTest >> javaMethod [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchCatchBodyType [
 	self assert: fastMethod statements second catches first body class equals: FASTJavaStatementBlock
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchCatchNumber [
 	self assert: fastMethod statements second catches size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchCatchParametersName [
 	self
 		assert: fastMethod statements second catches first parameter name
 		equals: 'e'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchCatchParametersType [
 	self
 		assert: fastMethod statements second catches first parameter class
 		equals: FASTJavaVariableExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchCatchedType [
 	| catchedTypes |
 	catchedTypes := fastMethod statements second catches first catchedTypes.
@@ -50,17 +51,17 @@ JavaSmaCCTryCatchTest >> testTryCatchCatchedType [
 	self assert: catchedTypes anyOne typeName name equals: 'Exception'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchFinallyPartType [
 	self assert: fastMethod statements second finally equals: nil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchTryPartType [
 	self assert: fastMethod statements second try class equals: FASTJavaStatementBlock
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCTryCatchTest >> testTryCatchType [
 	self assert: fastMethod statements second class equals: FASTJavaTryCatchStatement
 ]

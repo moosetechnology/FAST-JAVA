@@ -1,34 +1,35 @@
 Class {
-	#name : #JavaSmaCCAnnotation,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCAnnotation',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAnnotation >> javaMethod [
 	^'@Useless
 	void mth() {
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotation >> testAnnotatedEntity [
 	self
 		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne javaModifierOwner class
 		equals: FASTJavaMethodEntity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotation >> testNameOfAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne name equals: 'Useless'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotation >> testNumberOfAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotation >> testNumberOfElementsToAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 0
 ]

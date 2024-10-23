@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCInnerNewClassTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCInnerNewClassTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCInnerNewClassTest >> javaMethod [
 	
 	^ 'void method() {
@@ -12,7 +13,7 @@ JavaSmaCCInnerNewClassTest >> javaMethod [
 	}'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCInnerNewClassTest >> testNewClassExpressionReceiver [
 
 	self
@@ -36,7 +37,7 @@ JavaSmaCCInnerNewClassTest >> testNewClassExpressionReceiver [
 				receiverOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCInnerNewClassTest >> testNumberNewClassExpression [
 
 	self

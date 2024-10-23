@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCEmptyMethodBodyTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCEmptyMethodBodyTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCEmptyMethodBodyTest >> javaMethod [
 	
 	^ 
@@ -13,7 +14,7 @@ JavaSmaCCEmptyMethodBodyTest >> javaMethod [
 }'
 ]
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCEmptyMethodBodyTest >> testEmptyDeclaredMethodSize [
 	self assert: (fastModel allWithType: FASTJavaMethodEntity) size equals: 1.
 	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne statementBlock equals: nil

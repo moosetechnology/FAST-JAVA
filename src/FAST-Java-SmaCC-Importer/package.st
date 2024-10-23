@@ -1,1 +1,1 @@
-Package { #name : #'FAST-Java-SmaCC-Importer' }
+Package { #name : 'FAST-Java-SmaCC-Importer' }

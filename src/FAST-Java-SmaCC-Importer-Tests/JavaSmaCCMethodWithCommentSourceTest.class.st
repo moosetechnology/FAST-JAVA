@@ -1,16 +1,17 @@
 Class {
-	#name : #JavaSmaCCMethodWithCommentSourceTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMethodWithCommentSourceTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCMethodWithCommentSourceTest >> javaMethod [
 	^ '//Hello
 public void ifContinue() {}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodWithCommentSourceTest >> testContinueSourceText [
 	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne sourceText equals: self javaMethod
 ]

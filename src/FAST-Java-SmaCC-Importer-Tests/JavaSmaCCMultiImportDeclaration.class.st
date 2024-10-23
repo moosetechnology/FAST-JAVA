@@ -1,28 +1,29 @@
 Class {
-	#name : #JavaSmaCCMultiImportDeclaration,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMultiImportDeclaration',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMultiImportDeclaration >> classString [
 	^ 'import fr.inria.fast.*;
 class A {
 }' 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCMultiImportDeclaration >> javaMethod [
 	^ self shouldBeImplemented
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMultiImportDeclaration >> setUp [
 
 	fastModel := self parseClassString: self classString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMultiImportDeclaration >> testImport [
 
 	self assert: (fastModel allWithType: FASTJavaImportDeclaration) size equals: 1.

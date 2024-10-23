@@ -1,6 +1,6 @@
-Extension { #name : #FamixTSourceEntity }
+Extension { #name : 'FamixTSourceEntity' }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : '*FAST-Java-SmaCC-Importer' }
 FamixTSourceEntity >> getFASTModel [
 	self explicitRequirement 
 ]

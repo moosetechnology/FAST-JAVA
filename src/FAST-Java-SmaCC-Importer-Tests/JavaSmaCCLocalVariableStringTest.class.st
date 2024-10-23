@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCLocalVariableStringTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCLocalVariableStringTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCLocalVariableStringTest >> javaMethod [
 	
 	^ 'String aLittleOfVariables4() {
@@ -13,19 +14,19 @@ JavaSmaCCLocalVariableStringTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableStringTest >> testVariableDeclaratorExpressionParent4 [
 	self
 		assert: fastMethod statementBlock statements first declarators first expression parentNode
 		equals: fastMethod statementBlock statements first declarators first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableStringTest >> testVariableDeclaratorExpressionType4 [
 	self assert: fastMethod statementBlock statements first declarators first expression class equals: FASTJavaStringLiteral
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableStringTest >> testVariableDeclaratorExpressionValue4 [
 	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: 'test'
 ]

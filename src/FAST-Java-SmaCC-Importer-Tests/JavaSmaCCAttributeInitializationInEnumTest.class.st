@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCAttributeInitializationInEnumTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCAttributeInitializationInEnumTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAttributeInitializationInEnumTest >> enumString [
 	
 	^ 'enum AnEnum {
@@ -13,18 +14,18 @@ JavaSmaCCAttributeInitializationInEnumTest >> enumString [
 }'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAttributeInitializationInEnumTest >> javaMethod [
 	self shouldNotImplement
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAttributeInitializationInEnumTest >> setUp [
 
 	fastModel := self parseClassString: self enumString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAttributeInitializationInEnumTest >> testNumberOfDeclarationsInEnum [
 	self
 		assert: (fastModel allWithType: FASTJavaEnumDeclaration) anyOne declarations size

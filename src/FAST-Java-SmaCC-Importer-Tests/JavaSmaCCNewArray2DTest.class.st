@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCNewArray2DTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCNewArray2DTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCNewArray2DTest >> javaMethod [
 	^ 'void innerNewClass() {
 	String[][] s2 = new String[][] { {"a", "b", "c"} };
@@ -12,13 +13,13 @@ JavaSmaCCNewArray2DTest >> javaMethod [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCNewArray2DTest >> testNewArrayEmptySize [
 	self assert: (fastModel allWithType: FASTJavaNewArray) first arguments first class equals: FASTJavaEmptyDimExpression .
 	self assert: (fastModel allWithType: FASTJavaNewArray) first arguments second class equals: FASTJavaEmptyDimExpression.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCNewArray2DTest >> testNewArraySimpleArraySize [
 	self assert: (fastModel allWithType: FASTJavaNewArray) first arguments size equals: 2
 ]

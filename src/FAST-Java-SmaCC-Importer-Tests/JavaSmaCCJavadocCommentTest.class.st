@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCJavadocCommentTest,
-	#superclass : #JavaSmaCCCommentsTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCJavadocCommentTest',
+	#superclass : 'JavaSmaCCCommentsTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCJavadocCommentTest >> javaMethod [
 
 	^ 
@@ -14,7 +15,7 @@ void blah() { }
 '
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCJavadocCommentTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
@@ -23,7 +24,7 @@ JavaSmaCCJavadocCommentTest >> testCommentIsAttached [
 	self assert: fastComment container class equals: FASTJavaMethodEntity.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCJavadocCommentTest >> testCommentProperties [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
@@ -39,7 +40,7 @@ JavaSmaCCJavadocCommentTest >> testCommentProperties [
 	self assert: fastComment endPos equals: 28
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCJavadocCommentTest >> testModelHasComments [
 	self assert: (fastModel allWithType: FASTJavaComment) size equals: 1
 

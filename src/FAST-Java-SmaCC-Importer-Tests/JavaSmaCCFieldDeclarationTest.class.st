@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCFieldDeclarationTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCFieldDeclarationTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCFieldDeclarationTest >> javaMethod [
 	
 	^ 'String fieldDeclaration() {
@@ -14,7 +15,7 @@ JavaSmaCCFieldDeclarationTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCFieldDeclarationTest >> testFieldDeclarationModifiers [
 
 	self
@@ -23,14 +24,14 @@ JavaSmaCCFieldDeclarationTest >> testFieldDeclarationModifiers [
 		equals: 2 "public final"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCFieldDeclarationTest >> testFieldDeclarationParent [
 	self
 		assert: fastMethod statements first declarators first expression parentNode
 		equals: fastMethod statements first declarators first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCFieldDeclarationTest >> testFieldDeclarationSize [
 	"2 with Patate p"
 	self assert: (fastMethod mooseModel allWithType: FASTJavaVarDeclStatement) size equals: 2.

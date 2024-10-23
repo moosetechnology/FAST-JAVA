@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCLabeledStatementTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCLabeledStatementTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCLabeledStatementTest >> javaMethod [
 	
 	^ 'void methodWithLabeledStatement() {
@@ -12,7 +13,7 @@ JavaSmaCCLabeledStatementTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLabeledStatementTest >> testLabeledStatementInnerStatementType [
 
 	self
@@ -20,7 +21,7 @@ JavaSmaCCLabeledStatementTest >> testLabeledStatementInnerStatementType [
 		equals: FASTJavaReturnStatement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLabeledStatementTest >> testLabeledStatementLabelValue [
 
 	self
@@ -28,7 +29,7 @@ JavaSmaCCLabeledStatementTest >> testLabeledStatementLabelValue [
 		equals: 'myLabel'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLabeledStatementTest >> testLabeledStatementType [
 
 	self

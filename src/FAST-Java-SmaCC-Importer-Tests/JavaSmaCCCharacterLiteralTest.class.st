@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCCharacterLiteralTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCCharacterLiteralTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCCharacterLiteralTest >> javaMethod [
 	^ 'public void patate () {
 	print(''A'');
@@ -13,7 +14,7 @@ JavaSmaCCCharacterLiteralTest >> javaMethod [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCCharacterLiteralTest >> testCharacterLiteralType [
 
 	self
@@ -27,7 +28,7 @@ JavaSmaCCCharacterLiteralTest >> testCharacterLiteralType [
 		equals: FASTJavaCharacterLiteral.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCCharacterLiteralTest >> testCharacterLiteralValue [
 
 	self

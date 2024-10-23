@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCInstanceofTypePatternTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCInstanceofTypePatternTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCInstanceofTypePatternTest >> javaMethod [
 	
 	^ 'void f(Object obj) {
@@ -12,13 +13,13 @@ JavaSmaCCInstanceofTypePatternTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInstanceofTypePatternTest >> testTypePatternExists [
 
 	self assert: (fastModel allWithType: FASTJavaTypePattern) isNotEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInstanceofTypePatternTest >> testTypePatternInstanceof [
 
 	self
@@ -27,7 +28,7 @@ JavaSmaCCInstanceofTypePatternTest >> testTypePatternInstanceof [
 		equals: (fastModel allWithType: FASTJavaInfixOperation) anyOne
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInstanceofTypePatternTest >> testTypePatternType [
 
 	self
@@ -37,7 +38,7 @@ JavaSmaCCInstanceofTypePatternTest >> testTypePatternType [
 		equals: 'Number'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInstanceofTypePatternTest >> testTypePatternVariable [
 
 	self

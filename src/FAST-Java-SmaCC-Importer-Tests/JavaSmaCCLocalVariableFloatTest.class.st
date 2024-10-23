@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCLocalVariableFloatTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCLocalVariableFloatTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCLocalVariableFloatTest >> javaMethod [
 	
 	^ 'float aLittleOfVariables2() {
@@ -13,19 +14,19 @@ JavaSmaCCLocalVariableFloatTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableFloatTest >> testVariableDeclaratorExpressionParent2 [
 	self
 		assert: fastMethod statementBlock statements first declarators first expression parentNode
 		equals: fastMethod statementBlock statements first declarators first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableFloatTest >> testVariableDeclaratorExpressionType2 [
 	self assert: fastMethod statementBlock statements first declarators first expression class equals: FASTJavaFloatLiteral
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCLocalVariableFloatTest >> testVariableDeclaratorExpressionValue2 [
 	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: '5.5'
 ]

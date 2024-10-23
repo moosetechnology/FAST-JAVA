@@ -1,17 +1,18 @@
 Class {
-	#name : #JavaSmaCCSimpleVariablesDeclarationTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCSimpleVariablesDeclarationTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCSimpleVariablesDeclarationTest >> javaMethod [
 	^ 'void forMethod() {
 	int x, y;
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSimpleVariablesDeclarationTest >> testVariableDeclaratorExpressionName [
 	self
 		assert: fastMethod statements first declarators first variable name
