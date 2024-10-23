@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCSwitchWithInvocationConditionTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCSwitchWithInvocationConditionTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCSwitchWithInvocationConditionTest >> javaMethod [
 	^ 
 'void switchMethod() {
@@ -21,7 +22,7 @@ JavaSmaCCSwitchWithInvocationConditionTest >> javaMethod [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSwitchWithInvocationConditionTest >> testSwitchCondition [
 
 	| switchStatement |

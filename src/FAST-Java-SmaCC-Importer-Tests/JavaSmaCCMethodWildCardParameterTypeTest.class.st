@@ -1,15 +1,16 @@
 Class {
-	#name : #JavaSmaCCMethodWildCardParameterTypeTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMethodWildCardParameterTypeTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCMethodWildCardParameterTypeTest >> javaMethod [
 	 ^ 'public Collection<?> hello(){}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodWildCardParameterTypeTest >> testMethodTypeClass [
 
 	self
@@ -19,7 +20,7 @@ JavaSmaCCMethodWildCardParameterTypeTest >> testMethodTypeClass [
 		equals: FASTJavaClassTypeExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodWildCardParameterTypeTest >> testMethodTypeName [
 
 	self
@@ -29,7 +30,7 @@ JavaSmaCCMethodWildCardParameterTypeTest >> testMethodTypeName [
 		equals: 'Collection'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodWildCardParameterTypeTest >> testMethodTypeParameterName [
 
 	self
@@ -39,7 +40,7 @@ JavaSmaCCMethodWildCardParameterTypeTest >> testMethodTypeParameterName [
 		equals: '?'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodWildCardParameterTypeTest >> testMethodTypeParametersNumber [
 
 	self

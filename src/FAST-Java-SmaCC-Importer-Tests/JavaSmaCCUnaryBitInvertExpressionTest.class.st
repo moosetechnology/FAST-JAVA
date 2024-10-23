@@ -1,37 +1,38 @@
 Class {
-	#name : #JavaSmaCCUnaryBitInvertExpressionTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCUnaryBitInvertExpressionTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCUnaryBitInvertExpressionTest >> javaMethod [
 	^ 'public void patate () {
 	int i = ~i;	
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionIsPrefixed [
 	self
 		assert: fastMethod statements first declarators first expression isPrefixedUnaryExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionOperator [
 	self
 		assert: fastMethod statements first declarators first expression operator
 		equals: '~'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionOperatorType [
 	self
 		assert: fastMethod statements first declarators first expression operator class
 		equals: ByteString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryBitInvertExpressionTest >> testUnaryExpressionType [
 	self
 		assert: fastMethod statements first declarators first expression class

@@ -1,29 +1,30 @@
 Class {
-	#name : #JavaSmaCCImporterTest,
-	#superclass : #TestCase,
+	#name : 'JavaSmaCCImporterTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'fastModel',
 		'fastMethod'
 	],
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCImporterTest >> javaMethod [
 	self subclassResponsibility 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCImporterTest >> parseClassString: aString [
 	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeString: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCImporterTest >> parseMethodString: aString [
 	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeMethodString: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCImporterTest >> setUp [
 
 	super setUp.

@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCCommentsTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCCommentsTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 JavaSmaCCCommentsTest >> parseMethodString: aString [
 	"overriding to add comments to the parser"
 	^ JavaSmaCCProgramNodeImporterVisitor new 

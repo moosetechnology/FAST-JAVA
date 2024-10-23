@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCSourceTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCSourceTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSourceTest >> classString [
 	^ 'class A {
 	void hello() {
@@ -13,14 +14,14 @@ JavaSmaCCSourceTest >> classString [
 }' 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSourceTest >> javaMethod [
 	^ 'void hello() {
 	int i = 0;
 }' 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSourceTest >> testAccessToClassSourceText [
 	| model |
 	model := self parseClassString: self classString.
@@ -31,7 +32,7 @@ JavaSmaCCSourceTest >> testAccessToClassSourceText [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSourceTest >> testAccessToMethodSourceText [
 	| model |
 	model := self parseMethodString: self javaMethod.

@@ -1,17 +1,18 @@
 Class {
-	#name : #JavaSmaCCReturnAttributeAccessTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCReturnAttributeAccessTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCReturnAttributeAccessTest >> javaMethod [
 	^ 'void methodReturn() {
 		return a.b;
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCReturnAttributeAccessTest >> testReturnExpressionType [
 
 	self skip: 'temporary skip to let CI pass 11/16/2023'.
@@ -21,7 +22,7 @@ JavaSmaCCReturnAttributeAccessTest >> testReturnExpressionType [
 		equals: FASTJavaQualifiedName 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCReturnAttributeAccessTest >> testReturnStatementNumber [
 	self assert: (fastModel allWithType: FASTJavaReturnStatement) size equals: 1
 ]

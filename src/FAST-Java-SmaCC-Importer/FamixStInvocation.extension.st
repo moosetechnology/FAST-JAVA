@@ -1,6 +1,6 @@
-Extension { #name : #FamixStInvocation }
+Extension { #name : 'FamixStInvocation' }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : '*FAST-Java-SmaCC-Importer' }
 FamixStInvocation >> generateFastIfNotDoneAndBind [
 
 	^ self sender isInitializer

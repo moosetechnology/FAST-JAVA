@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCAnnotationWithNamedElements,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCAnnotationWithNamedElements',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAnnotationWithNamedElements >> javaClass [
 	^'class AClass {
 	@Useless(arg1="Argument 1",arg2=AClass.A_Constant)
@@ -13,35 +14,35 @@ JavaSmaCCAnnotationWithNamedElements >> javaClass [
 }'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAnnotationWithNamedElements >> javaMethod [
 	^self shouldNotImplement 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAnnotationWithNamedElements >> setUp [
 
 	fastModel := self parseClassString: self javaClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotationWithNamedElements >> testAnnotatedEntity [
 	self
 		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne javaModifierOwner class
 		equals: FASTJavaMethodEntity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotationWithNamedElements >> testNameOfAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne name equals: 'Useless'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotationWithNamedElements >> testNumberOfAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAnnotationWithNamedElements >> testNumberOfElementsToAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 2
 ]

@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCMethodCastTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMethodCastTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCMethodCastTest >> javaMethod [
 	^ 'public void onClick(final ClickEvent event) {
 	List<UnPojoMetierRHGWT> removedRowValues = new ArrayList<UnPojoMetierRHGWT>();
@@ -14,22 +15,22 @@ JavaSmaCCMethodCastTest >> javaMethod [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodCastTest >> testCastAsAReceiverOfAnInvocation [
 	self assert: fastMethod statements third children anyOne receiver class equals: FASTJavaCastExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodCastTest >> testCastExpressionName [
 	self assert: fastMethod statements third children anyOne receiver expression fieldName equals: 'pListModel'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodCastTest >> testCastExpressionType [
 	self assert: fastMethod statements third children anyOne receiver expression class equals: FASTJavaClassProperty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodCastTest >> testCastType [
 	self assert: fastMethod statements third children anyOne receiver type class equals: FASTJavaClassTypeExpression.
 	self assert: fastMethod statements third children anyOne receiver type fullName equals: 'IEditableListModel'

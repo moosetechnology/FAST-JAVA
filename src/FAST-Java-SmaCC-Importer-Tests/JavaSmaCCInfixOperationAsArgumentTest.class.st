@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCInfixOperationAsArgumentTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCInfixOperationAsArgumentTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCInfixOperationAsArgumentTest >> javaMethod [
 
 	^ 'void method() {
@@ -12,7 +13,7 @@ JavaSmaCCInfixOperationAsArgumentTest >> javaMethod [
 	}'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCInfixOperationAsArgumentTest >> testInfixOperationHasParent [
 
 	self assert: (fastModel allWithType: FASTJavaInfixOperation) anyOne parentNode isNotNil

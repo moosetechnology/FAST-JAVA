@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCC2BlockCommentsTest,
-	#superclass : #JavaSmaCCCommentsTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCC2BlockCommentsTest',
+	#superclass : 'JavaSmaCCCommentsTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCC2BlockCommentsTest >> javaMethod [
 
 	^ 
@@ -14,7 +15,7 @@ void blah() {
 }'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCC2BlockCommentsTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) first.
@@ -28,7 +29,7 @@ JavaSmaCC2BlockCommentsTest >> testCommentIsAttached [
 	self assert: fastComment container class equals: FASTJavaMethodEntity.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCC2BlockCommentsTest >> testCommentProperties [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) first.
@@ -43,7 +44,7 @@ JavaSmaCC2BlockCommentsTest >> testCommentProperties [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCC2BlockCommentsTest >> testModelHasComments [
 	self assert: (fastModel allWithType: FASTJavaComment) size equals: 2
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #FamixTagTestInvocation }
+Extension { #name : 'FamixTagTestInvocation' }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : '*FAST-Java-SmaCC-Importer' }
 FamixTagTestInvocation >> generateFastIfNotDoneAndBind [
 
 	^ self sender isInitializer

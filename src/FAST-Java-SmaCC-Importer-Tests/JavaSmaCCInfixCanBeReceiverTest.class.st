@@ -1,17 +1,18 @@
 Class {
-	#name : #JavaSmaCCInfixCanBeReceiverTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCInfixCanBeReceiverTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInfixCanBeReceiverTest >> javaMethod [
 	^ 'void method() {
 	int length = ("hello" + " world").length();
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCInfixCanBeReceiverTest >> testInvocationReceiver [
 
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver class equals: FASTJavaInfixOperation

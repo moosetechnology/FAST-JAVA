@@ -1,6 +1,6 @@
-Extension { #name : #FamixTInvocation }
+Extension { #name : 'FamixTInvocation' }
 
-{ #category : #'*FAST-Java-SmaCC-Importer' }
+{ #category : '*FAST-Java-SmaCC-Importer' }
 FamixTInvocation >> generateFastIfNotDoneAndBind [
 
 	^ self sender isInitializer

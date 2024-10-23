@@ -1,17 +1,18 @@
 Class {
-	#name : #JavaSmaCCArray2DTypeTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCArray2DTypeTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCArray2DTypeTest >> javaMethod [
 	^ 'method() {
           byte[][] buffer;
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeBaseTypeType [
 
 	self
@@ -21,7 +22,7 @@ JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeBaseTypeType [
 		equals: FASTJavaByteTypeExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeParentNode [
 
 	self
@@ -32,7 +33,7 @@ JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeParentNode [
 				parentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeType [
 
 	self
@@ -42,7 +43,7 @@ JavaSmaCCArray2DTypeTest >> testArrayTypeBaseTypeType [
 		equals: FASTJavaArrayTypeExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCArray2DTypeTest >> testArrayTypeInModelSize [
 
 	self

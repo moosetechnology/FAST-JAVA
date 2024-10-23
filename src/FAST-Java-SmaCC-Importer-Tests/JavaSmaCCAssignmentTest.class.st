@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCAssignmentTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCAssignmentTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCAssignmentTest >> javaMethod [
 	^ 'public ApplicationView(ContentPanel navView,
                            ContentPanel deviceView,
@@ -19,7 +20,7 @@ JavaSmaCCAssignmentTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAssignmentTest >> testAssignmentInArrayAccess [
 
 	(fastModel allWithType: FASTJavaAssignmentExpression) entities
@@ -30,7 +31,7 @@ JavaSmaCCAssignmentTest >> testAssignmentInArrayAccess [
 		ifNone: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAssignmentTest >> testAssignmentInFieldAccess [
 
 	(fastModel allWithType: FASTJavaAssignmentExpression) entities
@@ -41,7 +42,7 @@ JavaSmaCCAssignmentTest >> testAssignmentInFieldAccess [
 		ifNone: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAssignmentTest >> testAssignmentOperator [
 	| sortedAssignments |
 
@@ -57,7 +58,7 @@ JavaSmaCCAssignmentTest >> testAssignmentOperator [
 	self assert: sortedAssignments last operator equals: '+='
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAssignmentTest >> testAssignmentParameter [
 	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment | assignment expression name = 'navView' ]
@@ -77,13 +78,13 @@ JavaSmaCCAssignmentTest >> testAssignmentParameter [
 		ifNone: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAssignmentTest >> testExpressionParentNode [
 	self assert: (fastModel allWithType: FASTJavaAssignmentExpression) size equals: 6.
 	(fastModel allWithType: FASTJavaAssignmentExpression) do: [ :assignment | self assert: assignment expression parentNode equals: assignment ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCAssignmentTest >> testVariableParentNode [
 	self assert: (fastModel allWithType: FASTJavaAssignmentExpression) size equals: 6.
 	(fastModel allWithType: FASTJavaAssignmentExpression) do: [ :assignment | self assert: assignment variable parentNode equals: assignment ]

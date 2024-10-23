@@ -1,36 +1,37 @@
 Class {
-	#name : #JavaSmaCCUnaryNotExpressionTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCUnaryNotExpressionTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCUnaryNotExpressionTest >> javaMethod [
 	^ 'public void patate () {
 	boolean b = !b;	
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionIsPrefixed [
 	self assert: fastMethod statements first declarators first expression isPrefixedUnaryExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionOperator [
 	self
 		assert: fastMethod statements first declarators first expression operator
 		equals: '!'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionOperatorType [
 	self
 		assert: fastMethod statements first declarators first expression operator class
 		equals: ByteString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryNotExpressionTest >> testUnaryExpressionType [
 	self
 		assert: fastMethod statements first declarators first expression class

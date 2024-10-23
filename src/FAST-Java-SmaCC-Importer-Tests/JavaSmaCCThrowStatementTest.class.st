@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCThrowStatementTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCThrowStatementTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCThrowStatementTest >> javaMethod [
 	^ 
 'boolean methodThrow() {
@@ -15,17 +16,17 @@ JavaSmaCCThrowStatementTest >> javaMethod [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThrowStatementTest >> testThrowStatementParent [
 	self assert: (fastModel allWithType: FASTJavaThrowStatement) anyOne parentNode equals: fastMethod statements anyOne thenPart
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThrowStatementTest >> testThrowStatementParentAsChild [
 	self assert: (fastModel allWithType: FASTJavaThrowStatement) anyOne equals: fastMethod statements anyOne thenPart children anyOne
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThrowStatementTest >> testThrowStatementSize [
 	self assert: (fastModel allWithType: FASTJavaThrowStatement) size equals: 1 
 ]

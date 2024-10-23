@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCNewClassAffectedTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCNewClassAffectedTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCNewClassAffectedTest >> javaMethod [
 	^ 'void newMethod() {
 	new Hello().new Patate() {
@@ -19,17 +20,17 @@ JavaSmaCCNewClassAffectedTest >> javaMethod [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCNewClassAffectedTest >> testDeclaredMethodSize [
 	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne declarations size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCNewClassAffectedTest >> testNewName [
 	self assert: (fastModel allWithType: FASTJavaNewClassExpression) anyOne type fullName equals: 'Patate'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCNewClassAffectedTest >> testNewParent [
 
 	self
@@ -41,12 +42,12 @@ JavaSmaCCNewClassAffectedTest >> testNewParent [
 				statements anyOne
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCNewClassAffectedTest >> testNumberOfMethod [
 	self assert: fastModel allFASTJavaMethodEntity size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCNewClassAffectedTest >> testNumberOfNewClass [
 	self
 		assert: (fastModel allWithType: FASTJavaNewClassExpression) size

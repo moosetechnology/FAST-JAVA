@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCStaticInitializerTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCStaticInitializerTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCStaticInitializerTest >> javaMethod [
 	^ 'void initializer() {
 	Button b = new Button("param1") { 
@@ -13,7 +14,7 @@ JavaSmaCCStaticInitializerTest >> javaMethod [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCStaticInitializerTest >> testInitializerIsStatic [
 
 	self assert:

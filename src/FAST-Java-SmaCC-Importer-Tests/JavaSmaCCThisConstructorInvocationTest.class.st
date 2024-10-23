@@ -1,37 +1,38 @@
 Class {
-	#name : #JavaSmaCCThisConstructorInvocationTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCThisConstructorInvocationTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 JavaSmaCCThisConstructorInvocationTest >> javaMethod [
 	^ 'Patate () {
 	this("Hello");
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorArgumentsParent [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne arguments anyOne parentNode equals: (fastModel allWithType: FASTJavaMethodInvocation) anyOne
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorArgumentsSize [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne arguments size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorName [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne name equals: 'this'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorParent [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne parentNode  parentNode equals: fastMethod statementBlock 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCThisConstructorInvocationTest >> testThisConstructorSize [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) size equals: 1
 ]

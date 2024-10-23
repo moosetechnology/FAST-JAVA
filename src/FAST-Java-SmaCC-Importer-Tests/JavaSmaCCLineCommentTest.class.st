@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCLineCommentTest,
-	#superclass : #JavaSmaCCCommentsTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCLineCommentTest',
+	#superclass : 'JavaSmaCCCommentsTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCLineCommentTest >> javaMethod [
 
 	^ 
@@ -13,7 +14,7 @@ JavaSmaCCLineCommentTest >> javaMethod [
 }'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCLineCommentTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
@@ -22,7 +23,7 @@ JavaSmaCCLineCommentTest >> testCommentIsAttached [
 	self assert: fastComment container class equals: FASTJavaVariableDeclarator.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCLineCommentTest >> testCommentProperties [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
@@ -37,7 +38,7 @@ JavaSmaCCLineCommentTest >> testCommentProperties [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCLineCommentTest >> testModelHasComments [
 	self assert: (fastModel allWithType: FASTJavaComment) size equals: 1
 ]

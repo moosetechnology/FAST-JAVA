@@ -1,20 +1,21 @@
 Class {
-	#name : #JavaSmaCCMethodJokerTypeTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMethodJokerTypeTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCMethodJokerTypeTest >> javaMethod [
 	 ^ 'private <T extends B & A & C> T hello(){}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodJokerTypeTest >> testMethodJockerType [
 	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne typeParameters size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodJokerTypeTest >> testMethodTypeParameterName [
 
 	self
@@ -24,7 +25,7 @@ JavaSmaCCMethodJokerTypeTest >> testMethodTypeParameterName [
 		equals: 'T'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodJokerTypeTest >> testMethodTypeParameterTypesNames [
 
 	self
@@ -34,7 +35,7 @@ JavaSmaCCMethodJokerTypeTest >> testMethodTypeParameterTypesNames [
 		equals: { 'B' . 'A' . 'C' } asOrderedCollection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodJokerTypeTest >> testMethodTypeParameterTypesNumber [
 
 	self

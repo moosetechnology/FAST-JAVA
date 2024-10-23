@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCEnumWithInterfaceDeclarationTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCEnumWithInterfaceDeclarationTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCEnumWithInterfaceDeclarationTest >> enumString [
 	^ 'class A {
 	private enum MyEnum implements Serializable { 
@@ -33,17 +34,17 @@ JavaSmaCCEnumWithInterfaceDeclarationTest >> enumString [
 }' 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCEnumWithInterfaceDeclarationTest >> javaMethod [
 	^ self shouldNotImplement
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCEnumWithInterfaceDeclarationTest >> setUp [
 	"not doing anything because we want to call parsing in the test itself"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCEnumWithInterfaceDeclarationTest >> testCanParseEnumDeclarationText [
 
 	self

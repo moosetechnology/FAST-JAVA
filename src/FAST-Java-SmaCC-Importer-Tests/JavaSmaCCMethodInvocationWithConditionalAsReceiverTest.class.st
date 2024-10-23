@@ -2,19 +2,20 @@
 This class contains tests
 "
 Class {
-	#name : #JavaSmaCCMethodInvocationWithConditionalAsReceiverTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMethodInvocationWithConditionalAsReceiverTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCMethodInvocationWithConditionalAsReceiverTest >> javaMethod [
 	^ 'public void onClick(ClickEvent arg0) {
 		(ratioDTO==null?"":"").method("");
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodInvocationWithConditionalAsReceiverTest >> testClassPropertyReceiverMethodInvocations [
 	self assert: fastMethod statements first children anyOne receiver class equals: FASTJavaConditionalExpression
 ]

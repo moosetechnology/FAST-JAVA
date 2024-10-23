@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCConstructorDeclarationTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCConstructorDeclarationTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCConstructorDeclarationTest >> javaMethod [
 	^ 'ArrayAccess() {
 		int i = 3;
@@ -12,12 +13,12 @@ JavaSmaCCConstructorDeclarationTest >> javaMethod [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCConstructorDeclarationTest >> testConstructorName [
 	self assert: fastMethod name equals: 'ArrayAccess'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCConstructorDeclarationTest >> testNumberOfStatements [
 	self assert: fastMethod statements size equals: 2
 ]

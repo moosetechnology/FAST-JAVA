@@ -1,15 +1,16 @@
 Class {
-	#name : #JavaSmaCCMethodNoTypeTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCMethodNoTypeTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCMethodNoTypeTest >> javaMethod [
 	 ^ 'hello(){}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCMethodNoTypeTest >> testMethodTypeType [
 	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne type equals: nil
 ]

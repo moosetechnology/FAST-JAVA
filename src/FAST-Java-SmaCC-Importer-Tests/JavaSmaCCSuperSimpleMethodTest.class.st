@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCSuperSimpleMethodTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCSuperSimpleMethodTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCSuperSimpleMethodTest >> javaMethod [
 	^ 
 'boolean supersimple() {
@@ -13,22 +14,22 @@ JavaSmaCCSuperSimpleMethodTest >> javaMethod [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSuperSimpleMethodTest >> testExpressionParent [
 	self assert: fastMethod statements last expression parentNode equals: fastMethod statements last
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSuperSimpleMethodTest >> testExpressionType [
 	self assert: fastMethod statements last expression class equals: FASTJavaBooleanLiteral  
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSuperSimpleMethodTest >> testStatementsCount [
 	self assert: fastMethod statements size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSuperSimpleMethodTest >> testStatementsType [
 	self assert: fastMethod statements last class equals: FASTJavaReturnStatement  
 ]

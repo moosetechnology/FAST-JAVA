@@ -1,13 +1,14 @@
 Class {
-	#name : #JavaSmaCCSynchronizedStatementTest,
-	#superclass : #JavaSmaCCImporterTest,
+	#name : 'JavaSmaCCSynchronizedStatementTest',
+	#superclass : 'JavaSmaCCImporterTest',
 	#instVars : [
 		'testElement'
 	],
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 JavaSmaCCSynchronizedStatementTest >> javaMethod [
 	^ 'method() {
 		synchronized(theInstance) { 
@@ -16,7 +17,7 @@ JavaSmaCCSynchronizedStatementTest >> javaMethod [
 }'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 JavaSmaCCSynchronizedStatementTest >> setUp [
 	super setUp.
 
@@ -24,29 +25,29 @@ JavaSmaCCSynchronizedStatementTest >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementExpressionParentNode [
 
 	self assert: testElement expression parentNode equals: (fastModel allWithType: FASTJavaSynchronizedStatement) first.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementExpressionType [
 	self assert: testElement expression class equals: FASTJavaVariableExpression .
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementInModelSize [
 	self assert: (fastModel allWithType: FASTJavaSynchronizedStatement) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementParentNode [
 	self assert: testElement parentNode class equals: FASTJavaStatementBlock.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCSynchronizedStatementTest >> testSynchronizedStatementType [
 	self assert: testElement block class equals: FASTJavaStatementBlock.
 ]

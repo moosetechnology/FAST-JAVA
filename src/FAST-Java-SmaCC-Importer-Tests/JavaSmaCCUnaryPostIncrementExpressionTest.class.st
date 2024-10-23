@@ -1,32 +1,33 @@
 Class {
-	#name : #JavaSmaCCUnaryPostIncrementExpressionTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCUnaryPostIncrementExpressionTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> javaMethod [
 	^ 'public void patate () {
 	i++;		
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionIsPrefixed [
 	self deny: fastMethod statements first children anyOne isPrefixedUnaryExpression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionOperator [
 	self assert: fastMethod statements first children anyOne operator equals: '++'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionOperatorType [
 	self assert: fastMethod statements first children anyOne operator class equals: ByteString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionType [
 	self assert: fastMethod statements first children anyOne class equals: FASTJavaUnaryExpression
 ]

@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCEnumDeclarationTest,
-	#superclass : #JavaSmaCCImporterTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCEnumDeclarationTest',
+	#superclass : 'JavaSmaCCImporterTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCEnumDeclarationTest >> enumString [
 
 	^ 'private enum MyEnum { 
@@ -32,40 +33,40 @@ JavaSmaCCEnumDeclarationTest >> enumString [
 }' 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCEnumDeclarationTest >> javaMethod [
 	^self shouldNotImplement
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 JavaSmaCCEnumDeclarationTest >> setUp [
 
 	fastModel := self parseClassString: self enumString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCEnumDeclarationTest >> testConstantNameInEnum [
 	self assert: (fastModel allWithType: FASTJavaEnumConstant) anyOne name equals: 'INFORMATION_EMPTY'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCEnumDeclarationTest >> testEnumDeclarationName [
 	self assert: ( fastModel allWithType: FASTJavaEnumDeclaration) anyOne name equals: 'MyEnum' 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCEnumDeclarationTest >> testNumberOfConstantsInEnum [
 	self assert: ( fastModel allWithType: FASTJavaEnumDeclaration) anyOne constants size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCEnumDeclarationTest >> testNumberOfDeclarationsInEnum [
 	self
 		assert: ( fastModel allWithType: FASTJavaEnumDeclaration) anyOne declarations size
 		equals: 4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCEnumDeclarationTest >> testNumberOfEnumDeclaration [
 	self assert: ( fastModel allWithType: FASTJavaEnumDeclaration) size equals: 1
 ]

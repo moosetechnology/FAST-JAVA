@@ -1,10 +1,11 @@
 Class {
-	#name : #JavaSmaCCBlockCommentTest,
-	#superclass : #JavaSmaCCCommentsTest,
-	#category : #'FAST-Java-SmaCC-Importer-Tests'
+	#name : 'JavaSmaCCBlockCommentTest',
+	#superclass : 'JavaSmaCCCommentsTest',
+	#category : 'FAST-Java-SmaCC-Importer-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCBlockCommentTest >> javaMethod [
 
 	^ 
@@ -15,7 +16,7 @@ JavaSmaCCBlockCommentTest >> javaMethod [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCBlockCommentTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) first.
@@ -29,7 +30,7 @@ JavaSmaCCBlockCommentTest >> testCommentIsAttached [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCBlockCommentTest >> testCommentProperties [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) first.
@@ -44,7 +45,7 @@ JavaSmaCCBlockCommentTest >> testCommentProperties [
 	self assert: fastComment endPos equals: 52
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 JavaSmaCCBlockCommentTest >> testModelHasComments [
 	self assert: (fastModel allWithType: FASTJavaComment) size equals: 2
 ]
