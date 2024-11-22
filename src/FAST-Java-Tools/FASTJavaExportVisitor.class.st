@@ -9,14 +9,16 @@ FASTJavaExportVisitor new export: aFASTJavaNode
 ```
 "
 Class {
-	#name : #FASTJavaExportVisitor,
-	#superclass : #FASTJavaVisitor,
+	#name : 'FASTJavaExportVisitor',
+	#superclass : 'FASTJavaVisitor',
 	#traits : 'FASTTExporter',
 	#classTraits : 'FASTTExporter classTrait',
-	#category : #'FAST-Java-Tools-export'
+	#category : 'FAST-Java-Tools-export',
+	#package : 'FAST-Java-Tools',
+	#tag : 'export'
 }
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 FASTJavaExportVisitor >> checkForComments: aNode andDo: exportingBlock [
 	"checks whether the node as comments
 	- if yes print block comments (/*...*/) before the node and line comments (//...) after the nodes
@@ -37,13 +39,13 @@ FASTJavaExportVisitor >> checkForComments: aNode andDo: exportingBlock [
 
 ]
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 FASTJavaExportVisitor >> endOfStatement [
 	self unindented: ';'.
 	self newLine
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FASTJavaExportVisitor >> export: aFASTNode [
 	^String streamContents: [ :st |
 		outputStream := st.
@@ -51,7 +53,7 @@ FASTJavaExportVisitor >> export: aFASTNode [
 	]
 ]
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 FASTJavaExportVisitor >> goBack: aNumber [
 
 	"go back aNumber characters in the output stream"
@@ -61,7 +63,7 @@ FASTJavaExportVisitor >> goBack: aNumber [
 		ifFalse: [ self outputStream position: (self outputStream position - aNumber) ]
 ]
 
-{ #category : #precedence }
+{ #category : 'precedence' }
 FASTJavaExportVisitor >> isStringConcatenation: aFASTJavaInfixOperation [
 
 	^(aFASTJavaInfixOperation operator = '+')
@@ -71,7 +73,7 @@ FASTJavaExportVisitor >> isStringConcatenation: aFASTJavaInfixOperation [
 	]
 ]
 
-{ #category : #precedence }
+{ #category : 'precedence' }
 FASTJavaExportVisitor >> languageOperatorsPrecedence [
 	"redefined to introduce Java specific operators
 	
@@ -114,7 +116,7 @@ FASTJavaExportVisitor >> languageOperatorsPrecedence [
 
 ]
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 FASTJavaExportVisitor >> outputBlockComment: aComment [
 	"assuming block comments need a new line afterTest This is not always true, but difficult to decide"
 
@@ -122,7 +124,7 @@ FASTJavaExportVisitor >> outputBlockComment: aComment [
 	self newLine
 ]
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 FASTJavaExportVisitor >> outputLineComment: aComment [
 	"If there is a newline before the line comment, remove it
 	 Then lineComment is always followed by a newline"
@@ -134,7 +136,7 @@ FASTJavaExportVisitor >> outputLineComment: aComment [
 	self newLine
 ]
 
-{ #category : #precedence }
+{ #category : 'precedence' }
 FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
 	"used to decide whether a '+' is a String concatenation operator
 	 not a real type inference checking, just deals with the simplest cases which seem
@@ -149,7 +151,7 @@ FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
 	^self isStringConcatenation: aFASTJavaExpression	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self checkForComments: aFASTJavaAnnotation andDo: [
 		self
@@ -164,7 +166,7 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 	self checkForComments: aFASTJavaArgumentList andDo: [
 		self unindented: $(.
@@ -174,7 +176,7 @@ FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 	self checkForComments: aFASTJavaArrayAccess andDo: [
 	aFASTJavaArrayAccess array accept: self.
@@ -185,7 +187,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayAnnotationElement: aFASTJavaArrayAnnotationElement [
 
 	self checkForComments: aFASTJavaArrayAnnotationElement andDo: [
@@ -197,7 +199,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayAnnotationElement: aFASTJavaArrayAnno
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitializer [
 	self checkForComments: aFASTJavaArrayInitializer andDo: [
 		self unindented: '{ '.
@@ -208,7 +210,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitialize
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExpression [
 	self checkForComments: aFASTJavaArrayTypeExpression andDo: [
 	aFASTJavaArrayTypeExpression baseType accept: self.
@@ -217,7 +219,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExp
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaAssertStatement: aFASTJavaAssertStatement [
 	self checkForComments: aFASTJavaAssertStatement andDo: [
 		self indented: 'assert '.
@@ -233,7 +235,7 @@ FASTJavaExportVisitor >> visitFASTJavaAssertStatement: aFASTJavaAssertStatement 
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentExpression [
 
 	self checkForComments: aFASTJavaAssignmentExpression andDo: [
@@ -248,7 +250,7 @@ FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentE
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaBlockOrStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 	"for 'then' and 'else' parts of the if-statement,
@@ -262,7 +264,7 @@ FASTJavaExportVisitor >> visitFASTJavaBlockOrStatement: aFASTJavaStatement [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTypeExpression [
 	self checkForComments: aFASTJavaBooleanTypeExpression andDo: [
 	self unindented: 'boolean'
@@ -270,7 +272,7 @@ FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTyp
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
 
 	self checkForComments: aFASTJavaBreakStatement andDo: [
@@ -281,7 +283,7 @@ FASTJavaExportVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpression [
 	self checkForComments: aFASTJavaByteTypeExpression andDo: [
 	self unindented: 'byte'
@@ -289,7 +291,7 @@ FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpre
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self checkForComments: aFASTJavaCastExpression andDo: [
 		self
@@ -305,7 +307,7 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStatement [
 
 	self checkForComments: aFASTJavaCatchPartStatement andDo: [ 
@@ -321,7 +323,7 @@ FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStat
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpression [
 	self checkForComments: aFASTJavaCharTypeExpression andDo: [
 	self unindented: 'char'
@@ -329,7 +331,7 @@ FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpre
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLiteral [
 	self checkForComments: aFASTJavaCharacterLiteral andDo: [
 		self unindented: $'.
@@ -339,7 +341,7 @@ FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLitera
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
 
 	self checkForComments: aFASTJavaClassDeclaration andDo: [
@@ -361,7 +363,7 @@ FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaratio
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 	self checkForComments: aFASTJavaClassProperty andDo: [
 	aFASTJavaClassProperty type accept: self.
@@ -372,7 +374,7 @@ FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
 	self checkForComments: aFASTJavaClassTypeExpression andDo: [
 		aFASTJavaClassTypeExpression typeName accept: self.
@@ -385,7 +387,7 @@ FASTJavaExportVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExp
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
 	self checkForComments: aFASTJavaCompilationUnit andDo: [
 	aFASTJavaCompilationUnit packageDeclaration ifNotNil: [ :decl | 
@@ -402,7 +404,7 @@ FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit 
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression [
 	self checkForComments: aFASTJavaConditionalExpression andDo: [
 		self
@@ -420,7 +422,7 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatement [
 
 	self checkForComments: aFASTJavaContinueStatement andDo: [
@@ -431,7 +433,7 @@ FASTJavaExportVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatem
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatement [
 	self checkForComments: aFASTJavaDefaultCaseStatement andDo: [ 
 		self
@@ -445,7 +447,7 @@ FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCase
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	self checkForComments: aFASTJavaDoWhileStatement andDo: [
 		self indented: 'do '.
@@ -458,7 +460,7 @@ FASTJavaExportVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatemen
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
 	self checkForComments: aFASTJavaDoubleTypeExpression andDo: [
 	self unindented: 'double'
@@ -466,7 +468,7 @@ FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeE
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 	aFASTJavaStatement ifNil: [ ^self ].
@@ -476,7 +478,7 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
 	"An emptyMethodDeclaration is a semicolon where a MethodDeclaration is expected
 	eg: In this example, the class has a MethodDeclaration and an EmptyMethodDeclaration
@@ -489,7 +491,7 @@ FASTJavaExportVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMeth
 	self endOfStatement
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 
 	self checkForComments: aFASTJavaEnumConstant andDo: [
@@ -497,7 +499,7 @@ FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration [
 
 	self checkForComments: aFASTJavaEnumDeclaration andDo: [
@@ -533,7 +535,7 @@ FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration 
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 	self checkForComments: aFASTJavaFieldAccess andDo: [
 		self
@@ -547,7 +549,7 @@ FASTJavaExportVisitor >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 	self checkForComments: aFASTJavaFloatLiteral andDo: [
 		super visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral
@@ -555,7 +557,7 @@ FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExpression [
 	self checkForComments: aFASTJavaFloatTypeExpression andDo: [
 	self unindented: 'float'
@@ -563,7 +565,7 @@ FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExp
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatement [
 	self checkForComments: aFASTJavaForEachStatement andDo: [
 		self indented: 'for ('.
@@ -580,7 +582,7 @@ FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatemen
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 
 	self
@@ -600,7 +602,7 @@ FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 		]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaForStatementCondition: aFASTJavaForStatementCondition [
 
 	aFASTJavaForStatementCondition
@@ -611,7 +613,7 @@ FASTJavaExportVisitor >> visitFASTJavaForStatementCondition: aFASTJavaForStateme
 		]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaForStatementIncrementor: aFASTJavaForStatementIncrementor [
 
 	aFASTJavaForStatementIncrementor ifNil: [ ^self ].
@@ -621,7 +623,7 @@ FASTJavaExportVisitor >> visitFASTJavaForStatementIncrementor: aFASTJavaForState
 	self goBack: 2
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaForStatementInitializer: aFASTJavaForStatementInitializer [
 
 	aFASTJavaForStatementInitializer
@@ -635,7 +637,7 @@ FASTJavaExportVisitor >> visitFASTJavaForStatementInitializer: aFASTJavaForState
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 	self checkForComments: aFASTJavaIdentifier andDo: [
 		self unindented: aFASTJavaIdentifier name
@@ -643,7 +645,7 @@ FASTJavaExportVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	self checkForComments: aFASTJavaIfStatement andDo: [
 	self indented: 'if ('.
@@ -655,7 +657,7 @@ FASTJavaExportVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclaration [
 	self checkForComments: aFASTJavaImportDeclaration andDo: [
 	self unindented: 'import '.
@@ -667,7 +669,7 @@ FASTJavaExportVisitor >> visitFASTJavaImportDeclaration: aFASTJavaImportDeclarat
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 
 	| operator |
@@ -690,7 +692,7 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 
 ]
 
-{ #category : #generated }
+{ #category : 'generated' }
 FASTJavaExportVisitor >> visitFASTJavaInitializer: aFASTJavaInitializer [
 
 	self indented: ''.
@@ -698,7 +700,7 @@ FASTJavaExportVisitor >> visitFASTJavaInitializer: aFASTJavaInitializer [
 	self visitFASTTStatementBlock: aFASTJavaInitializer statementBlock
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
 	self checkForComments: aFASTJavaIntTypeExpression andDo: [
 	self unindented: 'int'
@@ -706,7 +708,7 @@ FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpress
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDeclaration [
 
 	self checkForComments: aFASTJavaInterfaceDeclaration andDo: [
@@ -725,7 +727,7 @@ FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDe
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatement [
 	self checkForComments: aFASTJavaLabeledCaseStatement andDo: [ 
 		self indented: 'case '.
@@ -741,7 +743,7 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCase
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaLabeledStatement: aFASTJavaLabeledStatement [
 	"Note on indentation: the 'inner statement' in aFASTJavaLabeledStatement
 	 will be displayed with leading indentation except if it is a block statement
@@ -755,7 +757,7 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledStatement: aFASTJavaLabeledStatemen
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpression [
 	self checkForComments: aFASTJavaLambdaExpression andDo: [
 		self unindented: $(.
@@ -765,14 +767,14 @@ FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpressio
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 	self checkForComments: aFASTJavaLongLiteral andDo: [
 		self visitFASTTLiteral: aFASTJavaLongLiteral
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
 	self checkForComments: aFASTJavaLongTypeExpression andDo: [
 	self unindented: 'long'
@@ -780,7 +782,7 @@ FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpre
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self checkForComments: aFASTJavaMethodEntity andDo: [
 		self indented: ''.
@@ -814,7 +816,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocation [
 	self checkForComments: aFASTJavaMethodInvocation andDo: [
 		self
@@ -831,7 +833,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation [
 	self checkForComments: aFASTJavaMethodInvocation andDo: [
 		aFASTJavaMethodInvocation ifNil: [ ^ self ].
@@ -841,7 +843,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodI
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaMethodThrows: aFASTJavaThrownExceptionsCollection [
 	self checkForComments: aFASTJavaThrownExceptionsCollection andDo: [
 	aFASTJavaThrownExceptionsCollection ifEmpty: [ ^self ].
@@ -852,7 +854,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodThrows: aFASTJavaThrownExceptionsCol
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
 	self checkForComments: aFASTJavaModifier andDo: [
 	self unindented: aFASTJavaModifier token
@@ -860,7 +862,7 @@ FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 	self checkForComments: aFASTJavaModifierCollection andDo: [
 	aFASTJavaModifierCollection
@@ -878,7 +880,7 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 
 	self checkForComments: aFASTJavaNewArray andDo: [
@@ -898,7 +900,7 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
 	self checkForComments: aFASTJavaNewClassExpression andDo: [
 		self unindented: 'new '.
@@ -910,9 +912,13 @@ FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpre
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 	self checkForComments: aFASTJavaNewExpression andDo: [
+		aFASTJavaNewExpression receiver ifNotNil: [ :receiver |
+			receiver accept: self.
+			self unindented: '.'
+		].
 		self unindented: 'new '.
 		aFASTJavaNewExpression type accept: self.
 		self visitFASTJavaArgumentsList: aFASTJavaNewExpression arguments
@@ -920,7 +926,7 @@ FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
 	self checkForComments: aFASTJavaNullLiteral andDo: [
 		self unindented: 'null'
@@ -928,7 +934,7 @@ FASTJavaExportVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 	self checkForComments: aFASTJavaOuterThis andDo: [
 		aFASTJavaOuterThis type accept: self.
@@ -936,7 +942,7 @@ FASTJavaExportVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [
 	self checkForComments: aFASTJavaPackageDeclaration andDo: [
 	self unindented: 'package '.
@@ -946,7 +952,7 @@ FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclar
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	self checkForComments: aFASTJavaParameter andDo: [
 		aFASTJavaParameter type 
@@ -962,7 +968,7 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 	self checkForComments: aFASTJavaParameterCollection andDo: [
 		self unindented: $(.
@@ -972,7 +978,7 @@ FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaPostfixedUnaryExpression: aFASTJavaUnaryExpression [
 
 	self
@@ -984,7 +990,7 @@ FASTJavaExportVisitor >> visitFASTJavaPostfixedUnaryExpression: aFASTJavaUnaryEx
 		withOperator: 'unary' , aFASTJavaUnaryExpression operator
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaPrefixedUnaryExpression: aFASTJavaUnaryExpression [
 
 	self
@@ -996,7 +1002,7 @@ FASTJavaExportVisitor >> visitFASTJavaPrefixedUnaryExpression: aFASTJavaUnaryExp
 		withOperator: aFASTJavaUnaryExpression operator , 'unary'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 	self checkForComments: aFASTJavaQualifiedName andDo: [
 	self unindented: aFASTJavaQualifiedName fullName
@@ -1004,7 +1010,7 @@ FASTJavaExportVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
 
 	aFASTJavaQualifiedTypeName namespace accept: self.
@@ -1014,7 +1020,7 @@ FASTJavaExportVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeN
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExpression [
 	self checkForComments: aFASTJavaShortTypeExpression andDo: [
 	self unindented: 'short'
@@ -1022,7 +1028,7 @@ FASTJavaExportVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExp
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaStatement: aFASTJavaStatement [
 	"empty statement ?"
 
@@ -1033,7 +1039,7 @@ FASTJavaExportVisitor >> visitFASTJavaStatement: aFASTJavaStatement [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self checkForComments: aFASTJavaStringLiteral andDo: [
 		self unindented: $".
@@ -1043,7 +1049,7 @@ FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
 
 	self checkForComments: aFASTJavaSwitchStatement andDo: [
@@ -1063,7 +1069,7 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement 
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaSynchronizedStatement: aFASTJavaSynchronizedStatement [
 
 	self checkForComments: aFASTJavaSynchronizedStatement andDo: [
@@ -1074,7 +1080,7 @@ FASTJavaExportVisitor >> visitFASTJavaSynchronizedStatement: aFASTJavaSynchroniz
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 		self visitFASTJavaBlockOrStatement: aFASTJavaStatement
@@ -1082,7 +1088,7 @@ FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaThrowStatement: aFASTJavaThrowStatement [
 
 	self checkForComments: aFASTJavaThrowStatement andDo: [
@@ -1092,7 +1098,7 @@ FASTJavaExportVisitor >> visitFASTJavaThrowStatement: aFASTJavaThrowStatement [
 	]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
 	self checkForComments: aFASTJavaTryCatchStatement andDo: [
 		self indented: 'try '.
@@ -1115,7 +1121,7 @@ FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatem
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 	self checkForComments: aFASTJavaTypeName andDo: [
 	self unindented: aFASTJavaTypeName name
@@ -1123,7 +1129,7 @@ FASTJavaExportVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpression [
 	self checkForComments: aFASTJavaTypeParameterExpression andDo: [
 		self unindented: aFASTJavaTypeParameterExpression name.
@@ -1136,7 +1142,7 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
 	"exports '++a' or 'a++'
 	 if '++a' has a infixOperationRightOperandOwner (resp. 'a++' has a infixOperationLeftOperandOwner)
@@ -1152,7 +1158,7 @@ FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression 
 					aFASTJavaUnaryExpression ] ]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 	self checkForComments: aFASTJavaVarDeclStatement andDo: [
 		self indented: ''.
@@ -1168,7 +1174,7 @@ FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatemen
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	self checkForComments: aFASTJavaVariableDeclarator andDo: [
 		aFASTJavaVariableDeclarator variable accept: self.
@@ -1179,7 +1185,7 @@ FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDecla
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpression [
 	self checkForComments: aFASTJavaVariableExpression andDo: [
 	self unindented: aFASTJavaVariableExpression name
@@ -1187,7 +1193,7 @@ FASTJavaExportVisitor >> visitFASTJavaVariableExpression: aFASTJavaVariableExpre
 
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaBooleanTypeExpression [
 	self checkForComments: aFASTJavaBooleanTypeExpression andDo: [
 	self unindented: 'void'
@@ -1195,7 +1201,7 @@ FASTJavaExportVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaBooleanTypeEx
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 	
 	self checkForComments: aFASTJavaWhileStatement andDo: [
@@ -1209,7 +1215,7 @@ FASTJavaExportVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatement [
 
 	self checkForComments: aFASTTExpressionStatement andDo: [
@@ -1219,12 +1225,12 @@ FASTJavaExportVisitor >> visitFASTTExpressionStatement: aFASTTExpressionStatemen
 	]
 ]
 
-{ #category : #'visiting expression' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTTLiteral: aFASTTLiteral [
 	self unindented: aFASTTLiteral primitiveValue
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTReturnStatement: aFASTTReturnStatement [
 	self indented: 'return '.
 	aFASTTReturnStatement expression
@@ -1232,7 +1238,7 @@ FASTJavaExportVisitor >> visitFASTTReturnStatement: aFASTTReturnStatement [
 	self endOfStatement
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	self outputTopLevelExpression: [
 		self unindented: ${.
@@ -1247,7 +1253,7 @@ FASTJavaExportVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitJavaClassMemberDeclarations: classDeclarationsList [
 
 	self unindented: ' {'.
@@ -1261,14 +1267,14 @@ FASTJavaExportVisitor >> visitJavaClassMemberDeclarations: classDeclarationsList
 	^ self unindent
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitNodeListSeparatedByCommas: aCollection [
 	aCollection
 		do: [ :node | node accept: self ]
 		separatedBy: [ self unindented: ', ' ]
 ]
 
-{ #category : #'visiting statement' }
+{ #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitTryResources: tryResources [
 	"we need to fiddle with indent and endOfStatement because resources are FASTJavaVarDeclStatement
 	 #visitFASTJavaVariableDeclarator: ends with semicolon and newline (it's a statement), so:

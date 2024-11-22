@@ -1,10 +1,11 @@
 Class {
-	#name : #FASTJavaDedalusDifferentialValidator,
-	#superclass : #FASTJavaDifferentialValidator,
-	#category : #'FAST-Java-Tools'
+	#name : 'FASTJavaDedalusDifferentialValidator',
+	#superclass : 'FASTJavaDifferentialValidator',
+	#category : 'FAST-Java-Tools',
+	#package : 'FAST-Java-Tools'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTJavaDedalusDifferentialValidator >> comparatorClass [ 
 
 	^FASTJavaDedalusModelComparator

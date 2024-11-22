@@ -1,17 +1,19 @@
 Class {
-	#name : #FASTJavaTestNodeBuilder,
-	#superclass : #TestCase,
-	#category : #'FAST-Java-Tools-Tests-utils'
+	#name : 'FASTJavaTestNodeBuilder',
+	#superclass : 'TestCase',
+	#category : 'FAST-Java-Tools-Tests-utils',
+	#package : 'FAST-Java-Tools-Tests',
+	#tag : 'utils'
 }
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> annotation: aString [
 	^FASTJavaAnnotation new
 		name: aString ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> array: aName accessAtFirstDimensionIndex: firstInt andSecondDimensionIndex: secondInt [  
 
 	^ FASTJavaArrayAccess new
@@ -20,7 +22,7 @@ FASTJavaTestNodeBuilder >> array: aName accessAtFirstDimensionIndex: firstInt an
 		  yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> array: aName accessAtIndex: anInt [
 
 	^ FASTJavaArrayAccess new
@@ -29,7 +31,7 @@ FASTJavaTestNodeBuilder >> array: aName accessAtIndex: anInt [
 		  yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> arrayInitializer: aCollection [
 
 	^FASTJavaArrayInitializer new
@@ -37,7 +39,7 @@ FASTJavaTestNodeBuilder >> arrayInitializer: aCollection [
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> assignment: aName value: aNode [
 	^FASTJavaAssignmentExpression new
 		operator: '=' ;
@@ -46,7 +48,7 @@ FASTJavaTestNodeBuilder >> assignment: aName value: aNode [
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> block: aNodeCollection [
 	| node i |
 	node := FASTJavaStatementBlock new.
@@ -59,7 +61,7 @@ FASTJavaTestNodeBuilder >> block: aNodeCollection [
 	^node
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> cast: aName expression: aNode [
 	^FASTJavaCastExpression new
 		type: (FASTJavaClassTypeExpression new typeName: (self type: aName)) ;
@@ -67,21 +69,21 @@ FASTJavaTestNodeBuilder >> cast: aName expression: aNode [
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> class: aName [
 	^FASTJavaClassDeclaration new
 		name: aName ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> comment: aString [
 	^FASTJavaComment new
 		content: aString ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> conditionalExpr: anExpr then: aThenPart else: anElsePart [
 
 	^ FASTJavaConditionalExpression new
@@ -91,7 +93,7 @@ FASTJavaTestNodeBuilder >> conditionalExpr: anExpr then: aThenPart else: anElseP
 		  yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> declaration: declarators type: aType modifiers: modifiers [
 	^FASTJavaVarDeclStatement new
 		modifiers: modifiers ;
@@ -100,7 +102,7 @@ FASTJavaTestNodeBuilder >> declaration: declarators type: aType modifiers: modif
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> declarator: aName init: aNode [
 	^FASTJavaVariableDeclarator new
 		variable: (self var: aName) ;
@@ -108,21 +110,21 @@ FASTJavaTestNodeBuilder >> declarator: aName init: aNode [
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> doubleArrayType [
 	^ FASTJavaArrayTypeExpression new
 		  baseType: FASTJavaDoubleTypeExpression new;
 		  yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> exprStatement: aNode [
 	^FASTJavaExpressionStatement new
 		expression: aNode ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> if: conditionNode then: thenNode else: elseNode [
 	^FASTJavaIfStatement new
 		condition: conditionNode ;
@@ -131,7 +133,7 @@ FASTJavaTestNodeBuilder >> if: conditionNode then: thenNode else: elseNode [
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> infix: aString lhs: aNode1 rhs: aNode2 [
 	^FASTJavaInfixOperation new
 		operator: aString ;
@@ -140,7 +142,7 @@ FASTJavaTestNodeBuilder >> infix: aString lhs: aNode1 rhs: aNode2 [
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> invocation: aName recvr: recvrNode args: aNodeCollection [
 	| node |
 	node := FASTJavaMethodInvocation new
@@ -153,39 +155,48 @@ FASTJavaTestNodeBuilder >> invocation: aName recvr: recvrNode args: aNodeCollect
 	^node
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> literal: aClass value: aString [ 
 	^aClass new primitiveValue: aString ; yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> literalFloat: aValue [
 	^self literal: FASTJavaFloatLiteral value: aValue asString
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> literalInt: aValue [
 	^self literal: FASTJavaIntegerLiteral value: aValue asString
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> literalNull [
 	^self literal: FASTJavaNullLiteral value: 'null'
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> literalString: aValue [
 	^self literal: FASTJavaStringLiteral value: aValue
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> modifier: aName [
 	^FASTJavaModifier new
 		token: aName ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'instance creation' }
+FASTJavaTestNodeBuilder >> newExpression: className args: args [
+
+	^FASTJavaNewExpression new
+		type: (FASTJavaClassTypeExpression new typeName: (self type: className));
+		arguments: args;
+		yourself
+]
+
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> newStringArrayExpression: args [
 
 	^FASTJavaNewArray new
@@ -194,14 +205,14 @@ FASTJavaTestNodeBuilder >> newStringArrayExpression: args [
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> return: aNode [
 	^FASTJavaReturnStatement new
 		expression: aNode ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> stringArrayType [
 
 	^ FASTJavaArrayTypeExpression new
@@ -209,7 +220,7 @@ FASTJavaTestNodeBuilder >> stringArrayType [
 		  yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> stringTwoDimensionalArrayType [
 
 	^ FASTJavaArrayTypeExpression new
@@ -217,21 +228,21 @@ FASTJavaTestNodeBuilder >> stringTwoDimensionalArrayType [
 		  yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> type: aName [
 	^FASTJavaTypeName new
 		name: aName ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> typeExpression: aName [
 	^FASTJavaTypeExpression new
 		name: aName ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> unaryOp: anOperator prefix: aBoolean expr: anExpr [
 
 	^ FASTJavaUnaryExpression new
@@ -241,14 +252,14 @@ FASTJavaTestNodeBuilder >> unaryOp: anOperator prefix: aBoolean expr: anExpr [
 		  yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> var: aName [
 	^FASTJavaVariableExpression new
 		name: aName ;
 		yourself
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> var: aVarName declaration: aTypeName [
 	^self
 		varDeclarations: ((FASTJavaClassTypeExpression new typeName: (self type: aTypeName)))
@@ -256,7 +267,7 @@ FASTJavaTestNodeBuilder >> var: aVarName declaration: aTypeName [
 		
 ]
 
-{ #category : #'api - building' }
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> varDeclarations: aType declarators: aNodeCollection [
 	^self
 		declaration: aNodeCollection

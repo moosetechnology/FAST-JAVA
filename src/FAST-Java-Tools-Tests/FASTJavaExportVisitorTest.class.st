@@ -1,13 +1,15 @@
 Class {
-	#name : #FASTJavaExportVisitorTest,
-	#superclass : #TestCase,
+	#name : 'FASTJavaExportVisitorTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'builder'
 	],
-	#category : #'FAST-Java-Tools-Tests-export'
+	#category : 'FAST-Java-Tools-Tests-export',
+	#package : 'FAST-Java-Tools-Tests',
+	#tag : 'export'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> astFor: sourceCode [
 
 	^JavaSmaCCProgramNodeImporterVisitor new
@@ -15,7 +17,7 @@ FASTJavaExportVisitorTest >> astFor: sourceCode [
 			typeDeclarations anyOne
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> astFor: sourceCode withRule: rule [
 
 	^JavaSmaCCProgramNodeImporterVisitor new
@@ -25,7 +27,7 @@ FASTJavaExportVisitorTest >> astFor: sourceCode withRule: rule [
 			parse
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> blockAST: sourceCode [
 
 	^self astFor: sourceCode withRule: #startingStateForblock_statement
@@ -33,7 +35,7 @@ FASTJavaExportVisitorTest >> blockAST: sourceCode [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> export: aFASTJavaNode equals: aString [
 
 	self
@@ -41,7 +43,7 @@ FASTJavaExportVisitorTest >> export: aFASTJavaNode equals: aString [
 		equals: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> expressionAST: sourceCode [
 
 	^self astFor: sourceCode withRule: #startingStateForexpression
@@ -49,21 +51,21 @@ FASTJavaExportVisitorTest >> expressionAST: sourceCode [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> methodAST: sourceCode [
 
 	^self astFor: sourceCode withRule: #startingStateForclass_or_interface_body_declaration
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> setUp [
 	super setUp.
 	
 	builder := FASTJavaTestNodeBuilder new
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTAssignmentInMessageSend [
 
 	| expr |
@@ -83,7 +85,7 @@ FASTJavaExportVisitorTest >> testVisitFASTAssignmentInMessageSend [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTEmptyReturn [
 
 	| ast |
@@ -93,7 +95,7 @@ FASTJavaExportVisitorTest >> testVisitFASTEmptyReturn [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTEmptyReturnAttributeAccess [
 
 	| ast |
@@ -104,7 +106,7 @@ FASTJavaExportVisitorTest >> testVisitFASTEmptyReturnAttributeAccess [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethod [
 	
 	| expr |
@@ -116,7 +118,7 @@ void mth() {
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArgument [
 	
 	| expr |
@@ -128,7 +130,7 @@ void mth() {
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithArrayElement [
 	
 	| expr |
@@ -140,7 +142,7 @@ void mth() {
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithArrayElementWithOtherAnnotation [
 	
 	| expr |
@@ -152,7 +154,7 @@ void mth() {
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithElement [
 	
 	| expr |
@@ -164,7 +166,7 @@ void mth() {
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithElementClassProperty [
 	
 	| expr |
@@ -176,7 +178,7 @@ void mth() {
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithNamedElements [
 	
 	| expr |
@@ -188,7 +190,7 @@ void mth() {
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnonymousClassDeclaration [
 
 	| expr |
@@ -199,7 +201,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnonymousClassDeclaration [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnonymousClassDeclarationWithMethod [
 
 	| expr |
@@ -212,7 +214,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnonymousClassDeclarationWithMetho
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaArrayAccess [
 
 	| exprUni exprBi |
@@ -223,7 +225,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaArrayAccess [
 	self export: exprBi equals: 'testArray[4][2]'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
 
 	| exprStr exprDouble exprBiStr |
@@ -236,7 +238,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
 	self export: exprBiStr equals: 'String[][]'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatement [
 
 	| expr |
@@ -246,7 +248,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatementExplanationIsExpression [
 
 	| expr |
@@ -256,7 +258,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatementExplanationIsExpres
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatementNoExplanation [
 
 	| expr |
@@ -266,7 +268,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatementNoExplanation [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 	| node |
 	node := builder assignment: 'aVar' value: (builder literalInt: 42).
@@ -277,7 +279,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAssignmentExpression [
 
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeAccess [
 
 	| ast |
@@ -287,7 +289,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeAccess [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeModifiers [
 
 	| ast |
@@ -299,14 +301,14 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeModifiers [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 	| node |
 	node := builder cast: 'float' expression: (builder var: 'aVar').
 	self export: node equals: '(float) aVar'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithParentheses [
 
 	| expr |
@@ -315,7 +317,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithParentheses [
 	self export: expr equals: '((AClass) obj.m1()).m2()'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCharacterLiterals [
 
 	self export: (self expressionAST: '''a''') equals: '''a'''.
@@ -324,7 +326,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCharacterLiterals [
 	self export: (self expressionAST: '''\000''') equals: '''\000'''
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclaration [
 	| node |
 	node := builder class: 'Blah'.
@@ -333,7 +335,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclaration [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotatedMethod [
 	| node |
 	node := builder class: 'Blah'.
@@ -346,7 +348,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotatedMetho
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotation [
 	| node |
 	node := builder class: 'Blah'.
@@ -357,7 +359,7 @@ class Blah {
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithInterfaces [
 	| node |
 	node := builder class: 'Blah'.
@@ -368,7 +370,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithInterfaces [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithMethod [
 	| node |
 	node := builder class: 'Blah'.
@@ -380,7 +382,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithMethod [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithModifiers [
 	| node |
 	node := builder class: 'Blah'.
@@ -391,7 +393,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithModifiers [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclass [
 	| node |
 	node := builder class: 'Blah'.
@@ -401,7 +403,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclass [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndInterfaces [
 	| node |
 	node := builder class: 'Blah'.
@@ -413,7 +415,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndI
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 
 	| expr |
@@ -423,7 +425,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaContinueStatement [
 
 	| ast |
@@ -433,7 +435,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaContinueStatement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaDoWhile [
 
 	| ast |
@@ -447,7 +449,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaDoWhile [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 
 	| ast |
@@ -462,7 +464,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithInitializedField [
 
 	| ast |
@@ -478,7 +480,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithInitializedFiel
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndArithmeticSubExpression [
 	
 	| expr |
@@ -487,7 +489,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndArithm
 	self export: expr equals: '(int) (3*4)'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndAttributeAccess [
 	
 	| expr |
@@ -496,7 +498,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndAttrib
 	self export: expr equals: '((String) 1).attr'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesClearStackOnTopLevelExpression [
 	"topLevelExpression
 	 Introduced to deal with an expression as argument of a method call because we are using a global stack,
@@ -508,7 +510,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesClearStackOnT
 	self export: expr equals: 'meth("a"+"b")'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesMessageOnStringConcatenation [
 	
 	| expr |
@@ -517,7 +519,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesMessageOnStri
 	self export: expr equals: '("a"+"b").length()'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesNone [
 	
 	| expr |
@@ -526,7 +528,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesNone [
 	self export: expr equals: '4+5'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcatenationLeft [
 	
 	| expr |
@@ -536,7 +538,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcate
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcatenationRight [
 	
 	| expr |
@@ -546,7 +548,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcate
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcatenationTypeInference [
 	"A case of string concatenation where the string is the result of another expression (not a Literal)
 	 In the example, the first concatenation ('a+String') returns a string 
@@ -559,7 +561,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcate
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasHigherPrecedence [
 	
 	| expr |
@@ -568,7 +570,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasHigherP
 	self export: expr equals: '4/5-6'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasLowerPrecedence [
 	
 	| expr |
@@ -577,7 +579,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasLowerPr
 	self export: expr equals: '(4+5)*6'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubUnary [
 	
 	| expr |
@@ -587,7 +589,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubUnary [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernaryIsSubWithHigherPrecedence [
 	
 	| expr |
@@ -597,7 +599,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernaryIsSubW
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernaryIsSubWithLowerPrecedence [
 	
 	| expr |
@@ -606,7 +608,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernaryIsSubW
 	self export: expr equals: '4+(5>6 ? 7 : 8)'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHasHigherPrecedence [
 	
 	| expr |
@@ -615,7 +617,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHas
 	self export: expr equals: '4>=5 ? 6<<7 : 8%9'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHasLowerPrecedence1 [
 	
 	| expr |
@@ -625,7 +627,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHas
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHasLowerPrecedence2 [
 	"parentheses not needed between '?' and ':'"
 	
@@ -636,7 +638,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHas
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesUnaryWithSub [
 	
 	| expr |
@@ -646,7 +648,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesUnaryWithSub 
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnSuper [
 	
 	| expr |
@@ -658,7 +660,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnSuper [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnThis [
 	
 	| expr |
@@ -670,14 +672,14 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnThis [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFloatLiteral [
 	| node |
 	node := builder literal: FASTJavaFloatLiteral value: '37.2f'.
 	self export: node equals: '37.2f'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForEachLoop [
 
 	| expr |
@@ -688,7 +690,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForEachLoop [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopBlockStatement [
 
 	| expr |
@@ -705,7 +707,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopBlockStatement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopEmpty [
 
 	| expr |
@@ -716,7 +718,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopEmpty [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopMissingElements [
 
 	| expr |
@@ -727,7 +729,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopMissingElements [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSingleStatement [
 
 	| expr |
@@ -740,7 +742,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSingleStatement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFullyQualifiedName [
 
 	| ast |
@@ -751,7 +753,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaFullyQualifiedName [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 	| node |
 	node := builder
@@ -765,7 +767,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperation [
 
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperationInstanceof [
 
 	| expr |
@@ -775,7 +777,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInfixOperationInstanceof [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInitializer [
 
 	| ast |
@@ -788,7 +790,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInitializer [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInitializerStatic [
 
 	| ast |
@@ -801,14 +803,14 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInitializerStatic [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaIntegerLiteral [
 	| node |
 	node := builder literal: FASTJavaIntegerLiteral value: '42'.
 	self export: node equals: '42'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclaration [
 
 	| ast |
@@ -819,7 +821,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclaration [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationExtendsInterfaces [
 
 	| ast |
@@ -830,7 +832,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationExtendsInterfa
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMethod [
 
 	| ast |
@@ -846,7 +848,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMet
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceWithAbstractMethod [
 
 	| ast |
@@ -860,7 +862,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceWithAbstractMethod [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledReturnStatement [
 
 	| ast |
@@ -872,7 +874,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledReturnStatement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledStatementBlock [
 
 	| ast |
@@ -885,7 +887,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledStatementBlock [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionOneStatement [
 
 	| ast |
@@ -897,7 +899,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionOneStatement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionStatementBlock [
 
 	| ast |
@@ -913,7 +915,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionStatementBlock [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 
 	| node |
@@ -923,7 +925,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 	self export: node equals: '42L'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodAbstract [
 
 	| ast |
@@ -933,7 +935,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodAbstract [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodDeclaration [
 
 	| ast |
@@ -944,7 +946,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodDeclaration [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocation [
 
 	| node |
@@ -952,7 +954,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocation [
 	self export: node equals: 'methodA()'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationArguments [
 
 	| node |
@@ -963,7 +965,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationArguments [
 	self export: node equals: 'methodA(aVar, 42)'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiver [
 	| node |
 	node := FASTJavaMethodInvocation new name: 'methodA'.
@@ -974,7 +976,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiver [
 
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignmentExpression [
 
 	| ast |
@@ -983,7 +985,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignme
 	self export: ast equals: '(x = "a"+"b").length()'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodModifiers [
 
 	| ast |
@@ -994,37 +996,56 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodModifiers [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayIntArg [
 	| node |
 	node := builder newStringArrayExpression: { builder literalInt: 5 }.
 	self export: node equals: 'new String[5]'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayNoArg [
 	| node |
 	node := builder newStringArrayExpression:  {FASTJavaEmptyDimExpression new}.
 	self export: node equals: 'new String[]'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpression [
+
+	| node |
+	node := builder newExpression: 'Object' args: #(  ).
+	self export: node equals: 'new Object()'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpressionWithReceiver [
+
+	| node |
+	node := builder newExpression: 'InnerClass' args: #(  ).
+	node receiver: (builder newExpression: 'OuterClass' args: #(  )).
+	self export: node equals: 'new OuterClass().new InnerClass()'
+]
+
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNullLiteral [
 	| node |
 	node := builder literal: FASTJavaNullLiteral value: nil.
 	self export: node equals: 'null'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaOuterThis [
-	| ast |
-	ast := self methodAST: 'void mth() { return EnclosingClass.this; }'.
 
-	self export: ast statements first equals: 'return EnclosingClass.this;
-'
+	| ast |
+	ast := self methodAST: 'EnclosingClass mth() { return EnclosingClass.this; }'.
+
+	self
+		export: ast statements first expression
+		equals: 'EnclosingClass.this'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaParameter [
 
 	| ast |
@@ -1034,7 +1055,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaParameter [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaPostIncrementAndSum [
 
 	| expr |
@@ -1044,7 +1065,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPostIncrementAndSum [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
 	"testing for operator precedence of operator '!'"
 	| ast |
@@ -1055,14 +1076,14 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
 		equals: ' !true'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
 	node := builder literal: FASTJavaStringLiteral value: 'This is a String'.
 	self export: node equals: '"This is a String"'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 
 	| expr |
@@ -1072,7 +1093,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSynchronizedBlock [
 
 	| expr |
@@ -1083,7 +1104,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSynchronizedBlock [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTestOnCharacter [
 
 	| ast |
@@ -1094,7 +1115,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTestOnCharacter [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaThrowStatement [
 
 	| expr |
@@ -1104,7 +1125,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaThrowStatement [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatch [
 
 	| ast |
@@ -1122,7 +1143,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatch [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatchMultipleExceptinoClasses [
 
 	| ast |
@@ -1140,7 +1161,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatchMultipleExceptinoClasses [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryFinally [
 
 	| ast |
@@ -1158,7 +1179,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryFinally [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithMultipleResources [
 
 	| ast |
@@ -1173,7 +1194,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithMultipleResources [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithResource [
 
 	| ast |
@@ -1188,7 +1209,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithResource [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 
 	self
@@ -1197,7 +1218,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeName [
 
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterGenericMethod [
 	
 	| expr |
@@ -1208,7 +1229,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterGenericMethod [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterOnMethod [
 	
 	| expr |
@@ -1219,7 +1240,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterOnMethod [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 	
 	| expr |
@@ -1230,7 +1251,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithMultipleTypes [
 
 	| expr |
@@ -1241,7 +1262,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithMultipleTypes [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersExtendingSomeType [
 	
 	| expr |
@@ -1252,7 +1273,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersExtendi
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersOnMethod [
 	
 	| expr |
@@ -1263,7 +1284,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersOnMetho
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
 
 	| nodeVar nodeInt |
@@ -1281,7 +1302,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
 	self export: nodeInt equals: '42++'
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclArrayWithInitializer [
 
 	| stmt type |
@@ -1295,7 +1316,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclArrayWithInitializer [
 
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclStatement [
 
 	| stmt |
@@ -1306,7 +1327,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclStatement [
 
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWith2BlockComments [
 
 	| stmt cmt |
@@ -1325,7 +1346,7 @@ String s;
 
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithBlockAndLineComments [
 
 	| stmt cmt |
@@ -1343,7 +1364,7 @@ String s;// this is the same declaration
 
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithBlockComment [
 
 	| stmt |
@@ -1356,7 +1377,7 @@ String s;
 
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithLineComment [
 
 	| stmt |
@@ -1368,14 +1389,14 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithLineComment [
 
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVariableExpression [
 	self
 		export: (builder var: 'aVar')
 		equals: 'aVar'
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaWhileLoopEmpty [
 
 	| ast |
@@ -1386,7 +1407,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaWhileLoopEmpty [
 '
 ]
 
-{ #category : #'test from source code' }
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTSwitchCaseDefault [
 
 	| ast |
@@ -1401,7 +1422,7 @@ FASTJavaExportVisitorTest >> testVisitFASTSwitchCaseDefault [
 '
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTTExpressionStatement [
 	| node |
 	node := builder exprStatement: (builder invocation: 'methodA' recvr: nil args: #()).
@@ -1412,7 +1433,7 @@ FASTJavaExportVisitorTest >> testVisitFASTTExpressionStatement [
 
 ]
 
-{ #category : #'test from FAST model' }
+{ #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTTLiterals [
 	self
 		export: (builder literalNull)

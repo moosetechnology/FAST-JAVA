@@ -1,14 +1,16 @@
 Class {
-	#name : #FASTJavaLocalResolverVisitorTest,
-	#superclass : #TestCase,
+	#name : 'FASTJavaLocalResolverVisitorTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'localResolver',
 		'builder'
 	],
-	#category : #'FAST-Java-Tools-Tests-resolver'
+	#category : 'FAST-Java-Tools-Tests-resolver',
+	#package : 'FAST-Java-Tools-Tests',
+	#tag : 'resolver'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaLocalResolverVisitorTest >> setUp [
 	super setUp.
 	
@@ -16,7 +18,7 @@ FASTJavaLocalResolverVisitorTest >> setUp [
 	localResolver := FASTJavaLocalResolverVisitor new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTJavaLocalResolverVisitorTest >> testBindToDeclaration [
 	"
 	void meth() {
@@ -55,7 +57,7 @@ FASTJavaLocalResolverVisitorTest >> testBindToDeclaration [
 	self assert: body first declarators first localUses size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTJavaLocalResolverVisitorTest >> testBindToLoopVariable [
 	"
 	void meth() {
@@ -114,7 +116,7 @@ FASTJavaLocalResolverVisitorTest >> testBindToLoopVariable [
 	self assert: loop initializer declarators first localUses size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTJavaLocalResolverVisitorTest >> testBindToParameter [
 	"
 	void meth(int x) {
@@ -148,7 +150,7 @@ FASTJavaLocalResolverVisitorTest >> testBindToParameter [
 	self assert: varAccess localDeclaration equals: ast parameters first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTJavaLocalResolverVisitorTest >> testBindingNotFound [
 	"
 	void meth() {
@@ -178,7 +180,7 @@ FASTJavaLocalResolverVisitorTest >> testBindingNotFound [
 	self assert: varAccess localDeclaration name equals: 'x'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTJavaLocalResolverVisitorTest >> testLoopVariableHidesParameter [
 	"
 	void meth(int i) {
