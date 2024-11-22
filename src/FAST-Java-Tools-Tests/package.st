@@ -1,1 +1,1 @@
-Package { #name : #'FAST-Java-Tools-Tests' }
+Package { #name : 'FAST-Java-Tools-Tests' }

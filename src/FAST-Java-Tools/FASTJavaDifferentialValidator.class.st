@@ -1,10 +1,11 @@
 Class {
-	#name : #FASTJavaDifferentialValidator,
-	#superclass : #FASTDifferentialValidator,
-	#category : #'FAST-Java-Tools'
+	#name : 'FASTJavaDifferentialValidator',
+	#superclass : 'FASTDifferentialValidator',
+	#category : 'FAST-Java-Tools',
+	#package : 'FAST-Java-Tools'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaDifferentialValidator >> getASTFromString: string [
 
 	^ JavaSmaCCProgramNodeImporterVisitor new
@@ -12,7 +13,7 @@ FASTJavaDifferentialValidator >> getASTFromString: string [
 		  model
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 FASTJavaDifferentialValidator >> getTopLevelNodes: model [
 
 	^model allWithSubTypesOfAny: {
@@ -22,13 +23,13 @@ FASTJavaDifferentialValidator >> getTopLevelNodes: model [
 	}
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FASTJavaDifferentialValidator >> isSourceFile: aFileReference [
 
 	^aFileReference extension = 'java'
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 FASTJavaDifferentialValidator >> reExportAST: ast [
 
 	^FASTJavaExportVisitor new

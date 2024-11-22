@@ -2,19 +2,20 @@
 A differential validator specialized for Dedalus code with files and position where we know that the differences are acceptable
 "
 Class {
-	#name : #FASTJavaDedalusModelComparator,
-	#superclass : #FamixModelComparator,
-	#category : #'FAST-Java-Tools'
+	#name : 'FASTJavaDedalusModelComparator',
+	#superclass : 'FamixModelComparator',
+	#category : 'FAST-Java-Tools',
+	#package : 'FAST-Java-Tools'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FASTJavaDedalusModelComparator >> ast: ast1 acceptableDifferenceTo: ast2 [
 
 	^(ast1 class = FASTJavaInfixOperation) 
 		or: [ ast2 class = FASTJavaInfixOperation ]
 ]
 
-{ #category : #comparison }
+{ #category : 'comparison' }
 FASTJavaDedalusModelComparator >> ast: node1 acceptableDifferenceTo: node2 property: property [
 	"returns nil if the difference is not acceptable
 	 otherwise, must return  a block testing where the comparison process might resume"
