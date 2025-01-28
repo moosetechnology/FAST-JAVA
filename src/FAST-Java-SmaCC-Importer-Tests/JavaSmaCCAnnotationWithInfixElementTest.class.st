@@ -10,7 +10,7 @@ Class {
 
 { #category : 'running' }
 JavaSmaCCAnnotationWithInfixElementTest >> javaMethod [
-	^ '@Useless( {"hello"+ "world"} )
+	^ '@Useless( "hello"+ "world" )
 	void concatenation() {
 }'
 ]
@@ -19,7 +19,7 @@ JavaSmaCCAnnotationWithInfixElementTest >> javaMethod [
 JavaSmaCCAnnotationWithInfixElementTest >> testElementsType [
 	self
 		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements anyOne class
-		equals: FASTJavaArrayAnnotationElement 
+		equals: FASTJavaInfixOperation 
 ]
 
 { #category : 'tests' }

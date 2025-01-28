@@ -8,7 +8,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 JavaSmaCCAnnotationWithArrayElementTest >> javaMethod [
 	^ '@Useless( {"hello", "world"} )
 	void arrayLiteral() {
