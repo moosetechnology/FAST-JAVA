@@ -27,7 +27,7 @@ JavaSmaCCAnnotationWithArrayElementTest >> testNumberOfElementsToAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCAnnotationWithArrayElementTest >> testNumberOfInitializedElement [
 	self assert: (fastModel allWithType: FASTJavaArrayAnnotationElement) first values size equals: 2
 ]
