@@ -908,6 +908,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaInfixOperation --|> tExpression.
 	javaInfixOperation --|> tReceiver.
+	javaInfixOperation --|> tAnnotationElement.
 
 	javaBreakStatement --|> tStatement.
 	javaCaseStatement --|> tStatementBlock.
