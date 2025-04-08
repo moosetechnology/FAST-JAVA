@@ -23,10 +23,10 @@ BaselineOfFASTJava >> baseline: spec [
 { #category : 'accessing' }
 BaselineOfFASTJava >> customProjectAttributes [
 
-	^ RPackageOrganizer default packages
-		  detect: [ :package | package name = 'BaselineOfFamix' ]
-		  ifFound: [ #(  ) ]
-		  ifNone: [ #( #NeedsMoose ) ]
+	^ self class environment
+		  at: #BaselineOfFamix
+		  ifPresent: [ #(  ) ]
+		  ifAbsent: [ #( #NeedsMoose ) ]
 ]
 
 { #category : 'baselines' }
