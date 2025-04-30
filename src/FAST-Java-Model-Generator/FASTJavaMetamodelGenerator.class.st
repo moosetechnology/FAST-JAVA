@@ -1576,7 +1576,7 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
 
 	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
-	tConditionalStatement := self remoteTrait: #TConditinalStatement withPrefix: #FAST.
+	tConditionalStatement := self remoteTrait: #TConditionalStatement withPrefix: #FAST.
 	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
 	tLoopStatement := self remoteTrait: #TLoopStatement withPrefix: #FAST.
 	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
