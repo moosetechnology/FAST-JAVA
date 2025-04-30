@@ -802,6 +802,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaLongTypeExpression withTesting.
 	javaShortTypeExpression := self newClassNamed: #ShortTypeExpression comment: 'I represent a short type'.
 	javaShortTypeExpression withTesting.
+	javaVarTypeExpression := self newClassNamed: #VarTypeExpression comment: 'I represent a var type (type inference)'.
+	javaVarTypeExpression withTesting.
 	javaVoidTypeExpression := self newClassNamed: #VoidTypeExpression comment: 'I represent a short type'.
 	javaVoidTypeExpression withTesting.
 
