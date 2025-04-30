@@ -128,7 +128,10 @@ Class {
 		'tAnnotationElement',
 		'javaLiteral',
 		'javaArrayAnnotationElement',
-		'javaTypePattern'
+		'javaTypePattern',
+		'tConditionalStatement',
+		'tLoopStatement',
+		'javaVarTypeExpression'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -914,12 +917,17 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCaseStatement --|> tStatementBlock.
 	javaContinueStatement --|> tStatement.
 	javaDoWhileStatement --|> tStatement.
+	javaDoWhileStatement --|> tConditionalStatement.
+	javaDoWhileStatement --|> tLoopStatement.
 	javaForStatement --|> tStatement.
+	javaForStatement --|> tConditionalStatement.
+	javaForStatement --|> tLoopStatement.
 
 	javaIdentifier --|> javaVariableExpression.
 	javaIdentifier --|> tReceiver.
 
 	javaIfStatement --|> tStatement.
+	javaIfStatement --|> tConditionalStatement.
 
 	javaArrayAnnotationElement --|> tAnnotationElement.
 	javaArrayAnnotationElement --|> tExpression. "because annotationElement=value are modeled as assignment expression"
@@ -990,6 +998,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaVariableDeclarator --|> tEntity.
 	javaWhileStatement --|> tStatement.
+	javaWhileStatement --|> tConditionalStatement.
+	javaWhileStatement --|> tLoopStatement.
 	javaMethodInvocation --|> tNamedEntity.
 	javaCastExpression --|> tExpression.
 	javaCastExpression --|> tReceiver.
@@ -1000,6 +1010,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaTryCatchStatement --|> tStatement.
 	javaForEachStatement --|> tStatement.
+	javaForEachStatement --|> tLoopStatement.
 	javaUnaryExpression --|> tExpression.
 
 	javaNewExpression --|> tExpression.
@@ -1252,10 +1263,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaLabeledCaseStatementOwner) comment:
 			 'The javaLabeledCaseStatement owner (if possible)').
 
-	((javaForEachStatement property: #body) comment:
-		 'The body of the for-each statement')
-	<>- ((tStatement property: #javaForEachStatementOwner) comment:
-			 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #list) comment:
 		 'The list that the for-each statement iterates over')
 	<>- ((tExpression property: #javaForEachStatementOwner) comment:
@@ -1302,10 +1309,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((javaVariableExpression property: #javaCatchParameterOwnler)
 			 comment: 'The javaCatchPartParameterOwner owner (if possible)').
 
-	((javaIfStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #ifConditionOwner) comment:
-			 'I represent a condition for my owner').
 	((javaIfStatement property: #elsePart) comment: 'else part')
 	<>- ((tStatement property: #ifElsePartOwner) comment:
 			 'The if owner (if possible)').
@@ -1333,10 +1336,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((tExpression property: #infixOperationRightOperandOwner) comment:
 			 'The right operand (if possible)').
 
-	((javaForStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #forConditionOwner) comment:
-			 'I represent a condition for my owner').
 	((javaForStatement property: #incrementor) comment:
 		 'Expression evaluated at the end of each loop')
 	<>- ((tStatement property: #forIncrementorOwner) comment:
@@ -1345,33 +1344,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'Expression used at initialization phase of a for loop')
 	<>- ((tStatement property: #forIninitializerOwner) comment:
 			 'I am the initializer of the for').
-	((javaForStatement property: #body) comment:
-		 'A statement to be evaluated in the loop')
-	<>- ((tStatement property: #forBodyOwner) comment:
-			 'I am the body of the for').
 
 	((javaSwitchStatement property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #switchConditionOwner) comment:
 			 'I represent a condition for my owner').
-
-	((javaDoWhileStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #doConditionOwner) comment:
-			 'I represent a condition for my owner').
-	((javaDoWhileStatement property: #body) comment:
-		 'A statement to be evaluated in the loop')
-	<>- ((tStatement property: #doBodyOwner) comment:
-			 'I am the body of the do').
-
-	((javaWhileStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #whileConditionOwner) comment:
-			 'I represent a condition for my owner').
-	((javaWhileStatement property: #body) comment:
-		 'A statement to be evaluated in the loop')
-	<>- ((tStatement property: #whileBodyOwner) comment:
-			 'I am the body of the do').
 
 	((javaInitializer property: #statementBlock) comment:
 		 'Statements block of the behavioural entity')
@@ -1586,23 +1563,29 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.
-	tComment := self remoteTrait: #TComment withPrefix: #FAST.
-	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
-	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
-	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
+
+	tBooleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
 	tCharacterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
 	tLiteral := self remoteTrait: #TLiteral withPrefix: #FAST.
-	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
-	tNamedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
 	tNullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
 	tStringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
+
+	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
+	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
+
+	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
+	tConditionalStatement := self remoteTrait: #TConditinalStatement withPrefix: #FAST.
+	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
+	tLoopStatement := self remoteTrait: #TLoopStatement withPrefix: #FAST.
+	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
+	tStatementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
+
+	tComment := self remoteTrait: #TComment withPrefix: #FAST.
+	tInvocation := self remoteTrait: #TInvocation withPrefix: #FAST.
+	tNamedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
+	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
 	tScopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
 	tVariableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
-	tStatementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
-	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
+	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
 	tWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
-	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
-	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
-	tBooleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
-	tInvocation := self remoteTrait: #TInvocation withPrefix: #FAST
 ]
