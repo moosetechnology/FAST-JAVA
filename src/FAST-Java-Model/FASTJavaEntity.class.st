@@ -56,6 +56,12 @@ FASTJavaEntity class >> metamodel [
 	^ FASTJavaModel metamodel
 ]
 
+{ #category : '*FAST-Java-Model-Extension' }
+FASTJavaEntity >> exporterClassName [
+
+	^ #FASTJavaExportVisitor
+]
+
 { #category : 'testing' }
 FASTJavaEntity >> isAnnotation [
 
@@ -597,6 +603,13 @@ FASTJavaEntity >> isTypePattern [
 
 { #category : 'testing' }
 FASTJavaEntity >> isVarDeclStatement [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isVarTypeExpression [
 
 	<generated>
 	^ false

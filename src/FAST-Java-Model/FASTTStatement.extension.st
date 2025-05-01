@@ -1,60 +1,6 @@
 Extension { #name : 'FASTTStatement' }
 
 { #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> doBodyOwner [
-	"Relation named: #doBodyOwner type: #FASTJavaDoWhileStatement opposite: #body"
-
-	<generated>
-	<FMComment: 'I am the body of the do'>
-	<container>
-	<derived>
-	<FMProperty: #doBodyOwner type: #FASTJavaDoWhileStatement opposite: #body>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #doBodyOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> doBodyOwner: anObject [
-
-	<generated>
-	(self attributeAt: #doBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self doBodyOwner.
-		self attributeAt: #doBodyOwner put: anObject.
-		otherSide body: nil ]
-	ifNotNil: [ 
-		self attributeAt: #doBodyOwner put: anObject.
-		anObject body: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> forBodyOwner [
-	"Relation named: #forBodyOwner type: #FASTJavaForStatement opposite: #body"
-
-	<generated>
-	<FMComment: 'I am the body of the for'>
-	<container>
-	<derived>
-	<FMProperty: #forBodyOwner type: #FASTJavaForStatement opposite: #body>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #forBodyOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> forBodyOwner: anObject [
-
-	<generated>
-	(self attributeAt: #forBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self forBodyOwner.
-		self attributeAt: #forBodyOwner put: anObject.
-		otherSide body: nil ]
-	ifNotNil: [ 
-		self attributeAt: #forBodyOwner put: anObject.
-		anObject body: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
 FASTTStatement >> forIncrementorOwner [
 	"Relation named: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor"
 
@@ -163,33 +109,6 @@ FASTTStatement >> ifThenPartOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> javaForEachStatementOwner [
-	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body"
-
-	<generated>
-	<FMComment: 'The javaForEachStatement owner (if possible)'>
-	<container>
-	<derived>
-	<FMProperty: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #body>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaForEachStatementOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> javaForEachStatementOwner: anObject [
-
-	<generated>
-	(self attributeAt: #javaForEachStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaForEachStatementOwner.
-		self attributeAt: #javaForEachStatementOwner put: anObject.
-		otherSide body: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaForEachStatementOwner put: anObject.
-		anObject body: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
 FASTTStatement >> labelStatementOwner [
 	"Relation named: #labelStatementOwner type: #FASTJavaLabeledStatement opposite: #labeledStatement"
 
@@ -214,31 +133,4 @@ FASTTStatement >> labelStatementOwner: anObject [
 	ifNotNil: [ 
 		self attributeAt: #labelStatementOwner put: anObject.
 		anObject labeledStatement: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> whileBodyOwner [
-	"Relation named: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body"
-
-	<generated>
-	<FMComment: 'I am the body of the do'>
-	<container>
-	<derived>
-	<FMProperty: #whileBodyOwner type: #FASTJavaWhileStatement opposite: #body>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #whileBodyOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTStatement >> whileBodyOwner: anObject [
-
-	<generated>
-	(self attributeAt: #whileBodyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self whileBodyOwner.
-		self attributeAt: #whileBodyOwner put: anObject.
-		otherSide body: nil ]
-	ifNotNil: [ 
-		self attributeAt: #whileBodyOwner put: anObject.
-		anObject body: self ]
 ]

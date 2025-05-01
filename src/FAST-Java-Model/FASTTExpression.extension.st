@@ -109,87 +109,6 @@ FASTTExpression >> conditionalThenPartOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> doConditionOwner [
-	"Relation named: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition"
-
-	<generated>
-	<FMComment: 'I represent a condition for my owner'>
-	<container>
-	<derived>
-	<FMProperty: #doConditionOwner type: #FASTJavaDoWhileStatement opposite: #condition>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #doConditionOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> doConditionOwner: anObject [
-
-	<generated>
-	(self attributeAt: #doConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self doConditionOwner.
-		self attributeAt: #doConditionOwner put: anObject.
-		otherSide condition: nil ]
-	ifNotNil: [ 
-		self attributeAt: #doConditionOwner put: anObject.
-		anObject condition: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> forConditionOwner [
-	"Relation named: #forConditionOwner type: #FASTJavaForStatement opposite: #condition"
-
-	<generated>
-	<FMComment: 'I represent a condition for my owner'>
-	<container>
-	<derived>
-	<FMProperty: #forConditionOwner type: #FASTJavaForStatement opposite: #condition>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #forConditionOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> forConditionOwner: anObject [
-
-	<generated>
-	(self attributeAt: #forConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self forConditionOwner.
-		self attributeAt: #forConditionOwner put: anObject.
-		otherSide condition: nil ]
-	ifNotNil: [ 
-		self attributeAt: #forConditionOwner put: anObject.
-		anObject condition: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> ifConditionOwner [
-	"Relation named: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition"
-
-	<generated>
-	<FMComment: 'I represent a condition for my owner'>
-	<container>
-	<derived>
-	<FMProperty: #ifConditionOwner type: #FASTJavaIfStatement opposite: #condition>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #ifConditionOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> ifConditionOwner: anObject [
-
-	<generated>
-	(self attributeAt: #ifConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self ifConditionOwner.
-		self attributeAt: #ifConditionOwner put: anObject.
-		otherSide condition: nil ]
-	ifNotNil: [ 
-		self attributeAt: #ifConditionOwner put: anObject.
-		anObject condition: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
 FASTTExpression >> infixOperationLeftOperandOwner [
 	"Relation named: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand"
 
@@ -637,32 +556,5 @@ FASTTExpression >> switchConditionOwner: anObject [
 		otherSide condition: nil ]
 	ifNotNil: [ 
 		self attributeAt: #switchConditionOwner put: anObject.
-		anObject condition: self ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> whileConditionOwner [
-	"Relation named: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition"
-
-	<generated>
-	<FMComment: 'I represent a condition for my owner'>
-	<container>
-	<derived>
-	<FMProperty: #whileConditionOwner type: #FASTJavaWhileStatement opposite: #condition>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #whileConditionOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model-accessing' }
-FASTTExpression >> whileConditionOwner: anObject [
-
-	<generated>
-	(self attributeAt: #whileConditionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self whileConditionOwner.
-		self attributeAt: #whileConditionOwner put: anObject.
-		otherSide condition: nil ]
-	ifNotNil: [ 
-		self attributeAt: #whileConditionOwner put: anObject.
 		anObject condition: self ]
 ]
