@@ -134,24 +134,8 @@ Class {
 	#package : 'FAST-Java-Model-Generator'
 }
 
-{ #category : 'accessing' }
-FASTJavaMetamodelGenerator class >> packageName [
-
-	^ #'FAST-Java-Model'
-]
-
-{ #category : 'accessing' }
-FASTJavaMetamodelGenerator class >> prefix [
-	^ #FASTJava
-]
-
-{ #category : 'accessing' }
-FASTJavaMetamodelGenerator class >> submetamodels [
-	^ { FASTMetamodelGenerator }
-]
-
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForAssertStatement [
+FASTJavaMetamodelGenerator class >> commentForAssertStatement [
 	^ 'I represent an assert statement
 
 example:
@@ -163,7 +147,7 @@ void method (){
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaAnnotation [
+FASTJavaMetamodelGenerator class >> commentForJavaAnnotation [
 	^ 'I reprensent a Java Annotation
 
 example:
@@ -172,7 +156,7 @@ example:
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaArrayAccess [
+FASTJavaMetamodelGenerator class >> commentForJavaArrayAccess [
 	^ 'I represent a java array access
 	
 ex:
@@ -181,7 +165,7 @@ liste[i]'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaArrayInitializer [
+FASTJavaMetamodelGenerator class >> commentForJavaArrayInitializer [
 	^ 'I represent the array initializer and I have many initializers
 	
 ex:
@@ -195,29 +179,29 @@ My initializers are
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaAssignmentExpression [
+FASTJavaMetamodelGenerator class >> commentForJavaAssignmentExpression [
 	^ 'An assignment expression mode.
 
 Contains a referances to an assignee assignee and the expression that''s being assigned.'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaBooleanLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaBooleanLiteral [
 	^ 'I represent a boolean literal node.'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaBreakStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaBreakStatement [
 	^ 'A node representing break statement in java'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaCaseStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaCaseStatement [
 	^ 'case part of switch statement'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaCharacterLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaCharacterLiteral [
 	^ 'I represent a character literal node.
 example:
 ```java
@@ -227,7 +211,7 @@ char c = ''a'';
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaClassDeclaration [
+FASTJavaMetamodelGenerator class >> commentForJavaClassDeclaration [
 	^ 'I represent a class declaration
 example
 
@@ -241,7 +225,7 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaClassProperty [
+FASTJavaMetamodelGenerator class >> commentForJavaClassProperty [
 	^ 'A FASTJavaClassProperty corresponds to the access to a class property
 	
 	It is not the same as the field access because there are some specific usage of class property to access the current object.
@@ -276,12 +260,12 @@ class Enclosing {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaComment [
+FASTJavaMetamodelGenerator class >> commentForJavaComment [
 	^ 'I represent a Java comment (block or line comment)'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaConditionalStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaConditionalStatement [
 	^ 'I represent a Java conditionnal Statement
 
 ex:
@@ -290,12 +274,12 @@ ex:
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaContinueStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaContinueStatement [
 	^ 'A node representing continue statement in java'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaDefaultCaseStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaDefaultCaseStatement [
 	^ 'I represent a default case
 	
 ex.:
@@ -304,7 +288,7 @@ default:'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaDoWhileStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaDoWhileStatement [
 	^ 'A node of a do-while statement.
 
 eg.
@@ -314,7 +298,7 @@ do {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaDoubleLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaDoubleLiteral [
 	^ 'I represent a double literal node.
 example:
 ```java
@@ -325,14 +309,14 @@ double d2 = 12.3d;
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaEmptyDimExpression [
+FASTJavaMetamodelGenerator class >> commentForJavaEmptyDimExpression [
 	^ 'A node representing an empty expression when creating an array, for example:
 	
 	new String[] {"a"};'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaEmptyMethodDeclaration [
+FASTJavaMetamodelGenerator class >> commentForJavaEmptyMethodDeclaration [
 	^ 'I reprensent an empty method declaration
 	
 ex.:
@@ -346,7 +330,7 @@ void newMethod() {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaEnumDeclaration [
+FASTJavaMetamodelGenerator class >> commentForJavaEnumDeclaration [
 	^ 'I represent an enum declaration
 example
 
@@ -362,12 +346,12 @@ public enum MyEnum {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaFieldAccess [
+FASTJavaMetamodelGenerator class >> commentForJavaFieldAccess [
 	^ 'A FASTJavaFieldAccess corresponds to an access to an instance variable (field)'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaFloatLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaFloatLiteral [
 	^ 'I represent a float literal node.
 example:
 ```java
@@ -377,7 +361,7 @@ float f = 12.3f;
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaForEachStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaForEachStatement [
 	^ 'A node of a for loop statement.
 
 eg.
@@ -387,7 +371,7 @@ for(Patate p : list) {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaForStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaForStatement [
 	^ 'A node of a for loop statement.
 
 eg.
@@ -397,12 +381,12 @@ for(_;_;_) {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaIdentifier [
+FASTJavaMetamodelGenerator class >> commentForJavaIdentifier [
 	^ 'A FASTJavaIdentifier is an identifier in a Java program'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaIfStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaIfStatement [
 	^ 'A node of a if statement or an if-else statement.
 
 eg.
@@ -414,7 +398,7 @@ if(...) {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaInfixOperation [
+FASTJavaMetamodelGenerator class >> commentForJavaInfixOperation [
 	^ 'Binary java operations in  format: <expr> <operator> <expr>
 
 ex:
@@ -424,7 +408,7 @@ ex:
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaInitializer [
+FASTJavaMetamodelGenerator class >> commentForJavaInitializer [
 	^ 'I represent a Java initializer
 	
 ex.:
@@ -438,12 +422,12 @@ new Button(){
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaIntegerLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaIntegerLiteral [
 	^ 'I represent an integer literal node.'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaInterfaceDeclaration [
+FASTJavaMetamodelGenerator class >> commentForJavaInterfaceDeclaration [
 	^ 'I represent an interface declaration
 example
 
@@ -458,7 +442,7 @@ public interface MyInterface {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaLabeledCaseStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaLabeledCaseStatement [
 	^ 'I represent a Labeled case
 	
 ex.:
@@ -467,7 +451,7 @@ case LABEL:'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaLongLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaLongLiteral [
 	^ 'I represent a long literal node.
 example:
 ```java
@@ -477,17 +461,17 @@ long l = 2147483648L;
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaMethodEntity [
+FASTJavaMetamodelGenerator class >> commentForJavaMethodEntity [
 	^ 'Represents a Java method'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaMethodInvocation [
+FASTJavaMetamodelGenerator class >> commentForJavaMethodInvocation [
 	^ 'A node representing method invocation'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaModifier [
+FASTJavaMetamodelGenerator class >> commentForJavaModifier [
 	^ 'I am a Java modifier
 
 example: 
@@ -516,7 +500,7 @@ for methods:
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaNewArray [
+FASTJavaMetamodelGenerator class >> commentForJavaNewArray [
 	^ 'I represent a java new array node.
 ex.
 
@@ -524,7 +508,7 @@ new String()["10px", "Hello world"]'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaNewClassExpression [
+FASTJavaMetamodelGenerator class >> commentForJavaNewClassExpression [
 	^ 'I represent a new class expression (which is most of the time a new anonymous class)
 	
 	
@@ -542,7 +526,7 @@ new SecureAsyncCallback<Void>() {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaNewExpression [
+FASTJavaMetamodelGenerator class >> commentForJavaNewExpression [
 	^ 'I represent the invocation of a Class constructor with the keyword ''new''
 
 ex.
@@ -551,12 +535,12 @@ new Patate()'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaNullLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaNullLiteral [
 	^ 'I represent a `null` literal node.'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaOuterThis [
+FASTJavaMetamodelGenerator class >> commentForJavaOuterThis [
 	^ 'I represent a java outer this (only a call to ''this'' to a class)
 	
 ex.:
@@ -565,7 +549,7 @@ hello(MyClass.this)'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaQualifiedTypeName [
+FASTJavaMetamodelGenerator class >> commentForJavaQualifiedTypeName [
 	^ 'I represent a qualified name for a type
 
 example:
@@ -583,12 +567,12 @@ new Canard.Poulet(){
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
+FASTJavaMetamodelGenerator class >> commentForJavaStringLiteral [
 	^ 'I represent a string literal node.'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaSwitchStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaSwitchStatement [
 	^ 'A node representing switch statement
 
 eg.
@@ -598,7 +582,7 @@ switch (_) {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaTAssignable [
+FASTJavaMetamodelGenerator class >> commentForJavaTAssignable [
 	^ 'You can assign something to me
 example:
 
@@ -606,7 +590,7 @@ this.hello = "hello"'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaTModifier [
+FASTJavaMetamodelGenerator class >> commentForJavaTModifier [
 	^ 'I am a modifier in java
 example:
 
@@ -614,12 +598,12 @@ public, proctected, private'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaThis [
+FASTJavaMetamodelGenerator class >> commentForJavaThis [
 	^ 'A FASTJavaThis corresponds to ''this'' in Java'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaThrowStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaThrowStatement [
 	^ 'I represent a java throw statement
 	
 ex:
@@ -628,7 +612,7 @@ throw new Hello();'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaTryCatchStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaTryCatchStatement [
 	^ 'I represent the java try catch statement. I must have two parts: the ''Try'' part and the ''catch'' part. 
 	
 ex.
@@ -646,7 +630,7 @@ void tryCatch() {
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaTypePattern [
+FASTJavaMetamodelGenerator class >> commentForJavaTypePattern [
 
 	^ 'This code element defines a type pattern, introduced in Java 16 by [JEP 394](https://openjdk.java.net/jeps/394).
 Example:
@@ -661,7 +645,7 @@ Example:
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaUnaryExpression [
+FASTJavaMetamodelGenerator class >> commentForJavaUnaryExpression [
 	^ 'I represent a Java Unary Expression
 	
 It can be :
@@ -678,7 +662,7 @@ see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaVarDeclStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaVarDeclStatement [
 	^ 'A statement of variable declaration.
 A variable declaration statement can contain several declarators.
 
@@ -689,7 +673,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaVariableDeclarator [
+FASTJavaMetamodelGenerator class >> commentForJavaVariableDeclarator [
 	^ 'A part of variable declaration statement containing a variable (named entity) and an expression (optional) that is assigned to it.
 A variable declaration statement can contain several declarators.
 
@@ -700,7 +684,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaWhileStatement [
+FASTJavaMetamodelGenerator class >> commentForJavaWhileStatement [
 	^ 'A node of a while statement.
 
 eg.
@@ -709,39 +693,55 @@ while(...) {
 }'
 ]
 
+{ #category : 'accessing' }
+FASTJavaMetamodelGenerator class >> packageName [
+
+	^ #'FAST-Java-Model'
+]
+
+{ #category : 'accessing' }
+FASTJavaMetamodelGenerator class >> prefix [
+	^ #FASTJava
+]
+
+{ #category : 'accessing' }
+FASTJavaMetamodelGenerator class >> submetamodels [
+	^ { FASTMetamodelGenerator }
+]
+
 { #category : 'definition' }
 FASTJavaMetamodelGenerator >> defineClasses [
 	super defineClasses.
 
 	javaEntity  := self newClassNamed: #Entity.
 
-	javaComment := self newClassNamed: #Comment comment: self commentForJavaComment.
-	javaFieldAccess := self newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
+	javaComment := self newClassNamed: #Comment comment: FASTJavaMetamodelGenerator commentForJavaComment.
+	javaFieldAccess := self newClassNamed: #FieldAccess comment: FASTJavaMetamodelGenerator commentForJavaFieldAccess.
 	javaFieldAccess withTesting.
-	javaIdentifier := self newClassNamed: #Identifier comment: self commentForJavaIdentifier.
+	javaIdentifier := self newClassNamed: #Identifier comment: FASTJavaMetamodelGenerator commentForJavaIdentifier.
 	javaIdentifier withTesting.
-	javaInfixOperation := self newClassNamed: #InfixOperation comment: self commentForJavaInfixOperation.
+	javaInfixOperation := self newClassNamed: #InfixOperation comment: FASTJavaMetamodelGenerator commentForJavaInfixOperation.
 	javaInfixOperation withTesting.
-	javaMethodEntity := self newClassNamed: #MethodEntity comment: self commentForJavaMethodEntity.
+	javaMethodEntity := self newClassNamed: #MethodEntity comment: FASTJavaMetamodelGenerator commentForJavaMethodEntity.
 	javaMethodEntity withTesting.
-	javaMethodInvocation := self newClassNamed: #MethodInvocation comment: self commentForJavaMethodInvocation.
-	javaThis := self newClassNamed: #This comment: self commentForJavaThis.
+	javaMethodInvocation := self newClassNamed: #MethodInvocation comment: FASTJavaMetamodelGenerator commentForJavaMethodInvocation.
+	javaThis := self newClassNamed: #This comment: FASTJavaMetamodelGenerator commentForJavaThis.
 	javaThis withTesting.
-	javaOuterThis := self newClassNamed: #OuterThis comment: self commentForJavaOuterThis.
+	javaOuterThis := self newClassNamed: #OuterThis comment: FASTJavaMetamodelGenerator commentForJavaOuterThis.
 	javaOuterThis withTesting.
-	javaVariableDeclarator := self newClassNamed: #VariableDeclarator comment: self commentForJavaVariableDeclarator.
+	javaVariableDeclarator := self newClassNamed: #VariableDeclarator comment: FASTJavaMetamodelGenerator commentForJavaVariableDeclarator.
 	javaVariableDeclarator withTesting.
-	javaClassProperty := self newClassNamed: #ClassProperty comment: self commentForJavaClassProperty.
+	javaClassProperty := self newClassNamed: #ClassProperty comment: FASTJavaMetamodelGenerator commentForJavaClassProperty.
 	javaClassProperty withTesting.
-	javaNewArray := self newClassNamed: #NewArray comment: self commentForJavaNewArray.
+	javaNewArray := self newClassNamed: #NewArray comment: FASTJavaMetamodelGenerator commentForJavaNewArray.
 	javaNewArray withTesting.
-	javaArrayAccess := self newClassNamed: #ArrayAccess comment: self commentForJavaArrayAccess.
+	javaArrayAccess := self newClassNamed: #ArrayAccess comment: FASTJavaMetamodelGenerator commentForJavaArrayAccess.
 	javaArrayAccess withTesting.
-	javaInitializer := self newClassNamed: #Initializer comment: self commentForJavaInitializer.
+	javaInitializer := self newClassNamed: #Initializer comment: FASTJavaMetamodelGenerator commentForJavaInitializer.
 	javaInitializer withTesting.
-	javaArrayInitializer :=  self newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
+	javaArrayInitializer :=  self newClassNamed: #ArrayInitializer comment: FASTJavaMetamodelGenerator commentForJavaArrayInitializer.
 	javaArrayInitializer withTesting.
-	javaModifier := self newClassNamed: #Modifier comment: self commentForJavaModifier.
+	javaModifier := self newClassNamed: #Modifier comment: FASTJavaMetamodelGenerator commentForJavaModifier.
 	javaModifier withTesting.
 	javaEnumConstant := self newClassNamed: #EnumConstant.
 	javaEnumConstant withTesting.
@@ -756,19 +756,19 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	"type name"
 	javaTypeName := self newClassNamed: #TypeName comment: 'I represent the name of a type'.
 	javaTypeName withTesting.
-	javaQualifiedTypeName := self newClassNamed: #QualifiedTypeName comment: self commentForJavaQualifiedTypeName.
+	javaQualifiedTypeName := self newClassNamed: #QualifiedTypeName comment: FASTJavaMetamodelGenerator commentForJavaQualifiedTypeName.
 	javaQualifiedTypeName withTesting.
 
 	"literals"
 	javaLiteral := self newClassNamed: #Literal comment: 'abtract class for all literals'.
-	javaCharacterLiteral := self newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
-	javaFloatLiteral := self newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
-	javaIntegerLiteral := self newClassNamed: #IntegerLiteral comment: self commentForJavaIntegerLiteral.
-	javaNullLiteral := self newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
-	javaStringLiteral := self newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
-	javaBooleanLiteral := self newClassNamed: #BooleanLiteral comment: self commentForJavaBooleanLiteral.
-	javaLongLiteral := self newClassNamed: #LongLiteral comment: self commentForJavaLongLiteral.
-	javaDoubleLiteral := self newClassNamed: #DoubleLiteral comment: self commentForJavaDoubleLiteral.
+	javaCharacterLiteral := self newClassNamed: #CharacterLiteral comment: FASTJavaMetamodelGenerator commentForJavaCharacterLiteral.
+	javaFloatLiteral := self newClassNamed: #FloatLiteral comment: FASTJavaMetamodelGenerator commentForJavaFloatLiteral.
+	javaIntegerLiteral := self newClassNamed: #IntegerLiteral comment: FASTJavaMetamodelGenerator commentForJavaIntegerLiteral.
+	javaNullLiteral := self newClassNamed: #NullLiteral comment: FASTJavaMetamodelGenerator commentForJavaNullLiteral.
+	javaStringLiteral := self newClassNamed: #StringLiteral comment: FASTJavaMetamodelGenerator commentForJavaStringLiteral.
+	javaBooleanLiteral := self newClassNamed: #BooleanLiteral comment: FASTJavaMetamodelGenerator commentForJavaBooleanLiteral.
+	javaLongLiteral := self newClassNamed: #LongLiteral comment: FASTJavaMetamodelGenerator commentForJavaLongLiteral.
+	javaDoubleLiteral := self newClassNamed: #DoubleLiteral comment: FASTJavaMetamodelGenerator commentForJavaDoubleLiteral.
 
 	"type expressions"
 	javaTypeExpression := self newClassNamed: #TypeExpression comment: 'I am an abstract class representing a type'.
@@ -803,62 +803,62 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaVoidTypeExpression withTesting.
 
 	"expressions"
-	javaUnaryExpression := self newClassNamed: #UnaryExpression comment: self commentForJavaUnaryExpression.
-	javaNewExpression := self newClassNamed: #NewExpression comment: self commentForJavaNewExpression.
+	javaUnaryExpression := self newClassNamed: #UnaryExpression comment: FASTJavaMetamodelGenerator commentForJavaUnaryExpression.
+	javaNewExpression := self newClassNamed: #NewExpression comment: FASTJavaMetamodelGenerator commentForJavaNewExpression.
 	javaNewExpression withTesting.
-	javaNewClassExpression := self newClassNamed: #NewClassExpression comment: self commentForJavaNewClassExpression.
+	javaNewClassExpression := self newClassNamed: #NewClassExpression comment: FASTJavaMetamodelGenerator commentForJavaNewClassExpression.
 	javaNewClassExpression withTesting.
-	javaAssignmentExpression := self newClassNamed: #AssignmentExpression comment: self commentForJavaAssignmentExpression.
+	javaAssignmentExpression := self newClassNamed: #AssignmentExpression comment: FASTJavaMetamodelGenerator commentForJavaAssignmentExpression.
 	javaAssignmentExpression withTesting.
 	javaCastExpression := self newClassNamed: #CastExpression comment: 'I represent a cast expression, e.g. `(int) 0.5`'.
 	javaCastExpression withTesting.
 	javaParameterExpression := self newClassNamed: #Parameter comment: 'I represent a parameter of a method declaration'.
 	javaParameterExpression withTesting.
-	javaConditionalExpression := self newClassNamed: #ConditionalExpression comment: self commentForJavaConditionalStatement.
+	javaConditionalExpression := self newClassNamed: #ConditionalExpression comment: FASTJavaMetamodelGenerator commentForJavaConditionalStatement.
 	javaConditionalExpression withTesting.
 	javaVariableExpression := self newClassNamed: #VariableExpression.
-	javaEmptyDimExpression := self newClassNamed: #EmptyDimExpression comment: self commentForJavaEmptyDimExpression.
+	javaEmptyDimExpression := self newClassNamed: #EmptyDimExpression comment: FASTJavaMetamodelGenerator commentForJavaEmptyDimExpression.
 	javaEmptyDimExpression withTesting.
-	javaAnnotationExpression := self newClassNamed: #Annotation comment: self commentForJavaAnnotation.
+	javaAnnotationExpression := self newClassNamed: #Annotation comment: FASTJavaMetamodelGenerator commentForJavaAnnotation.
 	javaAnnotationExpression withTesting.
 	javaArrayAnnotationElement := self newClassNamed: #ArrayAnnotationElement comment: 'I represent an array as argument of an annotationExpression'.
 	javaArrayAnnotationElement withTesting.
-	javaTypePattern := self newClassNamed: #TypePattern comment: self commentForJavaTypePattern.
+	javaTypePattern := self newClassNamed: #TypePattern comment: FASTJavaMetamodelGenerator commentForJavaTypePattern.
 	javaTypePattern withTesting.
 
 	"statements"
 	javaStatement := self newClassNamed: #Statement.
-	javaIfStatement := self newClassNamed: #IfStatement comment: self commentForJavaIfStatement.
+	javaIfStatement := self newClassNamed: #IfStatement comment: FASTJavaMetamodelGenerator commentForJavaIfStatement.
 	javaIfStatement withTesting.
-	javaForStatement := self newClassNamed: #ForStatement comment: self commentForJavaForStatement.
+	javaForStatement := self newClassNamed: #ForStatement comment: FASTJavaMetamodelGenerator commentForJavaForStatement.
 	javaForStatement withTesting.
-	javaBreakStatement := self newClassNamed: #BreakStatement comment: self commentForJavaBreakStatement.
+	javaBreakStatement := self newClassNamed: #BreakStatement comment: FASTJavaMetamodelGenerator commentForJavaBreakStatement.
 	javaBreakStatement withTesting.
-	javaSwitchStatement := self newClassNamed: #SwitchStatement comment: self commentForJavaSwitchStatement.
+	javaSwitchStatement := self newClassNamed: #SwitchStatement comment: FASTJavaMetamodelGenerator commentForJavaSwitchStatement.
 	javaSwitchStatement withTesting.
-	javaCaseStatement := self newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
+	javaCaseStatement := self newClassNamed: #CaseStatement comment: FASTJavaMetamodelGenerator commentForJavaCaseStatement.
 	javaCaseStatement withTesting.
-	javaContinueStatement := self newClassNamed: #ContinueStatement comment: self commentForJavaContinueStatement.
+	javaContinueStatement := self newClassNamed: #ContinueStatement comment: FASTJavaMetamodelGenerator commentForJavaContinueStatement.
 	javaContinueStatement withTesting.
-	javaWhileStatement := self newClassNamed: #WhileStatement comment: self commentForJavaWhileStatement.
+	javaWhileStatement := self newClassNamed: #WhileStatement comment: FASTJavaMetamodelGenerator commentForJavaWhileStatement.
 	javaWhileStatement withTesting.
-	javaDoWhileStatement := self newClassNamed: #DoWhileStatement comment: self commentForJavaDoWhileStatement.
+	javaDoWhileStatement := self newClassNamed: #DoWhileStatement comment: FASTJavaMetamodelGenerator commentForJavaDoWhileStatement.
 	javaDoWhileStatement withTesting.
-	javaThrowStatement := self newClassNamed: #ThrowStatement comment: self commentForJavaThrowStatement.
+	javaThrowStatement := self newClassNamed: #ThrowStatement comment: FASTJavaMetamodelGenerator commentForJavaThrowStatement.
 	javaThrowStatement withTesting.
-	javaTryCatchStatement := self newClassNamed: #TryCatchStatement comment: self commentForJavaTryCatchStatement.
+	javaTryCatchStatement := self newClassNamed: #TryCatchStatement comment: FASTJavaMetamodelGenerator commentForJavaTryCatchStatement.
 	javaTryCatchStatement withTesting.
 	javaCatchPartStatement := self newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
 	javaCatchPartStatement withTesting.
-	javaForEachStatement := self newClassNamed: #ForEachStatement comment: self commentForJavaForEachStatement.
+	javaForEachStatement := self newClassNamed: #ForEachStatement comment: FASTJavaMetamodelGenerator commentForJavaForEachStatement.
 	javaForEachStatement withTesting.
-	javaLabeledCaseStatement := self newClassNamed: #LabeledCaseStatement comment: self commentForJavaLabeledCaseStatement.
+	javaLabeledCaseStatement := self newClassNamed: #LabeledCaseStatement comment: FASTJavaMetamodelGenerator commentForJavaLabeledCaseStatement.
 	javaLabeledCaseStatement withTesting.
-	javaDefaultCaseStatement := self newClassNamed: #DefaultCaseStatement comment: self commentForJavaDefaultCaseStatement.
+	javaDefaultCaseStatement := self newClassNamed: #DefaultCaseStatement comment: FASTJavaMetamodelGenerator commentForJavaDefaultCaseStatement.
 	javaDefaultCaseStatement withTesting.
-	javaVarDeclStatement := self newClassNamed: #VarDeclStatement comment: self commentForJavaVarDeclStatement.
+	javaVarDeclStatement := self newClassNamed: #VarDeclStatement comment: FASTJavaMetamodelGenerator commentForJavaVarDeclStatement.
 	javaVarDeclStatement withTesting.
-	javaAssertStatement := self newClassNamed: #AssertStatement comment: self commentForAssertStatement.
+	javaAssertStatement := self newClassNamed: #AssertStatement comment: FASTJavaMetamodelGenerator commentForAssertStatement.
 	javaVarDeclStatement withTesting.
 	javaStatementBlock := self newClassNamed: #StatementBlock.
 	javaReturnStatement := self newClassNamed: #ReturnStatement.
@@ -867,13 +867,13 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaLabeledStatement withTesting.
 
 	"declarations"
-	javaClassDeclaration := self newClassNamed: #ClassDeclaration comment: self commentForJavaClassDeclaration.
+	javaClassDeclaration := self newClassNamed: #ClassDeclaration comment: FASTJavaMetamodelGenerator commentForJavaClassDeclaration.
 	javaClassDeclaration withTesting.
-	javaEnumDeclaration := self newClassNamed: #EnumDeclaration comment: self commentForJavaEnumDeclaration.
+	javaEnumDeclaration := self newClassNamed: #EnumDeclaration comment: FASTJavaMetamodelGenerator commentForJavaEnumDeclaration.
 	javaEnumDeclaration withTesting.
-	javaInterfaceDeclaration := self newClassNamed: #InterfaceDeclaration comment: self commentForJavaInterfaceDeclaration.
+	javaInterfaceDeclaration := self newClassNamed: #InterfaceDeclaration comment: FASTJavaMetamodelGenerator commentForJavaInterfaceDeclaration.
 	javaInterfaceDeclaration withTesting.
-	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
+	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: FASTJavaMetamodelGenerator commentForJavaEmptyMethodDeclaration.
 	javaEmptyMethodDeclaration withTesting.
 	compilationUnit := self newClassNamed: #CompilationUnit comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and types'.
 	compilationUnit withTesting.
@@ -1570,10 +1570,10 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tDeclaration := self newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
 	tWithDeclarations := self newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
 	
-	tModifier := self newTraitNamed: #TModifier comment: self commentForJavaTModifier. 
+	tModifier := self newTraitNamed: #TModifier comment: FASTJavaMetamodelGenerator commentForJavaTModifier. 
 	tWithModifiers := self newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
 	
-	tAssignable := self newTraitNamed: #TAssignable comment: self commentForJavaTAssignable. 
+	tAssignable := self newTraitNamed: #TAssignable comment: FASTJavaMetamodelGenerator commentForJavaTAssignable. 
 	tWithAssignable := self newTraitNamed: #TWithAssignable comment: 'I have an assignable'.
 	
 	tReceiver := self newTraitNamed: #TReceiver comment: 'I receive a message from someone'.
