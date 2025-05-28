@@ -128,7 +128,10 @@ Class {
 		'tAnnotationElement',
 		'javaLiteral',
 		'javaArrayAnnotationElement',
-		'javaTypePattern'
+		'javaTypePattern',
+		'tBranchStatement',
+		'tLoopStatement',
+		'tConditionalStatement'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -896,60 +899,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaComment --|> tComment.
 
-	javaAssignmentExpression --|> tExpression.
-	javaAssignmentExpression --|> tAnnotationElement.
-	javaAssignmentExpression --|> tReceiver.
-	javaAssignmentExpression --|> tWithAssignable.
-
-	javaFieldAccess --|> tExpression.
-	javaFieldAccess --|> tAssignable.
-	javaFieldAccess --|> tWithReceiver.
-	javaFieldAccess --|> tReceiver.
-
-	javaInfixOperation --|> tExpression.
-	javaInfixOperation --|> tReceiver.
-	javaInfixOperation --|> tAnnotationElement.
-
-	javaBreakStatement --|> tStatement.
-	javaCaseStatement --|> tStatementBlock.
-	javaContinueStatement --|> tStatement.
-	javaDoWhileStatement --|> tStatement.
-	javaForStatement --|> tStatement.
-
-	javaIdentifier --|> javaVariableExpression.
-	javaIdentifier --|> tReceiver.
-
-	javaIfStatement --|> tStatement.
-
-	javaArrayAnnotationElement --|> tAnnotationElement.
-	javaArrayAnnotationElement --|> tExpression. "because annotationElement=value are modeled as assignment expression"
-
-	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
-	javaLiteral --|> tReceiver.
-	javaLiteral --|> tAnnotationElement.
-
-	javaNullLiteral --|> tNullPointerLiteral.
-	javaNullLiteral --|> javaLiteral.
-	javaCharacterLiteral --|> tCharacterLiteral.
-	javaCharacterLiteral --|> javaLiteral.
-	javaStringLiteral --|> tStringLiteral.
-	javaStringLiteral --|> javaLiteral.
-	javaIntegerLiteral --|> tLiteral.
-	javaIntegerLiteral --|> javaLiteral.
-	javaFloatLiteral --|> tLiteral.
-	javaFloatLiteral --|> javaLiteral.
-	javaBooleanLiteral --|> tBooleanLiteral.
-	javaBooleanLiteral --|> javaLiteral.
-	javaLongLiteral --|> tLiteral.
-	javaLongLiteral --|> javaLiteral.
-	javaDoubleLiteral --|> tLiteral.
-	javaDoubleLiteral --|> javaLiteral.
-
-	javaMethodEntity --|> tNamedBehaviouralEntity.
-	javaMethodEntity --|> #THasImmediateSource.
-	javaMethodEntity --|> tDeclaration.
-	javaMethodEntity --|> tWithModifiers.
-
 	javaClassDeclaration --|> tStatement.
 	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
@@ -966,8 +915,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaEnumDeclaration --|> #THasImmediateSource.
 	javaEnumDeclaration withPrecedenceOf: #THasImmediateSource.
 
-	javaEnumConstant --|> javaVariableExpression.
-
 	javaInterfaceDeclaration --|> tStatement.
 	javaInterfaceDeclaration --|> tDeclaration.
 	javaInterfaceDeclaration --|> tWithDeclarations.
@@ -976,31 +923,37 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInterfaceDeclaration --|> #THasImmediateSource.
 	javaInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
 
-	javaMethodInvocation --|> tInvocation.
-	javaMethodInvocation --|> tWithReceiver.
-	javaMethodInvocation --|> tReceiver.
+	javaMethodEntity --|> tNamedBehaviouralEntity.
+	javaMethodEntity --|> #THasImmediateSource.
+	javaMethodEntity --|> tDeclaration.
+	javaMethodEntity --|> tWithModifiers.
 
-	javaSwitchStatement --|> tStatement.
-	javaThis --|> javaVariableExpression.
+	"EXPRESSIONS"
+	javaArrayAccess --|> tExpression.
+	javaArrayAccess --|> tAssignable.
+	javaArrayAccess --|> tReceiver.
 
-	javaVarDeclStatement --|> tStatement.
-	javaVarDeclStatement --|> tDeclaration.
-	javaVarDeclStatement --|> tScopableEntity.
-	javaVarDeclStatement --|> tWithModifiers.
+	javaArrayAnnotationElement --|> tAnnotationElement.
+	javaArrayAnnotationElement --|> tExpression. "because annotationElement=value are modeled as assignment expression"
 
-	javaVariableDeclarator --|> tEntity.
-	javaWhileStatement --|> tStatement.
-	javaMethodInvocation --|> tNamedEntity.
-	javaCastExpression --|> tExpression.
-	javaCastExpression --|> tReceiver.
+	javaAssignmentExpression --|> tExpression.
+	javaAssignmentExpression --|> tAnnotationElement.
+	javaAssignmentExpression --|> tReceiver.
+	javaAssignmentExpression --|> tWithAssignable.
 
-	javaClassProperty --|> javaVariableExpression.
-	javaClassProperty --|> tReceiver.
-	javaClassProperty --|> tAnnotationElement.
+	javaEnumConstant --|> javaVariableExpression.
 
-	javaTryCatchStatement --|> tStatement.
-	javaForEachStatement --|> tStatement.
-	javaUnaryExpression --|> tExpression.
+	javaFieldAccess --|> tExpression.
+	javaFieldAccess --|> tAssignable.
+	javaFieldAccess --|> tWithReceiver.
+	javaFieldAccess --|> tReceiver.
+
+	javaIdentifier --|> javaVariableExpression.
+	javaIdentifier --|> tReceiver.
+
+	javaInfixOperation --|> tExpression.
+	javaInfixOperation --|> tReceiver.
+	javaInfixOperation --|> tAnnotationElement.
 
 	javaNewExpression --|> tExpression.
 	javaNewExpression --|> #TWithArguments.
@@ -1015,38 +968,18 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaEmptyDimExpression --|> tExpression.
 	javaConditionalExpression --|> tExpression.
 
-	javaArrayAccess --|> tExpression.
-	javaArrayAccess --|> tAssignable.
-	javaArrayAccess --|> tReceiver.
+	javaThis --|> javaVariableExpression.
+	javaUnaryExpression --|> tExpression.
 
 	javaVariableExpression --|> tVariableExpression.
 	javaVariableExpression --|> tAssignable.
 	javaVariableExpression --|> tReceiver.
-
-	javaThrowStatement --|> tStatement.
-	javaLabeledCaseStatement --|> javaCaseStatement.
-	javaDefaultCaseStatement --|> javaCaseStatement.
-	javaEmptyMethodDeclaration --|> javaMethodEntity.
-
-	javaArrayInitializer --|> tExpression.
-	javaArrayInitializer --|> tAnnotationElement.
-
-	javaInitializer --|> tScopableEntity.
-	javaInitializer --|> #THasImmediateSource.
-	javaInitializer --|> tDeclaration.
-
-	javaOuterThis --|> tExpression.
-	javaOuterThis --|> tReceiver.
-
-	javaCatchPartStatement --|> tStatement.
 
 	javaLambdaExpression --|> tExpression.
 	javaLambdaExpression --|> tWithParameters.
 
 	javaMethodReference --|> tExpression.
 	javaMethodReference --|> tNamedEntity.
-
-	javaSynchronizedStatement --|> tStatement.
 
 	"types name"
 	javaTypeName --|> tNamedEntity.
@@ -1097,6 +1030,81 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	qualifiedName --|> tAssignable.
 
 	javaTypePattern --|> tExpression.
+
+	"EXPRESSIONS -- LITERALS"
+	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
+	javaLiteral --|> tReceiver.
+	javaLiteral --|> tAnnotationElement.
+
+	javaNullLiteral --|> tNullPointerLiteral.
+	javaNullLiteral --|> javaLiteral.
+	javaCharacterLiteral --|> tCharacterLiteral.
+	javaCharacterLiteral --|> javaLiteral.
+	javaStringLiteral --|> tStringLiteral.
+	javaStringLiteral --|> javaLiteral.
+	javaIntegerLiteral --|> tLiteral.
+	javaIntegerLiteral --|> javaLiteral.
+	javaFloatLiteral --|> tLiteral.
+	javaFloatLiteral --|> javaLiteral.
+	javaBooleanLiteral --|> tBooleanLiteral.
+	javaBooleanLiteral --|> javaLiteral.
+	javaLongLiteral --|> tLiteral.
+	javaLongLiteral --|> javaLiteral.
+	javaDoubleLiteral --|> tLiteral.
+	javaDoubleLiteral --|> javaLiteral.
+
+	"STATEMENTS"
+	javaBreakStatement --|> tStatement.
+	javaCaseStatement --|> tStatementBlock.
+	javaContinueStatement --|> tStatement.
+
+	javaDoWhileStatement --|> tLoopStatement.
+	javaForEachStatement --|> tLoopStatement.
+	javaForStatement --|> tLoopStatement.
+	javaWhileStatement --|> tLoopStatement.
+
+	javaIfStatement --|> tConditionalStatement.
+
+	javaMethodInvocation --|> tInvocation.
+	javaMethodInvocation --|> tWithReceiver.
+	javaMethodInvocation --|> tReceiver.
+
+	javaSwitchStatement --|> tBranchStatement.
+
+	javaVarDeclStatement --|> tStatement.
+	javaVarDeclStatement --|> tDeclaration.
+	javaVarDeclStatement --|> tScopableEntity.
+	javaVarDeclStatement --|> tWithModifiers.
+
+	javaVariableDeclarator --|> tEntity.
+	javaMethodInvocation --|> tNamedEntity.
+	javaCastExpression --|> tExpression.
+	javaCastExpression --|> tReceiver.
+
+	javaClassProperty --|> javaVariableExpression.
+	javaClassProperty --|> tReceiver.
+	javaClassProperty --|> tAnnotationElement.
+
+	javaTryCatchStatement --|> tBranchStatement.
+
+	javaThrowStatement --|> tStatement.
+	javaLabeledCaseStatement --|> javaCaseStatement.
+	javaDefaultCaseStatement --|> javaCaseStatement.
+	javaEmptyMethodDeclaration --|> javaMethodEntity.
+
+	javaArrayInitializer --|> tExpression.
+	javaArrayInitializer --|> tAnnotationElement.
+
+	javaInitializer --|> tScopableEntity.
+	javaInitializer --|> #THasImmediateSource.
+	javaInitializer --|> tDeclaration.
+
+	javaOuterThis --|> tExpression.
+	javaOuterThis --|> tReceiver.
+
+	javaCatchPartStatement --|> tStatement.
+
+	javaSynchronizedStatement --|> tStatement.
 
 	compilationUnit --|> tEntity.
 
@@ -1586,23 +1594,29 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.
+	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
+
+	tBranchStatement := self remoteTrait: #TBranchStatement withPrefix: #FAST.
 	tComment := self remoteTrait: #TComment withPrefix: #FAST.
-	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
-	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
-	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
-	tCharacterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
-	tLiteral := self remoteTrait: #TLiteral withPrefix: #FAST.
-	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
+	tConditionalStatement := self remoteTrait: #TConditionalStatement withPrefix: #FAST.
+	tExpression := self remoteTrait: #TExpression withPrefix: #FAST.
+	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
+	tInvocation := self remoteTrait: #TInvocation withPrefix: #FAST.
+	tLoopStatement := self remoteTrait: #TLoopStatement withPrefix: #FAST.
 	tNamedBehaviouralEntity := self remoteTrait: #TNamedBehaviouralEntity withPrefix: #FAST.
+	tWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
+	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
+	tScopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
+	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.
+	tStatementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
+	tVariableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
+	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
+	tWithComments := self remoteTrait: #TWithComments withPrefix: #FAST.
+
+	tLiteral := self remoteTrait: #TLiteral withPrefix: #FAST.
+	tBooleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
+	tCharacterLiteral := self remoteTrait: #TCharacterLiteral withPrefix: #FAST.
 	tNullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
 	tStringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
-	tScopableEntity := self remoteTrait: #TScopableEntity withPrefix: #FAST.
-	tVariableEntity := self remoteTrait: #TVariableEntity withPrefix: #FAST.
-	tStatementBlock := self remoteTrait: #TStatementBlock withPrefix: #FAST.
-	tExpressionStatement := self remoteTrait: #TExpressionStatement withPrefix: #FAST.
-	tWithParameters := self remoteTrait: #TWithParameters withPrefix: #FAST.
-	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
-	tReturnStatement := self remoteTrait: #TReturnStatement withPrefix: #FAST.
-	tBooleanLiteral := self remoteTrait: #TBooleanLiteral withPrefix: #FAST.
-	tInvocation := self remoteTrait: #TInvocation withPrefix: #FAST
+
 ]

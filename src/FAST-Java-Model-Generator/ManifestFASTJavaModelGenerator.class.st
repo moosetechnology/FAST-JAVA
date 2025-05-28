@@ -10,6 +10,13 @@ Class {
 }
 
 { #category : 'code-critics' }
+ManifestFASTJavaModelGenerator class >> ruleLongMethodsRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGClassDefinition #(#FASTJavaMetamodelGenerator)) #'2025-05-28T16:11:42.740747+02:00') )
+]
+
+{ #category : 'code-critics' }
 ManifestFASTJavaModelGenerator class >> ruleRefersToClassRuleV1FalsePositive [
 
 	<ignoreForCoverage>
