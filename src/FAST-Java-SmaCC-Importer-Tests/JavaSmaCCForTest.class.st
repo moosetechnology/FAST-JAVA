@@ -15,31 +15,31 @@ JavaSmaCCForTest >> javaMethod [
 ]
 
 { #category : 'tests' }
-JavaSmaCCForTest >> testForEachBodyParentNode [
+JavaSmaCCForTest >> testForBodyParentNode [
 	self assert: fastMethod statements first body parentNode equals: fastMethod statements first
 ]
 
 { #category : 'tests' }
-JavaSmaCCForTest >> testForEachBodyType [
+JavaSmaCCForTest >> testForBodyType [
 	self assert: fastMethod statements first body class equals: FASTJavaStatementBlock 
 ]
 
 { #category : 'tests' }
-JavaSmaCCForTest >> testForEachConditionParentNode [
+JavaSmaCCForTest >> testForConditionParentNode [
 	self assert: fastMethod statements first condition parentNode equals: fastMethod statements first
 ]
 
 { #category : 'tests' }
-JavaSmaCCForTest >> testForEachConditionType [
+JavaSmaCCForTest >> testForConditionType [
 	self assert: fastMethod statements first condition class equals: FASTJavaInfixOperation 
 ]
 
 { #category : 'tests' }
-JavaSmaCCForTest >> testForEachIncrementorsType [
+JavaSmaCCForTest >> testForIncrementorsType [
 	self assert: fastMethod statements first incrementor class equals: FASTJavaExpressionStatement 
 ]
 
 { #category : 'tests' }
-JavaSmaCCForTest >> testForEachInitializersType [
+JavaSmaCCForTest >> testForInitializersType [
 	self assert: fastMethod statements first initializer class equals: FASTJavaVarDeclStatement
 ]

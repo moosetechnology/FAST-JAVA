@@ -688,7 +688,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement 
 	currentFASTEntity fieldname:
 		(self clone visitIdentifier: aForEachStatement name).
 	currentFASTEntity type: (self clone accept: aForEachStatement type).
-	currentFASTEntity list:
+	currentFASTEntity expression:
 		(self clone accept: aForEachStatement expression).
 	^ currentFASTEntity
 ]
@@ -1254,7 +1254,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 	self setStartEndPos: aSwitchStatement.
 	aSwitchStatement block statementGroups do: [ :aStatementGroup |
 		 currentFASTEntity cases add: (self clone accept: aStatementGroup) ].
-	currentFASTEntity condition: (self clone accept: aSwitchStatement expression).
+	currentFASTEntity expression: (self clone accept: aSwitchStatement expression).
 	^ currentFASTEntity
 ]
 

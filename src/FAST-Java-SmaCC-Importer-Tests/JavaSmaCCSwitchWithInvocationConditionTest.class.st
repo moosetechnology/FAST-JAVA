@@ -28,5 +28,5 @@ JavaSmaCCSwitchWithInvocationConditionTest >> testSwitchCondition [
 	| switchStatement |
 	switchStatement := (fastModel allWithType:
 		                    FASTJavaSwitchStatement) anyOne.
-	self assert: switchStatement condition class equals: FASTJavaMethodInvocation
+	self assert: switchStatement expression class equals: FASTJavaMethodInvocation
 ]

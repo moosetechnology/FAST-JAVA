@@ -41,12 +41,12 @@ JavaSmaCCForEachTest >> testForEachFieldNameType [
 
 { #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachListParent [
-	self assert: fastMethod statements first list parentNode equals: fastMethod statements first
+	self assert: fastMethod statements first expression parentNode equals: fastMethod statements first
 ]
 
 { #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachListType [
-	self assert: fastMethod statements first list class equals: FASTJavaClassProperty
+	self assert: fastMethod statements first expression class equals: FASTJavaClassProperty
 ]
 
 { #category : 'tests' }

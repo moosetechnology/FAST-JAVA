@@ -56,7 +56,7 @@ JavaSmaCCSwitchTest >> testSwitchCondition [
 	| switchStatement |
 	switchStatement := (fastModel allWithType:
 		                    FASTJavaSwitchStatement) anyOne.
-	self assert: switchStatement condition class equals: FASTJavaVariableExpression
+	self assert: switchStatement expression class equals: FASTJavaVariableExpression
 ]
 
 { #category : 'tests' }

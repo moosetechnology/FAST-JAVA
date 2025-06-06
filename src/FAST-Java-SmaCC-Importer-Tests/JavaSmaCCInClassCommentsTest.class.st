@@ -17,14 +17,6 @@ public class GameOfLife {
         String s = "";
         String AaaaaaEeeee = "";
 		  /*an Inner comment*/	
-        for(boolean[] row : grid){
-            for(boolean val : row)
-                if(val)
-                    s += "*";
-                else
-                    s += ".";
-            s += "\n";
-        }
         System.out.println(s);
     }
 }'
