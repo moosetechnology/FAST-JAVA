@@ -1260,14 +1260,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaLabeledCaseStatementOwner) comment:
 			 'The javaLabeledCaseStatement owner (if possible)').
 
-	((javaForEachStatement property: #body) comment:
-		 'The body of the for-each statement')
-	<>- ((tStatement property: #javaForEachStatementOwner) comment:
-			 'The javaForEachStatement owner (if possible)').
-	((javaForEachStatement property: #list) comment:
-		 'The list that the for-each statement iterates over')
-	<>- ((tExpression property: #javaForEachStatementOwner) comment:
-			 'The javaForEachStatement owner (if possible)').
 	((javaForEachStatement property: #fieldname) comment:
 		 'The identifier of the created local variable')
 	<>- ((javaIdentifier property: #javaForEachStatementFieldNameOwner)
@@ -1310,17 +1302,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((javaVariableExpression property: #javaCatchParameterOwnler)
 			 comment: 'The javaCatchPartParameterOwner owner (if possible)').
 
-	((javaIfStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #ifConditionOwner) comment:
-			 'I represent a condition for my owner').
-	((javaIfStatement property: #elsePart) comment: 'else part')
-	<>- ((tStatement property: #ifElsePartOwner) comment:
-			 'The if owner (if possible)').
-	((javaIfStatement property: #thenPart) comment: 'then part')
-	<>- ((tStatement property: #ifThenPartOwner) comment:
-			 'The if owner (if possible)').
-
 	((javaConditionalExpression property: #condition) comment:
 		 'The condition of the statement')
 	<>- ((tExpression property: #conditionalConditionOwner) comment:
@@ -1341,10 +1322,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((tExpression property: #infixOperationRightOperandOwner) comment:
 			 'The right operand (if possible)').
 
-	((javaForStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #forConditionOwner) comment:
-			 'I represent a condition for my owner').
 	((javaForStatement property: #incrementor) comment:
 		 'Expression evaluated at the end of each loop')
 	<>- ((tStatement property: #forIncrementorOwner) comment:
@@ -1353,33 +1330,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'Expression used at initialization phase of a for loop')
 	<>- ((tStatement property: #forIninitializerOwner) comment:
 			 'I am the initializer of the for').
-	((javaForStatement property: #body) comment:
-		 'A statement to be evaluated in the loop')
-	<>- ((tStatement property: #forBodyOwner) comment:
-			 'I am the body of the for').
-
-	((javaSwitchStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #switchConditionOwner) comment:
-			 'I represent a condition for my owner').
-
-	((javaDoWhileStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #doConditionOwner) comment:
-			 'I represent a condition for my owner').
-	((javaDoWhileStatement property: #body) comment:
-		 'A statement to be evaluated in the loop')
-	<>- ((tStatement property: #doBodyOwner) comment:
-			 'I am the body of the do').
-
-	((javaWhileStatement property: #condition) comment:
-		 'The condition of the statement')
-	<>- ((tExpression property: #whileConditionOwner) comment:
-			 'I represent a condition for my owner').
-	((javaWhileStatement property: #body) comment:
-		 'A statement to be evaluated in the loop')
-	<>- ((tStatement property: #whileBodyOwner) comment:
-			 'I am the body of the do').
 
 	((javaInitializer property: #statementBlock) comment:
 		 'Statements block of the behavioural entity')
