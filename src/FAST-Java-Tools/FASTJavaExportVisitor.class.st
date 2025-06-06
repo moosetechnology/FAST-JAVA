@@ -573,7 +573,7 @@ FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatemen
 		self space.
 		aFASTJavaForEachStatement fieldname accept: self.
 		self unindented: ' : '.
-		aFASTJavaForEachStatement list accept: self.
+		aFASTJavaForEachStatement expression accept: self.
 		self unindented: ') '.
 		self indent.
 		self visitFASTJavaBlockOrStatement: aFASTJavaForEachStatement body.
@@ -591,7 +591,7 @@ FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 			self indented: 'for ('.
 			
 			self visitFASTJavaForStatementInitializer: aFASTJavaForStatement initializer.
-			self visitFASTJavaForStatementCondition:   aFASTJavaForStatement condition.
+			self visitFASTJavaForStatementCondition:   aFASTJavaForStatement expression.
 			self visitFASTJavaForStatementIncrementor: aFASTJavaForStatement incrementor.
 
 			self unindented: ') '.
@@ -1054,7 +1054,7 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement 
 
 	self checkForComments: aFASTJavaSwitchStatement andDo: [
 		self indented: 'switch ('.
-		aFASTJavaSwitchStatement condition accept: self.
+		aFASTJavaSwitchStatement expression accept: self.
 		self
 			unindented: ') {' ;
 			newLine ;
