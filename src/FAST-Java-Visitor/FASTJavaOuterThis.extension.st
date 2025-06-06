@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaOuterThis }
+Extension { #name : 'FASTJavaOuterThis' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaOuterThis >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaOuterThis: self
 ]

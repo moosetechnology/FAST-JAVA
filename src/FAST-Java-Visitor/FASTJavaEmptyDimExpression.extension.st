@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaEmptyDimExpression }
+Extension { #name : 'FASTJavaEmptyDimExpression' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaEmptyDimExpression >> accept: aVisitor [
 	^ aVisitor visitFASTJavaEmptyDimExpression: self
 ]

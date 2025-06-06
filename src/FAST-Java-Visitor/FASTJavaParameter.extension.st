@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaParameter }
+Extension { #name : 'FASTJavaParameter' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaParameter >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaParameter: self
 ]

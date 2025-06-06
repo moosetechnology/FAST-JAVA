@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaInterfaceDeclaration }
+Extension { #name : 'FASTJavaInterfaceDeclaration' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaInterfaceDeclaration >> accept: aFASTJavaVisitor [ 
 	^ aFASTJavaVisitor visitFASTJavaInterfaceDeclaration: self
 ]

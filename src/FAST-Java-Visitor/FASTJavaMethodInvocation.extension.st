@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaMethodInvocation }
+Extension { #name : 'FASTJavaMethodInvocation' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaMethodInvocation >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaMethodInvocation: self
 ]

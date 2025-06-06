@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaMethodEntity }
+Extension { #name : 'FASTJavaMethodEntity' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaMethodEntity >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaMethodEntity: self
 ]

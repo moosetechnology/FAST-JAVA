@@ -1,1 +1,1 @@
-Package { #name : #'FAST-Java-Visitor' }
+Package { #name : 'FAST-Java-Visitor' }

@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaEnumConstant }
+Extension { #name : 'FASTJavaEnumConstant' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaEnumConstant >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaEnumConstant: self
 ]
