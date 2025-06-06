@@ -17,8 +17,8 @@ I can be used as an annotation ""argument"" eg: @SuppressWarnings(value=""unchec
 Trait {
 	#name : 'FASTJavaTAnnotationElement',
 	#instVars : [
-		'#arrayOwner => FMOne type: #FASTJavaArrayAnnotationElement opposite: #values',
-		'#parentAnnotation => FMOne type: #FASTJavaAnnotation opposite: #elements'
+		'#parentAnnotation => FMOne type: #FASTJavaAnnotation opposite: #elements',
+		'#arrayOwner => FMOne type: #FASTJavaArrayAnnotationElement opposite: #values'
 	],
 	#category : 'FAST-Java-Model-Traits',
 	#package : 'FAST-Java-Model',

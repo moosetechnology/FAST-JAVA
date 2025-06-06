@@ -20,22 +20,19 @@ void tryCatch() {
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `doBodyOwner` | `FASTTStatement` | `body` | `FASTJavaDoWhileStatement` | I am the body of the do|
-| `forBodyOwner` | `FASTTStatement` | `body` | `FASTJavaForStatement` | I am the body of the for|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementor` | `FASTJavaForStatement` | I am the incrementor of the for|
 | `forIninitializerOwner` | `FASTTStatement` | `initializer` | `FASTJavaForStatement` | I am the initializer of the for|
-| `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
-| `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
-| `javaForEachStatementOwner` | `FASTTStatement` | `body` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
+| `parentBranchStatement` | `FASTTStatement` | `branches` | `FASTTBranchStatement` | My parent BranchStatement (of which I am a branch)|
 | `statementContainer` | `FASTTStatement` | `statements` | `FASTTStatementBlock` | Block containing this statement.|
-| `whileBodyOwner` | `FASTTStatement` | `body` | `FASTJavaWhileStatement` | I am the body of the do|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `branches` | `FASTTBranchStatement` | `parentBranchStatement` | `FASTTStatement` | The various children branches of this BranchStatement|
 | `catches` | `FASTJavaTryCatchStatement` | `tryOwner` | `FASTJavaCatchPartStatement` | I contain all the catch statements|
+| `expression` | `FASTTBranchStatement` | `parentBranchStatement` | `FASTTExpression` | The expression commanding which branch is executed|
 | `finally` | `FASTJavaTryCatchStatement` | `javaTryFinallyOwner` | `FASTJavaStatementBlock` | I contain the 'finally' part of the try/catch/finally|
 | `resources` | `FASTJavaTryCatchStatement` | `javaTryResourceOwner` | `FASTJavaVarDeclStatement` | I contain the resources in a try-with-resource statement|
 | `try` | `FASTJavaTryCatchStatement` | `javaTryCatchOwner` | `FASTJavaStatementBlock` | I represent the 'try' part of the TryCatch Statement|
@@ -53,8 +50,8 @@ void tryCatch() {
 Class {
 	#name : 'FASTJavaTryCatchStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTStatement',
-	#classTraits : 'FASTTStatement classTrait',
+	#traits : 'FASTTBranchStatement',
+	#classTraits : 'FASTTBranchStatement classTrait',
 	#instVars : [
 		'#try => FMOne type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner',
 		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner',
