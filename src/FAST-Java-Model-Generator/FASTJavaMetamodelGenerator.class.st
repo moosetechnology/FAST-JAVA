@@ -131,7 +131,9 @@ Class {
 		'javaTypePattern',
 		'tBranchStatement',
 		'tLoopStatement',
-		'tConditionalStatement'
+		'tConditionalStatement',
+		'tBreakStatement',
+		'tBreakableStatement'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -1055,13 +1057,18 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	"STATEMENTS"
 	javaBreakStatement --|> tStatement.
+	javaBreakStatement --|> tBreakStatement.
 	javaCaseStatement --|> tStatementBlock.
 	javaContinueStatement --|> tStatement.
 
 	javaDoWhileStatement --|> tLoopStatement.
+	javaDoWhileStatement --|> tBreakableStatement.
 	javaForEachStatement --|> tLoopStatement.
+	javaForEachStatement --|> tBreakableStatement.
 	javaForStatement --|> tLoopStatement.
+	javaForStatement --|> tBreakableStatement.
 	javaWhileStatement --|> tLoopStatement.
+	javaWhileStatement --|> tBreakableStatement.
 
 	javaIfStatement --|> tConditionalStatement.
 
@@ -1070,6 +1077,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodInvocation --|> tReceiver.
 
 	javaSwitchStatement --|> tBranchStatement.
+	javaSwitchStatement --|> tBreakableStatement.
 
 	javaVarDeclStatement --|> tStatement.
 	javaVarDeclStatement --|> tDeclaration.
@@ -1547,6 +1555,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tNamedEntity := self remoteTrait: #TNamedEntity withPrefix: #FAST.
 
 	tBranchStatement := self remoteTrait: #TBranchStatement withPrefix: #FAST.
+	tBreakStatement := self remoteTrait: #TBreakStatement withPrefix: #FAST.
+	tBreakableStatement := self remoteTrait: #TBreakableStatement withPrefix: #FAST.
 	tComment := self remoteTrait: #TComment withPrefix: #FAST.
 	tConditionalStatement := self remoteTrait: #TConditionalStatement withPrefix: #FAST.
 	tExpression := self remoteTrait: #TExpression withPrefix: #FAST.
