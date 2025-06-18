@@ -35,6 +35,48 @@ FASTJavaCFGVisitorTest >> setUp [
 ]
 
 { #category : 'tests' }
+FASTJavaCFGVisitorTest >> testIfStatementInLoop [
+
+	| block |
+	self cfgFor: 'void meth() {
+	for (int i=1; i < 10; i++)
+		if (i > 3)
+			System.out.println("after 3");
+		else
+			System.out.println("before 3");
+}'.
+
+	self assert: visitor basicBlocks size equals: 4.
+
+	block := visitor basicBlocks first.
+	self assert: block isStart.
+	self assert: block isConditional.
+	self assert: block isFinal.
+
+	self assert: (visitor basicBlocks first nextBlockForValue: 'true') equals: visitor basicBlocks second.
+
+	block := visitor basicBlocks second.
+	self deny: block isStart.
+	self assert: block isConditional.
+	self deny: block isFinal.
+
+	self assert: (visitor basicBlocks second nextBlockForValue: 'true') equals: visitor basicBlocks third.
+
+	block := visitor basicBlocks third.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self deny: block isFinal.
+
+	self assert: (visitor basicBlocks second nextBlockForValue: 'false') equals: visitor basicBlocks fourth.
+
+	block := visitor basicBlocks fourth.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self deny: block isFinal.
+
+]
+
+{ #category : 'tests' }
 FASTJavaCFGVisitorTest >> testIfStatementNoElse [
 
 	| block |
@@ -182,6 +224,41 @@ FASTJavaCFGVisitorTest >> testLoopWhile [
 	self deny: block isStart.
 	self deny: block isConditional.
 	self deny: block isFinal.
+
+]
+
+{ #category : 'tests' }
+FASTJavaCFGVisitorTest >> testLoopWithBreak [
+
+	| block |
+	self cfgFor: 'void meth() {
+	for (int i=5; i < 10; i++)
+		if (i % 2 == 0)
+			break;
+}'.
+
+	self assert: visitor basicBlocks size equals: 3.
+
+	block := visitor basicBlocks first.
+	self assert: block isStart.
+	self assert: block isConditional.
+	self assert: block isFinal.
+
+	self assert: (visitor basicBlocks first nextBlockForValue: 'true') equals: visitor basicBlocks second.
+
+	block := visitor basicBlocks second.
+	self deny: block isStart.
+	self assert: block isConditional.
+	self deny: block isFinal.
+
+	self assert: (visitor basicBlocks second nextBlockForValue: 'true') equals: visitor basicBlocks third.
+
+	block := visitor basicBlocks third.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self assert: block isFinal.
+
+	self assert: (visitor basicBlocks second nextBlockForValue: 'false') equals: visitor basicBlocks first.
 
 ]
 

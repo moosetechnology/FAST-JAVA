@@ -9,6 +9,13 @@ Class {
 }
 
 { #category : 'visiting - statements' }
+FASTJavaCFGVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
+
+	self visitFASTTBreakStatement: aFASTJavaBreakStatement
+
+]
+
+{ #category : 'visiting - statements' }
 FASTJavaCFGVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	^ self visitFASTTLoopStatement: aFASTJavaDoWhileStatement
 ]
