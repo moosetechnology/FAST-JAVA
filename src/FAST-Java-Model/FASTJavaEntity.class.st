@@ -127,6 +127,13 @@ FASTJavaEntity >> isBreakStatement [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isBreakableStatement [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isByteTypeExpression [
 
 	<generated>

@@ -40,8 +40,8 @@ for(Patate p : list) {
 Class {
 	#name : 'FASTJavaForEachStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTLoopStatement',
-	#classTraits : 'FASTTLoopStatement classTrait',
+	#traits : 'FASTTBreakableStatement + FASTTLoopStatement',
+	#classTraits : 'FASTTBreakableStatement classTrait + FASTTLoopStatement classTrait',
 	#instVars : [
 		'#fieldname => FMOne type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner',
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner'

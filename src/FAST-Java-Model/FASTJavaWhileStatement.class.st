@@ -38,8 +38,8 @@ while(...) {
 Class {
 	#name : 'FASTJavaWhileStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTLoopStatement',
-	#classTraits : 'FASTTLoopStatement classTrait',
+	#traits : 'FASTTBreakableStatement + FASTTLoopStatement',
+	#classTraits : 'FASTTBreakableStatement classTrait + FASTTLoopStatement classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'

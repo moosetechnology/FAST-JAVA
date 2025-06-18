@@ -27,8 +27,8 @@ A node representing break statement in java
 Class {
 	#name : 'FASTJavaBreakStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTStatement',
-	#classTraits : 'FASTTStatement classTrait',
+	#traits : 'FASTTBreakStatement + FASTTStatement',
+	#classTraits : 'FASTTBreakStatement classTrait + FASTTStatement classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'

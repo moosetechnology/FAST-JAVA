@@ -39,8 +39,8 @@ switch (_) {
 Class {
 	#name : 'FASTJavaSwitchStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTBranchStatement',
-	#classTraits : 'FASTTBranchStatement classTrait',
+	#traits : 'FASTTBranchStatement + FASTTBreakableStatement',
+	#classTraits : 'FASTTBranchStatement classTrait + FASTTBreakableStatement classTrait',
 	#instVars : [
 		'#cases => FMMany type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner'
 	],
