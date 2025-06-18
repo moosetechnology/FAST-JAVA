@@ -35,6 +35,65 @@ FASTJavaCFGVisitorTest >> setUp [
 ]
 
 { #category : 'tests' }
+FASTJavaCFGVisitorTest >> testIfStatementNoElse [
+
+	| block |
+	self cfgFor: 'void meth() {
+	if (5 > 3)
+		System.out.println("all is good!");
+}'.
+
+	self assert: visitor basicBlocks size equals: 2.
+
+	block := visitor basicBlocks first.
+	self assert: block isStart.
+	self assert: block isConditional.
+	self assert: block isFinal.
+
+	self assert: (block nextBlockForValue: 'true') equals: visitor basicBlocks second.
+
+	block := visitor basicBlocks second.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self assert: block isFinal.
+
+]
+
+{ #category : 'tests' }
+FASTJavaCFGVisitorTest >> testIfStatementWithElse [
+
+	| block |
+	self cfgFor: 'void meth() {
+	if (5 > 3)
+		System.out.println("all is good!");
+	else
+		System.out.println("WTF ?!");
+}'.
+
+	self assert: visitor basicBlocks size equals: 3.
+
+	block := visitor basicBlocks first.
+	self assert: block isStart.
+	self assert: block isConditional.
+	self deny: block isFinal.
+
+	self assert: (visitor basicBlocks first nextBlockForValue: 'true') equals: visitor basicBlocks second.
+
+	block := visitor basicBlocks second.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self assert: block isFinal.
+
+	self assert: (visitor basicBlocks first nextBlockForValue: 'false') equals: visitor basicBlocks third.
+
+	block := visitor basicBlocks third.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self assert: block isFinal.
+
+]
+
+{ #category : 'tests' }
 FASTJavaCFGVisitorTest >> testLoopFor [
 
 	| block |
@@ -59,6 +118,74 @@ FASTJavaCFGVisitorTest >> testLoopFor [
 ]
 
 { #category : 'tests' }
+FASTJavaCFGVisitorTest >> testLoopForeach [
+
+	| block |
+	self cfgFor: 'void meth() {
+	ArrayList<Something> collection;
+	for (Something each : collection)
+		System.out.println(i);
+}'.
+
+	self assert: visitor basicBlocks size equals: 3.
+
+	block := visitor basicBlocks first.
+	self assert: block isStart.
+	self deny: block isConditional.
+	self deny: block isFinal.
+
+	self assert: block nextBlock equals: visitor basicBlocks second.
+
+	block := visitor basicBlocks second.
+	self deny: block isStart.
+	self assert: block isConditional.
+	self assert: block isFinal.
+
+	self assert: (block nextBlockForValue: 'true') equals: visitor basicBlocks third.
+
+	block := visitor basicBlocks third.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self deny: block isFinal.
+
+]
+
+{ #category : 'tests' }
+FASTJavaCFGVisitorTest >> testLoopWhile [
+
+	| block |
+	self cfgFor: 'void meth() {
+	int i = 1;
+	while (i < 10) {
+		System.out.println(i);
+		i++;
+	}
+}'.
+
+	self assert: visitor basicBlocks size equals: 3.
+
+	block := visitor basicBlocks first.
+	self assert: block isStart.
+	self deny: block isConditional.
+	self deny: block isFinal.
+
+	self assert: block nextBlock equals: visitor basicBlocks second.
+
+	block := visitor basicBlocks second.
+	self deny: block isStart.
+	self assert: block isConditional.
+	self assert: block isFinal.
+
+	self assert: (block nextBlockForValue: 'true') equals: visitor basicBlocks third.
+
+	block := visitor basicBlocks third.
+	self deny: block isStart.
+	self deny: block isConditional.
+	self deny: block isFinal.
+
+]
+
+{ #category : 'tests' }
 FASTJavaCFGVisitorTest >> testSimpleInstructionsGivesOneBlock [
 
 	| block |
@@ -71,7 +198,8 @@ FASTJavaCFGVisitorTest >> testSimpleInstructionsGivesOneBlock [
 
 	block := visitor basicBlocks anyOne.
 	self assert: block isStart.
-	self assert: block isFinal
+	self assert: block isFinal.
+	self assert: block statements size equals: 2
 
 ]
 
@@ -85,6 +213,7 @@ FASTJavaCFGVisitorTest >> testSimpleReturnGivesOneBlock [
 
 	block := visitor basicBlocks anyOne.
 	self assert: block isStart.
-	self assert: block isFinal
+	self assert: block isFinal.
+	self assert: block statements size equals: 1
 
 ]
