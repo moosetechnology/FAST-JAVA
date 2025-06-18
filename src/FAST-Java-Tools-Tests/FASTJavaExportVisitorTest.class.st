@@ -1,6 +1,6 @@
 Class {
 	#name : 'FASTJavaExportVisitorTest',
-	#superclass : 'TestCase',
+	#superclass : 'FASTJavaAbstracVisitorTest',
 	#instVars : [
 		'builder'
 	],
@@ -10,52 +10,11 @@ Class {
 }
 
 { #category : 'running' }
-FASTJavaExportVisitorTest >> astFor: sourceCode [
-
-	^JavaSmaCCProgramNodeImporterVisitor new
-		accept: (JavaParser parse: sourceCode)
-			typeDeclarations anyOne
-]
-
-{ #category : 'running' }
-FASTJavaExportVisitorTest >> astFor: sourceCode withRule: rule [
-
-	^JavaSmaCCProgramNodeImporterVisitor new
-		accept: (JavaParser
-			createParserOnStream:  (ReadStream on: sourceCode)
-			startingAt: (JavaParser perform: rule))
-			parse
-]
-
-{ #category : 'running' }
-FASTJavaExportVisitorTest >> blockAST: sourceCode [
-
-	^self astFor: sourceCode withRule: #startingStateForblock_statement
-
-
-]
-
-{ #category : 'running' }
 FASTJavaExportVisitorTest >> export: aFASTJavaNode equals: aString [
 
 	self
 		assert: (FASTJavaExportVisitor new export: aFASTJavaNode)
 		equals: aString
-]
-
-{ #category : 'running' }
-FASTJavaExportVisitorTest >> expressionAST: sourceCode [
-
-	^self astFor: sourceCode withRule: #startingStateForexpression
-
-
-]
-
-{ #category : 'running' }
-FASTJavaExportVisitorTest >> methodAST: sourceCode [
-
-	^self astFor: sourceCode withRule: #startingStateForclass_or_interface_body_declaration
-
 ]
 
 { #category : 'running' }
