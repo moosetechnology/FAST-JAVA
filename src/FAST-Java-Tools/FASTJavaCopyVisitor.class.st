@@ -5,6 +5,12 @@ Class {
 	#package : 'FAST-Java-Tools'
 }
 
+{ #category : 'instance creation' }
+FASTJavaCopyVisitor class >> on: anAST [
+
+	^anAST accept: self new
+]
+
 { #category : 'copying' }
 FASTJavaCopyVisitor >> copy: aNode [
 

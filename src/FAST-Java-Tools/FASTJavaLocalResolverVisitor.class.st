@@ -21,6 +21,13 @@ FASTJavaLocalResolverVisitor >> on: aFASTBehaviouralEntity [
 ]
 
 { #category : 'visiting' }
+FASTJavaLocalResolverVisitor >> visitFASTJavaExpressionStatement: aFASTJavaExpressionStatement [ 
+
+	 aFASTJavaExpressionStatement expression accept: self.
+
+]
+
+{ #category : 'visiting' }
 FASTJavaLocalResolverVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 
 	aFASTJavaForStatement initializer ifNotNil: [ :node | node accept: self].
@@ -39,6 +46,12 @@ FASTJavaLocalResolverVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 
 	aFASTJavaParameter variable localDeclaration: aFASTJavaParameter.
 
+]
+
+{ #category : 'api' }
+FASTJavaLocalResolverVisitor >> visitFASTJavaStatementBlock: aFASTJavaStatementBlock [ 
+	
+	self visitFASTTStatement: aFASTJavaStatementBlock.
 ]
 
 { #category : 'visiting' }

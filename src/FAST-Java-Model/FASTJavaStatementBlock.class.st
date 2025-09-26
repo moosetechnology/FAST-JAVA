@@ -63,6 +63,15 @@ FASTJavaStatementBlock class >> annotation [
 ]
 
 { #category : 'accessing' }
+FASTJavaStatementBlock >> filterChildren: children seen: seen [
+
+	"Children could be just an element, the api is not consistent"
+	children isCollection ifFalse: [ ^ OrderedCollection newFrom: { children } ].
+	
+	^ children reject: [ :elem | seen includes: elem ]
+]
+
+{ #category : 'accessing' }
 FASTJavaStatementBlock >> javaCatchPartStatementOwner [
 	"Relation named: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body"
 

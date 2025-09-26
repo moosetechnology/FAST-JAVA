@@ -52,7 +52,7 @@ FASTJavaTestNodeBuilder >> assignment: aName value: aNode [
 FASTJavaTestNodeBuilder >> block: aNodeCollection [
 	| node i |
 	node := FASTJavaStatementBlock new.
-	
+
 	i := 1.
 	aNodeCollection do: [ :aStmtNode |
 		aStmtNode startPos: i.
