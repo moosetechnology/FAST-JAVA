@@ -146,6 +146,16 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity: anObject [
 ]
 
 { #category : 'initialization' }
+JavaSmaCCProgramNodeImporterVisitor >> getExpressionAST: anExpressionString [
+	"For the expression to be parser correctly, the Java importer must be set as being on a Class declaration
+	then `clone` will create a sub-parser for the expression"
+
+	^(self currentFASTEntity: (FASTJavaClassDeclaration new) ;
+		clone) 
+		parseCodeExpressionString: anExpressionString 
+]
+
+{ #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	super initialize.
 	model := FASTJavaModel new.
