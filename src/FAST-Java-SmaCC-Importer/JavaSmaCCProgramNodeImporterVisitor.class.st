@@ -140,6 +140,12 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity [
 ]
 
 { #category : 'initialization' }
+JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity: anObject [
+
+	currentFASTEntity := anObject 
+]
+
+{ #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	super initialize.
 	model := FASTJavaModel new.
@@ -184,6 +190,30 @@ JavaSmaCCProgramNodeImporterVisitor >> parentFASTVisitor [
 JavaSmaCCProgramNodeImporterVisitor >> parentFASTVisitor: anObject [
 	
 	parentFASTVisitor := anObject
+]
+
+{ #category : 'initialization' }
+JavaSmaCCProgramNodeImporterVisitor >> parseCodeExpressionString: aCodeString [
+
+	| ast |
+	parser := JavaParser
+		          createParserOnStream: (ReadStream on: aCodeString)
+		          startingAt:
+		          JavaParser
+			          startingStateForexpression.
+
+	[
+	ast := parser parse.
+
+	(ast isKindOf: SmaCCParseNode) ifTrue: [
+		ast completeSource: aCodeString ] ]
+		on: Error
+		do: [ :err |
+			('SmaCC Err parsing: ' , String crlf , aCodeString) record.
+			err signal ].
+
+	^self accept: ast.
+
 ]
 
 { #category : 'initialization' }
