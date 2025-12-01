@@ -1,6 +1,6 @@
 Class {
 	#name : 'JavaSmaCCAnnotationWithNamedElements',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
@@ -17,12 +17,6 @@ JavaSmaCCAnnotationWithNamedElements >> javaClass [
 { #category : 'running' }
 JavaSmaCCAnnotationWithNamedElements >> javaMethod [
 	^self shouldNotImplement 
-]
-
-{ #category : 'running' }
-JavaSmaCCAnnotationWithNamedElements >> setUp [
-
-	fastModel := self parseClassString: self javaClass
 ]
 
 { #category : 'tests' }

@@ -1,12 +1,12 @@
 Class {
 	#name : 'JavaSmaCCAttributeInitializationInEnumTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
-JavaSmaCCAttributeInitializationInEnumTest >> enumString [
+{ #category : 'as yet unclassified' }
+JavaSmaCCAttributeInitializationInEnumTest >> javaClass [
 	
 	^ 'enum AnEnum {
   CONST1, CONST2;
@@ -19,13 +19,7 @@ JavaSmaCCAttributeInitializationInEnumTest >> javaMethod [
 	self shouldNotImplement
 ]
 
-{ #category : 'running' }
-JavaSmaCCAttributeInitializationInEnumTest >> setUp [
-
-	fastModel := self parseClassString: self enumString
-]
-
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 JavaSmaCCAttributeInitializationInEnumTest >> testNumberOfDeclarationsInEnum [
 	self
 		assert: (fastModel allWithType: FASTJavaEnumDeclaration) anyOne declarations size

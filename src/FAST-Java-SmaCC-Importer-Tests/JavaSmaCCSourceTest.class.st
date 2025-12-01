@@ -1,12 +1,12 @@
 Class {
 	#name : 'JavaSmaCCSourceTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : 'tests' }
-JavaSmaCCSourceTest >> classString [
+JavaSmaCCSourceTest >> javaClass [
 	^ 'class A {
 	void hello() {
 		int i = 0;
@@ -23,18 +23,20 @@ JavaSmaCCSourceTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCSourceTest >> testAccessToClassSourceText [
-	| model |
-	model := self parseClassString: self classString.
-	self assert: (model allWithType: FASTJavaMethodEntity) anyOne sourceText equals: self classString.
-	self assert: (model allWithType: FASTJavaClassDeclaration) anyOne sourceText equals: self classString.
-	self assert: (model allWithType: FASTJavaMethodEntity) anyOne sourceCode equals: 'void hello() {
+
+	fastModel := self parseClassString: self javaClass.
+
+	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne sourceText equals: self javaClass.
+	self assert: (fastModel allWithType: FASTJavaClassDeclaration) anyOne sourceText equals: self javaClass.
+	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne sourceCode equals: 'void hello() {
 		int i = 0;
 	}'
 ]
 
 { #category : 'tests' }
 JavaSmaCCSourceTest >> testAccessToMethodSourceText [
-	| model |
-	model := self parseMethodString: self javaMethod.
-	self assert: (model allWithType: FASTJavaMethodEntity) anyOne sourceText equals: self javaMethod
+
+	fastModel := self parseMethodString: self javaMethod.
+	
+	self assert: (fastModel allWithType: FASTJavaMethodEntity) anyOne sourceText equals: self javaMethod
 ]

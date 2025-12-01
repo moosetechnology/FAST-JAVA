@@ -1,12 +1,12 @@
 Class {
 	#name : 'JavaSmaCCInClassCommentsTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : 'tests' }
-JavaSmaCCInClassCommentsTest >> classString [
+JavaSmaCCInClassCommentsTest >> javaClass [
 
 	^ '
 import java.util.Scanner;
@@ -42,12 +42,6 @@ JavaSmaCCInClassCommentsTest >> parseClassString: aString [
 	^ JavaSmaCCProgramNodeImporterVisitor new
 		  withComments;
 		  parseCodeString: aString
-]
-
-{ #category : 'tests' }
-JavaSmaCCInClassCommentsTest >> setUp [
-
-	fastModel := self parseClassString: self classString.
 ]
 
 { #category : 'tests' }

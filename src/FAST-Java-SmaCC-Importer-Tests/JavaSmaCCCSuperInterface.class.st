@@ -1,27 +1,24 @@
 Class {
 	#name : 'JavaSmaCCCSuperInterface',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : 'resources' }
-JavaSmaCCCSuperInterface >> aSuperInterface [
+JavaSmaCCCSuperInterface >> javaClass [
 	^ 'public interface AnInterface extends ASuperInterface {
 }'
 ]
 
 { #category : 'initialization' }
-JavaSmaCCCSuperInterface >> setUp [
-	fastModel := ((self parseClassString: self aSuperInterface)
-		allWithType: FASTJavaInterfaceDeclaration) anyOne
-]
-
-{ #category : 'initialization' }
 JavaSmaCCCSuperInterface >> testSuperInterface [
 
-	self assert: fastModel interfaces size equals: 1.
+	| interfaceDecl |
+	interfaceDecl := (fastModel allWithType: FASTJavaInterfaceDeclaration) anyOne.
+
+	self assert: interfaceDecl interfaces size equals: 1.
 	self
-		assert: fastModel interfaces anyOne typeName name
+		assert: interfaceDecl interfaces anyOne typeName name
 		equals: #ASuperInterface
 ]

@@ -1,9 +1,6 @@
 Class {
 	#name : 'JavaSmaCCLocalClassTest',
-	#superclass : 'JavaSmaCCImporterTest',
-	#instVars : [
-		'throwMethod'
-	],
+	#superclass : 'JavaSmaCCMethodImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }

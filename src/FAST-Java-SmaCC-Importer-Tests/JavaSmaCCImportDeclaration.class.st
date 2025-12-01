@@ -1,6 +1,6 @@
 Class {
 	#name : 'JavaSmaCCImportDeclaration',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
@@ -12,15 +12,16 @@ class A {
 }' 
 ]
 
+{ #category : 'tests' }
+JavaSmaCCImportDeclaration >> javaClass [
+	^ 'import fr.inria.fast.Hello;
+class A {
+}' 
+]
+
 { #category : 'accessing' }
 JavaSmaCCImportDeclaration >> javaMethod [
 	^ self shouldBeImplemented
-]
-
-{ #category : 'tests' }
-JavaSmaCCImportDeclaration >> setUp [
-
-	fastModel := self parseClassString: self classString.
 ]
 
 { #category : 'tests' }

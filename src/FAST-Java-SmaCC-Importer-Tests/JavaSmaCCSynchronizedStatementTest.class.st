@@ -1,6 +1,6 @@
 Class {
 	#name : 'JavaSmaCCSynchronizedStatementTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCImporterAbstractTest',
 	#instVars : [
 		'testElement'
 	],
@@ -19,7 +19,11 @@ JavaSmaCCSynchronizedStatementTest >> javaMethod [
 
 { #category : 'initialization' }
 JavaSmaCCSynchronizedStatementTest >> setUp [
+
 	super setUp.
+	
+	fastModel := (self parseMethodString: self javaMethod).
+	fastMethod := fastModel allFASTJavaMethodEntity anyOne.
 
 	testElement := (fastModel allWithType: FASTJavaSynchronizedStatement) first.
 

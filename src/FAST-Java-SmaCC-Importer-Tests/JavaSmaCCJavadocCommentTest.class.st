@@ -1,6 +1,6 @@
 Class {
 	#name : 'JavaSmaCCJavadocCommentTest',
-	#superclass : 'JavaSmaCCCommentsTest',
+	#superclass : 'JavaSmaCCCommentsAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
