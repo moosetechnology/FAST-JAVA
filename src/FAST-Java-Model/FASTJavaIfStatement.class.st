@@ -14,22 +14,19 @@ if(...) {
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `doBodyOwner` | `FASTTStatement` | `body` | `FASTJavaDoWhileStatement` | I am the body of the do|
-| `forBodyOwner` | `FASTTStatement` | `body` | `FASTJavaForStatement` | I am the body of the for|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementor` | `FASTJavaForStatement` | I am the incrementor of the for|
 | `forIninitializerOwner` | `FASTTStatement` | `initializer` | `FASTJavaForStatement` | I am the initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
-| `javaForEachStatementOwner` | `FASTTStatement` | `body` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
+| `parentLoopStatement` | `FASTTStatement` | `body` | `FASTTLoopStatement` | Optional loop of which this statement is the body|
 | `statementContainer` | `FASTTStatement` | `statements` | `FASTTStatementBlock` | Block containing this statement.|
-| `whileBodyOwner` | `FASTTStatement` | `body` | `FASTJavaWhileStatement` | I am the body of the do|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `condition` | `FASTJavaIfStatement` | `ifConditionOwner` | `FASTTExpression` | The condition of the statement|
+| `condition` | `FASTTConditionalStatement` | `parentConditionalStatement` | `FASTTExpression` | The boolean condition tested|
 | `elsePart` | `FASTJavaIfStatement` | `ifElsePartOwner` | `FASTTStatement` | else part|
 | `thenPart` | `FASTJavaIfStatement` | `ifThenPartOwner` | `FASTTStatement` | then part|
 
@@ -46,8 +43,8 @@ if(...) {
 Class {
 	#name : 'FASTJavaIfStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTStatement',
-	#classTraits : 'FASTTStatement classTrait',
+	#traits : 'FASTTConditionalStatement + FASTTStatement',
+	#classTraits : 'FASTTConditionalStatement classTrait + FASTTStatement classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -60,37 +57,6 @@ FASTJavaIfStatement class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	^ self
-]
-
-{ #category : 'accessing' }
-FASTJavaIfStatement >> condition [
-	"Relation named: #condition type: #FASTTExpression opposite: #ifConditionOwner"
-
-	<generated>
-	<FMComment: 'The condition of the statement'>
-	<FMProperty: #condition type: #FASTTExpression opposite: #ifConditionOwner>
-	^ self attributeAt: #condition ifAbsent: [ nil ]
-]
-
-{ #category : 'accessing' }
-FASTJavaIfStatement >> condition: anObject [
-
-	<generated>
-	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self condition.
-		self attributeAt: #condition put: anObject.
-		otherSide ifConditionOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #condition put: anObject.
-		anObject ifConditionOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaIfStatement >> conditionGroup [
-	<generated>
-	<navigation: 'Condition'>
-	^ MooseSpecializedGroup with: self condition
 ]
 
 { #category : 'accessing' }

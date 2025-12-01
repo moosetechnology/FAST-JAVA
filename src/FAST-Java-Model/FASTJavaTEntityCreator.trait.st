@@ -588,6 +588,13 @@ FASTJavaTEntityCreator >> newVarDeclStatement [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newVarTypeExpression [
+
+	<generated>
+	^ self add: FASTJavaVarTypeExpression new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newVariableDeclarator [
 
 	<generated>
