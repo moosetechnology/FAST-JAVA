@@ -1,12 +1,12 @@
 Class {
 	#name : 'JavaSmaCCEnumWithInterfaceDeclarationTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : 'tests' }
-JavaSmaCCEnumWithInterfaceDeclarationTest >> enumString [
+JavaSmaCCEnumWithInterfaceDeclarationTest >> javaClass [
 	^ 'class A {
 	private enum MyEnum implements Serializable { 
 		
@@ -48,6 +48,6 @@ JavaSmaCCEnumWithInterfaceDeclarationTest >> setUp [
 JavaSmaCCEnumWithInterfaceDeclarationTest >> testCanParseEnumDeclarationText [
 
 	self
-		shouldnt: [ self parseClassString: self enumString ]
+		shouldnt: [ self parseClassString: self javaClass ]
 		raise: Error
 ]

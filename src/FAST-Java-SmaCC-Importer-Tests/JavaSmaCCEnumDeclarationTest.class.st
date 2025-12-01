@@ -1,12 +1,12 @@
 Class {
 	#name : 'JavaSmaCCEnumDeclarationTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : 'running' }
-JavaSmaCCEnumDeclarationTest >> enumString [
+JavaSmaCCEnumDeclarationTest >> javaClass [
 
 	^ 'private enum MyEnum { 
 		
@@ -36,12 +36,6 @@ JavaSmaCCEnumDeclarationTest >> enumString [
 { #category : 'running' }
 JavaSmaCCEnumDeclarationTest >> javaMethod [
 	^self shouldNotImplement
-]
-
-{ #category : 'running' }
-JavaSmaCCEnumDeclarationTest >> setUp [
-
-	fastModel := self parseClassString: self enumString
 ]
 
 { #category : 'tests' }

@@ -3,7 +3,7 @@ This class contains tests
 "
 Class {
 	#name : 'JavaSmaCCNewInnerClassTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCMethodImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
