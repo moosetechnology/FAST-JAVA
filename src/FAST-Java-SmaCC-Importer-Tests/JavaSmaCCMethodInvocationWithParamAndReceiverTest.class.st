@@ -1,9 +1,9 @@
 Class {
 	#name : 'JavaSmaCCMethodInvocationWithParamAndReceiverTest',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCImporterAbstractTest',
 	#instVars : [
-		'methodInvocationWithClassPropertyAsReceiver',
-		'methodInvocationWithVariableAsReceiver'
+		'methodInvocationWithVariableAsReceiver',
+		'methodInvocationWithClassPropertyAsReceiver'
 	],
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'

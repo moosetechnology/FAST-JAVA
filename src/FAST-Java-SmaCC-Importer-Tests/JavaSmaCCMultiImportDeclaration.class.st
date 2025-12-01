@@ -1,12 +1,12 @@
 Class {
 	#name : 'JavaSmaCCMultiImportDeclaration',
-	#superclass : 'JavaSmaCCImporterTest',
+	#superclass : 'JavaSmaCCClassImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
 { #category : 'tests' }
-JavaSmaCCMultiImportDeclaration >> classString [
+JavaSmaCCMultiImportDeclaration >> javaClass [
 	^ 'import fr.inria.fast.*;
 class A {
 }' 
@@ -15,12 +15,6 @@ class A {
 { #category : 'accessing' }
 JavaSmaCCMultiImportDeclaration >> javaMethod [
 	^ self shouldBeImplemented
-]
-
-{ #category : 'tests' }
-JavaSmaCCMultiImportDeclaration >> setUp [
-
-	fastModel := self parseClassString: self classString
 ]
 
 { #category : 'tests' }

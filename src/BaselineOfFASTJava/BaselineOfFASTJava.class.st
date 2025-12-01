@@ -11,10 +11,6 @@ BaselineOfFASTJava >> baseline: spec [
 	spec
 		for: #common
 		do: [ 
-			spec blessing: #baseline.
-			spec description: 'Developement version of FAST Java using FamixNG for Pharo.'.
-			spec author: 'BenoitVerhaeghe'.
-			spec timestamp: '07/06/2018 00:00'.
 			self defineDependencies: spec.
 			self definePackages: spec.
 			self defineGroups: spec ]
@@ -35,7 +31,7 @@ BaselineOfFASTJava >> defineDependencies: spec [
 	spec baseline: 'FAST' with: [ 
 		spec
 			loads: #( 'default' );
-			repository: 'github://moosetechnology/FAST:v2/src' ].
+			repository: 'github://moosetechnology/FAST:v3/src' ].
 	spec
 		project: 'FASTTool'
 		copyFrom: 'FAST'

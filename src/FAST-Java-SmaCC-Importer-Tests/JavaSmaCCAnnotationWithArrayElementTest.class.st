@@ -1,9 +1,6 @@
 Class {
 	#name : 'JavaSmaCCAnnotationWithArrayElementTest',
-	#superclass : 'JavaSmaCCImporterTest',
-	#instVars : [
-		'methodNewArray'
-	],
+	#superclass : 'JavaSmaCCMethodImporterAbstractTest',
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
