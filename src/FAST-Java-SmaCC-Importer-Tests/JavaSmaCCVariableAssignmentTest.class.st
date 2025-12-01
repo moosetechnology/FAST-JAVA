@@ -1,6 +1,9 @@
 Class {
 	#name : 'JavaSmaCCVariableAssignmentTest',
-	#superclass : 'JavaSmaCCImporterAbstractTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'fast'
+	],
 	#category : 'FAST-Java-SmaCC-Importer-Tests',
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
@@ -18,42 +21,36 @@ JavaSmaCCVariableAssignmentTest >> javaMethod [
 
 { #category : 'running' }
 JavaSmaCCVariableAssignmentTest >> setUp [
-	"Note that fastModel is not a MooseModel, but the root node of an AST"
 
-	fastModel := JavaSmaCCProgramNodeImporterVisitor new getExpressionAST: self expressionString 
+	fast := JavaSmaCCProgramNodeImporterVisitor new getExpressionAST: self expressionString 
 ]
 
 { #category : 'tests' }
 JavaSmaCCVariableAssignmentTest >> testASTIsAnExpression [
-	"Note that fastModel resulting from a parse is not a MooseModel, but the root node of an AST"
 
-	self assert: fastModel class equals: FASTJavaAssignmentExpression 
+	self assert: fast class equals: FASTJavaAssignmentExpression 
 ]
 
 { #category : 'tests' }
 JavaSmaCCVariableAssignmentTest >> testASTLHSIsAVariable [
-	"Note that fastModel resulting from a parse is not a MooseModel, but the root node of an AST"
 
-	self assert: fastModel variable class equals: FASTJavaVariableExpression 
+	self assert: fast variable class equals: FASTJavaVariableExpression 
 ]
 
 { #category : 'tests' }
 JavaSmaCCVariableAssignmentTest >> testASTLHSNameIsAVariable [
-	"Note that fastModel resulting from a parse is not a MooseModel, but the root node of an AST"
 
-	self assert: fastModel variable name equals: 'aVariable' 
+	self assert: fast variable name equals: 'aVariable' 
 ]
 
 { #category : 'tests' }
 JavaSmaCCVariableAssignmentTest >> testASTRHSIsString [
-	"Note that fastModel resulting from a parse is not a MooseModel, but the root node of an AST"
 
-	self assert: fastModel expression class equals: FASTJavaStringLiteral 
+	self assert: fast expression class equals: FASTJavaStringLiteral 
 ]
 
 { #category : 'tests' }
 JavaSmaCCVariableAssignmentTest >> testASTRHSValueIsA_value [
-	"Note that fastModel resulting from a parse is not a MooseModel, but the root node of an AST"
 
-	self assert: fastModel expression primitiveValue equals: 'a value' 
+	self assert: fast expression primitiveValue equals: 'a value' 
 ]
