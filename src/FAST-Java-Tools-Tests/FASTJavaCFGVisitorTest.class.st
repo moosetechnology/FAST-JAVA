@@ -177,6 +177,41 @@ FASTJavaCFGVisitorTest >> ifMethodSource [
 }'
 ]
 
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> ifWithSingleStatementMethodSource [
+
+	^ 
+'public int ifElseMethod() {
+	int i = 0;
+	i = i + 4;
+	if (i == 4)
+		System.out.println(i);
+	return i;
+}'
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> imbricatedIfsMethodSource [
+
+	^ 
+'public int ifElseMethod() {
+	int i = 0;
+	i = i + 4;
+	if (i > 4) {
+		if (i == 5) { 
+			System.out.println("This code is very dumb.");
+		}
+		else { 
+			System.out.println(i);
+		}
+	}
+	else {  
+		System.out.println("This code is also very dumb.");
+	}
+	return i;
+}'
+]
+
 { #category : 'nil' }
 FASTJavaCFGVisitorTest >> noReturnMethodSource [
 
@@ -207,6 +242,44 @@ FASTJavaCFGVisitorTest >> simpleMethodSource [
 	System.out.println(i);
 	return i;
 }'
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> startWithIfSource [
+
+	^ 
+'public void transform(Object input) {
+        if (input == null) {
+        }
+}'
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> swapPositionSource [
+
+	^ 
+'private void swapPosition() {
+        if (true) {
+				System.out.println("whatever1");
+            if (true) {
+                System.out.println("whatever2");
+            } else {
+                System.out.println("whatever3");
+            }
+				System.out.println("whatever4");
+        } else {
+           	System.out.println("whatever5");
+            if (true) {
+                if (true) {
+                    System.out.println("whatever6");
+                } else {
+                    System.out.println("whatever7");
+                }
+            }
+			System.out.println("whatever8");
+        }
+		return;
+    }'
 ]
 
 { #category : 'as yet unclassified' }
@@ -269,6 +342,27 @@ FASTJavaCFGVisitorTest >> switchWithDefaultMethodSource [
 			System.out.println("Default code");
 	}
 	return true;
+}'
+]
+
+{ #category : 'nil' }
+FASTJavaCFGVisitorTest >> ternaryOperatorMethodInReturnSource [
+
+	^ 'public int ternaryOperatorMethodInReturn() {
+	int i = 0;
+	int j = 4;
+	return i > j ? i : j;
+}'
+]
+
+{ #category : 'nil' }
+FASTJavaCFGVisitorTest >> ternaryOperatorMethodSource [
+
+	^ 'public void ternaryOperatorMethod() {
+	int i = 0;
+	int j = 4;
+	int h = i > j ? i : j;
+	return h;
 }'
 ]
 
@@ -657,6 +751,86 @@ FASTJavaCFGVisitorTest >> testIfMethodCorrectCFG [
 ]
 
 { #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testIfWithSingleStatementMethodCorrectCFG [
+
+	| startBlock conditionalBlock thenBlock nextBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self ifWithSingleStatementMethodSource).
+
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 2.
+	self assert: startBlock nextBlock isConditional.
+
+	conditionalBlock := startBlock nextBlock.
+
+	self assert: conditionalBlock isStart not.
+	self assert: conditionalBlock isConditional.
+	self assert: conditionalBlock statements size equals: 1.
+	self assert: conditionalBlock nextBlocks size equals: 2.
+
+	thenBlock := conditionalBlock nextBlockForValue: true.
+	nextBlock := conditionalBlock nextBlockForValue: false.
+
+	self assert: thenBlock isConditional not.
+	self assert: thenBlock isFinal not.
+	self assert: thenBlock statements size equals: 1.
+
+	self assert: thenBlock nextBlock equals: nextBlock.
+	self assert: nextBlock isFinal.
+	self assert: nextBlock statements size equals: 1
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testImbicatedIfsMethodCorrectCFG [
+"bug status : postponing pending actions in else is good and well, but with the imbricated if else it becomes important to know when to execute those pending actions, to ensure that those are not postponed again..."
+	| startBlock conditionalBlock elseBlock imbricatedIfBlock imbricatedThenBlock imbricatedElseBlock finalBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self imbricatedIfsMethodSource).
+
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 2.
+	self assert: startBlock nextBlock isConditional.
+
+	conditionalBlock := startBlock nextBlock.
+
+	self assert: conditionalBlock isStart not.
+	self assert: conditionalBlock isConditional.
+	self assert: conditionalBlock statements size equals: 1.
+	self assert: conditionalBlock nextBlocks size equals: 2.
+
+	imbricatedIfBlock := conditionalBlock nextBlockForValue: true.
+	elseBlock := conditionalBlock nextBlockForValue: false.
+	finalBlock := elseBlock nextBlock.
+	
+	self assert: imbricatedIfBlock isConditional.
+	self assert: imbricatedIfBlock isFinal not.
+	self assert: imbricatedIfBlock statements size equals: 1.
+	
+	imbricatedThenBlock := imbricatedIfBlock nextBlockForValue: true.
+	imbricatedElseBlock := imbricatedIfBlock nextBlockForValue: false.
+	
+	self assert: imbricatedThenBlock isConditional not.
+	self assert: imbricatedThenBlock isFinal not.
+	self assert: imbricatedThenBlock statements size equals: 1.
+	self assert: imbricatedThenBlock nextBlock equals: finalBlock.
+	
+	self assert: imbricatedElseBlock isConditional not.
+	self assert: imbricatedElseBlock isFinal not.
+	self assert: imbricatedElseBlock statements size equals: 1.
+	self assert: imbricatedElseBlock nextBlock equals: finalBlock.
+	
+	self assert: elseBlock isConditional not.
+	self assert: elseBlock isFinal not.
+	self assert: elseBlock statements size equals: 1.
+
+	self assert: finalBlock isConditional not.
+	self assert: finalBlock isFinal.
+	self assert: finalBlock statements size equals: 1
+]
+
+{ #category : 'as yet unclassified' }
 FASTJavaCFGVisitorTest >> testNoReturnMethodCorrectCFG [
 
 	| startBlock |
@@ -680,6 +854,115 @@ FASTJavaCFGVisitorTest >> testSimpleMethodCorrectCFG [
 	self assert: startBlock isStart.
 	self assert: startBlock nextBlock isNullBlock.
 	self assert: startBlock statements size equals: 4
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testStartWithIfCorrectCFG [
+
+	| startBlock nextBlock |
+	"TODO: it could be an useful test for eventual CFG pruning, but as it is it's just here to make sure this code doesn't make the tool go boom"
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self startWithIfSource).
+
+	self assert: startBlock isConditional.
+	self assert: startBlock isFinal.
+	self assert: startBlock statements size equals: 1.
+	self assert: startBlock nextBlocks size equals: 2.
+
+	nextBlock := startBlock nextBlockForValue: true.
+	self assert: nextBlock isConditional not.
+	self assert: nextBlock isFinal.
+	self assert: nextBlock statements isEmpty
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testSwapPositionCorrectCFG [
+
+	| startBlock ifBlock elseBlock nextBlock ifThenBlock ifElseBlock elseIfBlock elseElseBlock finalBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self swapPositionSource).
+
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 1.
+	self assert: startBlock isConditional.
+
+	"test of first conditional depth"
+	ifBlock := startBlock nextBlockForValue: true.
+	elseBlock := startBlock nextBlockForValue: false.
+
+	self assert: ifBlock isConditional not.
+	self assert: ifBlock statements size equals: 1.
+
+	self assert: elseBlock isConditional not.
+	self assert: elseBlock statements size equals: 1.
+
+	"test of second conditional depth"
+	ifBlock := ifBlock nextBlock.
+	elseBlock := elseBlock nextBlock.
+
+	self assert: ifBlock isConditional.
+	self assert: ifBlock statements size equals: 1.
+	self assert: ifBlock nextBlocks size equals: 2.
+
+	self assert: elseBlock isConditional.
+	self assert: elseBlock statements size equals: 1.
+	self assert: elseBlock nextBlocks size equals: 2.
+	
+	ifThenBlock := ifBlock nextBlockForValue: true.
+	ifElseBlock := ifBlock nextBlockForValue: false.
+	
+	elseIfBlock := elseBlock nextBlockForValue: true.
+	elseElseBlock := elseBlock nextBlockForValue: false.
+	
+	"testing all of the 'true' side of the tree"
+	self assert: ifThenBlock isFinal not.
+	self assert: ifThenBlock isConditional not.
+	self assert: ifThenBlock statements size equals: 1.
+	
+	self assert: ifElseBlock isFinal not.
+	self assert: ifElseBlock isConditional not.
+	self assert: ifElseBlock statements size equals: 1.
+	
+	nextBlock := ifThenBlock nextBlock.
+	
+	self assert: nextBlock equals: ifElseBlock nextBlock.
+	self assert: nextBlock isFinal not.
+	self assert: nextBlock isConditional not.
+	self assert: nextBlock statements size equals: 1.
+	
+	finalBlock := nextBlock nextBlock.
+	
+	"testing all of the 'false' side of the tree"
+	self assert: elseIfBlock isFinal not.
+	self assert: elseIfBlock isConditional.
+	self assert: elseIfBlock statements size equals: 1.
+	
+	ifThenBlock := elseIfBlock nextBlockForValue: true.
+	ifElseBlock := elseIfBlock nextBlockForValue: false.
+	
+	self assert: ifThenBlock isFinal not.
+	self assert: ifThenBlock isConditional not.
+	self assert: ifThenBlock statements size equals: 1.
+	
+	self assert: ifElseBlock isFinal not.
+	self assert: ifElseBlock isConditional not.
+	self assert: ifElseBlock statements size equals: 1.
+	
+	self assert: ifThenBlock nextBlock equals: elseElseBlock.
+	self assert: ifElseBlock nextBlock equals: elseElseBlock.
+	
+	self assert: elseElseBlock isFinal not.
+	self assert: elseElseBlock isConditional not.
+	self assert: elseElseBlock statements size equals: 1.
+	self assert: elseElseBlock nextBlock equals: finalBlock.
+	
+	self assert: finalBlock isFinal.
+	self assert: finalBlock isConditional not.
+	self assert: finalBlock statements size equals: 1
+	
+
 ]
 
 { #category : 'as yet unclassified' }
@@ -845,10 +1128,190 @@ FASTJavaCFGVisitorTest >> testSwitchWithDefaultMethodCorrectCFG [
 ]
 
 { #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testTernaryOperatorMethodCorrectCFG [
+
+	| startBlock ternaryBlock trueBlock falseBlock nextBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self ternaryOperatorMethodSource).
+			
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 2.
+	
+	ternaryBlock := startBlock nextBlock.
+	
+	self assert: ternaryBlock isConditional.
+	self assert: ternaryBlock nextBlocks size equals: 2.
+	
+	trueBlock := ternaryBlock nextBlockForValue: true.
+	falseBlock := ternaryBlock nextBlockForValue: false.
+	
+	self assert: trueBlock isFinal not.
+	self assert: trueBlock isConditional not.
+	self assert: trueBlock statements size equals: 1.
+	
+	self assert: falseBlock isFinal not.
+	self assert: falseBlock isConditional not.
+	self assert: falseBlock statements size equals: 1.
+	
+	self assert: trueBlock nextBlock equals: falseBlock nextBlock.
+	
+	nextBlock := trueBlock nextBlock.
+	
+	self assert: nextBlock isFinal.
+	self assert: nextBlock isConditional not.
+	self assert: nextBlock statements size equals: 1
+	
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testTernaryOperatorMethodInReturnCorrectCFG [
+
+	| startBlock ternaryBlock trueBlock falseBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self ternaryOperatorMethodInReturnSource).
+			
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 2.
+	
+	ternaryBlock := startBlock nextBlock.
+	
+	self assert: ternaryBlock isConditional.
+	self assert: ternaryBlock nextBlocks size equals: 2.
+	
+	trueBlock := ternaryBlock nextBlockForValue: true.
+	falseBlock := ternaryBlock nextBlockForValue: false.
+	
+	self assert: trueBlock isFinal.
+	self assert: trueBlock isConditional not.
+	self assert: trueBlock statements size equals: 1.
+	
+	self assert: falseBlock isFinal.
+	self assert: falseBlock isConditional not.
+	self assert: falseBlock statements size equals: 1
+
+	
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testThrowInsideTryMethodCorrectCFG [
+
+	| startBlock tryBlock throwBlock catchIOBlock defaultCatchBlock finalBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self throwWithinTryMethodSource).
+			
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 2.
+	
+	tryBlock := startBlock nextBlock.
+	
+	self assert: tryBlock isConditional.
+	self assert: tryBlock nextBlocks size equals: 3.
+	
+	throwBlock := tryBlock nextBlockForValue: '[No exceptions]'.
+	catchIOBlock := tryBlock nextBlockForValue: 'Catches (IOException)'.
+	defaultCatchBlock := tryBlock nextBlockForValue: 'Catches (Exception)'.
+	
+	self assert: throwBlock isConditional.
+	self assert: throwBlock nextBlocks size equals: 3.
+	self assert: (throwBlock nextBlockForValue: 'Catched as (IOException)') equals: catchIOBlock.
+	self assert: (throwBlock nextBlockForValue: 'Catched as (Exception)') equals: defaultCatchBlock.
+	self assert: (throwBlock nextBlockForValue: '[Uncatched exception]') isNotNil.
+	
+	finalBlock := throwBlock nextBlockForValue: '[Uncatched exception]'.
+	
+	self assert: finalBlock isConditional not.
+	self assert: finalBlock isFinal.
+	self assert: finalBlock statements isEmpty
+	
+]
+
+{ #category : 'as yet unclassified' }
 FASTJavaCFGVisitorTest >> testThrowMethodCorrectCFG [
 
-	"TODO"
-	self assert: false
+	| startBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self throwMethodSource).
+			
+	self assert: startBlock isStart.
+	self assert: startBlock nextBlock isNullBlock.
+	self assert: startBlock statements size equals: 3
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testTransformCorrectCFG [
+
+	| startBlock firstReturnBlock nextBlock noSuchMethodExceptionBlock illegalAccessExceptionBlock invocationTargetExceptionBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self transformSource).
+
+	"testing the if starting the method"
+	self assert: startBlock isStart.
+	self assert: startBlock isConditional.
+	self assert: startBlock statements size equals: 1.
+
+	firstReturnBlock := startBlock nextBlockForValue: true.
+	nextBlock := startBlock nextBlockForValue: false.
+
+	"testing the then value of the if in the beginning of the method"
+	self assert: firstReturnBlock isFinal.
+	self assert: firstReturnBlock isConditional not.
+	self assert: firstReturnBlock statements size equals: 1.
+
+	noSuchMethodExceptionBlock := nextBlock nextBlockForValue:
+		                              'Catches (NoSuchMethodException)'.
+	illegalAccessExceptionBlock := nextBlock nextBlockForValue:
+		                               'Catches (IllegalAccessException)'.
+	invocationTargetExceptionBlock := nextBlock nextBlockForValue:
+		                                  'Catches (InvocationTargetException)'.
+
+	"testing every statement in the try except for the last one (the return)"
+	[ nextBlock isFinal ] whileFalse: [
+			self assert: nextBlock isConditional.
+			self assert: nextBlock statements size equals: 1.
+			self
+				assert:
+				(nextBlock nextBlockForValue: 'Catches (NoSuchMethodException)')
+				equals: noSuchMethodExceptionBlock.
+			self
+				assert:
+				(nextBlock nextBlockForValue: 'Catches (IllegalAccessException)')
+				equals: illegalAccessExceptionBlock.
+			self
+				assert:
+				(nextBlock nextBlockForValue:
+					 'Catches (InvocationTargetException)')
+				equals: invocationTargetExceptionBlock.
+			nextBlock := nextBlock nextBlockForValue: '[No exceptions]' ].
+
+	"testing the return statement within the try statement"
+	self assert: nextBlock statements size equals: 1.
+	self assert: nextBlock isFinal.
+	self assert: nextBlock isConditional.
+	self
+		assert:
+		(nextBlock nextBlockForValue: 'Catches (NoSuchMethodException)')
+		equals: noSuchMethodExceptionBlock.
+	self
+		assert:
+		(nextBlock nextBlockForValue: 'Catches (IllegalAccessException)')
+		equals: illegalAccessExceptionBlock.
+	self
+		assert:
+		(nextBlock nextBlockForValue: 'Catches (InvocationTargetException)')
+		equals: invocationTargetExceptionBlock.
+	self
+		assert: (nextBlock nextBlockForValue: '[No exceptions]') class
+		equals: FASTNullBlock.
+
+	"testing that catches are final blocks (because of their throw statements)"
+	self assert: noSuchMethodExceptionBlock isFinal.
+	self assert: illegalAccessExceptionBlock isFinal.
+	self assert: invocationTargetExceptionBlock isFinal
 ]
 
 { #category : 'as yet unclassified' }
@@ -947,8 +1410,31 @@ FASTJavaCFGVisitorTest >> testTryCatchWithForAndBreakMethodCorrectCFG [
 { #category : 'as yet unclassified' }
 FASTJavaCFGVisitorTest >> testTryWithFinallyCorrectCFG [
 
-	"TODO"
-	self assert: false
+	| startBlock nextBlock catchBlock finallyBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self tryWithFinallyMethodSource).
+
+	self assert: startBlock isStart.
+	self assert: startBlock isConditional not.
+	self assert: startBlock statements size equals: 1.
+
+	nextBlock := startBlock nextBlock.
+	catchBlock := nextBlock nextBlockForValue: 'Catches (Exception)'.
+	finallyBlock := catchBlock nextBlock.
+
+	[ nextBlock isFinal ] whileFalse: [
+			self assert: nextBlock isConditional.
+			self assert: nextBlock statements size equals: 1.
+			self
+				assert: (nextBlock nextBlockForValue: 'Catches (Exception)')
+				equals: catchBlock.
+			nextBlock := nextBlock nextBlockForValue: '[No exceptions]' ].
+
+	self assert: nextBlock statements size equals: 2.
+	self assert: nextBlock isFinal.
+	self assert: nextBlock isConditional not.
+	self assert: nextBlock equals: finallyBlock
 ]
 
 { #category : 'as yet unclassified' }
@@ -987,6 +1473,36 @@ FASTJavaCFGVisitorTest >> testTryWithMultipleCatchesMethodCorrectCFG [
 ]
 
 { #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testTwoReturnsCorrectCFG [
+
+	| startBlock conditionalBlock thenBlock nextBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self twoReturnsMethodSource).
+
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 2.
+	self assert: startBlock nextBlock isConditional.
+
+	conditionalBlock := startBlock nextBlock.
+
+	self assert: conditionalBlock isStart not.
+	self assert: conditionalBlock isConditional.
+	self assert: conditionalBlock statements size equals: 1.
+	self assert: conditionalBlock nextBlocks size equals: 2.
+
+	thenBlock := conditionalBlock nextBlockForValue: true.
+	nextBlock := conditionalBlock nextBlockForValue: false.
+
+	self assert: thenBlock isConditional not.
+	self assert: thenBlock isFinal.
+	self assert: thenBlock statements size equals: 1.
+	
+	self assert: nextBlock isFinal.
+	self assert: nextBlock statements size equals: 1
+]
+
+{ #category : 'as yet unclassified' }
 FASTJavaCFGVisitorTest >> testWhileMethodCorrectCFG [
 
 	| startBlock conditionalBlock thenBlock nextBlock |
@@ -1018,11 +1534,67 @@ FASTJavaCFGVisitorTest >> testWhileMethodCorrectCFG [
 	self assert: nextBlock statements size equals: 1
 ]
 
+{ #category : 'nil' }
+FASTJavaCFGVisitorTest >> throwMethodSource [
+
+	^ 
+'public void simpleMethod() throws IOException {
+	int i = 0;
+	i = i + 4;
+	throw new IOException("bye bye");
+}'
+]
+
+{ #category : 'nil' }
+FASTJavaCFGVisitorTest >> throwWithinTryMethodSource [
+
+	^ 
+'public void simpleMethod() throws IOException {
+	int i = 0;
+	i = i + 4;
+	try { 
+		System.out.println("Following statement has been written by a professional, don''t try to reproduce this at home.");
+		throw new IOException("bye bye");
+	} 
+	catch (IOException e) {
+		System.out.println("IOException");
+		e.printStackTrace();
+	}
+	catch (Exception e) {
+		System.out.println("Useless");
+		e.printStackTrace();
+	}
+}'
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> transformSource [
+
+	^ 
+'public Object transform(Object input) {
+        if (input == null) {
+            return null;
+        }
+        try {
+            Class cls = input.getClass();
+            Method method = cls.getMethod(iMethodName, iParamTypes);
+            return method.invoke(input, iArgs);
+                
+        } catch (NoSuchMethodException ex) {
+            throw new FunctorException("InvokerTransformer: The method ''" + iMethodName + "'' on ''" + input.getClass() + "'' does not exist");
+        } catch (IllegalAccessException ex) {
+            throw new FunctorException("InvokerTransformer: The method ''" + iMethodName + "'' on ''" + input.getClass() + "'' cannot be accessed");
+        } catch (InvocationTargetException ex) {
+            throw new FunctorException("InvokerTransformer: The method ''" + iMethodName + "'' on ''" + input.getClass() + "'' threw an exception", ex);
+        }
+    }'
+]
+
 { #category : 'as yet unclassified' }
 FASTJavaCFGVisitorTest >> tryCatchMethodSource [
 
 	^ 
-'public boolean tryCatchMethod() {
+'public boolean tryCatchMethod(ObjectInputStream ois) {
 	System.out.println("Hello World");
 	try {
 			System.out.println("start reading file");
@@ -1066,6 +1638,28 @@ FASTJavaCFGVisitorTest >> tryCatchWithForAndBreakMethodSource [
 ]
 
 { #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> tryWithFinallyMethodSource [
+
+	^ 
+'public boolean tryCatchMethod(ObjectInputStream ois) {
+	System.out.println("Hello World");
+	try {
+			System.out.println("start reading file");
+			ois.readObject();
+			System.out.println("successful file reading");
+	}
+	catch (Exception e) {
+			System.out.println("file not read");
+			e.printStackTrace();
+	}
+	finally { 
+			ois.close(); 
+	}
+	return true;
+}'
+]
+
+{ #category : 'as yet unclassified' }
 FASTJavaCFGVisitorTest >> tryWithMultipleCatchesMethodSource [
 
 	^ 
@@ -1086,6 +1680,20 @@ FASTJavaCFGVisitorTest >> tryWithMultipleCatchesMethodSource [
 			e.printStackTrace();
 	}
 	return true;
+}'
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> twoReturnsMethodSource [
+
+	^ 
+'public int ifElseMethod() {
+	int i = 0;
+	i = i + 4;
+	if (i == 4) {
+		return i;
+	} 
+	return i;
 }'
 ]
 

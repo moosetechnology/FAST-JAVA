@@ -294,6 +294,20 @@ FASTJavaCFGVisitor >> conditionForCatch: catch [
 ]
 
 { #category : 'as yet unclassified' }
+FASTJavaCFGVisitor >> conditionForCatchedThrow: catch [
+
+	| exporter |
+	exporter := catch exporterForCFG.
+
+	^ String streamContents: [ :s |
+			  s nextPutAll: 'Catched as ('.
+			  catch catchedTypes
+				  do: [ :type | s nextPutAll: (exporter export: type) ]
+				  separatedBy: [ s nextPutAll: ' | ' ].
+			  s nextPut: $) ]
+]
+
+{ #category : 'as yet unclassified' }
 FASTJavaCFGVisitor >> createConditionFor: case [
 
 	| exporter |
@@ -321,6 +335,25 @@ FASTJavaCFGVisitor >> initialize [
 	insideTryBlock := false.
 	catchBlocks := OrderedCollection new
 	
+]
+
+{ #category : 'asserting' }
+FASTJavaCFGVisitor >> shouldIfFinalBlockBeClosed: aFASTJavaIfStatement [
+"black magic to know if you can close current blocks within an if"
+	| parentStatementBlock parentNode isIfLastStmt isImbricatedIf |
+	aFASTJavaIfStatement ifElsePartOwner ifNotNil: [ ^ false ].
+
+	parentStatementBlock := aFASTJavaIfStatement parentLoopStatement.
+	parentNode := parentStatementBlock fastBehaviouralParent.
+
+	isIfLastStmt := parentStatementBlock statements last
+	                = aFASTJavaIfStatement.
+
+	isImbricatedIf := parentNode class = FASTJavaIfStatement.
+
+	^ isIfLastStmt
+		  ifTrue: [ isImbricatedIf ]
+		  ifFalse: [ isImbricatedIf not ]
 ]
 
 { #category : 'accessing' }
@@ -397,11 +430,129 @@ FASTJavaCFGVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
 ]
 
 { #category : 'generated' }
-FASTJavaCFGVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatement [
+FASTJavaCFGVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression [
 
+	self
+		visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression
+		isNested: false
+		withinReturn: false
+]
+
+{ #category : 'generated' }
+FASTJavaCFGVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression isNested: isNested [
+
+	| conditionalBlock pendingActions |
+	conditionalBlock := cfgBuilder newConditionalBlock:
+		                    aFASTJavaConditionalExpression.
+
+	"then-statement"
+	self assert: cfgBuilder pendingNextBlock isEmpty.
+	cfgBuilder addPendingNextBlockAction: [ :thenBlock |
+		conditionalBlock nextBlock: thenBlock onValue: true ].
+	cfgBuilder closeCurrentBlock.
+
+	aFASTJavaConditionalExpression thenPart class
+	= FASTJavaConditionalExpression
+		ifTrue: [
+				self
+					visitFASTJavaConditionalExpression:
+					aFASTJavaConditionalExpression thenPart
+					isNested: true ]
+		ifFalse: [
+				cfgBuilder addStatementFromExpression:
+					aFASTJavaConditionalExpression thenPart ].
+
+	isNested ifFalse: [ cfgBuilder closeCurrentBlock ].
+
+	"postponing pending actions created in the then part, in case there is an else part"
+	pendingActions := cfgBuilder copyAndRemovePendingActions.
+
+	"adding a new pending action, either for the new else block or following code if no elsePart"
+	cfgBuilder addPendingNextBlockAction: [ :elseOrNextBlock |
+		conditionalBlock nextBlock: elseOrNextBlock onValue: false ].
+
+	"else part"
+	cfgBuilder closeCurrentBlock.
+	aFASTJavaConditionalExpression elsePart class
+	= FASTJavaConditionalExpression
+		ifTrue: [
+				self
+					visitFASTJavaConditionalExpression:
+					aFASTJavaConditionalExpression elsePart
+					isNested: true ]
+		ifFalse: [
+				cfgBuilder addStatementFromExpression:
+					aFASTJavaConditionalExpression elsePart ].
+
+	"putting the postponed pending actions back in place"
+	cfgBuilder addPendingNextBlockActions: pendingActions.
+	cfgBuilder closeCurrentBlock
+]
+
+{ #category : 'generated' }
+FASTJavaCFGVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression isNested: isNested withinReturn: withinReturn [
+
+	| expression conditionalBlock pendingActions |
+	expression := withinReturn
+		              ifTrue: [ aFASTJavaConditionalExpression expression ]
+		              ifFalse: [ aFASTJavaConditionalExpression ].
+
+	"using the parameter to include the return statement if the condition is used in a return"
+	conditionalBlock := cfgBuilder newConditionalBlock:
+		                    aFASTJavaConditionalExpression.
+
+	"then-statement"
+	self assert: cfgBuilder pendingNextBlock isEmpty.
+	cfgBuilder addPendingNextBlockAction: [ :thenBlock |
+		conditionalBlock nextBlock: thenBlock onValue: true ].
+	cfgBuilder closeCurrentBlock.
+
+	expression thenPart class
+	= FASTJavaConditionalExpression
+		ifTrue: [
+				self
+					visitFASTJavaConditionalExpression:
+					expression thenPart
+					isNested: true ]
+		ifFalse: [
+				cfgBuilder addStatementFromExpression:
+					expression thenPart ].
+
+	isNested ifFalse: [ cfgBuilder closeCurrentBlock ].
+
+	"postponing pending actions created in the then part, in case there is an else part"
+	pendingActions := cfgBuilder copyAndRemovePendingActions.
+
+	"adding a new pending action, either for the new else block or following code if no elsePart"
+	cfgBuilder addPendingNextBlockAction: [ :elseOrNextBlock |
+		conditionalBlock nextBlock: elseOrNextBlock onValue: false ].
+
+	"else part"
+	cfgBuilder closeCurrentBlock.
+	expression elsePart class
+	= FASTJavaConditionalExpression
+		ifTrue: [
+				self
+					visitFASTJavaConditionalExpression:
+					expression elsePart
+					isNested: true ]
+		ifFalse: [
+				cfgBuilder addStatementFromExpression:
+					expression elsePart ].
+
+	"putting the postponed pending actions back in place"
+	cfgBuilder addPendingNextBlockActions: pendingActions.
+	cfgBuilder closeCurrentBlock
+]
+
+{ #category : 'generated' }
+FASTJavaCFGVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatement [
+	
 	skipStmtsUntilEndOfStmtBlock := true.
 
-	super visitFASTJavaContinueStatement: aFASTJavaContinueStatement.
+	"super visitFASTJavaContinueStatement: aFASTJavaContinueStatement."
+	cfgBuilder currentBlock ifNil: [ cfgBuilder newBasicBlock: FASTBasicBlock ].
+	"todo if no block create block"
 	cfgBuilder currentBlock addStatement: aFASTJavaContinueStatement.
 
 	cfgBuilder saveCurrentBlockForBreakableStatement
@@ -459,7 +610,9 @@ FASTJavaCFGVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 { #category : 'generated' }
 FASTJavaCFGVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 
-	| conditionalBlock thenBlock elseBlock |
+	| mustBeClosed conditionalBlock thenBlock pendingActions elseBlock |
+	mustBeClosed := self shouldIfFinalBlockBeClosed: aFASTJavaIfStatement.
+	
 	conditionalBlock := cfgBuilder newConditionalBlock:
 		                    aFASTJavaIfStatement.
 
@@ -468,39 +621,37 @@ FASTJavaCFGVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	cfgBuilder addPendingNextBlockAction: [ :thenBlock |
 		conditionalBlock nextBlock: thenBlock onValue: true ].
 	cfgBuilder closeCurrentBlock.
-	
+
 	aFASTJavaIfStatement thenPart accept: self.
 
 	"saving then block to link to block after if/else"
 	thenBlock := cfgBuilder currentBlock.
 
-	"adding a pending action, either for the new else block or following code if no elsePart"
+	"postponing pending actions created in the then part, in case there is an else part"
+	pendingActions := cfgBuilder copyAndRemovePendingActions.
+
+	"adding a new pending action, either for the new else block or following code if no elsePart"
 	cfgBuilder addPendingNextBlockAction: [ :elseOrNextBlock |
 		conditionalBlock nextBlock: elseOrNextBlock onValue: false ].
 
 	"else part"
 	aFASTJavaIfStatement elsePart ifNotNil: [
 			cfgBuilder closeCurrentBlock.
-
-			aFASTJavaIfStatement elsePart class = FASTJavaIfStatement ifTrue: [
-				mustNotCloseNextBlock := true ].
 			aFASTJavaIfStatement elsePart accept: self.
 
 			"saving else block to link to block after if/else"
 			elseBlock := cfgBuilder currentBlock.
 
 			"linking else block to next block"
-			cfgBuilder addPendingNextBlockAction: [ :nextBlock |
-				elseBlock nextBlock: nextBlock ] ].
+			"cfgBuilder addPendingNextBlockAction: [ :nextBlock |
+				elseBlock nextBlock: nextBlock ]" ].
 
-	"linking then block to next block"
-	cfgBuilder addPendingNextBlockAction: [ :nextBlock |
-		thenBlock nextBlock: nextBlock ].
+	"putting the postponed pending actions back in place"
+	cfgBuilder addPendingNextBlockActions: pendingActions.
 
 	"hack to return a current block for else if statements"
-	mustNotCloseNextBlock
-		ifTrue: [ mustNotCloseNextBlock := false ]
-		ifFalse: [ cfgBuilder closeCurrentBlock ]
+	mustBeClosed
+		ifTrue: [ cfgBuilder closeCurrentBlockIfPossible ]
 ]
 
 { #category : 'generated' }
@@ -584,6 +735,36 @@ FASTJavaCFGVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
 	cfgBuilder closingBreakableStatement: conditionalBlock 
 ]
 
+{ #category : 'generated' }
+FASTJavaCFGVisitor >> visitFASTJavaThrowStatement: aFASTJavaThrowStatement [
+
+	insideTryBlock
+		"needs to be handled, and I know it's going to be painful"
+		ifTrue: [ self visitFASTJavaThrowStatementWithinTryBlock: aFASTJavaThrowStatement ]
+		"if it stops the method's execution, treat it as you would treat a return"
+		ifFalse: [ self visitFASTTReturnStatement: aFASTJavaThrowStatement ]
+]
+
+{ #category : 'generated' }
+FASTJavaCFGVisitor >> visitFASTJavaThrowStatementWithinTryBlock: aFASTJavaThrowStatement [
+"currently does not try to solve anything to actually add precise edges, would be cool if it did"
+	| newBlock finalBlock |
+	cfgBuilder closeCurrentBlock.
+
+	newBlock := cfgBuilder newBasicBlock: FASTConditionalBasicBlock.
+	skipStmtsUntilEndOfStmtBlock ifFalse: [
+		cfgBuilder currentBlock addStatement: aFASTJavaThrowStatement ].
+
+	catchBlocks keysAndValuesDo: [ :catch :catchBlock |
+			newBlock
+				nextBlock: catchBlock
+				onValue: (self conditionForCatchedThrow: catch) ].
+
+	finalBlock := cfgBuilder newBasicBlock: FASTBasicBlock.
+	finalBlock nextBlock: FASTNullBlock new.
+	newBlock nextBlock: finalBlock onValue: '[Uncatched exception]'
+]
+
 { #category : 'as yet unclassified' }
 FASTJavaCFGVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
 
@@ -624,8 +805,7 @@ FASTJavaCFGVisitor >> visitFASTJavaTryCatchStatementPrecise: aFASTJavaTryCatchSt
 
 	| nextBlockActions |
 	"ugly, i need to find a better way to do this"
-	nextBlockActions := cfgBuilder pendingNextBlock copy.
-	cfgBuilder pendingNextBlock removeAll.
+	nextBlockActions := cfgBuilder copyAndRemovePendingActions.
 
 	cfgBuilder closeCurrentBlock.
 
@@ -643,14 +823,17 @@ FASTJavaCFGVisitor >> visitFASTJavaTryCatchStatementPrecise: aFASTJavaTryCatchSt
 	insideTryBlock := true.
 
 	aFASTJavaTryCatchStatement try accept: self.
-	cfgBuilder closeCurrentBlock.
 
 	catchBlocks do: [ :cb |
 			cfgBuilder addPendingNextBlockAction: [ :nextBlock |
 				cb nextBlock: nextBlock ] ].
 
 	catchBlocks removeAll.
-	insideTryBlock := false
+	insideTryBlock := false.
+
+	aFASTJavaTryCatchStatement finally ifNotNil: [
+		cfgBuilder closeCurrentBlock.
+		self visitFASTTStatementBlock: aFASTJavaTryCatchStatement finally ]
 ]
 
 { #category : 'generated' }
@@ -662,10 +845,26 @@ FASTJavaCFGVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 { #category : 'generated' }
 FASTJavaCFGVisitor >> visitFASTTReturnStatement: aFASTReturnStatement [
 	
-	self visitFASTTStatement: aFASTReturnStatement.
+	"yet another solution that I am not a huge fan of, but for now it'll do"
+	aFASTReturnStatement expression class = FASTJavaConditionalExpression
+		ifTrue: [
+				^ self
+					visitFASTJavaConditionalExpression: aFASTReturnStatement
+					isNested: false
+					withinReturn: true ].
 
-	cfgBuilder currentBlock nextBlock: FASTNullBlock new.
-	cfgBuilder closeCurrentBlock
+	insideTryBlock
+		ifFalse: [
+				self visitFASTTStatement: aFASTReturnStatement.
+				cfgBuilder currentBlock nextBlock: FASTNullBlock new
+				"cfgBuilder closeCurrentBlock" ]
+		ifTrue: [
+				self visitFASTTStatementWithinTryBlock: aFASTReturnStatement.
+				"removing the '[No exceptions]' pending edge and set it manually"
+				cfgBuilder removeLastPendingNextBlockAction.
+				cfgBuilder currentBlock
+					nextBlock: FASTNullBlock new
+					onValue: '[No exceptions]' ]
 ]
 
 { #category : 'generated' }
@@ -675,22 +874,41 @@ FASTJavaCFGVisitor >> visitFASTTStatement: aFASTStatement [
 	insideTryBlock ifTrue: [
 		^ self visitFASTTStatementWithinTryBlock: aFASTStatement ].
 
-	cfgBuilder currentBlock ifNil: [
-			newBlock := cfgBuilder newBasicBlock: FASTBasicBlock.
-			cfgBuilder addPendingNextBlockAction: [ :nextBlock |
-				newBlock nextBlock: nextBlock ] ].
+	(cfgBuilder currentBlock isNil or: [
+		 cfgBuilder currentBlock class = FASTConditionalBasicBlock ])
+		ifTrue: [
+				newBlock := cfgBuilder newBasicBlock: FASTBasicBlock.
+				cfgBuilder addPendingNextBlockAction: [ :nextBlock |
+					newBlock nextBlock: nextBlock ] ].
 
-	skipStmtsUntilEndOfStmtBlock ifFalse: [ "super visitFASTTStatement: aFASTStatement."
-		cfgBuilder currentBlock addStatement: aFASTStatement ]
+	skipStmtsUntilEndOfStmtBlock ifFalse: [
+			| currentBlock |
+			currentBlock := cfgBuilder currentBlock.
+			
+			super visitFASTTStatement: aFASTStatement.
+			
+			"only adding statement if no expression made changes to the CFG"
+			currentBlock = cfgBuilder currentBlock ifTrue: [
+				cfgBuilder currentBlock addStatement: aFASTStatement ] ]
 ]
 
 { #category : 'generated' }
 FASTJavaCFGVisitor >> visitFASTTStatementBlock: aFASTStatementBlock [
+
+	| blockCount |
 	"visiting statements directly to avoid sending the statement block to `visitFASTTStatement:`"
-	aFASTStatementBlock containedEntities do: [ :child | child accept: self ].
-	
+	blockCount := cfgBuilder basicBlocks size.
+
+	aFASTStatementBlock containedEntities do: [ :child |
+		child accept: self ].
+
+	"adds an empty block for an empty statement block, mostly here to avoid bugs"
+	"could be done better? time will tell"
+	blockCount = cfgBuilder basicBlocks size ifTrue: [
+		cfgBuilder newBasicBlock: FASTBasicBlock ].
+
 	"setting it back to default state in case a continue or break stmt was visited"
-	skipStmtsUntilEndOfStmtBlock := false.
+	skipStmtsUntilEndOfStmtBlock := false
 ]
 
 { #category : 'generated' }
