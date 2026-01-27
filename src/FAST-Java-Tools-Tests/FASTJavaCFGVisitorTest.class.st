@@ -356,6 +356,17 @@ FASTJavaCFGVisitorTest >> ternaryOperatorMethodInReturnSource [
 ]
 
 { #category : 'nil' }
+FASTJavaCFGVisitorTest >> ternaryOperatorMethodNestedSource [
+
+	^ 'public void ternaryOperatorMethod() {
+	int i = 0;
+	int j = 4;
+	int h = i > j ? (i > 6 ? 3 : (j < 2 ? 9 : 6)) : j;
+	return h;
+}'
+]
+
+{ #category : 'nil' }
 FASTJavaCFGVisitorTest >> ternaryOperatorMethodSource [
 
 	^ 'public void ternaryOperatorMethod() {
@@ -1191,6 +1202,67 @@ FASTJavaCFGVisitorTest >> testTernaryOperatorMethodInReturnCorrectCFG [
 	self assert: falseBlock isConditional not.
 	self assert: falseBlock statements size equals: 1
 
+	
+]
+
+{ #category : 'as yet unclassified' }
+FASTJavaCFGVisitorTest >> testTernaryOperatorMethodNestedCorrectCFG [
+
+	| startBlock ternaryBlock ternaryBlockNested ternaryBlockNestedNested trueBlock falseBlock nextBlock |
+	startBlock := cfgBuilder buildCFGForModel:
+		              (self getFASTMethodEntityForSource:
+			               self ternaryOperatorMethodNestedSource).
+			
+	self assert: startBlock isStart.
+	self assert: startBlock statements size equals: 2.
+	
+	ternaryBlock := startBlock nextBlock.
+	
+	self assert: ternaryBlock isConditional.
+	self assert: ternaryBlock nextBlocks size equals: 2.
+	
+	ternaryBlockNested := ternaryBlock nextBlockForValue: true.
+	falseBlock := ternaryBlock nextBlockForValue: false.
+	
+	self assert: ternaryBlockNested isFinal not.
+	self assert: ternaryBlockNested isConditional.
+	self assert: ternaryBlockNested nextBlocks size equals: 2.
+	
+	self assert: falseBlock isFinal not.
+	self assert: falseBlock isConditional not.
+	self assert: falseBlock statements size equals: 1.
+	
+	trueBlock := ternaryBlockNested nextBlockForValue: true.
+	ternaryBlockNestedNested := ternaryBlockNested nextBlockForValue: false.
+	
+	self assert: trueBlock isFinal not.
+	self assert: trueBlock isConditional not.
+	self assert: trueBlock statements size equals: 1.
+	
+	self assert: trueBlock nextBlock equals: falseBlock nextBlock.
+	
+	self assert: ternaryBlockNested isFinal not.
+	self assert: ternaryBlockNested isConditional.
+	self assert: ternaryBlockNested nextBlocks size equals: 2.
+	
+	trueBlock := ternaryBlockNestedNested nextBlockForValue: true.
+	falseBlock := ternaryBlockNestedNested nextBlockForValue: false.
+	
+	self assert: trueBlock isFinal not.
+	self assert: trueBlock isConditional not.
+	self assert: trueBlock statements size equals: 1.
+	
+	self assert: falseBlock isFinal not.
+	self assert: falseBlock isConditional not.
+	self assert: falseBlock statements size equals: 1.
+	
+	self assert: trueBlock nextBlock equals: falseBlock nextBlock.
+	
+	nextBlock := trueBlock nextBlock.
+	
+	self assert: nextBlock isFinal.
+	self assert: nextBlock isConditional not.
+	self assert: nextBlock statements size equals: 1
 	
 ]
 
