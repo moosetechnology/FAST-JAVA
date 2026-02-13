@@ -343,7 +343,7 @@ FASTJavaCFGVisitor >> shouldIfFinalBlockBeClosed: aFASTJavaIfStatement [
 	| parentStatementBlock parentNode isIfLastStmt isImbricatedIf |
 	aFASTJavaIfStatement ifElsePartOwner ifNotNil: [ ^ false ].
 
-	parentStatementBlock := aFASTJavaIfStatement parentLoopStatement.
+	parentStatementBlock := aFASTJavaIfStatement parentNode.
 	parentNode := parentStatementBlock fastBehaviouralParent.
 
 	isIfLastStmt := parentStatementBlock statements last
