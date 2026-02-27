@@ -8,7 +8,6 @@ I represent an import declaration, e.g. `import java.util.List;`
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `compilationUnit` | `FASTJavaImportDeclaration` | `importDeclarations` | `FASTJavaCompilationUnit` | The compilation unit that owns me|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |

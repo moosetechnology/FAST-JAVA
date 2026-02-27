@@ -17,7 +17,6 @@ new Button(){
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `javaDeclarationOwner` | `FASTJavaTDeclaration` | `declarations` | `FASTJavaTWithDeclarations` | The element that declares me|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |

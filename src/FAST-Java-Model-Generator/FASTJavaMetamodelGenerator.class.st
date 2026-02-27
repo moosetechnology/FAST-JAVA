@@ -1369,7 +1369,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaLambdaExpression property: #expression) comment:
 		 'Expression to be executed as part of the lambda.')
-	<>- ((tEntity property: #javaLambdaExpressionOwner) comment:
+	<>- ((javaEntity property: #javaLambdaExpressionOwner) comment:
 			 'The expression owner (if possible)').
 
 	((javaMethodReference property: #receiver) comment:
