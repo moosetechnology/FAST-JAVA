@@ -12,7 +12,6 @@
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `javaCatchPartStatementOwner` | `FASTJavaStatementBlock` | `body` | `FASTJavaCatchPartStatement` | The javaCatchPartStatementOwner owner (if possible)|
 | `javaInitializerOwner` | `FASTTStatementBlock` | `statementBlock` | `FASTJavaInitializer` | Behavioural entity containing the statement block|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `javaSynchronizedStatementOwner` | `FASTTStatementBlock` | `block` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaTryCatchOwner` | `FASTJavaStatementBlock` | `try` | `FASTJavaTryCatchStatement` | The javaTryCatch owner (if possible)|
 | `javaTryFinallyOwner` | `FASTJavaStatementBlock` | `finally` | `FASTJavaTryCatchStatement` | The try/finally part that owns me|

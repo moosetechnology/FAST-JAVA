@@ -26,7 +26,6 @@
 | `javaClassPropertyOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaLabeledCaseStatementOwner` | `FASTTExpression` | `label` | `FASTJavaLabeledCaseStatement` | The javaLabeledCaseStatement owner (if possible)|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `javaMethodReferenceOwner` | `FASTJavaVariableExpression` | `receiver` | `FASTJavaMethodReference` | The owner of the method reference (if possible)|
 | `javaMethodTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaMethodEntity` | The variable expression owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|

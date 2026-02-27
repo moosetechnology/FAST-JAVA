@@ -8,7 +8,6 @@ I represent a package declaration, e.g. `package fr.inria;`
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `compilationUnit` | `FASTJavaPackageDeclaration` | `packageDeclaration` | `FASTJavaCompilationUnit` | The compilation unit that owns me|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |

@@ -13,7 +13,6 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `varDeclOwner` | `FASTJavaVariableDeclarator` | `declarators` | `FASTJavaVarDeclStatement` | The owner of the declarator|
 
 ### Children
