@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaClassTypeExpression }
+Extension { #name : 'FASTJavaClassTypeExpression' }
 
-{ #category : #'*FAST-Java-Model-Extension' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTJavaClassTypeExpression >> fullName [
 	^ typeName fullName
 ]

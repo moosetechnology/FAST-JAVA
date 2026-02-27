@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaImportDeclaration }
+Extension { #name : 'FASTJavaImportDeclaration' }
 
-{ #category : #'*FAST-Java-Model-Extension' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTJavaImportDeclaration >> declarationName [
 
 	self
@@ -10,7 +10,7 @@ FASTJavaImportDeclaration >> declarationName [
 	^ self qualifiedName
 ]
 
-{ #category : #'*FAST-Java-Model-Extension' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTJavaImportDeclaration >> declarationName: aName [
 
 	self
