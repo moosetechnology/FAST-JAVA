@@ -5,7 +5,7 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+| `javaLambdaExpressionOwner` | `FASTJavaEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
@@ -27,6 +27,9 @@ Class {
 	#superclass : 'MooseEntity',
 	#traits : 'FASTTEntity + FASTTWithComments',
 	#classTraits : 'FASTTEntity classTrait + FASTTWithComments classTrait',
+	#instVars : [
+		'#javaLambdaExpressionOwner => FMOne type: #FASTJavaLambdaExpression opposite: #expression'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -56,10 +59,11 @@ FASTJavaEntity class >> metamodel [
 	^ FASTJavaModel metamodel
 ]
 
-{ #category : '*FAST-Java-Model-Extension' }
-FASTJavaEntity >> exporterClassName [
+{ #category : 'testing' }
+FASTJavaEntity >> hasImmediateSource [
 
-	^ #FASTJavaExportVisitor
+	<generated>
+	^ false
 ]
 
 { #category : 'testing' }
@@ -490,13 +494,6 @@ FASTJavaEntity >> isQualifiedTypeName [
 ]
 
 { #category : 'testing' }
-FASTJavaEntity >> isQueryable [
-
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
 FASTJavaEntity >> isReturnStatement [
 
 	<generated>
@@ -648,4 +645,29 @@ FASTJavaEntity >> isWhileStatement [
 
 	<generated>
 	^ false
+]
+
+{ #category : 'accessing' }
+FASTJavaEntity >> javaLambdaExpressionOwner [
+	"Relation named: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression"
+
+	<generated>
+	<FMComment: 'The expression owner (if possible)'>
+	<container>
+	<derived>
+	^ javaLambdaExpressionOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaEntity >> javaLambdaExpressionOwner: anObject [
+
+	<generated>
+	javaLambdaExpressionOwner := anObject
+]
+
+{ #category : 'navigation' }
+FASTJavaEntity >> javaLambdaExpressionOwnerGroup [
+	<generated>
+	<navigation: 'JavaLambdaExpressionOwner'>
+	^ MooseSpecializedGroup with: self javaLambdaExpressionOwner
 ]

@@ -4,11 +4,6 @@ I represent a compilation unit, I can contain declarations for a package, import
 ## Relations
 ======================
 
-### Parents
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
-
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|

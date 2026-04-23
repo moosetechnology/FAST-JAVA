@@ -57,24 +57,16 @@ BaselineOfFASTJava >> defineDependencies: spec [
 BaselineOfFASTJava >> defineGroups: spec [
 
 	spec
-		group: 'core'
-		with:
-			#( 'FAST-Java-Model' 'FAST-Java-Model-Extension' 'FAST-Java-Model-Generator' );
-		group: 'tools'
-		with: #( 'visitor' 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
-		group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
-			   'FAST-Java-SmaCC-Importer-Tests' );
+		group: 'core' with: #( 'FAST-Java-Model' 'FAST-Java-Model-Extension' 'FAST-Java-Model-Generator' );
+		group: 'tools' with: #( 'visitor' 'FAST-Java-Tools' 'FAST-Java-Tools-Tests' );
+		group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests' );
 		group: 'visitor' with: #( 'core' 'FAST-Java-Visitor' );
 		group: 'highlighter' with: #( 'core' 'FAST-Java-Highlighter' );
 		group: 'all' with: #( 'smacc' 'visitor' 'highlighter' 'tools' );
 		group: 'default' with: #( 'core' ).
 
-	spec for: #NeedsMoose do: [ 
-		spec
-			group: 'smacc'
-			with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer'
-				   'FAST-Java-SmaCC-Importer-Tests'
-				   'TinyLogger' ) ]
+	spec for: #NeedsMoose do: [ spec group: 'smacc' with: #( 'core' 'SmaCC' 'FAST-Java-SmaCC-Importer' 'FAST-Java-SmaCC-Importer-Tests'
+	   'TinyLogger' ) ]
 ]
 
 { #category : 'baselines' }
@@ -83,25 +75,17 @@ BaselineOfFASTJava >> definePackages: spec [
 	spec
 		package: 'FAST-Java-Model' with: [ spec requires: #( 'FAST' ) ];
 		package: 'FAST-Java-Model-Generator';
-		package: 'FAST-Java-Model-Extension'
-		with: [ spec requires: #( 'FAST-Java-Model' ) ];
+		package: 'FAST-Java-Model-Extension' with: [ spec requires: #( 'FAST-Java-Model' ) ];
 		package: 'FAST-Java-SmaCC-Importer';
-		package: 'FAST-Java-SmaCC-Importer-Tests'
-		with: [ spec requires: #( 'FAST-Java-SmaCC-Importer' ) ];
-		package: 'FAST-Java-Visitor'
-		with: [ spec requires: #( 'FAST-Java-Model' ) ];
-		package: 'FAST-Java-Highlighter'
-		with: [ spec requires: #( 'FAST-Java-Model' ) ].
+		package: 'FAST-Java-SmaCC-Importer-Tests' with: [ spec requires: #( 'FAST-Java-SmaCC-Importer' ) ];
+		package: 'FAST-Java-Visitor' with: [ spec requires: #( 'FAST-Java-Model' ) ];
+		package: 'FAST-Java-Highlighter' with: [ spec requires: #( 'FAST-Java-Model' 'FASTTool' ) ].
+		
 	"Tools"
 	spec
-		package: 'FAST-Java-Tools'
-		with: [ spec requires: #( 'FAST-Java-Visitor' 'FASTTool' ) ];
-		package: 'FAST-Java-Tools-Tests'
-		with: [ spec requires: #( 'FAST-Java-Tools' ) ].
-
+		package: 'FAST-Java-Tools' with: [ spec requires: #( 'FAST-Java-Visitor' 'FASTTool' ) ];
+		package: 'FAST-Java-Tools-Tests' with: [ spec requires: #( 'FAST-Java-Tools' ) ].
+		
 	"In case of no Famix loaded"
-	spec for: #NeedsMoose do: [ 
-		spec
-			package: 'FAST-Java-Model'
-			with: [ spec requires: #( 'FAST' 'Famix' ) ] ]
+	spec for: #NeedsMoose do: [ spec package: 'FAST-Java-Model' with: [ spec requires: #( 'FAST' 'Famix' ) ] ]
 ]

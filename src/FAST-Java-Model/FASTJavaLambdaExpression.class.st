@@ -24,7 +24,6 @@ I represent a lambda expression
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaLabeledCaseStatementOwner` | `FASTTExpression` | `label` | `FASTJavaLabeledCaseStatement` | The javaLabeledCaseStatement owner (if possible)|
-| `javaLambdaExpressionOwner` | `FASTTEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
@@ -41,7 +40,7 @@ I represent a lambda expression
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `expression` | `FASTJavaLambdaExpression` | `javaLambdaExpressionOwner` | `FASTTEntity` | Expression to be executed as part of the lambda.|
+| `expression` | `FASTJavaLambdaExpression` | `javaLambdaExpressionOwner` | `FASTJavaEntity` | Expression to be executed as part of the lambda.|
 | `parameters` | `FASTTWithParameters` | `parameterOwner` | `FASTTVariableEntity` | My parameters|
 
 
@@ -59,6 +58,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTExpression + FASTTWithParameters',
 	#classTraits : 'FASTTExpression classTrait + FASTTWithParameters classTrait',
+	#instVars : [
+		'#expression => FMOne type: #FASTJavaEntity opposite: #javaLambdaExpressionOwner'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -75,26 +77,18 @@ FASTJavaLambdaExpression class >> annotation [
 
 { #category : 'accessing' }
 FASTJavaLambdaExpression >> expression [
-	"Relation named: #expression type: #FASTTEntity opposite: #javaLambdaExpressionOwner"
+	"Relation named: #expression type: #FASTJavaEntity opposite: #javaLambdaExpressionOwner"
 
 	<generated>
 	<FMComment: 'Expression to be executed as part of the lambda.'>
-	<FMProperty: #expression type: #FASTTEntity opposite: #javaLambdaExpressionOwner>
-	^ self attributeAt: #expression ifAbsent: [ nil ]
+	^ expression
 ]
 
 { #category : 'accessing' }
 FASTJavaLambdaExpression >> expression: anObject [
 
 	<generated>
-	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self expression.
-		self attributeAt: #expression put: anObject.
-		otherSide javaLambdaExpressionOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #expression put: anObject.
-		anObject javaLambdaExpressionOwner: self ]
+	expression := anObject
 ]
 
 { #category : 'navigation' }
