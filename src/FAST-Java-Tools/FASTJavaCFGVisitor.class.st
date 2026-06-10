@@ -1,8 +1,8 @@
 Class {
 	#name : 'FASTJavaCFGVisitor',
 	#superclass : 'FASTJavaVisitor',
-	#traits : 'FASTTCFGVisitor',
-	#classTraits : 'FASTTCFGVisitor classTrait',
+	#traits : 'FASTTCFGVisitor + FASTJavaTVisitor',
+	#classTraits : 'FASTTCFGVisitor classTrait + FASTJavaTVisitor classTrait',
 	#instVars : [
 		'#mustNotCloseNextBlock',
 		'#breakStatementVisited',

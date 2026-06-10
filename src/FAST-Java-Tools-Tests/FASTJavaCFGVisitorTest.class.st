@@ -1147,7 +1147,7 @@ FASTJavaCFGVisitorTest >> testTernaryOperatorMethodCorrectCFG [
 			               self ternaryOperatorMethodSource).
 			
 	self assert: startBlock isStart.
-	self assert: startBlock statements size equals: 2.
+	self assert: startBlock statements size equals: 3.
 	
 	ternaryBlock := startBlock nextBlock.
 	
@@ -1214,7 +1214,7 @@ FASTJavaCFGVisitorTest >> testTernaryOperatorMethodNestedCorrectCFG [
 			               self ternaryOperatorMethodNestedSource).
 			
 	self assert: startBlock isStart.
-	self assert: startBlock statements size equals: 2.
+	self assert: startBlock statements size equals: 3.
 	
 	ternaryBlock := startBlock nextBlock.
 	

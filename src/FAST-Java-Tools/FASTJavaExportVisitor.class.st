@@ -11,8 +11,8 @@ FASTJavaExportVisitor new export: aFASTJavaNode
 Class {
 	#name : 'FASTJavaExportVisitor',
 	#superclass : 'FASTJavaVisitor',
-	#traits : 'FASTTExporter',
-	#classTraits : 'FASTTExporter classTrait',
+	#traits : 'FASTTExporter + FASTJavaTVisitor',
+	#classTraits : 'FASTTExporter classTrait + FASTJavaTVisitor classTrait',
 	#category : 'FAST-Java-Tools-export',
 	#package : 'FAST-Java-Tools',
 	#tag : 'export'
@@ -983,7 +983,7 @@ FASTJavaExportVisitor >> visitFASTJavaPostfixedUnaryExpression: aFASTJavaUnaryEx
 
 	self
 		outputExpression: [
-			self visitFASTTExpression: aFASTJavaUnaryExpression.
+			aFASTJavaUnaryExpression expression accept: self.
 			self unindented: aFASTJavaUnaryExpression operator.
 			aFASTJavaUnaryExpression infixOperationLeftOperandOwner ifNotNil: [
 				self space ] ]
@@ -998,7 +998,7 @@ FASTJavaExportVisitor >> visitFASTJavaPrefixedUnaryExpression: aFASTJavaUnaryExp
 			aFASTJavaUnaryExpression infixOperationRightOperandOwner ifNotNil: [
 				self space ].
 			self unindented: aFASTJavaUnaryExpression operator.
-			self visitFASTTExpression: aFASTJavaUnaryExpression ]
+			aFASTJavaUnaryExpression expression accept: self ]
 		withOperator: aFASTJavaUnaryExpression operator , 'unary'
 ]
 
