@@ -6,6 +6,8 @@ There is actually very little to do, most things are in the FASTCore Local resol
 Class {
 	#name : 'FASTJavaLocalResolverVisitor',
 	#superclass : 'FASTJavaVisitor',
+	#traits : 'FASTJavaTVisitor',
+	#classTraits : 'FASTJavaTVisitor classTrait',
 	#instVars : [
 		'scoper'
 	],

@@ -42,7 +42,6 @@ FASTJavaQualifiedTypeName class >> annotation [
 	<FMClass: #QualifiedTypeName super: #FASTJavaTypeName>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -66,11 +65,4 @@ FASTJavaQualifiedTypeName >> namespace: anObject [
 
 	<generated>
 	namespace := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaQualifiedTypeName >> namespaceGroup [
-	<generated>
-	<navigation: 'Namespace'>
-	^ MooseSpecializedGroup with: self namespace
 ]

@@ -46,7 +46,6 @@ FASTJavaCompilationUnit class >> annotation [
 	<FMClass: #CompilationUnit super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -90,13 +89,6 @@ FASTJavaCompilationUnit >> classDeclarations: anObject [
 	classDeclarations value: anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaCompilationUnit >> classDeclarationsGroup [
-	<generated>
-	<navigation: 'ClassDeclarations'>
-	^ MooseSpecializedGroup withAll: self classDeclarations asSet
-]
-
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> enumDeclarations [
 	"Relation named: #enumDeclarations type: #FASTJavaEnumDeclaration opposite: #compilationUnit"
@@ -112,13 +104,6 @@ FASTJavaCompilationUnit >> enumDeclarations: anObject [
 
 	<generated>
 	enumDeclarations value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaCompilationUnit >> enumDeclarationsGroup [
-	<generated>
-	<navigation: 'EnumDeclarations'>
-	^ MooseSpecializedGroup withAll: self enumDeclarations asSet
 ]
 
 { #category : 'accessing' }
@@ -138,13 +123,6 @@ FASTJavaCompilationUnit >> importDeclarations: anObject [
 	importDeclarations value: anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaCompilationUnit >> importDeclarationsGroup [
-	<generated>
-	<navigation: 'ImportDeclarations'>
-	^ MooseSpecializedGroup withAll: self importDeclarations asSet
-]
-
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> interfaceDeclarations [
 	"Relation named: #interfaceDeclarations type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit"
@@ -160,13 +138,6 @@ FASTJavaCompilationUnit >> interfaceDeclarations: anObject [
 
 	<generated>
 	interfaceDeclarations value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaCompilationUnit >> interfaceDeclarationsGroup [
-	<generated>
-	<navigation: 'InterfaceDeclarations'>
-	^ MooseSpecializedGroup withAll: self interfaceDeclarations asSet
 ]
 
 { #category : 'testing' }
@@ -190,11 +161,4 @@ FASTJavaCompilationUnit >> packageDeclaration: anObject [
 
 	<generated>
 	packageDeclaration := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaCompilationUnit >> packageDeclarationGroup [
-	<generated>
-	<navigation: 'PackageDeclaration'>
-	^ MooseSpecializedGroup with: self packageDeclaration
 ]

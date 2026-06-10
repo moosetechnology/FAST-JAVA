@@ -17,7 +17,6 @@ FASTJavaTEntityCreator classSide >> annotation [
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'entity creation' }

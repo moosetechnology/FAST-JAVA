@@ -61,7 +61,6 @@ FASTJavaVarDeclStatement class >> annotation [
 	<FMClass: #VarDeclStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -85,13 +84,6 @@ FASTJavaVarDeclStatement >> declarators: anObject [
 
 	<generated>
 	declarators value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaVarDeclStatement >> declaratorsGroup [
-	<generated>
-	<navigation: 'Declarators'>
-	^ MooseSpecializedGroup withAll: self declarators asSet
 ]
 
 { #category : 'testing' }
@@ -118,13 +110,6 @@ FASTJavaVarDeclStatement >> javaTryResourceOwner: anObject [
 	javaTryResourceOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaVarDeclStatement >> javaTryResourceOwnerGroup [
-	<generated>
-	<navigation: 'JavaTryResourceOwner'>
-	^ MooseSpecializedGroup with: self javaTryResourceOwner
-]
-
 { #category : 'accessing' }
 FASTJavaVarDeclStatement >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner"
@@ -139,11 +124,4 @@ FASTJavaVarDeclStatement >> type: anObject [
 
 	<generated>
 	type := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaVarDeclStatement >> typeGroup [
-	<generated>
-	<navigation: 'Type'>
-	^ MooseSpecializedGroup with: self type
 ]

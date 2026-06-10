@@ -58,7 +58,6 @@ FASTJavaForEachStatement class >> annotation [
 	<FMClass: #ForEachStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -75,13 +74,6 @@ FASTJavaForEachStatement >> fieldname: anObject [
 
 	<generated>
 	fieldname := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaForEachStatement >> fieldnameGroup [
-	<generated>
-	<navigation: 'Fieldname'>
-	^ MooseSpecializedGroup with: self fieldname
 ]
 
 { #category : 'testing' }
@@ -115,13 +107,6 @@ FASTJavaForEachStatement >> list: anObject [
 		anObject javaForEachStatementOwner: self ]
 ]
 
-{ #category : 'navigation' }
-FASTJavaForEachStatement >> listGroup [
-	<generated>
-	<navigation: 'List'>
-	^ MooseSpecializedGroup with: self list
-]
-
 { #category : 'accessing' }
 FASTJavaForEachStatement >> type [
 	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner"
@@ -136,11 +121,4 @@ FASTJavaForEachStatement >> type: anObject [
 
 	<generated>
 	type := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaForEachStatement >> typeGroup [
-	<generated>
-	<navigation: 'Type'>
-	^ MooseSpecializedGroup with: self type
 ]

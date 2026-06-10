@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaCaseStatement }
+Extension { #name : 'FASTJavaCaseStatement' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaCaseStatement >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaCaseStatement: self
 ]

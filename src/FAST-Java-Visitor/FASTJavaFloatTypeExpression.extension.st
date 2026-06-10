@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaFloatTypeExpression }
+Extension { #name : 'FASTJavaFloatTypeExpression' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaFloatTypeExpression >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaFloatTypeExpression: self
 ]

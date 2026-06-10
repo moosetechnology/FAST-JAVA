@@ -35,7 +35,7 @@ liste[i]
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableAssignmentOwner` | `FASTJavaTAssignable` | `variable` | `FASTJavaTWithAssignable` | The owner of the assignment|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
-| `parentConditionalStatement` | `FASTTExpression` | `condition` | `FASTTConditionalStatement` | Optional condition statement where this expression is used|
+| `parentConditional` | `FASTTExpression` | `condition` | `FASTTWithCondition` | Optional condition statement/expression where this expression is used|
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
@@ -75,7 +75,6 @@ FASTJavaArrayAccess class >> annotation [
 	<FMClass: #ArrayAccess super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -102,13 +101,6 @@ FASTJavaArrayAccess >> array: anObject [
 		anObject javaArrayArrayAccessOwner: self ]
 ]
 
-{ #category : 'navigation' }
-FASTJavaArrayAccess >> arrayGroup [
-	<generated>
-	<navigation: 'Array'>
-	^ MooseSpecializedGroup with: self array
-]
-
 { #category : 'accessing' }
 FASTJavaArrayAccess >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaArrayAccessOwner"
@@ -131,13 +123,6 @@ FASTJavaArrayAccess >> expression: anObject [
 	ifNotNil: [ 
 		self attributeAt: #expression put: anObject.
 		anObject javaArrayAccessOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaArrayAccess >> expressionGroup [
-	<generated>
-	<navigation: 'Expression'>
-	^ MooseSpecializedGroup with: self expression
 ]
 
 { #category : 'testing' }

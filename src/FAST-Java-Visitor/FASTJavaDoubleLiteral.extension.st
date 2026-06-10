@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaDoubleLiteral }
+Extension { #name : 'FASTJavaDoubleLiteral' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaDoubleLiteral >> accept: aVisitor [
 	^ aVisitor visitFASTJavaDoubleLiteral: self
 ]

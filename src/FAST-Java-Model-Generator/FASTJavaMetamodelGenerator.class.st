@@ -137,10 +137,22 @@ Class {
 	#package : 'FAST-Java-Model-Generator'
 }
 
+{ #category : 'additional tools' }
+FASTJavaMetamodelGenerator class >> metamodelToolGenerators [
+
+  ^ { FamixVisitorGenerator }
+]
+
 { #category : 'accessing' }
 FASTJavaMetamodelGenerator class >> packageName [
 
 	^ #'FAST-Java-Model'
+]
+
+{ #category : 'additional tools' }
+FASTJavaMetamodelGenerator class >> packageNameForVisitor [
+
+  ^ #'FAST-Java-Visitor'
 ]
 
 { #category : 'accessing' }

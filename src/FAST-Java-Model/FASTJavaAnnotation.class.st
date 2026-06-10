@@ -51,7 +51,6 @@ FASTJavaAnnotation class >> annotation [
 	<FMClass: #Annotation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -76,13 +75,6 @@ FASTJavaAnnotation >> elements: anObject [
 
 	<generated>
 	elements value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaAnnotation >> elementsGroup [
-	<generated>
-	<navigation: 'Elements'>
-	^ MooseSpecializedGroup withAll: self elements asSet
 ]
 
 { #category : 'testing' }

@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaEnumDeclaration }
+Extension { #name : 'FASTJavaEnumDeclaration' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaEnumDeclaration >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaEnumDeclaration: self
 ]

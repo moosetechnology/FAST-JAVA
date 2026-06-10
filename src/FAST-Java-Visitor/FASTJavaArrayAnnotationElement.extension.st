@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaArrayAnnotationElement }
+Extension { #name : 'FASTJavaArrayAnnotationElement' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaArrayAnnotationElement >> accept: aVisitor [
 	^ aVisitor visitFASTJavaArrayAnnotationElement: self
 ]

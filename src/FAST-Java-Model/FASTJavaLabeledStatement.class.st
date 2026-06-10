@@ -48,7 +48,6 @@ FASTJavaLabeledStatement class >> annotation [
 	<FMClass: #LabeledStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -95,11 +94,4 @@ FASTJavaLabeledStatement >> labeledStatement: anObject [
 	ifNotNil: [ 
 		self attributeAt: #labeledStatement put: anObject.
 		anObject labelStatementOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaLabeledStatement >> labeledStatementGroup [
-	<generated>
-	<navigation: 'LabeledStatement'>
-	^ MooseSpecializedGroup with: self labeledStatement
 ]

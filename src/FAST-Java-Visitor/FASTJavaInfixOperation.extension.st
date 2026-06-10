@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaInfixOperation }
+Extension { #name : 'FASTJavaInfixOperation' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaInfixOperation >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaInfixOperation: self
 ]
