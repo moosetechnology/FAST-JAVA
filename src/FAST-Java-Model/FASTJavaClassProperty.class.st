@@ -75,7 +75,6 @@ FASTJavaClassProperty class >> annotation [
 	<FMClass: #ClassProperty super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -114,11 +113,4 @@ FASTJavaClassProperty >> type: anObject [
 
 	<generated>
 	type := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaClassProperty >> typeGroup [
-	<generated>
-	<navigation: 'Type'>
-	^ MooseSpecializedGroup with: self type
 ]

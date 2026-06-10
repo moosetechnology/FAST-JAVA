@@ -31,7 +31,6 @@ FASTJavaTModifier classSide >> annotation [
 	<FMClass: #TModifier super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -49,11 +48,4 @@ FASTJavaTModifier >> javaModifierOwner: anObject [
 
 	<generated>
 	javaModifierOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTModifier >> javaModifierOwnerGroup [
-	<generated>
-	<navigation: 'JavaModifierOwner'>
-	^ MooseSpecializedGroup with: self javaModifierOwner
 ]

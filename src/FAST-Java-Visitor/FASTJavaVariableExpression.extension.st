@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaVariableExpression }
+Extension { #name : 'FASTJavaVariableExpression' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaVariableExpression >> accept: aVisitor [
 	^ aVisitor visitFASTJavaVariableExpression: self
 ]

@@ -55,7 +55,6 @@ FASTJavaCatchPartStatement class >> annotation [
 	<FMClass: #CatchPartStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -80,13 +79,6 @@ FASTJavaCatchPartStatement >> body: anObject [
 	body := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaCatchPartStatement >> bodyGroup [
-	<generated>
-	<navigation: 'Body'>
-	^ MooseSpecializedGroup with: self body
-]
-
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> catchedTypes [
 	"Relation named: #catchedTypes type: #FASTJavaTypeExpression opposite: #catchOwner"
@@ -102,13 +94,6 @@ FASTJavaCatchPartStatement >> catchedTypes: anObject [
 
 	<generated>
 	catchedTypes value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaCatchPartStatement >> catchedTypesGroup [
-	<generated>
-	<navigation: 'CatchedTypes'>
-	^ MooseSpecializedGroup withAll: self catchedTypes asSet
 ]
 
 { #category : 'testing' }
@@ -134,13 +119,6 @@ FASTJavaCatchPartStatement >> parameter: anObject [
 	parameter := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaCatchPartStatement >> parameterGroup [
-	<generated>
-	<navigation: 'Parameter'>
-	^ MooseSpecializedGroup with: self parameter
-]
-
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> tryOwner [
 	"Relation named: #tryOwner type: #FASTJavaTryCatchStatement opposite: #catches"
@@ -156,11 +134,4 @@ FASTJavaCatchPartStatement >> tryOwner: anObject [
 
 	<generated>
 	tryOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaCatchPartStatement >> tryOwnerGroup [
-	<generated>
-	<navigation: 'TryOwner'>
-	^ MooseSpecializedGroup with: self tryOwner
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaPackageDeclaration }
+Extension { #name : 'FASTJavaPackageDeclaration' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaPackageDeclaration >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaPackageDeclaration: self
 ]

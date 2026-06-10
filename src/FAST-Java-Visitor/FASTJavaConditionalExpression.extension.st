@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaConditionalExpression }
+Extension { #name : 'FASTJavaConditionalExpression' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaConditionalExpression >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaConditionalExpression: self
 ]

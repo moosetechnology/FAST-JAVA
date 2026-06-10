@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaLambdaExpression }
+Extension { #name : 'FASTJavaLambdaExpression' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaLambdaExpression >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaLambdaExpression: self
 ]

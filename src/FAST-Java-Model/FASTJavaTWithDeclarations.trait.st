@@ -28,7 +28,6 @@ FASTJavaTWithDeclarations classSide >> annotation [
 	<FMClass: #TWithDeclarations super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -52,11 +51,4 @@ FASTJavaTWithDeclarations >> declarations: anObject [
 
 	<generated>
 	declarations value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTWithDeclarations >> declarationsGroup [
-	<generated>
-	<navigation: 'Declarations'>
-	^ MooseSpecializedGroup withAll: self declarations asSet
 ]

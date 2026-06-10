@@ -31,7 +31,6 @@ FASTJavaTAssignable classSide >> annotation [
 	<FMClass: #TAssignable super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -50,11 +49,4 @@ FASTJavaTAssignable >> javaVariableAssignmentOwner: anObject [
 
 	<generated>
 	javaVariableAssignmentOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTAssignable >> javaVariableAssignmentOwnerGroup [
-	<generated>
-	<navigation: 'JavaVariableAssignmentOwner'>
-	^ MooseSpecializedGroup with: self javaVariableAssignmentOwner
 ]

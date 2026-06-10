@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaPrimitiveTypeExpression }
+Extension { #name : 'FASTJavaPrimitiveTypeExpression' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaPrimitiveTypeExpression >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaPrimitiveTypeExpression: self
 ]

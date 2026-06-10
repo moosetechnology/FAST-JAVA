@@ -47,7 +47,6 @@ FASTJavaSynchronizedStatement class >> annotation [
 	<FMClass: #SynchronizedStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -74,13 +73,6 @@ FASTJavaSynchronizedStatement >> block: anObject [
 		anObject javaSynchronizedStatementOwner: self ]
 ]
 
-{ #category : 'navigation' }
-FASTJavaSynchronizedStatement >> blockGroup [
-	<generated>
-	<navigation: 'Block'>
-	^ MooseSpecializedGroup with: self block
-]
-
 { #category : 'accessing' }
 FASTJavaSynchronizedStatement >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaSynchronizedStatementOwner"
@@ -103,13 +95,6 @@ FASTJavaSynchronizedStatement >> expression: anObject [
 	ifNotNil: [ 
 		self attributeAt: #expression put: anObject.
 		anObject javaSynchronizedStatementOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaSynchronizedStatement >> expressionGroup [
-	<generated>
-	<navigation: 'Expression'>
-	^ MooseSpecializedGroup with: self expression
 ]
 
 { #category : 'testing' }

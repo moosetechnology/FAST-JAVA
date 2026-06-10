@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaAnnotation }
+Extension { #name : 'FASTJavaAnnotation' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaAnnotation >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaAnnotation: self
 ]

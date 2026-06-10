@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaIntegerLiteral }
+Extension { #name : 'FASTJavaIntegerLiteral' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaIntegerLiteral >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaIntegerLiteral: self
 ]

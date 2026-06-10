@@ -42,7 +42,6 @@ FASTJavaEntity class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -663,11 +662,4 @@ FASTJavaEntity >> javaLambdaExpressionOwner: anObject [
 
 	<generated>
 	javaLambdaExpressionOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaEntity >> javaLambdaExpressionOwnerGroup [
-	<generated>
-	<navigation: 'JavaLambdaExpressionOwner'>
-	^ MooseSpecializedGroup with: self javaLambdaExpressionOwner
 ]

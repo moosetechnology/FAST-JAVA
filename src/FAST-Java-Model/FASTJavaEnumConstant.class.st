@@ -27,7 +27,6 @@ FASTJavaEnumConstant class >> annotation [
 	<FMClass: #EnumConstant super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -52,11 +51,4 @@ FASTJavaEnumConstant >> parentEnum: anObject [
 
 	<generated>
 	parentEnum := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaEnumConstant >> parentEnumGroup [
-	<generated>
-	<navigation: 'ParentEnum'>
-	^ MooseSpecializedGroup with: self parentEnum
 ]
