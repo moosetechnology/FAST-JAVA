@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/moosetechnology/FAST-JAVA/actions/workflows/tests.yml/badge.svg)](https://github.com/moosetechnology/FAST-JAVA/actions/workflows/tests.yml)
 
-[![Coverage Status](https://coveralls.io/repos/github/moosetechnology/FAST-JAVA/badge.svg?branch=v3)](https://coveralls.io/github/moosetechnology/FAST-JAVA?branch=v3)
+[![Coverage Status](https://coveralls.io/repos/github/moosetechnology/FAST-JAVA/badge.svg?branch=v4)](https://coveralls.io/github/moosetechnology/FAST-JAVA?branch=v4)
 
 Supported Moose Versions: [![Moose version 12](https://img.shields.io/badge/Moose-12-%23aac9ff.svg)](https://github.com/moosetechnology/Moose) [![Moose version 13](https://img.shields.io/badge/Moose-13-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 
@@ -14,7 +14,7 @@ To load the FAST-Java project, execute in a playground
 
 ```st
 Metacello new
-  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v3' path: 'src';
+  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v4' path: 'src';
   baseline: 'FASTJava';
   load
 ```
@@ -23,7 +23,7 @@ If you want to load the SmaCC importer with the model (create a FAST Java model 
 
 ```st
 Metacello new
-  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v3' path: 'src';
+  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v4' path: 'src';
   baseline: 'FASTJava';
   load: 'all'
 ```
@@ -47,4 +47,4 @@ A full documentation is available on [modularmoose.org](https://modularmoose.org
 
 ## UML
 
-![meta-model image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v3-doc/fast-java.svg)
+![meta-model image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v4-doc/fast-java.svg)
