@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaDoWhileStatement }
+Extension { #name : 'FASTJavaDoWhileStatement' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaDoWhileStatement >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaDoWhileStatement: self
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaQualifiedTypeName }
+Extension { #name : 'FASTJavaQualifiedTypeName' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaQualifiedTypeName >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaQualifiedTypeName: self
 ]

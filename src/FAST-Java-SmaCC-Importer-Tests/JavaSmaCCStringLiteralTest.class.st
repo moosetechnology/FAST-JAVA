@@ -14,10 +14,12 @@ JavaSmaCCStringLiteralTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCStringLiteralTest >> testStringLiteralType [
-	self assert: fastMethod statements first children anyOne arguments first class equals: FASTJavaStringLiteral
+
+	self assert: fastMethod statements first containedEntities anyOne arguments first class equals: FASTJavaStringLiteral
 ]
 
 { #category : 'tests' }
 JavaSmaCCStringLiteralTest >> testStringLiteralValue [
-	self assert: fastMethod statements first children anyOne arguments first primitiveValue equals: 'Patate'
+
+	self assert: fastMethod statements first containedEntities anyOne arguments first primitiveValue equals: 'Patate'
 ]

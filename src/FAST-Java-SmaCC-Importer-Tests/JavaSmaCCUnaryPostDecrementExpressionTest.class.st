@@ -14,20 +14,24 @@ JavaSmaCCUnaryPostDecrementExpressionTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostDecrementExpressionTest >> testUnaryExpressionIsPrefixed [
-	self deny: fastMethod statements first children anyOne isPrefixedUnaryExpression
+
+	self deny: fastMethod statements first containedEntities anyOne isPrefixedUnaryExpression
 ]
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostDecrementExpressionTest >> testUnaryExpressionOperator [
-	self assert: fastMethod statements first children anyOne operator equals: '--'
+
+	self assert: fastMethod statements first containedEntities anyOne operator equals: '--'
 ]
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostDecrementExpressionTest >> testUnaryExpressionOperatorType [
-	self assert: fastMethod statements first children anyOne operator class equals: ByteString
+
+	self assert: fastMethod statements first containedEntities anyOne operator class equals: ByteString
 ]
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostDecrementExpressionTest >> testUnaryExpressionType [
-	self assert: fastMethod statements first children anyOne class equals: FASTJavaUnaryExpression
+
+	self assert: fastMethod statements first containedEntities anyOne class equals: FASTJavaUnaryExpression
 ]

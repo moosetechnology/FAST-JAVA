@@ -648,6 +648,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesUnaryWithSub 
 '
 ]
 
+{ #category : 'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionStatement [
+	| node |
+	node := builder exprStatement: (builder invocation: 'methodA' recvr: nil args: #()).
+	self
+		export: node
+		equals: 'methodA();
+'.
+
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnSuper [
 	
@@ -913,6 +924,23 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionStatementBlock [
 ;
 }
 '
+]
+
+{ #category : 'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaLiterals [
+	self
+		export: (builder literalNull)
+		equals: 'null'.
+	self
+		export: (builder literalInt: 42)
+		equals: '42'.
+	self
+		export: (builder literalFloat: '42f')
+		equals: '42f'.
+	self
+		export: (builder literalString: 'a string')
+		equals: '"a string"'.
+
 ]
 
 { #category : 'test from FAST model' }
@@ -1420,32 +1448,4 @@ FASTJavaExportVisitorTest >> testVisitFASTSwitchCaseDefault [
     break;
 }
 '
-]
-
-{ #category : 'test from FAST model' }
-FASTJavaExportVisitorTest >> testVisitFASTTExpressionStatement [
-	| node |
-	node := builder exprStatement: (builder invocation: 'methodA' recvr: nil args: #()).
-	self
-		export: node
-		equals: 'methodA();
-'.
-
-]
-
-{ #category : 'test from FAST model' }
-FASTJavaExportVisitorTest >> testVisitFASTTLiterals [
-	self
-		export: (builder literalNull)
-		equals: 'null'.
-	self
-		export: (builder literalInt: 42)
-		equals: '42'.
-	self
-		export: (builder literalFloat: '42f')
-		equals: '42f'.
-	self
-		export: (builder literalString: 'a string')
-		equals: '"a string"'.
-
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaInitializer }
+Extension { #name : 'FASTJavaInitializer' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaInitializer >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaInitializer: self
 ]
