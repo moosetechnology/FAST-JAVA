@@ -43,54 +43,76 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> setUp [
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testClassPropertyReceiverMethodInvocations [
-	self assert: methodInvocationWithClassPropertyAsReceiver statements first children anyOne receiver class equals: FASTJavaClassProperty
+
+	self
+		assert: methodInvocationWithClassPropertyAsReceiver statements first containedEntities anyOne receiver class
+		equals: FASTJavaClassProperty
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfArguments [
-	self assert: fastModel statementBlock children anyOne children anyOne expression arguments size equals: 2.
-	self assert: fastModel statementBlock children anyOne children anyOne expression receiver arguments size equals: 2
+
+	self assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression arguments size equals: 2.
+	self
+		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver arguments size
+		equals: 2
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfMethodInvocations [
-	self assert: fastModel statementBlock children anyOne children anyOne expression class equals: FASTJavaMethodInvocation.
-	self assert: fastModel statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
-	self assert: fastModel statementBlock children anyOne children anyOne expression receiver receiver equals: nil
+
+	self
+		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression class
+		equals: FASTJavaMethodInvocation.
+	self
+		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver class
+		equals: FASTJavaMethodInvocation.
+	self assert: fastModel statementBlock containedEntities anyOne children anyOne expression receiver receiver equals: nil
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverIsInModel [
+
 	self
-		assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver localMooseModel
+		assert: methodInvocationWithVariableAsReceiver statements first containedEntities anyOne receiver localMooseModel
 		equals: methodInvocationWithVariableAsReceiver localMooseModel
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverKnowTheCallingMethod [
+
 	self
-		assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver parentNode
-		equals: methodInvocationWithVariableAsReceiver statements first children anyOne
+		assert: methodInvocationWithVariableAsReceiver statements first containedEntities anyOne receiver parentNode
+		equals: methodInvocationWithVariableAsReceiver statements first containedEntities anyOne
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverMethodInvocations [
-	self assert: fastModel statementBlock children anyOne children anyOne expression receiver class equals: FASTJavaMethodInvocation.
-	self assert: fastModel statementBlock children anyOne children anyOne expression receiver receiver equals: nil.
-	self assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver class equals: FASTJavaIdentifier
+
+	self
+		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver class
+		equals: FASTJavaMethodInvocation.
+	self assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver receiver equals: nil.
+	self
+		assert: methodInvocationWithVariableAsReceiver statements first containedEntities anyOne receiver class
+		equals: FASTJavaIdentifier
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testTypeOfArguments [
+
 	self
-		assert: fastModel statementBlock children anyOne children anyOne expression arguments first class
+		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression arguments first class
 		equals: FASTJavaIntegerLiteral.
 	self
-		assert: fastModel statementBlock children anyOne children anyOne expression arguments second class
+		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression arguments second class
 		equals: FASTJavaIntegerLiteral
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testVariableReceiverMethodInvocations [
-	self assert: methodInvocationWithVariableAsReceiver statements first children anyOne receiver class equals: FASTJavaIdentifier
+
+	self
+		assert: methodInvocationWithVariableAsReceiver statements first containedEntities anyOne receiver class
+		equals: FASTJavaIdentifier
 ]

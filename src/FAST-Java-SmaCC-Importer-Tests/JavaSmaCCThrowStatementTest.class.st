@@ -23,7 +23,10 @@ JavaSmaCCThrowStatementTest >> testThrowStatementParent [
 
 { #category : 'tests' }
 JavaSmaCCThrowStatementTest >> testThrowStatementParentAsChild [
-	self assert: (fastModel allWithType: FASTJavaThrowStatement) anyOne equals: fastMethod statements anyOne thenPart children anyOne
+
+	self
+		assert: (fastModel allWithType: FASTJavaThrowStatement) anyOne
+		equals: fastMethod statements anyOne thenPart containedEntities anyOne
 ]
 
 { #category : 'tests' }

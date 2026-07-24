@@ -17,28 +17,15 @@ JavaSmaCCCharacterLiteralTest >> javaMethod [
 { #category : 'tests' }
 JavaSmaCCCharacterLiteralTest >> testCharacterLiteralType [
 
-	self
-		assert: fastMethod statements first children anyOne arguments first class
-		equals: FASTJavaCharacterLiteral.
-	self
-		assert: fastMethod statements second children anyOne arguments first class
-		equals: FASTJavaCharacterLiteral.
-	self
-		assert: fastMethod statements third children anyOne arguments first class
-		equals: FASTJavaCharacterLiteral.
+	self assert: fastMethod statements first containedEntities anyOne arguments first class equals: FASTJavaCharacterLiteral.
+	self assert: fastMethod statements second containedEntities anyOne arguments first class equals: FASTJavaCharacterLiteral.
+	self assert: fastMethod statements third containedEntities anyOne arguments first class equals: FASTJavaCharacterLiteral
 ]
 
 { #category : 'tests' }
 JavaSmaCCCharacterLiteralTest >> testCharacterLiteralValue [
 
-	self
-		assert: fastMethod statements first children anyOne arguments first primitiveValue
-		equals: 'A'.
-	self
-		assert: fastMethod statements second children anyOne arguments first primitiveValue
-		equals: '\n'.
-	self
-		assert: fastMethod statements third children anyOne arguments first primitiveValue
-		equals: '\u0000'.
-
+	self assert: fastMethod statements first containedEntities anyOne arguments first primitiveValue equals: 'A'.
+	self assert: fastMethod statements second containedEntities anyOne arguments first primitiveValue equals: '\n'.
+	self assert: fastMethod statements third containedEntities anyOne arguments first primitiveValue equals: '\u0000'
 ]

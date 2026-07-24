@@ -14,20 +14,24 @@ JavaSmaCCUnaryPostIncrementExpressionTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionIsPrefixed [
-	self deny: fastMethod statements first children anyOne isPrefixedUnaryExpression
+
+	self deny: fastMethod statements first containedEntities anyOne isPrefixedUnaryExpression
 ]
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionOperator [
-	self assert: fastMethod statements first children anyOne operator equals: '++'
+
+	self assert: fastMethod statements first containedEntities anyOne operator equals: '++'
 ]
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionOperatorType [
-	self assert: fastMethod statements first children anyOne operator class equals: ByteString
+
+	self assert: fastMethod statements first containedEntities anyOne operator class equals: ByteString
 ]
 
 { #category : 'tests' }
 JavaSmaCCUnaryPostIncrementExpressionTest >> testUnaryExpressionType [
-	self assert: fastMethod statements first children anyOne class equals: FASTJavaUnaryExpression
+
+	self assert: fastMethod statements first containedEntities anyOne class equals: FASTJavaUnaryExpression
 ]

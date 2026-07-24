@@ -17,10 +17,16 @@ JavaSmaCCCClassPropertyTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCCClassPropertyTest >> testClassPropertyName [
-	self assert: fastMethod statements asOrderedCollection fourth children anyOne receiver fieldName equals: 'editableTablelist'
+
+	self
+		assert: fastMethod statements asOrderedCollection fourth containedEntities anyOne receiver fieldName
+		equals: 'editableTablelist'
 ]
 
 { #category : 'tests' }
 JavaSmaCCCClassPropertyTest >> testClassPropertyType [
-	self assert: fastMethod statements asOrderedCollection fourth children anyOne receiver class equals: FASTJavaClassProperty
+
+	self
+		assert: fastMethod statements asOrderedCollection fourth containedEntities anyOne receiver class
+		equals: FASTJavaClassProperty
 ]

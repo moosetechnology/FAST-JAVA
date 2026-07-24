@@ -17,5 +17,6 @@ JavaSmaCCMethodInvocationWithConditionalAsReceiverTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithConditionalAsReceiverTest >> testClassPropertyReceiverMethodInvocations [
-	self assert: fastMethod statements first children anyOne receiver class equals: FASTJavaConditionalExpression
+
+	self assert: fastMethod statements first containedEntities anyOne receiver class equals: FASTJavaConditionalExpression
 ]

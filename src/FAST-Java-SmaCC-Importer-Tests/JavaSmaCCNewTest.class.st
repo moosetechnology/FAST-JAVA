@@ -14,10 +14,12 @@ JavaSmaCCNewTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCNewTest >> testNewName [
-	self assert: fastMethod statements anyOne children anyOne type fullName equals: 'Patate'
+
+	self assert: fastMethod statements anyOne containedEntities anyOne type fullName equals: 'Patate'
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewTest >> testNewType [
-	self assert: fastMethod statements first children anyOne class equals: FASTJavaNewExpression
+
+	self assert: fastMethod statements first containedEntities anyOne class equals: FASTJavaNewExpression
 ]
