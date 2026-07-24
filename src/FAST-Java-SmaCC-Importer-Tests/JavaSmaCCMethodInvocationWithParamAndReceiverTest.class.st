@@ -67,7 +67,7 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testNumberOfMethodInvocatio
 	self
 		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver class
 		equals: FASTJavaMethodInvocation.
-	self assert: fastModel statementBlock containedEntities anyOne children anyOne expression receiver receiver equals: nil
+	self assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver receiver equals: nil
 ]
 
 { #category : 'tests' }
