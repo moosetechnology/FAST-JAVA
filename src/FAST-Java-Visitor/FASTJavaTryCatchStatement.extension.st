@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaTryCatchStatement }
+Extension { #name : 'FASTJavaTryCatchStatement' }
 
-{ #category : #'*FAST-Java-Visitor-generated' }
+{ #category : '*FAST-Java-Visitor-generated' }
 FASTJavaTryCatchStatement >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaTryCatchStatement: self
 ]

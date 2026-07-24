@@ -42,6 +42,17 @@ FASTJavaLocalResolverVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 ]
 
 { #category : 'visiting' }
+FASTJavaLocalResolverVisitor >> visitFASTJavaStatementBlock: aFASTJavaStatementBlock [
+	scoper pushScope.
+
+	"visit order is important to ensure declarations are visited before statements"
+	(aFASTJavaStatementBlock statements sorted: [:a :b | a startPos < b startPos])
+		do: [ :node | node accept: self ].
+
+	^scoper popScope
+]
+
+{ #category : 'visiting' }
 FASTJavaLocalResolverVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	"register a variable (structuralEntity) declaration into the current scope"
 
@@ -66,15 +77,4 @@ FASTJavaLocalResolverVisitor >> visitFASTTBehaviouralEntity: aFASTBehaviouralEnt
 
 	aFASTBehaviouralEntity parameters do: [ :param | param accept: self].
 	aFASTBehaviouralEntity statementBlock accept: self
-]
-
-{ #category : 'visiting' }
-FASTJavaLocalResolverVisitor >> visitFASTTStatementBlock: aFASTJavaStatementBlock [
-	scoper pushScope.
-
-	"visit order is important to ensure declarations are visited before statements"
-	(aFASTJavaStatementBlock statements sorted: [:a :b | a startPos < b startPos])
-		do: [ :node | node accept: self ].
-
-	^scoper popScope
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaLabeledStatement }
+Extension { #name : 'FASTJavaLabeledStatement' }
 
-{ #category : #'*FAST-Java-Visitor' }
+{ #category : '*FAST-Java-Visitor' }
 FASTJavaLabeledStatement >> accept: aFASTJavaVisitor [
 	^ aFASTJavaVisitor visitFASTJavaLabeledStatement: self
 ]
