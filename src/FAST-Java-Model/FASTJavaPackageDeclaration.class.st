@@ -43,7 +43,6 @@ FASTJavaPackageDeclaration class >> annotation [
 	<FMClass: #PackageDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -62,13 +61,6 @@ FASTJavaPackageDeclaration >> compilationUnit: anObject [
 
 	<generated>
 	compilationUnit := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaPackageDeclaration >> compilationUnitGroup [
-	<generated>
-	<navigation: 'CompilationUnit'>
-	^ MooseSpecializedGroup with: self compilationUnit
 ]
 
 { #category : 'testing' }

@@ -40,7 +40,6 @@ FASTJavaClassTypeExpression class >> annotation [
 	<FMClass: #ClassTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -67,13 +66,6 @@ FASTJavaClassTypeExpression >> javaMethodThrowsOwner: anObject [
 	javaMethodThrowsOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaClassTypeExpression >> javaMethodThrowsOwnerGroup [
-	<generated>
-	<navigation: 'JavaMethodThrowsOwner'>
-	^ MooseSpecializedGroup with: self javaMethodThrowsOwner
-]
-
 { #category : 'accessing' }
 FASTJavaClassTypeExpression >> typeName [
 	"Relation named: #typeName type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner"
@@ -88,13 +80,6 @@ FASTJavaClassTypeExpression >> typeName: anObject [
 
 	<generated>
 	typeName := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaClassTypeExpression >> typeNameGroup [
-	<generated>
-	<navigation: 'TypeName'>
-	^ MooseSpecializedGroup with: self typeName
 ]
 
 { #category : 'accessing' }
@@ -112,11 +97,4 @@ FASTJavaClassTypeExpression >> typeParameterOwner: anObject [
 
 	<generated>
 	typeParameterOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaClassTypeExpression >> typeParameterOwnerGroup [
-	<generated>
-	<navigation: 'TypeParameterOwner'>
-	^ MooseSpecializedGroup with: self typeParameterOwner
 ]

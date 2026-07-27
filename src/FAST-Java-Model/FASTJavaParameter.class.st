@@ -33,7 +33,7 @@ I represent a parameter of a method declaration
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
 | `parameterOwner` | `FASTTVariableEntity` | `parameters` | `FASTTWithParameters` | parameterOwner|
 | `parentAssignmentExpression` | `FASTTVariableEntity` | `variable` | `FASTTAssignment` | Optional assignment to the variable|
-| `parentConditionalStatement` | `FASTTExpression` | `condition` | `FASTTConditionalStatement` | Optional condition statement where this expression is used|
+| `parentConditional` | `FASTTExpression` | `condition` | `FASTTWithCondition` | Optional condition statement/expression where this expression is used|
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
@@ -79,7 +79,6 @@ FASTJavaParameter class >> annotation [
 	<FMClass: #Parameter super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -120,13 +119,6 @@ FASTJavaParameter >> type: anObject [
 	type := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaParameter >> typeGroup [
-	<generated>
-	<navigation: 'Type'>
-	^ MooseSpecializedGroup with: self type
-]
-
 { #category : 'accessing' }
 FASTJavaParameter >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner"
@@ -141,11 +133,4 @@ FASTJavaParameter >> variable: anObject [
 
 	<generated>
 	variable := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaParameter >> variableGroup [
-	<generated>
-	<navigation: 'Variable'>
-	^ MooseSpecializedGroup with: self variable
 ]

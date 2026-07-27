@@ -32,7 +32,6 @@ FASTJavaIdentifier class >> annotation [
 	<FMClass: #Identifier super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -58,11 +57,4 @@ FASTJavaIdentifier >> javaForEachStatementFieldNameOwner: anObject [
 
 	<generated>
 	javaForEachStatementFieldNameOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaIdentifier >> javaForEachStatementFieldNameOwnerGroup [
-	<generated>
-	<navigation: 'JavaForEachStatementFieldNameOwner'>
-	^ MooseSpecializedGroup with: self javaForEachStatementFieldNameOwner
 ]

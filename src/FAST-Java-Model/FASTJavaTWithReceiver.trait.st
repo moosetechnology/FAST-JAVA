@@ -28,7 +28,6 @@ FASTJavaTWithReceiver classSide >> annotation [
 	<FMClass: #TWithReceiver super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -45,11 +44,4 @@ FASTJavaTWithReceiver >> receiver: anObject [
 
 	<generated>
 	receiver := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTWithReceiver >> receiverGroup [
-	<generated>
-	<navigation: 'Receiver'>
-	^ MooseSpecializedGroup with: self receiver
 ]

@@ -17,7 +17,6 @@ FASTJavaShortTypeExpression class >> annotation [
 	<FMClass: #ShortTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

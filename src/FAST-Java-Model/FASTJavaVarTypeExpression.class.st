@@ -17,7 +17,6 @@ FASTJavaVarTypeExpression class >> annotation [
 	<FMClass: #VarTypeExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

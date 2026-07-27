@@ -24,7 +24,7 @@ for(_;_;_) {
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `body` | `FASTTLoopStatement` | `parentLoopStatement` | `FASTTStatement` | The body of the loop|
-| `condition` | `FASTTConditionalStatement` | `parentConditionalStatement` | `FASTTExpression` | The boolean condition tested|
+| `condition` | `FASTTWithCondition` | `parentConditional` | `FASTTExpression` | The boolean condition tested|
 | `incrementor` | `FASTJavaForStatement` | `forIncrementorOwner` | `FASTTStatement` | Expression evaluated at the end of each loop|
 | `initializer` | `FASTJavaForStatement` | `forIninitializerOwner` | `FASTTStatement` | Expression used at initialization phase of a for loop|
 
@@ -54,7 +54,6 @@ FASTJavaForStatement class >> annotation [
 	<FMClass: #ForStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -81,13 +80,6 @@ FASTJavaForStatement >> incrementor: anObject [
 		anObject forIncrementorOwner: self ]
 ]
 
-{ #category : 'navigation' }
-FASTJavaForStatement >> incrementorGroup [
-	<generated>
-	<navigation: 'Incrementor'>
-	^ MooseSpecializedGroup with: self incrementor
-]
-
 { #category : 'accessing' }
 FASTJavaForStatement >> initializer [
 	"Relation named: #initializer type: #FASTTStatement opposite: #forIninitializerOwner"
@@ -110,13 +102,6 @@ FASTJavaForStatement >> initializer: anObject [
 	ifNotNil: [ 
 		self attributeAt: #initializer put: anObject.
 		anObject forIninitializerOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaForStatement >> initializerGroup [
-	<generated>
-	<navigation: 'Initializer'>
-	^ MooseSpecializedGroup with: self initializer
 ]
 
 { #category : 'testing' }

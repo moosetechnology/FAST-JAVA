@@ -16,7 +16,8 @@ FASTJavaModel class >> allSubmetamodelsPackagesNames [
 
 { #category : 'meta' }
 FASTJavaModel class >> annotation [
-	<FMClass: #FASTJavaModel super: #MooseModel>
+
+	<FMClass: #Model super: #MooseModel>
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]

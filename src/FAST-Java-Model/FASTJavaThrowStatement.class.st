@@ -50,7 +50,6 @@ FASTJavaThrowStatement class >> annotation [
 	<FMClass: #ThrowStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -75,13 +74,6 @@ FASTJavaThrowStatement >> expression: anObject [
 	ifNotNil: [ 
 		self attributeAt: #expression put: anObject.
 		anObject javaThrowStatementOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaThrowStatement >> expressionGroup [
-	<generated>
-	<navigation: 'Expression'>
-	^ MooseSpecializedGroup with: self expression
 ]
 
 { #category : 'testing' }

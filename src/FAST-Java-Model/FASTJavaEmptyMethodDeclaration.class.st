@@ -26,7 +26,6 @@ FASTJavaEmptyMethodDeclaration class >> annotation [
 	<FMClass: #EmptyMethodDeclaration super: #FASTJavaMethodEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

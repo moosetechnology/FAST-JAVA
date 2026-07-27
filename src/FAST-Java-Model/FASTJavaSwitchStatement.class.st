@@ -55,7 +55,6 @@ FASTJavaSwitchStatement class >> annotation [
 	<FMClass: #SwitchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -81,13 +80,6 @@ FASTJavaSwitchStatement >> cases: anObject [
 	cases value: anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaSwitchStatement >> casesGroup [
-	<generated>
-	<navigation: 'Cases'>
-	^ MooseSpecializedGroup withAll: self cases asSet
-]
-
 { #category : 'accessing' }
 FASTJavaSwitchStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #switchConditionOwner"
@@ -110,13 +102,6 @@ FASTJavaSwitchStatement >> condition: anObject [
 	ifNotNil: [ 
 		self attributeAt: #condition put: anObject.
 		anObject switchConditionOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaSwitchStatement >> conditionGroup [
-	<generated>
-	<navigation: 'Condition'>
-	^ MooseSpecializedGroup with: self condition
 ]
 
 { #category : 'testing' }

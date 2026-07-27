@@ -47,7 +47,6 @@ FASTJavaQualifiedName class >> annotation [
 	<FMClass: #QualifiedName super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -73,13 +72,6 @@ FASTJavaQualifiedName >> namespace: anObject [
 	namespace := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaQualifiedName >> namespaceGroup [
-	<generated>
-	<navigation: 'Namespace'>
-	^ MooseSpecializedGroup with: self namespace
-]
-
 { #category : 'accessing' }
 FASTJavaQualifiedName >> namespaceOwner [
 	"Relation named: #namespaceOwner type: #FASTJavaQualifiedName opposite: #namespace"
@@ -98,13 +90,6 @@ FASTJavaQualifiedName >> namespaceOwner: anObject [
 	namespaceOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaQualifiedName >> namespaceOwnerGroup [
-	<generated>
-	<navigation: 'NamespaceOwner'>
-	^ MooseSpecializedGroup with: self namespaceOwner
-]
-
 { #category : 'accessing' }
 FASTJavaQualifiedName >> qualifiedNameOwner [
 	"Relation named: #qualifiedNameOwner type: #FASTJavaTWithQualifiedName opposite: #qualifiedName"
@@ -121,11 +106,4 @@ FASTJavaQualifiedName >> qualifiedNameOwner: anObject [
 
 	<generated>
 	qualifiedNameOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaQualifiedName >> qualifiedNameOwnerGroup [
-	<generated>
-	<navigation: 'QualifiedNameOwner'>
-	^ MooseSpecializedGroup with: self qualifiedNameOwner
 ]

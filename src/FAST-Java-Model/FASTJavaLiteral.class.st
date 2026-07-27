@@ -30,5 +30,4 @@ FASTJavaLiteral class >> annotation [
 	<FMClass: #Literal super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]

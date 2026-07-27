@@ -28,7 +28,6 @@ FASTJavaTDeclaration classSide >> annotation [
 	<FMClass: #TDeclaration super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -46,11 +45,4 @@ FASTJavaTDeclaration >> javaDeclarationOwner: anObject [
 
 	<generated>
 	javaDeclarationOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTDeclaration >> javaDeclarationOwnerGroup [
-	<generated>
-	<navigation: 'JavaDeclarationOwner'>
-	^ MooseSpecializedGroup with: self javaDeclarationOwner
 ]

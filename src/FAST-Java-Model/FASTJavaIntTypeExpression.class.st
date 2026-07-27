@@ -17,7 +17,6 @@ FASTJavaIntTypeExpression class >> annotation [
 	<FMClass: #IntTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

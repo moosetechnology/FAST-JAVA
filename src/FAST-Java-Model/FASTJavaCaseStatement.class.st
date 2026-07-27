@@ -7,7 +7,7 @@ case part of switch statement
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `fastBehaviouralParent` | `FASTTStatementBlock` | `statementBlock` | `FASTTBehaviouralEntity` | Behavioural entity containing the statement block.|
+| `fastBehaviouralParent` | `FASTTStatementBlock` | `statementBlock` | `FASTTWithStatements` | Behavioural entity containing the statement block.|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementor` | `FASTJavaForStatement` | I am the incrementor of the for|
 | `forIninitializerOwner` | `FASTTStatement` | `initializer` | `FASTJavaForStatement` | I am the initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
@@ -53,7 +53,6 @@ FASTJavaCaseStatement class >> annotation [
 	<FMClass: #CaseStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -78,11 +77,4 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner: anObject [
 
 	<generated>
 	javaCaseStatementSwitchOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaCaseStatement >> javaCaseStatementSwitchOwnerGroup [
-	<generated>
-	<navigation: 'JavaCaseStatementSwitchOwner'>
-	^ MooseSpecializedGroup with: self javaCaseStatementSwitchOwner
 ]

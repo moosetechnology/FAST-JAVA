@@ -59,7 +59,6 @@ FASTJavaInitializer class >> annotation [
 	<FMClass: #Initializer super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -106,11 +105,4 @@ FASTJavaInitializer >> statementBlock: anObject [
 	ifNotNil: [ 
 		self attributeAt: #statementBlock put: anObject.
 		anObject javaInitializerOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaInitializer >> statementBlockGroup [
-	<generated>
-	<navigation: 'StatementBlock'>
-	^ MooseSpecializedGroup with: self statementBlock
 ]

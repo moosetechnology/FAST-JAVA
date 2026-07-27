@@ -31,7 +31,6 @@ FASTJavaTAnnotationElement classSide >> annotation [
 	<FMClass: #TAnnotationElement super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -51,13 +50,6 @@ FASTJavaTAnnotationElement >> arrayOwner: anObject [
 	arrayOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaTAnnotationElement >> arrayOwnerGroup [
-	<generated>
-	<navigation: 'ArrayOwner'>
-	^ MooseSpecializedGroup with: self arrayOwner
-]
-
 { #category : 'accessing' }
 FASTJavaTAnnotationElement >> parentAnnotation [
 	"Relation named: #parentAnnotation type: #FASTJavaAnnotation opposite: #elements"
@@ -74,11 +66,4 @@ FASTJavaTAnnotationElement >> parentAnnotation: anObject [
 
 	<generated>
 	parentAnnotation := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTAnnotationElement >> parentAnnotationGroup [
-	<generated>
-	<navigation: 'ParentAnnotation'>
-	^ MooseSpecializedGroup with: self parentAnnotation
 ]

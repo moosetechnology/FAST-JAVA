@@ -17,7 +17,6 @@ FASTJavaFloatTypeExpression class >> annotation [
 	<FMClass: #FloatTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
