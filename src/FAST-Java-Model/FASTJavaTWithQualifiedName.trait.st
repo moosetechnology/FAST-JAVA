@@ -28,7 +28,6 @@ FASTJavaTWithQualifiedName classSide >> annotation [
 	<FMClass: #TWithQualifiedName super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -45,11 +44,4 @@ FASTJavaTWithQualifiedName >> qualifiedName: anObject [
 
 	<generated>
 	qualifiedName := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTWithQualifiedName >> qualifiedNameGroup [
-	<generated>
-	<navigation: 'QualifiedName'>
-	^ MooseSpecializedGroup with: self qualifiedName
 ]

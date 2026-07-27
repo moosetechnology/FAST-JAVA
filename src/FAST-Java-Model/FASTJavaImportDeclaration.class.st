@@ -47,7 +47,6 @@ FASTJavaImportDeclaration class >> annotation [
 	<FMClass: #ImportDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -65,13 +64,6 @@ FASTJavaImportDeclaration >> compilationUnit: anObject [
 
 	<generated>
 	compilationUnit := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaImportDeclaration >> compilationUnitGroup [
-	<generated>
-	<navigation: 'CompilationUnit'>
-	^ MooseSpecializedGroup with: self compilationUnit
 ]
 
 { #category : 'testing' }

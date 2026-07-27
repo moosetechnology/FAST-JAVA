@@ -26,7 +26,6 @@ FASTJavaArrayTypeExpression class >> annotation [
 	<FMClass: #ArrayTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -51,13 +50,6 @@ FASTJavaArrayTypeExpression >> baseType: anObject [
 	ifNotNil: [ 
 		self attributeAt: #baseType put: anObject.
 		anObject javaArrayTypeNameOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaArrayTypeExpression >> baseTypeGroup [
-	<generated>
-	<navigation: 'BaseType'>
-	^ MooseSpecializedGroup with: self baseType
 ]
 
 { #category : 'testing' }

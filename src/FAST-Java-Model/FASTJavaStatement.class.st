@@ -39,5 +39,4 @@ FASTJavaStatement class >> annotation [
 	<FMClass: #Statement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]

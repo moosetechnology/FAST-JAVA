@@ -28,7 +28,6 @@ FASTJavaTWithModifiers classSide >> annotation [
 	<FMClass: #TWithModifiers super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -52,11 +51,4 @@ FASTJavaTWithModifiers >> modifiers: anObject [
 
 	<generated>
 	modifiers value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTWithModifiers >> modifiersGroup [
-	<generated>
-	<navigation: 'Modifiers'>
-	^ MooseSpecializedGroup withAll: self modifiers asSet
 ]

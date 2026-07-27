@@ -37,7 +37,7 @@ ex:
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
 | `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
-| `parentConditionalStatement` | `FASTTExpression` | `condition` | `FASTTConditionalStatement` | Optional condition statement where this expression is used|
+| `parentConditional` | `FASTTExpression` | `condition` | `FASTTWithCondition` | Optional condition statement/expression where this expression is used|
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
@@ -81,7 +81,6 @@ FASTJavaInfixOperation class >> annotation [
 	<FMClass: #InfixOperation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -113,13 +112,6 @@ FASTJavaInfixOperation >> leftOperand: anObject [
 	ifNotNil: [ 
 		self attributeAt: #leftOperand put: anObject.
 		anObject infixOperationLeftOperandOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaInfixOperation >> leftOperandGroup [
-	<generated>
-	<navigation: 'LeftOperand'>
-	^ MooseSpecializedGroup with: self leftOperand
 ]
 
 { #category : 'accessing' }
@@ -159,11 +151,4 @@ FASTJavaInfixOperation >> rightOperand: anObject [
 	ifNotNil: [ 
 		self attributeAt: #rightOperand put: anObject.
 		anObject infixOperationRightOperandOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaInfixOperation >> rightOperandGroup [
-	<generated>
-	<navigation: 'RightOperand'>
-	^ MooseSpecializedGroup with: self rightOperand
 ]

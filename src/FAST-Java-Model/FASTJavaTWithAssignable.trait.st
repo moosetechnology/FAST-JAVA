@@ -28,7 +28,6 @@ FASTJavaTWithAssignable classSide >> annotation [
 	<FMClass: #TWithAssignable super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -45,11 +44,4 @@ FASTJavaTWithAssignable >> variable: anObject [
 
 	<generated>
 	variable := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTWithAssignable >> variableGroup [
-	<generated>
-	<navigation: 'Variable'>
-	^ MooseSpecializedGroup with: self variable
 ]

@@ -25,7 +25,7 @@ if(...) {
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `condition` | `FASTTConditionalStatement` | `parentConditionalStatement` | `FASTTExpression` | The boolean condition tested|
+| `condition` | `FASTTWithCondition` | `parentConditional` | `FASTTExpression` | The boolean condition tested|
 | `elsePart` | `FASTJavaIfStatement` | `ifElsePartOwner` | `FASTTStatement` | else part|
 | `thenPart` | `FASTJavaIfStatement` | `ifThenPartOwner` | `FASTTStatement` | then part|
 
@@ -55,7 +55,6 @@ FASTJavaIfStatement class >> annotation [
 	<FMClass: #IfStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -80,13 +79,6 @@ FASTJavaIfStatement >> elsePart: anObject [
 	ifNotNil: [ 
 		self attributeAt: #elsePart put: anObject.
 		anObject ifElsePartOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaIfStatement >> elsePartGroup [
-	<generated>
-	<navigation: 'ElsePart'>
-	^ MooseSpecializedGroup with: self elsePart
 ]
 
 { #category : 'testing' }
@@ -118,11 +110,4 @@ FASTJavaIfStatement >> thenPart: anObject [
 	ifNotNil: [ 
 		self attributeAt: #thenPart put: anObject.
 		anObject ifThenPartOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaIfStatement >> thenPartGroup [
-	<generated>
-	<navigation: 'ThenPart'>
-	^ MooseSpecializedGroup with: self thenPart
 ]

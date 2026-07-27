@@ -68,7 +68,6 @@ FASTJavaTryCatchStatement class >> annotation [
 	<FMClass: #TryCatchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -100,13 +99,6 @@ FASTJavaTryCatchStatement >> catches: anObject [
 	catches value: anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaTryCatchStatement >> catchesGroup [
-	<generated>
-	<navigation: 'Catches'>
-	^ MooseSpecializedGroup withAll: self catches asSet
-]
-
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> finally [
 	"Relation named: #finally type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner"
@@ -121,13 +113,6 @@ FASTJavaTryCatchStatement >> finally: anObject [
 
 	<generated>
 	finally := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTryCatchStatement >> finallyGroup [
-	<generated>
-	<navigation: 'Finally'>
-	^ MooseSpecializedGroup with: self finally
 ]
 
 { #category : 'testing' }
@@ -154,13 +139,6 @@ FASTJavaTryCatchStatement >> resources: anObject [
 	resources value: anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaTryCatchStatement >> resourcesGroup [
-	<generated>
-	<navigation: 'Resources'>
-	^ MooseSpecializedGroup withAll: self resources asSet
-]
-
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> try [
 	"Relation named: #try type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner"
@@ -175,11 +153,4 @@ FASTJavaTryCatchStatement >> try: anObject [
 
 	<generated>
 	try := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTryCatchStatement >> tryGroup [
-	<generated>
-	<navigation: 'Try'>
-	^ MooseSpecializedGroup with: self try
 ]

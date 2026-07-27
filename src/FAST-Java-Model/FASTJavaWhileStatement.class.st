@@ -24,7 +24,7 @@ while(...) {
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `body` | `FASTTLoopStatement` | `parentLoopStatement` | `FASTTStatement` | The body of the loop|
-| `condition` | `FASTTConditionalStatement` | `parentConditionalStatement` | `FASTTExpression` | The boolean condition tested|
+| `condition` | `FASTTWithCondition` | `parentConditional` | `FASTTExpression` | The boolean condition tested|
 
 
 ## Properties
@@ -52,7 +52,6 @@ FASTJavaWhileStatement class >> annotation [
 	<FMClass: #WhileStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

@@ -5,7 +5,7 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `fastBehaviouralParent` | `FASTTStatementBlock` | `statementBlock` | `FASTTBehaviouralEntity` | Behavioural entity containing the statement block.|
+| `fastBehaviouralParent` | `FASTTStatementBlock` | `statementBlock` | `FASTTWithStatements` | Behavioural entity containing the statement block.|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementor` | `FASTJavaForStatement` | I am the incrementor of the for|
 | `forIninitializerOwner` | `FASTTStatement` | `initializer` | `FASTJavaForStatement` | I am the initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
@@ -55,7 +55,6 @@ FASTJavaStatementBlock class >> annotation [
 	<FMClass: #StatementBlock super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -76,13 +75,6 @@ FASTJavaStatementBlock >> javaCatchPartStatementOwner: anObject [
 	javaCatchPartStatementOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaStatementBlock >> javaCatchPartStatementOwnerGroup [
-	<generated>
-	<navigation: 'JavaCatchPartStatementOwner'>
-	^ MooseSpecializedGroup with: self javaCatchPartStatementOwner
-]
-
 { #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryCatchOwner [
 	"Relation named: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try"
@@ -101,13 +93,6 @@ FASTJavaStatementBlock >> javaTryCatchOwner: anObject [
 	javaTryCatchOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaStatementBlock >> javaTryCatchOwnerGroup [
-	<generated>
-	<navigation: 'JavaTryCatchOwner'>
-	^ MooseSpecializedGroup with: self javaTryCatchOwner
-]
-
 { #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryFinallyOwner [
 	"Relation named: #javaTryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally"
@@ -124,11 +109,4 @@ FASTJavaStatementBlock >> javaTryFinallyOwner: anObject [
 
 	<generated>
 	javaTryFinallyOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaStatementBlock >> javaTryFinallyOwnerGroup [
-	<generated>
-	<navigation: 'JavaTryFinallyOwner'>
-	^ MooseSpecializedGroup with: self javaTryFinallyOwner
 ]

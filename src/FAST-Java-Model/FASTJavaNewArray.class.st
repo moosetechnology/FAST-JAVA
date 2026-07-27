@@ -29,7 +29,6 @@ FASTJavaNewArray class >> annotation [
 	<FMClass: #NewArray super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -54,13 +53,6 @@ FASTJavaNewArray >> initializer: anObject [
 	ifNotNil: [ 
 		self attributeAt: #initializer put: anObject.
 		anObject javaNewArrayInitialOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaNewArray >> initializerGroup [
-	<generated>
-	<navigation: 'Initializer'>
-	^ MooseSpecializedGroup with: self initializer
 ]
 
 { #category : 'testing' }

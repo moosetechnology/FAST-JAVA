@@ -41,7 +41,6 @@ FASTJavaTypeExpression class >> annotation [
 	<FMClass: #TypeExpression super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -59,13 +58,6 @@ FASTJavaTypeExpression >> catchOwner: anObject [
 
 	<generated>
 	catchOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTypeExpression >> catchOwnerGroup [
-	<generated>
-	<navigation: 'CatchOwner'>
-	^ MooseSpecializedGroup with: self catchOwner
 ]
 
 { #category : 'testing' }
@@ -92,13 +84,6 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner: anObject [
 	javaClassDeclarationInterfaceOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwnerGroup [
-	<generated>
-	<navigation: 'JavaClassDeclarationInterfaceOwner'>
-	^ MooseSpecializedGroup with: self javaClassDeclarationInterfaceOwner
-]
-
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner [
 	"Relation named: #javaClassDeclarationSuperclassOwner type: #FASTJavaClassDeclaration opposite: #superclass"
@@ -117,13 +102,6 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner: anObject [
 	javaClassDeclarationSuperclassOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwnerGroup [
-	<generated>
-	<navigation: 'JavaClassDeclarationSuperclassOwner'>
-	^ MooseSpecializedGroup with: self javaClassDeclarationSuperclassOwner
-]
-
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner [
 	"Relation named: #javaEnumDeclarationInterfaceOwner type: #FASTJavaEnumDeclaration opposite: #interfaces"
@@ -139,13 +117,6 @@ FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner: anObject [
 
 	<generated>
 	javaEnumDeclarationInterfaceOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwnerGroup [
-	<generated>
-	<navigation: 'JavaEnumDeclarationInterfaceOwner'>
-	^ MooseSpecializedGroup with: self javaEnumDeclarationInterfaceOwner
 ]
 
 { #category : 'accessing' }
@@ -166,13 +137,6 @@ FASTJavaTypeExpression >> javaForEachStatementTypeOwner: anObject [
 	javaForEachStatementTypeOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaTypeExpression >> javaForEachStatementTypeOwnerGroup [
-	<generated>
-	<navigation: 'JavaForEachStatementTypeOwner'>
-	^ MooseSpecializedGroup with: self javaForEachStatementTypeOwner
-]
-
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner [
 	"Relation named: #javaInterfaceDeclarationInterfaceOwner type: #FASTJavaInterfaceDeclaration opposite: #interfaces"
@@ -188,13 +152,6 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
 
 	<generated>
 	javaInterfaceDeclarationInterfaceOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwnerGroup [
-	<generated>
-	<navigation: 'JavaInterfaceDeclarationInterfaceOwner'>
-	^ MooseSpecializedGroup with: self javaInterfaceDeclarationInterfaceOwner
 ]
 
 { #category : 'accessing' }
@@ -213,11 +170,4 @@ FASTJavaTypeExpression >> javaTypePatternTypeOwner: anObject [
 
 	<generated>
 	javaTypePatternTypeOwner := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaTypeExpression >> javaTypePatternTypeOwnerGroup [
-	<generated>
-	<navigation: 'JavaTypePatternTypeOwner'>
-	^ MooseSpecializedGroup with: self javaTypePatternTypeOwner
 ]

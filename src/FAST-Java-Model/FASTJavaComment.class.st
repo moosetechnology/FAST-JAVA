@@ -34,5 +34,4 @@ FASTJavaComment class >> annotation [
 	<FMClass: #Comment super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]

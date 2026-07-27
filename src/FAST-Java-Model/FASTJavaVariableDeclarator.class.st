@@ -51,7 +51,6 @@ FASTJavaVariableDeclarator class >> annotation [
 	<FMClass: #VariableDeclarator super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -78,13 +77,6 @@ FASTJavaVariableDeclarator >> expression: anObject [
 		anObject javaVariableDeclaratorExpressionOwner: self ]
 ]
 
-{ #category : 'navigation' }
-FASTJavaVariableDeclarator >> expressionGroup [
-	<generated>
-	<navigation: 'Expression'>
-	^ MooseSpecializedGroup with: self expression
-]
-
 { #category : 'testing' }
 FASTJavaVariableDeclarator >> isVariableDeclarator [
 
@@ -109,13 +101,6 @@ FASTJavaVariableDeclarator >> varDeclOwner: anObject [
 	varDeclOwner := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaVariableDeclarator >> varDeclOwnerGroup [
-	<generated>
-	<navigation: 'VarDeclOwner'>
-	^ MooseSpecializedGroup with: self varDeclOwner
-]
-
 { #category : 'accessing' }
 FASTJavaVariableDeclarator >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner"
@@ -130,11 +115,4 @@ FASTJavaVariableDeclarator >> variable: anObject [
 
 	<generated>
 	variable := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaVariableDeclarator >> variableGroup [
-	<generated>
-	<navigation: 'Variable'>
-	^ MooseSpecializedGroup with: self variable
 ]

@@ -42,7 +42,6 @@ FASTJavaNewClassExpression class >> annotation [
 	<FMClass: #NewClassExpression super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

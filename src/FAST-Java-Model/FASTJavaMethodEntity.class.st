@@ -15,7 +15,7 @@ Represents a Java method
 |---|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `parameters` | `FASTTWithParameters` | `parameterOwner` | `FASTTVariableEntity` | My parameters|
-| `statementBlock` | `FASTTBehaviouralEntity` | `fastBehaviouralParent` | `FASTTStatementBlock` | Statements block of the behavioural entity|
+| `statementBlock` | `FASTTWithStatements` | `fastBehaviouralParent` | `FASTTStatementBlock` | Statements block of the behavioural entity|
 | `throws` | `FASTJavaMethodEntity` | `javaMethodThrowsOwner` | `FASTJavaClassTypeExpression` | The list of throws exception|
 | `type` | `FASTJavaMethodEntity` | `javaMethodTypeOwner` | `FASTJavaVariableExpression` | The type of the method|
 | `typeParameters` | `FASTJavaMethodEntity` | `javaMethodTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The list of type parameter|
@@ -58,7 +58,6 @@ FASTJavaMethodEntity class >> annotation [
 	<FMClass: #MethodEntity super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -97,13 +96,6 @@ FASTJavaMethodEntity >> throws: anObject [
 	throws value: anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaMethodEntity >> throwsGroup [
-	<generated>
-	<navigation: 'Throws'>
-	^ MooseSpecializedGroup withAll: self throws asSet
-]
-
 { #category : 'accessing' }
 FASTJavaMethodEntity >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner"
@@ -118,13 +110,6 @@ FASTJavaMethodEntity >> type: anObject [
 
 	<generated>
 	type := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaMethodEntity >> typeGroup [
-	<generated>
-	<navigation: 'Type'>
-	^ MooseSpecializedGroup with: self type
 ]
 
 { #category : 'accessing' }
@@ -142,11 +127,4 @@ FASTJavaMethodEntity >> typeParameters: anObject [
 
 	<generated>
 	typeParameters value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaMethodEntity >> typeParametersGroup [
-	<generated>
-	<navigation: 'TypeParameters'>
-	^ MooseSpecializedGroup withAll: self typeParameters asSet
 ]

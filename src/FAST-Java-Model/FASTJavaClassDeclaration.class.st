@@ -73,7 +73,6 @@ FASTJavaClassDeclaration class >> annotation [
 	<FMClass: #ClassDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -99,13 +98,6 @@ FASTJavaClassDeclaration >> compilationUnit: anObject [
 	compilationUnit := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaClassDeclaration >> compilationUnitGroup [
-	<generated>
-	<navigation: 'CompilationUnit'>
-	^ MooseSpecializedGroup with: self compilationUnit
-]
-
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwner"
@@ -121,13 +113,6 @@ FASTJavaClassDeclaration >> interfaces: anObject [
 
 	<generated>
 	interfaces value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaClassDeclaration >> interfacesGroup [
-	<generated>
-	<navigation: 'Interfaces'>
-	^ MooseSpecializedGroup withAll: self interfaces asSet
 ]
 
 { #category : 'testing' }
@@ -151,11 +136,4 @@ FASTJavaClassDeclaration >> superclass: anObject [
 
 	<generated>
 	superclass := anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaClassDeclaration >> superclassGroup [
-	<generated>
-	<navigation: 'Superclass'>
-	^ MooseSpecializedGroup with: self superclass
 ]

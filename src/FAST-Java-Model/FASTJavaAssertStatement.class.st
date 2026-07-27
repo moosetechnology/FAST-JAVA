@@ -54,7 +54,6 @@ FASTJavaAssertStatement class >> annotation [
 	<FMClass: #AssertStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -81,13 +80,6 @@ FASTJavaAssertStatement >> condition: anObject [
 		anObject assertConditionOwner: self ]
 ]
 
-{ #category : 'navigation' }
-FASTJavaAssertStatement >> conditionGroup [
-	<generated>
-	<navigation: 'Condition'>
-	^ MooseSpecializedGroup with: self condition
-]
-
 { #category : 'accessing' }
 FASTJavaAssertStatement >> message [
 	"Relation named: #message type: #FASTTExpression opposite: #javaStringAssertStatementOwner"
@@ -110,11 +102,4 @@ FASTJavaAssertStatement >> message: anObject [
 	ifNotNil: [ 
 		self attributeAt: #message put: anObject.
 		anObject javaStringAssertStatementOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaAssertStatement >> messageGroup [
-	<generated>
-	<navigation: 'Message'>
-	^ MooseSpecializedGroup with: self message
 ]

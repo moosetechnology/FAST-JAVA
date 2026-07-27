@@ -30,7 +30,6 @@ FASTJavaLabeledCaseStatement class >> annotation [
 	<FMClass: #LabeledCaseStatement super: #FASTJavaCaseStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -62,11 +61,4 @@ FASTJavaLabeledCaseStatement >> label: anObject [
 	ifNotNil: [ 
 		self attributeAt: #label put: anObject.
 		anObject javaLabeledCaseStatementOwner: self ]
-]
-
-{ #category : 'navigation' }
-FASTJavaLabeledCaseStatement >> labelGroup [
-	<generated>
-	<navigation: 'Label'>
-	^ MooseSpecializedGroup with: self label
 ]

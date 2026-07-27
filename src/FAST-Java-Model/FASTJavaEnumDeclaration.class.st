@@ -75,7 +75,6 @@ FASTJavaEnumDeclaration class >> annotation [
 	<FMClass: #EnumDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -107,13 +106,6 @@ FASTJavaEnumDeclaration >> compilationUnit: anObject [
 	compilationUnit := anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaEnumDeclaration >> compilationUnitGroup [
-	<generated>
-	<navigation: 'CompilationUnit'>
-	^ MooseSpecializedGroup with: self compilationUnit
-]
-
 { #category : 'accessing' }
 FASTJavaEnumDeclaration >> constants [
 	"Relation named: #constants type: #FASTJavaEnumConstant opposite: #parentEnum"
@@ -131,13 +123,6 @@ FASTJavaEnumDeclaration >> constants: anObject [
 	constants value: anObject
 ]
 
-{ #category : 'navigation' }
-FASTJavaEnumDeclaration >> constantsGroup [
-	<generated>
-	<navigation: 'Constants'>
-	^ MooseSpecializedGroup withAll: self constants asSet
-]
-
 { #category : 'accessing' }
 FASTJavaEnumDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner"
@@ -153,13 +138,6 @@ FASTJavaEnumDeclaration >> interfaces: anObject [
 
 	<generated>
 	interfaces value: anObject
-]
-
-{ #category : 'navigation' }
-FASTJavaEnumDeclaration >> interfacesGroup [
-	<generated>
-	<navigation: 'Interfaces'>
-	^ MooseSpecializedGroup withAll: self interfaces asSet
 ]
 
 { #category : 'testing' }

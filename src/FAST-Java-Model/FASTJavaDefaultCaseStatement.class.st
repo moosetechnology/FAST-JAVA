@@ -21,7 +21,6 @@ FASTJavaDefaultCaseStatement class >> annotation [
 	<FMClass: #DefaultCaseStatement super: #FASTJavaCaseStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }
