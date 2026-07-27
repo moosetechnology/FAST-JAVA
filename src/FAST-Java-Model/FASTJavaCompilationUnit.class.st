@@ -13,6 +13,11 @@ I represent a compilation unit, I can contain declarations for a package, import
 | `interfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaInterfaceDeclaration` | My interface declarations|
 | `packageDeclaration` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaPackageDeclaration` | My package declaration, or nil for the default package|
 
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
 
 ## Properties
 ======================
@@ -20,20 +25,21 @@ I represent a compilation unit, I can contain declarations for a package, import
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `source` | `String` | nil | Actual source code of the source entity|
 | `startPos` | `Number` | nil | |
 
 "
 Class {
 	#name : 'FASTJavaCompilationUnit',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTEntity',
-	#classTraits : 'FASTTEntity classTrait',
+	#traits : '(FASTTEntity + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
+	#classTraits : '(FASTTEntity classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
-		'#packageDeclaration => FMOne type: #FASTJavaPackageDeclaration opposite: #compilationUnit',
-		'#importDeclarations => FMMany type: #FASTJavaImportDeclaration opposite: #compilationUnit',
 		'#classDeclarations => FMMany type: #FASTJavaClassDeclaration opposite: #compilationUnit',
+		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit',
+		'#importDeclarations => FMMany type: #FASTJavaImportDeclaration opposite: #compilationUnit',
 		'#interfaceDeclarations => FMMany type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit',
-		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit'
+		'#packageDeclaration => FMOne type: #FASTJavaPackageDeclaration opposite: #compilationUnit'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',

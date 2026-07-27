@@ -1112,6 +1112,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTypePattern --|> tExpression.
 
 	compilationUnit --|> tEntity.
+	compilationUnit --|> #THasImmediateSource.
+	compilationUnit withPrecedenceOf: #THasImmediateSource.
 
 	"package and import do not use TDeclaration on purpose: they are only contained in a compilation unit"
 	packageDeclaration --|> tEntity.

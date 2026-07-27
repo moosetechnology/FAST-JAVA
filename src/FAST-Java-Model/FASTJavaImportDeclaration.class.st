@@ -32,9 +32,9 @@ Class {
 	#traits : 'FASTJavaTWithQualifiedName + FASTTEntity',
 	#classTraits : 'FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
 	#instVars : [
-		'#isStatic => FMProperty defaultValue: false',
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #importDeclarations',
 		'#isOnDemand => FMProperty defaultValue: false',
-		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #importDeclarations'
+		'#isStatic => FMProperty defaultValue: false'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
