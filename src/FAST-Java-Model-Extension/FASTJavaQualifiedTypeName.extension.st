@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaQualifiedTypeName }
+Extension { #name : 'FASTJavaQualifiedTypeName' }
 
-{ #category : #'*FAST-Java-Model-Extension' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTJavaQualifiedTypeName >> fullName [
 	^ self namespace fullName , '.', self name
 ]

@@ -1,1 +1,1 @@
-Package { #name : #'FAST-Java-Model-Extension' }
+Package { #name : 'FAST-Java-Model-Extension' }

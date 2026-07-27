@@ -12,17 +12,6 @@ JavaSmaCCAbstractMethodTest >> abstractMethod [
 }'
 ]
 
-{ #category : 'accessing' }
-JavaSmaCCAbstractMethodTest >> javaMethod [
-	^ self shouldBeImplemented
-]
-
-{ #category : 'running' }
-JavaSmaCCAbstractMethodTest >> parseExpressionString: aString [
-
-	^ JavaSmaCCProgramNodeImporterVisitor new getExpressionAST: aString
-]
-
 { #category : 'running' }
 JavaSmaCCAbstractMethodTest >> setUp [
 

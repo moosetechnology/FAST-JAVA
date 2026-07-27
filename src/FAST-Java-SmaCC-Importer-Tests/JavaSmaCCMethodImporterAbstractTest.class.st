@@ -5,6 +5,12 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : 'testing' }
+JavaSmaCCMethodImporterAbstractTest class >> isAbstract [
+
+	^ self == JavaSmaCCMethodImporterAbstractTest
+]
+
 { #category : 'running' }
 JavaSmaCCMethodImporterAbstractTest >> javaMethod [
 	self subclassResponsibility 

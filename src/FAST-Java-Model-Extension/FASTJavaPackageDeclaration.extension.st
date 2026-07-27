@@ -1,6 +1,6 @@
-Extension { #name : #FASTJavaPackageDeclaration }
+Extension { #name : 'FASTJavaPackageDeclaration' }
 
-{ #category : #'*FAST-Java-Model-Extension' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTJavaPackageDeclaration >> declarationName [
 
 	self
@@ -10,7 +10,7 @@ FASTJavaPackageDeclaration >> declarationName [
 	^ self qualifiedName
 ]
 
-{ #category : #'*FAST-Java-Model-Extension' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTJavaPackageDeclaration >> declarationName: aName [
 
 	self

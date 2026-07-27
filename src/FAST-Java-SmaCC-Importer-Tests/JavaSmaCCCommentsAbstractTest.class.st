@@ -5,6 +5,12 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
+{ #category : 'testing' }
+JavaSmaCCCommentsAbstractTest class >> isAbstract [
+
+	^ self == JavaSmaCCCommentsAbstractTest
+]
+
 { #category : 'parsing' }
 JavaSmaCCCommentsAbstractTest >> parseMethodString: aString [
 	"overriding to add comments to the parser"

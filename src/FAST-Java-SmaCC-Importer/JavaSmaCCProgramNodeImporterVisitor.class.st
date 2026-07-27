@@ -270,11 +270,12 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 	[
 	self accept: ast.
 	((self model allWithSubTypesOfAny: {
+			  FASTJavaCompilationUnit.
 			  FASTJavaClassDeclaration.
 			  FASTJavaInterfaceDeclaration.
 			  FASTJavaEnumDeclaration }) detect: [ :classDeclaration |
 		 classDeclaration parentNode isNil ]) source:
-		ast completeSource asString ]
+			ast completeSource asString ]
 		on: Error
 		do: [ :err |
 			('FAST Err parsing: ' , String crlf , aCodeString) record.
@@ -1070,9 +1071,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 	aNewClass expressions do: [ :expression | 
 		currentFASTEntity arguments add: (self clone accept: expression) ].
 	aNewClass type
-		ifNotNil: [ 
+		ifNotNil: [
 		currentFASTEntity type: (self clone accept: aNewClass type) ]
-		ifNil: [ 
+		ifNil: [
 			currentFASTEntity type: (self clone createTypeName: aNewClass name).
 			currentFASTEntity receiver: (self clone accept: aNewClass primary) ].
 	aNewClass declarations do: [ :method | 
@@ -1105,6 +1106,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclarat
 	currentFASTEntity := self addToModel: FASTJavaPackageDeclaration new.
 	self setStartEndPos: aPackageDeclaration.
 	currentFASTEntity qualifiedName: (self clone accept: aPackageDeclaration name).
+	^ currentFASTEntity
 ]
 
 { #category : 'visitor' }
@@ -1171,6 +1173,21 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
 	^ currentFASTEntity
 ]
 
+{ #category : 'generated' }
+JavaSmaCCProgramNodeImporterVisitor >> visitProgramFile: aProgramFile [
+	currentFASTEntity := self addToModel: FASTJavaCompilationUnit new.
+	self setStartEndPos: aProgramFile.
+	currentFASTEntity packageDeclaration: (self clone accept: aProgramFile packageDeclaration).
+	aProgramFile imports do: [ :import | currentFASTEntity addImportDeclaration: (self clone accept: import) ].
+	aProgramFile typeDeclarations do: [ :declaration | "Maybe CompilationUnit should use TWithDeclarations rather than having a relation for classes, interfaces, and enums"
+			| entity |
+			entity := self clone accept: declaration.
+			entity isClassDeclaration ifTrue: [ currentFASTEntity addClassDeclaration: entity ].
+			entity isInterfaceDeclaration ifTrue: [ currentFASTEntity addInterfaceDeclaration: entity ].
+			entity isEnumDeclaration ifTrue: [ currentFASTEntity addEnumDeclaration: entity ] ].
+	^ currentFASTEntity
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 
@@ -1222,6 +1239,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingle
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self setStartEndPos: aSingleTypeImportDeclaration.
 	currentFASTEntity qualifiedName: (self clone accept: aSingleTypeImportDeclaration name).
+	^ currentFASTEntity
 ]
 
 { #category : 'visitor' }
@@ -1271,7 +1289,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperCo
 JavaSmaCCProgramNodeImporterVisitor >> visitSuperMemberAcessor: aFieldAccess [
 	currentFASTEntity := self create: FASTJavaVariableExpression from: aFieldAccess superToken.
 	currentFASTEntity name: aFieldAccess superToken value.
-	^currentFASTEntity 
+	^ currentFASTEntity 
 ]
 
 { #category : 'visitor' }
@@ -1371,13 +1389,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aTypeImportOnDemandDeclaration [
-
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self setStartEndPos: aTypeImportOnDemandDeclaration.
 	currentFASTEntity
 		isOnDemand: true;
 		qualifiedName:
-			(self clone accept: aTypeImportOnDemandDeclaration name)
+			(self clone accept: aTypeImportOnDemandDeclaration name).
+	^ currentFASTEntity
 ]
 
 { #category : 'visitor' }
@@ -1395,7 +1413,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeParameter: aTypeParameter [
 	currentFASTEntity name: aTypeParameter name value.
 	aTypeParameter types do: [ :type |
 		currentFASTEntity addType: (self clone accept: type)
-		 ].
+	].
 	^ currentFASTEntity
 ]
 
