@@ -8,10 +8,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCNewInnerClassTest >> javaMethod [
 	^ 'public void onClick(ClickEvent event) {
-  view.setDisplayView(view.new InnerClass());
+	view.setDisplayView(view.new InnerClass());
 }'
 ]
 

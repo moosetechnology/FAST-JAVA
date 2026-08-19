@@ -5,11 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCLambdaWithArgumentsTest >> javaMethod [
 	^ 'method() {
-		a.method((Person p, int i) -> anImvocation().anotherOne());
-	}'
+	a.method((Person p, int i) -> anImvocation().anotherOne());
+}'
 ]
 
 { #category : 'tests' }

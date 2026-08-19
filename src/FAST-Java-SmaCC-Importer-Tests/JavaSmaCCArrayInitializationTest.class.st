@@ -5,10 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCArrayInitializationTest >> javaMethod [
 	^ 'void arrayAccess() {
-   String[] hello = {"hello", "world"};
+	String[] hello = {"hello", "world"};
 }'
 ]
 

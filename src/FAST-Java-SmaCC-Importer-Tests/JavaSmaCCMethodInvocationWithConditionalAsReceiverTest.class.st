@@ -8,11 +8,12 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCMethodInvocationWithConditionalAsReceiverTest >> javaMethod [
+
 	^ 'public void onClick(ClickEvent arg0) {
-		(ratioDTO==null?"":"").method("");
-	}'
+	(ratioDTO==null?"":"").method("");
+}'
 ]
 
 { #category : 'tests' }

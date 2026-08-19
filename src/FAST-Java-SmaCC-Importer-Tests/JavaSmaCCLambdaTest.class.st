@@ -8,8 +8,8 @@ Class {
 { #category : 'resources' }
 JavaSmaCCLambdaTest >> javaMethod [
 	^ 'method() {
-		a.method(() -> anImvocation().anotherOne());
-	}'
+	a.method(() -> anImvocation().anotherOne());
+}'
 ]
 
 { #category : 'tests' }

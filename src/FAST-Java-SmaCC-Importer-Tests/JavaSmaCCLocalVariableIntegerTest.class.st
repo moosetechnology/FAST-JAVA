@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCLocalVariableIntegerTest >> javaMethod [
-	
+
 	^ 'int aLittleOfVariables() {
 		int x = 5;	
 		return x;

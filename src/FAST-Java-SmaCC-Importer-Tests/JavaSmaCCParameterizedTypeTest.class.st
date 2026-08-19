@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCParameterizedTypeTest >> javaMethod [
-	^'IMap<String,Iterator<String>> meth() { }'
+	^ 'IMap<String,Iterator<String>> meth() {}'
 ]
 
 { #category : 'tests' }

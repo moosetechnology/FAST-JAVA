@@ -5,37 +5,31 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCEnumDeclarationTest >> javaClass [
+	^ 'private enum MyEnum {
 
-	^ 'private enum MyEnum { 
-		
-		INFORMATION_EMPTY("INFO_EMPTY");
-		
-		private String label = null;
+	INFORMATION_EMPTY("INFO_EMPTY");
 
-		/**
-		* Constructeur
-		*
-		* @param label
-		**/
-		private MyEnum(final String label) {
-			setLabel(label);
-		}
-		
-		public String setLabel(String label) {
-			return this.label = label;
-		}
-		
-		public String getLabel() {
-			return this.label;
-		}
-}' 
-]
+	private String label = null;
 
-{ #category : 'running' }
-JavaSmaCCEnumDeclarationTest >> javaMethod [
-	^self shouldNotImplement
+	/**
+	* Constructeur
+	*
+	* @param label
+	**/
+	private MyEnum(final String label) {
+		setLabel(label);
+	}
+
+	public String setLabel(String label) {
+		return this.label = label;
+	}
+
+	public String getLabel() {
+		return this.label;
+	}
+}'
 ]
 
 { #category : 'tests' }

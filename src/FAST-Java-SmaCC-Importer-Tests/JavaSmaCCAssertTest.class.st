@@ -8,8 +8,8 @@ Class {
 { #category : 'resources' }
 JavaSmaCCAssertTest >> javaMethod [
 	^ 'void assertMethod() {
-		assert 1 == 3 || "hello" == "world" : "A message";
-	}'
+	assert 1 == 3 || "hello" == "world" : "A message";
+}'
 ]
 
 { #category : 'tests' }

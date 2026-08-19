@@ -7,8 +7,7 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCSwitchWithInvocationConditionTest >> javaMethod [
-	^ 
-'void switchMethod() {
+	^ 'void switchMethod() {
 	switch(a.call()) { 
 		case HELLO:
 			doStuff();
@@ -18,8 +17,7 @@ JavaSmaCCSwitchWithInvocationConditionTest >> javaMethod [
 		default:
 			done();
 	}
-}
-'
+}'
 ]
 
 { #category : 'tests' }

@@ -11,7 +11,13 @@ JavaSmaCCCommentsAbstractTest class >> isAbstract [
 	^ self == JavaSmaCCCommentsAbstractTest
 ]
 
-{ #category : 'parsing' }
+{ #category : 'resources' }
+JavaSmaCCCommentsAbstractTest >> javaMethod [
+
+	self subclassResponsibility
+]
+
+{ #category : 'running' }
 JavaSmaCCCommentsAbstractTest >> parseMethodString: aString [
 	"overriding to add comments to the parser"
 
@@ -24,6 +30,6 @@ JavaSmaCCCommentsAbstractTest >> parseMethodString: aString [
 JavaSmaCCCommentsAbstractTest >> setUp [
 
 	super setUp.
-	fastModel := (self parseMethodString: self javaMethod).
+	fastModel := self parseMethodString: self javaMethod.
 	fastMethod := fastModel allFASTJavaMethodEntity anyOne
 ]

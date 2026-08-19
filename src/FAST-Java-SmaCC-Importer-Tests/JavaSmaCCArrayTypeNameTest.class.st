@@ -5,11 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCArrayTypeNameTest >> javaMethod [
 	^ 'method() {
-          Byte[] buffer = newExchange.getIn().getMandatoryBody(Byte[].class);
-	}'
+	Byte[] buffer = newExchange.getIn().getMandatoryBody(Byte[].class);
+}'
 ]
 
 { #category : 'tests' }

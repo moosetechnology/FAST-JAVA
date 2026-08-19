@@ -8,7 +8,7 @@ Class {
 { #category : 'resources' }
 JavaSmaCCSuperMethodInvocationTest >> javaMethod [
 	^ 'void superMethodInvocation() {
-  super.superMethodInvocation();
+	super.superMethodInvocation();
 }'
 ]
 

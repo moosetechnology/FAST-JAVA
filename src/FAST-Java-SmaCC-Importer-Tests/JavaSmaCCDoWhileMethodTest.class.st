@@ -5,16 +5,13 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCDoWhileMethodTest >> javaMethod [
-	
-	^ 
-'void doWhile() {
- 	do {
-      something();
-   } while (ReactiveHelper.executeFromQueue());
-}
-'
+	^ 'void doWhile() {
+	do {
+		something();
+	} while (ReactiveHelper.executeFromQueue());
+}'
 ]
 
 { #category : 'tests' }

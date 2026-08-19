@@ -7,7 +7,7 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCLocalVariableCharTest >> javaMethod [
-	
+
 	^ 'char aLittleOfVariables3() {
 		char x = ''c'';	
 		return x;

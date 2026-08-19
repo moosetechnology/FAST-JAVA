@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCForTest >> javaMethod [
 	^ 'void forMethod() {
 	for (int i = 0;i< 3;++i){

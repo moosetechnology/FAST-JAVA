@@ -5,13 +5,13 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : 'resources' }
 JavaSmaCCEnumWithInterfaceDeclarationTest >> javaClass [
 	^ 'class A {
-	private enum MyEnum implements Serializable { 
-		
+	private enum MyEnum implements Serializable {
+
 		INFORMATION_EMPTY("INFO_EMPTY");
-		
+
 		private String label = null;
 
 		/**
@@ -22,21 +22,16 @@ JavaSmaCCEnumWithInterfaceDeclarationTest >> javaClass [
 		private MyEnum(final String label) {
 			setLabel(label);
 		}
-		
+
 		public String setLabel(String label) {
 			return this.label = label;
 		}
-		
+
 		public String getLabel() {
 			return this.label;
 		}
 	}
-}' 
-]
-
-{ #category : 'accessing' }
-JavaSmaCCEnumWithInterfaceDeclarationTest >> javaMethod [
-	^ self shouldNotImplement
+}'
 ]
 
 { #category : 'running' }

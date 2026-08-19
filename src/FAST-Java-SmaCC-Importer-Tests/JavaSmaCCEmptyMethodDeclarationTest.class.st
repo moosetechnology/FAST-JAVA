@@ -5,18 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCEmptyMethodDeclarationTest >> javaMethod [
 	^ 'void newMethod() {
 	new Patate() {
-		public void onSuccess(){
-			System.out.println("Success");
-		}
 		;
-		
-		public void onFail(){
-			System.out.println("Fail");
-		}
 	};
 }'
 ]

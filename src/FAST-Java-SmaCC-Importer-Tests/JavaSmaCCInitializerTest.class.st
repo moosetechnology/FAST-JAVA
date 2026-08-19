@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCInitializerTest >> javaMethod [
 	^ 'void initializer() {
 	Button b = new Button("param1") { 

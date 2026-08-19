@@ -5,12 +5,12 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCContinueTest >> javaMethod [
 	^ 'public void ifContinue() {
-		if (true){
-			continue;
-		}
+	if (true) {
+		continue;
+	}
 }'
 ]
 

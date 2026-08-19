@@ -5,10 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCUnarySubstractionExpressionTest >> javaMethod [
-	^ 'public void patate () {
-	int i = -i;	
+	^ 'public void patate() {
+	int i = -i;
 }'
 ]
 

@@ -5,34 +5,29 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : 'resources' }
 JavaSmaCCInClassCommentsTest >> javaClass [
 
-	^ '
-import java.util.Scanner;
-public class GameOfLife {
-	
-	/*A comment for Show()*/
-    public static void show(boolean[][] grid){
-        String s = "";
-        String AaaaaaEeeee = "";
-		  /*an Inner comment*/	
-        for(boolean[] row : grid){
-            for(boolean val : row)
-                if(val)
-                    s += "*";
-                else
-                    s += ".";
-            s += "\n";
-        }
-        System.out.println(s);
-    }
-}'
-]
+	^ 'import java.util.Scanner;
 
-{ #category : 'accessing' }
-JavaSmaCCInClassCommentsTest >> javaMethod [
-	^ self shouldBeImplemented
+public class GameOfLife {
+
+	/*A comment for Show()*/
+	public static void show(boolean[][] grid) {
+		String s = "";
+		String AaaaaaEeeee = "";
+		/*an Inner comment*/
+		for (boolean[] row : grid) {
+			for (boolean val : row)
+				if (val)
+					s += "*";
+				else
+					s += ".";
+			s += "\n";
+		}
+		System.out.println(s);
+	}
+}'
 ]
 
 { #category : 'running' }

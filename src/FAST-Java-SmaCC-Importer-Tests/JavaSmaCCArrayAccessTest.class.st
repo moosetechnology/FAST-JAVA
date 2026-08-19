@@ -8,8 +8,8 @@ Class {
 { #category : 'resources' }
 JavaSmaCCArrayAccessTest >> javaMethod [
 	^ 'void arrayAccess() {
-   int j = array1[i];
-   int k = array2[i][j];
+	int j = array1[i];
+	int k = array2[i][j];
 }'
 ]
 

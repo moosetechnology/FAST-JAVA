@@ -7,8 +7,8 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCUnaryPreIncrementExpressionTest >> javaMethod [
-	^ 'public void patate () {
-	++i;		
+	^ 'public void patate() {
+	++i;
 }'
 ]
 

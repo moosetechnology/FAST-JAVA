@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCInfixOperationAsArgumentTest >> javaMethod [
 
 	^ 'void method() {

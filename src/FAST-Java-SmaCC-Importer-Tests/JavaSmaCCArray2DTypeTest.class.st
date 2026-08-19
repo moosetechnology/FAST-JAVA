@@ -5,11 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCArray2DTypeTest >> javaMethod [
 	^ 'method() {
-          byte[][] buffer;
-	}'
+	byte[][] buffer;
+}'
 ]
 
 { #category : 'tests' }

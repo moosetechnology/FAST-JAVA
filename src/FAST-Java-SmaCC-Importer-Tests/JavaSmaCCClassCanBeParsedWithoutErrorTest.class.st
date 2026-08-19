@@ -5,18 +5,18 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : 'resources' }
 JavaSmaCCClassCanBeParsedWithoutErrorTest >> javaClass [
 	^ 'package hello;
 
 import java;
 import patate;
-	
+
 class A {
 	void hello() {
 		int i = 0;
 	}
-}' 
+}'
 ]
 
 { #category : 'running' }

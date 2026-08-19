@@ -12,8 +12,8 @@ Class {
 { #category : 'running' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> javaMethod [
 	^ 'public void onClick(ClickEvent arg0) {
-		x = hello(a,b).hello2(1,2);
-	}'
+	x = hello(a,b).hello2(1,2);
+}'
 ]
 
 { #category : 'resources' }

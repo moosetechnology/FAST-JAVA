@@ -5,14 +5,14 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCNewClassAffectedTest >> javaMethod [
 	^ 'void newMethod() {
 	new Hello().new Patate() {
 		public void onSuccess(){
 			System.out.println("Success");
 		}
-		
+
 		public void onFail(){
 			System.out.println("Fail");
 		}

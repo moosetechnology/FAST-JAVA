@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCSimpleVariableDeclarationTest >> javaMethod [
 	^ 'void forMethod() {
 	int x;

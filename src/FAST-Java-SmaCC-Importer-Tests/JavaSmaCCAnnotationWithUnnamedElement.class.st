@@ -5,11 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCAnnotationWithUnnamedElement >> javaMethod [
-	^'@Useless("Argument 1")
-	void mth() {
-	}'
+	^ '@Useless("Argument 1")
+	void mth() {}'
 ]
 
 { #category : 'tests' }

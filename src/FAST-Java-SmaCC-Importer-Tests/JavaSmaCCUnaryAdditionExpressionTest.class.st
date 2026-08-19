@@ -7,8 +7,8 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCUnaryAdditionExpressionTest >> javaMethod [
-	^ 'public void patate () {
-	int i = +i;	
+	^ 'public void patate() {
+	int i = +i;
 }'
 ]
 

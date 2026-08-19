@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCUnaryNotExpressionTest >> javaMethod [
-	^ 'public void patate () {
+	^ 'public void patate() {
 	boolean b = !b;	
 }'
 ]

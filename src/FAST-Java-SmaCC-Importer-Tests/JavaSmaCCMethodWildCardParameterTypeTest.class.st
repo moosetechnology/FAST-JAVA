@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCMethodWildCardParameterTypeTest >> javaMethod [
-	 ^ 'public Collection<?> hello(){}'
+	^ 'public Collection<?> hello(){}'
 ]
 
 { #category : 'tests' }
