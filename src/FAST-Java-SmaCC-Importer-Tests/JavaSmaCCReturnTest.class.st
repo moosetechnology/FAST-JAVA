@@ -5,11 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCReturnTest >> javaMethod [
 	^ 'int methodReturn(int i) {
-		return i;
-	}'
+	return i;
+}'
 ]
 
 { #category : 'tests' }

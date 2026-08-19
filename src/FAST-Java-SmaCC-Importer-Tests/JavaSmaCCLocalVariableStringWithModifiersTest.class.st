@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCLocalVariableStringWithModifiersTest >> javaMethod [
-	
+
 	^ 'String aLittleOfVariables5() {
 		final String x = null;	
 		return x;

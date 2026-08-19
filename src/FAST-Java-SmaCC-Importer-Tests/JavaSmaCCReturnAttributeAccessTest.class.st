@@ -5,11 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCReturnAttributeAccessTest >> javaMethod [
 	^ 'void methodReturn() {
-		return a.b;
-	}'
+	return a.b;
+}'
 ]
 
 { #category : 'tests' }

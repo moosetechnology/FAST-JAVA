@@ -5,12 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCArrayInitializationExpressionTest >> javaMethod [
 	^ 'void arrayAccess() {
-		Veggies veggies[] = { new BlackOlives(), 
-		                      new Spinach(), 
-		                      new Eggplant() };
+	Veggies veggies[] = { new BlackOlives(), new Spinach(), new Eggplant() };
 }'
 ]
 

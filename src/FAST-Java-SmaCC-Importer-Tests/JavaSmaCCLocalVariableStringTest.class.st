@@ -7,7 +7,7 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCLocalVariableStringTest >> javaMethod [
-	
+
 	^ 'String aLittleOfVariables4() {
 		String x = "test";	
 		return x;

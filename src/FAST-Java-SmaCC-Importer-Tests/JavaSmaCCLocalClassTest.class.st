@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCLocalClassTest >> javaMethod [
-	
+
 	^ 'methodLocalClass() {
         TestMethod t = new TestMethod() { 
             class DummyClass {};

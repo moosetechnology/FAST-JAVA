@@ -5,9 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCMethodIntTypeTest >> javaMethod [
-	 ^ 'int hello(){}'
+
+	^ 'int hello(){}'
 ]
 
 { #category : 'tests' }

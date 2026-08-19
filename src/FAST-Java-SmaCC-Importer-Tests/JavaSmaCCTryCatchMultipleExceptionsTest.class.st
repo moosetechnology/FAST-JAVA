@@ -11,11 +11,10 @@ JavaSmaCCTryCatchMultipleExceptionsTest >> javaMethod [
 	int x;
 	try {
 		x = 1;
-   } catch (Exception | PatateException e) {
+	} catch (Exception | PatateException e) {
 		e.getMessage();
 	};
-}
-'
+}'
 ]
 
 { #category : 'tests' }

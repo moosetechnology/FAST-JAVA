@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : 'resources' }
 JavaSmaCCInfixCanBeReceiverTest >> javaMethod [
 	^ 'void method() {
 	int length = ("hello" + " world").length();

@@ -5,18 +5,12 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCAttributeInitializationInEnumTest >> javaClass [
-	
 	^ 'enum AnEnum {
-  CONST1, CONST2;
-  AnEnum aField = CONST1;
+	CONST1, CONST2;
+	AnEnum aField = CONST1;
 }'
-]
-
-{ #category : 'running' }
-JavaSmaCCAttributeInitializationInEnumTest >> javaMethod [
-	self shouldNotImplement
 ]
 
 { #category : 'as yet unclassified' }

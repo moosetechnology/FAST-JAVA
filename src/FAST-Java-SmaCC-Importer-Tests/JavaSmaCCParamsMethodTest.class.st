@@ -7,10 +7,9 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCParamsMethodTest >> javaMethod [
-	
 	^ 'void params(int a, float b, double c, int... etc) {
-		x = a + b + c;
-	}'
+	x = a + b + c;
+}'
 ]
 
 { #category : 'tests' }

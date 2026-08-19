@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCInterfaceDeclarationTest >> javaMethod [
 	^'void method() {
 	public interface MyInterface {
@@ -14,7 +14,7 @@ JavaSmaCCInterfaceDeclarationTest >> javaMethod [
 
 	void someMethod();
 }
-}' 
+}'
 ]
 
 { #category : 'tests' }

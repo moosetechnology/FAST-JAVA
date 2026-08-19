@@ -5,11 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCBlockCommentTest >> javaMethod [
-
-	^ 
-'void blah() {
+	^ 'void blah() {
   /* the following is a declaration */
   String someVar;
   /* block comment at the end */

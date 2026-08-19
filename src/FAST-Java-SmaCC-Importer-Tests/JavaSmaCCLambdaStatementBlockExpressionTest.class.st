@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCLambdaStatementBlockExpressionTest >> javaMethod [
 	^ 'method() {
 		a.method( (file) -> {

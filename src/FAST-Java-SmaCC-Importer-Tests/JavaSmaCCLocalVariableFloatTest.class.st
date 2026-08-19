@@ -7,7 +7,7 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCLocalVariableFloatTest >> javaMethod [
-	
+
 	^ 'float aLittleOfVariables2() {
 		float x = 5.5;	
 		return x;

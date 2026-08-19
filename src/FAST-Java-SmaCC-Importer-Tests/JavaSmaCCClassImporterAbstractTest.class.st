@@ -11,7 +11,7 @@ JavaSmaCCClassImporterAbstractTest class >> isAbstract [
 	^ self == JavaSmaCCClassImporterAbstractTest
 ]
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCClassImporterAbstractTest >> javaClass [
 
 	self shouldBeImplemented 

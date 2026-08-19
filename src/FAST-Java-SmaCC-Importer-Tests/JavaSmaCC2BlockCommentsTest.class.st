@@ -5,17 +5,14 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCC2BlockCommentsTest >> javaMethod [
-
-	^ 
-'/* this is a useless method */
-/* but it is usefull for testing */
-void blah() {
-}'
+	^ '/* this is a useless method */
+/* but it is useful for testing */
+void blah() {}'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 JavaSmaCC2BlockCommentsTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) first.
@@ -29,7 +26,7 @@ JavaSmaCC2BlockCommentsTest >> testCommentIsAttached [
 	self assert: fastComment container class equals: FASTJavaMethodEntity.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 JavaSmaCC2BlockCommentsTest >> testCommentProperties [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) first.
@@ -40,11 +37,10 @@ JavaSmaCC2BlockCommentsTest >> testCommentProperties [
 	fastComment := (fastModel allWithType: FASTJavaComment) second.
 
 	self assert: (fastModel allWithType: FASTJavaComment) first isBlockComment.
-	self assert: fastComment content equals: '/* but it is usefull for testing */'.
-
+	self assert: fastComment content equals: '/* but it is useful for testing */'.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 JavaSmaCC2BlockCommentsTest >> testModelHasComments [
 	self assert: (fastModel allWithType: FASTJavaComment) size equals: 2
 ]

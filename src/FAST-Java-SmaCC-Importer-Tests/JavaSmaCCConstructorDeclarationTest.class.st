@@ -5,11 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCConstructorDeclarationTest >> javaMethod [
 	^ 'ArrayAccess() {
-		int i = 3;
-		hello.hello();
+	int i = 3;
+	hello.hello();
 }'
 ]
 

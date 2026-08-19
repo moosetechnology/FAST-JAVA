@@ -5,10 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCSwitchTest >> javaMethod [
-	^ 
-'void switchMethod() {
+	^ 'void switchMethod() {
 	switch(hello) { 
 		case HELLO:
 			doStuff();
@@ -18,8 +17,7 @@ JavaSmaCCSwitchTest >> javaMethod [
 		default:
 			done();
 	}
-}
-'
+}'
 ]
 
 { #category : 'tests' }

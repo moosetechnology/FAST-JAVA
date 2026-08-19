@@ -7,13 +7,13 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCLabeledStatementBlockTest >> javaMethod [
-	
+
 	^ 'String methodWithLabeledStatement() {
-		 myLabel: {
-			int i = 3;
-			break myLabel; 
-    }
-	}'
+	myLabel: {
+		int i = 3;
+		break myLabel; 
+	}
+}'
 ]
 
 { #category : 'tests' }

@@ -5,13 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCDeclarationTest >> javaMethod [
-	
-	^ 
-'public Declaration(int parameter1, double parameter2){
-}
-'
+	^ 'public Declaration(int parameter1, double parameter2){}'
 ]
 
 { #category : 'tests' }

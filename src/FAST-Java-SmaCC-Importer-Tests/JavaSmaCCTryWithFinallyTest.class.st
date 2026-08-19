@@ -11,11 +11,10 @@ JavaSmaCCTryWithFinallyTest >> javaMethod [
 	int x;
 	try {
 		x = 1;
-   } finally {
+	} finally {
 		Patate.displayError(e.getMessage());
 	};
-}
-'
+}'
 ]
 
 { #category : 'tests' }

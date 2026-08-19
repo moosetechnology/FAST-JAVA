@@ -5,11 +5,11 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCMethodReferenceTest >> javaMethod [
 	^ 'method() {
-         retrieve(config::getServiceChooser);
-	}'
+	retrieve(config::getServiceChooser);
+}'
 ]
 
 { #category : 'tests' }

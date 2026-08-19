@@ -5,10 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCUnaryPreDecrementExpressionTest >> javaMethod [
-	^ 'public void patate () {
-	--i;		
+	^ 'public void patate() {
+	--i;
 }'
 ]
 

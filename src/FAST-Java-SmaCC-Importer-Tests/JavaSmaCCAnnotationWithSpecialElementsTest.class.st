@@ -5,11 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCAnnotationWithSpecialElementsTest >> javaMethod [
 	^ '@Useless( array={ @OtherAnnotation }, value=RetentionPolicy.RUNTIME )
-	void arrayLiteral() {
-}'
+	void arrayLiteral() {}'
 ]
 
 { #category : 'tests' }

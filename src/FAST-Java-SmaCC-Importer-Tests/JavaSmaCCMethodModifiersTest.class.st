@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCMethodModifiersTest >> javaMethod [
-	 ^ '
+	^ '
 	@Hello
 	private transient void hello(){}'
 ]

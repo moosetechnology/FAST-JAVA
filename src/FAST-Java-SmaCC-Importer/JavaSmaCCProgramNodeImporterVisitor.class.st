@@ -1238,6 +1238,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
 JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingleTypeImportDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self setStartEndPos: aSingleTypeImportDeclaration.
+	currentFASTEntity isStatic: aSingleTypeImportDeclaration staticToken isNotNil.
 	currentFASTEntity qualifiedName: (self clone accept: aSingleTypeImportDeclaration name).
 	^ currentFASTEntity
 ]

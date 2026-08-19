@@ -5,9 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCMethodJokerTypeTest >> javaMethod [
-	 ^ 'private <T extends B & A & C> T hello(){}'
+
+	^ 'private <T extends B & A & C> T hello(){}'
 ]
 
 { #category : 'tests' }

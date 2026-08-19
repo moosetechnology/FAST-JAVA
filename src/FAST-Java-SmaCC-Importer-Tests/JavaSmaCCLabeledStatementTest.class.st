@@ -7,10 +7,10 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCLabeledStatementTest >> javaMethod [
-	
+
 	^ 'void methodWithLabeledStatement() {
-		 myLabel: return;
-	}'
+	myLabel: return;
+}'
 ]
 
 { #category : 'tests' }

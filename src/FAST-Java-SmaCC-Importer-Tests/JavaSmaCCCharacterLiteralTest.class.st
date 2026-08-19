@@ -7,7 +7,7 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCCharacterLiteralTest >> javaMethod [
-	^ 'public void patate () {
+	^ 'public void patate() {
 	print(''A'');
 	print(''\n'');
 	print(''\u0000'');

@@ -5,13 +5,13 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCStaticInitializerTest >> javaMethod [
 	^ 'void initializer() {
 	Button b = new Button("param1") { 
-	static { addClickListener(new ClickListener(){}); }
-	 };
-	}'
+		static { addClickListener(new ClickListener(){}); }
+	};
+}'
 ]
 
 { #category : 'tests' }

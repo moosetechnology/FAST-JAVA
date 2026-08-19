@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCMethodShortTypeTest >> javaMethod [
-	 ^ 'short hello(){}'
+	^ 'short hello(){}'
 ]
 
 { #category : 'tests' }

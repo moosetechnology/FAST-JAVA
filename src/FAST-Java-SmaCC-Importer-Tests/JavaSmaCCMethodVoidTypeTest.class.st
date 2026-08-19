@@ -5,9 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCMethodVoidTypeTest >> javaMethod [
-	 ^ 'void hello(){}'
+	^ 'void hello(){}'
 ]
 
 { #category : 'tests' }

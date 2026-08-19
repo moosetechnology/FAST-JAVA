@@ -5,11 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCAnnotationWithInfixElementTest >> javaMethod [
-	^ '@Useless( "hello"+ "world" )
-	void concatenation() {
-}'
+	^ '@Useless( "hello" + "world" )
+	void concatenation() {}'
 ]
 
 { #category : 'tests' }

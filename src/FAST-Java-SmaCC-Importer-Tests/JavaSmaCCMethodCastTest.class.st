@@ -7,6 +7,7 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCMethodCastTest >> javaMethod [
+
 	^ 'public void onClick(final ClickEvent event) {
 	List<UnPojoMetierRHGWT> removedRowValues = new ArrayList<UnPojoMetierRHGWT>();
 	removedRowValues.add(rowValue);

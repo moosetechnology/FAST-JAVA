@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCInfixOperationTest >> javaMethod [
 	^ 'void infixOperationMethod() {
 	if ((1 > 2) != true )

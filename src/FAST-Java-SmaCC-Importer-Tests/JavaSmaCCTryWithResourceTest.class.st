@@ -8,7 +8,7 @@ Class {
 { #category : 'resources' }
 JavaSmaCCTryWithResourceTest >> javaMethod [
 	^ 'void tryCatch() {
-  try  (ACloseableType o = new ACloseableType()) { }
+	try (ACloseableType o = new ACloseableType()) {}
 }'
 ]
 

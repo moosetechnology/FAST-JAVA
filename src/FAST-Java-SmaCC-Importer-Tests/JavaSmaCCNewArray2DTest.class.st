@@ -5,7 +5,7 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCNewArray2DTest >> javaMethod [
 	^ 'void innerNewClass() {
 	String[][] s2 = new String[][] { {"a", "b", "c"} };

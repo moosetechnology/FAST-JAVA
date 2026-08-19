@@ -12,7 +12,7 @@ JavaSmaCCArgumentNewClassTest >> javaMethod [
 		public void onSuccess(){
 			System.out.println("Success");
 		}
-		
+
 		public void onFail(){
 			System.out.println("Fail");
 		}

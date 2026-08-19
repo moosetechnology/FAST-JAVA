@@ -8,8 +8,8 @@ Class {
 { #category : 'resources' }
 JavaSmaCCAssertionWithAnExpressionTest >> javaMethod [
 	^ 'void assertMethod() {
-		assert 1 == 3 : "A message" + " of error";
-	}'
+	assert 1 == 3 : "A message" + " of error";
+}'
 ]
 
 { #category : 'tests' }

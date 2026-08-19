@@ -11,11 +11,10 @@ JavaSmaCCTryCatchTest >> javaMethod [
 	int x;
 	try {
 		x = 1;
-   } catch (Exception e) {
+	} catch (Exception e) {
 		Patate.displayError(e.getMessage());
 	};
-}
-'
+}'
 ]
 
 { #category : 'tests' }

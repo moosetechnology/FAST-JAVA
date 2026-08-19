@@ -5,19 +5,16 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCAssignmentTest >> javaMethod [
-	^ 'public ApplicationView(ContentPanel navView,
-                           ContentPanel deviceView,
-                           ContentPanel mapView,
-                           ContentPanel archiveView) {
-        navPanel = navView;
-        devicePanel = deviceView;
-        mapPanel = mapView;
-        archivePanel = archiveView;
-        this.var = 5;
-        array[3] += 5.3;
-	}'
+	^ 'public ApplicationView(ContentPanel navView, ContentPanel deviceView, ContentPanel mapView, ContentPanel archiveView) {
+	navPanel = navView;
+	devicePanel = deviceView;
+	mapPanel = mapView;
+	archivePanel = archiveView;
+	this.var = 5;
+	array[3] += 5.3;
+}'
 ]
 
 { #category : 'tests' }

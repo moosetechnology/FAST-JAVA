@@ -5,11 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCAnnotationWithArrayElementTest >> javaMethod [
-	^ '@Useless( {"hello", "world"} )
-	void arrayLiteral() {
-}'
+	^ '@Useless( { "hello", "world" } )
+	void arrayLiteral() {}'
 ]
 
 { #category : 'tests' }
@@ -24,7 +23,7 @@ JavaSmaCCAnnotationWithArrayElementTest >> testNumberOfElementsToAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 1
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 JavaSmaCCAnnotationWithArrayElementTest >> testNumberOfInitializedElement [
 	self assert: (fastModel allWithType: FASTJavaArrayAnnotationElement) first values size equals: 2
 ]

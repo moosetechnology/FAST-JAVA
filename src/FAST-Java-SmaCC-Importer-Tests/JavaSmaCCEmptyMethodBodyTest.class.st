@@ -5,11 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCEmptyMethodBodyTest >> javaMethod [
-	
-	^ 
-'class A {
+	^ 'class A {
 	native void doWhile();
 }'
 ]

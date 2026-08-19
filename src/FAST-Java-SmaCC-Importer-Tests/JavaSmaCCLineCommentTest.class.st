@@ -5,16 +5,14 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resources' }
 JavaSmaCCLineCommentTest >> javaMethod [
-
-	^ 
-'void blah() {
-  String someVar; // this is a declaration
+	^ 'void blah() {
+	String someVar; // this is a declaration
 }'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 JavaSmaCCLineCommentTest >> testCommentIsAttached [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
@@ -23,7 +21,7 @@ JavaSmaCCLineCommentTest >> testCommentIsAttached [
 	self assert: fastComment container class equals: FASTJavaVariableDeclarator.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 JavaSmaCCLineCommentTest >> testCommentProperties [
 	| fastComment |
 	fastComment := (fastModel allWithType: FASTJavaComment) anyOne.
@@ -33,12 +31,11 @@ JavaSmaCCLineCommentTest >> testCommentProperties [
 
 	self assert: fastComment content equals: '// this is a declaration'.
 
-	self assert: fastComment startPos equals: 33.
-	self assert: fastComment endPos equals: 56.
-
+	self assert: fastComment startPos equals: 32.
+	self assert: fastComment endPos equals: 55
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 JavaSmaCCLineCommentTest >> testModelHasComments [
 	self assert: (fastModel allWithType: FASTJavaComment) size equals: 1
 ]

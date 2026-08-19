@@ -5,10 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCConditionalStatementTest >> javaMethod [
 	^ 'void arrayAccess() {
-   int result = (1>2) ? 4 :  5;
+	int result = (1>2) ? 4 :  5;
 }'
 ]
 

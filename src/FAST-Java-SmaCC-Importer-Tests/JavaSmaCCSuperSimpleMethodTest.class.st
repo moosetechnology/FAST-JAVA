@@ -5,11 +5,10 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'running' }
+{ #category : 'resources' }
 JavaSmaCCSuperSimpleMethodTest >> javaMethod [
-	^ 
-'boolean supersimple() {
-  return true;
+	^ 'boolean supersimple() {
+	return true;
 }
 '
 ]

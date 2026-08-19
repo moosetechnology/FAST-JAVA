@@ -5,8 +5,9 @@ Class {
 	#package : 'FAST-Java-SmaCC-Importer-Tests'
 }
 
-{ #category : 'accessing' }
+{ #category : 'resources' }
 JavaSmaCCMethodExceptionTest >> javaMethod [
+
 	^ 'void method() throws MyException {
 }'
 ]

@@ -7,13 +7,11 @@ Class {
 
 { #category : 'resources' }
 JavaSmaCCThrowStatementTest >> javaMethod [
-	^ 
-'boolean methodThrow() {
-  if(true) { 
-	throw new Error();
- }
-}
-'
+	^ 'boolean methodThrow() {
+	if(true) { 
+		throw new Error();
+	}
+}'
 ]
 
 { #category : 'tests' }
