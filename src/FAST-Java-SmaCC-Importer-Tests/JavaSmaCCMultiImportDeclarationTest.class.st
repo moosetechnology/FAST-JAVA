@@ -13,6 +13,11 @@ JavaSmaCCMultiImportDeclarationTest >> javaClass [
 { #category : 'tests' }
 JavaSmaCCMultiImportDeclarationTest >> testImport [
 
+	| import |
 	self assert: (fastModel allWithType: FASTJavaImportDeclaration) size equals: 1.
-	self assert: (fastModel allWithType: FASTJavaImportDeclaration) anyOne isOnDemand
+
+	import := (fastModel allWithType: FASTJavaImportDeclaration) anyOne.
+
+	self deny: import isStatic.
+	self assert: import isOnDemand
 ]
