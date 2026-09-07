@@ -1,6 +1,6 @@
 Extension { #name : 'FASTTStatementBlock' }
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatementBlock >> javaInitializerOwner [
 	"Relation named: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock"
 
@@ -13,7 +13,7 @@ FASTTStatementBlock >> javaInitializerOwner [
 	^ self attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatementBlock >> javaInitializerOwner: anObject [
 
 	<generated>
@@ -27,7 +27,7 @@ FASTTStatementBlock >> javaInitializerOwner: anObject [
 		anObject statementBlock: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatementBlock >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block"
 
@@ -40,7 +40,7 @@ FASTTStatementBlock >> javaSynchronizedStatementOwner [
 	^ self attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatementBlock >> javaSynchronizedStatementOwner: anObject [
 
 	<generated>
