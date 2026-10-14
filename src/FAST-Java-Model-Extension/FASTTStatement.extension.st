@@ -1,6 +1,6 @@
 Extension { #name : 'FASTTStatement' }
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> forIncrementorOwner [
 	"Relation named: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor"
 
@@ -13,7 +13,7 @@ FASTTStatement >> forIncrementorOwner [
 	^ self attributeAt: #forIncrementorOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> forIncrementorOwner: anObject [
 
 	<generated>
@@ -27,7 +27,7 @@ FASTTStatement >> forIncrementorOwner: anObject [
 		anObject incrementor: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> forIninitializerOwner [
 	"Relation named: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer"
 
@@ -40,7 +40,7 @@ FASTTStatement >> forIninitializerOwner [
 	^ self attributeAt: #forIninitializerOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> forIninitializerOwner: anObject [
 
 	<generated>
@@ -54,7 +54,7 @@ FASTTStatement >> forIninitializerOwner: anObject [
 		anObject initializer: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> ifElsePartOwner [
 	"Relation named: #ifElsePartOwner type: #FASTJavaIfStatement opposite: #elsePart"
 
@@ -67,7 +67,7 @@ FASTTStatement >> ifElsePartOwner [
 	^ self attributeAt: #ifElsePartOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> ifElsePartOwner: anObject [
 
 	<generated>
@@ -81,7 +81,7 @@ FASTTStatement >> ifElsePartOwner: anObject [
 		anObject elsePart: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> ifThenPartOwner [
 	"Relation named: #ifThenPartOwner type: #FASTJavaIfStatement opposite: #thenPart"
 
@@ -94,7 +94,7 @@ FASTTStatement >> ifThenPartOwner [
 	^ self attributeAt: #ifThenPartOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> ifThenPartOwner: anObject [
 
 	<generated>
@@ -108,7 +108,7 @@ FASTTStatement >> ifThenPartOwner: anObject [
 		anObject thenPart: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> labelStatementOwner [
 	"Relation named: #labelStatementOwner type: #FASTJavaLabeledStatement opposite: #labeledStatement"
 
@@ -121,7 +121,7 @@ FASTTStatement >> labelStatementOwner [
 	^ self attributeAt: #labelStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model-Extension' }
 FASTTStatement >> labelStatementOwner: anObject [
 
 	<generated>
