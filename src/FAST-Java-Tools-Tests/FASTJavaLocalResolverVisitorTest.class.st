@@ -28,23 +28,20 @@ FASTJavaLocalResolverVisitorTest >> testBindToDeclaration [
 	"
 
 	| varAccess body ast |
-
 	ast := FASTJavaMethodEntity new
-		type: (FASTJavaVoidTypeExpression new name: 'void');
-		name: 'meth';
-		statementBlock: (FASTJavaStatementBlock new
-			 statements: {
-					 (FASTJavaVarDeclStatement new
-						  type: (FASTJavaIntTypeExpression new name: 'int');
-						  declarators: { FASTJavaVariableDeclarator new
-								   variable: (FASTJavaVariableExpression new name: 'x') } ;
-						  startPos: 1).
-					 (FASTJavaExpressionStatement new
-						  expression: (FASTJavaAssignmentExpression new
-								   variable: (FASTJavaVariableExpression new name: 'x');
-								   expression: (FASTJavaIntegerLiteral new primitiveValue: '5') ;
-								   operator: '=');
-						  startPos: 2) }).
+		       type: (FASTJavaVoidTypeExpression new name: 'void');
+		       name: 'meth';
+		       statementBlock: (FASTJavaStatementBlock new statements: {
+						        (FASTJavaVarDeclStatement new
+							         type: (FASTJavaIntTypeExpression new name: 'int');
+							         declarators: { (FASTJavaVariableDeclarator new variable: (FASTJavaVariableExpression new name: 'x')) };
+							         startPos: 1).
+						        (FASTJavaExpressionStatement new
+							         expression: (FASTJavaAssignmentExpression new
+									          variable: (FASTJavaVariableExpression new name: 'x');
+									          expression: (FASTJavaIntegerLiteral new primitiveValue: '5');
+									          operator: '=');
+							         startPos: 2) }).
 
 	localResolver on: ast.
 
@@ -54,7 +51,7 @@ FASTJavaLocalResolverVisitorTest >> testBindToDeclaration [
 	self assert: varAccess localDeclaration variable name equals: 'x'.
 	self assert: varAccess localDeclaration equals: body first declarators first.
 
-	self assert: body first declarators first localUses size equals: 1
+	self assert: body first declarators first localUses size equals: 2
 ]
 
 { #category : 'tests' }
@@ -113,7 +110,7 @@ FASTJavaLocalResolverVisitorTest >> testBindToLoopVariable [
 	self assert: varAccess localDeclaration variable name equals: 'i'.
 	self assert: varAccess localDeclaration equals: loop initializer declarators first.
 
-	self assert: loop initializer declarators first localUses size equals: 3
+	self assert: loop initializer declarators first localUses size equals: 4
 ]
 
 { #category : 'tests' }
@@ -190,29 +187,22 @@ FASTJavaLocalResolverVisitorTest >> testLoopVariableHidesParameter [
 	"
 
 	| varAccess loop ast |
-
 	ast := FASTJavaMethodEntity new
-		type: (FASTJavaVoidTypeExpression new name: 'void');
-		name: 'meth' ;
-		parameters: { (FASTJavaParameter new
-			 variable: (FASTJavaVariableExpression new name: 'i');
-			 type: (FASTJavaIntTypeExpression new name: 'int')) };
-		statementBlock: (FASTJavaStatementBlock new
-			 statements: {
-					 (FASTJavaForStatement new
-					  initializer: (FASTJavaVarDeclStatement new
-							   type: (FASTJavaIntTypeExpression new
-									    name: 'int');
-							   declarators: { (FASTJavaVariableDeclarator new
-									    variable: (FASTJavaVariableExpression new
-											     name: 'i');
-									    expression: (FASTJavaIntegerLiteral new
-											     primitiveValue: '1')) });
-					  body: (FASTJavaExpressionStatement new
-							   expression: (FASTJavaUnaryExpression new
-									    expression: (FASTJavaVariableExpression new name: 'i');
-									    operator: '++'));
-					  startPos: 1) }).
+		       type: (FASTJavaVoidTypeExpression new name: 'void');
+		       name: 'meth';
+		       parameters: { (FASTJavaParameter new
+				        variable: (FASTJavaVariableExpression new name: 'i');
+				        type: (FASTJavaIntTypeExpression new name: 'int')) };
+		       statementBlock: (FASTJavaStatementBlock new statements: { (FASTJavaForStatement new
+					         initializer: (FASTJavaVarDeclStatement new
+							          type: (FASTJavaIntTypeExpression new name: 'int');
+							          declarators: { (FASTJavaVariableDeclarator new
+									           variable: (FASTJavaVariableExpression new name: 'i');
+									           expression: (FASTJavaIntegerLiteral new primitiveValue: '1')) });
+					         body: (FASTJavaExpressionStatement new expression: (FASTJavaUnaryExpression new
+								           expression: (FASTJavaVariableExpression new name: 'i');
+								           operator: '++'));
+					         startPos: 1) }).
 
 	localResolver on: ast.
 
@@ -222,6 +212,6 @@ FASTJavaLocalResolverVisitorTest >> testLoopVariableHidesParameter [
 	self assert: varAccess localDeclaration variable name equals: 'i'.
 	self assert: varAccess localDeclaration equals: loop initializer declarators first.
 
-	self assert: loop initializer declarators first localUses size equals: 1.
-	self assert: ast parameters first localUses size equals: 0
+	self assert: loop initializer declarators first localUses size equals: 2.
+	self assert: ast parameters first localUses size equals: 1
 ]
