@@ -11,7 +11,6 @@ JavaSmaCCLabeledStatementBlockTest >> javaMethod [
 	^ 'String methodWithLabeledStatement() {
 	myLabel: {
 		int i = 3;
-		break myLabel; 
 	}
 }'
 ]

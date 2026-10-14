@@ -52,6 +52,7 @@ Class {
 { #category : 'meta' }
 FASTJavaSwitchStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SwitchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -59,6 +60,8 @@ FASTJavaSwitchStatement class >> annotation [
 
 { #category : 'adding' }
 FASTJavaSwitchStatement >> addCase: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self cases add: anObject
 ]
@@ -67,6 +70,7 @@ FASTJavaSwitchStatement >> addCase: anObject [
 FASTJavaSwitchStatement >> cases [
 	"Relation named: #cases type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The cases of the switch statement'>
 	<derived>
@@ -76,6 +80,7 @@ FASTJavaSwitchStatement >> cases [
 { #category : 'accessing' }
 FASTJavaSwitchStatement >> cases: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	cases value: anObject
 ]
@@ -84,6 +89,7 @@ FASTJavaSwitchStatement >> cases: anObject [
 FASTJavaSwitchStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #switchConditionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The condition of the statement'>
 	<FMProperty: #condition type: #FASTTExpression opposite: #switchConditionOwner>
@@ -93,6 +99,7 @@ FASTJavaSwitchStatement >> condition [
 { #category : 'accessing' }
 FASTJavaSwitchStatement >> condition: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -107,6 +114,7 @@ FASTJavaSwitchStatement >> condition: anObject [
 { #category : 'testing' }
 FASTJavaSwitchStatement >> isSwitchStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

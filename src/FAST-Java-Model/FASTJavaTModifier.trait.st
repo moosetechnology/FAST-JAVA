@@ -28,6 +28,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTModifier classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TModifier super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -37,6 +38,7 @@ FASTJavaTModifier classSide >> annotation [
 FASTJavaTModifier >> javaModifierOwner [
 	"Relation named: #javaModifierOwner type: #FASTJavaTWithModifiers opposite: #modifiers"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The owner of the modifier'>
 	<container>
@@ -46,6 +48,7 @@ FASTJavaTModifier >> javaModifierOwner [
 { #category : 'accessing' }
 FASTJavaTModifier >> javaModifierOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaModifierOwner := anObject
 ]

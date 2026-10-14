@@ -70,6 +70,7 @@ Class {
 { #category : 'meta' }
 FASTJavaClassDeclaration class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ClassDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -77,6 +78,8 @@ FASTJavaClassDeclaration class >> annotation [
 
 { #category : 'adding' }
 FASTJavaClassDeclaration >> addInterface: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self interfaces add: anObject
 ]
@@ -85,6 +88,7 @@ FASTJavaClassDeclaration >> addInterface: anObject [
 FASTJavaClassDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #classDeclarations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The compilation unit that owns me'>
 	<container>
@@ -94,6 +98,7 @@ FASTJavaClassDeclaration >> compilationUnit [
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> compilationUnit: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
 ]
@@ -102,6 +107,7 @@ FASTJavaClassDeclaration >> compilationUnit: anObject [
 FASTJavaClassDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The interfaces I implement'>
 	<derived>
@@ -111,6 +117,7 @@ FASTJavaClassDeclaration >> interfaces [
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> interfaces: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interfaces value: anObject
 ]
@@ -118,6 +125,7 @@ FASTJavaClassDeclaration >> interfaces: anObject [
 { #category : 'testing' }
 FASTJavaClassDeclaration >> isClassDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -126,6 +134,7 @@ FASTJavaClassDeclaration >> isClassDeclaration [
 FASTJavaClassDeclaration >> superclass [
 	"Relation named: #superclass type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My superclass'>
 	^ superclass
@@ -134,6 +143,7 @@ FASTJavaClassDeclaration >> superclass [
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> superclass: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	superclass := anObject
 ]

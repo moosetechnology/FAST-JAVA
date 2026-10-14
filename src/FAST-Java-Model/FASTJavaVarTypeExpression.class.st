@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaVarTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #VarTypeExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaVarTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaVarTypeExpression >> isVarTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

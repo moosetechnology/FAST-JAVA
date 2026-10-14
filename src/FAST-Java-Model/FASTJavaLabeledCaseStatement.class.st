@@ -27,6 +27,7 @@ Class {
 { #category : 'meta' }
 FASTJavaLabeledCaseStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #LabeledCaseStatement super: #FASTJavaCaseStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -35,6 +36,7 @@ FASTJavaLabeledCaseStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaLabeledCaseStatement >> isLabeledCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -43,6 +45,7 @@ FASTJavaLabeledCaseStatement >> isLabeledCaseStatement [
 FASTJavaLabeledCaseStatement >> label [
 	"Relation named: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The label of the case statement'>
 	<FMProperty: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner>
@@ -52,6 +55,7 @@ FASTJavaLabeledCaseStatement >> label [
 { #category : 'accessing' }
 FASTJavaLabeledCaseStatement >> label: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #label ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

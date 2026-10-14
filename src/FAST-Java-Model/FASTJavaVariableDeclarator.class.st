@@ -48,6 +48,7 @@ Class {
 { #category : 'meta' }
 FASTJavaVariableDeclarator class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #VariableDeclarator super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -57,6 +58,7 @@ FASTJavaVariableDeclarator class >> annotation [
 FASTJavaVariableDeclarator >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaVariableDeclaratorExpressionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Expression to be assigned to the var during declaration'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaVariableDeclaratorExpressionOwner>
@@ -66,6 +68,7 @@ FASTJavaVariableDeclarator >> expression [
 { #category : 'accessing' }
 FASTJavaVariableDeclarator >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -80,6 +83,7 @@ FASTJavaVariableDeclarator >> expression: anObject [
 { #category : 'testing' }
 FASTJavaVariableDeclarator >> isVariableDeclarator [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -88,6 +92,7 @@ FASTJavaVariableDeclarator >> isVariableDeclarator [
 FASTJavaVariableDeclarator >> varDeclOwner [
 	"Relation named: #varDeclOwner type: #FASTJavaVarDeclStatement opposite: #declarators"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The owner of the declarator'>
 	<container>
@@ -97,6 +102,7 @@ FASTJavaVariableDeclarator >> varDeclOwner [
 { #category : 'accessing' }
 FASTJavaVariableDeclarator >> varDeclOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	varDeclOwner := anObject
 ]
@@ -105,6 +111,7 @@ FASTJavaVariableDeclarator >> varDeclOwner: anObject [
 FASTJavaVariableDeclarator >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The variable that is being declared'>
 	^ variable
@@ -113,6 +120,7 @@ FASTJavaVariableDeclarator >> variable [
 { #category : 'accessing' }
 FASTJavaVariableDeclarator >> variable: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	variable := anObject
 ]

@@ -48,6 +48,7 @@ Class {
 { #category : 'meta' }
 FASTJavaAnnotation class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Annotation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -55,6 +56,8 @@ FASTJavaAnnotation class >> annotation [
 
 { #category : 'adding' }
 FASTJavaAnnotation >> addElement: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self elements add: anObject
 ]
@@ -63,6 +66,7 @@ FASTJavaAnnotation >> addElement: anObject [
 FASTJavaAnnotation >> elements [
 	"Relation named: #elements type: #FASTJavaTAnnotationElement opposite: #parentAnnotation"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: '"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")'>
@@ -73,6 +77,7 @@ FASTJavaAnnotation >> elements [
 { #category : 'accessing' }
 FASTJavaAnnotation >> elements: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	elements value: anObject
 ]
@@ -80,6 +85,7 @@ FASTJavaAnnotation >> elements: anObject [
 { #category : 'testing' }
 FASTJavaAnnotation >> isAnnotation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

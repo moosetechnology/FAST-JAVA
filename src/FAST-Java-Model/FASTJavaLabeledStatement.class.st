@@ -25,7 +25,7 @@
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
-| `label` | `String` | nil | The label of the labeled statement|
+| `label` | `String` | nil | The label declared by this statement|
 | `startPos` | `Number` | nil | |
 
 "
@@ -45,6 +45,7 @@ Class {
 { #category : 'meta' }
 FASTJavaLabeledStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #LabeledStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -53,6 +54,7 @@ FASTJavaLabeledStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaLabeledStatement >> isLabeledStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -61,13 +63,15 @@ FASTJavaLabeledStatement >> isLabeledStatement [
 FASTJavaLabeledStatement >> label [
 
 	<FMProperty: #label type: #String>
+	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The label of the labeled statement'>
+	<FMComment: 'The label declared by this statement'>
 	^ label
 ]
 
 { #category : 'accessing' }
 FASTJavaLabeledStatement >> label: anObject [
+	<ignoreForCoverage>
 	<generated>
 	label := anObject
 ]
@@ -76,6 +80,7 @@ FASTJavaLabeledStatement >> label: anObject [
 FASTJavaLabeledStatement >> labeledStatement [
 	"Relation named: #labeledStatement type: #FASTTStatement opposite: #labelStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Inner statement that is labeled'>
 	<FMProperty: #labeledStatement type: #FASTTStatement opposite: #labelStatementOwner>
@@ -85,6 +90,7 @@ FASTJavaLabeledStatement >> labeledStatement [
 { #category : 'accessing' }
 FASTJavaLabeledStatement >> labeledStatement: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #labeledStatement ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

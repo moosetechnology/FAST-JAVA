@@ -52,6 +52,7 @@ Class {
 { #category : 'meta' }
 FASTJavaIfStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #IfStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -61,6 +62,7 @@ FASTJavaIfStatement class >> annotation [
 FASTJavaIfStatement >> elsePart [
 	"Relation named: #elsePart type: #FASTTStatement opposite: #ifElsePartOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'else part'>
 	<FMProperty: #elsePart type: #FASTTStatement opposite: #ifElsePartOwner>
@@ -70,6 +72,7 @@ FASTJavaIfStatement >> elsePart [
 { #category : 'accessing' }
 FASTJavaIfStatement >> elsePart: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #elsePart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -84,6 +87,7 @@ FASTJavaIfStatement >> elsePart: anObject [
 { #category : 'testing' }
 FASTJavaIfStatement >> isIfStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -92,6 +96,7 @@ FASTJavaIfStatement >> isIfStatement [
 FASTJavaIfStatement >> thenPart [
 	"Relation named: #thenPart type: #FASTTStatement opposite: #ifThenPartOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'then part'>
 	<FMProperty: #thenPart type: #FASTTStatement opposite: #ifThenPartOwner>
@@ -101,6 +106,7 @@ FASTJavaIfStatement >> thenPart [
 { #category : 'accessing' }
 FASTJavaIfStatement >> thenPart: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #thenPart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

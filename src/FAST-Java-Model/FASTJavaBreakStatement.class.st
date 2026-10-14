@@ -22,6 +22,7 @@ A node representing break statement in java
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `label` | `String` | nil | The label targeted by this break statement|
 | `startPos` | `Number` | nil | |
 
 "
@@ -30,6 +31,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
+	#instVars : [
+		'#label => FMProperty'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -38,6 +42,7 @@ Class {
 { #category : 'meta' }
 FASTJavaBreakStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #BreakStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -46,6 +51,24 @@ FASTJavaBreakStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaBreakStatement >> isBreakStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaBreakStatement >> label [
+
+	<FMProperty: #label type: #String>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The label targeted by this break statement'>
+	^ label
+]
+
+{ #category : 'accessing' }
+FASTJavaBreakStatement >> label: anObject [
+	<ignoreForCoverage>
+	<generated>
+	label := anObject
 ]

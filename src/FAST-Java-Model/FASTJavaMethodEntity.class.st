@@ -55,6 +55,7 @@ Class {
 { #category : 'meta' }
 FASTJavaMethodEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #MethodEntity super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -62,12 +63,16 @@ FASTJavaMethodEntity class >> annotation [
 
 { #category : 'adding' }
 FASTJavaMethodEntity >> addThrow: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self throws add: anObject
 ]
 
 { #category : 'adding' }
 FASTJavaMethodEntity >> addTypeParameter: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self typeParameters add: anObject
 ]
@@ -75,6 +80,7 @@ FASTJavaMethodEntity >> addTypeParameter: anObject [
 { #category : 'testing' }
 FASTJavaMethodEntity >> isMethodEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -83,6 +89,7 @@ FASTJavaMethodEntity >> isMethodEntity [
 FASTJavaMethodEntity >> throws [
 	"Relation named: #throws type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The list of throws exception'>
 	<derived>
@@ -92,6 +99,7 @@ FASTJavaMethodEntity >> throws [
 { #category : 'accessing' }
 FASTJavaMethodEntity >> throws: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	throws value: anObject
 ]
@@ -100,6 +108,7 @@ FASTJavaMethodEntity >> throws: anObject [
 FASTJavaMethodEntity >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the method'>
 	^ type
@@ -108,6 +117,7 @@ FASTJavaMethodEntity >> type [
 { #category : 'accessing' }
 FASTJavaMethodEntity >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]
@@ -116,6 +126,7 @@ FASTJavaMethodEntity >> type: anObject [
 FASTJavaMethodEntity >> typeParameters [
 	"Relation named: #typeParameters type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The list of type parameter'>
 	<derived>
@@ -125,6 +136,7 @@ FASTJavaMethodEntity >> typeParameters [
 { #category : 'accessing' }
 FASTJavaMethodEntity >> typeParameters: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typeParameters value: anObject
 ]

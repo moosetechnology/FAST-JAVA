@@ -62,6 +62,7 @@ Class {
 { #category : 'meta' }
 FASTJavaEmptyDimExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #EmptyDimExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -70,6 +71,7 @@ FASTJavaEmptyDimExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaEmptyDimExpression >> isEmptyDimExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -41,6 +41,7 @@ Class {
 { #category : 'meta' }
 FASTJavaExpressionStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ExpressionStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>

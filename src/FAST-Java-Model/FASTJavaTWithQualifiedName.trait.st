@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTWithQualifiedName classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithQualifiedName super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -34,6 +35,7 @@ FASTJavaTWithQualifiedName classSide >> annotation [
 FASTJavaTWithQualifiedName >> qualifiedName [
 	"Relation named: #qualifiedName type: #FASTJavaQualifiedName opposite: #qualifiedNameOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The name that qualifies me'>
 	^ qualifiedName
@@ -42,6 +44,7 @@ FASTJavaTWithQualifiedName >> qualifiedName [
 { #category : 'accessing' }
 FASTJavaTWithQualifiedName >> qualifiedName: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	qualifiedName := anObject
 ]

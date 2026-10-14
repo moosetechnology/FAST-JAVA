@@ -79,6 +79,7 @@ Class {
 { #category : 'meta' }
 FASTJavaTypePattern class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TypePattern super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -87,6 +88,7 @@ FASTJavaTypePattern class >> annotation [
 { #category : 'testing' }
 FASTJavaTypePattern >> isTypePattern [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -95,6 +97,7 @@ FASTJavaTypePattern >> isTypePattern [
 FASTJavaTypePattern >> type [
 	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the declared variable'>
 	^ type
@@ -103,6 +106,7 @@ FASTJavaTypePattern >> type [
 { #category : 'accessing' }
 FASTJavaTypePattern >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]
@@ -111,6 +115,7 @@ FASTJavaTypePattern >> type: anObject [
 FASTJavaTypePattern >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The local variable declared by this type pattern'>
 	^ variable
@@ -119,6 +124,7 @@ FASTJavaTypePattern >> variable [
 { #category : 'accessing' }
 FASTJavaTypePattern >> variable: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	variable := anObject
 ]

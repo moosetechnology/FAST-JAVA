@@ -69,6 +69,7 @@ Class {
 { #category : 'meta' }
 FASTJavaLambdaExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #LambdaExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -78,6 +79,7 @@ FASTJavaLambdaExpression class >> annotation [
 FASTJavaLambdaExpression >> expression [
 	"Relation named: #expression type: #FASTJavaEntity opposite: #javaLambdaExpressionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Expression to be executed as part of the lambda.'>
 	^ expression
@@ -86,6 +88,7 @@ FASTJavaLambdaExpression >> expression [
 { #category : 'accessing' }
 FASTJavaLambdaExpression >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	expression := anObject
 ]
@@ -93,6 +96,7 @@ FASTJavaLambdaExpression >> expression: anObject [
 { #category : 'testing' }
 FASTJavaLambdaExpression >> isLambdaExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -39,6 +39,7 @@ Class {
 { #category : 'meta' }
 FASTJavaQualifiedTypeName class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #QualifiedTypeName super: #FASTJavaTypeName>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -47,6 +48,7 @@ FASTJavaQualifiedTypeName class >> annotation [
 { #category : 'testing' }
 FASTJavaQualifiedTypeName >> isQualifiedTypeName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -55,6 +57,7 @@ FASTJavaQualifiedTypeName >> isQualifiedTypeName [
 FASTJavaQualifiedTypeName >> namespace [
 	"Relation named: #namespace type: #FASTJavaTypeName opposite: #javaTypeNameQualify"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The namespace of the name'>
 	^ namespace
@@ -63,6 +66,7 @@ FASTJavaQualifiedTypeName >> namespace [
 { #category : 'accessing' }
 FASTJavaQualifiedTypeName >> namespace: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	namespace := anObject
 ]

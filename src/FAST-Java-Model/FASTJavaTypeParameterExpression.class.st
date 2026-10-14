@@ -72,6 +72,7 @@ Class {
 { #category : 'meta' }
 FASTJavaTypeParameterExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TypeParameterExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -79,6 +80,8 @@ FASTJavaTypeParameterExpression class >> annotation [
 
 { #category : 'adding' }
 FASTJavaTypeParameterExpression >> addType: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self types add: anObject
 ]
@@ -86,6 +89,7 @@ FASTJavaTypeParameterExpression >> addType: anObject [
 { #category : 'testing' }
 FASTJavaTypeParameterExpression >> isTypeParameterExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -94,6 +98,7 @@ FASTJavaTypeParameterExpression >> isTypeParameterExpression [
 FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner [
 	"Relation named: #javaMethodTypeParameterOwner type: #FASTJavaMethodEntity opposite: #typeParameters"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The method that use me'>
 	<container>
@@ -103,6 +108,7 @@ FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner [
 { #category : 'accessing' }
 FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaMethodTypeParameterOwner := anObject
 ]
@@ -111,6 +117,7 @@ FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner: anObject [
 FASTJavaTypeParameterExpression >> types [
 	"Relation named: #types type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The list of types I extend or implements'>
 	<derived>
@@ -120,6 +127,7 @@ FASTJavaTypeParameterExpression >> types [
 { #category : 'accessing' }
 FASTJavaTypeParameterExpression >> types: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	types value: anObject
 ]

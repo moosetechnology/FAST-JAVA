@@ -75,6 +75,7 @@ Class {
 { #category : 'meta' }
 FASTJavaNewExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #NewExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -83,6 +84,7 @@ FASTJavaNewExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaNewExpression >> isNewExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -91,6 +93,7 @@ FASTJavaNewExpression >> isNewExpression [
 FASTJavaNewExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the array'>
 	^ type
@@ -99,6 +102,7 @@ FASTJavaNewExpression >> type [
 { #category : 'accessing' }
 FASTJavaNewExpression >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]

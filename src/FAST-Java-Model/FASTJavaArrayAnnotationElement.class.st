@@ -70,6 +70,7 @@ Class {
 { #category : 'meta' }
 FASTJavaArrayAnnotationElement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ArrayAnnotationElement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -77,6 +78,8 @@ FASTJavaArrayAnnotationElement class >> annotation [
 
 { #category : 'adding' }
 FASTJavaArrayAnnotationElement >> addValue: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self values add: anObject
 ]
@@ -84,6 +87,7 @@ FASTJavaArrayAnnotationElement >> addValue: anObject [
 { #category : 'testing' }
 FASTJavaArrayAnnotationElement >> isArrayAnnotationElement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -92,6 +96,7 @@ FASTJavaArrayAnnotationElement >> isArrayAnnotationElement [
 FASTJavaArrayAnnotationElement >> values [
 	"Relation named: #values type: #FASTJavaTAnnotationElement opposite: #arrayOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Annotation elements in the Array'>
 	<derived>
@@ -101,6 +106,7 @@ FASTJavaArrayAnnotationElement >> values [
 { #category : 'accessing' }
 FASTJavaArrayAnnotationElement >> values: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	values value: anObject
 ]

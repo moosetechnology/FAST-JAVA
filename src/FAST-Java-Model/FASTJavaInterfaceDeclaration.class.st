@@ -69,6 +69,7 @@ Class {
 { #category : 'meta' }
 FASTJavaInterfaceDeclaration class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #InterfaceDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -76,6 +77,8 @@ FASTJavaInterfaceDeclaration class >> annotation [
 
 { #category : 'adding' }
 FASTJavaInterfaceDeclaration >> addInterface: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self interfaces add: anObject
 ]
@@ -84,6 +87,7 @@ FASTJavaInterfaceDeclaration >> addInterface: anObject [
 FASTJavaInterfaceDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #interfaceDeclarations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The compilation unit that owns me'>
 	<container>
@@ -93,6 +97,7 @@ FASTJavaInterfaceDeclaration >> compilationUnit [
 { #category : 'accessing' }
 FASTJavaInterfaceDeclaration >> compilationUnit: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
 ]
@@ -101,6 +106,7 @@ FASTJavaInterfaceDeclaration >> compilationUnit: anObject [
 FASTJavaInterfaceDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My super interfaces'>
 	<derived>
@@ -110,6 +116,7 @@ FASTJavaInterfaceDeclaration >> interfaces [
 { #category : 'accessing' }
 FASTJavaInterfaceDeclaration >> interfaces: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interfaces value: anObject
 ]
@@ -117,6 +124,7 @@ FASTJavaInterfaceDeclaration >> interfaces: anObject [
 { #category : 'testing' }
 FASTJavaInterfaceDeclaration >> isInterfaceDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

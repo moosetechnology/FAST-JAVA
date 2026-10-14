@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaVoidTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #VoidTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaVoidTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaVoidTypeExpression >> isVoidTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -38,6 +38,7 @@ Class {
 { #category : 'meta' }
 FASTJavaEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -47,6 +48,7 @@ FASTJavaEntity class >> annotation [
 { #category : 'testing' }
 FASTJavaEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FASTJavaEntity
 ]
@@ -54,6 +56,7 @@ FASTJavaEntity class >> isAbstract [
 { #category : 'meta' }
 FASTJavaEntity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FASTJavaModel metamodel
 ]
@@ -61,6 +64,7 @@ FASTJavaEntity class >> metamodel [
 { #category : 'testing' }
 FASTJavaEntity >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -68,6 +72,7 @@ FASTJavaEntity >> hasImmediateSource [
 { #category : 'testing' }
 FASTJavaEntity >> isAnnotation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -75,6 +80,7 @@ FASTJavaEntity >> isAnnotation [
 { #category : 'testing' }
 FASTJavaEntity >> isArrayAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -82,6 +88,7 @@ FASTJavaEntity >> isArrayAccess [
 { #category : 'testing' }
 FASTJavaEntity >> isArrayAnnotationElement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -89,6 +96,7 @@ FASTJavaEntity >> isArrayAnnotationElement [
 { #category : 'testing' }
 FASTJavaEntity >> isArrayInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -96,6 +104,7 @@ FASTJavaEntity >> isArrayInitializer [
 { #category : 'testing' }
 FASTJavaEntity >> isArrayTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -103,6 +112,7 @@ FASTJavaEntity >> isArrayTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isAssignmentExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -110,6 +120,7 @@ FASTJavaEntity >> isAssignmentExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isBehaviouralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -117,6 +128,7 @@ FASTJavaEntity >> isBehaviouralEntity [
 { #category : 'testing' }
 FASTJavaEntity >> isBooleanLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -124,6 +136,7 @@ FASTJavaEntity >> isBooleanLiteral [
 { #category : 'testing' }
 FASTJavaEntity >> isBooleanTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -131,6 +144,7 @@ FASTJavaEntity >> isBooleanTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isBreakStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -138,6 +152,7 @@ FASTJavaEntity >> isBreakStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isByteTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -145,6 +160,7 @@ FASTJavaEntity >> isByteTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -152,6 +168,7 @@ FASTJavaEntity >> isCaseStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isCastExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -159,6 +176,7 @@ FASTJavaEntity >> isCastExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isCatchPartStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -166,6 +184,7 @@ FASTJavaEntity >> isCatchPartStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isCharTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -173,6 +192,7 @@ FASTJavaEntity >> isCharTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isCharacterLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -180,6 +200,7 @@ FASTJavaEntity >> isCharacterLiteral [
 { #category : 'testing' }
 FASTJavaEntity >> isClassDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -187,6 +208,7 @@ FASTJavaEntity >> isClassDeclaration [
 { #category : 'testing' }
 FASTJavaEntity >> isClassProperty [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -194,6 +216,7 @@ FASTJavaEntity >> isClassProperty [
 { #category : 'testing' }
 FASTJavaEntity >> isClassTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -201,6 +224,7 @@ FASTJavaEntity >> isClassTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isCompilationUnit [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -208,6 +232,7 @@ FASTJavaEntity >> isCompilationUnit [
 { #category : 'testing' }
 FASTJavaEntity >> isConditionalExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -215,6 +240,7 @@ FASTJavaEntity >> isConditionalExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isContinueStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -222,6 +248,7 @@ FASTJavaEntity >> isContinueStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isDefaultCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -229,6 +256,7 @@ FASTJavaEntity >> isDefaultCaseStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isDoWhileStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -236,6 +264,7 @@ FASTJavaEntity >> isDoWhileStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isDoubleTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -243,6 +272,7 @@ FASTJavaEntity >> isDoubleTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isEmptyDimExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -250,6 +280,7 @@ FASTJavaEntity >> isEmptyDimExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isEmptyMethodDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -257,6 +288,7 @@ FASTJavaEntity >> isEmptyMethodDeclaration [
 { #category : 'testing' }
 FASTJavaEntity >> isEnumConstant [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -264,6 +296,7 @@ FASTJavaEntity >> isEnumConstant [
 { #category : 'testing' }
 FASTJavaEntity >> isEnumDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -271,6 +304,7 @@ FASTJavaEntity >> isEnumDeclaration [
 { #category : 'testing' }
 FASTJavaEntity >> isExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -278,6 +312,7 @@ FASTJavaEntity >> isExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isExpressionStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -285,6 +320,7 @@ FASTJavaEntity >> isExpressionStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isFieldAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -292,6 +328,7 @@ FASTJavaEntity >> isFieldAccess [
 { #category : 'testing' }
 FASTJavaEntity >> isFloatTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -299,6 +336,7 @@ FASTJavaEntity >> isFloatTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isForEachStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -306,6 +344,7 @@ FASTJavaEntity >> isForEachStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isForStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -313,6 +352,7 @@ FASTJavaEntity >> isForStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isIdentifier [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -320,6 +360,7 @@ FASTJavaEntity >> isIdentifier [
 { #category : 'testing' }
 FASTJavaEntity >> isIfStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -327,6 +368,7 @@ FASTJavaEntity >> isIfStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isImportDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -334,6 +376,7 @@ FASTJavaEntity >> isImportDeclaration [
 { #category : 'testing' }
 FASTJavaEntity >> isInfixOperation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -341,6 +384,7 @@ FASTJavaEntity >> isInfixOperation [
 { #category : 'testing' }
 FASTJavaEntity >> isInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -348,6 +392,7 @@ FASTJavaEntity >> isInitializer [
 { #category : 'testing' }
 FASTJavaEntity >> isIntTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -355,6 +400,7 @@ FASTJavaEntity >> isIntTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isInterfaceDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -362,6 +408,7 @@ FASTJavaEntity >> isInterfaceDeclaration [
 { #category : 'testing' }
 FASTJavaEntity >> isInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -369,6 +416,7 @@ FASTJavaEntity >> isInvocation [
 { #category : 'testing' }
 FASTJavaEntity >> isLabeledCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -376,6 +424,7 @@ FASTJavaEntity >> isLabeledCaseStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isLabeledStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -383,6 +432,7 @@ FASTJavaEntity >> isLabeledStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isLambdaExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -390,6 +440,7 @@ FASTJavaEntity >> isLambdaExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -397,6 +448,7 @@ FASTJavaEntity >> isLiteral [
 { #category : 'testing' }
 FASTJavaEntity >> isLongTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -404,6 +456,7 @@ FASTJavaEntity >> isLongTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isMethodEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -411,6 +464,7 @@ FASTJavaEntity >> isMethodEntity [
 { #category : 'testing' }
 FASTJavaEntity >> isMethodReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -418,6 +472,7 @@ FASTJavaEntity >> isMethodReference [
 { #category : 'testing' }
 FASTJavaEntity >> isModifier [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -425,6 +480,7 @@ FASTJavaEntity >> isModifier [
 { #category : 'testing' }
 FASTJavaEntity >> isNewArray [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -432,6 +488,7 @@ FASTJavaEntity >> isNewArray [
 { #category : 'testing' }
 FASTJavaEntity >> isNewClassExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -439,6 +496,7 @@ FASTJavaEntity >> isNewClassExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isNewExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -446,6 +504,7 @@ FASTJavaEntity >> isNewExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isNullPointerLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -453,6 +512,7 @@ FASTJavaEntity >> isNullPointerLiteral [
 { #category : 'testing' }
 FASTJavaEntity >> isOuterThis [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -460,6 +520,7 @@ FASTJavaEntity >> isOuterThis [
 { #category : 'testing' }
 FASTJavaEntity >> isPackageDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -467,6 +528,7 @@ FASTJavaEntity >> isPackageDeclaration [
 { #category : 'testing' }
 FASTJavaEntity >> isParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -474,6 +536,7 @@ FASTJavaEntity >> isParameter [
 { #category : 'testing' }
 FASTJavaEntity >> isPrimitiveTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -481,6 +544,7 @@ FASTJavaEntity >> isPrimitiveTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isQualifiedName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -488,6 +552,7 @@ FASTJavaEntity >> isQualifiedName [
 { #category : 'testing' }
 FASTJavaEntity >> isQualifiedTypeName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -495,6 +560,7 @@ FASTJavaEntity >> isQualifiedTypeName [
 { #category : 'testing' }
 FASTJavaEntity >> isReturnStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -502,6 +568,7 @@ FASTJavaEntity >> isReturnStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isScopableEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -509,6 +576,7 @@ FASTJavaEntity >> isScopableEntity [
 { #category : 'testing' }
 FASTJavaEntity >> isShortTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -516,6 +584,7 @@ FASTJavaEntity >> isShortTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -523,6 +592,7 @@ FASTJavaEntity >> isStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isStatementBlock [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -530,6 +600,7 @@ FASTJavaEntity >> isStatementBlock [
 { #category : 'testing' }
 FASTJavaEntity >> isStringLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -537,6 +608,7 @@ FASTJavaEntity >> isStringLiteral [
 { #category : 'testing' }
 FASTJavaEntity >> isSwitchStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -544,6 +616,7 @@ FASTJavaEntity >> isSwitchStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isSynchronizedStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -551,6 +624,7 @@ FASTJavaEntity >> isSynchronizedStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isThis [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -558,6 +632,7 @@ FASTJavaEntity >> isThis [
 { #category : 'testing' }
 FASTJavaEntity >> isThrowStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -565,6 +640,7 @@ FASTJavaEntity >> isThrowStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isTryCatchStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -572,6 +648,7 @@ FASTJavaEntity >> isTryCatchStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -579,6 +656,7 @@ FASTJavaEntity >> isTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isTypeName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -586,6 +664,7 @@ FASTJavaEntity >> isTypeName [
 { #category : 'testing' }
 FASTJavaEntity >> isTypeParameterExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -593,6 +672,7 @@ FASTJavaEntity >> isTypeParameterExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isTypePattern [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -600,6 +680,7 @@ FASTJavaEntity >> isTypePattern [
 { #category : 'testing' }
 FASTJavaEntity >> isVarDeclStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -607,6 +688,7 @@ FASTJavaEntity >> isVarDeclStatement [
 { #category : 'testing' }
 FASTJavaEntity >> isVarTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -614,6 +696,7 @@ FASTJavaEntity >> isVarTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isVariableDeclarator [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -621,6 +704,7 @@ FASTJavaEntity >> isVariableDeclarator [
 { #category : 'testing' }
 FASTJavaEntity >> isVariableEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -628,6 +712,7 @@ FASTJavaEntity >> isVariableEntity [
 { #category : 'testing' }
 FASTJavaEntity >> isVariableExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -635,6 +720,7 @@ FASTJavaEntity >> isVariableExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isVoidTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -642,6 +728,7 @@ FASTJavaEntity >> isVoidTypeExpression [
 { #category : 'testing' }
 FASTJavaEntity >> isWhileStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -650,6 +737,7 @@ FASTJavaEntity >> isWhileStatement [
 FASTJavaEntity >> javaLambdaExpressionOwner [
 	"Relation named: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The expression owner (if possible)'>
 	<container>
@@ -660,6 +748,7 @@ FASTJavaEntity >> javaLambdaExpressionOwner [
 { #category : 'accessing' }
 FASTJavaEntity >> javaLambdaExpressionOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaLambdaExpressionOwner := anObject
 ]

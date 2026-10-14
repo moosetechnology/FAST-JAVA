@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaTEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newAnnotation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaAnnotation new
 ]
@@ -29,6 +31,7 @@ FASTJavaTEntityCreator >> newAnnotation [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newArrayAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaArrayAccess new
 ]
@@ -36,6 +39,7 @@ FASTJavaTEntityCreator >> newArrayAccess [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newArrayAnnotationElement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaArrayAnnotationElement new
 ]
@@ -43,6 +47,7 @@ FASTJavaTEntityCreator >> newArrayAnnotationElement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newArrayInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaArrayInitializer new
 ]
@@ -50,6 +55,7 @@ FASTJavaTEntityCreator >> newArrayInitializer [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newArrayTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaArrayTypeExpression new
 ]
@@ -57,6 +63,7 @@ FASTJavaTEntityCreator >> newArrayTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newAssertStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaAssertStatement new
 ]
@@ -64,6 +71,7 @@ FASTJavaTEntityCreator >> newAssertStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newAssignmentExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaAssignmentExpression new
 ]
@@ -71,6 +79,7 @@ FASTJavaTEntityCreator >> newAssignmentExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newBooleanLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaBooleanLiteral new
 ]
@@ -78,6 +87,7 @@ FASTJavaTEntityCreator >> newBooleanLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newBooleanTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaBooleanTypeExpression new
 ]
@@ -85,6 +95,7 @@ FASTJavaTEntityCreator >> newBooleanTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newBreakStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaBreakStatement new
 ]
@@ -92,6 +103,7 @@ FASTJavaTEntityCreator >> newBreakStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newByteTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaByteTypeExpression new
 ]
@@ -99,6 +111,7 @@ FASTJavaTEntityCreator >> newByteTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaCaseStatement new
 ]
@@ -106,6 +119,7 @@ FASTJavaTEntityCreator >> newCaseStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newCastExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaCastExpression new
 ]
@@ -113,6 +127,7 @@ FASTJavaTEntityCreator >> newCastExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newCatchPartStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaCatchPartStatement new
 ]
@@ -120,6 +135,7 @@ FASTJavaTEntityCreator >> newCatchPartStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newCharTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaCharTypeExpression new
 ]
@@ -127,6 +143,7 @@ FASTJavaTEntityCreator >> newCharTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newCharacterLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaCharacterLiteral new
 ]
@@ -134,6 +151,7 @@ FASTJavaTEntityCreator >> newCharacterLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newClassDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaClassDeclaration new
 ]
@@ -141,6 +159,7 @@ FASTJavaTEntityCreator >> newClassDeclaration [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newClassProperty [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaClassProperty new
 ]
@@ -148,6 +167,7 @@ FASTJavaTEntityCreator >> newClassProperty [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newClassTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaClassTypeExpression new
 ]
@@ -155,6 +175,7 @@ FASTJavaTEntityCreator >> newClassTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaComment new
 ]
@@ -162,6 +183,7 @@ FASTJavaTEntityCreator >> newComment [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newCompilationUnit [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaCompilationUnit new
 ]
@@ -169,6 +191,7 @@ FASTJavaTEntityCreator >> newCompilationUnit [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newConditionalExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaConditionalExpression new
 ]
@@ -176,6 +199,7 @@ FASTJavaTEntityCreator >> newConditionalExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newContinueStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaContinueStatement new
 ]
@@ -183,6 +207,7 @@ FASTJavaTEntityCreator >> newContinueStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newDefaultCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaDefaultCaseStatement new
 ]
@@ -190,6 +215,7 @@ FASTJavaTEntityCreator >> newDefaultCaseStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newDoWhileStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaDoWhileStatement new
 ]
@@ -197,6 +223,7 @@ FASTJavaTEntityCreator >> newDoWhileStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newDoubleLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaDoubleLiteral new
 ]
@@ -204,6 +231,7 @@ FASTJavaTEntityCreator >> newDoubleLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newDoubleTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaDoubleTypeExpression new
 ]
@@ -211,6 +239,7 @@ FASTJavaTEntityCreator >> newDoubleTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newEmptyDimExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaEmptyDimExpression new
 ]
@@ -218,6 +247,7 @@ FASTJavaTEntityCreator >> newEmptyDimExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newEmptyMethodDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaEmptyMethodDeclaration new
 ]
@@ -225,6 +255,7 @@ FASTJavaTEntityCreator >> newEmptyMethodDeclaration [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newEnumConstant [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaEnumConstant new
 ]
@@ -232,6 +263,7 @@ FASTJavaTEntityCreator >> newEnumConstant [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newEnumDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaEnumDeclaration new
 ]
@@ -239,6 +271,7 @@ FASTJavaTEntityCreator >> newEnumDeclaration [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newExpressionStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaExpressionStatement new
 ]
@@ -246,6 +279,7 @@ FASTJavaTEntityCreator >> newExpressionStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newFieldAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaFieldAccess new
 ]
@@ -253,6 +287,7 @@ FASTJavaTEntityCreator >> newFieldAccess [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newFloatLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaFloatLiteral new
 ]
@@ -260,6 +295,7 @@ FASTJavaTEntityCreator >> newFloatLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newFloatTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaFloatTypeExpression new
 ]
@@ -267,6 +303,7 @@ FASTJavaTEntityCreator >> newFloatTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newForEachStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaForEachStatement new
 ]
@@ -274,6 +311,7 @@ FASTJavaTEntityCreator >> newForEachStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newForStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaForStatement new
 ]
@@ -281,6 +319,7 @@ FASTJavaTEntityCreator >> newForStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newIdentifier [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaIdentifier new
 ]
@@ -288,6 +327,7 @@ FASTJavaTEntityCreator >> newIdentifier [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newIfStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaIfStatement new
 ]
@@ -295,6 +335,7 @@ FASTJavaTEntityCreator >> newIfStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newImportDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaImportDeclaration new
 ]
@@ -302,6 +343,7 @@ FASTJavaTEntityCreator >> newImportDeclaration [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newInfixOperation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaInfixOperation new
 ]
@@ -309,6 +351,7 @@ FASTJavaTEntityCreator >> newInfixOperation [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaInitializer new
 ]
@@ -316,6 +359,7 @@ FASTJavaTEntityCreator >> newInitializer [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newIntTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaIntTypeExpression new
 ]
@@ -323,6 +367,7 @@ FASTJavaTEntityCreator >> newIntTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newIntegerLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaIntegerLiteral new
 ]
@@ -330,6 +375,7 @@ FASTJavaTEntityCreator >> newIntegerLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newInterfaceDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaInterfaceDeclaration new
 ]
@@ -337,6 +383,7 @@ FASTJavaTEntityCreator >> newInterfaceDeclaration [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newLabeledCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaLabeledCaseStatement new
 ]
@@ -344,6 +391,7 @@ FASTJavaTEntityCreator >> newLabeledCaseStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newLabeledStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaLabeledStatement new
 ]
@@ -351,6 +399,7 @@ FASTJavaTEntityCreator >> newLabeledStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newLambdaExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaLambdaExpression new
 ]
@@ -358,6 +407,7 @@ FASTJavaTEntityCreator >> newLambdaExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaLiteral new
 ]
@@ -365,6 +415,7 @@ FASTJavaTEntityCreator >> newLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newLongLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaLongLiteral new
 ]
@@ -372,6 +423,7 @@ FASTJavaTEntityCreator >> newLongLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newLongTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaLongTypeExpression new
 ]
@@ -379,6 +431,7 @@ FASTJavaTEntityCreator >> newLongTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newMethodEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaMethodEntity new
 ]
@@ -386,6 +439,7 @@ FASTJavaTEntityCreator >> newMethodEntity [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newMethodInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaMethodInvocation new
 ]
@@ -393,6 +447,7 @@ FASTJavaTEntityCreator >> newMethodInvocation [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newMethodReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaMethodReference new
 ]
@@ -400,6 +455,7 @@ FASTJavaTEntityCreator >> newMethodReference [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newModifier [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaModifier new
 ]
@@ -407,6 +463,7 @@ FASTJavaTEntityCreator >> newModifier [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newNewArray [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaNewArray new
 ]
@@ -414,6 +471,7 @@ FASTJavaTEntityCreator >> newNewArray [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newNewClassExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaNewClassExpression new
 ]
@@ -421,6 +479,7 @@ FASTJavaTEntityCreator >> newNewClassExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newNewExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaNewExpression new
 ]
@@ -428,6 +487,7 @@ FASTJavaTEntityCreator >> newNewExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newNullLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaNullLiteral new
 ]
@@ -435,6 +495,7 @@ FASTJavaTEntityCreator >> newNullLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newOuterThis [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaOuterThis new
 ]
@@ -442,6 +503,7 @@ FASTJavaTEntityCreator >> newOuterThis [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newPackageDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaPackageDeclaration new
 ]
@@ -449,6 +511,7 @@ FASTJavaTEntityCreator >> newPackageDeclaration [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaParameter new
 ]
@@ -456,6 +519,7 @@ FASTJavaTEntityCreator >> newParameter [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newPrimitiveTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaPrimitiveTypeExpression new
 ]
@@ -463,6 +527,7 @@ FASTJavaTEntityCreator >> newPrimitiveTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newQualifiedName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaQualifiedName new
 ]
@@ -470,6 +535,7 @@ FASTJavaTEntityCreator >> newQualifiedName [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newQualifiedTypeName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaQualifiedTypeName new
 ]
@@ -477,6 +543,7 @@ FASTJavaTEntityCreator >> newQualifiedTypeName [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newReturnStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaReturnStatement new
 ]
@@ -484,6 +551,7 @@ FASTJavaTEntityCreator >> newReturnStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newShortTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaShortTypeExpression new
 ]
@@ -491,6 +559,7 @@ FASTJavaTEntityCreator >> newShortTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaStatement new
 ]
@@ -498,6 +567,7 @@ FASTJavaTEntityCreator >> newStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newStatementBlock [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaStatementBlock new
 ]
@@ -505,6 +575,7 @@ FASTJavaTEntityCreator >> newStatementBlock [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newStringLiteral [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaStringLiteral new
 ]
@@ -512,6 +583,7 @@ FASTJavaTEntityCreator >> newStringLiteral [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newSwitchStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaSwitchStatement new
 ]
@@ -519,6 +591,7 @@ FASTJavaTEntityCreator >> newSwitchStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newSynchronizedStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaSynchronizedStatement new
 ]
@@ -526,6 +599,7 @@ FASTJavaTEntityCreator >> newSynchronizedStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newThis [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaThis new
 ]
@@ -533,6 +607,7 @@ FASTJavaTEntityCreator >> newThis [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newThrowStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaThrowStatement new
 ]
@@ -540,6 +615,7 @@ FASTJavaTEntityCreator >> newThrowStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newTryCatchStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaTryCatchStatement new
 ]
@@ -547,6 +623,7 @@ FASTJavaTEntityCreator >> newTryCatchStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaTypeExpression new
 ]
@@ -554,6 +631,7 @@ FASTJavaTEntityCreator >> newTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newTypeName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaTypeName new
 ]
@@ -561,6 +639,7 @@ FASTJavaTEntityCreator >> newTypeName [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newTypeParameterExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaTypeParameterExpression new
 ]
@@ -568,6 +647,7 @@ FASTJavaTEntityCreator >> newTypeParameterExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newTypePattern [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaTypePattern new
 ]
@@ -575,6 +655,7 @@ FASTJavaTEntityCreator >> newTypePattern [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newUnaryExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaUnaryExpression new
 ]
@@ -582,6 +663,7 @@ FASTJavaTEntityCreator >> newUnaryExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newVarDeclStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaVarDeclStatement new
 ]
@@ -589,6 +671,7 @@ FASTJavaTEntityCreator >> newVarDeclStatement [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newVarTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaVarTypeExpression new
 ]
@@ -596,6 +679,7 @@ FASTJavaTEntityCreator >> newVarTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newVariableDeclarator [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaVariableDeclarator new
 ]
@@ -603,6 +687,7 @@ FASTJavaTEntityCreator >> newVariableDeclarator [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newVariableExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaVariableExpression new
 ]
@@ -610,6 +695,7 @@ FASTJavaTEntityCreator >> newVariableExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newVoidTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaVoidTypeExpression new
 ]
@@ -617,6 +703,7 @@ FASTJavaTEntityCreator >> newVoidTypeExpression [
 { #category : 'entity creation' }
 FASTJavaTEntityCreator >> newWhileStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaWhileStatement new
 ]

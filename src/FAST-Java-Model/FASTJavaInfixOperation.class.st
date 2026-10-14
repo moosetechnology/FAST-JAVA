@@ -58,7 +58,7 @@ ex:
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
-| `operator` | `String` | nil | operator s symbol|
+| `operator` | `String` | nil | The operator's symbol|
 | `startPos` | `Number` | nil | |
 
 "
@@ -78,6 +78,7 @@ Class {
 { #category : 'meta' }
 FASTJavaInfixOperation class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #InfixOperation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -86,6 +87,7 @@ FASTJavaInfixOperation class >> annotation [
 { #category : 'testing' }
 FASTJavaInfixOperation >> isInfixOperation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -94,6 +96,7 @@ FASTJavaInfixOperation >> isInfixOperation [
 FASTJavaInfixOperation >> leftOperand [
 	"Relation named: #leftOperand type: #FASTTExpression opposite: #infixOperationLeftOperandOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'leftOperand'>
 	<FMProperty: #leftOperand type: #FASTTExpression opposite: #infixOperationLeftOperandOwner>
@@ -103,6 +106,7 @@ FASTJavaInfixOperation >> leftOperand [
 { #category : 'accessing' }
 FASTJavaInfixOperation >> leftOperand: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #leftOperand ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -118,13 +122,15 @@ FASTJavaInfixOperation >> leftOperand: anObject [
 FASTJavaInfixOperation >> operator [
 
 	<FMProperty: #operator type: #String>
+	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'operator s symbol'>
+	<FMComment: 'The operator''s symbol'>
 	^ operator
 ]
 
 { #category : 'accessing' }
 FASTJavaInfixOperation >> operator: anObject [
+	<ignoreForCoverage>
 	<generated>
 	operator := anObject
 ]
@@ -133,6 +139,7 @@ FASTJavaInfixOperation >> operator: anObject [
 FASTJavaInfixOperation >> rightOperand [
 	"Relation named: #rightOperand type: #FASTTExpression opposite: #infixOperationRightOperandOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'rightOperand'>
 	<FMProperty: #rightOperand type: #FASTTExpression opposite: #infixOperationRightOperandOwner>
@@ -142,6 +149,7 @@ FASTJavaInfixOperation >> rightOperand [
 { #category : 'accessing' }
 FASTJavaInfixOperation >> rightOperand: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #rightOperand ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaFloatTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #FloatTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaFloatTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaFloatTypeExpression >> isFloatTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

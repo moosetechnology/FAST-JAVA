@@ -66,6 +66,7 @@ Class {
 { #category : 'meta' }
 FASTJavaLongLiteral class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #LongLiteral super: #FASTJavaLiteral>
 	<package: #'FAST-Java-Model'>
 	<generated>

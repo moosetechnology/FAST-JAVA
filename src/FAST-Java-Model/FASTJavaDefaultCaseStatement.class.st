@@ -18,6 +18,7 @@ Class {
 { #category : 'meta' }
 FASTJavaDefaultCaseStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #DefaultCaseStatement super: #FASTJavaCaseStatement>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -26,6 +27,7 @@ FASTJavaDefaultCaseStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaDefaultCaseStatement >> isDefaultCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

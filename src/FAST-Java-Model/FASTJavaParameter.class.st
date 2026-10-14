@@ -76,6 +76,7 @@ Class {
 { #category : 'meta' }
 FASTJavaParameter class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Parameter super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -85,6 +86,7 @@ FASTJavaParameter class >> annotation [
 FASTJavaParameter >> hasVariableArguments [
 
 	<FMProperty: #hasVariableArguments type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'>
 	^ hasVariableArguments ifNil: [ hasVariableArguments := false ]
@@ -92,6 +94,7 @@ FASTJavaParameter >> hasVariableArguments [
 
 { #category : 'accessing' }
 FASTJavaParameter >> hasVariableArguments: anObject [
+	<ignoreForCoverage>
 	<generated>
 	hasVariableArguments := anObject
 ]
@@ -99,6 +102,7 @@ FASTJavaParameter >> hasVariableArguments: anObject [
 { #category : 'testing' }
 FASTJavaParameter >> isParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -107,6 +111,7 @@ FASTJavaParameter >> isParameter [
 FASTJavaParameter >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the parameter'>
 	^ type
@@ -115,6 +120,7 @@ FASTJavaParameter >> type [
 { #category : 'accessing' }
 FASTJavaParameter >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]
@@ -123,6 +129,7 @@ FASTJavaParameter >> type: anObject [
 FASTJavaParameter >> variable [
 	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'parameter variable'>
 	^ variable
@@ -131,6 +138,7 @@ FASTJavaParameter >> variable [
 { #category : 'accessing' }
 FASTJavaParameter >> variable: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	variable := anObject
 ]

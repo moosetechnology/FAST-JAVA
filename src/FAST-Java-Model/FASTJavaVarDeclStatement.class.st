@@ -58,6 +58,7 @@ Class {
 { #category : 'meta' }
 FASTJavaVarDeclStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #VarDeclStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -65,6 +66,8 @@ FASTJavaVarDeclStatement class >> annotation [
 
 { #category : 'adding' }
 FASTJavaVarDeclStatement >> addDeclarator: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self declarators add: anObject
 ]
@@ -73,6 +76,7 @@ FASTJavaVarDeclStatement >> addDeclarator: anObject [
 FASTJavaVarDeclStatement >> declarators [
 	"Relation named: #declarators type: #FASTJavaVariableDeclarator opposite: #varDeclOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The declarators for the type'>
 	<derived>
@@ -82,6 +86,7 @@ FASTJavaVarDeclStatement >> declarators [
 { #category : 'accessing' }
 FASTJavaVarDeclStatement >> declarators: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	declarators value: anObject
 ]
@@ -89,6 +94,7 @@ FASTJavaVarDeclStatement >> declarators: anObject [
 { #category : 'testing' }
 FASTJavaVarDeclStatement >> isVarDeclStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -97,6 +103,7 @@ FASTJavaVarDeclStatement >> isVarDeclStatement [
 FASTJavaVarDeclStatement >> javaTryResourceOwner [
 	"Relation named: #javaTryResourceOwner type: #FASTJavaTryCatchStatement opposite: #resources"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The try-with-resource that owns me'>
 	<container>
@@ -106,6 +113,7 @@ FASTJavaVarDeclStatement >> javaTryResourceOwner [
 { #category : 'accessing' }
 FASTJavaVarDeclStatement >> javaTryResourceOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaTryResourceOwner := anObject
 ]
@@ -114,6 +122,7 @@ FASTJavaVarDeclStatement >> javaTryResourceOwner: anObject [
 FASTJavaVarDeclStatement >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the declared variables'>
 	^ type
@@ -122,6 +131,7 @@ FASTJavaVarDeclStatement >> type [
 { #category : 'accessing' }
 FASTJavaVarDeclStatement >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]

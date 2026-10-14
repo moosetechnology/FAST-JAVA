@@ -65,6 +65,7 @@ Class {
 { #category : 'meta' }
 FASTJavaTryCatchStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TryCatchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -72,12 +73,16 @@ FASTJavaTryCatchStatement class >> annotation [
 
 { #category : 'adding' }
 FASTJavaTryCatchStatement >> addCatch: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self catches add: anObject
 ]
 
 { #category : 'adding' }
 FASTJavaTryCatchStatement >> addResource: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self resources add: anObject
 ]
@@ -86,6 +91,7 @@ FASTJavaTryCatchStatement >> addResource: anObject [
 FASTJavaTryCatchStatement >> catches [
 	"Relation named: #catches type: #FASTJavaCatchPartStatement opposite: #tryOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'I contain all the catch statements'>
 	<derived>
@@ -95,6 +101,7 @@ FASTJavaTryCatchStatement >> catches [
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> catches: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	catches value: anObject
 ]
@@ -103,6 +110,7 @@ FASTJavaTryCatchStatement >> catches: anObject [
 FASTJavaTryCatchStatement >> finally [
 	"Relation named: #finally type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'I contain the ''finally'' part of the try/catch/finally'>
 	^ finally
@@ -111,6 +119,7 @@ FASTJavaTryCatchStatement >> finally [
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> finally: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	finally := anObject
 ]
@@ -118,6 +127,7 @@ FASTJavaTryCatchStatement >> finally: anObject [
 { #category : 'testing' }
 FASTJavaTryCatchStatement >> isTryCatchStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -126,6 +136,7 @@ FASTJavaTryCatchStatement >> isTryCatchStatement [
 FASTJavaTryCatchStatement >> resources [
 	"Relation named: #resources type: #FASTJavaVarDeclStatement opposite: #javaTryResourceOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'I contain the resources in a try-with-resource statement'>
 	<derived>
@@ -135,6 +146,7 @@ FASTJavaTryCatchStatement >> resources [
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> resources: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	resources value: anObject
 ]
@@ -143,6 +155,7 @@ FASTJavaTryCatchStatement >> resources: anObject [
 FASTJavaTryCatchStatement >> try [
 	"Relation named: #try type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'I represent the ''try'' part of the TryCatch Statement'>
 	^ try
@@ -151,6 +164,7 @@ FASTJavaTryCatchStatement >> try [
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> try: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	try := anObject
 ]

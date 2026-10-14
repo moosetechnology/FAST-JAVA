@@ -72,6 +72,7 @@ Class {
 { #category : 'meta' }
 FASTJavaArrayAccess class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ArrayAccess super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -81,6 +82,7 @@ FASTJavaArrayAccess class >> annotation [
 FASTJavaArrayAccess >> array [
 	"Relation named: #array type: #FASTTExpression opposite: #javaArrayArrayAccessOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Name of accessed field'>
 	<FMProperty: #array type: #FASTTExpression opposite: #javaArrayArrayAccessOwner>
@@ -90,6 +92,7 @@ FASTJavaArrayAccess >> array [
 { #category : 'accessing' }
 FASTJavaArrayAccess >> array: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #array ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -105,6 +108,7 @@ FASTJavaArrayAccess >> array: anObject [
 FASTJavaArrayAccess >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaArrayAccessOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The accessed index'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaArrayAccessOwner>
@@ -114,6 +118,7 @@ FASTJavaArrayAccess >> expression [
 { #category : 'accessing' }
 FASTJavaArrayAccess >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -128,6 +133,7 @@ FASTJavaArrayAccess >> expression: anObject [
 { #category : 'testing' }
 FASTJavaArrayAccess >> isArrayAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

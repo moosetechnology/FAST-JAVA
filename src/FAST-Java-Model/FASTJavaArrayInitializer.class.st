@@ -76,6 +76,7 @@ Class {
 { #category : 'meta' }
 FASTJavaArrayInitializer class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ArrayInitializer super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -83,6 +84,8 @@ FASTJavaArrayInitializer class >> annotation [
 
 { #category : 'adding' }
 FASTJavaArrayInitializer >> addInitializer: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self initializers add: anObject
 ]
@@ -91,6 +94,7 @@ FASTJavaArrayInitializer >> addInitializer: anObject [
 FASTJavaArrayInitializer >> initializers [
 	"Relation named: #initializers type: #FASTTExpression opposite: #javaArrayInitializers"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My initializers'>
 	<derived>
@@ -102,6 +106,7 @@ FASTJavaArrayInitializer >> initializers [
 { #category : 'accessing' }
 FASTJavaArrayInitializer >> initializers: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	self initializers value: anObject
 ]
@@ -109,6 +114,7 @@ FASTJavaArrayInitializer >> initializers: anObject [
 { #category : 'testing' }
 FASTJavaArrayInitializer >> isArrayInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

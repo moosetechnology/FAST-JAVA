@@ -432,6 +432,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aBooleanType [
 JavaSmaCCProgramNodeImporterVisitor >> visitBreakStatement: aBreakStatement [
 	currentFASTEntity := self addToModel: FASTJavaBreakStatement new.
 	self setStartEndPos: aBreakStatement.
+	currentFASTEntity label: aBreakStatement identifier value.
 	^ currentFASTEntity
 ]
 
@@ -554,6 +555,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitConditionalExpression: aConditionalE
 JavaSmaCCProgramNodeImporterVisitor >> visitContinueStatement: aContinueStatement [
 	currentFASTEntity := self addToModel: FASTJavaContinueStatement new.
 	self setStartEndPos: aContinueStatement.
+	currentFASTEntity label: aContinueStatement identifier value.
 	^ currentFASTEntity
 ]
 

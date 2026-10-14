@@ -10,6 +10,8 @@ Class {
 
 { #category : 'accessing' }
 FASTJavaModel class >> allSubmetamodelsPackagesNames [
+
+	<ignoreForCoverage>
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits' #'FAST-Core-Model')
 ]
@@ -17,6 +19,7 @@ FASTJavaModel class >> allSubmetamodelsPackagesNames [
 { #category : 'meta' }
 FASTJavaModel class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Model super: #MooseModel>
 	<package: #'FAST-Java-Model'>
 	<generated>

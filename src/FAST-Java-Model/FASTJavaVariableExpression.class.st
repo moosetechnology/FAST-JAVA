@@ -88,6 +88,7 @@ Class {
 { #category : 'meta' }
 FASTJavaVariableExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #VariableExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -97,6 +98,7 @@ FASTJavaVariableExpression class >> annotation [
 FASTJavaVariableExpression >> javaCastExpressionTypeOwner [
 	"Relation named: #javaCastExpressionTypeOwner type: #FASTJavaCastExpression opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaCastExpression owner (if possible)'>
 	<container>
@@ -107,6 +109,7 @@ FASTJavaVariableExpression >> javaCastExpressionTypeOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaCastExpressionTypeOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaCastExpressionTypeOwner := anObject
 ]
@@ -115,6 +118,7 @@ FASTJavaVariableExpression >> javaCastExpressionTypeOwner: anObject [
 FASTJavaVariableExpression >> javaCatchParameterOwnler [
 	"Relation named: #javaCatchParameterOwnler type: #FASTJavaCatchPartStatement opposite: #parameter"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaCatchPartParameterOwner owner (if possible)'>
 	<container>
@@ -125,6 +129,7 @@ FASTJavaVariableExpression >> javaCatchParameterOwnler [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaCatchParameterOwnler: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaCatchParameterOwnler := anObject
 ]
@@ -133,6 +138,7 @@ FASTJavaVariableExpression >> javaCatchParameterOwnler: anObject [
 FASTJavaVariableExpression >> javaClassPropertyOwner [
 	"Relation named: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaClassProperty owner (if possible)'>
 	<container>
@@ -143,6 +149,7 @@ FASTJavaVariableExpression >> javaClassPropertyOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaClassPropertyOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaClassPropertyOwner := anObject
 ]
@@ -151,6 +158,7 @@ FASTJavaVariableExpression >> javaClassPropertyOwner: anObject [
 FASTJavaVariableExpression >> javaMethodReferenceOwner [
 	"Relation named: #javaMethodReferenceOwner type: #FASTJavaMethodReference opposite: #receiver"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The owner of the method reference (if possible)'>
 	<container>
@@ -161,6 +169,7 @@ FASTJavaVariableExpression >> javaMethodReferenceOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaMethodReferenceOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaMethodReferenceOwner := anObject
 ]
@@ -169,6 +178,7 @@ FASTJavaVariableExpression >> javaMethodReferenceOwner: anObject [
 FASTJavaVariableExpression >> javaMethodTypeOwner [
 	"Relation named: #javaMethodTypeOwner type: #FASTJavaMethodEntity opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
@@ -179,6 +189,7 @@ FASTJavaVariableExpression >> javaMethodTypeOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaMethodTypeOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaMethodTypeOwner := anObject
 ]
@@ -187,6 +198,7 @@ FASTJavaVariableExpression >> javaMethodTypeOwner: anObject [
 FASTJavaVariableExpression >> javaNewExpressionOwner [
 	"Relation named: #javaNewExpressionOwner type: #FASTJavaNewExpression opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaNewExpression owner (if possible)'>
 	<container>
@@ -197,6 +209,7 @@ FASTJavaVariableExpression >> javaNewExpressionOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaNewExpressionOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaNewExpressionOwner := anObject
 ]
@@ -205,6 +218,7 @@ FASTJavaVariableExpression >> javaNewExpressionOwner: anObject [
 FASTJavaVariableExpression >> javaOuterThisOwner [
 	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaOuterThis owner (if possible)'>
 	<container>
@@ -215,6 +229,7 @@ FASTJavaVariableExpression >> javaOuterThisOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaOuterThisOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaOuterThisOwner := anObject
 ]
@@ -223,6 +238,7 @@ FASTJavaVariableExpression >> javaOuterThisOwner: anObject [
 FASTJavaVariableExpression >> javaParameterTypeOwner [
 	"Relation named: #javaParameterTypeOwner type: #FASTJavaParameter opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
@@ -233,6 +249,7 @@ FASTJavaVariableExpression >> javaParameterTypeOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaParameterTypeOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaParameterTypeOwner := anObject
 ]
@@ -241,6 +258,7 @@ FASTJavaVariableExpression >> javaParameterTypeOwner: anObject [
 FASTJavaVariableExpression >> javaParameterVariableOwner [
 	"Relation named: #javaParameterVariableOwner type: #FASTJavaParameter opposite: #variable"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
@@ -251,6 +269,7 @@ FASTJavaVariableExpression >> javaParameterVariableOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaParameterVariableOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaParameterVariableOwner := anObject
 ]
@@ -259,6 +278,7 @@ FASTJavaVariableExpression >> javaParameterVariableOwner: anObject [
 FASTJavaVariableExpression >> javaTypePatternVariableOwner [
 	"Relation named: #javaTypePatternVariableOwner type: #FASTJavaTypePattern opposite: #variable"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaTypePattern variable owner (if possible)'>
 	<container>
@@ -269,6 +289,7 @@ FASTJavaVariableExpression >> javaTypePatternVariableOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaTypePatternVariableOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaTypePatternVariableOwner := anObject
 ]
@@ -277,6 +298,7 @@ FASTJavaVariableExpression >> javaTypePatternVariableOwner: anObject [
 FASTJavaVariableExpression >> javaVarDeclTypeOwner [
 	"Relation named: #javaVarDeclTypeOwner type: #FASTJavaVarDeclStatement opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
@@ -287,6 +309,7 @@ FASTJavaVariableExpression >> javaVarDeclTypeOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaVarDeclTypeOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaVarDeclTypeOwner := anObject
 ]
@@ -295,6 +318,7 @@ FASTJavaVariableExpression >> javaVarDeclTypeOwner: anObject [
 FASTJavaVariableExpression >> javaVariableDeclaratorOwner [
 	"Relation named: #javaVariableDeclaratorOwner type: #FASTJavaVariableDeclarator opposite: #variable"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaVariableDeclarator owner (if possible)'>
 	<container>
@@ -305,6 +329,7 @@ FASTJavaVariableExpression >> javaVariableDeclaratorOwner [
 { #category : 'accessing' }
 FASTJavaVariableExpression >> javaVariableDeclaratorOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaVariableDeclaratorOwner := anObject
 ]

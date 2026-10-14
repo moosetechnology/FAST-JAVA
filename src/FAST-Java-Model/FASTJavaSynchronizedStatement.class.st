@@ -44,6 +44,7 @@ Class {
 { #category : 'meta' }
 FASTJavaSynchronizedStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SynchronizedStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -53,6 +54,7 @@ FASTJavaSynchronizedStatement class >> annotation [
 FASTJavaSynchronizedStatement >> block [
 	"Relation named: #block type: #FASTTStatementBlock opposite: #javaSynchronizedStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The block that is synchronized'>
 	<FMProperty: #block type: #FASTTStatementBlock opposite: #javaSynchronizedStatementOwner>
@@ -62,6 +64,7 @@ FASTJavaSynchronizedStatement >> block [
 { #category : 'accessing' }
 FASTJavaSynchronizedStatement >> block: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #block ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -77,6 +80,7 @@ FASTJavaSynchronizedStatement >> block: anObject [
 FASTJavaSynchronizedStatement >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaSynchronizedStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The instance on which the statement block is synchronized'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaSynchronizedStatementOwner>
@@ -86,6 +90,7 @@ FASTJavaSynchronizedStatement >> expression [
 { #category : 'accessing' }
 FASTJavaSynchronizedStatement >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -100,6 +105,7 @@ FASTJavaSynchronizedStatement >> expression: anObject [
 { #category : 'testing' }
 FASTJavaSynchronizedStatement >> isSynchronizedStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -26,6 +26,7 @@ Class {
 { #category : 'meta' }
 FASTJavaNewArray class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #NewArray super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -35,6 +36,7 @@ FASTJavaNewArray class >> annotation [
 FASTJavaNewArray >> initializer [
 	"Relation named: #initializer type: #FASTTExpression opposite: #javaNewArrayInitialOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The initializer of the array'>
 	<FMProperty: #initializer type: #FASTTExpression opposite: #javaNewArrayInitialOwner>
@@ -44,6 +46,7 @@ FASTJavaNewArray >> initializer [
 { #category : 'accessing' }
 FASTJavaNewArray >> initializer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -58,6 +61,7 @@ FASTJavaNewArray >> initializer: anObject [
 { #category : 'testing' }
 FASTJavaNewArray >> isNewArray [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

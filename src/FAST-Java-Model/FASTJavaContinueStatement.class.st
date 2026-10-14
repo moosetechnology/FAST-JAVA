@@ -22,6 +22,7 @@ A node representing continue statement in java
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `label` | `String` | nil | The label targeted by this continue statement|
 | `startPos` | `Number` | nil | |
 
 "
@@ -30,6 +31,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
+	#instVars : [
+		'#label => FMProperty'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -38,6 +42,7 @@ Class {
 { #category : 'meta' }
 FASTJavaContinueStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ContinueStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -46,6 +51,24 @@ FASTJavaContinueStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaContinueStatement >> isContinueStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaContinueStatement >> label [
+
+	<FMProperty: #label type: #String>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The label targeted by this continue statement'>
+	^ label
+]
+
+{ #category : 'accessing' }
+FASTJavaContinueStatement >> label: anObject [
+	<ignoreForCoverage>
+	<generated>
+	label := anObject
 ]

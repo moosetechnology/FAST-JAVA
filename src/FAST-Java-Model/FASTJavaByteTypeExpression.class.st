@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaByteTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ByteTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaByteTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaByteTypeExpression >> isByteTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

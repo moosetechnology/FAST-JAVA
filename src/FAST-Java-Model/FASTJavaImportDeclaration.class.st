@@ -44,6 +44,7 @@ Class {
 { #category : 'meta' }
 FASTJavaImportDeclaration class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ImportDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -53,6 +54,7 @@ FASTJavaImportDeclaration class >> annotation [
 FASTJavaImportDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #importDeclarations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The compilation unit that owns me'>
 	<container>
@@ -62,6 +64,7 @@ FASTJavaImportDeclaration >> compilationUnit [
 { #category : 'accessing' }
 FASTJavaImportDeclaration >> compilationUnit: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
 ]
@@ -69,6 +72,7 @@ FASTJavaImportDeclaration >> compilationUnit: anObject [
 { #category : 'testing' }
 FASTJavaImportDeclaration >> isImportDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -77,6 +81,7 @@ FASTJavaImportDeclaration >> isImportDeclaration [
 FASTJavaImportDeclaration >> isOnDemand [
 
 	<FMProperty: #isOnDemand type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Whether this import is on-demand (wildcard) or single-type'>
 	^ isOnDemand ifNil: [ isOnDemand := false ]
@@ -84,6 +89,7 @@ FASTJavaImportDeclaration >> isOnDemand [
 
 { #category : 'accessing' }
 FASTJavaImportDeclaration >> isOnDemand: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isOnDemand := anObject
 ]
@@ -92,6 +98,7 @@ FASTJavaImportDeclaration >> isOnDemand: anObject [
 FASTJavaImportDeclaration >> isStatic [
 
 	<FMProperty: #isStatic type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'True if importing static members'>
 	^ isStatic ifNil: [ isStatic := false ]
@@ -99,6 +106,7 @@ FASTJavaImportDeclaration >> isStatic [
 
 { #category : 'accessing' }
 FASTJavaImportDeclaration >> isStatic: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isStatic := anObject
 ]

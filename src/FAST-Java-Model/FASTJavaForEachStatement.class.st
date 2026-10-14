@@ -55,6 +55,7 @@ Class {
 { #category : 'meta' }
 FASTJavaForEachStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ForEachStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -64,6 +65,7 @@ FASTJavaForEachStatement class >> annotation [
 FASTJavaForEachStatement >> fieldname [
 	"Relation named: #fieldname type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The identifier of the created local variable'>
 	^ fieldname
@@ -72,6 +74,7 @@ FASTJavaForEachStatement >> fieldname [
 { #category : 'accessing' }
 FASTJavaForEachStatement >> fieldname: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	fieldname := anObject
 ]
@@ -79,6 +82,7 @@ FASTJavaForEachStatement >> fieldname: anObject [
 { #category : 'testing' }
 FASTJavaForEachStatement >> isForEachStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -87,6 +91,7 @@ FASTJavaForEachStatement >> isForEachStatement [
 FASTJavaForEachStatement >> list [
 	"Relation named: #list type: #FASTTExpression opposite: #javaForEachStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The list that the for-each statement iterates over'>
 	<FMProperty: #list type: #FASTTExpression opposite: #javaForEachStatementOwner>
@@ -96,6 +101,7 @@ FASTJavaForEachStatement >> list [
 { #category : 'accessing' }
 FASTJavaForEachStatement >> list: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #list ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -111,6 +117,7 @@ FASTJavaForEachStatement >> list: anObject [
 FASTJavaForEachStatement >> type [
 	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the created local variable'>
 	^ type
@@ -119,6 +126,7 @@ FASTJavaForEachStatement >> type [
 { #category : 'accessing' }
 FASTJavaForEachStatement >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]

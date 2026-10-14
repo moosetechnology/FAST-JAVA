@@ -72,6 +72,7 @@ Class {
 { #category : 'meta' }
 FASTJavaConditionalExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ConditionalExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -81,6 +82,7 @@ FASTJavaConditionalExpression class >> annotation [
 FASTJavaConditionalExpression >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #conditionalConditionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The condition of the statement'>
 	<FMProperty: #condition type: #FASTTExpression opposite: #conditionalConditionOwner>
@@ -90,6 +92,7 @@ FASTJavaConditionalExpression >> condition [
 { #category : 'accessing' }
 FASTJavaConditionalExpression >> condition: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -105,6 +108,7 @@ FASTJavaConditionalExpression >> condition: anObject [
 FASTJavaConditionalExpression >> elsePart [
 	"Relation named: #elsePart type: #FASTTExpression opposite: #conditionalElsePartOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'else part'>
 	<FMProperty: #elsePart type: #FASTTExpression opposite: #conditionalElsePartOwner>
@@ -114,6 +118,7 @@ FASTJavaConditionalExpression >> elsePart [
 { #category : 'accessing' }
 FASTJavaConditionalExpression >> elsePart: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #elsePart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -128,6 +133,7 @@ FASTJavaConditionalExpression >> elsePart: anObject [
 { #category : 'testing' }
 FASTJavaConditionalExpression >> isConditionalExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -136,6 +142,7 @@ FASTJavaConditionalExpression >> isConditionalExpression [
 FASTJavaConditionalExpression >> thenPart [
 	"Relation named: #thenPart type: #FASTTExpression opposite: #conditionalThenPartOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'then part'>
 	<FMProperty: #thenPart type: #FASTTExpression opposite: #conditionalThenPartOwner>
@@ -145,6 +152,7 @@ FASTJavaConditionalExpression >> thenPart [
 { #category : 'accessing' }
 FASTJavaConditionalExpression >> thenPart: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #thenPart ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

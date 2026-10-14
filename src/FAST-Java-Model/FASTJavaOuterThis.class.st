@@ -73,6 +73,7 @@ Class {
 { #category : 'meta' }
 FASTJavaOuterThis class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #OuterThis super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -81,6 +82,7 @@ FASTJavaOuterThis class >> annotation [
 { #category : 'testing' }
 FASTJavaOuterThis >> isOuterThis [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -89,6 +91,7 @@ FASTJavaOuterThis >> isOuterThis [
 FASTJavaOuterThis >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The accessed type'>
 	^ type
@@ -97,6 +100,7 @@ FASTJavaOuterThis >> type [
 { #category : 'accessing' }
 FASTJavaOuterThis >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]

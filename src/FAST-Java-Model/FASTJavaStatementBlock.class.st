@@ -52,6 +52,7 @@ Class {
 { #category : 'meta' }
 FASTJavaStatementBlock class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #StatementBlock super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -61,6 +62,7 @@ FASTJavaStatementBlock class >> annotation [
 FASTJavaStatementBlock >> javaCatchPartStatementOwner [
 	"Relation named: #javaCatchPartStatementOwner type: #FASTJavaCatchPartStatement opposite: #body"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaCatchPartStatementOwner owner (if possible)'>
 	<container>
@@ -71,6 +73,7 @@ FASTJavaStatementBlock >> javaCatchPartStatementOwner [
 { #category : 'accessing' }
 FASTJavaStatementBlock >> javaCatchPartStatementOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaCatchPartStatementOwner := anObject
 ]
@@ -79,6 +82,7 @@ FASTJavaStatementBlock >> javaCatchPartStatementOwner: anObject [
 FASTJavaStatementBlock >> javaTryCatchOwner [
 	"Relation named: #javaTryCatchOwner type: #FASTJavaTryCatchStatement opposite: #try"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaTryCatch owner (if possible)'>
 	<container>
@@ -89,6 +93,7 @@ FASTJavaStatementBlock >> javaTryCatchOwner [
 { #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryCatchOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaTryCatchOwner := anObject
 ]
@@ -97,6 +102,7 @@ FASTJavaStatementBlock >> javaTryCatchOwner: anObject [
 FASTJavaStatementBlock >> javaTryFinallyOwner [
 	"Relation named: #javaTryFinallyOwner type: #FASTJavaTryCatchStatement opposite: #finally"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The try/finally part that owns me'>
 	<container>
@@ -107,6 +113,7 @@ FASTJavaStatementBlock >> javaTryFinallyOwner [
 { #category : 'accessing' }
 FASTJavaStatementBlock >> javaTryFinallyOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaTryFinallyOwner := anObject
 ]

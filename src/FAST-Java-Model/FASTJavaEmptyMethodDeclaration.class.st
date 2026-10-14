@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FASTJavaEmptyMethodDeclaration class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #EmptyMethodDeclaration super: #FASTJavaMethodEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -31,6 +32,7 @@ FASTJavaEmptyMethodDeclaration class >> annotation [
 { #category : 'testing' }
 FASTJavaEmptyMethodDeclaration >> isEmptyMethodDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
