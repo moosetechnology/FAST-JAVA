@@ -21,5 +21,5 @@ JavaSmaCCContinueTest >> testContinueParent [
 
 { #category : 'tests' }
 JavaSmaCCContinueTest >> testContinueSize [
-	self assert: (fastMethod mooseModel allWithType: FASTJavaContinueStatement) size equals: 1 
+	self assert: (fastMethod mooseModel allWithType: FASTJavaContinueStatement) size equals: 1
 ]

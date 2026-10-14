@@ -1128,49 +1128,34 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 	super defineProperties.
 
-	(javaAssignmentExpression property: #operator type: #String)
-		comment: 'The assignment operator: =, +=, /=, ...'.
+	(javaAssignmentExpression property: #operator type: #String) comment: 'The assignment operator: =, +=, /=, ...'.
 
-	(javaFieldAccess property: #fieldName type: #String) comment:
-		'Name of accessed field'.
-	(javaInfixOperation property: #operator type: #String) comment:
-		'operator s symbol'.
-	(javaClassProperty property: #fieldName type: #String) comment:
-		'Name of accessed field'.
+	(javaInfixOperation property: #operator type: #String) comment: 'The operator''s symbol'.
 
-	(javaUnaryExpression property: #operator type: #String) comment:
-		'The operator string to apply to the expression'.
-	(javaUnaryExpression
-		 property: #isPrefixedUnaryExpression
-		 type: #Boolean) comment:
+	(javaFieldAccess property: #fieldName type: #String) comment: 'Name of accessed field'.
+
+	(javaClassProperty property: #fieldName type: #String) comment: 'Name of accessed field'.
+
+	(javaUnaryExpression property: #operator type: #String) comment: 'The operator to apply to the expression'.
+	(javaUnaryExpression property: #isPrefixedUnaryExpression type: #Boolean) comment:
 		'True if the expression is prefixed (ex. ++i) else false'.
 
-	(javaModifier property: #token type: #String) comment:
-		'The modifier value'.
+	(javaModifier property: #token type: #String) comment: 'The modifier value'.
 
-	(javaLabeledStatement property: #label type: #String) comment:
-		'The label of the labeled statement'.
+	(javaLabeledStatement property: #label type: #String) comment: 'The label declared by this statement'.
 
-	(importDeclaration
-		 property: #isStatic
-		 type: #Boolean
-		 defaultValue: false) comment: 'True if importing static members'.
-	(importDeclaration
-		 property: #isOnDemand
-		 type: #Boolean
-		 defaultValue: false) comment:
+	(importDeclaration property: #isStatic type: #Boolean defaultValue: false) comment: 'True if importing static members'.
+	(importDeclaration property: #isOnDemand type: #Boolean defaultValue: false) comment:
 		'Whether this import is on-demand (wildcard) or single-type'.
 
-	(javaInitializer
-		 property: #isStatic
-		 type: #Boolean
-		 defaultValue: false) comment: 'Whether this initializer is static'.
+	(javaInitializer property: #isStatic type: #Boolean defaultValue: false) comment: 'Whether this initializer is static'.
 
-	(javaParameterExpression
-		 property: #hasVariableArguments
-		 type: #Boolean
-		 defaultValue: false) comment:
-		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'
+	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
+		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
+
+	(javaBreakStatement property: #label type: #String) comment: 'The label targeted by this break statement'.
+
+	(javaContinueStatement property: #label type: #String) comment: 'The label targeted by this continue statement'
 ]
 
 { #category : 'definition' }
