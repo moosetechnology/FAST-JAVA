@@ -49,6 +49,7 @@ Class {
 { #category : 'meta' }
 FASTJavaDoWhileStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #DoWhileStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -57,6 +58,7 @@ FASTJavaDoWhileStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaDoWhileStatement >> isDoWhileStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

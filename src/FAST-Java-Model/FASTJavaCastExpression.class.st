@@ -70,6 +70,7 @@ Class {
 { #category : 'meta' }
 FASTJavaCastExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CastExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -79,6 +80,7 @@ FASTJavaCastExpression class >> annotation [
 FASTJavaCastExpression >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaCastExpressionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The expression to cast'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaCastExpressionOwner>
@@ -88,6 +90,7 @@ FASTJavaCastExpression >> expression [
 { #category : 'accessing' }
 FASTJavaCastExpression >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -102,6 +105,7 @@ FASTJavaCastExpression >> expression: anObject [
 { #category : 'testing' }
 FASTJavaCastExpression >> isCastExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -110,6 +114,7 @@ FASTJavaCastExpression >> isCastExpression [
 FASTJavaCastExpression >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type into which the expression will be cast'>
 	^ type
@@ -118,6 +123,7 @@ FASTJavaCastExpression >> type [
 { #category : 'accessing' }
 FASTJavaCastExpression >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]

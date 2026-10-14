@@ -71,6 +71,7 @@ Class {
 { #category : 'meta' }
 FASTJavaFieldAccess class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #FieldAccess super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -80,6 +81,7 @@ FASTJavaFieldAccess class >> annotation [
 FASTJavaFieldAccess >> fieldName [
 
 	<FMProperty: #fieldName type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Name of accessed field'>
 	^ fieldName
@@ -87,6 +89,7 @@ FASTJavaFieldAccess >> fieldName [
 
 { #category : 'accessing' }
 FASTJavaFieldAccess >> fieldName: anObject [
+	<ignoreForCoverage>
 	<generated>
 	fieldName := anObject
 ]
@@ -94,6 +97,7 @@ FASTJavaFieldAccess >> fieldName: anObject [
 { #category : 'testing' }
 FASTJavaFieldAccess >> isFieldAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

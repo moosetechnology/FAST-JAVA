@@ -89,6 +89,7 @@ Class {
 { #category : 'meta' }
 FASTJavaModifier class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Modifier super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -97,6 +98,7 @@ FASTJavaModifier class >> annotation [
 { #category : 'testing' }
 FASTJavaModifier >> isModifier [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -105,6 +107,7 @@ FASTJavaModifier >> isModifier [
 FASTJavaModifier >> token [
 
 	<FMProperty: #token type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The modifier value'>
 	^ token
@@ -112,6 +115,7 @@ FASTJavaModifier >> token [
 
 { #category : 'accessing' }
 FASTJavaModifier >> token: anObject [
+	<ignoreForCoverage>
 	<generated>
 	token := anObject
 ]

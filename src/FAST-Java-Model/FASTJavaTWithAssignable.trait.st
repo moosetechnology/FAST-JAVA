@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTWithAssignable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithAssignable super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -34,6 +35,7 @@ FASTJavaTWithAssignable classSide >> annotation [
 FASTJavaTWithAssignable >> variable [
 	"Relation named: #variable type: #FASTJavaTAssignable opposite: #javaVariableAssignmentOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My variable'>
 	^ variable
@@ -42,6 +44,7 @@ FASTJavaTWithAssignable >> variable [
 { #category : 'accessing' }
 FASTJavaTWithAssignable >> variable: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	variable := anObject
 ]

@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FASTJavaArrayTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ArrayTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -32,6 +33,7 @@ FASTJavaArrayTypeExpression class >> annotation [
 FASTJavaArrayTypeExpression >> baseType [
 	"Relation named: #baseType type: #FASTTExpression opposite: #javaArrayTypeNameOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the array'>
 	<FMProperty: #baseType type: #FASTTExpression opposite: #javaArrayTypeNameOwner>
@@ -41,6 +43,7 @@ FASTJavaArrayTypeExpression >> baseType [
 { #category : 'accessing' }
 FASTJavaArrayTypeExpression >> baseType: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #baseType ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -55,6 +58,7 @@ FASTJavaArrayTypeExpression >> baseType: anObject [
 { #category : 'testing' }
 FASTJavaArrayTypeExpression >> isArrayTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -29,6 +29,7 @@ Class {
 { #category : 'meta' }
 FASTJavaIdentifier class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Identifier super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -37,6 +38,7 @@ FASTJavaIdentifier class >> annotation [
 { #category : 'testing' }
 FASTJavaIdentifier >> isIdentifier [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -45,6 +47,7 @@ FASTJavaIdentifier >> isIdentifier [
 FASTJavaIdentifier >> javaForEachStatementFieldNameOwner [
 	"Relation named: #javaForEachStatementFieldNameOwner type: #FASTJavaForEachStatement opposite: #fieldname"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
@@ -55,6 +58,7 @@ FASTJavaIdentifier >> javaForEachStatementFieldNameOwner [
 { #category : 'accessing' }
 FASTJavaIdentifier >> javaForEachStatementFieldNameOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaForEachStatementFieldNameOwner := anObject
 ]

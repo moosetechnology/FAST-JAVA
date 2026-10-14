@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaCharTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CharTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaCharTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaCharTypeExpression >> isCharTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

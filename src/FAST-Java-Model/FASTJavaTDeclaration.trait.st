@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTDeclaration classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TDeclaration super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -34,6 +35,7 @@ FASTJavaTDeclaration classSide >> annotation [
 FASTJavaTDeclaration >> javaDeclarationOwner [
 	"Relation named: #javaDeclarationOwner type: #FASTJavaTWithDeclarations opposite: #declarations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The element that declares me'>
 	<container>
@@ -43,6 +45,7 @@ FASTJavaTDeclaration >> javaDeclarationOwner [
 { #category : 'accessing' }
 FASTJavaTDeclaration >> javaDeclarationOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaDeclarationOwner := anObject
 ]

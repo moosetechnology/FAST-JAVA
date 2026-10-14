@@ -70,6 +70,7 @@ Class {
 { #category : 'meta' }
 FASTJavaTypeName class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TypeName super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -78,6 +79,7 @@ FASTJavaTypeName class >> annotation [
 { #category : 'testing' }
 FASTJavaTypeName >> isTypeName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -86,6 +88,7 @@ FASTJavaTypeName >> isTypeName [
 FASTJavaTypeName >> javaTypeNameQualify [
 	"Relation named: #javaTypeNameQualify type: #FASTJavaQualifiedTypeName opposite: #namespace"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'the name I qualify'>
 	<container>
@@ -96,6 +99,7 @@ FASTJavaTypeName >> javaTypeNameQualify [
 { #category : 'accessing' }
 FASTJavaTypeName >> javaTypeNameQualify: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaTypeNameQualify := anObject
 ]
@@ -104,6 +108,7 @@ FASTJavaTypeName >> javaTypeNameQualify: anObject [
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
 	"Relation named: #javaTypeNameTypeExpressionOwner type: #FASTJavaClassTypeExpression opposite: #typeName"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type expression that owns me'>
 	<container>
@@ -114,6 +119,7 @@ FASTJavaTypeName >> javaTypeNameTypeExpressionOwner [
 { #category : 'accessing' }
 FASTJavaTypeName >> javaTypeNameTypeExpressionOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaTypeNameTypeExpressionOwner := anObject
 ]

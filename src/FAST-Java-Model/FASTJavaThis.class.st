@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaThis class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #This super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaThis class >> annotation [
 { #category : 'testing' }
 FASTJavaThis >> isThis [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

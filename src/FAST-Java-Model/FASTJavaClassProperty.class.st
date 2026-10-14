@@ -72,6 +72,7 @@ Class {
 { #category : 'meta' }
 FASTJavaClassProperty class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ClassProperty super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -81,6 +82,7 @@ FASTJavaClassProperty class >> annotation [
 FASTJavaClassProperty >> fieldName [
 
 	<FMProperty: #fieldName type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Name of accessed field'>
 	^ fieldName
@@ -88,6 +90,7 @@ FASTJavaClassProperty >> fieldName [
 
 { #category : 'accessing' }
 FASTJavaClassProperty >> fieldName: anObject [
+	<ignoreForCoverage>
 	<generated>
 	fieldName := anObject
 ]
@@ -95,6 +98,7 @@ FASTJavaClassProperty >> fieldName: anObject [
 { #category : 'testing' }
 FASTJavaClassProperty >> isClassProperty [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -103,6 +107,7 @@ FASTJavaClassProperty >> isClassProperty [
 FASTJavaClassProperty >> type [
 	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the property'>
 	^ type
@@ -111,6 +116,7 @@ FASTJavaClassProperty >> type [
 { #category : 'accessing' }
 FASTJavaClassProperty >> type: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	type := anObject
 ]

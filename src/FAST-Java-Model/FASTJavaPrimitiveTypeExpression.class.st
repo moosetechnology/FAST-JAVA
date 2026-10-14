@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaPrimitiveTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #PrimitiveTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaPrimitiveTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaPrimitiveTypeExpression >> isPrimitiveTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

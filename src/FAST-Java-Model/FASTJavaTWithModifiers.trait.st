@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTWithModifiers classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithModifiers super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -32,6 +33,8 @@ FASTJavaTWithModifiers classSide >> annotation [
 
 { #category : 'adding' }
 FASTJavaTWithModifiers >> addModifier: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self modifiers add: anObject
 ]
@@ -40,6 +43,7 @@ FASTJavaTWithModifiers >> addModifier: anObject [
 FASTJavaTWithModifiers >> modifiers [
 	"Relation named: #modifiers type: #FASTJavaTModifier opposite: #javaModifierOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My modifiers'>
 	<derived>
@@ -49,6 +53,7 @@ FASTJavaTWithModifiers >> modifiers [
 { #category : 'accessing' }
 FASTJavaTWithModifiers >> modifiers: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	modifiers value: anObject
 ]

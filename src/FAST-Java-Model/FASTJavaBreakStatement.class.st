@@ -42,6 +42,7 @@ Class {
 { #category : 'meta' }
 FASTJavaBreakStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #BreakStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -50,6 +51,7 @@ FASTJavaBreakStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaBreakStatement >> isBreakStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

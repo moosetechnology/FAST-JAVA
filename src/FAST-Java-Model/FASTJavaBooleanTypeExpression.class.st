@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaBooleanTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #BooleanTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaBooleanTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaBooleanTypeExpression >> isBooleanTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

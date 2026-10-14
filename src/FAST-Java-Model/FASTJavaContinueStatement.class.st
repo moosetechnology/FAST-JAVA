@@ -42,6 +42,7 @@ Class {
 { #category : 'meta' }
 FASTJavaContinueStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ContinueStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -50,6 +51,7 @@ FASTJavaContinueStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaContinueStatement >> isContinueStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

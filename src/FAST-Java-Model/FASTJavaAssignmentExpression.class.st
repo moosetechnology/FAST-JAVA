@@ -75,6 +75,7 @@ Class {
 { #category : 'meta' }
 FASTJavaAssignmentExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #AssignmentExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -84,6 +85,7 @@ FASTJavaAssignmentExpression class >> annotation [
 FASTJavaAssignmentExpression >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaAssignmentExpressionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Expression to be assigned to the var during declaration'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaAssignmentExpressionOwner>
@@ -93,6 +95,7 @@ FASTJavaAssignmentExpression >> expression [
 { #category : 'accessing' }
 FASTJavaAssignmentExpression >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -107,6 +110,7 @@ FASTJavaAssignmentExpression >> expression: anObject [
 { #category : 'testing' }
 FASTJavaAssignmentExpression >> isAssignmentExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -115,6 +119,7 @@ FASTJavaAssignmentExpression >> isAssignmentExpression [
 FASTJavaAssignmentExpression >> operator [
 
 	<FMProperty: #operator type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The assignment operator: =, +=, /=, ...'>
 	^ operator
@@ -122,6 +127,7 @@ FASTJavaAssignmentExpression >> operator [
 
 { #category : 'accessing' }
 FASTJavaAssignmentExpression >> operator: anObject [
+	<ignoreForCoverage>
 	<generated>
 	operator := anObject
 ]

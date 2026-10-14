@@ -51,6 +51,7 @@ Class {
 { #category : 'meta' }
 FASTJavaAssertStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #AssertStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -60,6 +61,7 @@ FASTJavaAssertStatement class >> annotation [
 FASTJavaAssertStatement >> condition [
 	"Relation named: #condition type: #FASTTExpression opposite: #assertConditionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The condition of the statement'>
 	<FMProperty: #condition type: #FASTTExpression opposite: #assertConditionOwner>
@@ -69,6 +71,7 @@ FASTJavaAssertStatement >> condition [
 { #category : 'accessing' }
 FASTJavaAssertStatement >> condition: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #condition ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -84,6 +87,7 @@ FASTJavaAssertStatement >> condition: anObject [
 FASTJavaAssertStatement >> message [
 	"Relation named: #message type: #FASTTExpression opposite: #javaStringAssertStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The error message that is raised if the condition is false'>
 	<FMProperty: #message type: #FASTTExpression opposite: #javaStringAssertStatementOwner>
@@ -93,6 +97,7 @@ FASTJavaAssertStatement >> message [
 { #category : 'accessing' }
 FASTJavaAssertStatement >> message: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #message ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

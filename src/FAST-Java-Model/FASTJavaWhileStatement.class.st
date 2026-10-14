@@ -49,6 +49,7 @@ Class {
 { #category : 'meta' }
 FASTJavaWhileStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #WhileStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -57,6 +58,7 @@ FASTJavaWhileStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaWhileStatement >> isWhileStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

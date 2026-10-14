@@ -41,6 +41,7 @@ Class {
 { #category : 'meta' }
 FASTJavaReturnStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ReturnStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>

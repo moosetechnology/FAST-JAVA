@@ -72,6 +72,7 @@ Class {
 { #category : 'meta' }
 FASTJavaEnumDeclaration class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #EnumDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -79,12 +80,16 @@ FASTJavaEnumDeclaration class >> annotation [
 
 { #category : 'adding' }
 FASTJavaEnumDeclaration >> addConstant: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self constants add: anObject
 ]
 
 { #category : 'adding' }
 FASTJavaEnumDeclaration >> addInterface: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self interfaces add: anObject
 ]
@@ -93,6 +98,7 @@ FASTJavaEnumDeclaration >> addInterface: anObject [
 FASTJavaEnumDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #enumDeclarations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The compilation unit that owns me'>
 	<container>
@@ -102,6 +108,7 @@ FASTJavaEnumDeclaration >> compilationUnit [
 { #category : 'accessing' }
 FASTJavaEnumDeclaration >> compilationUnit: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
 ]
@@ -110,6 +117,7 @@ FASTJavaEnumDeclaration >> compilationUnit: anObject [
 FASTJavaEnumDeclaration >> constants [
 	"Relation named: #constants type: #FASTJavaEnumConstant opposite: #parentEnum"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The constants I define'>
 	<derived>
@@ -119,6 +127,7 @@ FASTJavaEnumDeclaration >> constants [
 { #category : 'accessing' }
 FASTJavaEnumDeclaration >> constants: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	constants value: anObject
 ]
@@ -127,6 +136,7 @@ FASTJavaEnumDeclaration >> constants: anObject [
 FASTJavaEnumDeclaration >> interfaces [
 	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The interfaces I implement'>
 	<derived>
@@ -136,6 +146,7 @@ FASTJavaEnumDeclaration >> interfaces [
 { #category : 'accessing' }
 FASTJavaEnumDeclaration >> interfaces: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interfaces value: anObject
 ]
@@ -143,6 +154,7 @@ FASTJavaEnumDeclaration >> interfaces: anObject [
 { #category : 'testing' }
 FASTJavaEnumDeclaration >> isEnumDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

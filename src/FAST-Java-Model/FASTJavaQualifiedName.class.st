@@ -44,6 +44,7 @@ Class {
 { #category : 'meta' }
 FASTJavaQualifiedName class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #QualifiedName super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -52,6 +53,7 @@ FASTJavaQualifiedName class >> annotation [
 { #category : 'testing' }
 FASTJavaQualifiedName >> isQualifiedName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -60,6 +62,7 @@ FASTJavaQualifiedName >> isQualifiedName [
 FASTJavaQualifiedName >> namespace [
 	"Relation named: #namespace type: #FASTJavaQualifiedName opposite: #namespaceOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The namespace that qualifies me'>
 	^ namespace
@@ -68,6 +71,7 @@ FASTJavaQualifiedName >> namespace [
 { #category : 'accessing' }
 FASTJavaQualifiedName >> namespace: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	namespace := anObject
 ]
@@ -76,6 +80,7 @@ FASTJavaQualifiedName >> namespace: anObject [
 FASTJavaQualifiedName >> namespaceOwner [
 	"Relation named: #namespaceOwner type: #FASTJavaQualifiedName opposite: #namespace"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The namespace I qualify'>
 	<container>
@@ -86,6 +91,7 @@ FASTJavaQualifiedName >> namespaceOwner [
 { #category : 'accessing' }
 FASTJavaQualifiedName >> namespaceOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	namespaceOwner := anObject
 ]
@@ -94,6 +100,7 @@ FASTJavaQualifiedName >> namespaceOwner: anObject [
 FASTJavaQualifiedName >> qualifiedNameOwner [
 	"Relation named: #qualifiedNameOwner type: #FASTJavaTWithQualifiedName opposite: #qualifiedName"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The owner of the qualified name'>
 	<container>
@@ -104,6 +111,7 @@ FASTJavaQualifiedName >> qualifiedNameOwner [
 { #category : 'accessing' }
 FASTJavaQualifiedName >> qualifiedNameOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	qualifiedNameOwner := anObject
 ]

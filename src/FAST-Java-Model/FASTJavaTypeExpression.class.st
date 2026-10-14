@@ -38,6 +38,7 @@ Class {
 { #category : 'meta' }
 FASTJavaTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TypeExpression super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -47,6 +48,7 @@ FASTJavaTypeExpression class >> annotation [
 FASTJavaTypeExpression >> catchOwner [
 	"Relation named: #catchOwner type: #FASTJavaCatchPartStatement opposite: #catchedTypes"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The catch part that owns me (ie. where I am catched)'>
 	<container>
@@ -56,6 +58,7 @@ FASTJavaTypeExpression >> catchOwner [
 { #category : 'accessing' }
 FASTJavaTypeExpression >> catchOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	catchOwner := anObject
 ]
@@ -63,6 +66,7 @@ FASTJavaTypeExpression >> catchOwner: anObject [
 { #category : 'testing' }
 FASTJavaTypeExpression >> isTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -71,6 +75,7 @@ FASTJavaTypeExpression >> isTypeExpression [
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner [
 	"Relation named: #javaClassDeclarationInterfaceOwner type: #FASTJavaClassDeclaration opposite: #interfaces"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The class that implements me'>
 	<container>
@@ -80,6 +85,7 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner [
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaClassDeclarationInterfaceOwner := anObject
 ]
@@ -88,6 +94,7 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner: anObject [
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner [
 	"Relation named: #javaClassDeclarationSuperclassOwner type: #FASTJavaClassDeclaration opposite: #superclass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The class that extends me'>
 	<container>
@@ -98,6 +105,7 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner [
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaClassDeclarationSuperclassOwner := anObject
 ]
@@ -106,6 +114,7 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner: anObject [
 FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner [
 	"Relation named: #javaEnumDeclarationInterfaceOwner type: #FASTJavaEnumDeclaration opposite: #interfaces"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The enum that implements me'>
 	<container>
@@ -115,6 +124,7 @@ FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner [
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaEnumDeclarationInterfaceOwner := anObject
 ]
@@ -123,6 +133,7 @@ FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner: anObject [
 FASTJavaTypeExpression >> javaForEachStatementTypeOwner [
 	"Relation named: #javaForEachStatementTypeOwner type: #FASTJavaForEachStatement opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
@@ -133,6 +144,7 @@ FASTJavaTypeExpression >> javaForEachStatementTypeOwner [
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaForEachStatementTypeOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaForEachStatementTypeOwner := anObject
 ]
@@ -141,6 +153,7 @@ FASTJavaTypeExpression >> javaForEachStatementTypeOwner: anObject [
 FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner [
 	"Relation named: #javaInterfaceDeclarationInterfaceOwner type: #FASTJavaInterfaceDeclaration opposite: #interfaces"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The interface that extends me'>
 	<container>
@@ -150,6 +163,7 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner [
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaInterfaceDeclarationInterfaceOwner := anObject
 ]
@@ -158,6 +172,7 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
 FASTJavaTypeExpression >> javaTypePatternTypeOwner [
 	"Relation named: #javaTypePatternTypeOwner type: #FASTJavaTypePattern opposite: #type"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The javaTypePattern type owner (if possible)'>
 	<container>
@@ -168,6 +183,7 @@ FASTJavaTypeExpression >> javaTypePatternTypeOwner [
 { #category : 'accessing' }
 FASTJavaTypeExpression >> javaTypePatternTypeOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaTypePatternTypeOwner := anObject
 ]

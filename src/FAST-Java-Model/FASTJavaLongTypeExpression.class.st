@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaLongTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #LongTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaLongTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaLongTypeExpression >> isLongTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -51,6 +51,7 @@ Class {
 { #category : 'meta' }
 FASTJavaForStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ForStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -60,6 +61,7 @@ FASTJavaForStatement class >> annotation [
 FASTJavaForStatement >> incrementor [
 	"Relation named: #incrementor type: #FASTTStatement opposite: #forIncrementorOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Expression evaluated at the end of each loop'>
 	<FMProperty: #incrementor type: #FASTTStatement opposite: #forIncrementorOwner>
@@ -69,6 +71,7 @@ FASTJavaForStatement >> incrementor [
 { #category : 'accessing' }
 FASTJavaForStatement >> incrementor: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #incrementor ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -84,6 +87,7 @@ FASTJavaForStatement >> incrementor: anObject [
 FASTJavaForStatement >> initializer [
 	"Relation named: #initializer type: #FASTTStatement opposite: #forIninitializerOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Expression used at initialization phase of a for loop'>
 	<FMProperty: #initializer type: #FASTTStatement opposite: #forIninitializerOwner>
@@ -93,6 +97,7 @@ FASTJavaForStatement >> initializer [
 { #category : 'accessing' }
 FASTJavaForStatement >> initializer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -107,6 +112,7 @@ FASTJavaForStatement >> initializer: anObject [
 { #category : 'testing' }
 FASTJavaForStatement >> isForStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

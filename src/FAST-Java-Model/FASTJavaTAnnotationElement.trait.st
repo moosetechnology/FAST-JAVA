@@ -28,6 +28,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTAnnotationElement classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAnnotationElement super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -37,6 +38,7 @@ FASTJavaTAnnotationElement classSide >> annotation [
 FASTJavaTAnnotationElement >> arrayOwner [
 	"Relation named: #arrayOwner type: #FASTJavaArrayAnnotationElement opposite: #values"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The ArrayAnnotationElement I am an element of'>
 	<container>
@@ -46,6 +48,7 @@ FASTJavaTAnnotationElement >> arrayOwner [
 { #category : 'accessing' }
 FASTJavaTAnnotationElement >> arrayOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	arrayOwner := anObject
 ]
@@ -54,6 +57,7 @@ FASTJavaTAnnotationElement >> arrayOwner: anObject [
 FASTJavaTAnnotationElement >> parentAnnotation [
 	"Relation named: #parentAnnotation type: #FASTJavaAnnotation opposite: #elements"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'An "argument" of an annotation, eg. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")'>
@@ -64,6 +68,7 @@ FASTJavaTAnnotationElement >> parentAnnotation [
 { #category : 'accessing' }
 FASTJavaTAnnotationElement >> parentAnnotation: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentAnnotation := anObject
 ]

@@ -39,6 +39,7 @@ Class {
 { #category : 'meta' }
 FASTJavaNewClassExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #NewClassExpression super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -47,6 +48,7 @@ FASTJavaNewClassExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaNewClassExpression >> isNewClassExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

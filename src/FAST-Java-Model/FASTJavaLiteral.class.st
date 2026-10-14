@@ -27,6 +27,7 @@ Class {
 { #category : 'meta' }
 FASTJavaLiteral class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Literal super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>

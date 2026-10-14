@@ -56,6 +56,7 @@ Class {
 { #category : 'meta' }
 FASTJavaInitializer class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Initializer super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -64,6 +65,7 @@ FASTJavaInitializer class >> annotation [
 { #category : 'testing' }
 FASTJavaInitializer >> isInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -72,6 +74,7 @@ FASTJavaInitializer >> isInitializer [
 FASTJavaInitializer >> isStatic [
 
 	<FMProperty: #isStatic type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Whether this initializer is static'>
 	^ isStatic ifNil: [ isStatic := false ]
@@ -79,6 +82,7 @@ FASTJavaInitializer >> isStatic [
 
 { #category : 'accessing' }
 FASTJavaInitializer >> isStatic: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isStatic := anObject
 ]
@@ -87,6 +91,7 @@ FASTJavaInitializer >> isStatic: anObject [
 FASTJavaInitializer >> statementBlock [
 	"Relation named: #statementBlock type: #FASTTStatementBlock opposite: #javaInitializerOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Statements block of the behavioural entity'>
 	<FMProperty: #statementBlock type: #FASTTStatementBlock opposite: #javaInitializerOwner>
@@ -96,6 +101,7 @@ FASTJavaInitializer >> statementBlock [
 { #category : 'accessing' }
 FASTJavaInitializer >> statementBlock: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #statementBlock ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

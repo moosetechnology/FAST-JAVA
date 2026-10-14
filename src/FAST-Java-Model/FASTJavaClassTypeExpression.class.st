@@ -37,6 +37,7 @@ Class {
 { #category : 'meta' }
 FASTJavaClassTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ClassTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -45,6 +46,7 @@ FASTJavaClassTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaClassTypeExpression >> isClassTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -53,6 +55,7 @@ FASTJavaClassTypeExpression >> isClassTypeExpression [
 FASTJavaClassTypeExpression >> javaMethodThrowsOwner [
 	"Relation named: #javaMethodThrowsOwner type: #FASTJavaMethodEntity opposite: #throws"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The method that throws me'>
 	<container>
@@ -62,6 +65,7 @@ FASTJavaClassTypeExpression >> javaMethodThrowsOwner [
 { #category : 'accessing' }
 FASTJavaClassTypeExpression >> javaMethodThrowsOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaMethodThrowsOwner := anObject
 ]
@@ -70,6 +74,7 @@ FASTJavaClassTypeExpression >> javaMethodThrowsOwner: anObject [
 FASTJavaClassTypeExpression >> typeName [
 	"Relation named: #typeName type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The name of the type'>
 	^ typeName
@@ -78,6 +83,7 @@ FASTJavaClassTypeExpression >> typeName [
 { #category : 'accessing' }
 FASTJavaClassTypeExpression >> typeName: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typeName := anObject
 ]
@@ -86,6 +92,7 @@ FASTJavaClassTypeExpression >> typeName: anObject [
 FASTJavaClassTypeExpression >> typeParameterOwner [
 	"Relation named: #typeParameterOwner type: #FASTJavaTypeParameterExpression opposite: #types"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type parameter I specify'>
 	<container>
@@ -95,6 +102,7 @@ FASTJavaClassTypeExpression >> typeParameterOwner [
 { #category : 'accessing' }
 FASTJavaClassTypeExpression >> typeParameterOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typeParameterOwner := anObject
 ]

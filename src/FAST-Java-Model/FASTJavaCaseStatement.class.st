@@ -50,6 +50,7 @@ Class {
 { #category : 'meta' }
 FASTJavaCaseStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CaseStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -58,6 +59,7 @@ FASTJavaCaseStatement class >> annotation [
 { #category : 'testing' }
 FASTJavaCaseStatement >> isCaseStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -66,6 +68,7 @@ FASTJavaCaseStatement >> isCaseStatement [
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
 	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaSwitchStatement opposite: #cases"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The switch owner'>
 	<container>
@@ -75,6 +78,7 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
 { #category : 'accessing' }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	javaCaseStatementSwitchOwner := anObject
 ]

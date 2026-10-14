@@ -62,7 +62,7 @@ see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html
 |---|
 | `endPos` | `Number` | nil | |
 | `isPrefixedUnaryExpression` | `Boolean` | nil | True if the expression is prefixed (ex. ++i) else false|
-| `operator` | `String` | nil | The operator string to apply to the expression|
+| `operator` | `String` | nil | The operator to apply to the expression|
 | `startPos` | `Number` | nil | |
 
 "
@@ -83,6 +83,7 @@ Class {
 { #category : 'meta' }
 FASTJavaUnaryExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #UnaryExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -92,6 +93,7 @@ FASTJavaUnaryExpression class >> annotation [
 FASTJavaUnaryExpression >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaUnaryExpressionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The affected expression'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaUnaryExpressionOwner>
@@ -101,6 +103,7 @@ FASTJavaUnaryExpression >> expression [
 { #category : 'accessing' }
 FASTJavaUnaryExpression >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -116,6 +119,7 @@ FASTJavaUnaryExpression >> expression: anObject [
 FASTJavaUnaryExpression >> isPrefixedUnaryExpression [
 
 	<FMProperty: #isPrefixedUnaryExpression type: #Boolean>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'True if the expression is prefixed (ex. ++i) else false'>
 	^ isPrefixedUnaryExpression
@@ -123,6 +127,7 @@ FASTJavaUnaryExpression >> isPrefixedUnaryExpression [
 
 { #category : 'accessing' }
 FASTJavaUnaryExpression >> isPrefixedUnaryExpression: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isPrefixedUnaryExpression := anObject
 ]
@@ -131,13 +136,15 @@ FASTJavaUnaryExpression >> isPrefixedUnaryExpression: anObject [
 FASTJavaUnaryExpression >> operator [
 
 	<FMProperty: #operator type: #String>
+	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The operator string to apply to the expression'>
+	<FMComment: 'The operator to apply to the expression'>
 	^ operator
 ]
 
 { #category : 'accessing' }
 FASTJavaUnaryExpression >> operator: anObject [
+	<ignoreForCoverage>
 	<generated>
 	operator := anObject
 ]

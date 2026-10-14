@@ -52,6 +52,7 @@ Class {
 { #category : 'meta' }
 FASTJavaCatchPartStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CatchPartStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -59,6 +60,8 @@ FASTJavaCatchPartStatement class >> annotation [
 
 { #category : 'adding' }
 FASTJavaCatchPartStatement >> addCatchedType: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self catchedTypes add: anObject
 ]
@@ -67,6 +70,7 @@ FASTJavaCatchPartStatement >> addCatchedType: anObject [
 FASTJavaCatchPartStatement >> body [
 	"Relation named: #body type: #FASTJavaStatementBlock opposite: #javaCatchPartStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The body of the catch part'>
 	^ body
@@ -75,6 +79,7 @@ FASTJavaCatchPartStatement >> body [
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> body: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	body := anObject
 ]
@@ -83,6 +88,7 @@ FASTJavaCatchPartStatement >> body: anObject [
 FASTJavaCatchPartStatement >> catchedTypes [
 	"Relation named: #catchedTypes type: #FASTJavaTypeExpression opposite: #catchOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The types (exception) that are catched'>
 	<derived>
@@ -92,6 +98,7 @@ FASTJavaCatchPartStatement >> catchedTypes [
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> catchedTypes: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	catchedTypes value: anObject
 ]
@@ -99,6 +106,7 @@ FASTJavaCatchPartStatement >> catchedTypes: anObject [
 { #category : 'testing' }
 FASTJavaCatchPartStatement >> isCatchPartStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -107,6 +115,7 @@ FASTJavaCatchPartStatement >> isCatchPartStatement [
 FASTJavaCatchPartStatement >> parameter [
 	"Relation named: #parameter type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The parameter of the catch part'>
 	^ parameter
@@ -115,6 +124,7 @@ FASTJavaCatchPartStatement >> parameter [
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> parameter: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parameter := anObject
 ]
@@ -123,6 +133,7 @@ FASTJavaCatchPartStatement >> parameter: anObject [
 FASTJavaCatchPartStatement >> tryOwner [
 	"Relation named: #tryOwner type: #FASTJavaTryCatchStatement opposite: #catches"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The try part that owns me'>
 	<container>
@@ -132,6 +143,7 @@ FASTJavaCatchPartStatement >> tryOwner [
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> tryOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	tryOwner := anObject
 ]

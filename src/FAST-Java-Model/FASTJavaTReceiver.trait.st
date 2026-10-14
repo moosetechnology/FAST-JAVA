@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FASTJavaTReceiver classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TReceiver super: #Object>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -34,6 +35,7 @@ FASTJavaTReceiver classSide >> annotation [
 FASTJavaTReceiver >> receiverOwner [
 	"Relation named: #receiverOwner type: #FASTJavaTWithReceiver opposite: #receiver"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The owner of the receiver'>
 	<container>
@@ -44,6 +46,7 @@ FASTJavaTReceiver >> receiverOwner [
 { #category : 'accessing' }
 FASTJavaTReceiver >> receiverOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	receiverOwner := anObject
 ]

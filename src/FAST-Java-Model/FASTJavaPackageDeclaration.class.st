@@ -40,6 +40,7 @@ Class {
 { #category : 'meta' }
 FASTJavaPackageDeclaration class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #PackageDeclaration super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -49,6 +50,7 @@ FASTJavaPackageDeclaration class >> annotation [
 FASTJavaPackageDeclaration >> compilationUnit [
 	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #packageDeclaration"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The compilation unit that owns me'>
 	<container>
@@ -59,6 +61,7 @@ FASTJavaPackageDeclaration >> compilationUnit [
 { #category : 'accessing' }
 FASTJavaPackageDeclaration >> compilationUnit: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
 ]
@@ -66,6 +69,7 @@ FASTJavaPackageDeclaration >> compilationUnit: anObject [
 { #category : 'testing' }
 FASTJavaPackageDeclaration >> isPackageDeclaration [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

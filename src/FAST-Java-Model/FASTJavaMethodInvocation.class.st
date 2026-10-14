@@ -70,6 +70,7 @@ Class {
 { #category : 'meta' }
 FASTJavaMethodInvocation class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #MethodInvocation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>

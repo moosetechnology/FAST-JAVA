@@ -49,6 +49,7 @@ Class {
 { #category : 'meta' }
 FASTJavaCompilationUnit class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CompilationUnit super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -56,24 +57,32 @@ FASTJavaCompilationUnit class >> annotation [
 
 { #category : 'adding' }
 FASTJavaCompilationUnit >> addClassDeclaration: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self classDeclarations add: anObject
 ]
 
 { #category : 'adding' }
 FASTJavaCompilationUnit >> addEnumDeclaration: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self enumDeclarations add: anObject
 ]
 
 { #category : 'adding' }
 FASTJavaCompilationUnit >> addImportDeclaration: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self importDeclarations add: anObject
 ]
 
 { #category : 'adding' }
 FASTJavaCompilationUnit >> addInterfaceDeclaration: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self interfaceDeclarations add: anObject
 ]
@@ -82,6 +91,7 @@ FASTJavaCompilationUnit >> addInterfaceDeclaration: anObject [
 FASTJavaCompilationUnit >> classDeclarations [
 	"Relation named: #classDeclarations type: #FASTJavaClassDeclaration opposite: #compilationUnit"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My class declarations'>
 	<derived>
@@ -91,6 +101,7 @@ FASTJavaCompilationUnit >> classDeclarations [
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> classDeclarations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	classDeclarations value: anObject
 ]
@@ -99,6 +110,7 @@ FASTJavaCompilationUnit >> classDeclarations: anObject [
 FASTJavaCompilationUnit >> enumDeclarations [
 	"Relation named: #enumDeclarations type: #FASTJavaEnumDeclaration opposite: #compilationUnit"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My enum declaration'>
 	<derived>
@@ -108,6 +120,7 @@ FASTJavaCompilationUnit >> enumDeclarations [
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> enumDeclarations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	enumDeclarations value: anObject
 ]
@@ -116,6 +129,7 @@ FASTJavaCompilationUnit >> enumDeclarations: anObject [
 FASTJavaCompilationUnit >> importDeclarations [
 	"Relation named: #importDeclarations type: #FASTJavaImportDeclaration opposite: #compilationUnit"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My import declarations'>
 	<derived>
@@ -125,6 +139,7 @@ FASTJavaCompilationUnit >> importDeclarations [
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> importDeclarations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	importDeclarations value: anObject
 ]
@@ -133,6 +148,7 @@ FASTJavaCompilationUnit >> importDeclarations: anObject [
 FASTJavaCompilationUnit >> interfaceDeclarations [
 	"Relation named: #interfaceDeclarations type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My interface declarations'>
 	<derived>
@@ -142,6 +158,7 @@ FASTJavaCompilationUnit >> interfaceDeclarations [
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> interfaceDeclarations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interfaceDeclarations value: anObject
 ]
@@ -149,6 +166,7 @@ FASTJavaCompilationUnit >> interfaceDeclarations: anObject [
 { #category : 'testing' }
 FASTJavaCompilationUnit >> isCompilationUnit [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -157,6 +175,7 @@ FASTJavaCompilationUnit >> isCompilationUnit [
 FASTJavaCompilationUnit >> packageDeclaration [
 	"Relation named: #packageDeclaration type: #FASTJavaPackageDeclaration opposite: #compilationUnit"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'My package declaration, or nil for the default package'>
 	^ packageDeclaration
@@ -165,6 +184,7 @@ FASTJavaCompilationUnit >> packageDeclaration [
 { #category : 'accessing' }
 FASTJavaCompilationUnit >> packageDeclaration: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	packageDeclaration := anObject
 ]

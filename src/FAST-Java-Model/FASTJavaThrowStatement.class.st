@@ -47,6 +47,7 @@ Class {
 { #category : 'meta' }
 FASTJavaThrowStatement class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ThrowStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -56,6 +57,7 @@ FASTJavaThrowStatement class >> annotation [
 FASTJavaThrowStatement >> expression [
 	"Relation named: #expression type: #FASTTExpression opposite: #javaThrowStatementOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The thrown element'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaThrowStatementOwner>
@@ -65,6 +67,7 @@ FASTJavaThrowStatement >> expression [
 { #category : 'accessing' }
 FASTJavaThrowStatement >> expression: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #expression ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -79,6 +82,7 @@ FASTJavaThrowStatement >> expression: anObject [
 { #category : 'testing' }
 FASTJavaThrowStatement >> isThrowStatement [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

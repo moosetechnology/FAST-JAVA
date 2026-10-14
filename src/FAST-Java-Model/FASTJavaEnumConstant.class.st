@@ -24,6 +24,7 @@ Class {
 { #category : 'meta' }
 FASTJavaEnumConstant class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #EnumConstant super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -32,6 +33,7 @@ FASTJavaEnumConstant class >> annotation [
 { #category : 'testing' }
 FASTJavaEnumConstant >> isEnumConstant [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -40,6 +42,7 @@ FASTJavaEnumConstant >> isEnumConstant [
 FASTJavaEnumConstant >> parentEnum [
 	"Relation named: #parentEnum type: #FASTJavaEnumDeclaration opposite: #constants"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The enum type that contains me'>
 	<container>
@@ -49,6 +52,7 @@ FASTJavaEnumConstant >> parentEnum [
 { #category : 'accessing' }
 FASTJavaEnumConstant >> parentEnum: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentEnum := anObject
 ]

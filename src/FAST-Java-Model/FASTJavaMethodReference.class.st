@@ -70,6 +70,7 @@ Class {
 { #category : 'meta' }
 FASTJavaMethodReference class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #MethodReference super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -78,6 +79,7 @@ FASTJavaMethodReference class >> annotation [
 { #category : 'testing' }
 FASTJavaMethodReference >> isMethodReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -86,6 +88,7 @@ FASTJavaMethodReference >> isMethodReference [
 FASTJavaMethodReference >> receiver [
 	"Relation named: #receiver type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The method of the reference'>
 	^ receiver
@@ -94,6 +97,7 @@ FASTJavaMethodReference >> receiver [
 { #category : 'accessing' }
 FASTJavaMethodReference >> receiver: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	receiver := anObject
 ]

@@ -14,6 +14,7 @@ Class {
 { #category : 'meta' }
 FASTJavaDoubleTypeExpression class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #DoubleTypeExpression super: #FASTJavaPrimitiveTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
@@ -22,6 +23,7 @@ FASTJavaDoubleTypeExpression class >> annotation [
 { #category : 'testing' }
 FASTJavaDoubleTypeExpression >> isDoubleTypeExpression [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
