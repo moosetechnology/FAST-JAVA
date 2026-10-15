@@ -749,18 +749,17 @@ FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDe
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatement [
-	self checkForComments: aFASTJavaLabeledCaseStatement andDo: [ 
-		self indented: 'case '.
-		aFASTJavaLabeledCaseStatement label accept: self.
-		self
-			unindented: ' :' ;
-			newLine ;
-			indent.
-		aFASTJavaLabeledCaseStatement statements do: [ :caseStatement |
-			caseStatement accept: self
-		].
-		self unindent
-	]
+
+	self checkForComments: aFASTJavaLabeledCaseStatement andDo: [
+			aFASTJavaLabeledCaseStatement labels do: [ :label |
+					self indented: 'case '.
+					label caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ].
+					self
+						unindented: ' :';
+						newLine ].
+			self indent.
+			aFASTJavaLabeledCaseStatement statements do: [ :caseStatement | caseStatement accept: self ].
+			self unindent ]
 ]
 
 { #category : 'visiting statement' }
@@ -1096,6 +1095,33 @@ FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	]
 ]
 
+{ #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaSwitchExpression: aFASTJavaSwitchExpression [
+
+	self output: 'switch ('.
+	aFASTJavaSwitchExpression condition accept: self.
+	self
+		output: ') {';
+		newLine;
+		indent.
+	aFASTJavaSwitchExpression rules do: [ :rule | rule accept: self ].
+	self
+		unindent;
+		indented: $}
+]
+
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaSwitchRule: aFASTJavaSwitchRule [
+
+	self indented: ''.
+	aFASTJavaSwitchRule label caseExpressions ifEmpty: [ self output: 'default' ] ifNotEmpty: [ :caseExpressions |
+			self output: 'case '.
+			caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ] ].
+	self output: ' -> '.
+	aFASTJavaSwitchRule body accept: self.
+	aFASTJavaSwitchRule body isExpression ifTrue: [ self endOfStatement ]
+]
+
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
 
@@ -1260,6 +1286,14 @@ FASTJavaExportVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 		self unindent.
 ]
 
+]
+
+{ #category : 'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaYieldStatement: aFASTJavaYieldStatement [
+
+	self indented: 'yield '.
+	aFASTJavaYieldStatement expression accept: self.
+	self endOfStatement
 ]
 
 { #category : 'visiting' }

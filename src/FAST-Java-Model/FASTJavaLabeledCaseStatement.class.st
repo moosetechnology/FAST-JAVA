@@ -5,15 +5,6 @@ ex.:
 
 case LABEL:
 
-## Relations
-======================
-
-### Children
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `label` | `FASTJavaLabeledCaseStatement` | `javaLabeledCaseStatementOwner` | `FASTTExpression` | The label of the case statement|
-
-
 
 "
 Class {
@@ -39,30 +30,4 @@ FASTJavaLabeledCaseStatement >> isLabeledCaseStatement [
 	<ignoreForCoverage>
 	<generated>
 	^ true
-]
-
-{ #category : 'accessing' }
-FASTJavaLabeledCaseStatement >> label [
-	"Relation named: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The label of the case statement'>
-	<FMProperty: #label type: #FASTTExpression opposite: #javaLabeledCaseStatementOwner>
-	^ self attributeAt: #label ifAbsent: [ nil ]
-]
-
-{ #category : 'accessing' }
-FASTJavaLabeledCaseStatement >> label: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	(self attributeAt: #label ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self label.
-		self attributeAt: #label put: anObject.
-		otherSide javaLabeledCaseStatementOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #label put: anObject.
-		anObject javaLabeledCaseStatementOwner: self ]
 ]

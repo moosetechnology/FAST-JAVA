@@ -581,6 +581,30 @@ FASTJavaTEntityCreator >> newStringLiteral [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newSwitchExpression [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaSwitchExpression new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newSwitchLabel [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaSwitchLabel new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newSwitchRule [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaSwitchRule new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newSwitchStatement [
 
 	<ignoreForCoverage>
@@ -706,4 +730,12 @@ FASTJavaTEntityCreator >> newWhileStatement [
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaWhileStatement new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newYieldStatement [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaYieldStatement new
 ]

@@ -25,7 +25,6 @@
 | `javaCatchParameterOwnler` | `FASTJavaVariableExpression` | `parameter` | `FASTJavaCatchPartStatement` | The javaCatchPartParameterOwner owner (if possible)|
 | `javaClassPropertyOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaLabeledCaseStatementOwner` | `FASTTExpression` | `label` | `FASTJavaLabeledCaseStatement` | The javaLabeledCaseStatement owner (if possible)|
 | `javaMethodReferenceOwner` | `FASTJavaVariableExpression` | `receiver` | `FASTJavaMethodReference` | The owner of the method reference (if possible)|
 | `javaMethodTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaMethodEntity` | The variable expression owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
@@ -49,6 +48,9 @@
 | `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
 | `returnOwner` | `FASTTExpression` | `expression` | `FASTTReturnStatement` | The return statement that own the expression (if it's the case)|
 | `switchConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchStatement` | I represent a condition for my owner|
+| `switchExpressionConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchExpression` | The switch expression whose condition I am|
+| `switchLabelOwner` | `FASTTExpression` | `caseExpressions` | `FASTJavaSwitchLabel` | The switch label that owns me|
+| `yieldStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaYieldStatement` | The yield statement that owns me|
 
 
 ## Properties
@@ -67,18 +69,18 @@ Class {
 	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTVariableExpression',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
-		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable',
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
-		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
-		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
-		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
+		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
 		'#javaMethodReferenceOwner => FMOne type: #FASTJavaMethodReference opposite: #receiver',
 		'#javaMethodTypeOwner => FMOne type: #FASTJavaMethodEntity opposite: #type',
+		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
+		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaParameterTypeOwner => FMOne type: #FASTJavaParameter opposite: #type',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
+		'#javaTypePatternVariableOwner => FMOne type: #FASTJavaTypePattern opposite: #variable',
 		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
-		'#javaTypePatternVariableOwner => FMOne type: #FASTJavaTypePattern opposite: #variable'
+		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',

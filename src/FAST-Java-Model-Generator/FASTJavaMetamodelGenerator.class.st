@@ -131,7 +131,11 @@ Class {
 		'javaTypePattern',
 		'tConditionalStatement',
 		'tLoopStatement',
-		'javaVarTypeExpression'
+		'javaVarTypeExpression',
+		'javaSwitchExpression',
+		'javaSwitchLabel',
+		'javaSwitchRule',
+		'javaYieldStatement'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -591,8 +595,35 @@ FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaSwitchExpression [
+
+	^ 'I represent a switch expression, introduced in Java 14 by [JEP 361](https://openjdk.org/jeps/361).
+Example:
+```language=text
+switch (day) {
+	case MONDAY, FRIDAY, SUNDAY -> System.out.println(6);
+	case TUESDAY                -> System.out.println(7);
+	case THURSDAY, SATURDAY     -> System.out.println(8);
+	case WEDNESDAY              -> System.out.println(9);
+}
+```'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaSwitchLabel [
+
+	^ 'I represent a label of a switch case. I contain all expressions associated with the label; an empty list represents the default label.'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaSwitchRule [
+
+	^ 'I represent an arrow-form switch rule.'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaSwitchStatement [
-	^ 'A node representing switch statement
+	^ 'A node representing a switch statement
 
 eg.
 switch (_) {
@@ -712,11 +743,18 @@ while(...) {
 }'
 ]
 
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaYieldStatement [
+
+	^ 'I represent a yield statement used to produce a value from a switch expression.'
+]
+
 { #category : 'definition' }
 FASTJavaMetamodelGenerator >> defineClasses [
+
 	super defineClasses.
 
-	javaEntity  := self newClassNamed: #Entity.
+	javaEntity := self newClassNamed: #Entity.
 
 	javaComment := self newClassNamed: #Comment comment: self commentForJavaComment.
 	javaFieldAccess := self newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
@@ -742,7 +780,7 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaArrayAccess withTesting.
 	javaInitializer := self newClassNamed: #Initializer comment: self commentForJavaInitializer.
 	javaInitializer withTesting.
-	javaArrayInitializer :=  self newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
+	javaArrayInitializer := self newClassNamed: #ArrayInitializer comment: self commentForJavaArrayInitializer.
 	javaArrayInitializer withTesting.
 	javaModifier := self newClassNamed: #Modifier comment: self commentForJavaModifier.
 	javaModifier withTesting.
@@ -782,7 +820,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaClassTypeExpression withTesting.
 	javaPrimitiveTypeExpression := self newClassNamed: #PrimitiveTypeExpression comment: 'I represent a primitive type'.
 	javaPrimitiveTypeExpression withTesting.
-	javaTypeParameter := self newClassNamed: #TypeParameterExpression comment: 'I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`'.
+	javaTypeParameter := self
+		                     newClassNamed: #TypeParameterExpression
+		                     comment: 'I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`'.
 	javaTypeParameter withTesting.
 
 	"primitive type expressions"
@@ -826,10 +866,14 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaEmptyDimExpression withTesting.
 	javaAnnotationExpression := self newClassNamed: #Annotation comment: self commentForJavaAnnotation.
 	javaAnnotationExpression withTesting.
-	javaArrayAnnotationElement := self newClassNamed: #ArrayAnnotationElement comment: 'I represent an array as argument of an annotationExpression'.
+	javaArrayAnnotationElement := self
+		                              newClassNamed: #ArrayAnnotationElement
+		                              comment: 'I represent an array as argument of an annotationExpression'.
 	javaArrayAnnotationElement withTesting.
 	javaTypePattern := self newClassNamed: #TypePattern comment: self commentForJavaTypePattern.
 	javaTypePattern withTesting.
+	javaSwitchExpression := self newClassNamed: #SwitchExpression comment: self commentForJavaSwitchExpression.
+	javaSwitchExpression withTesting.
 
 	"statements"
 	javaStatement := self newClassNamed: #Statement.
@@ -843,6 +887,12 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaSwitchStatement withTesting.
 	javaCaseStatement := self newClassNamed: #CaseStatement comment: self commentForJavaCaseStatement.
 	javaCaseStatement withTesting.
+	javaSwitchLabel := self newClassNamed: #SwitchLabel comment: self commentForJavaSwitchLabel.
+	javaSwitchLabel withTesting.
+	javaSwitchRule := self newClassNamed: #SwitchRule comment: self commentForJavaSwitchRule.
+	javaSwitchRule withTesting.
+	javaYieldStatement := self newClassNamed: #YieldStatement comment: self commentForJavaYieldStatement.
+	javaYieldStatement withTesting.
 	javaContinueStatement := self newClassNamed: #ContinueStatement comment: self commentForJavaContinueStatement.
 	javaContinueStatement withTesting.
 	javaWhileStatement := self newClassNamed: #WhileStatement comment: self commentForJavaWhileStatement.
@@ -853,7 +903,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaThrowStatement withTesting.
 	javaTryCatchStatement := self newClassNamed: #TryCatchStatement comment: self commentForJavaTryCatchStatement.
 	javaTryCatchStatement withTesting.
-	javaCatchPartStatement := self newClassNamed: #CatchPartStatement comment: 'I represent the ''catch'' part of the TryCatch Statement'.
+	javaCatchPartStatement := self
+		                          newClassNamed: #CatchPartStatement
+		                          comment: 'I represent the ''catch'' part of the TryCatch Statement'.
 	javaCatchPartStatement withTesting.
 	javaForEachStatement := self newClassNamed: #ForEachStatement comment: self commentForJavaForEachStatement.
 	javaForEachStatement withTesting.
@@ -880,14 +932,20 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaInterfaceDeclaration withTesting.
 	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
 	javaEmptyMethodDeclaration withTesting.
-	compilationUnit := self newClassNamed: #CompilationUnit comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and types'.
+	compilationUnit := self
+		                   newClassNamed: #CompilationUnit
+		                   comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and types'.
 	compilationUnit withTesting.
-	packageDeclaration := self newClassNamed: #PackageDeclaration comment: 'I represent a package declaration, e.g. `package fr.inria;`'.
+	packageDeclaration := self
+		                      newClassNamed: #PackageDeclaration
+		                      comment: 'I represent a package declaration, e.g. `package fr.inria;`'.
 	packageDeclaration withTesting.
-	importDeclaration := self newClassNamed: #ImportDeclaration comment: 'I represent an import declaration, e.g. `import java.util.List;`'.
+	importDeclaration := self
+		                     newClassNamed: #ImportDeclaration
+		                     comment: 'I represent an import declaration, e.g. `import java.util.List;`'.
 	importDeclaration withTesting.
 	qualifiedName := self newClassNamed: #QualifiedName.
-	qualifiedName withTesting.
+	qualifiedName withTesting
 ]
 
 { #category : 'definition' }
@@ -1118,9 +1176,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"package and import do not use TDeclaration on purpose: they are only contained in a compilation unit"
 	packageDeclaration --|> tEntity.
 	packageDeclaration --|> tWithQualifiedName.
-
 	importDeclaration --|> tEntity.
-	importDeclaration --|> tWithQualifiedName
+	importDeclaration --|> tWithQualifiedName.
+
+	javaSwitchExpression --|> tExpression.
+	javaSwitchLabel --|> tEntity.
+	javaSwitchRule --|> tEntity.
+	javaYieldStatement --|> tStatement
 ]
 
 { #category : 'definition' }
@@ -1247,10 +1309,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaThrowStatementOwner) comment:
 			 'The javaThrowStatement owner (if possible)').
 
-	((javaLabeledCaseStatement property: #label) comment:
-		 'The label of the case statement')
-	<>- ((tExpression property: #javaLabeledCaseStatementOwner) comment:
-			 'The javaLabeledCaseStatement owner (if possible)').
+	((javaCaseStatement property: #labels) comment: 'The labels of the case statement') <>-* ((javaSwitchLabel property: #caseStatementOwner) comment: 'The case statement that owns me').
+
+	((javaSwitchLabel property: #caseExpressions) comment: 'The expressions of this case label; empty for default') <>-* ((tExpression property: #switchLabelOwner) comment: 'The switch label that owns me').
 
 	((javaForEachStatement property: #list) comment:
 		 'The list that the for-each statement iterates over')
@@ -1526,7 +1587,15 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((compilationUnit property: #enumDeclarations) comment:
 		 'My enum declaration')
 	<>-* ((javaEnumDeclaration property: #compilationUnit) comment:
-			 'The compilation unit that owns me')
+			 'The compilation unit that owns me').
+
+	((javaSwitchExpression property: #condition) comment: 'The condition of the switch expression') <>- ((tExpression property: #switchExpressionConditionOwner) comment: 'The switch expression whose condition I am').
+	((javaSwitchExpression property: #rules) comment: 'The rules of the switch expression') <>-* ((javaSwitchRule property: #switchExpressionOwner) comment: 'The switch expression that owns me').
+
+	((javaSwitchRule property: #label) comment: 'The label of the switch rule') <>- ((javaSwitchLabel property: #switchRuleOwner) comment: 'The switch rule that owns me').
+	((javaSwitchRule property: #body) comment: 'The body of the switch rule') <>- ((javaEntity property: #switchRuleBodyOwner) comment: 'The switch rule whose body I am').
+
+	((javaYieldStatement property: #expression) comment: 'The yielded expression') <>- ((tExpression property: #yieldStatementOwner) comment: 'The yield statement that owns me')
 ]
 
 { #category : 'definition' }

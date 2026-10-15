@@ -1449,3 +1449,36 @@ FASTJavaExportVisitorTest >> testVisitFASTSwitchCaseDefault [
 }
 '
 ]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTSwitchExpression [
+
+	| ast |
+	ast := self methodAST:
+		       'int mth(int value) { return switch (value) { case 1, 2 -> 10; case 3 -> { yield 30; } default -> 20; }; }'.
+
+	self export: ast statements first equals: 'return switch (value) {
+  case 1, 2 -> 10;
+  case 3 -> {
+    yield 30;
+  }
+  default -> 20;
+};
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTSwitchMultipleLabels [
+
+	| ast |
+	ast := self methodAST: 'void mth() { switch (a) { case 1, 2: case 3: break; default: break; } }'.
+
+	self export: ast statements first equals: 'switch (a) {
+  case 1, 2 :
+  case 3 :
+    break;
+  default:
+    break;
+}
+'
+]
