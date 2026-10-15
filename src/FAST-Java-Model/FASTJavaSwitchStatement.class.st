@@ -1,5 +1,5 @@
 "
-A node representing switch statement
+A node representing a switch statement
 
 eg.
 switch (_) {

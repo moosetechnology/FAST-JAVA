@@ -22,6 +22,7 @@ case part of switch statement
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `labels` | `FASTJavaCaseStatement` | `caseStatementOwner` | `FASTJavaSwitchLabel` | The labels of the case statement|
 | `statements` | `FASTTStatementBlock` | `statementContainer` | `FASTTStatement` | Statements enclosed in this block|
 
 
@@ -40,7 +41,8 @@ Class {
 	#traits : 'FASTTStatementBlock',
 	#classTraits : 'FASTTStatementBlock classTrait',
 	#instVars : [
-		'#javaCaseStatementSwitchOwner => FMOne type: #FASTJavaSwitchStatement opposite: #cases'
+		'#javaCaseStatementSwitchOwner => FMOne type: #FASTJavaSwitchStatement opposite: #cases',
+		'#labels => FMMany type: #FASTJavaSwitchLabel opposite: #caseStatementOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -54,6 +56,14 @@ FASTJavaCaseStatement class >> annotation [
 	<FMClass: #CaseStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaCaseStatement >> addLabel: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self labels add: anObject
 ]
 
 { #category : 'testing' }
@@ -81,4 +91,23 @@ FASTJavaCaseStatement >> javaCaseStatementSwitchOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaCaseStatementSwitchOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCaseStatement >> labels [
+	"Relation named: #labels type: #FASTJavaSwitchLabel opposite: #caseStatementOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The labels of the case statement'>
+	<derived>
+	^ labels
+]
+
+{ #category : 'accessing' }
+FASTJavaCaseStatement >> labels: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	labels value: anObject
 ]

@@ -6,6 +6,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `javaLambdaExpressionOwner` | `FASTJavaEntity` | `expression` | `FASTJavaLambdaExpression` | The expression owner (if possible)|
+| `switchRuleBodyOwner` | `FASTJavaEntity` | `body` | `FASTJavaSwitchRule` | The switch rule whose body I am|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
@@ -28,7 +29,8 @@ Class {
 	#traits : 'FASTTEntity + FASTTWithComments',
 	#classTraits : 'FASTTEntity classTrait + FASTTWithComments classTrait',
 	#instVars : [
-		'#javaLambdaExpressionOwner => FMOne type: #FASTJavaLambdaExpression opposite: #expression'
+		'#javaLambdaExpressionOwner => FMOne type: #FASTJavaLambdaExpression opposite: #expression',
+		'#switchRuleBodyOwner => FMOne type: #FASTJavaSwitchRule opposite: #body'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -606,6 +608,30 @@ FASTJavaEntity >> isStringLiteral [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isSwitchExpression [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isSwitchLabel [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isSwitchRule [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isSwitchStatement [
 
 	<ignoreForCoverage>
@@ -733,6 +759,14 @@ FASTJavaEntity >> isWhileStatement [
 	^ false
 ]
 
+{ #category : 'testing' }
+FASTJavaEntity >> isYieldStatement [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
 { #category : 'accessing' }
 FASTJavaEntity >> javaLambdaExpressionOwner [
 	"Relation named: #javaLambdaExpressionOwner type: #FASTJavaLambdaExpression opposite: #expression"
@@ -751,4 +785,24 @@ FASTJavaEntity >> javaLambdaExpressionOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaLambdaExpressionOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaEntity >> switchRuleBodyOwner [
+	"Relation named: #switchRuleBodyOwner type: #FASTJavaSwitchRule opposite: #body"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The switch rule whose body I am'>
+	<container>
+	<derived>
+	^ switchRuleBodyOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaEntity >> switchRuleBodyOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	switchRuleBodyOwner := anObject
 ]

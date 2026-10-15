@@ -31,10 +31,47 @@ JavaSmaCCSwitchTest >> testDefaultCaseSize [
 ]
 
 { #category : 'tests' }
+JavaSmaCCSwitchTest >> testDeprecatedLabel [
+
+	| labeledCase expected actual |
+	labeledCase := (fastModel allWithType: FASTJavaLabeledCaseStatement) first.
+	expected := labeledCase labels first caseExpressions first.
+	actual := [ labeledCase label ]
+		          on: Deprecation
+		          do: [ :notification | notification resume ].
+	self assert: actual identicalTo: expected
+]
+
+{ #category : 'tests' }
+JavaSmaCCSwitchTest >> testDeprecatedLabelSetter [
+
+	| labeledCase replacement actual |
+	labeledCase := (fastModel allWithType: FASTJavaLabeledCaseStatement) first.
+	replacement := FASTJavaVariableExpression new
+		               name: 'replacement';
+		               yourself.
+	[ labeledCase label: replacement ]
+		on: Deprecation
+		do: [ :notification | notification resume ].
+	self assert: labeledCase labels size equals: 1.
+	actual := labeledCase labels first caseExpressions first.
+	self assert: actual identicalTo: replacement
+]
+
+{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testExpressionsSize [
-	self assert: ((fastModel allWithType: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'HELLO'  ]) anyOne statements size equals: 2. 
-	self assert: ((fastModel allWithType: FASTJavaLabeledCaseStatement) select: [:case | case label name = 'WORLD'  ]) anyOne statements size equals: 1.
-	self assert: (fastModel allWithType: FASTJavaDefaultCaseStatement) anyOne statements size equals: 1.
+
+	self
+		assert:
+			((fastModel allWithType: FASTJavaLabeledCaseStatement) select: [ :case |
+				 case labels first caseExpressions first name = 'HELLO' ]) anyOne statements size
+		equals: 2.
+	self
+		assert:
+			((fastModel allWithType: FASTJavaLabeledCaseStatement) select: [ :case |
+				 case labels first caseExpressions first name = 'WORLD' ]) anyOne statements size
+		equals: 1.
+	self assert: (fastModel allWithType: FASTJavaDefaultCaseStatement) anyOne statements size equals: 1
 ]
 
 { #category : 'tests' }
@@ -44,8 +81,9 @@ JavaSmaCCSwitchTest >> testLabeledCaseSize [
 
 { #category : 'tests' }
 JavaSmaCCSwitchTest >> testLabeledValue [
-	self assert: (fastModel allWithType: FASTJavaLabeledCaseStatement) first label name equals: 'HELLO'.
-	self assert: (fastModel allWithType: FASTJavaLabeledCaseStatement) second label name equals: 'WORLD'
+
+	self assert: (fastModel allWithType: FASTJavaLabeledCaseStatement) first labels first caseExpressions first name equals: 'HELLO'.
+	self assert: (fastModel allWithType: FASTJavaLabeledCaseStatement) second labels first caseExpressions first name equals: 'WORLD'
 ]
 
 { #category : 'tests' }
