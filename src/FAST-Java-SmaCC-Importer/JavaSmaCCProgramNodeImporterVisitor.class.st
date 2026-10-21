@@ -1558,6 +1558,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aType
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self setStartEndPos: aTypeImportOnDemandDeclaration.
 	currentFASTEntity
+		isStatic: aTypeImportOnDemandDeclaration staticToken isNotNil;
 		isOnDemand: true;
 		qualifiedName:
 			(self clone accept: aTypeImportOnDemandDeclaration name).
