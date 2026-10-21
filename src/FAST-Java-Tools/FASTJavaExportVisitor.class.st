@@ -1126,20 +1126,21 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchRule: aFASTJavaSwitchRule [
 FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
 
 	self checkForComments: aFASTJavaSwitchStatement andDo: [
-		self indented: 'switch ('.
-		aFASTJavaSwitchStatement condition accept: self.
-		self
-			unindented: ') {' ;
-			newLine ;
-			indent.
-		aFASTJavaSwitchStatement cases do: [ :switchCase |
-			switchCase accept: self
-		].
-		self
-			unindent ;
-			indented: $} ;
-			newLine
-	]
+			self indented: 'switch ('.
+			aFASTJavaSwitchStatement condition accept: self.
+			self
+				unindented: ') {';
+				newLine;
+				indent.
+
+			"A switch block is in colon form or in arrow form, so one of these is empty."
+			aFASTJavaSwitchStatement cases do: [ :switchCase | switchCase accept: self ].
+			aFASTJavaSwitchStatement rules do: [ :rule | rule accept: self ].
+
+			self
+				unindent;
+				indented: $};
+				newLine ]
 ]
 
 { #category : 'visiting statement' }

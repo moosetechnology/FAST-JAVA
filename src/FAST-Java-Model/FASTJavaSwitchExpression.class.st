@@ -51,8 +51,9 @@ switch (day) {
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `cases` | `FASTJavaTWithSwitchBlock` | `javaCaseStatementSwitchOwner` | `FASTJavaCaseStatement` | The case groups of my switch block, in colon form|
 | `condition` | `FASTJavaSwitchExpression` | `switchExpressionConditionOwner` | `FASTTExpression` | The condition of the switch expression|
-| `rules` | `FASTJavaSwitchExpression` | `switchExpressionOwner` | `FASTJavaSwitchRule` | The rules of the switch expression|
+| `rules` | `FASTJavaTWithSwitchBlock` | `switchOwner` | `FASTJavaSwitchRule` | The rules of my switch block, in arrow form|
 
 
 ## Properties
@@ -67,11 +68,8 @@ switch (day) {
 Class {
 	#name : 'FASTJavaSwitchExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTExpression',
-	#classTraits : 'FASTTExpression classTrait',
-	#instVars : [
-		'#rules => FMMany type: #FASTJavaSwitchRule opposite: #switchExpressionOwner'
-	],
+	#traits : 'FASTJavaTWithSwitchBlock + FASTTExpression',
+	#classTraits : 'FASTJavaTWithSwitchBlock classTrait + FASTTExpression classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -84,14 +82,6 @@ FASTJavaSwitchExpression class >> annotation [
 	<FMClass: #SwitchExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-]
-
-{ #category : 'adding' }
-FASTJavaSwitchExpression >> addRule: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self rules add: anObject
 ]
 
 { #category : 'accessing' }
@@ -126,23 +116,4 @@ FASTJavaSwitchExpression >> isSwitchExpression [
 	<ignoreForCoverage>
 	<generated>
 	^ true
-]
-
-{ #category : 'accessing' }
-FASTJavaSwitchExpression >> rules [
-	"Relation named: #rules type: #FASTJavaSwitchRule opposite: #switchExpressionOwner"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The rules of the switch expression'>
-	<derived>
-	^ rules
-]
-
-{ #category : 'accessing' }
-FASTJavaSwitchExpression >> rules: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	rules value: anObject
 ]

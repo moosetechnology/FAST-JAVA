@@ -30,6 +30,17 @@ JavaSmaCCProgramNodeImporterVisitor class >> parseCodeMethodString: aCodeString 
 ]
 
 { #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
+	"A switch used as a statement is a switch statement (JLS 14.11.1) whatever form its
+	block takes, but SmaCC types the node after the form, not the position. Only the
+	places where a statement is expected can tell the two apart, so they come here."
+
+	(aStatementNode isKindOf: JavaSwitchExpressionNode) ifTrue: [ ^ self clone visitSwitchExpressionAsStatement: aStatementNode ].
+
+	^ self clone accept: aStatementNode
+]
+
+{ #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> addThrowsOf: aDeclarationNode [
 
 	aDeclarationNode throws ifNotNil: [ :throws |
@@ -418,10 +429,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression 
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
+
 	currentFASTEntity := self addToModel: FASTJavaStatementBlock new.
 	self setStartEndPos: aBlock.
-	aBlock statements
-		do: [ :each | currentFASTEntity statements add: (self clone accept: each) ].
+	aBlock statements do: [ :each | currentFASTEntity statements add: (self acceptStatement: each) ].
 	^ currentFASTEntity
 ]
 
@@ -617,7 +628,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoWhileStatement: aDoWhileStatement 
 	currentFASTEntity
 		condition: (self clone accept: aDoWhileStatement expression).
 	currentFASTEntity
-		body: (self clone accept: aDoWhileStatement statement).
+		body: (self acceptStatement: aDoWhileStatement statement).
 	^ currentFASTEntity
 ]
 
@@ -763,15 +774,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement [
+
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
 	self setStartEndPos: aForEachStatement.
-	currentFASTEntity body:
-		(self clone accept: aForEachStatement statement).
-	currentFASTEntity fieldname:
-		(self clone visitIdentifier: aForEachStatement name).
+	currentFASTEntity body: (self acceptStatement: aForEachStatement statement).
+	currentFASTEntity fieldname: (self clone visitIdentifier: aForEachStatement name).
 	currentFASTEntity type: (self clone accept: aForEachStatement type).
-	currentFASTEntity list:
-		(self clone accept: aForEachStatement expression).
+	currentFASTEntity list: (self clone accept: aForEachStatement expression).
 	^ currentFASTEntity
 ]
 
@@ -789,7 +798,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 			[ :initial | currentFASTEntity initializer: (self clone accept: initial) ].
 	aForStatement statement
 		ifNotNil:
-			[ :statement | currentFASTEntity body: (self clone accept: statement) ].
+			[ :statement | currentFASTEntity body: (self acceptStatement: statement) ].
 	^ currentFASTEntity
 ]
 
@@ -803,15 +812,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIdentifier: aNameNode [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitIfElseStatement: anIfStatementNode [
+
 	currentFASTEntity := self addToModel: FASTJavaIfStatement new.
 	self setStartEndPos: anIfStatementNode.
-	currentFASTEntity
-		condition: (self clone accept: anIfStatementNode expression).
-	currentFASTEntity
-		thenPart: (self clone accept: anIfStatementNode trueStatement).
-	anIfStatementNode falseStatement
-		ifNotNil: [ currentFASTEntity
-				elsePart: (self clone accept: anIfStatementNode falseStatement) ].
+	currentFASTEntity condition: (self clone accept: anIfStatementNode expression).
+	currentFASTEntity thenPart: (self acceptStatement: anIfStatementNode trueStatement).
+	anIfStatementNode falseStatement ifNotNil: [
+		currentFASTEntity elsePart: (self acceptStatement: anIfStatementNode falseStatement) ].
 	^ currentFASTEntity
 ]
 
@@ -822,7 +829,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIfStatement: anIfStatementNode [
 	currentFASTEntity
 		condition: (self clone accept: anIfStatementNode expression).
 	currentFASTEntity
-		thenPart: (self clone accept: anIfStatementNode trueStatement).
+		thenPart: (self acceptStatement: anIfStatementNode trueStatement).
 	^ currentFASTEntity
 ]
 
@@ -912,7 +919,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLabeledStatement: aLabeledStatement 
 			                      label: aLabeledStatement identifier value;
 			                      yourself).
 	self setStartEndPos: aLabeledStatement.
-	currentFASTEntity labeledStatement:	(self clone accept: aLabeledStatement statement).
+	currentFASTEntity labeledStatement: (self acceptStatement: aLabeledStatement statement).
 	^ currentFASTEntity
 ]
 
@@ -1350,7 +1357,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 			                      ifFalse: [ FASTJavaDefaultCaseStatement new ]).
 	self setStartEndPos: aSwitchBlockStatementGroup.
 	aSwitchBlockStatementGroup labels do: [ :label | currentFASTEntity labels add: (self clone accept: label) ].
-	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity statements add: (self clone accept: statement) ].
+	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity statements add: (self acceptStatement: statement) ].
 	^ currentFASTEntity
 ]
 
@@ -1358,6 +1365,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchExpression: aSwitchExpression [
 
 	currentFASTEntity := self addToModel: FASTJavaSwitchExpression new.
+	self setStartEndPos: aSwitchExpression.
+	currentFASTEntity condition: (self clone accept: aSwitchExpression expression).
+	aSwitchExpression statementGroups do: [ :statementGroup | currentFASTEntity rules add: (self clone accept: statementGroup) ].
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitSwitchExpressionAsStatement: aSwitchExpression [
+	"JLS 14.11.1: a switch whose block is in arrow form is a switch statement when it is
+	used as one."
+
+	currentFASTEntity := self addToModel: FASTJavaSwitchStatement new.
 	self setStartEndPos: aSwitchExpression.
 	currentFASTEntity condition: (self clone accept: aSwitchExpression expression).
 	aSwitchExpression statementGroups do: [ :statementGroup | currentFASTEntity rules add: (self clone accept: statementGroup) ].
@@ -1569,7 +1588,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitWhileStatement: aWhileStatementNode 
 	currentFASTEntity
 		condition: (self clone accept: aWhileStatementNode expression).
 	currentFASTEntity
-		body: (self clone accept: aWhileStatementNode statement).
+		body: (self acceptStatement: aWhileStatementNode statement).
 	^ currentFASTEntity
 ]
 

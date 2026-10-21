@@ -1122,6 +1122,30 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchStatementWithRules [
+
+	| ast |
+	ast := self methodAST: 'void mth(int value) {
+  switch (value) {
+    case 1 -> first();
+    default -> {
+      last();
+    }
+  }
+}'.
+
+	self export: ast equals: 'void mth(int value) {
+  switch (value) {
+    case 1 -> first();
+    default -> {
+      last();
+    }
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSynchronizedBlock [
 
 	| expr |

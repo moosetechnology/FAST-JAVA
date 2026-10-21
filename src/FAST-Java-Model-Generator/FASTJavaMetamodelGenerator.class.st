@@ -137,7 +137,8 @@ Class {
 		'javaSwitchRule',
 		'javaYieldStatement',
 		'tTryResource',
-		'tWithTypeParameters'
+		'tWithTypeParameters',
+		'tWithSwitchBlock'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -1055,6 +1056,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodInvocation --|> tReceiver.
 
 	javaSwitchStatement --|> tStatement.
+	javaSwitchStatement --|> tWithSwitchBlock.
 	javaThis --|> javaVariableExpression.
 
 	javaVarDeclStatement --|> tStatement.
@@ -1188,6 +1190,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	importDeclaration --|> tWithQualifiedName.
 
 	javaSwitchExpression --|> tExpression.
+	javaSwitchExpression --|> tWithSwitchBlock.
 	javaSwitchLabel --|> tEntity.
 	javaSwitchRule --|> tEntity.
 	javaYieldStatement --|> tStatement
@@ -1255,8 +1258,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-* ((javaVariableDeclarator property: #varDeclOwner) comment:
 			 'The owner of the declarator').
 
-	((javaSwitchStatement property: #cases) comment:
-		 'The cases of the switch statement')
+	((tWithSwitchBlock property: #cases) comment:
+		 'The case groups of my switch block, in colon form')
 	<>-*
 		((javaCaseStatement property: #javaCaseStatementSwitchOwner)
 			 comment: 'The switch owner').
@@ -1598,7 +1601,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The compilation unit that owns me').
 
 	((javaSwitchExpression property: #condition) comment: 'The condition of the switch expression') <>- ((tExpression property: #switchExpressionConditionOwner) comment: 'The switch expression whose condition I am').
-	((javaSwitchExpression property: #rules) comment: 'The rules of the switch expression') <>-* ((javaSwitchRule property: #switchExpressionOwner) comment: 'The switch expression that owns me').
+	((tWithSwitchBlock property: #rules) comment: 'The rules of my switch block, in arrow form') <>-* ((javaSwitchRule property: #switchOwner) comment: 'The switch that owns me').
 
 	((javaSwitchRule property: #label) comment: 'The label of the switch rule') <>- ((javaSwitchLabel property: #switchRuleOwner) comment: 'The switch rule that owns me').
 	((javaSwitchRule property: #body) comment: 'The body of the switch rule') <>- ((javaEntity property: #switchRuleBodyOwner) comment: 'The switch rule whose body I am').
@@ -1630,6 +1633,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tTryResource := self newTraitNamed: #TTryResource comment: 'I am a resource in a try-with-resource'.
 
 	tWithTypeParameters := self newTraitNamed: #TWithTypeParameters comment: 'I am a generic declaration: I declare type parameters'.
+
+	tWithSwitchBlock := self newTraitNamed: #TWithSwitchBlock comment: 'I have a switch block: a list of case groups in colon form, or of rules in arrow form'.
 
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.

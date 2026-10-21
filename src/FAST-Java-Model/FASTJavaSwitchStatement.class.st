@@ -23,8 +23,9 @@ switch (_) {
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `cases` | `FASTJavaSwitchStatement` | `javaCaseStatementSwitchOwner` | `FASTJavaCaseStatement` | The cases of the switch statement|
+| `cases` | `FASTJavaTWithSwitchBlock` | `javaCaseStatementSwitchOwner` | `FASTJavaCaseStatement` | The case groups of my switch block, in colon form|
 | `condition` | `FASTJavaSwitchStatement` | `switchConditionOwner` | `FASTTExpression` | The condition of the statement|
+| `rules` | `FASTJavaTWithSwitchBlock` | `switchOwner` | `FASTJavaSwitchRule` | The rules of my switch block, in arrow form|
 
 
 ## Properties
@@ -39,11 +40,8 @@ switch (_) {
 Class {
 	#name : 'FASTJavaSwitchStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTStatement',
-	#classTraits : 'FASTTStatement classTrait',
-	#instVars : [
-		'#cases => FMMany type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner'
-	],
+	#traits : 'FASTJavaTWithSwitchBlock + FASTTStatement',
+	#classTraits : 'FASTJavaTWithSwitchBlock classTrait + FASTTStatement classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -56,33 +54,6 @@ FASTJavaSwitchStatement class >> annotation [
 	<FMClass: #SwitchStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-]
-
-{ #category : 'adding' }
-FASTJavaSwitchStatement >> addCase: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self cases add: anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaSwitchStatement >> cases [
-	"Relation named: #cases type: #FASTJavaCaseStatement opposite: #javaCaseStatementSwitchOwner"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The cases of the switch statement'>
-	<derived>
-	^ cases
-]
-
-{ #category : 'accessing' }
-FASTJavaSwitchStatement >> cases: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	cases value: anObject
 ]
 
 { #category : 'accessing' }

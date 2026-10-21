@@ -7,7 +7,7 @@ I represent an arrow-form switch rule.
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `switchExpressionOwner` | `FASTJavaSwitchRule` | `rules` | `FASTJavaSwitchExpression` | The switch expression that owns me|
+| `switchOwner` | `FASTJavaSwitchRule` | `rules` | `FASTJavaTWithSwitchBlock` | The switch that owns me|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
@@ -33,7 +33,7 @@ Class {
 	#instVars : [
 		'#body => FMOne type: #FASTJavaEntity opposite: #switchRuleBodyOwner',
 		'#label => FMOne type: #FASTJavaSwitchLabel opposite: #switchRuleOwner',
-		'#switchExpressionOwner => FMOne type: #FASTJavaSwitchExpression opposite: #rules'
+		'#switchOwner => FMOne type: #FASTJavaTWithSwitchBlock opposite: #rules'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -94,20 +94,20 @@ FASTJavaSwitchRule >> label: anObject [
 ]
 
 { #category : 'accessing' }
-FASTJavaSwitchRule >> switchExpressionOwner [
-	"Relation named: #switchExpressionOwner type: #FASTJavaSwitchExpression opposite: #rules"
+FASTJavaSwitchRule >> switchOwner [
+	"Relation named: #switchOwner type: #FASTJavaTWithSwitchBlock opposite: #rules"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The switch expression that owns me'>
+	<FMComment: 'The switch that owns me'>
 	<container>
-	^ switchExpressionOwner
+	^ switchOwner
 ]
 
 { #category : 'accessing' }
-FASTJavaSwitchRule >> switchExpressionOwner: anObject [
+FASTJavaSwitchRule >> switchOwner: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	switchExpressionOwner := anObject
+	switchOwner := anObject
 ]
