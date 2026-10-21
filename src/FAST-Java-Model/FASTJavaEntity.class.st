@@ -80,6 +80,22 @@ FASTJavaEntity >> isAnnotation [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isAnnotationElementDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isAnnotationInterfaceDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isArrayAccess [
 
 	<ignoreForCoverage>

@@ -131,6 +131,33 @@ void mth() {
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationInterfaceDeclaration [
+
+	| ast |
+	ast := self astFor: '@interface Author { }'.
+
+	self export: ast equals: '@interface Author {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationInterfaceDeclarationWithElements [
+
+	| ast |
+	ast := self astFor: 'public @interface Author {
+	String name() default "unknown";
+	int revision();
+}'.
+
+	self export: ast equals: 'public @interface Author {
+  String name() default "unknown";
+  int revision();
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithArrayElement [
 	
 	| expr |

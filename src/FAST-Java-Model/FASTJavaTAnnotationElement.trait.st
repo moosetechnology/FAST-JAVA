@@ -9,6 +9,7 @@ I can be used as an annotation ""argument"" eg: @SuppressWarnings(value=""unchec
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
+| `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
 | `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 
@@ -18,6 +19,7 @@ Trait {
 	#name : 'FASTJavaTAnnotationElement',
 	#instVars : [
 		'#arrayOwner => FMOne type: #FASTJavaArrayAnnotationElement opposite: #values',
+		'#defaultValueOwner => FMOne type: #FASTJavaAnnotationElementDeclaration opposite: #defaultValue',
 		'#parentAnnotation => FMOne type: #FASTJavaAnnotation opposite: #elements'
 	],
 	#category : 'FAST-Java-Model-Traits',
@@ -51,6 +53,26 @@ FASTJavaTAnnotationElement >> arrayOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	arrayOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTAnnotationElement >> defaultValueOwner [
+	"Relation named: #defaultValueOwner type: #FASTJavaAnnotationElementDeclaration opposite: #defaultValue"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The annotation element declaration I am the default value of'>
+	<container>
+	<derived>
+	^ defaultValueOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTAnnotationElement >> defaultValueOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	defaultValueOwner := anObject
 ]
 
 { #category : 'accessing' }

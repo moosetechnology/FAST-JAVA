@@ -166,6 +166,39 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 
 ]
 
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaAnnotationElementDeclaration: aFASTJavaAnnotationElementDeclaration [
+
+	self checkForComments: aFASTJavaAnnotationElementDeclaration andDo: [
+			self indented: ''.
+			self visitFASTJavaModifiers: aFASTJavaAnnotationElementDeclaration modifiers.
+			aFASTJavaAnnotationElementDeclaration type accept: self.
+			self space.
+			self unindented: aFASTJavaAnnotationElementDeclaration name.
+			self unindented: '()'.
+
+			aFASTJavaAnnotationElementDeclaration defaultValue ifNotNil: [ :defaultValue |
+					self unindented: ' default '.
+					defaultValue accept: self ].
+
+			self
+				unindented: $;;
+				newLine ]
+]
+
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaAnnotationInterfaceDeclaration: aFASTJavaAnnotationInterfaceDeclaration [
+
+	self checkForComments: aFASTJavaAnnotationInterfaceDeclaration andDo: [
+			self visitFASTJavaModifiers: aFASTJavaAnnotationInterfaceDeclaration modifiers.
+			self unindented: '@interface '.
+			self unindented: aFASTJavaAnnotationInterfaceDeclaration name.
+
+			aFASTJavaAnnotationInterfaceDeclaration declarations ifNotNil: [ :declarations |
+				self visitJavaClassMemberDeclarations: declarations ].
+			self newLine ]
+]
+
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 	self checkForComments: aFASTJavaArgumentList andDo: [
@@ -402,6 +435,8 @@ FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit 
 		self newLine ].
 	aFASTJavaCompilationUnit interfaceDeclarations do: [ :decl | 
 		self visitFASTJavaInterfaceDeclaration: decl ].
+	aFASTJavaCompilationUnit annotationInterfaceDeclarations do: [ :decl | 
+		self visitFASTJavaAnnotationInterfaceDeclaration: decl ].
 	aFASTJavaCompilationUnit classDeclarations do: [ :decl | 
 		self visitFASTJavaClassDeclaration: decl ]
 ]

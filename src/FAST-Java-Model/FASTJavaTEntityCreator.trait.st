@@ -29,6 +29,22 @@ FASTJavaTEntityCreator >> newAnnotation [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newAnnotationElementDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaAnnotationElementDeclaration new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newAnnotationInterfaceDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaAnnotationInterfaceDeclaration new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newArrayAccess [
 
 	<ignoreForCoverage>

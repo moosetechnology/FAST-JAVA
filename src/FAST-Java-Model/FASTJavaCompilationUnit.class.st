@@ -7,6 +7,7 @@ I represent a compilation unit, I can contain declarations for a package, import
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotationInterfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaAnnotationInterfaceDeclaration` | My annotation interface declarations|
 | `classDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaClassDeclaration` | My class declarations|
 | `enumDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaEnumDeclaration` | My enum declaration|
 | `importDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaImportDeclaration` | My import declarations|
@@ -35,6 +36,7 @@ Class {
 	#traits : '(FASTTEntity + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
 	#classTraits : '(FASTTEntity classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
+		'#annotationInterfaceDeclarations => FMMany type: #FASTJavaAnnotationInterfaceDeclaration opposite: #compilationUnit',
 		'#classDeclarations => FMMany type: #FASTJavaClassDeclaration opposite: #compilationUnit',
 		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit',
 		'#importDeclarations => FMMany type: #FASTJavaImportDeclaration opposite: #compilationUnit',
@@ -53,6 +55,14 @@ FASTJavaCompilationUnit class >> annotation [
 	<FMClass: #CompilationUnit super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaCompilationUnit >> addAnnotationInterfaceDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self annotationInterfaceDeclarations add: anObject
 ]
 
 { #category : 'adding' }
@@ -85,6 +95,25 @@ FASTJavaCompilationUnit >> addInterfaceDeclaration: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self interfaceDeclarations add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> annotationInterfaceDeclarations [
+	"Relation named: #annotationInterfaceDeclarations type: #FASTJavaAnnotationInterfaceDeclaration opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'My annotation interface declarations'>
+	<derived>
+	^ annotationInterfaceDeclarations
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> annotationInterfaceDeclarations: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	annotationInterfaceDeclarations value: anObject
 ]
 
 { #category : 'accessing' }

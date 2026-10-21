@@ -138,7 +138,9 @@ Class {
 		'javaYieldStatement',
 		'tTryResource',
 		'tWithTypeParameters',
-		'tWithSwitchBlock'
+		'tWithSwitchBlock',
+		'javaAnnotationInterfaceDeclaration',
+		'javaAnnotationElementDeclaration'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -179,6 +181,30 @@ FASTJavaMetamodelGenerator >> commentForJavaAnnotation [
 example:
 
 @Override'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaAnnotationElementDeclaration [
+
+	^ 'I represent the declaration of an element of an annotation interface ([JLS 9.6.1](https://docs.oracle.com/javase/specs/jls/se17/html/jls-9.html#jls-9.6.1)): a method that takes no parameter, throws nothing, and may have a default value.
+Example:
+```language=text
+public @interface MyAnnotation {
+	String value() default "none";
+}
+```'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaAnnotationInterfaceDeclaration [
+
+	^ 'I represent an annotation interface declaration ([JLS 9.6](https://docs.oracle.com/javase/specs/jls/se17/html/jls-9.html#jls-9.6)).
+Example:
+```language=text
+public @interface MyAnnotation {
+	String value() default "none";
+}
+```'
 ]
 
 { #category : 'comments' }
@@ -933,6 +959,14 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaEnumDeclaration withTesting.
 	javaInterfaceDeclaration := self newClassNamed: #InterfaceDeclaration comment: self commentForJavaInterfaceDeclaration.
 	javaInterfaceDeclaration withTesting.
+	javaAnnotationInterfaceDeclaration := self
+		                                      newClassNamed: #AnnotationInterfaceDeclaration
+		                                      comment: self commentForJavaAnnotationInterfaceDeclaration.
+	javaAnnotationInterfaceDeclaration withTesting.
+	javaAnnotationElementDeclaration := self
+		                                    newClassNamed: #AnnotationElementDeclaration
+		                                    comment: self commentForJavaAnnotationElementDeclaration.
+	javaAnnotationElementDeclaration withTesting.
 	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
 	javaEmptyMethodDeclaration withTesting.
 	compilationUnit := self
@@ -1050,6 +1084,17 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInterfaceDeclaration --|> tNamedEntity.
 	javaInterfaceDeclaration --|> #THasImmediateSource.
 	javaInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
+
+	"JLS 9.6: an annotation interface has no supertype and no type parameters."
+	javaAnnotationInterfaceDeclaration --|> tStatement.
+	javaAnnotationInterfaceDeclaration --|> tDeclaration.
+	javaAnnotationInterfaceDeclaration --|> tWithDeclarations.
+	javaAnnotationInterfaceDeclaration --|> tWithModifiers.
+	javaAnnotationInterfaceDeclaration --|> tNamedEntity.
+	javaAnnotationInterfaceDeclaration --|> #THasImmediateSource.
+	javaAnnotationInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
+
+	javaAnnotationElementDeclaration --|> javaMethodEntity.
 
 	javaMethodInvocation --|> tInvocation.
 	javaMethodInvocation --|> tWithReceiver.
@@ -1253,6 +1298,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'Annotation elements in the Array')
 	<>-* ((tAnnotationElement property: #arrayOwner) comment:
 			 'The ArrayAnnotationElement I am an element of').
+
+	((javaAnnotationElementDeclaration property: #defaultValue) comment:
+		 'The value I take when the annotation does not give one, eg. "none" in `String value() default "none";`')
+	<>- ((tAnnotationElement property: #defaultValueOwner) comment:
+			 'The annotation element declaration I am the default value of').
 
 	((javaVarDeclStatement property: #declarators) comment:
 		 'The declarators for the type')
@@ -1599,6 +1649,10 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((compilationUnit property: #enumDeclarations) comment:
 		 'My enum declaration')
 	<>-* ((javaEnumDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #annotationInterfaceDeclarations) comment:
+		 'My annotation interface declarations')
+	<>-* ((javaAnnotationInterfaceDeclaration property: #compilationUnit) comment:
 			 'The compilation unit that owns me').
 
 	((javaSwitchExpression property: #condition) comment: 'The condition of the switch expression') <>- ((tExpression property: #switchExpressionConditionOwner) comment: 'The switch expression whose condition I am').

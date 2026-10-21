@@ -30,6 +30,17 @@ JavaSmaCCProgramNodeImporterVisitor class >> parseCodeMethodString: aCodeString 
 ]
 
 { #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> acceptAnnotationInterfaceMember: aMemberNode [
+	"JLS 9.6.1: a member of an annotation interface that is a method declaration declares
+	one of its elements. SmaCC gives such a declaration one node class when it has a
+	default value and another when it has none, so both come here."
+
+	(aMemberNode isKindOf: JavaAbstractMethodDeclarationNode) ifTrue: [ ^ self clone visitAnnotationElementDeclaration: aMemberNode ].
+
+	^ self clone accept: aMemberNode
+]
+
+{ #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
 	"A switch used as a statement is a switch statement (JLS 14.11.1) whatever form its
 	block takes, but SmaCC types the node after the form, not the position. Only the
@@ -191,7 +202,7 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 { #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
 
-	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaMethodEntity }
+	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaAnnotationInterfaceDeclaration . FASTJavaMethodEntity }
 		includes: currentFASTEntity class )
 		ifTrue: [ ^ false ].
 
@@ -355,6 +366,38 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 
 	anAnnotation values do: [ :expression |
 		currentFASTEntity addElement: (self clone accept: expression) ].
+
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationElementDeclaration: anElementDeclaration [
+	"JLS 9.6.1: an element of an annotation interface is declared as a method that takes no
+	parameter and may have a default value."
+
+	currentFASTEntity := (self create: FASTJavaAnnotationElementDeclaration from: anElementDeclaration)
+		                     name: anElementDeclaration declarator name value;
+		                     yourself.
+
+	anElementDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	currentFASTEntity type: (self clone accept: anElementDeclaration type).
+
+	(anElementDeclaration isKindOf: JavaAnnotationMethodDeclarationNode) ifTrue: [
+		currentFASTEntity defaultValue: (self clone accept: anElementDeclaration value) ].
+
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationInterface: anAnnotationInterface [
+	"JLS 9.6: an annotation interface declaration has no supertype and no type parameters."
+
+	self create: FASTJavaAnnotationInterfaceDeclaration from: anAnnotationInterface.
+	currentFASTEntity name: anAnnotationInterface name value.
+
+	anAnnotationInterface modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	anAnnotationInterface declarations do: [ :declaration |
+		currentFASTEntity addDeclaration: (self acceptAnnotationInterfaceMember: declaration) ].
 
 	^ currentFASTEntity
 ]
@@ -1243,7 +1286,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitProgramFile: aProgramFile [
 			entity := self clone accept: declaration.
 			entity isClassDeclaration ifTrue: [ currentFASTEntity addClassDeclaration: entity ].
 			entity isInterfaceDeclaration ifTrue: [ currentFASTEntity addInterfaceDeclaration: entity ].
-			entity isEnumDeclaration ifTrue: [ currentFASTEntity addEnumDeclaration: entity ] ].
+			entity isEnumDeclaration ifTrue: [ currentFASTEntity addEnumDeclaration: entity ].
+			entity isAnnotationInterfaceDeclaration ifTrue: [ currentFASTEntity addAnnotationInterfaceDeclaration: entity ] ].
 	^ currentFASTEntity
 ]
 
