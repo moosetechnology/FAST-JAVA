@@ -27,6 +27,7 @@ A FASTJavaFieldAccess corresponds to an access to an instance variable (field)
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
+| `javaTryResourceOwner` | `FASTJavaTTryResource` | `resources` | `FASTJavaTryCatchStatement` | The try-with-resource that owns me|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableAssignmentOwner` | `FASTJavaTAssignable` | `variable` | `FASTJavaTWithAssignable` | The owner of the assignment|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
@@ -60,8 +61,8 @@ A FASTJavaFieldAccess corresponds to an access to an instance variable (field)
 Class {
 	#name : 'FASTJavaFieldAccess',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTExpression',
-	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTJavaTTryResource + FASTJavaTWithReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTJavaTTryResource classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#fieldName => FMProperty'
 	],

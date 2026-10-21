@@ -135,7 +135,8 @@ Class {
 		'javaSwitchExpression',
 		'javaSwitchLabel',
 		'javaSwitchRule',
-		'javaYieldStatement'
+		'javaYieldStatement',
+		'tTryResource'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -965,6 +966,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAssignmentExpression --|> tWithAssignable.
 
 	javaFieldAccess --|> tExpression.
+	javaFieldAccess --|> tTryResource.
 	javaFieldAccess --|> tAssignable.
 	javaFieldAccess --|> tWithReceiver.
 	javaFieldAccess --|> tReceiver.
@@ -1052,6 +1054,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaThis --|> javaVariableExpression.
 
 	javaVarDeclStatement --|> tStatement.
+	javaVarDeclStatement --|> tTryResource.
 	javaVarDeclStatement --|> tDeclaration.
 	javaVarDeclStatement --|> tScopableEntity.
 	javaVarDeclStatement --|> tWithModifiers.
@@ -1091,6 +1094,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaArrayAccess --|> tReceiver.
 
 	javaVariableExpression --|> tVariableExpression.
+	javaVariableExpression --|> tTryResource.
 	javaVariableExpression --|> tAssignable.
 	javaVariableExpression --|> tReceiver.
 
@@ -1347,7 +1351,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaTryCatchStatement property: #resources) comment:
 		 'I contain the resources in a try-with-resource statement')
 	<>-*
-		((javaVarDeclStatement property: #javaTryResourceOwner) comment:
+		((tTryResource property: #javaTryResourceOwner) comment:
 			 'The try-with-resource that owns me').
 
 	((javaCatchPartStatement property: #catchedTypes) comment:
@@ -1600,25 +1604,27 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 { #category : 'definition' }
 FASTJavaMetamodelGenerator >> defineTraits [
-	super defineTraits. 
+	super defineTraits.
 
 	tDeclaration := self newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
 	tWithDeclarations := self newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
-	
-	tModifier := self newTraitNamed: #TModifier comment: self commentForJavaTModifier. 
+
+	tModifier := self newTraitNamed: #TModifier comment: self commentForJavaTModifier.
 	tWithModifiers := self newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
-	
-	tAssignable := self newTraitNamed: #TAssignable comment: self commentForJavaTAssignable. 
+
+	tAssignable := self newTraitNamed: #TAssignable comment: self commentForJavaTAssignable.
 	tWithAssignable := self newTraitNamed: #TWithAssignable comment: 'I have an assignable'.
-	
+
 	tReceiver := self newTraitNamed: #TReceiver comment: 'I receive a message from someone'.
 	tWithReceiver := self newTraitNamed: #TWithReceiver comment: 'I can send a message to someone'.
-	
+
 	tWithQualifiedName := self newTraitNamed: #TWithQualifiedName comment: 'I have a qualified name.'.
 
 	tAnnotationElement := self newTraitNamed: #TAnnotationElement comment: 'I can be used as an annotation "argument" eg: @SuppressWarnings(value="unchecked")
 	Acceptable annotation elements are: literal, Enum constant, Annotation, Class, an array of the preceding (out of laziness we use ArrayInitializer which is too permissive)'.
-	
+
+	tTryResource := self newTraitNamed: #TTryResource comment: 'I am a resource in a try-with-resource'.
+
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.
 
@@ -1628,7 +1634,7 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tNullPointerLiteral := self remoteTrait: #TNullPointerLiteral withPrefix: #FAST.
 	tStringLiteral := self remoteTrait: #TStringLiteral withPrefix: #FAST.
 
-	tExpression := self remoteTrait: #TExpression withPrefix: #FAST. 
+	tExpression := self remoteTrait: #TExpression withPrefix: #FAST.
 	tVariableExpression := self remoteTrait: #TVariableExpression withPrefix: #FAST.
 
 	tStatement := self remoteTrait: #TStatement withPrefix: #FAST.

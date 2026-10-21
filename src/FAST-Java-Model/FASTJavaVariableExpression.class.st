@@ -35,6 +35,7 @@
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
+| `javaTryResourceOwner` | `FASTJavaTTryResource` | `resources` | `FASTJavaTryCatchStatement` | The try-with-resource that owns me|
 | `javaTypePatternVariableOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaTypePattern` | The javaTypePattern variable owner (if possible)|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVarDeclTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaVarDeclStatement` | The variable expression owner (if possible)|
@@ -66,8 +67,8 @@
 Class {
 	#name : 'FASTJavaVariableExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTTVariableExpression',
-	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTTVariableExpression classTrait',
+	#traits : 'FASTJavaTAssignable + FASTJavaTReceiver + FASTJavaTTryResource + FASTTVariableExpression',
+	#classTraits : 'FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTJavaTTryResource classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
 		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',

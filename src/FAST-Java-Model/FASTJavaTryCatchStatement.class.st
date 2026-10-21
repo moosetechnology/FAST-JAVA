@@ -33,7 +33,7 @@ void tryCatch() {
 |---|
 | `catches` | `FASTJavaTryCatchStatement` | `tryOwner` | `FASTJavaCatchPartStatement` | I contain all the catch statements|
 | `finally` | `FASTJavaTryCatchStatement` | `javaTryFinallyOwner` | `FASTJavaStatementBlock` | I contain the 'finally' part of the try/catch/finally|
-| `resources` | `FASTJavaTryCatchStatement` | `javaTryResourceOwner` | `FASTJavaVarDeclStatement` | I contain the resources in a try-with-resource statement|
+| `resources` | `FASTJavaTryCatchStatement` | `javaTryResourceOwner` | `FASTJavaTTryResource` | I contain the resources in a try-with-resource statement|
 | `try` | `FASTJavaTryCatchStatement` | `javaTryCatchOwner` | `FASTJavaStatementBlock` | I represent the 'try' part of the TryCatch Statement|
 
 
@@ -52,10 +52,10 @@ Class {
 	#traits : 'FASTTStatement',
 	#classTraits : 'FASTTStatement classTrait',
 	#instVars : [
-		'#try => FMOne type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner',
 		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner',
 		'#finally => FMOne type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner',
-		'#resources => FMMany type: #FASTJavaVarDeclStatement opposite: #javaTryResourceOwner'
+		'#resources => FMMany type: #FASTJavaTTryResource opposite: #javaTryResourceOwner',
+		'#try => FMOne type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -134,7 +134,7 @@ FASTJavaTryCatchStatement >> isTryCatchStatement [
 
 { #category : 'accessing' }
 FASTJavaTryCatchStatement >> resources [
-	"Relation named: #resources type: #FASTJavaVarDeclStatement opposite: #javaTryResourceOwner"
+	"Relation named: #resources type: #FASTJavaTTryResource opposite: #javaTryResourceOwner"
 
 	<ignoreForCoverage>
 	<generated>
