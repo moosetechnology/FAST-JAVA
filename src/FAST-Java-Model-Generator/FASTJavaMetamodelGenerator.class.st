@@ -136,7 +136,8 @@ Class {
 		'javaSwitchLabel',
 		'javaSwitchRule',
 		'javaYieldStatement',
-		'tTryResource'
+		'tTryResource',
+		'tWithTypeParameters'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -1019,11 +1020,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodEntity --|> #THasImmediateSource.
 	javaMethodEntity --|> tDeclaration.
 	javaMethodEntity --|> tWithModifiers.
+	javaMethodEntity --|> tWithTypeParameters.
 
 	javaClassDeclaration --|> tStatement.
 	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
+	javaClassDeclaration --|> tWithTypeParameters.
 	javaClassDeclaration --|> tNamedEntity.
 	javaClassDeclaration --|> #THasImmediateSource.
 	javaClassDeclaration withPrecedenceOf: #THasImmediateSource.
@@ -1042,6 +1045,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInterfaceDeclaration --|> tDeclaration.
 	javaInterfaceDeclaration --|> tWithDeclarations.
 	javaInterfaceDeclaration --|> tWithModifiers.
+	javaInterfaceDeclaration --|> tWithTypeParameters.
 	javaInterfaceDeclaration --|> tNamedEntity.
 	javaInterfaceDeclaration --|> #THasImmediateSource.
 	javaInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
@@ -1449,11 +1453,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-*
 		((javaClassTypeExpression property: #javaMethodThrowsOwner)
 			 comment: 'The method that throws me').
-	((javaMethodEntity property: #typeParameters) comment:
-		 'The list of type parameter')
+	((tWithTypeParameters property: #typeParameters) comment:
+		 'The type parameters I declare')
 	<>-*
-		((javaTypeParameter property: #javaMethodTypeParameterOwner)
-			 comment: 'The method that use me').
+		((javaTypeParameter property: #javaTypeParameterOwner) comment:
+			 'The generic declaration that declares me').
 
 	((javaTypeParameter property: #types) comment:
 		 'The list of types I extend or implements')
@@ -1624,6 +1628,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	Acceptable annotation elements are: literal, Enum constant, Annotation, Class, an array of the preceding (out of laziness we use ArrayInitializer which is too permissive)'.
 
 	tTryResource := self newTraitNamed: #TTryResource comment: 'I am a resource in a try-with-resource'.
+
+	tWithTypeParameters := self newTraitNamed: #TWithTypeParameters comment: 'I am a generic declaration: I declare type parameters'.
 
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.

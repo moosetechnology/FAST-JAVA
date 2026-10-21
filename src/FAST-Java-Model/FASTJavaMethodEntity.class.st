@@ -18,7 +18,7 @@ Represents a Java method
 | `statementBlock` | `FASTTWithStatements` | `fastBehaviouralParent` | `FASTTStatementBlock` | Statements block of the behavioural entity|
 | `throws` | `FASTJavaMethodEntity` | `javaMethodThrowsOwner` | `FASTJavaClassTypeExpression` | The list of throws exception|
 | `type` | `FASTJavaMethodEntity` | `javaMethodTypeOwner` | `FASTJavaVariableExpression` | The type of the method|
-| `typeParameters` | `FASTJavaMethodEntity` | `javaMethodTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The list of type parameter|
+| `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -40,12 +40,11 @@ Represents a Java method
 Class {
 	#name : 'FASTJavaMethodEntity',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTJavaTWithTypeParameters + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTJavaTWithTypeParameters classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner',
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
-		'#typeParameters => FMMany type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner'
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -67,14 +66,6 @@ FASTJavaMethodEntity >> addThrow: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self throws add: anObject
-]
-
-{ #category : 'adding' }
-FASTJavaMethodEntity >> addTypeParameter: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self typeParameters add: anObject
 ]
 
 { #category : 'testing' }
@@ -120,23 +111,4 @@ FASTJavaMethodEntity >> type: anObject [
 	<ignoreForCoverage>
 	<generated>
 	type := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaMethodEntity >> typeParameters [
-	"Relation named: #typeParameters type: #FASTJavaTypeParameterExpression opposite: #javaMethodTypeParameterOwner"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The list of type parameter'>
-	<derived>
-	^ typeParameters
-]
-
-{ #category : 'accessing' }
-FASTJavaMethodEntity >> typeParameters: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	typeParameters value: anObject
 ]

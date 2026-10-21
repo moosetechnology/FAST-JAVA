@@ -24,11 +24,11 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 | `javaAssignmentExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaAssignmentExpression` | The javaAssignmentExpression owner (if possible)|
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaMethodTypeParameterOwner` | `FASTJavaTypeParameterExpression` | `typeParameters` | `FASTJavaMethodEntity` | The method that use me|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
+| `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | `typeParameters` | `FASTJavaTWithTypeParameters` | The generic declaration that declares me|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
 | `parentConditional` | `FASTTExpression` | `condition` | `FASTTWithCondition` | Optional condition statement/expression where this expression is used|
@@ -63,7 +63,7 @@ Class {
 	#traits : 'FASTTExpression + FASTTNamedEntity',
 	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
-		'#javaMethodTypeParameterOwner => FMOne type: #FASTJavaMethodEntity opposite: #typeParameters',
+		'#javaTypeParameterOwner => FMOne type: #FASTJavaTWithTypeParameters opposite: #typeParameters',
 		'#types => FMMany type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -97,22 +97,22 @@ FASTJavaTypeParameterExpression >> isTypeParameterExpression [
 ]
 
 { #category : 'accessing' }
-FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner [
-	"Relation named: #javaMethodTypeParameterOwner type: #FASTJavaMethodEntity opposite: #typeParameters"
+FASTJavaTypeParameterExpression >> javaTypeParameterOwner [
+	"Relation named: #javaTypeParameterOwner type: #FASTJavaTWithTypeParameters opposite: #typeParameters"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The method that use me'>
+	<FMComment: 'The generic declaration that declares me'>
 	<container>
-	^ javaMethodTypeParameterOwner
+	^ javaTypeParameterOwner
 ]
 
 { #category : 'accessing' }
-FASTJavaTypeParameterExpression >> javaMethodTypeParameterOwner: anObject [
+FASTJavaTypeParameterExpression >> javaTypeParameterOwner: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	javaMethodTypeParameterOwner := anObject
+	javaTypeParameterOwner := anObject
 ]
 
 { #category : 'accessing' }
