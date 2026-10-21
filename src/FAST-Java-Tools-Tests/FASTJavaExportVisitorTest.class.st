@@ -1208,11 +1208,41 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryFinally [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithExistingVariableResource [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  try (resource) { }
+}'.
+
+	self export: ast equals: 'void mth() {
+  try (resource) {
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithMixedResources [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  try (resource; this.other; ACloseableType o = new ACloseableType()) { }
+}'.
+
+	self export: ast equals: 'void mth() {
+  try (resource; this.other; ACloseableType o = new ACloseableType()) {
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithMultipleResources [
 
 	| ast |
 	ast := self methodAST: 'void mth() {
-  try  (ACloseableType o = new ACloseableType(); OtherCloseable p = makeOtherCloseable()) { }
+  try (ACloseableType o = new ACloseableType(); OtherCloseable p = makeOtherCloseable()) { }
 }'.
 
 	self export: ast equals: 'void mth() {
@@ -1227,7 +1257,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithResource [
 
 	| ast |
 	ast := self methodAST: 'void mth() {
-  try  (ACloseableType o = new ACloseableType()) { }
+  try (ACloseableType o = new ACloseableType()) { }
 }'.
 
 	self export: ast equals: 'void mth() {
