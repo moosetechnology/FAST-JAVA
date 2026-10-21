@@ -1150,6 +1150,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 
 	javaClassTypeExpression --|> javaTypeExpression.
+	javaVarTypeExpression --|> javaTypeExpression.
 	javaClassTypeExpression --|> #TWithArguments.
 
 	javaTypeParameter --|> tExpression.

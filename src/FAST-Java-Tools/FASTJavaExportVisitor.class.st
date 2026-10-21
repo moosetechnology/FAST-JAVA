@@ -1248,6 +1248,12 @@ FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatemen
 
 ]
 
+{ #category : 'visiting type' }
+FASTJavaExportVisitor >> visitFASTJavaVarTypeExpression: aFASTJavaVarTypeExpression [
+
+	self checkForComments: aFASTJavaVarTypeExpression andDo: [ self unindented: 'var' ]
+]
+
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	self checkForComments: aFASTJavaVariableDeclarator andDo: [

@@ -200,6 +200,16 @@ JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
 		ifNotNil: [ self parentFASTVisitor isOutsideTypeDeclaration ]
 ]
 
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> isVarTypeNode: aClassType [
+	"JLS 14.4.1: `var` is a reserved type name standing for an inferred type. It is
+	never generic and never qualified, so a simple name is enough to tell."
+
+	| name |
+	name := aClassType name.
+	^ (name isKindOf: JavaTypeNameNode) and: [ name arguments isEmpty and: [ name name value = 'var' ] ]
+]
+
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> model [
 	^ model
@@ -559,13 +569,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
+
+	(self isVarTypeNode: aClassType) ifTrue: [
+			currentFASTEntity := self addToModel: (FASTJavaVarTypeExpression new
+					                      name: aClassType name name value;
+					                      yourself).
+			self setStartEndPos: aClassType.
+			^ currentFASTEntity ].
+
 	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	self setStartEndPos: aClassType.
 	currentFASTEntity typeName: (self clone accept: aClassType name).
 
-	aClassType name arguments do: [ :typeArgument |
-		currentFASTEntity addArgument: (self clone accept: typeArgument)
-	].
+	aClassType name arguments do: [ :typeArgument | currentFASTEntity addArgument: (self clone accept: typeArgument) ].
 
 	^ currentFASTEntity
 ]

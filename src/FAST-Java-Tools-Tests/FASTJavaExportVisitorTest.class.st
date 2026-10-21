@@ -1471,6 +1471,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithLineComment [
 
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarTypeExpression [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  var inferred = 1;
+}'.
+
+	self export: ast equals: 'void mth() {
+  var inferred = 1;
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVariableExpression [
 	self
