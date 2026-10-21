@@ -1131,6 +1131,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
 		equals: ' !true'
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaRecordDeclaration [
+
+	| ast |
+	ast := self astFor: 'public record Point(int x, int y) { }'.
+
+	self export: ast equals: 'public record Point(int x, int y) {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaRecordDeclarationGenericImplementsInterface [
+
+	| ast |
+	ast := self astFor: 'record Pair<A, B>(A first, B second) implements Shape { }'.
+
+	self export: ast equals: 'record Pair<A, B>(A first, B second) implements Shape {
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |

@@ -13,6 +13,7 @@ I represent a compilation unit, I can contain declarations for a package, import
 | `importDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaImportDeclaration` | My import declarations|
 | `interfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaInterfaceDeclaration` | My interface declarations|
 | `packageDeclaration` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaPackageDeclaration` | My package declaration, or nil for the default package|
+| `recordDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaRecordDeclaration` | My record declarations|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -41,7 +42,8 @@ Class {
 		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit',
 		'#importDeclarations => FMMany type: #FASTJavaImportDeclaration opposite: #compilationUnit',
 		'#interfaceDeclarations => FMMany type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit',
-		'#packageDeclaration => FMOne type: #FASTJavaPackageDeclaration opposite: #compilationUnit'
+		'#packageDeclaration => FMOne type: #FASTJavaPackageDeclaration opposite: #compilationUnit',
+		'#recordDeclarations => FMMany type: #FASTJavaRecordDeclaration opposite: #compilationUnit'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -95,6 +97,14 @@ FASTJavaCompilationUnit >> addInterfaceDeclaration: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self interfaceDeclarations add: anObject
+]
+
+{ #category : 'adding' }
+FASTJavaCompilationUnit >> addRecordDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self recordDeclarations add: anObject
 ]
 
 { #category : 'accessing' }
@@ -216,4 +226,23 @@ FASTJavaCompilationUnit >> packageDeclaration: anObject [
 	<ignoreForCoverage>
 	<generated>
 	packageDeclaration := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> recordDeclarations [
+	"Relation named: #recordDeclarations type: #FASTJavaRecordDeclaration opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'My record declarations'>
+	<derived>
+	^ recordDeclarations
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> recordDeclarations: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	recordDeclarations value: anObject
 ]

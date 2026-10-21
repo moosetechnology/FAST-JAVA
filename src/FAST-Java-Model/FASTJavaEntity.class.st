@@ -576,6 +576,14 @@ FASTJavaEntity >> isQualifiedTypeName [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isRecordDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isReturnStatement [
 
 	<ignoreForCoverage>

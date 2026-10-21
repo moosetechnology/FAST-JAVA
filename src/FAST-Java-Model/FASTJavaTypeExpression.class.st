@@ -13,6 +13,7 @@ I am an abstract class representing a type
 | `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaEnumDeclaration` | The enum that implements me|
 | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaInterfaceDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaInterfaceDeclaration` | The interface that extends me|
+| `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaRecordDeclaration` | The record that implements me|
 | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
 
 
@@ -28,6 +29,7 @@ Class {
 		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
 		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces',
+		'#javaRecordDeclarationInterfaceOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #interfaces',
 		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -166,6 +168,25 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaInterfaceDeclarationInterfaceOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaRecordDeclarationInterfaceOwner [
+	"Relation named: #javaRecordDeclarationInterfaceOwner type: #FASTJavaRecordDeclaration opposite: #interfaces"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The record that implements me'>
+	<container>
+	^ javaRecordDeclarationInterfaceOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaRecordDeclarationInterfaceOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaRecordDeclarationInterfaceOwner := anObject
 ]
 
 { #category : 'accessing' }

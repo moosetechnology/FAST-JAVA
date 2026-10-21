@@ -557,6 +557,14 @@ FASTJavaTEntityCreator >> newQualifiedTypeName [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newRecordDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaRecordDeclaration new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newReturnStatement [
 
 	<ignoreForCoverage>

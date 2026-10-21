@@ -140,7 +140,8 @@ Class {
 		'tWithTypeParameters',
 		'tWithSwitchBlock',
 		'javaAnnotationInterfaceDeclaration',
-		'javaAnnotationElementDeclaration'
+		'javaAnnotationElementDeclaration',
+		'javaRecordDeclaration'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -619,6 +620,17 @@ new Canard.Poulet(){
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaRecordDeclaration [
+
+	^ 'I represent a record declaration ([JLS 8.10](https://docs.oracle.com/javase/specs/jls/se17/html/jls-8.html#jls-8.10)).
+Example:
+```language=text
+public record Point(int x, int y) {
+}
+```'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
 	^ 'I represent a string literal node.'
 ]
@@ -967,6 +979,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 		                                    newClassNamed: #AnnotationElementDeclaration
 		                                    comment: self commentForJavaAnnotationElementDeclaration.
 	javaAnnotationElementDeclaration withTesting.
+	javaRecordDeclaration := self newClassNamed: #RecordDeclaration comment: self commentForJavaRecordDeclaration.
+	javaRecordDeclaration withTesting.
 	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
 	javaEmptyMethodDeclaration withTesting.
 	compilationUnit := self
@@ -1095,6 +1109,16 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAnnotationInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
 
 	javaAnnotationElementDeclaration --|> javaMethodEntity.
+
+	"JLS 8.10: a record can be generic and implement interfaces, but never extends."
+	javaRecordDeclaration --|> tStatement.
+	javaRecordDeclaration --|> tDeclaration.
+	javaRecordDeclaration --|> tWithDeclarations.
+	javaRecordDeclaration --|> tWithModifiers.
+	javaRecordDeclaration --|> tWithTypeParameters.
+	javaRecordDeclaration --|> tNamedEntity.
+	javaRecordDeclaration --|> #THasImmediateSource.
+	javaRecordDeclaration withPrecedenceOf: #THasImmediateSource.
 
 	javaMethodInvocation --|> tInvocation.
 	javaMethodInvocation --|> tWithReceiver.
@@ -1590,6 +1614,19 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			  #javaInterfaceDeclarationInterfaceOwner) comment:
 			 'The interface that extends me').
 
+	"JLS 8.10.1: the components of a record are declared in its header, like the
+	parameters of the canonical constructor they define."
+	((javaRecordDeclaration property: #components) comment:
+		 'The record components I declare')
+	<>-* ((javaParameterExpression property: #recordOwner) comment:
+			 'The record that declares me as one of its components').
+
+	((javaRecordDeclaration property: #interfaces) comment:
+		 'The interfaces I implement')
+	<>-*
+		((javaTypeExpression property: #javaRecordDeclarationInterfaceOwner)
+			 comment: 'The record that implements me').
+
 	((tWithDeclarations property: #declarations) comment:
 		 'The elements I declare')
 	<>-* ((tDeclaration property: #javaDeclarationOwner) comment:
@@ -1653,6 +1690,10 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((compilationUnit property: #annotationInterfaceDeclarations) comment:
 		 'My annotation interface declarations')
 	<>-* ((javaAnnotationInterfaceDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #recordDeclarations) comment:
+		 'My record declarations')
+	<>-* ((javaRecordDeclaration property: #compilationUnit) comment:
 			 'The compilation unit that owns me').
 
 	((javaSwitchExpression property: #condition) comment: 'The condition of the switch expression') <>- ((tExpression property: #switchExpressionConditionOwner) comment: 'The switch expression whose condition I am').

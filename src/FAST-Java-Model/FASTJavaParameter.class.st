@@ -36,6 +36,7 @@ I represent a parameter of a method declaration
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
+| `recordOwner` | `FASTJavaParameter` | `components` | `FASTJavaRecordDeclaration` | The record that declares me as one of its components|
 | `returnOwner` | `FASTTExpression` | `expression` | `FASTTReturnStatement` | The return statement that own the expression (if it's the case)|
 | `switchConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchStatement` | I represent a condition for my owner|
 | `switchExpressionConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchExpression` | The switch expression whose condition I am|
@@ -67,6 +68,7 @@ Class {
 	#classTraits : 'FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
 		'#hasVariableArguments => FMProperty defaultValue: false',
+		'#recordOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #components',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
 	],
@@ -107,6 +109,25 @@ FASTJavaParameter >> isParameter [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> recordOwner [
+	"Relation named: #recordOwner type: #FASTJavaRecordDeclaration opposite: #components"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The record that declares me as one of its components'>
+	<container>
+	^ recordOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> recordOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	recordOwner := anObject
 ]
 
 { #category : 'accessing' }

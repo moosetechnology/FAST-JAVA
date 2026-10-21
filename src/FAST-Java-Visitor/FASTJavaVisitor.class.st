@@ -380,6 +380,12 @@ FASTJavaVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaRecordDeclaration: aFASTJavaRecordDeclaration [
+
+	^ self visitFASTTStatement: aFASTJavaRecordDeclaration
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaReturnStatement: aFASTJavaReturnStatement [
 	^ self visitFASTTReturnStatement: aFASTJavaReturnStatement
 ]

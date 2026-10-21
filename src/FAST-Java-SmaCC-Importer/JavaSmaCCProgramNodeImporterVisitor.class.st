@@ -202,7 +202,7 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 { #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
 
-	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaAnnotationInterfaceDeclaration . FASTJavaMethodEntity }
+	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaAnnotationInterfaceDeclaration . FASTJavaRecordDeclaration . FASTJavaMethodEntity }
 		includes: currentFASTEntity class )
 		ifTrue: [ ^ false ].
 
@@ -1287,7 +1287,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitProgramFile: aProgramFile [
 			entity isClassDeclaration ifTrue: [ currentFASTEntity addClassDeclaration: entity ].
 			entity isInterfaceDeclaration ifTrue: [ currentFASTEntity addInterfaceDeclaration: entity ].
 			entity isEnumDeclaration ifTrue: [ currentFASTEntity addEnumDeclaration: entity ].
-			entity isAnnotationInterfaceDeclaration ifTrue: [ currentFASTEntity addAnnotationInterfaceDeclaration: entity ] ].
+			entity isAnnotationInterfaceDeclaration ifTrue: [ currentFASTEntity addAnnotationInterfaceDeclaration: entity ].
+			entity isRecordDeclaration ifTrue: [ currentFASTEntity addRecordDeclaration: entity ] ].
 	^ currentFASTEntity
 ]
 
@@ -1314,6 +1315,25 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeNam
 	self setStartEndPos: aQualifiedTypeName.
 	currentFASTEntity name: aQualifiedTypeName name value.
 	currentFASTEntity namespace: (self clone accept: aQualifiedTypeName nspace).
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitRecordDeclaration: aRecordDeclaration [
+	"JLS 8.10: a record declares its components in its header. It can be generic and can
+	implement interfaces, but it never extends."
+
+	self create: FASTJavaRecordDeclaration from: aRecordDeclaration.
+	currentFASTEntity name: aRecordDeclaration name value.
+
+	aRecordDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+
+	self addTypeParametersOf: aRecordDeclaration.
+
+	aRecordDeclaration parameters do: [ :component | currentFASTEntity addComponent: (self clone accept: component) ].
+	aRecordDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
+	aRecordDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
+
 	^ currentFASTEntity
 ]
 
