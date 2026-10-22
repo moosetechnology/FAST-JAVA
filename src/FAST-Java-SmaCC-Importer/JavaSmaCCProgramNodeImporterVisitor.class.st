@@ -72,6 +72,22 @@ JavaSmaCCProgramNodeImporterVisitor >> addTypeParametersOf: aDeclarationNode [
 		typeParameters parameters do: [ :typeParameter | currentFASTEntity addTypeParameter: (self clone accept: typeParameter) ] ]
 ]
 
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> arrayDimensionsOf: aVariableNode [
+	"JLS 10.2: the brackets of an array type may be written after the variable instead of
+	after the type, once per dimension."
+
+	| dimensions node |
+	dimensions := 0.
+	node := aVariableNode.
+
+	[ node isKindOf: JavaArrayVariableNameNode ] whileTrue: [
+			dimensions := dimensions + 1.
+			node := node variable ].
+
+	^ dimensions
+]
+
 { #category : 'private - comments' }
 JavaSmaCCProgramNodeImporterVisitor >> attach: aFastComment [
 	(aFastComment isBlockComment
@@ -897,7 +913,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anIn
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self setStartEndPos: anInitializedVariableDeclaration.
 	currentFASTEntity
-		variable: (self clone accept: anInitializedVariableDeclaration variable).
+		variable: (self clone accept: anInitializedVariableDeclaration variable);
+		dimensions: (self arrayDimensionsOf: anInitializedVariableDeclaration variable).
 	currentFASTEntity
 		expression: (self clone accept: anInitializedVariableDeclaration initializer).
 	^ currentFASTEntity
@@ -1217,6 +1234,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	self setStartEndPos: aParameter.
 	currentFASTEntity variable: (self clone accept: aParameter variable).
 	currentFASTEntity type: (self clone accept: aParameter type).
+	currentFASTEntity dimensions: (self arrayDimensionsOf: aParameter variable).
 	^ currentFASTEntity
 ]
 
@@ -1640,7 +1658,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclar
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self setStartEndPos: aVariableDeclaration.
 	currentFASTEntity
-		variable: (self clone accept: aVariableDeclaration variable).
+		variable: (self clone accept: aVariableDeclaration variable);
+		dimensions: (self arrayDimensionsOf: aVariableDeclaration variable).
 	^ currentFASTEntity
 ]
 

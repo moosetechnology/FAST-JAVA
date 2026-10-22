@@ -1296,6 +1296,16 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 
+	"JLS 10.2: the brackets of an array type may be written after the name of a variable
+	rather than after the type, where they belong to that variable alone. They are kept
+	where they are written, so the type a variable declares is the one its declaration
+	writes with these dimensions added."
+	(javaParameterExpression property: #dimensions type: #Number defaultValue: 0) comment:
+		'The bracket pairs written after my name, eg. the one of `char cbuf[]`'.
+
+	(javaVariableDeclarator property: #dimensions type: #Number defaultValue: 0) comment:
+		'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'.
+
 	(javaBreakStatement property: #label type: #String) comment: 'The label targeted by this break statement'.
 
 	(javaContinueStatement property: #label type: #String) comment: 'The label targeted by this continue statement'

@@ -55,6 +55,7 @@ I represent a parameter of a method declaration
 
 | Name | Type | Default value | Comment |
 |---|
+| `dimensions` | `Number` | 0 | The bracket pairs written after my name, eg. the one of `char cbuf[]`|
 | `endPos` | `Number` | nil | |
 | `hasVariableArguments` | `Boolean` | false | Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)|
 | `name` | `String` | nil | |
@@ -67,6 +68,7 @@ Class {
 	#traits : 'FASTTExpression + FASTTVariableEntity',
 	#classTraits : 'FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
+		'#dimensions => FMProperty defaultValue: 0',
 		'#hasVariableArguments => FMProperty defaultValue: false',
 		'#recordOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #components',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
@@ -84,6 +86,23 @@ FASTJavaParameter class >> annotation [
 	<FMClass: #Parameter super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> dimensions [
+
+	<FMProperty: #dimensions type: #Number defaultValue: 0>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bracket pairs written after my name, eg. the one of `char cbuf[]`'>
+	^ dimensions ifNil: [ dimensions := 0 ]
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> dimensions: anObject [
+	<ignoreForCoverage>
+	<generated>
+	dimensions := anObject
 ]
 
 { #category : 'accessing' }

@@ -266,6 +266,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaArrayVariableDeclarator [
+	"JLS 10.2: the brackets written after a variable are written back there, so a
+	declaration comes out as it went in."
+
+	| ast |
+	ast := self astFor: 'class Blah { void read(char cbuf[]) { int values[], plain; } }'.
+
+	self export: ast equals: 'class Blah {
+  void read(char cbuf[]) {
+    int values[], plain;
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAssertStatement [
 
 	| expr |

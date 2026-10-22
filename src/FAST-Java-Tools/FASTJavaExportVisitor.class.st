@@ -1025,7 +1025,9 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 				].
 				self space
 			].
-		aFASTJavaParameter variable accept: self
+		aFASTJavaParameter variable accept: self.
+		"JLS 10.2: the brackets written after a name are written back there."
+		aFASTJavaParameter dimensions timesRepeat: [ self unindented: '[]' ]
 	]
 ]
 
@@ -1320,6 +1322,8 @@ FASTJavaExportVisitor >> visitFASTJavaVarTypeExpression: aFASTJavaVarTypeExpress
 FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	self checkForComments: aFASTJavaVariableDeclarator andDo: [
 		aFASTJavaVariableDeclarator variable accept: self.
+		"JLS 10.2: the brackets written after a name are written back there."
+		aFASTJavaVariableDeclarator dimensions timesRepeat: [ self unindented: '[]' ].
 		aFASTJavaVariableDeclarator expression ifNil: [ ^ self ].
 		self unindented: ' = '.
 		aFASTJavaVariableDeclarator expression accept: self
