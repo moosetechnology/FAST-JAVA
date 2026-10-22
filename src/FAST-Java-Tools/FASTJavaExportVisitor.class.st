@@ -883,6 +883,15 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 		self
 			outputExpression: [
 				self visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation receiver.
+
+				"JLS 15.12: the type arguments an invocation writes come between the receiver
+				and the name."
+				aFASTJavaMethodInvocation typeArguments ifNotEmpty: [ :typeArguments |
+					self unindented: $<.
+					self visitNodeListSeparatedByCommas: typeArguments.
+					self unindented: $>
+				].
+
 				self unindented: aFASTJavaMethodInvocation name.
 
 				self outputTopLevelExpression: [

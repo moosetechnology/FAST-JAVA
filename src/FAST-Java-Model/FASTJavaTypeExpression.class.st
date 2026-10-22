@@ -13,6 +13,7 @@ I am an abstract class representing a type
 | `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaEnumDeclaration` | The enum that implements me|
 | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaInterfaceDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaInterfaceDeclaration` | The interface that extends me|
+| `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaMethodInvocation` | The invocation that writes me as one of its type arguments|
 | `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaRecordDeclaration` | The record that implements me|
 | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
 
@@ -29,6 +30,7 @@ Class {
 		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
 		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces',
+		'#javaMethodInvocationTypeArgumentOwner => FMOne type: #FASTJavaMethodInvocation opposite: #typeArguments',
 		'#javaRecordDeclarationInterfaceOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #interfaces',
 		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type'
 	],
@@ -168,6 +170,25 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaInterfaceDeclarationInterfaceOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaMethodInvocationTypeArgumentOwner [
+	"Relation named: #javaMethodInvocationTypeArgumentOwner type: #FASTJavaMethodInvocation opposite: #typeArguments"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The invocation that writes me as one of its type arguments'>
+	<container>
+	^ javaMethodInvocationTypeArgumentOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaMethodInvocationTypeArgumentOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaMethodInvocationTypeArgumentOwner := anObject
 ]
 
 { #category : 'accessing' }

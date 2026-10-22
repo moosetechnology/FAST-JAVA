@@ -1097,6 +1097,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 								endPos: superToken stopPosition;
 								yourself).
 					self addToModel: currentFASTEntity receiver ] ].
+	"JLS 15.12: an invocation may write the type arguments of a generic method before
+	its name, as `Collections.<String>emptyList()` does. They are types, a wildcard being
+	no part of them."
+	aMethodInvocation arguments do: [ :argument |
+		| typeArgument |
+		typeArgument := self clone accept: argument.
+		typeArgument isTypeExpression ifTrue: [ currentFASTEntity addTypeArgument: typeArgument ] ].
 	currentFASTEntity name: aMethodInvocation name value.
 	^ currentFASTEntity
 ]

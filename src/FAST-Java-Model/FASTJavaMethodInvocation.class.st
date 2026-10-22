@@ -47,6 +47,7 @@ A node representing method invocation
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `invoked` | `FASTTInvocation` | `invokedIn` | `FASTTNamedEntity` | The name of the behavioural invoked|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
+| `typeArguments` | `FASTJavaMethodInvocation` | `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write before the method name, eg. the String of `Collections.<String>emptyList()`|
 
 
 ## Properties
@@ -64,6 +65,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTInvocation + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTInvocation classTrait + FASTTNamedEntity classTrait',
+	#instVars : [
+		'#typeArguments => FMMany type: #FASTJavaTypeExpression opposite: #javaMethodInvocationTypeArgumentOwner'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -76,4 +80,31 @@ FASTJavaMethodInvocation class >> annotation [
 	<FMClass: #MethodInvocation super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaMethodInvocation >> addTypeArgument: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self typeArguments add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodInvocation >> typeArguments [
+	"Relation named: #typeArguments type: #FASTJavaTypeExpression opposite: #javaMethodInvocationTypeArgumentOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The type arguments I write before the method name, eg. the String of `Collections.<String>emptyList()`'>
+	<derived>
+	^ typeArguments
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodInvocation >> typeArguments: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typeArguments value: anObject
 ]

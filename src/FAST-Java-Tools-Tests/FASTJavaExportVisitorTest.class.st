@@ -1057,6 +1057,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignme
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationTypeArguments [
+
+	| ast |
+	ast := self expressionAST: 'Source.<String, Integer>make(1, 2)'.
+
+	self export: ast equals: 'Source.<String, Integer>make(1, 2)'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodModifiers [
 
 	| ast |

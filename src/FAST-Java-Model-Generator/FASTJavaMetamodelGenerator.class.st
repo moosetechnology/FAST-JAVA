@@ -1521,6 +1521,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((javaVariableExpression property: #javaMethodReferenceOwner)
 			 comment: 'The owner of the method reference (if possible)').
 
+	"JLS 15.12: an invocation may write the type arguments of a generic method before
+	its name. They are types, a wildcard being no part of them."
+	((javaMethodInvocation property: #typeArguments) comment:
+		 'The type arguments I write before the method name, eg. the String of `Collections.<String>emptyList()`')
+	<>-*
+		((javaTypeExpression property: #javaMethodInvocationTypeArgumentOwner)
+			 comment: 'The invocation that writes me as one of its type arguments').
+
 	((javaSynchronizedStatement property: #expression) comment:
 		 'The instance on which the statement block is synchronized')
 	<>-
