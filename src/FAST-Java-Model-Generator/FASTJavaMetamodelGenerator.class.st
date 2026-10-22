@@ -1173,6 +1173,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVariableExpression --|> tAssignable.
 	javaVariableExpression --|> tReceiver.
 
+	"JLS 9.7.1: the value of an annotation element may be a name, which denotes an enum
+	constant, as the TYPE and METHOD of `@Target({TYPE, METHOD})` do."
+	javaVariableExpression --|> tAnnotationElement.
+
 	javaThrowStatement --|> tStatement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
