@@ -1081,6 +1081,26 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodModifiers [
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReference [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  use(Foo::bar);
+  use(Foo::new);
+  use(String[]::new);
+  use(super::bar);
+}'.
+
+	self export: ast equals: 'void mth() {
+  use(Foo::bar);
+  use(Foo::new);
+  use(String[]::new);
+  use(super::bar);
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayIntArg [
 	| node |
@@ -1197,6 +1217,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 	expr := self methodAST: 'void meth() { a = 12 + ++a; }'.
 
 	self export: expr statements first equals: 'a = 12+ ++a;
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchStatementWithASharedDefault [
+
+	| ast |
+	ast := self methodAST: 'void mth(int value) {
+  switch (value) {
+    case 1:
+    default:
+      last();
+  }
+}'.
+
+	self export: ast equals: 'void mth(int value) {
+  switch (value) {
+    case 1:
+    default:
+      last();
+  }
+}
 '
 ]
 
@@ -1589,7 +1631,7 @@ FASTJavaExportVisitorTest >> testVisitFASTSwitchCaseDefault [
 	ast := self methodAST: 'void mth() { switch (a) { case b: break; default: break; } }'.
 
 	self export: ast statements first equals: 'switch (a) {
-  case b :
+  case b:
     break;
   default:
     break;
@@ -1621,8 +1663,8 @@ FASTJavaExportVisitorTest >> testVisitFASTSwitchMultipleLabels [
 	ast := self methodAST: 'void mth() { switch (a) { case 1, 2: case 3: break; default: break; } }'.
 
 	self export: ast statements first equals: 'switch (a) {
-  case 1, 2 :
-  case 3 :
+  case 1, 2:
+  case 3:
     break;
   default:
     break;
