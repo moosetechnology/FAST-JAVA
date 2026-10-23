@@ -257,7 +257,7 @@ FASTJavaMetamodelGenerator >> commentForJavaCaseStatement [
 FASTJavaMetamodelGenerator >> commentForJavaCharacterLiteral [
 	^ 'I represent a character literal node.
 example:
-```java
+```language=text
 char c = ''a'';
 ```
 `''a''` is the literal'
@@ -354,7 +354,7 @@ do {
 FASTJavaMetamodelGenerator >> commentForJavaDoubleLiteral [
 	^ 'I represent a double literal node.
 example:
-```java
+```language=text
 double d1 = 12.3;
 double d2 = 12.3d;
 ```
@@ -407,7 +407,7 @@ FASTJavaMetamodelGenerator >> commentForJavaFieldAccess [
 FASTJavaMetamodelGenerator >> commentForJavaFloatLiteral [
 	^ 'I represent a float literal node.
 example:
-```java
+```language=text
 float f = 12.3f;
 ```
 `12.3f` is the literal'
@@ -487,15 +487,11 @@ int i = 12;
 FASTJavaMetamodelGenerator >> commentForJavaInterfaceDeclaration [
 	^ 'I represent an interface declaration
 example
-
-```java
+```language=text
 public interface MyInterface {
-
     public static final String CODE = "SEME";
-
 }
-```
-'
+```'
 ]
 
 { #category : 'comments' }
@@ -511,7 +507,7 @@ case LABEL:'
 FASTJavaMetamodelGenerator >> commentForJavaLongLiteral [
 	^ 'I represent a long literal node.
 example:
-```java
+```language=text
 long l = 2147483648L;
 ```
 `2147483648L` is the literal'

@@ -1,7 +1,7 @@
 "
 I represent a float literal node.
 example:
-```java
+```language=text
 float f = 12.3f;
 ```
 `12.3f` is the literal

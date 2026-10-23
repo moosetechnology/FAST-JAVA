@@ -1,15 +1,11 @@
 "
 I represent an interface declaration
 example
-
-```java
+```language=text
 public interface MyInterface {
-
     public static final String CODE = ""SEME"";
-
 }
 ```
-
 
 ## Relations
 ======================
