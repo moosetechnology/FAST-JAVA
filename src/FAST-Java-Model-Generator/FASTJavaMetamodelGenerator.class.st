@@ -476,7 +476,11 @@ new Button(){
 
 { #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaIntegerLiteral [
-	^ 'I represent an integer literal node.'
+	^ 'I represent an integer literal ([JLS 3.10.1](https://docs.oracle.com/javase/specs/jls/se17/html/jls-3.html#jls-3.10.1)).
+Example:
+```language=text
+int i = 12;
+```'
 ]
 
 { #category : 'comments' }

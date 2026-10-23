@@ -9,7 +9,7 @@ Class {
 JavaSmaCCLocalVariableFloatTest >> javaMethod [
 
 	^ 'float aLittleOfVariables2() {
-		float x = 5.5;	
+		float x = 5.5f;	
 		return x;
 	}'
 ]
@@ -28,5 +28,5 @@ JavaSmaCCLocalVariableFloatTest >> testVariableDeclaratorExpressionType2 [
 
 { #category : 'tests' }
 JavaSmaCCLocalVariableFloatTest >> testVariableDeclaratorExpressionValue2 [
-	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: '5.5'
+	self assert: fastMethod statementBlock statements first declarators first expression primitiveValue equals: '5.5f'
 ]

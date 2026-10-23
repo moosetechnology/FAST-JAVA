@@ -22,7 +22,7 @@ JavaSmaCCAssignmentTest >> testAssignmentInArrayAccess [
 
 	(fastModel allWithType: FASTJavaAssignmentExpression) entities
 		detect: [ :assignment |
-		assignment expression class = FASTJavaFloatLiteral ]
+		assignment expression class = FASTJavaDoubleLiteral ]
 		ifFound: [ :assignment |
 			self assert: assignment variable class equals: FASTJavaArrayAccess ]
 		ifNone: [ self fail ]

@@ -504,6 +504,13 @@ FASTJavaExportVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatemen
 ]
 
 { #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaDoubleLiteral: aFASTJavaDoubleLiteral [
+	self checkForComments: aFASTJavaDoubleLiteral andDo: [
+		self visitFASTJavaLiteral: aFASTJavaDoubleLiteral
+	]
+]
+
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
 	self checkForComments: aFASTJavaDoubleTypeExpression andDo: [
 	self unindented: 'double'

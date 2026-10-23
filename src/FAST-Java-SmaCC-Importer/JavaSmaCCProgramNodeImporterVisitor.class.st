@@ -827,12 +827,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFinallyClause: aFinallyClause [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitFloatLiteral: aFloatLiteral [
+	"JLS 3.10.2: a floating-point literal is of type float when an F suffixes it, of type
+	double otherwise."
+
+	| tokenValue |
+	tokenValue := aFloatLiteral token value.
+
 	currentFASTEntity := self
-		addToModel:
-			(FASTJavaFloatLiteral new
-				primitiveValue: aFloatLiteral token value;
-				yourself).
-		self setStartEndPos: aFloatLiteral.
+		                     create: (('Ff' includes: tokenValue last)
+				                      ifTrue: [ FASTJavaFloatLiteral ]
+				                      ifFalse: [ FASTJavaDoubleLiteral ])
+		                     from: aFloatLiteral.
+	currentFASTEntity primitiveValue: tokenValue.
+
 	^ currentFASTEntity
 ]
 
@@ -963,12 +970,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntType: aByteType [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
+	"JLS 3.10.1: an integer literal is of type long when an L suffixes it, of type int otherwise."
+
+	| tokenValue |
+	tokenValue := anIntegerLiteral token value.
+
 	currentFASTEntity := self
-		addToModel:
-			(FASTJavaIntegerLiteral new
-				primitiveValue: anIntegerLiteral token value;
-				yourself).
-	self setStartEndPos: anIntegerLiteral.
+		                     create: (('Ll' includes: tokenValue last)
+				                      ifTrue: [ FASTJavaLongLiteral ]
+				                      ifFalse: [ FASTJavaIntegerLiteral ])
+		                     from: anIntegerLiteral.
+	currentFASTEntity primitiveValue: tokenValue.
+
 	^ currentFASTEntity
 ]
 
