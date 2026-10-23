@@ -286,7 +286,9 @@ FASTJavaExportVisitor >> visitFASTJavaBlockOrStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 	"for 'then' and 'else' parts of the if-statement,
 	if it's a simple statement (not a block), go to next line and indent
-	Not very elegant solution but simple"
+	Not very elegant solution but simple.
+	A case statement answers isStatementBlock as well, holding statements of its own, so
+	the class is what is asked for here: only a braced block writes no newline."
 	(aFASTJavaStatement isKindOf: FASTJavaStatementBlock)
 	ifFalse: [ self newLine ].
 
@@ -936,13 +938,13 @@ FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
 FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 	self checkForComments: aFASTJavaModifierCollection andDo: [
 	aFASTJavaModifierCollection
-		select: [ :modifier | modifier isKindOf: FASTJavaAnnotation ]
+		select: [ :modifier | modifier isAnnotation ]
 		thenDo: [ :aFASTJavaAnnotation | 
 			self visitFASTJavaAnnotation: aFASTJavaAnnotation.
 			self newLine.
 			self indented: '' ].
 	aFASTJavaModifierCollection
-		select: [ :modifier | modifier isKindOf: FASTJavaModifier ]
+		select: [ :modifier | modifier isModifier ]
 		thenDo: [ :aFASTJavaModifier | 
 			self visitFASTJavaModifier: aFASTJavaModifier.
 			self space ]
