@@ -118,6 +118,11 @@ FASTJavaVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpressio
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaComment: aFASTJavaComment [
+	^ self visitFASTTComment: aFASTJavaComment
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
 
 	^ self visitFASTTEntity: aFASTJavaCompilationUnit
@@ -290,6 +295,11 @@ FASTJavaVisitor >> visitFASTJavaLiteral: aFASTJavaLiteral [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
+	^ self visitFASTTLiteral: aFASTJavaLongLiteral
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
 	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaLongTypeExpression
 ]
@@ -416,6 +426,21 @@ FASTJavaVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaSwitchExpression: aFASTJavaSwitchExpression [
+	^ self visitFASTTExpression: aFASTJavaSwitchExpression
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaSwitchLabel: aFASTJavaSwitchLabel [
+	^ self visitFASTTEntity: aFASTJavaSwitchLabel
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaSwitchRule: aFASTJavaSwitchRule [
+	^ self visitFASTTEntity: aFASTJavaSwitchRule
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
 	^ self visitFASTTStatement: aFASTJavaSwitchStatement
 ]
@@ -503,4 +528,9 @@ FASTJavaVisitor >> visitFASTJavaVoidTypeExpression: aFASTJavaVoidTypeExpression 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 	^ self visitFASTTStatement: aFASTJavaWhileStatement
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaYieldStatement: aFASTJavaYieldStatement [
+	^ self visitFASTTStatement: aFASTJavaYieldStatement
 ]
