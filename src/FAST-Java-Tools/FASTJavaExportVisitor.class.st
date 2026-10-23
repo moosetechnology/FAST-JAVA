@@ -798,10 +798,14 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCase
 
 	self checkForComments: aFASTJavaLabeledCaseStatement andDo: [
 			aFASTJavaLabeledCaseStatement labels do: [ :label |
-					self indented: 'case '.
-					label caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ].
+					"JLS 14.11: a label that writes no case expression is the default of the group."
+					label caseExpressions
+						ifEmpty: [ self indented: 'default' ]
+						ifNotEmpty: [
+								self indented: 'case '.
+								label caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ] ].
 					self
-						unindented: ' :';
+						unindented: ':';
 						newLine ].
 			self indent.
 			aFASTJavaLabeledCaseStatement statements do: [ :caseStatement | caseStatement accept: self ].
@@ -920,6 +924,22 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodI
 		self unindented: $.
 ]
 
+]
+
+{ #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaMethodReference: aFASTJavaMethodReference [
+	"JLS 15.13: a method reference writes the name it refers to after `::`, `new` for a
+	constructor. A reference on `super` is the one form that keeps no receiver."
+
+	self checkForComments: aFASTJavaMethodReference andDo: [
+		self
+			outputExpression: [
+				aFASTJavaMethodReference receiver
+					ifNil: [ self unindented: 'super' ]
+					ifNotNil: [ :receiver | receiver accept: self ].
+				self unindented: '::'.
+				self unindented: aFASTJavaMethodReference name ]
+			withOperator: #memberAccess ]
 ]
 
 { #category : 'visiting' }
