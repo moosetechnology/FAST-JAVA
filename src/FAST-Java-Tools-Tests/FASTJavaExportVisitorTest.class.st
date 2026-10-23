@@ -492,6 +492,13 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaDoWhile [
 '
 ]
 
+{ #category : 'test from FAST model' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaDoubleLiteral [
+	| node |
+	node := builder literal: FASTJavaDoubleLiteral value: '37.2'.
+	self export: node equals: '37.2'
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 
@@ -990,8 +997,6 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLiterals [
 FASTJavaExportVisitorTest >> testVisitFASTJavaLongLiteral [
 
 	| node |
-	self skip: 'FASTJavaLongLiteral are never created by the importer'.
-
 	node := builder literal: FASTJavaLongLiteral value: '42L'.
 	self export: node equals: '42L'
 ]
