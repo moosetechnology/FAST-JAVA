@@ -1255,11 +1255,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclarat
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
+	"JLS 8.4.1: a parameter writes the modifiers it is declared with, an annotation
+	(JLS 9.7.4) and `final` among them."
+
 	currentFASTEntity := self addToModel: FASTJavaParameter new.
 	self setStartEndPos: aParameter.
 	currentFASTEntity variable: (self clone accept: aParameter variable).
 	currentFASTEntity type: (self clone accept: aParameter type).
 	currentFASTEntity dimensions: (self arrayDimensionsOf: aParameter variable).
+	aParameter modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	^ currentFASTEntity
 ]
 
