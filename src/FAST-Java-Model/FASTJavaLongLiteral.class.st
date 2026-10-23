@@ -73,3 +73,11 @@ FASTJavaLongLiteral class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]
+
+{ #category : 'testing' }
+FASTJavaLongLiteral >> isLongLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ true
+]

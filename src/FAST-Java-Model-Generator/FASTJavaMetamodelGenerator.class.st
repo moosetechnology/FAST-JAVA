@@ -845,12 +845,16 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaLiteral := self newClassNamed: #Literal comment: 'abtract class for all literals'.
 	javaCharacterLiteral := self newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
 	javaFloatLiteral := self newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
+	javaFloatLiteral withTesting.
 	javaIntegerLiteral := self newClassNamed: #IntegerLiteral comment: self commentForJavaIntegerLiteral.
+	javaIntegerLiteral withTesting.
 	javaNullLiteral := self newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
 	javaStringLiteral := self newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
 	javaBooleanLiteral := self newClassNamed: #BooleanLiteral comment: self commentForJavaBooleanLiteral.
 	javaLongLiteral := self newClassNamed: #LongLiteral comment: self commentForJavaLongLiteral.
+	javaLongLiteral withTesting.
 	javaDoubleLiteral := self newClassNamed: #DoubleLiteral comment: self commentForJavaDoubleLiteral.
+	javaDoubleLiteral withTesting.
 
 	"type expressions"
 	javaTypeExpression := self newClassNamed: #TypeExpression comment: 'I am an abstract class representing a type'.

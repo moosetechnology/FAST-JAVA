@@ -23,7 +23,7 @@ JavaSmaCCMethodInvocationWithTypeArgumentsTest >> javaMethod [
 JavaSmaCCMethodInvocationWithTypeArgumentsTest >> testInvocationArgumentsAreNotTypeArguments [
 
 	self assert: self invocation arguments size equals: 2.
-	self assert: (self invocation arguments allSatisfy: [ :each | each class = FASTJavaIntegerLiteral ])
+	self assert: (self invocation arguments allSatisfy: [ :each | each isIntegerLiteral ])
 ]
 
 { #category : 'tests' }

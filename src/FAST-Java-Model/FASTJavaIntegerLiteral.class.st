@@ -68,3 +68,11 @@ FASTJavaIntegerLiteral class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]
+
+{ #category : 'testing' }
+FASTJavaIntegerLiteral >> isIntegerLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ true
+]
