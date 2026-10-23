@@ -1455,6 +1455,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 ]
 
 { #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithLowerBound [
+
+	| ast |
+	ast := self methodAST: 'void mth(Collection<? super Number> values) { }'.
+
+	self export: ast equals: 'void mth(Collection<? super Number> values) {
+}
+'
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithMultipleTypes [
 
 	| expr |

@@ -1314,6 +1314,10 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 			typeArgumentSuperclasses
 				do: [ :node | node accept: self ]
 				separatedBy: [ self << ' & ' ]
+		].
+		aFASTJavaTypeParameterExpression superType ifNotNil: [ :lowerBound |
+			self unindented: ' super '.
+			lowerBound accept: self
 		]
 	]
 ]

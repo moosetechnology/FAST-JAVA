@@ -9,6 +9,7 @@ I represent a class type
 |---|
 | `javaMethodThrowsOwner` | `FASTJavaClassTypeExpression` | `throws` | `FASTJavaMethodEntity` | The method that throws me|
 | `typeParameterOwner` | `FASTJavaClassTypeExpression` | `types` | `FASTJavaTypeParameterExpression` | The type parameter I specify|
+| `typeParameterSuperTypeOwner` | `FASTJavaClassTypeExpression` | `superType` | `FASTJavaTypeParameterExpression` | The wildcard I bound from below|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
@@ -27,7 +28,8 @@ Class {
 	#instVars : [
 		'#javaMethodThrowsOwner => FMOne type: #FASTJavaMethodEntity opposite: #throws',
 		'#typeName => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameTypeExpressionOwner',
-		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types'
+		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types',
+		'#typeParameterSuperTypeOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #superType'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -105,4 +107,24 @@ FASTJavaClassTypeExpression >> typeParameterOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	typeParameterOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaClassTypeExpression >> typeParameterSuperTypeOwner [
+	"Relation named: #typeParameterSuperTypeOwner type: #FASTJavaTypeParameterExpression opposite: #superType"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The wildcard I bound from below'>
+	<container>
+	<derived>
+	^ typeParameterSuperTypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaClassTypeExpression >> typeParameterSuperTypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typeParameterSuperTypeOwner := anObject
 ]

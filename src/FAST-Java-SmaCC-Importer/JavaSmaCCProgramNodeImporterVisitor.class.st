@@ -1587,13 +1587,16 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
 			currentFASTEntity := self create: FASTJavaTypeParameterExpression  from: aTypeArgument.
 			currentFASTEntity name: '?'.
 
-			"JLS 4.5.1: the bound of `? extends B` is an upper one, which is what the types
-			of a type parameter are. The one of `? super B` is a lower bound, and the types
-			of a type parameter are class types, so neither it nor an array bound such as
-			the one of `Class<? extends T[]>` has a place among them."
+			"JLS 4.5.1: `? extends B` writes an upper bound, which is what the types of a
+			type parameter are, and `? super B` writes a lower one. Both are class types
+			here, so an array bound such as the one of `Class<? extends T[]>` has no place
+			among them."
 			aTypeArgument token ifNotNil: [ :keyword |
-				(keyword value = 'extends' and: [ aTypeArgument type isKindOf: JavaClassTypeNode ])
-					ifTrue: [ currentFASTEntity addType: (self clone accept: aTypeArgument type) ] ].
+				(aTypeArgument type isKindOf: JavaClassTypeNode) ifTrue: [
+					keyword value = 'extends' ifTrue: [
+						currentFASTEntity addType: (self clone accept: aTypeArgument type) ].
+					keyword value = 'super' ifTrue: [
+						currentFASTEntity superType: (self clone accept: aTypeArgument type) ] ] ].
 
 			currentFASTEntity
 		]
