@@ -1498,6 +1498,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithParametersOnMetho
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypePattern [
+
+	| ast |
+	ast := self methodAST: 'public void mth() { if (obj instanceof AClass aVar) { aBool = true; } }'.
+
+	self export: ast equals: 'public void mth() {
+  if (obj instanceof AClass aVar) {
+    aBool = true;
+  }
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
 

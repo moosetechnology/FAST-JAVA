@@ -1323,6 +1323,16 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 ]
 
 { #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaTypePattern: aFASTJavaTypePattern [
+	"JLS 14.30.1: a type pattern writes the type it matches, then the variable it declares."
+
+	self checkForComments: aFASTJavaTypePattern andDo: [
+			aFASTJavaTypePattern type accept: self.
+			self space.
+			aFASTJavaTypePattern variable accept: self ]
+]
+
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
 	"exports '++a' or 'a++'
 	 if '++a' has a infixOperationRightOperandOwner (resp. 'a++' has a infixOperationLeftOperandOwner)
