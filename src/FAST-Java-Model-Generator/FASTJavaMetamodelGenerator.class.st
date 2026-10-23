@@ -1202,6 +1202,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaLambdaExpression --|> tWithParameters.
 
 	javaMethodReference --|> tExpression.
+	javaMethodReference --|> tWithReceiver.
 	javaMethodReference --|> tNamedEntity.
 
 	javaSynchronizedStatement --|> tStatement.
@@ -1523,11 +1524,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'Expression to be executed as part of the lambda.')
 	<>- ((javaEntity property: #javaLambdaExpressionOwner) comment:
 			 'The expression owner (if possible)').
-
-	((javaMethodReference property: #receiver) comment:
-		 'The method of the reference')
-	<>- ((javaVariableExpression property: #javaMethodReferenceOwner)
-			 comment: 'The owner of the method reference (if possible)').
 
 	"JLS 15.12: an invocation may write the type arguments of a generic method before
 	its name. They are types, a wildcard being no part of them."

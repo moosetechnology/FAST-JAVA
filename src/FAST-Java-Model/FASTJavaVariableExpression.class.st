@@ -27,7 +27,6 @@
 | `javaCatchParameterOwnler` | `FASTJavaVariableExpression` | `parameter` | `FASTJavaCatchPartStatement` | The javaCatchPartParameterOwner owner (if possible)|
 | `javaClassPropertyOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaMethodReferenceOwner` | `FASTJavaVariableExpression` | `receiver` | `FASTJavaMethodReference` | The owner of the method reference (if possible)|
 | `javaMethodTypeOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaMethodEntity` | The variable expression owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaNewExpressionOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaNewExpression` | The javaNewExpression owner (if possible)|
@@ -76,7 +75,6 @@ Class {
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
 		'#javaCatchParameterOwnler => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
 		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
-		'#javaMethodReferenceOwner => FMOne type: #FASTJavaMethodReference opposite: #receiver',
 		'#javaMethodTypeOwner => FMOne type: #FASTJavaMethodEntity opposite: #type',
 		'#javaNewExpressionOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
 		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
@@ -158,26 +156,6 @@ FASTJavaVariableExpression >> javaClassPropertyOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaClassPropertyOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaVariableExpression >> javaMethodReferenceOwner [
-	"Relation named: #javaMethodReferenceOwner type: #FASTJavaMethodReference opposite: #receiver"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The owner of the method reference (if possible)'>
-	<container>
-	<derived>
-	^ javaMethodReferenceOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaVariableExpression >> javaMethodReferenceOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaMethodReferenceOwner := anObject
 ]
 
 { #category : 'accessing' }

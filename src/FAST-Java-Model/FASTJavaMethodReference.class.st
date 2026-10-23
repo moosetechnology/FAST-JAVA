@@ -43,7 +43,7 @@ I represent a method reference
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `receiver` | `FASTJavaMethodReference` | `javaMethodReferenceOwner` | `FASTJavaVariableExpression` | The method of the reference|
+| `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
 
 
 ## Properties
@@ -59,11 +59,8 @@ I represent a method reference
 Class {
 	#name : 'FASTJavaMethodReference',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTExpression + FASTTNamedEntity',
-	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
-	#instVars : [
-		'#receiver => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner'
-	],
+	#traits : 'FASTJavaTWithReceiver + FASTTExpression + FASTTNamedEntity',
+	#classTraits : 'FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -84,22 +81,4 @@ FASTJavaMethodReference >> isMethodReference [
 	<ignoreForCoverage>
 	<generated>
 	^ true
-]
-
-{ #category : 'accessing' }
-FASTJavaMethodReference >> receiver [
-	"Relation named: #receiver type: #FASTJavaVariableExpression opposite: #javaMethodReferenceOwner"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The method of the reference'>
-	^ receiver
-]
-
-{ #category : 'accessing' }
-FASTJavaMethodReference >> receiver: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	receiver := anObject
 ]
