@@ -1,7 +1,7 @@
 "
 I represent a character literal node.
 example:
-```java
+```language=text
 char c = 'a';
 ```
 `'a'` is the literal

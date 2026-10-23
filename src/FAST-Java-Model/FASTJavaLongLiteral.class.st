@@ -1,7 +1,7 @@
 "
 I represent a long literal node.
 example:
-```java
+```language=text
 long l = 2147483648L;
 ```
 `2147483648L` is the literal

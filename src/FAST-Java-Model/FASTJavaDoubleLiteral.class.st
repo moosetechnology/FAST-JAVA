@@ -1,7 +1,7 @@
 "
 I represent a double literal node.
 example:
-```java
+```language=text
 double d1 = 12.3;
 double d2 = 12.3d;
 ```
