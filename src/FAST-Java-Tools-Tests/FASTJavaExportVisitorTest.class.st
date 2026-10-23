@@ -131,6 +131,33 @@ void mth() {
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationInterfaceDeclaration [
+
+	| ast |
+	ast := self astFor: '@interface Author { }'.
+
+	self export: ast equals: '@interface Author {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationInterfaceDeclarationWithElements [
+
+	| ast |
+	ast := self astFor: 'public @interface Author {
+	String name() default "unknown";
+	int revision();
+}'.
+
+	self export: ast equals: 'public @interface Author {
+  String name() default "unknown";
+  int revision();
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithArrayElement [
 	
 	| expr |
@@ -236,6 +263,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
 	self export: exprStr equals: 'String[]'.
 	self export: exprDouble equals: 'double[]'.
 	self export: exprBiStr equals: 'String[][]'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaArrayVariableDeclarator [
+	"JLS 10.2: the brackets written after a variable are written back there, so a
+	declaration comes out as it went in."
+
+	| ast |
+	ast := self astFor: 'class Blah { void read(char cbuf[]) { int values[], plain; } }'.
+
+	self export: ast equals: 'class Blah {
+  void read(char cbuf[]) {
+    int values[], plain;
+  }
+}
+'
 ]
 
 { #category : 'test from source code' }
@@ -1014,6 +1057,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignme
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationTypeArguments [
+
+	| ast |
+	ast := self expressionAST: 'Source.<String, Integer>make(1, 2)'.
+
+	self export: ast equals: 'Source.<String, Integer>make(1, 2)'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodModifiers [
 
 	| ast |
@@ -1104,6 +1156,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
 		equals: ' !true'
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaRecordDeclaration [
+
+	| ast |
+	ast := self astFor: 'public record Point(int x, int y) { }'.
+
+	self export: ast equals: 'public record Point(int x, int y) {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaRecordDeclarationGenericImplementsInterface [
+
+	| ast |
+	ast := self astFor: 'record Pair<A, B>(A first, B second) implements Shape { }'.
+
+	self export: ast equals: 'record Pair<A, B>(A first, B second) implements Shape {
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
@@ -1118,6 +1192,30 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 	expr := self methodAST: 'void meth() { a = 12 + ++a; }'.
 
 	self export: expr statements first equals: 'a = 12+ ++a;
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchStatementWithRules [
+
+	| ast |
+	ast := self methodAST: 'void mth(int value) {
+  switch (value) {
+    case 1 -> first();
+    default -> {
+      last();
+    }
+  }
+}'.
+
+	self export: ast equals: 'void mth(int value) {
+  switch (value) {
+    case 1 -> first();
+    default -> {
+      last();
+    }
+  }
+}
 '
 ]
 
@@ -1445,6 +1543,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclWithLineComment [
 	self export: stmt equals: 'String s;// this is a var declaration
 '.
 
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVarTypeExpression [
+
+	| ast |
+	ast := self methodAST: 'void mth() {
+  var inferred = 1;
+}'.
+
+	self export: ast equals: 'void mth() {
+  var inferred = 1;
+}
+'
 ]
 
 { #category : 'test from FAST model' }

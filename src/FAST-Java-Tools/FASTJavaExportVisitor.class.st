@@ -166,6 +166,39 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 
 ]
 
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaAnnotationElementDeclaration: aFASTJavaAnnotationElementDeclaration [
+
+	self checkForComments: aFASTJavaAnnotationElementDeclaration andDo: [
+			self indented: ''.
+			self visitFASTJavaModifiers: aFASTJavaAnnotationElementDeclaration modifiers.
+			aFASTJavaAnnotationElementDeclaration type accept: self.
+			self space.
+			self unindented: aFASTJavaAnnotationElementDeclaration name.
+			self unindented: '()'.
+
+			aFASTJavaAnnotationElementDeclaration defaultValue ifNotNil: [ :defaultValue |
+					self unindented: ' default '.
+					defaultValue accept: self ].
+
+			self
+				unindented: $;;
+				newLine ]
+]
+
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaAnnotationInterfaceDeclaration: aFASTJavaAnnotationInterfaceDeclaration [
+
+	self checkForComments: aFASTJavaAnnotationInterfaceDeclaration andDo: [
+			self visitFASTJavaModifiers: aFASTJavaAnnotationInterfaceDeclaration modifiers.
+			self unindented: '@interface '.
+			self unindented: aFASTJavaAnnotationInterfaceDeclaration name.
+
+			aFASTJavaAnnotationInterfaceDeclaration declarations ifNotNil: [ :declarations |
+				self visitJavaClassMemberDeclarations: declarations ].
+			self newLine ]
+]
+
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 	self checkForComments: aFASTJavaArgumentList andDo: [
@@ -253,7 +286,9 @@ FASTJavaExportVisitor >> visitFASTJavaBlockOrStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [
 	"for 'then' and 'else' parts of the if-statement,
 	if it's a simple statement (not a block), go to next line and indent
-	Not very elegant solution but simple"
+	Not very elegant solution but simple.
+	A case statement answers isStatementBlock as well, holding statements of its own, so
+	the class is what is asked for here: only a braced block writes no newline."
 	(aFASTJavaStatement isKindOf: FASTJavaStatementBlock)
 	ifFalse: [ self newLine ].
 
@@ -402,8 +437,12 @@ FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit 
 		self newLine ].
 	aFASTJavaCompilationUnit interfaceDeclarations do: [ :decl | 
 		self visitFASTJavaInterfaceDeclaration: decl ].
+	aFASTJavaCompilationUnit annotationInterfaceDeclarations do: [ :decl | 
+		self visitFASTJavaAnnotationInterfaceDeclaration: decl ].
 	aFASTJavaCompilationUnit classDeclarations do: [ :decl | 
-		self visitFASTJavaClassDeclaration: decl ]
+		self visitFASTJavaClassDeclaration: decl ].
+	aFASTJavaCompilationUnit recordDeclarations do: [ :decl | 
+		self visitFASTJavaRecordDeclaration: decl ]
 ]
 
 ]
@@ -846,6 +885,15 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 		self
 			outputExpression: [
 				self visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation receiver.
+
+				"JLS 15.12: the type arguments an invocation writes come between the receiver
+				and the name."
+				aFASTJavaMethodInvocation typeArguments ifNotEmpty: [ :typeArguments |
+					self unindented: $<.
+					self visitNodeListSeparatedByCommas: typeArguments.
+					self unindented: $>
+				].
+
 				self unindented: aFASTJavaMethodInvocation name.
 
 				self outputTopLevelExpression: [
@@ -890,13 +938,13 @@ FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
 FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 	self checkForComments: aFASTJavaModifierCollection andDo: [
 	aFASTJavaModifierCollection
-		select: [ :modifier | modifier isKindOf: FASTJavaAnnotation ]
+		select: [ :modifier | modifier isAnnotation ]
 		thenDo: [ :aFASTJavaAnnotation | 
 			self visitFASTJavaAnnotation: aFASTJavaAnnotation.
 			self newLine.
 			self indented: '' ].
 	aFASTJavaModifierCollection
-		select: [ :modifier | modifier isKindOf: FASTJavaModifier ]
+		select: [ :modifier | modifier isModifier ]
 		thenDo: [ :aFASTJavaModifier | 
 			self visitFASTJavaModifier: aFASTJavaModifier.
 			self space ]
@@ -988,7 +1036,9 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 				].
 				self space
 			].
-		aFASTJavaParameter variable accept: self
+		aFASTJavaParameter variable accept: self.
+		"JLS 10.2: the brackets written after a name are written back there."
+		aFASTJavaParameter dimensions timesRepeat: [ self unindented: '[]' ]
 	]
 ]
 
@@ -1042,6 +1092,31 @@ FASTJavaExportVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeN
 		unindented: $. ;
 		unindented: aFASTJavaQualifiedTypeName name .
 
+]
+
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaRecordDeclaration: aFASTJavaRecordDeclaration [
+
+	self checkForComments: aFASTJavaRecordDeclaration andDo: [
+			self visitFASTJavaModifiers: aFASTJavaRecordDeclaration modifiers.
+			self unindented: 'record '.
+			self unindented: aFASTJavaRecordDeclaration name.
+
+			aFASTJavaRecordDeclaration typeParameters ifNotEmpty: [ :typeParameters |
+					self unindented: $<.
+					self visitNodeListSeparatedByCommas: typeParameters.
+					self unindented: $> ].
+
+			self unindented: $(.
+			self visitNodeListSeparatedByCommas: aFASTJavaRecordDeclaration components.
+			self unindented: $).
+
+			aFASTJavaRecordDeclaration interfaces ifNotEmpty: [ :interfaces |
+					self unindented: ' implements '.
+					interfaces do: [ :interface | interface accept: self ] separatedBy: [ self unindented: ', ' ] ].
+
+			aFASTJavaRecordDeclaration declarations ifNotNil: [ :declarations | self visitJavaClassMemberDeclarations: declarations ].
+			self newLine ]
 ]
 
 { #category : 'visiting statement' }
@@ -1126,20 +1201,21 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchRule: aFASTJavaSwitchRule [
 FASTJavaExportVisitor >> visitFASTJavaSwitchStatement: aFASTJavaSwitchStatement [
 
 	self checkForComments: aFASTJavaSwitchStatement andDo: [
-		self indented: 'switch ('.
-		aFASTJavaSwitchStatement condition accept: self.
-		self
-			unindented: ') {' ;
-			newLine ;
-			indent.
-		aFASTJavaSwitchStatement cases do: [ :switchCase |
-			switchCase accept: self
-		].
-		self
-			unindent ;
-			indented: $} ;
-			newLine
-	]
+			self indented: 'switch ('.
+			aFASTJavaSwitchStatement condition accept: self.
+			self
+				unindented: ') {';
+				newLine;
+				indent.
+
+			"A switch block is in colon form or in arrow form, so one of these is empty."
+			aFASTJavaSwitchStatement cases do: [ :switchCase | switchCase accept: self ].
+			aFASTJavaSwitchStatement rules do: [ :rule | rule accept: self ].
+
+			self
+				unindent;
+				indented: $};
+				newLine ]
 ]
 
 { #category : 'visiting statement' }
@@ -1247,10 +1323,18 @@ FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatemen
 
 ]
 
+{ #category : 'visiting type' }
+FASTJavaExportVisitor >> visitFASTJavaVarTypeExpression: aFASTJavaVarTypeExpression [
+
+	self checkForComments: aFASTJavaVarTypeExpression andDo: [ self unindented: 'var' ]
+]
+
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	self checkForComments: aFASTJavaVariableDeclarator andDo: [
 		aFASTJavaVariableDeclarator variable accept: self.
+		"JLS 10.2: the brackets written after a name are written back there."
+		aFASTJavaVariableDeclarator dimensions timesRepeat: [ self unindented: '[]' ].
 		aFASTJavaVariableDeclarator expression ifNil: [ ^ self ].
 		self unindented: ' = '.
 		aFASTJavaVariableDeclarator expression accept: self

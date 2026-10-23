@@ -80,6 +80,22 @@ FASTJavaEntity >> isAnnotation [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isAnnotationElementDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isAnnotationInterfaceDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isArrayAccess [
 
 	<ignoreForCoverage>
@@ -264,6 +280,14 @@ FASTJavaEntity >> isDoWhileStatement [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isDoubleLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isDoubleTypeExpression [
 
 	<ignoreForCoverage>
@@ -321,6 +345,14 @@ FASTJavaEntity >> isExpressionStatement [
 
 { #category : 'testing' }
 FASTJavaEntity >> isFieldAccess [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isFloatLiteral [
 
 	<ignoreForCoverage>
 	<generated>
@@ -400,6 +432,14 @@ FASTJavaEntity >> isIntTypeExpression [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isIntegerLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isInterfaceDeclaration [
 
 	<ignoreForCoverage>
@@ -441,6 +481,14 @@ FASTJavaEntity >> isLambdaExpression [
 
 { #category : 'testing' }
 FASTJavaEntity >> isLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isLongLiteral [
 
 	<ignoreForCoverage>
 	<generated>
@@ -553,6 +601,14 @@ FASTJavaEntity >> isQualifiedName [
 
 { #category : 'testing' }
 FASTJavaEntity >> isQualifiedTypeName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isRecordDeclaration [
 
 	<ignoreForCoverage>
 	<generated>

@@ -1,9 +1,10 @@
 Extension { #name : 'FASTTStatement' }
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> forIncrementorOwner [
 	"Relation named: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'I am the incrementor of the for'>
 	<container>
@@ -13,10 +14,13 @@ FASTTStatement >> forIncrementorOwner [
 	^ self attributeAt: #forIncrementorOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> forIncrementorOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'FAST-Java-Model'>
+
 	(self attributeAt: #forIncrementorOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self forIncrementorOwner.
@@ -27,10 +31,11 @@ FASTTStatement >> forIncrementorOwner: anObject [
 		anObject incrementor: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> forIninitializerOwner [
 	"Relation named: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'I am the initializer of the for'>
 	<container>
@@ -40,10 +45,13 @@ FASTTStatement >> forIninitializerOwner [
 	^ self attributeAt: #forIninitializerOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> forIninitializerOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'FAST-Java-Model'>
+
 	(self attributeAt: #forIninitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self forIninitializerOwner.
@@ -54,10 +62,11 @@ FASTTStatement >> forIninitializerOwner: anObject [
 		anObject initializer: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> ifElsePartOwner [
 	"Relation named: #ifElsePartOwner type: #FASTJavaIfStatement opposite: #elsePart"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The if owner (if possible)'>
 	<container>
@@ -67,10 +76,13 @@ FASTTStatement >> ifElsePartOwner [
 	^ self attributeAt: #ifElsePartOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> ifElsePartOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'FAST-Java-Model'>
+
 	(self attributeAt: #ifElsePartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self ifElsePartOwner.
@@ -81,10 +93,11 @@ FASTTStatement >> ifElsePartOwner: anObject [
 		anObject elsePart: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> ifThenPartOwner [
 	"Relation named: #ifThenPartOwner type: #FASTJavaIfStatement opposite: #thenPart"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The if owner (if possible)'>
 	<container>
@@ -94,10 +107,13 @@ FASTTStatement >> ifThenPartOwner [
 	^ self attributeAt: #ifThenPartOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> ifThenPartOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'FAST-Java-Model'>
+
 	(self attributeAt: #ifThenPartOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self ifThenPartOwner.
@@ -108,10 +124,11 @@ FASTTStatement >> ifThenPartOwner: anObject [
 		anObject thenPart: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> labelStatementOwner [
 	"Relation named: #labelStatementOwner type: #FASTJavaLabeledStatement opposite: #labeledStatement"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Label Statement entity containing this statement'>
 	<container>
@@ -121,10 +138,13 @@ FASTTStatement >> labelStatementOwner [
 	^ self attributeAt: #labelStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatement >> labelStatementOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'FAST-Java-Model'>
+
 	(self attributeAt: #labelStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self labelStatementOwner.

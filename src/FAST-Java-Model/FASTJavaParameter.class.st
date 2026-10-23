@@ -36,6 +36,7 @@ I represent a parameter of a method declaration
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
+| `recordOwner` | `FASTJavaParameter` | `components` | `FASTJavaRecordDeclaration` | The record that declares me as one of its components|
 | `returnOwner` | `FASTTExpression` | `expression` | `FASTTReturnStatement` | The return statement that own the expression (if it's the case)|
 | `switchConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchStatement` | I represent a condition for my owner|
 | `switchExpressionConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchExpression` | The switch expression whose condition I am|
@@ -54,6 +55,7 @@ I represent a parameter of a method declaration
 
 | Name | Type | Default value | Comment |
 |---|
+| `dimensions` | `Number` | 0 | The bracket pairs written after my name, eg. the one of `char cbuf[]`|
 | `endPos` | `Number` | nil | |
 | `hasVariableArguments` | `Boolean` | false | Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)|
 | `name` | `String` | nil | |
@@ -66,7 +68,9 @@ Class {
 	#traits : 'FASTTExpression + FASTTVariableEntity',
 	#classTraits : 'FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
+		'#dimensions => FMProperty defaultValue: 0',
 		'#hasVariableArguments => FMProperty defaultValue: false',
+		'#recordOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #components',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
 	],
@@ -82,6 +86,23 @@ FASTJavaParameter class >> annotation [
 	<FMClass: #Parameter super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> dimensions [
+
+	<FMProperty: #dimensions type: #Number defaultValue: 0>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bracket pairs written after my name, eg. the one of `char cbuf[]`'>
+	^ dimensions ifNil: [ dimensions := 0 ]
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> dimensions: anObject [
+	<ignoreForCoverage>
+	<generated>
+	dimensions := anObject
 ]
 
 { #category : 'accessing' }
@@ -107,6 +128,25 @@ FASTJavaParameter >> isParameter [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> recordOwner [
+	"Relation named: #recordOwner type: #FASTJavaRecordDeclaration opposite: #components"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The record that declares me as one of its components'>
+	<container>
+	^ recordOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> recordOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	recordOwner := anObject
 ]
 
 { #category : 'accessing' }

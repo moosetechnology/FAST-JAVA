@@ -12,7 +12,7 @@ case part of switch statement
 | `forIninitializerOwner` | `FASTTStatement` | `initializer` | `FASTJavaForStatement` | I am the initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
-| `javaCaseStatementSwitchOwner` | `FASTJavaCaseStatement` | `cases` | `FASTJavaSwitchStatement` | The switch owner|
+| `javaCaseStatementSwitchOwner` | `FASTJavaCaseStatement` | `cases` | `FASTJavaTWithSwitchBlock` | The switch owner|
 | `javaInitializerOwner` | `FASTTStatementBlock` | `statementBlock` | `FASTJavaInitializer` | Behavioural entity containing the statement block|
 | `javaSynchronizedStatementOwner` | `FASTTStatementBlock` | `block` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
@@ -41,7 +41,7 @@ Class {
 	#traits : 'FASTTStatementBlock',
 	#classTraits : 'FASTTStatementBlock classTrait',
 	#instVars : [
-		'#javaCaseStatementSwitchOwner => FMOne type: #FASTJavaSwitchStatement opposite: #cases',
+		'#javaCaseStatementSwitchOwner => FMOne type: #FASTJavaTWithSwitchBlock opposite: #cases',
 		'#labels => FMMany type: #FASTJavaSwitchLabel opposite: #caseStatementOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -76,7 +76,7 @@ FASTJavaCaseStatement >> isCaseStatement [
 
 { #category : 'accessing' }
 FASTJavaCaseStatement >> javaCaseStatementSwitchOwner [
-	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaSwitchStatement opposite: #cases"
+	"Relation named: #javaCaseStatementSwitchOwner type: #FASTJavaTWithSwitchBlock opposite: #cases"
 
 	<ignoreForCoverage>
 	<generated>

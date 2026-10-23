@@ -74,3 +74,11 @@ FASTJavaDoubleLiteral class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]
+
+{ #category : 'testing' }
+FASTJavaDoubleLiteral >> isDoubleLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ true
+]

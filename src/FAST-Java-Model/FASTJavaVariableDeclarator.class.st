@@ -27,6 +27,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 
 | Name | Type | Default value | Comment |
 |---|
+| `dimensions` | `Number` | 0 | The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not|
 | `endPos` | `Number` | nil | |
 | `startPos` | `Number` | nil | |
 
@@ -37,6 +38,7 @@ Class {
 	#traits : 'FASTTEntity',
 	#classTraits : 'FASTTEntity classTrait',
 	#instVars : [
+		'#dimensions => FMProperty defaultValue: 0',
 		'#varDeclOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #declarators',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner'
 	],
@@ -52,6 +54,23 @@ FASTJavaVariableDeclarator class >> annotation [
 	<FMClass: #VariableDeclarator super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaVariableDeclarator >> dimensions [
+
+	<FMProperty: #dimensions type: #Number defaultValue: 0>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'>
+	^ dimensions ifNil: [ dimensions := 0 ]
+]
+
+{ #category : 'accessing' }
+FASTJavaVariableDeclarator >> dimensions: anObject [
+	<ignoreForCoverage>
+	<generated>
+	dimensions := anObject
 ]
 
 { #category : 'accessing' }

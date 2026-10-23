@@ -136,7 +136,12 @@ Class {
 		'javaSwitchLabel',
 		'javaSwitchRule',
 		'javaYieldStatement',
-		'tTryResource'
+		'tTryResource',
+		'tWithTypeParameters',
+		'tWithSwitchBlock',
+		'javaAnnotationInterfaceDeclaration',
+		'javaAnnotationElementDeclaration',
+		'javaRecordDeclaration'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -177,6 +182,30 @@ FASTJavaMetamodelGenerator >> commentForJavaAnnotation [
 example:
 
 @Override'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaAnnotationElementDeclaration [
+
+	^ 'I represent the declaration of an element of an annotation interface ([JLS 9.6.1](https://docs.oracle.com/javase/specs/jls/se17/html/jls-9.html#jls-9.6.1)): a method that takes no parameter, throws nothing, and may have a default value.
+Example:
+```language=text
+public @interface MyAnnotation {
+	String value() default "none";
+}
+```'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaAnnotationInterfaceDeclaration [
+
+	^ 'I represent an annotation interface declaration ([JLS 9.6](https://docs.oracle.com/javase/specs/jls/se17/html/jls-9.html#jls-9.6)).
+Example:
+```language=text
+public @interface MyAnnotation {
+	String value() default "none";
+}
+```'
 ]
 
 { #category : 'comments' }
@@ -591,6 +620,17 @@ new Canard.Poulet(){
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaRecordDeclaration [
+
+	^ 'I represent a record declaration ([JLS 8.10](https://docs.oracle.com/javase/specs/jls/se17/html/jls-8.html#jls-8.10)).
+Example:
+```language=text
+public record Point(int x, int y) {
+}
+```'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
 	^ 'I represent a string literal node.'
 ]
@@ -805,12 +845,16 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaLiteral := self newClassNamed: #Literal comment: 'abtract class for all literals'.
 	javaCharacterLiteral := self newClassNamed: #CharacterLiteral comment: self commentForJavaCharacterLiteral.
 	javaFloatLiteral := self newClassNamed: #FloatLiteral comment: self commentForJavaFloatLiteral.
+	javaFloatLiteral withTesting.
 	javaIntegerLiteral := self newClassNamed: #IntegerLiteral comment: self commentForJavaIntegerLiteral.
+	javaIntegerLiteral withTesting.
 	javaNullLiteral := self newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
 	javaStringLiteral := self newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
 	javaBooleanLiteral := self newClassNamed: #BooleanLiteral comment: self commentForJavaBooleanLiteral.
 	javaLongLiteral := self newClassNamed: #LongLiteral comment: self commentForJavaLongLiteral.
+	javaLongLiteral withTesting.
 	javaDoubleLiteral := self newClassNamed: #DoubleLiteral comment: self commentForJavaDoubleLiteral.
+	javaDoubleLiteral withTesting.
 
 	"type expressions"
 	javaTypeExpression := self newClassNamed: #TypeExpression comment: 'I am an abstract class representing a type'.
@@ -931,6 +975,16 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaEnumDeclaration withTesting.
 	javaInterfaceDeclaration := self newClassNamed: #InterfaceDeclaration comment: self commentForJavaInterfaceDeclaration.
 	javaInterfaceDeclaration withTesting.
+	javaAnnotationInterfaceDeclaration := self
+		                                      newClassNamed: #AnnotationInterfaceDeclaration
+		                                      comment: self commentForJavaAnnotationInterfaceDeclaration.
+	javaAnnotationInterfaceDeclaration withTesting.
+	javaAnnotationElementDeclaration := self
+		                                    newClassNamed: #AnnotationElementDeclaration
+		                                    comment: self commentForJavaAnnotationElementDeclaration.
+	javaAnnotationElementDeclaration withTesting.
+	javaRecordDeclaration := self newClassNamed: #RecordDeclaration comment: self commentForJavaRecordDeclaration.
+	javaRecordDeclaration withTesting.
 	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
 	javaEmptyMethodDeclaration withTesting.
 	compilationUnit := self
@@ -1019,11 +1073,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodEntity --|> #THasImmediateSource.
 	javaMethodEntity --|> tDeclaration.
 	javaMethodEntity --|> tWithModifiers.
+	javaMethodEntity --|> tWithTypeParameters.
 
 	javaClassDeclaration --|> tStatement.
 	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
+	javaClassDeclaration --|> tWithTypeParameters.
 	javaClassDeclaration --|> tNamedEntity.
 	javaClassDeclaration --|> #THasImmediateSource.
 	javaClassDeclaration withPrecedenceOf: #THasImmediateSource.
@@ -1042,15 +1098,38 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInterfaceDeclaration --|> tDeclaration.
 	javaInterfaceDeclaration --|> tWithDeclarations.
 	javaInterfaceDeclaration --|> tWithModifiers.
+	javaInterfaceDeclaration --|> tWithTypeParameters.
 	javaInterfaceDeclaration --|> tNamedEntity.
 	javaInterfaceDeclaration --|> #THasImmediateSource.
 	javaInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
+
+	"JLS 9.6: an annotation interface has no supertype and no type parameters."
+	javaAnnotationInterfaceDeclaration --|> tStatement.
+	javaAnnotationInterfaceDeclaration --|> tDeclaration.
+	javaAnnotationInterfaceDeclaration --|> tWithDeclarations.
+	javaAnnotationInterfaceDeclaration --|> tWithModifiers.
+	javaAnnotationInterfaceDeclaration --|> tNamedEntity.
+	javaAnnotationInterfaceDeclaration --|> #THasImmediateSource.
+	javaAnnotationInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
+
+	javaAnnotationElementDeclaration --|> javaMethodEntity.
+
+	"JLS 8.10: a record can be generic and implement interfaces, but never extends."
+	javaRecordDeclaration --|> tStatement.
+	javaRecordDeclaration --|> tDeclaration.
+	javaRecordDeclaration --|> tWithDeclarations.
+	javaRecordDeclaration --|> tWithModifiers.
+	javaRecordDeclaration --|> tWithTypeParameters.
+	javaRecordDeclaration --|> tNamedEntity.
+	javaRecordDeclaration --|> #THasImmediateSource.
+	javaRecordDeclaration withPrecedenceOf: #THasImmediateSource.
 
 	javaMethodInvocation --|> tInvocation.
 	javaMethodInvocation --|> tWithReceiver.
 	javaMethodInvocation --|> tReceiver.
 
 	javaSwitchStatement --|> tStatement.
+	javaSwitchStatement --|> tWithSwitchBlock.
 	javaThis --|> javaVariableExpression.
 
 	javaVarDeclStatement --|> tStatement.
@@ -1098,6 +1177,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVariableExpression --|> tAssignable.
 	javaVariableExpression --|> tReceiver.
 
+	"JLS 9.7.1: the value of an annotation element may be a name, which denotes an enum
+	constant, as the TYPE and METHOD of `@Target({TYPE, METHOD})` do."
+	javaVariableExpression --|> tAnnotationElement.
+
 	javaThrowStatement --|> tStatement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
@@ -1144,6 +1227,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVoidTypeExpression --|> javaPrimitiveTypeExpression.
 
 	javaClassTypeExpression --|> javaTypeExpression.
+	javaVarTypeExpression --|> javaTypeExpression.
 	javaClassTypeExpression --|> #TWithArguments.
 
 	javaTypeParameter --|> tExpression.
@@ -1184,6 +1268,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	importDeclaration --|> tWithQualifiedName.
 
 	javaSwitchExpression --|> tExpression.
+	javaSwitchExpression --|> tWithSwitchBlock.
 	javaSwitchLabel --|> tEntity.
 	javaSwitchRule --|> tEntity.
 	javaYieldStatement --|> tStatement
@@ -1219,6 +1304,16 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 
+	"JLS 10.2: the brackets of an array type may be written after the name of a variable
+	rather than after the type, where they belong to that variable alone. They are kept
+	where they are written, so the type a variable declares is the one its declaration
+	writes with these dimensions added."
+	(javaParameterExpression property: #dimensions type: #Number defaultValue: 0) comment:
+		'The bracket pairs written after my name, eg. the one of `char cbuf[]`'.
+
+	(javaVariableDeclarator property: #dimensions type: #Number defaultValue: 0) comment:
+		'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'.
+
 	(javaBreakStatement property: #label type: #String) comment: 'The label targeted by this break statement'.
 
 	(javaContinueStatement property: #label type: #String) comment: 'The label targeted by this continue statement'
@@ -1246,13 +1341,18 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-* ((tAnnotationElement property: #arrayOwner) comment:
 			 'The ArrayAnnotationElement I am an element of').
 
+	((javaAnnotationElementDeclaration property: #defaultValue) comment:
+		 'The value I take when the annotation does not give one, eg. "none" in `String value() default "none";`')
+	<>- ((tAnnotationElement property: #defaultValueOwner) comment:
+			 'The annotation element declaration I am the default value of').
+
 	((javaVarDeclStatement property: #declarators) comment:
 		 'The declarators for the type')
 	<>-* ((javaVariableDeclarator property: #varDeclOwner) comment:
 			 'The owner of the declarator').
 
-	((javaSwitchStatement property: #cases) comment:
-		 'The cases of the switch statement')
+	((tWithSwitchBlock property: #cases) comment:
+		 'The case groups of my switch block, in colon form')
 	<>-*
 		((javaCaseStatement property: #javaCaseStatementSwitchOwner)
 			 comment: 'The switch owner').
@@ -1429,6 +1529,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((javaVariableExpression property: #javaMethodReferenceOwner)
 			 comment: 'The owner of the method reference (if possible)').
 
+	"JLS 15.12: an invocation may write the type arguments of a generic method before
+	its name. They are types, a wildcard being no part of them."
+	((javaMethodInvocation property: #typeArguments) comment:
+		 'The type arguments I write before the method name, eg. the String of `Collections.<String>emptyList()`')
+	<>-*
+		((javaTypeExpression property: #javaMethodInvocationTypeArgumentOwner)
+			 comment: 'The invocation that writes me as one of its type arguments').
+
 	((javaSynchronizedStatement property: #expression) comment:
 		 'The instance on which the statement block is synchronized')
 	<>-
@@ -1449,11 +1557,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-*
 		((javaClassTypeExpression property: #javaMethodThrowsOwner)
 			 comment: 'The method that throws me').
-	((javaMethodEntity property: #typeParameters) comment:
-		 'The list of type parameter')
+	((tWithTypeParameters property: #typeParameters) comment:
+		 'The type parameters I declare')
 	<>-*
-		((javaTypeParameter property: #javaMethodTypeParameterOwner)
-			 comment: 'The method that use me').
+		((javaTypeParameter property: #javaTypeParameterOwner) comment:
+			 'The generic declaration that declares me').
 
 	((javaTypeParameter property: #types) comment:
 		 'The list of types I extend or implements')
@@ -1532,6 +1640,19 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			  #javaInterfaceDeclarationInterfaceOwner) comment:
 			 'The interface that extends me').
 
+	"JLS 8.10.1: the components of a record are declared in its header, like the
+	parameters of the canonical constructor they define."
+	((javaRecordDeclaration property: #components) comment:
+		 'The record components I declare')
+	<>-* ((javaParameterExpression property: #recordOwner) comment:
+			 'The record that declares me as one of its components').
+
+	((javaRecordDeclaration property: #interfaces) comment:
+		 'The interfaces I implement')
+	<>-*
+		((javaTypeExpression property: #javaRecordDeclarationInterfaceOwner)
+			 comment: 'The record that implements me').
+
 	((tWithDeclarations property: #declarations) comment:
 		 'The elements I declare')
 	<>-* ((tDeclaration property: #javaDeclarationOwner) comment:
@@ -1592,9 +1713,17 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'My enum declaration')
 	<>-* ((javaEnumDeclaration property: #compilationUnit) comment:
 			 'The compilation unit that owns me').
+	((compilationUnit property: #annotationInterfaceDeclarations) comment:
+		 'My annotation interface declarations')
+	<>-* ((javaAnnotationInterfaceDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #recordDeclarations) comment:
+		 'My record declarations')
+	<>-* ((javaRecordDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
 
 	((javaSwitchExpression property: #condition) comment: 'The condition of the switch expression') <>- ((tExpression property: #switchExpressionConditionOwner) comment: 'The switch expression whose condition I am').
-	((javaSwitchExpression property: #rules) comment: 'The rules of the switch expression') <>-* ((javaSwitchRule property: #switchExpressionOwner) comment: 'The switch expression that owns me').
+	((tWithSwitchBlock property: #rules) comment: 'The rules of my switch block, in arrow form') <>-* ((javaSwitchRule property: #switchOwner) comment: 'The switch that owns me').
 
 	((javaSwitchRule property: #label) comment: 'The label of the switch rule') <>- ((javaSwitchLabel property: #switchRuleOwner) comment: 'The switch rule that owns me').
 	((javaSwitchRule property: #body) comment: 'The body of the switch rule') <>- ((javaEntity property: #switchRuleBodyOwner) comment: 'The switch rule whose body I am').
@@ -1624,6 +1753,10 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	Acceptable annotation elements are: literal, Enum constant, Annotation, Class, an array of the preceding (out of laziness we use ArrayInitializer which is too permissive)'.
 
 	tTryResource := self newTraitNamed: #TTryResource comment: 'I am a resource in a try-with-resource'.
+
+	tWithTypeParameters := self newTraitNamed: #TWithTypeParameters comment: 'I am a generic declaration: I declare type parameters'.
+
+	tWithSwitchBlock := self newTraitNamed: #TWithSwitchBlock comment: 'I have a switch block: a list of case groups in colon form, or of rules in arrow form'.
 
 	"From FAST"
 	tEntity := self remoteTrait: #TEntity withPrefix: #FAST.

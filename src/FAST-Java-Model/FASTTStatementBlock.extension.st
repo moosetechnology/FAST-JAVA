@@ -1,9 +1,10 @@
 Extension { #name : 'FASTTStatementBlock' }
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatementBlock >> javaInitializerOwner [
 	"Relation named: #javaInitializerOwner type: #FASTJavaInitializer opposite: #statementBlock"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity containing the statement block'>
 	<container>
@@ -13,10 +14,13 @@ FASTTStatementBlock >> javaInitializerOwner [
 	^ self attributeAt: #javaInitializerOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatementBlock >> javaInitializerOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'FAST-Java-Model'>
+
 	(self attributeAt: #javaInitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaInitializerOwner.
@@ -27,10 +31,11 @@ FASTTStatementBlock >> javaInitializerOwner: anObject [
 		anObject statementBlock: self ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatementBlock >> javaSynchronizedStatementOwner [
 	"Relation named: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #block"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The owner of the synchronized block (if possible)'>
 	<container>
@@ -40,10 +45,13 @@ FASTTStatementBlock >> javaSynchronizedStatementOwner [
 	^ self attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]
 
-{ #category : '*FAST-Java-Model-accessing' }
+{ #category : '*FAST-Java-Model' }
 FASTTStatementBlock >> javaSynchronizedStatementOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'FAST-Java-Model'>
+
 	(self attributeAt: #javaSynchronizedStatementOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self javaSynchronizedStatementOwner.

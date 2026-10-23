@@ -29,10 +29,63 @@ JavaSmaCCProgramNodeImporterVisitor class >> parseCodeMethodString: aCodeString 
 	^ self new parseCodeMethodString: aCodeString
 ]
 
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> acceptAnnotationInterfaceMember: aMemberNode [
+	"JLS 9.6.1: a member of an annotation interface that is a method declaration declares
+	one of its elements. SmaCC gives such a declaration one node class when it has a
+	default value and another when it has none, so both come here."
+
+	(aMemberNode isKindOf: JavaAbstractMethodDeclarationNode) ifTrue: [ ^ self clone visitAnnotationElementDeclaration: aMemberNode ].
+
+	^ self clone accept: aMemberNode
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
+	"A switch used as a statement is a switch statement (JLS 14.11.1) whatever form its
+	block takes, but SmaCC types the node after the form, not the position. Only the
+	places where a statement is expected can tell the two apart, so they come here."
+
+	(aStatementNode isKindOf: JavaSwitchExpressionNode) ifTrue: [ ^ self clone visitSwitchExpressionAsStatement: aStatementNode ].
+
+	^ self clone accept: aStatementNode
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> addThrowsOf: aDeclarationNode [
+
+	aDeclarationNode throws ifNotNil: [ :throws |
+		throws classTypes do: [ :classType | currentFASTEntity addThrow: (self clone accept: classType) ] ]
+]
+
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> addToModel: anEntity [
 	self model silentlyAdd: anEntity.
 	^ anEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> addTypeParametersOf: aDeclarationNode [
+	"JLS 4.4: class, interface, method and constructor declarations can be generic."
+
+	aDeclarationNode typeParameters ifNotNil: [ :typeParameters |
+		typeParameters parameters do: [ :typeParameter | currentFASTEntity addTypeParameter: (self clone accept: typeParameter) ] ]
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> arrayDimensionsOf: aVariableNode [
+	"JLS 10.2: the brackets of an array type may be written after the variable instead of
+	after the type, once per dimension."
+
+	| dimensions node |
+	dimensions := 0.
+	node := aVariableNode.
+
+	[ node isKindOf: JavaArrayVariableNameNode ] whileTrue: [
+			dimensions := dimensions + 1.
+			node := node variable ].
+
+	^ dimensions
 ]
 
 { #category : 'private - comments' }
@@ -165,13 +218,23 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 { #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
 
-	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaMethodEntity }
+	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaAnnotationInterfaceDeclaration . FASTJavaRecordDeclaration . FASTJavaMethodEntity }
 		includes: currentFASTEntity class )
 		ifTrue: [ ^ false ].
 
 	^self parentFASTVisitor
 		ifNil: [ true ]
 		ifNotNil: [ self parentFASTVisitor isOutsideTypeDeclaration ]
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> isVarTypeNode: aClassType [
+	"JLS 14.4.1: `var` is a reserved type name standing for an inferred type. It is
+	never generic and never qualified, so a simple name is enough to tell."
+
+	| name |
+	name := aClassType name.
+	^ (name isKindOf: JavaTypeNameNode) and: [ name arguments isEmpty and: [ name name value = 'var' ] ]
 ]
 
 { #category : 'initialization' }
@@ -296,14 +359,18 @@ JavaSmaCCProgramNodeImporterVisitor >> setStartEndPos: aNodeEntity [
 JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstractMethodDeclaration [
 
 	currentFASTEntity := (self create: FASTJavaMethodEntity from: anAbstractMethodDeclaration)
-		name: anAbstractMethodDeclaration declarator name value;
-		yourself.
+		                     name: anAbstractMethodDeclaration declarator name value;
+		                     yourself.
 
-	anAbstractMethodDeclaration declarator parameters do: [ :parameter | 
-		currentFASTEntity addParameter: (self clone accept: parameter) ].
-	anAbstractMethodDeclaration modifiers do: [ :modifier | 
-		currentFASTEntity addModifier: (self clone accept: modifier) ].
+	anAbstractMethodDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	currentFASTEntity type: (self clone accept: anAbstractMethodDeclaration type).
+
+	self addTypeParametersOf: anAbstractMethodDeclaration.
+
+	anAbstractMethodDeclaration declarator parameters do: [ :parameter |
+		currentFASTEntity addParameter: (self clone accept: parameter) ].
+
+	self addThrowsOf: anAbstractMethodDeclaration.
 
 	^ currentFASTEntity
 ]
@@ -315,6 +382,38 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 
 	anAnnotation values do: [ :expression |
 		currentFASTEntity addElement: (self clone accept: expression) ].
+
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationElementDeclaration: anElementDeclaration [
+	"JLS 9.6.1: an element of an annotation interface is declared as a method that takes no
+	parameter and may have a default value."
+
+	currentFASTEntity := (self create: FASTJavaAnnotationElementDeclaration from: anElementDeclaration)
+		                     name: anElementDeclaration declarator name value;
+		                     yourself.
+
+	anElementDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	currentFASTEntity type: (self clone accept: anElementDeclaration type).
+
+	(anElementDeclaration isKindOf: JavaAnnotationMethodDeclarationNode) ifTrue: [
+		currentFASTEntity defaultValue: (self clone accept: anElementDeclaration value) ].
+
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationInterface: anAnnotationInterface [
+	"JLS 9.6: an annotation interface declaration has no supertype and no type parameters."
+
+	self create: FASTJavaAnnotationInterfaceDeclaration from: anAnnotationInterface.
+	currentFASTEntity name: anAnnotationInterface name value.
+
+	anAnnotationInterface modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	anAnnotationInterface declarations do: [ :declaration |
+		currentFASTEntity addDeclaration: (self acceptAnnotationInterfaceMember: declaration) ].
 
 	^ currentFASTEntity
 ]
@@ -399,10 +498,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBinaryExpression: aBinaryExpression 
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitBlock: aBlock [
+
 	currentFASTEntity := self addToModel: FASTJavaStatementBlock new.
 	self setStartEndPos: aBlock.
-	aBlock statements
-		do: [ :each | currentFASTEntity statements add: (self clone accept: each) ].
+	aBlock statements do: [ :each | currentFASTEntity statements add: (self acceptStatement: each) ].
 	^ currentFASTEntity
 ]
 
@@ -501,10 +600,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharacterLiteral: aCharacterLiteral 
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration [
+
 	self create: FASTJavaClassDeclaration from: aClassDeclaration.
 	currentFASTEntity name: aClassDeclaration name value.
-	
+
 	aClassDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+
+	self addTypeParametersOf: aClassDeclaration.
+
 	aClassDeclaration superclass ifNotNil: [ :superclass | currentFASTEntity superclass: (self clone accept: superclass) ].
 	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
 	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
@@ -525,13 +628,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
+
+	(self isVarTypeNode: aClassType) ifTrue: [
+			currentFASTEntity := self addToModel: (FASTJavaVarTypeExpression new
+					                      name: aClassType name name value;
+					                      yourself).
+			self setStartEndPos: aClassType.
+			^ currentFASTEntity ].
+
 	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	self setStartEndPos: aClassType.
 	currentFASTEntity typeName: (self clone accept: aClassType name).
 
-	aClassType name arguments do: [ :typeArgument |
-		currentFASTEntity addArgument: (self clone accept: typeArgument)
-	].
+	aClassType name arguments do: [ :typeArgument | currentFASTEntity addArgument: (self clone accept: typeArgument) ].
 
 	^ currentFASTEntity
 ]
@@ -561,13 +670,21 @@ JavaSmaCCProgramNodeImporterVisitor >> visitContinueStatement: aContinueStatemen
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration [
+
 	currentFASTEntity := (self create: FASTJavaMethodEntity from: aConstructorDeclaration)
-		name: aConstructorDeclaration name name value;
-		yourself.
+		                     name: aConstructorDeclaration name name value;
+		                     yourself.
 	self setStartEndPos: aConstructorDeclaration.
+
+	self addTypeParametersOf: aConstructorDeclaration.
+
 	aConstructorDeclaration parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
+
+	self addThrowsOf: aConstructorDeclaration.
+
 	currentFASTEntity statementBlock: (self clone accept: aConstructorDeclaration body).
 	aConstructorDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+
 	^ currentFASTEntity
 ]
 
@@ -586,7 +703,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoWhileStatement: aDoWhileStatement 
 	currentFASTEntity
 		condition: (self clone accept: aDoWhileStatement expression).
 	currentFASTEntity
-		body: (self clone accept: aDoWhileStatement statement).
+		body: (self acceptStatement: aDoWhileStatement statement).
 	^ currentFASTEntity
 ]
 
@@ -732,15 +849,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement [
+
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
 	self setStartEndPos: aForEachStatement.
-	currentFASTEntity body:
-		(self clone accept: aForEachStatement statement).
-	currentFASTEntity fieldname:
-		(self clone visitIdentifier: aForEachStatement name).
+	currentFASTEntity body: (self acceptStatement: aForEachStatement statement).
+	currentFASTEntity fieldname: (self clone visitIdentifier: aForEachStatement name).
 	currentFASTEntity type: (self clone accept: aForEachStatement type).
-	currentFASTEntity list:
-		(self clone accept: aForEachStatement expression).
+	currentFASTEntity list: (self clone accept: aForEachStatement expression).
 	^ currentFASTEntity
 ]
 
@@ -758,7 +873,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 			[ :initial | currentFASTEntity initializer: (self clone accept: initial) ].
 	aForStatement statement
 		ifNotNil:
-			[ :statement | currentFASTEntity body: (self clone accept: statement) ].
+			[ :statement | currentFASTEntity body: (self acceptStatement: statement) ].
 	^ currentFASTEntity
 ]
 
@@ -772,15 +887,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIdentifier: aNameNode [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitIfElseStatement: anIfStatementNode [
+
 	currentFASTEntity := self addToModel: FASTJavaIfStatement new.
 	self setStartEndPos: anIfStatementNode.
-	currentFASTEntity
-		condition: (self clone accept: anIfStatementNode expression).
-	currentFASTEntity
-		thenPart: (self clone accept: anIfStatementNode trueStatement).
-	anIfStatementNode falseStatement
-		ifNotNil: [ currentFASTEntity
-				elsePart: (self clone accept: anIfStatementNode falseStatement) ].
+	currentFASTEntity condition: (self clone accept: anIfStatementNode expression).
+	currentFASTEntity thenPart: (self acceptStatement: anIfStatementNode trueStatement).
+	anIfStatementNode falseStatement ifNotNil: [
+		currentFASTEntity elsePart: (self acceptStatement: anIfStatementNode falseStatement) ].
 	^ currentFASTEntity
 ]
 
@@ -791,7 +904,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIfStatement: anIfStatementNode [
 	currentFASTEntity
 		condition: (self clone accept: anIfStatementNode expression).
 	currentFASTEntity
-		thenPart: (self clone accept: anIfStatementNode trueStatement).
+		thenPart: (self acceptStatement: anIfStatementNode trueStatement).
 	^ currentFASTEntity
 ]
 
@@ -800,7 +913,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anIn
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self setStartEndPos: anInitializedVariableDeclaration.
 	currentFASTEntity
-		variable: (self clone accept: anInitializedVariableDeclaration variable).
+		variable: (self clone accept: anInitializedVariableDeclaration variable);
+		dimensions: (self arrayDimensionsOf: anInitializedVariableDeclaration variable).
 	currentFASTEntity
 		expression: (self clone accept: anInitializedVariableDeclaration initializer).
 	^ currentFASTEntity
@@ -860,10 +974,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntegerLiteral: anIntegerLiteral [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitInterfaceDeclaration: anInterfaceDeclaration [
+
 	self create: FASTJavaInterfaceDeclaration from: anInterfaceDeclaration.
 	currentFASTEntity name: anInterfaceDeclaration name value.
 
 	anInterfaceDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+
+	self addTypeParametersOf: anInterfaceDeclaration.
+
 	anInterfaceDeclaration interfaceTypes do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
 	anInterfaceDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
 
@@ -877,7 +995,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLabeledStatement: aLabeledStatement 
 			                      label: aLabeledStatement identifier value;
 			                      yourself).
 	self setStartEndPos: aLabeledStatement.
-	currentFASTEntity labeledStatement:	(self clone accept: aLabeledStatement statement).
+	currentFASTEntity labeledStatement: (self acceptStatement: aLabeledStatement statement).
 	^ currentFASTEntity
 ]
 
@@ -935,27 +1053,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 	self create: FASTJavaMethodEntity from: aMethodDeclaration.
 	currentFASTEntity name: aMethodDeclaration declarator name value.
 
-	aMethodDeclaration modifiers do: [ :modifier | 
-		currentFASTEntity addModifier: (self clone accept: modifier) ].
+	aMethodDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 
-	aMethodDeclaration type ifNotNil: [ 
-		currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
+	aMethodDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
 
-	aMethodDeclaration typeParameters ifNotNil: [ :typeParameters | 
-		typeParameters parameters do: [ :typeParameter | 
-			currentFASTEntity addTypeParameter:
-				(self clone accept: typeParameter) ] ].
+	self addTypeParametersOf: aMethodDeclaration.
 
-	aMethodDeclaration declarator parameters do: [ :parameter | 
-		currentFASTEntity addParameter: (self clone accept: parameter) ].
+	aMethodDeclaration declarator parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
 
-	aMethodDeclaration throws ifNotNil: [ :throws | 
-		throws classTypes do: [ :classType | 
-			currentFASTEntity addThrow: (self clone accept: classType) ] ].
+	self addThrowsOf: aMethodDeclaration.
 
 	methodBody := self clone accept: aMethodDeclaration body.
-	(methodBody isKindOf: JavaEmptyMethodBodyNode) ifFalse: [ 
-		currentFASTEntity statementBlock: (self clone accept: methodBody) ].
+	(methodBody isKindOf: JavaEmptyMethodBodyNode) ifFalse: [ currentFASTEntity statementBlock: (self clone accept: methodBody) ].
 
 	^ currentFASTEntity
 ]
@@ -988,6 +1097,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 								endPos: superToken stopPosition;
 								yourself).
 					self addToModel: currentFASTEntity receiver ] ].
+	"JLS 15.12: an invocation may write the type arguments of a generic method before
+	its name, as `Collections.<String>emptyList()` does. They are types, a wildcard being
+	no part of them."
+	aMethodInvocation arguments do: [ :argument |
+		| typeArgument |
+		typeArgument := self clone accept: argument.
+		typeArgument isTypeExpression ifTrue: [ currentFASTEntity addTypeArgument: typeArgument ] ].
 	currentFASTEntity name: aMethodInvocation name value.
 	^ currentFASTEntity
 ]
@@ -1125,6 +1241,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	self setStartEndPos: aParameter.
 	currentFASTEntity variable: (self clone accept: aParameter variable).
 	currentFASTEntity type: (self clone accept: aParameter type).
+	currentFASTEntity dimensions: (self arrayDimensionsOf: aParameter variable).
 	^ currentFASTEntity
 ]
 
@@ -1194,7 +1311,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitProgramFile: aProgramFile [
 			entity := self clone accept: declaration.
 			entity isClassDeclaration ifTrue: [ currentFASTEntity addClassDeclaration: entity ].
 			entity isInterfaceDeclaration ifTrue: [ currentFASTEntity addInterfaceDeclaration: entity ].
-			entity isEnumDeclaration ifTrue: [ currentFASTEntity addEnumDeclaration: entity ] ].
+			entity isEnumDeclaration ifTrue: [ currentFASTEntity addEnumDeclaration: entity ].
+			entity isAnnotationInterfaceDeclaration ifTrue: [ currentFASTEntity addAnnotationInterfaceDeclaration: entity ].
+			entity isRecordDeclaration ifTrue: [ currentFASTEntity addRecordDeclaration: entity ] ].
 	^ currentFASTEntity
 ]
 
@@ -1221,6 +1340,25 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeNam
 	self setStartEndPos: aQualifiedTypeName.
 	currentFASTEntity name: aQualifiedTypeName name value.
 	currentFASTEntity namespace: (self clone accept: aQualifiedTypeName nspace).
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitRecordDeclaration: aRecordDeclaration [
+	"JLS 8.10: a record declares its components in its header. It can be generic and can
+	implement interfaces, but it never extends."
+
+	self create: FASTJavaRecordDeclaration from: aRecordDeclaration.
+	currentFASTEntity name: aRecordDeclaration name value.
+
+	aRecordDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+
+	self addTypeParametersOf: aRecordDeclaration.
+
+	aRecordDeclaration parameters do: [ :component | currentFASTEntity addComponent: (self clone accept: component) ].
+	aRecordDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
+	aRecordDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
+
 	^ currentFASTEntity
 ]
 
@@ -1324,7 +1462,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 			                      ifFalse: [ FASTJavaDefaultCaseStatement new ]).
 	self setStartEndPos: aSwitchBlockStatementGroup.
 	aSwitchBlockStatementGroup labels do: [ :label | currentFASTEntity labels add: (self clone accept: label) ].
-	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity statements add: (self clone accept: statement) ].
+	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity statements add: (self acceptStatement: statement) ].
 	^ currentFASTEntity
 ]
 
@@ -1332,6 +1470,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchExpression: aSwitchExpression [
 
 	currentFASTEntity := self addToModel: FASTJavaSwitchExpression new.
+	self setStartEndPos: aSwitchExpression.
+	currentFASTEntity condition: (self clone accept: aSwitchExpression expression).
+	aSwitchExpression statementGroups do: [ :statementGroup | currentFASTEntity rules add: (self clone accept: statementGroup) ].
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> visitSwitchExpressionAsStatement: aSwitchExpression [
+	"JLS 14.11.1: a switch whose block is in arrow form is a switch statement when it is
+	used as one."
+
+	currentFASTEntity := self addToModel: FASTJavaSwitchStatement new.
 	self setStartEndPos: aSwitchExpression.
 	currentFASTEntity condition: (self clone accept: aSwitchExpression expression).
 	aSwitchExpression statementGroups do: [ :statementGroup | currentFASTEntity rules add: (self clone accept: statementGroup) ].
@@ -1422,9 +1572,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
 		ifNil: [  self accept: aTypeArgument type ]
 		ifNotNil: [
 			currentFASTEntity := self create: FASTJavaTypeParameterExpression  from: aTypeArgument.
+			currentFASTEntity name: '?'.
+
+			"JLS 4.5.1: the bound of `? extends B` is an upper one, which is what the types
+			of a type parameter are. The one of `? super B` is a lower bound, and the types
+			of a type parameter are class types, so neither it nor an array bound such as
+			the one of `Class<? extends T[]>` has a place among them."
+			aTypeArgument token ifNotNil: [ :keyword |
+				(keyword value = 'extends' and: [ aTypeArgument type isKindOf: JavaClassTypeNode ])
+					ifTrue: [ currentFASTEntity addType: (self clone accept: aTypeArgument type) ] ].
+
 			currentFASTEntity
-				name: '?' ;
-				yourself
 		]
 ]
 
@@ -1433,6 +1591,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aType
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self setStartEndPos: aTypeImportOnDemandDeclaration.
 	currentFASTEntity
+		isStatic: aTypeImportOnDemandDeclaration staticToken isNotNil;
 		isOnDemand: true;
 		qualifiedName:
 			(self clone accept: aTypeImportOnDemandDeclaration name).
@@ -1514,7 +1673,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclar
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self setStartEndPos: aVariableDeclaration.
 	currentFASTEntity
-		variable: (self clone accept: aVariableDeclaration variable).
+		variable: (self clone accept: aVariableDeclaration variable);
+		dimensions: (self arrayDimensionsOf: aVariableDeclaration variable).
 	^ currentFASTEntity
 ]
 
@@ -1543,7 +1703,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitWhileStatement: aWhileStatementNode 
 	currentFASTEntity
 		condition: (self clone accept: aWhileStatementNode expression).
 	currentFASTEntity
-		body: (self clone accept: aWhileStatementNode statement).
+		body: (self acceptStatement: aWhileStatementNode statement).
 	^ currentFASTEntity
 ]
 

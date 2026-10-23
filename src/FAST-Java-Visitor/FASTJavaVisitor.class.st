@@ -11,6 +11,18 @@ FASTJavaVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaAnnotationElementDeclaration: aFASTJavaAnnotationElementDeclaration [
+
+	^ self visitFASTJavaMethodEntity: aFASTJavaAnnotationElementDeclaration
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaAnnotationInterfaceDeclaration: aFASTJavaAnnotationInterfaceDeclaration [
+
+	^ self visitFASTTStatement: aFASTJavaAnnotationInterfaceDeclaration
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 	^ self visitFASTTExpression: aFASTJavaArrayAccess
 ]
@@ -365,6 +377,12 @@ FASTJavaVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
 	^ self visitFASTJavaTypeName: aFASTJavaQualifiedTypeName
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaRecordDeclaration: aFASTJavaRecordDeclaration [
+
+	^ self visitFASTTStatement: aFASTJavaRecordDeclaration
 ]
 
 { #category : 'generated' }

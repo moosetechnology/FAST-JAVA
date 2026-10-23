@@ -7,11 +7,13 @@ I represent a compilation unit, I can contain declarations for a package, import
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotationInterfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaAnnotationInterfaceDeclaration` | My annotation interface declarations|
 | `classDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaClassDeclaration` | My class declarations|
 | `enumDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaEnumDeclaration` | My enum declaration|
 | `importDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaImportDeclaration` | My import declarations|
 | `interfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaInterfaceDeclaration` | My interface declarations|
 | `packageDeclaration` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaPackageDeclaration` | My package declaration, or nil for the default package|
+| `recordDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaRecordDeclaration` | My record declarations|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -35,11 +37,13 @@ Class {
 	#traits : '(FASTTEntity + FamixTHasImmediateSource withPrecedenceOf: FamixTHasImmediateSource)',
 	#classTraits : '(FASTTEntity classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
+		'#annotationInterfaceDeclarations => FMMany type: #FASTJavaAnnotationInterfaceDeclaration opposite: #compilationUnit',
 		'#classDeclarations => FMMany type: #FASTJavaClassDeclaration opposite: #compilationUnit',
 		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit',
 		'#importDeclarations => FMMany type: #FASTJavaImportDeclaration opposite: #compilationUnit',
 		'#interfaceDeclarations => FMMany type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit',
-		'#packageDeclaration => FMOne type: #FASTJavaPackageDeclaration opposite: #compilationUnit'
+		'#packageDeclaration => FMOne type: #FASTJavaPackageDeclaration opposite: #compilationUnit',
+		'#recordDeclarations => FMMany type: #FASTJavaRecordDeclaration opposite: #compilationUnit'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -53,6 +57,14 @@ FASTJavaCompilationUnit class >> annotation [
 	<FMClass: #CompilationUnit super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaCompilationUnit >> addAnnotationInterfaceDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self annotationInterfaceDeclarations add: anObject
 ]
 
 { #category : 'adding' }
@@ -85,6 +97,33 @@ FASTJavaCompilationUnit >> addInterfaceDeclaration: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self interfaceDeclarations add: anObject
+]
+
+{ #category : 'adding' }
+FASTJavaCompilationUnit >> addRecordDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self recordDeclarations add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> annotationInterfaceDeclarations [
+	"Relation named: #annotationInterfaceDeclarations type: #FASTJavaAnnotationInterfaceDeclaration opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'My annotation interface declarations'>
+	<derived>
+	^ annotationInterfaceDeclarations
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> annotationInterfaceDeclarations: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	annotationInterfaceDeclarations value: anObject
 ]
 
 { #category : 'accessing' }
@@ -187,4 +226,23 @@ FASTJavaCompilationUnit >> packageDeclaration: anObject [
 	<ignoreForCoverage>
 	<generated>
 	packageDeclaration := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> recordDeclarations [
+	"Relation named: #recordDeclarations type: #FASTJavaRecordDeclaration opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'My record declarations'>
+	<derived>
+	^ recordDeclarations
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> recordDeclarations: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	recordDeclarations value: anObject
 ]

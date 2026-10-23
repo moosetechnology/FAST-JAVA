@@ -5,7 +5,7 @@ I represent a var type (type inference)
 "
 Class {
 	#name : 'FASTJavaVarTypeExpression',
-	#superclass : 'FASTJavaEntity',
+	#superclass : 'FASTJavaTypeExpression',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -15,7 +15,7 @@ Class {
 FASTJavaVarTypeExpression class >> annotation [
 
 	<ignoreForCoverage>
-	<FMClass: #VarTypeExpression super: #FASTJavaEntity>
+	<FMClass: #VarTypeExpression super: #FASTJavaTypeExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]

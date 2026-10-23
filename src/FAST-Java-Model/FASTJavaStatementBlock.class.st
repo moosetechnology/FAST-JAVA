@@ -40,9 +40,9 @@ Class {
 	#traits : 'FASTTStatementBlock',
 	#classTraits : 'FASTTStatementBlock classTrait',
 	#instVars : [
+		'#javaCatchPartStatementOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #body',
 		'#javaTryCatchOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #try',
-		'#javaTryFinallyOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #finally',
-		'#javaCatchPartStatementOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #body'
+		'#javaTryFinallyOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #finally'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',

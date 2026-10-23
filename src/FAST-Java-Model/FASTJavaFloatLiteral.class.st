@@ -73,3 +73,11 @@ FASTJavaFloatLiteral class >> annotation [
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]
+
+{ #category : 'testing' }
+FASTJavaFloatLiteral >> isFloatLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ true
+]
