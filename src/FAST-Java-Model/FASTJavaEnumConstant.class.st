@@ -7,12 +7,20 @@
 |---|
 | `parentEnum` | `FASTJavaEnumConstant` | `constants` | `FASTJavaEnumDeclaration` | The enum type that contains me|
 
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
+| `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
+
 
 
 "
 Class {
 	#name : 'FASTJavaEnumConstant',
 	#superclass : 'FASTJavaVariableExpression',
+	#traits : 'FASTJavaTWithDeclarations + FASTTWithArguments',
+	#classTraits : 'FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#parentEnum => FMOne type: #FASTJavaEnumDeclaration opposite: #constants'
 	],

@@ -545,7 +545,9 @@ FASTJavaExportVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMeth
 FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 
 	self checkForComments: aFASTJavaEnumConstant andDo: [
-		self unindented: aFASTJavaEnumConstant name
+		self unindented: aFASTJavaEnumConstant name.
+		aFASTJavaEnumConstant arguments ifNotEmpty: [ :arguments | self visitFASTJavaArgumentsList: arguments ].
+		aFASTJavaEnumConstant declarations ifNotEmpty: [ :declarations | self visitJavaClassMemberDeclarations: declarations ]
 	]
 ]
 

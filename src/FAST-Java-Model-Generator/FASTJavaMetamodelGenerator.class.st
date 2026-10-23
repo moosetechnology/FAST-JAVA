@@ -1093,6 +1093,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaEnumDeclaration withPrecedenceOf: #THasImmediateSource.
 
 	javaEnumConstant --|> javaVariableExpression.
+	javaEnumConstant --|> tWithDeclarations.
+	javaEnumConstant --|> #TWithArguments.
 
 	javaInterfaceDeclaration --|> tStatement.
 	javaInterfaceDeclaration --|> tDeclaration.
