@@ -764,12 +764,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitEnumConstant: anEnumConstant [
-	"treat EnumConstant as a Field"
+	"JLS 8.9.1: a constant writes the arguments the constructor of its enum takes, and may
+	write a class body, which declares a class of its own extending that enum."
 
 	currentFASTEntity := self addToModel: FASTJavaEnumConstant new.
 	self setStartEndPos: anEnumConstant.
 	currentFASTEntity
 			name: anEnumConstant name value.
+	anEnumConstant expressions do: [ :expression |
+		currentFASTEntity arguments add: (self clone accept: expression) ].
+	anEnumConstant declarations do: [ :declaration |
+		currentFASTEntity declarations add: (self clone accept: declaration) ].
 
 	^ currentFASTEntity
 ]

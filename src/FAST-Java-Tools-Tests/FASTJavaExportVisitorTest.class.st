@@ -500,6 +500,42 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaDoubleLiteral [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithArguments [
+
+	| ast |
+	ast := self astFor: 'enum AnEnum {
+  CONST1("a"), CONST2("b", 2);
+}'.
+
+	self export: ast equals: 'enum AnEnum {
+  CONST1("a"), CONST2("b", 2);
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithBody [
+
+	| ast |
+	ast := self astFor: 'enum AnEnum {
+  CONST1 {
+    int kind() {
+      return 1;
+    }
+  };
+}'.
+
+	self export: ast equals: 'enum AnEnum {
+  CONST1 {
+    int kind() {
+      return 1;
+    }
+};
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 
 	| ast |

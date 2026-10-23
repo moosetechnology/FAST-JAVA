@@ -33,6 +33,12 @@ JavaSmaCCEnumDeclarationTest >> javaClass [
 ]
 
 { #category : 'tests' }
+JavaSmaCCEnumDeclarationTest >> testConstantArgumentsInEnum [
+
+	self assert: (fastModel allWithType: FASTJavaEnumConstant) anyOne arguments anyOne primitiveValue equals: 'INFO_EMPTY'
+]
+
+{ #category : 'tests' }
 JavaSmaCCEnumDeclarationTest >> testConstantNameInEnum [
 	self assert: (fastModel allWithType: FASTJavaEnumConstant) anyOne name equals: 'INFORMATION_EMPTY'
 ]
