@@ -44,6 +44,7 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `superType` | `FASTJavaTypeParameterExpression` | `typeParameterSuperTypeOwner` | `FASTJavaClassTypeExpression` | The lower bound a wildcard writes, as in `? super Number`|
 | `types` | `FASTJavaTypeParameterExpression` | `typeParameterOwner` | `FASTJavaClassTypeExpression` | The list of types I extend or implements|
 
 
@@ -64,6 +65,7 @@ Class {
 	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaTypeParameterOwner => FMOne type: #FASTJavaTWithTypeParameters opposite: #typeParameters',
+		'#superType => FMOne type: #FASTJavaClassTypeExpression opposite: #typeParameterSuperTypeOwner',
 		'#types => FMMany type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -113,6 +115,24 @@ FASTJavaTypeParameterExpression >> javaTypeParameterOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaTypeParameterOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeParameterExpression >> superType [
+	"Relation named: #superType type: #FASTJavaClassTypeExpression opposite: #typeParameterSuperTypeOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The lower bound a wildcard writes, as in `? super Number`'>
+	^ superType
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeParameterExpression >> superType: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	superType := anObject
 ]
 
 { #category : 'accessing' }

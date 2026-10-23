@@ -1565,6 +1565,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaClassTypeExpression property: #typeParameterOwner) comment:
 			 'The type parameter I specify').
 
+	((javaTypeParameter property: #superType) comment:
+		 'The lower bound a wildcard writes, as in `? super Number`')
+	<>-
+		((javaClassTypeExpression property: #typeParameterSuperTypeOwner) comment:
+			 'The wildcard I bound from below').
+
 	((javaParameterExpression property: #type) comment:
 		 'The type of the parameter')
 	<>-
