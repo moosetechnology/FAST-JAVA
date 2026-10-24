@@ -1245,6 +1245,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaParameterExpression --|> tExpression.
 	javaParameterExpression --|> tVariableEntity.
+	javaParameterExpression --|> tWithModifiers.
 	javaConditionalExpression --|> tReceiver.
 
 	javaStatement --|> tStatement.

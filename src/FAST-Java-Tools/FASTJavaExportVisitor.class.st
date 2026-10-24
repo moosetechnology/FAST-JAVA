@@ -1053,9 +1053,16 @@ FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclar
 
 ]
 
-{ #category : 'visiting' }
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	self checkForComments: aFASTJavaParameter andDo: [
+		"JLS 8.4.1: the modifiers a parameter writes come before its type, and stay on the
+		line it is written on."
+		aFASTJavaParameter modifiers do: [
+			:modifier |
+			modifier accept: self.
+			self space
+		].
 		aFASTJavaParameter type 
 			ifNotNil: [ :parameterType |
 				"Lambda parameters may be typeless"

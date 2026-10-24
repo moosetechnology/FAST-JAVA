@@ -1197,6 +1197,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaParameter [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaParameterWithModifiers [
+
+	| ast |
+	ast := self methodAST: 'void mth(@Deprecated final String text) { }'.
+
+	self export: ast equals: 'void mth(@Deprecated final String text) {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaParameterWithModifiersAndVariableArguments [
+
+	| ast |
+	ast := self methodAST: 'void mth(@SuppressWarnings("unchecked") String... parts) { }'.
+
+	self export: ast equals: 'void mth(@SuppressWarnings("unchecked") String... parts) {
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaPostIncrementAndSum [
 
 	| expr |

@@ -46,6 +46,7 @@ I represent a parameter of a method declaration
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `type` | `FASTJavaParameter` | `javaParameterTypeOwner` | `FASTJavaVariableExpression` | The type of the parameter|
 | `variable` | `FASTJavaParameter` | `javaParameterVariableOwner` | `FASTJavaVariableExpression` | parameter variable|
 
@@ -65,8 +66,8 @@ I represent a parameter of a method declaration
 Class {
 	#name : 'FASTJavaParameter',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTExpression + FASTTVariableEntity',
-	#classTraits : 'FASTTExpression classTrait + FASTTVariableEntity classTrait',
+	#traits : 'FASTJavaTWithModifiers + FASTTExpression + FASTTVariableEntity',
+	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
 		'#dimensions => FMProperty defaultValue: 0',
 		'#hasVariableArguments => FMProperty defaultValue: false',
