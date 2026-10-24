@@ -1494,14 +1494,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((tExpression property: #infixOperationRightOperandOwner) comment:
 			 'The right operand (if possible)').
 
-	((javaForStatement property: #incrementor) comment:
-		 'Expression evaluated at the end of each loop')
-	<>- ((tStatement property: #forIncrementorOwner) comment:
-			 'I am the incrementor of the for').
-	((javaForStatement property: #initializer) comment:
-		 'Expression used at initialization phase of a for loop')
-	<>- ((tStatement property: #forIninitializerOwner) comment:
-			 'I am the initializer of the for').
+	((javaForStatement property: #incrementors) comment:
+		 'Statements evaluated at the end of each loop')
+	<>-* ((tStatement property: #forIncrementorOwner) comment:
+			 'I am an incrementor of the for').
+	((javaForStatement property: #initializers) comment:
+		 'Statements evaluated at initialization phase of a for loop')
+	<>-* ((tStatement property: #forIninitializerOwner) comment:
+			 'I am an initializer of the for').
 
 	((javaSwitchStatement property: #condition) comment:
 		 'The condition of the statement')

@@ -827,6 +827,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopMissingElements [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSeveralHeaderStatements [
+
+	| expr |
+	expr := self methodAST: 'public void mth() { for (i=0, j=1; i<=10; i++, j--) ; }'.
+
+	self export: expr statements first equals: 'for (i = 0, j = 1; i<=10; i++, j--) 
+  ;
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSingleStatement [
 
 	| expr |

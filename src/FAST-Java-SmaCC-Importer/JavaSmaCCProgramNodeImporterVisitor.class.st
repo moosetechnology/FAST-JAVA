@@ -198,6 +198,16 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity: anObject [
 	currentFASTEntity := anObject 
 ]
 
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> expressionStatementOf: anExpressionNode [
+	"JLS 14.8: an expression written where a statement is expected is a statement of its own."
+
+	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
+	self setStartEndPos: anExpressionNode.
+	currentFASTEntity expression: (self clone accept: anExpressionNode).
+	^ currentFASTEntity
+]
+
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> getExpressionAST: anExpressionString [
 	"For the expression to be parser correctly, the Java importer must be set as being on a Class declaration
@@ -353,6 +363,20 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 JavaSmaCCProgramNodeImporterVisitor >> setStartEndPos: aNodeEntity [
 	currentFASTEntity startPos: aNodeEntity startPosition.
 	currentFASTEntity endPos: aNodeEntity stopPosition
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> statementsOfForHeader: aNode [
+	"JLS 14.14.1: the first and the last part of the header of a for write a list of
+	statement expressions, each one a statement of its own; the first part may write one
+	local variable declaration instead, which is a statement by itself."
+
+	| imported |
+	imported := self clone accept: aNode.
+
+	^ imported isCollection
+		  ifTrue: [ imported ]
+		  ifFalse: [ OrderedCollection with: imported ]
 ]
 
 { #category : 'visitor' }
@@ -878,11 +902,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 	aForStatement test
 		ifNotNil: [ :test | currentFASTEntity condition: (self clone accept: test) ].
 	aForStatement _update
-		ifNotNil:
-			[ :_update | currentFASTEntity incrementor: (self clone accept: _update) ].
+		ifNotNil: [ :_update |
+			currentFASTEntity incrementors: (self statementsOfForHeader: _update) ].
 	aForStatement initial
-		ifNotNil:
-			[ :initial | currentFASTEntity initializer: (self clone accept: initial) ].
+		ifNotNil: [ :initial |
+			currentFASTEntity initializers: (self statementsOfForHeader: initial) ].
 	aForStatement statement
 		ifNotNil:
 			[ :statement | currentFASTEntity body: (self acceptStatement: statement) ].
@@ -1415,12 +1439,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingle
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitStatementExpressionList: aStatementExpressionList [
-	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
-	self setStartEndPos: aStatementExpressionList.
-	aStatementExpressionList expressions
-		do:
-			[ :expression | currentFASTEntity expression: (self clone accept: expression) ].
-	^ currentFASTEntity
+	"JLS 14.14.1: a list of statement expressions writes one statement for each expression
+	it holds, so they are all answered rather than one of them."
+
+	^ aStatementExpressionList expressions collect: [ :expression |
+		  self clone expressionStatementOf: expression ]
 ]
 
 { #category : 'visitor' }

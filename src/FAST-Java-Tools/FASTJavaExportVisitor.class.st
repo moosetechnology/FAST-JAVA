@@ -650,13 +650,13 @@ FASTJavaExportVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 		checkForComments: aFASTJavaForStatement
 		andDo: [
 			self indented: 'for ('.
-			
-			self visitFASTJavaForStatementInitializer: aFASTJavaForStatement initializer.
-			self visitFASTJavaForStatementCondition:   aFASTJavaForStatement condition.
-			self visitFASTJavaForStatementIncrementor: aFASTJavaForStatement incrementor.
+
+			self visitFASTJavaForStatementInitializers: aFASTJavaForStatement initializers.
+			self visitFASTJavaForStatementCondition: aFASTJavaForStatement condition.
+			self visitFASTJavaForStatementIncrementors: aFASTJavaForStatement incrementors.
 
 			self unindented: ') '.
-			
+
 			self indent.
 			self visitFASTJavaBlockOrStatement: aFASTJavaForStatement body.
 			self unindent
@@ -675,27 +675,33 @@ FASTJavaExportVisitor >> visitFASTJavaForStatementCondition: aFASTJavaForStateme
 ]
 
 { #category : 'visiting statement' }
-FASTJavaExportVisitor >> visitFASTJavaForStatementIncrementor: aFASTJavaForStatementIncrementor [
+FASTJavaExportVisitor >> visitFASTJavaForStatementIncrementors: statements [
+	"JLS 14.14.1: the last part of the header writes its statements with a comma between
+	them, and nothing closes the part."
 
-	aFASTJavaForStatementIncrementor ifNil: [ ^self ].
-
-	aFASTJavaForStatementIncrementor accept: self.
-	"'incrementor' is a FASTJavaStatement that prints ';\n' "
-	self goBack: 2
+	statements
+		do: [ :statement |
+			statement accept: self.
+			"a statement prints a semicolon and a new line"
+			self goBack: 2 ]
+		separatedBy: [ self unindented: ', ' ]
 ]
 
 { #category : 'visiting statement' }
-FASTJavaExportVisitor >> visitFASTJavaForStatementInitializer: aFASTJavaForStatementInitializer [
+FASTJavaExportVisitor >> visitFASTJavaForStatementInitializers: statements [
+	"JLS 14.14.1: the first part of the header writes its statements with a comma between
+	them, and one semicolon closes the part."
 
-	aFASTJavaForStatementInitializer
-		ifNil: [ self unindented: $; ]
-		ifNotNil: [
-			aFASTJavaForStatementInitializer accept: self.
-			"'initializer' is a FASTJavaStatement that prints a \n"
-			self goBack: 1.
-			self space
-		].
+	statements ifEmpty: [ ^ self unindented: $; ].
 
+	statements
+		do: [ :statement |
+			statement accept: self.
+			"a statement prints a semicolon and a new line"
+			self goBack: 2 ]
+		separatedBy: [ self unindented: ', ' ].
+
+	self unindented: '; '
 ]
 
 { #category : 'visiting expression' }

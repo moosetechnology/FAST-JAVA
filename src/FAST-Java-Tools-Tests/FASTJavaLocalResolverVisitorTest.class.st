@@ -71,22 +71,22 @@ FASTJavaLocalResolverVisitorTest >> testBindToLoopVariable [
 		statementBlock: (FASTJavaStatementBlock new
 			 statements: {
 					 (FASTJavaForStatement new
-					  initializer: (FASTJavaVarDeclStatement new
+					  initializers: { (FASTJavaVarDeclStatement new
 							   type: (FASTJavaIntTypeExpression new
 									    name: 'int');
 							   declarators: { (FASTJavaVariableDeclarator new
 									    variable: (FASTJavaVariableExpression new
 											     name: 'i');
 									    expression: (FASTJavaIntegerLiteral new
-											     primitiveValue: '1')) });
+											     primitiveValue: '1')) }) };
 					  condition: (FASTJavaInfixOperation new
 							   leftOperand: (FASTJavaVariableExpression new name: 'i');
 							   rightOperand: (FASTJavaIntegerLiteral new primitiveValue: '2');
 							   operator: '<');
-					  incrementor: (FASTJavaExpressionStatement new
+					  incrementors: { (FASTJavaExpressionStatement new
 							   expression: (FASTJavaUnaryExpression new
 									    expression: (FASTJavaVariableExpression new name: 'i');
-									    operator: '++'));
+									    operator: '++')) };
 					  body: (FASTJavaExpressionStatement new
 							   expression: (FASTJavaUnaryExpression new
 									    expression: (FASTJavaVariableExpression new name: 'i');
@@ -99,18 +99,18 @@ FASTJavaLocalResolverVisitorTest >> testBindToLoopVariable [
 	varAccess := loop condition leftOperand.
 	self deny: varAccess localDeclaration isNonLocalDeclaration.
 	self assert: varAccess localDeclaration variable name equals: 'i'.
-	self assert: varAccess localDeclaration equals: loop initializer declarators first.
-	varAccess := loop incrementor expression expression.
+	self assert: varAccess localDeclaration equals: loop initializers first declarators first.
+	varAccess := loop incrementors first expression expression.
 	self deny: varAccess localDeclaration isNonLocalDeclaration.
 	self assert: varAccess localDeclaration variable name equals: 'i'.
-	self assert: varAccess localDeclaration equals: loop initializer declarators first.
+	self assert: varAccess localDeclaration equals: loop initializers first declarators first.
 
 	varAccess := loop body expression expression.
 	self deny: varAccess localDeclaration isNonLocalDeclaration.
 	self assert: varAccess localDeclaration variable name equals: 'i'.
-	self assert: varAccess localDeclaration equals: loop initializer declarators first.
+	self assert: varAccess localDeclaration equals: loop initializers first declarators first.
 
-	self assert: loop initializer declarators first localUses size equals: 4
+	self assert: loop initializers first declarators first localUses size equals: 4
 ]
 
 { #category : 'tests' }
@@ -194,11 +194,11 @@ FASTJavaLocalResolverVisitorTest >> testLoopVariableHidesParameter [
 				        variable: (FASTJavaVariableExpression new name: 'i');
 				        type: (FASTJavaIntTypeExpression new name: 'int')) };
 		       statementBlock: (FASTJavaStatementBlock new statements: { (FASTJavaForStatement new
-					         initializer: (FASTJavaVarDeclStatement new
+					         initializers: { (FASTJavaVarDeclStatement new
 							          type: (FASTJavaIntTypeExpression new name: 'int');
 							          declarators: { (FASTJavaVariableDeclarator new
 									           variable: (FASTJavaVariableExpression new name: 'i');
-									           expression: (FASTJavaIntegerLiteral new primitiveValue: '1')) });
+									           expression: (FASTJavaIntegerLiteral new primitiveValue: '1')) }) };
 					         body: (FASTJavaExpressionStatement new expression: (FASTJavaUnaryExpression new
 								           expression: (FASTJavaVariableExpression new name: 'i');
 								           operator: '++'));
@@ -210,8 +210,8 @@ FASTJavaLocalResolverVisitorTest >> testLoopVariableHidesParameter [
 	varAccess := loop body expression expression.
 	self deny: varAccess localDeclaration isNonLocalDeclaration.
 	self assert: varAccess localDeclaration variable name equals: 'i'.
-	self assert: varAccess localDeclaration equals: loop initializer declarators first.
+	self assert: varAccess localDeclaration equals: loop initializers first declarators first.
 
-	self assert: loop initializer declarators first localUses size equals: 2.
+	self assert: loop initializers first declarators first localUses size equals: 2.
 	self assert: ast parameters first localUses size equals: 1
 ]

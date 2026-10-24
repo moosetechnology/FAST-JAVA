@@ -12,8 +12,8 @@ for(_;_;_) {
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `forIncrementorOwner` | `FASTTStatement` | `incrementor` | `FASTJavaForStatement` | I am the incrementor of the for|
-| `forIninitializerOwner` | `FASTTStatement` | `initializer` | `FASTJavaForStatement` | I am the initializer of the for|
+| `forIncrementorOwner` | `FASTTStatement` | `incrementors` | `FASTJavaForStatement` | I am an incrementor of the for|
+| `forIninitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
@@ -25,8 +25,8 @@ for(_;_;_) {
 |---|
 | `body` | `FASTTLoopStatement` | `parentLoopStatement` | `FASTTStatement` | The body of the loop|
 | `condition` | `FASTTWithCondition` | `parentConditional` | `FASTTExpression` | The boolean condition tested|
-| `incrementor` | `FASTJavaForStatement` | `forIncrementorOwner` | `FASTTStatement` | Expression evaluated at the end of each loop|
-| `initializer` | `FASTJavaForStatement` | `forIninitializerOwner` | `FASTTStatement` | Expression used at initialization phase of a for loop|
+| `incrementors` | `FASTJavaForStatement` | `forIncrementorOwner` | `FASTTStatement` | Statements evaluated at the end of each loop|
+| `initializers` | `FASTJavaForStatement` | `forIninitializerOwner` | `FASTTStatement` | Statements evaluated at initialization phase of a for loop|
 
 
 ## Properties
@@ -57,56 +57,62 @@ FASTJavaForStatement class >> annotation [
 	<generated>
 ]
 
-{ #category : 'accessing' }
-FASTJavaForStatement >> incrementor [
-	"Relation named: #incrementor type: #FASTTStatement opposite: #forIncrementorOwner"
+{ #category : 'adding' }
+FASTJavaForStatement >> addIncrementor: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'Expression evaluated at the end of each loop'>
-	<FMProperty: #incrementor type: #FASTTStatement opposite: #forIncrementorOwner>
-	^ self attributeAt: #incrementor ifAbsent: [ nil ]
+	^ self incrementors add: anObject
+]
+
+{ #category : 'adding' }
+FASTJavaForStatement >> addInitializer: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self initializers add: anObject
 ]
 
 { #category : 'accessing' }
-FASTJavaForStatement >> incrementor: anObject [
+FASTJavaForStatement >> incrementors [
+	"Relation named: #incrementors type: #FASTTStatement opposite: #forIncrementorOwner"
 
 	<ignoreForCoverage>
 	<generated>
-	(self attributeAt: #incrementor ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self incrementor.
-		self attributeAt: #incrementor put: anObject.
-		otherSide forIncrementorOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #incrementor put: anObject.
-		anObject forIncrementorOwner: self ]
+	<FMComment: 'Statements evaluated at the end of each loop'>
+	<derived>
+	<FMProperty: #incrementors type: #FASTTStatement opposite: #forIncrementorOwner>
+	<multivalued>
+	^ self attributeAt: #incrementors ifAbsentPut: [ FMMultivalueLink on: self opposite: #forIncrementorOwner: ]
 ]
 
 { #category : 'accessing' }
-FASTJavaForStatement >> initializer [
-	"Relation named: #initializer type: #FASTTStatement opposite: #forIninitializerOwner"
+FASTJavaForStatement >> incrementors: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'Expression used at initialization phase of a for loop'>
-	<FMProperty: #initializer type: #FASTTStatement opposite: #forIninitializerOwner>
-	^ self attributeAt: #initializer ifAbsent: [ nil ]
+	self incrementors value: anObject
 ]
 
 { #category : 'accessing' }
-FASTJavaForStatement >> initializer: anObject [
+FASTJavaForStatement >> initializers [
+	"Relation named: #initializers type: #FASTTStatement opposite: #forIninitializerOwner"
 
 	<ignoreForCoverage>
 	<generated>
-	(self attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self initializer.
-		self attributeAt: #initializer put: anObject.
-		otherSide forIninitializerOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #initializer put: anObject.
-		anObject forIninitializerOwner: self ]
+	<FMComment: 'Statements evaluated at initialization phase of a for loop'>
+	<derived>
+	<FMProperty: #initializers type: #FASTTStatement opposite: #forIninitializerOwner>
+	<multivalued>
+	^ self attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #forIninitializerOwner: ]
+]
+
+{ #category : 'accessing' }
+FASTJavaForStatement >> initializers: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	self initializers value: anObject
 ]
 
 { #category : 'testing' }
