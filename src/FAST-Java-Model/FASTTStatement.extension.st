@@ -2,14 +2,13 @@ Extension { #name : 'FASTTStatement' }
 
 { #category : '*FAST-Java-Model' }
 FASTTStatement >> forIncrementorOwner [
-	"Relation named: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor"
+	"Relation named: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementors"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'I am the incrementor of the for'>
+	<FMComment: 'I am an incrementor of the for'>
 	<container>
-	<derived>
-	<FMProperty: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementor>
+	<FMProperty: #forIncrementorOwner type: #FASTJavaForStatement opposite: #incrementors>
 	<package: #'FAST-Java-Model'>
 	^ self attributeAt: #forIncrementorOwner ifAbsent: [ nil ]
 ]
@@ -21,26 +20,18 @@ FASTTStatement >> forIncrementorOwner: anObject [
 	<generated>
 	<package: #'FAST-Java-Model'>
 
-	(self attributeAt: #forIncrementorOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self forIncrementorOwner.
-		self attributeAt: #forIncrementorOwner put: anObject.
-		otherSide incrementor: nil ]
-	ifNotNil: [ 
-		self attributeAt: #forIncrementorOwner put: anObject.
-		anObject incrementor: self ]
+	self attributeAt: #forIncrementorOwner put: (FMMultivalueLink on: self update: #incrementors from: self forIncrementorOwner to: anObject).
 ]
 
 { #category : '*FAST-Java-Model' }
 FASTTStatement >> forIninitializerOwner [
-	"Relation named: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer"
+	"Relation named: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializers"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'I am the initializer of the for'>
+	<FMComment: 'I am an initializer of the for'>
 	<container>
-	<derived>
-	<FMProperty: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializer>
+	<FMProperty: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializers>
 	<package: #'FAST-Java-Model'>
 	^ self attributeAt: #forIninitializerOwner ifAbsent: [ nil ]
 ]
@@ -52,14 +43,7 @@ FASTTStatement >> forIninitializerOwner: anObject [
 	<generated>
 	<package: #'FAST-Java-Model'>
 
-	(self attributeAt: #forIninitializerOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self forIninitializerOwner.
-		self attributeAt: #forIninitializerOwner put: anObject.
-		otherSide initializer: nil ]
-	ifNotNil: [ 
-		self attributeAt: #forIninitializerOwner put: anObject.
-		anObject initializer: self ]
+	self attributeAt: #forIninitializerOwner put: (FMMultivalueLink on: self update: #initializers from: self forIninitializerOwner to: anObject).
 ]
 
 { #category : '*FAST-Java-Model' }

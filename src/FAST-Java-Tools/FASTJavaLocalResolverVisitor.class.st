@@ -23,9 +23,9 @@ FASTJavaLocalResolverVisitor >> on: aFASTBehaviouralEntity [
 { #category : 'visiting' }
 FASTJavaLocalResolverVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 
-	aFASTJavaForStatement initializer ifNotNil: [ :node | node accept: self].
-	aFASTJavaForStatement condition   ifNotNil: [ :node | node accept: self].
-	aFASTJavaForStatement incrementor ifNotNil: [ :node | node accept: self].
+	aFASTJavaForStatement initializers do: [ :node | node accept: self ].
+	aFASTJavaForStatement condition    ifNotNil: [ :node | node accept: self ].
+	aFASTJavaForStatement incrementors do: [ :node | node accept: self ].
 	aFASTJavaForStatement body accept: self
 ]
 
