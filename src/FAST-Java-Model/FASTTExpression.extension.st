@@ -644,6 +644,37 @@ FASTTExpression >> switchExpressionConditionOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
+FASTTExpression >> switchLabelGuardOwner [
+	"Relation named: #switchLabelGuardOwner type: #FASTJavaSwitchLabel opposite: #guard"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The switch label I guard'>
+	<container>
+	<derived>
+	<FMProperty: #switchLabelGuardOwner type: #FASTJavaSwitchLabel opposite: #guard>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #switchLabelGuardOwner ifAbsent: [ nil ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> switchLabelGuardOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'FAST-Java-Model'>
+
+	(self attributeAt: #switchLabelGuardOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self switchLabelGuardOwner.
+		self attributeAt: #switchLabelGuardOwner put: anObject.
+		otherSide guard: nil ]
+	ifNotNil: [ 
+		self attributeAt: #switchLabelGuardOwner put: anObject.
+		anObject guard: self ]
+]
+
+{ #category : '*FAST-Java-Model' }
 FASTTExpression >> switchLabelOwner [
 	"Relation named: #switchLabelOwner type: #FASTJavaSwitchLabel opposite: #caseExpressions"
 

@@ -1421,6 +1421,8 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaSwitchLabel property: #caseExpressions) comment: 'The expressions of this case label; empty for default') <>-* ((tExpression property: #switchLabelOwner) comment: 'The switch label that owns me').
 
+	((javaSwitchLabel property: #guard) comment: 'The expression a match must satisfy for this label to apply') <>- ((tExpression property: #switchLabelGuardOwner) comment: 'The switch label I guard').
+
 	((javaForEachStatement property: #list) comment:
 		 'The list that the for-each statement iterates over')
 	<>- ((tExpression property: #javaForEachStatementOwner) comment:

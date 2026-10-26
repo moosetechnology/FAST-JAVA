@@ -14,6 +14,7 @@ I represent a label of a switch case. I contain all expressions associated with 
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `caseExpressions` | `FASTJavaSwitchLabel` | `switchLabelOwner` | `FASTTExpression` | The expressions of this case label; empty for default|
+| `guard` | `FASTJavaSwitchLabel` | `switchLabelGuardOwner` | `FASTTExpression` | The expression a match must satisfy for this label to apply|
 
 
 ## Properties
@@ -94,6 +95,32 @@ FASTJavaSwitchLabel >> caseStatementOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	caseStatementOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaSwitchLabel >> guard [
+	"Relation named: #guard type: #FASTTExpression opposite: #switchLabelGuardOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The expression a match must satisfy for this label to apply'>
+	<FMProperty: #guard type: #FASTTExpression opposite: #switchLabelGuardOwner>
+	^ self attributeAt: #guard ifAbsent: [ nil ]
+]
+
+{ #category : 'accessing' }
+FASTJavaSwitchLabel >> guard: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	(self attributeAt: #guard ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self guard.
+		self attributeAt: #guard put: anObject.
+		otherSide switchLabelGuardOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #guard put: anObject.
+		anObject switchLabelGuardOwner: self ]
 ]
 
 { #category : 'testing' }
