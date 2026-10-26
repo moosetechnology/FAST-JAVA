@@ -1290,6 +1290,72 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchLabelWithGuardedTypePattern [
+
+	| ast |
+	ast := self methodAST: 'void mth(Object obj) { switch (obj) { case Integer i when i > 0: first(i); break; default: last(); } }'.
+
+	self export: ast equals: 'void mth(Object obj) {
+  switch (obj) {
+    case Integer i when i>0:
+      first(i);
+      break;
+    default:
+      last();
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchLabelWithTypePattern [
+
+	| ast |
+	ast := self methodAST: 'void mth(Object obj) { switch (obj) { case String s: first(s); break; default: last(); } }'.
+
+	self export: ast equals: 'void mth(Object obj) {
+  switch (obj) {
+    case String s:
+      first(s);
+      break;
+    default:
+      last();
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchRuleWithGuardedTypePattern [
+
+	| ast |
+	ast := self methodAST: 'void mth(Object obj) { switch (obj) { case Integer i when i > 0 -> first(i); default -> last(); } }'.
+
+	self export: ast equals: 'void mth(Object obj) {
+  switch (obj) {
+    case Integer i when i>0 -> first(i);
+    default -> last();
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchRuleWithTypePattern [
+
+	| ast |
+	ast := self methodAST: 'void mth(Object obj) { switch (obj) { case Integer i -> first(i); default -> last(); } }'.
+
+	self export: ast equals: 'void mth(Object obj) {
+  switch (obj) {
+    case Integer i -> first(i);
+    default -> last();
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchStatementWithASharedDefault [
 
 	| ast |

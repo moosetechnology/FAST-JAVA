@@ -379,6 +379,20 @@ JavaSmaCCProgramNodeImporterVisitor >> statementsOfForHeader: aNode [
 		  ifFalse: [ OrderedCollection with: imported ]
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> typePatternOf: aNode [
+	"JLS 14.30.1: a type pattern names a type and declares the variable bound to what it
+	matches. SmaCC writes the two into whichever node holds the pattern, an instanceof
+	operation or a case label."
+
+	^ (self addToModel: FASTJavaTypePattern new)
+		  startPos: aNode type startPosition;
+		  endPos: aNode variable stopPosition;
+		  type: (self clone accept: aNode type);
+		  variable: (self clone accept: aNode variable);
+		  yourself
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstractMethodDeclaration [
 
@@ -975,13 +989,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInstanceofPatternExpression: anInsta
 		from: anInstanceofPatternExpression.
 	currentFASTEntity leftOperand:
 		(self clone accept: anInstanceofPatternExpression object).
-	currentFASTEntity rightOperand:
-		((self addToModel: FASTJavaTypePattern new)
-			 startPos: anInstanceofPatternExpression type startPosition;
-			 endPos: anInstanceofPatternExpression variable stopPosition;
-			 type: (self clone accept: anInstanceofPatternExpression type);
-			 variable:
-				 (self clone accept: anInstanceofPatternExpression variable)).
+	currentFASTEntity rightOperand: (self typePatternOf: anInstanceofPatternExpression).
 	currentFASTEntity operator: 'instanceof'.
 	^ currentFASTEntity
 ]
@@ -1494,6 +1502,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockExpressionGroup: aSwitchB
 	self setStartEndPos: aSwitchBlockExpressionGroup.
 	switchLabel := self addToModel: FASTJavaSwitchLabel new.
 	aSwitchBlockExpressionGroup constants do: [ :constant | switchLabel caseExpressions add: (self clone accept: constant) ].
+	"JLS 14.11.1: where a label writes no constant it may write a pattern, which the rule
+	reads as a variable, and a guard the match must satisfy."
+	aSwitchBlockExpressionGroup type ifNotNil: [
+			switchLabel caseExpressions add: (self typePatternOf: aSwitchBlockExpressionGroup).
+			aSwitchBlockExpressionGroup guard ifNotNil: [ :guard | switchLabel guard: (self clone accept: guard) ] ].
 	currentFASTEntity label: switchLabel.
 	currentFASTEntity body: (self clone accept: aSwitchBlockExpressionGroup value).
 	^ currentFASTEntity
@@ -1539,6 +1552,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchLabel: aSwitchLabel [
 	currentFASTEntity := self addToModel: FASTJavaSwitchLabel new.
 	self setStartEndPos: aSwitchLabel.
 	aSwitchLabel constants do: [ :constant | currentFASTEntity caseExpressions add: (self clone accept: constant) ].
+	"JLS 14.11.1: where a label writes no constant it may write a pattern, which the
+	labeled statements read as a variable, and a guard the match must satisfy."
+	aSwitchLabel type ifNotNil: [
+			currentFASTEntity caseExpressions add: (self typePatternOf: aSwitchLabel).
+			aSwitchLabel guard ifNotNil: [ :guard | currentFASTEntity guard: (self clone accept: guard) ] ].
 	^ currentFASTEntity
 ]
 

@@ -812,6 +812,9 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCase
 						ifNotEmpty: [
 								self indented: 'case '.
 								label caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ] ].
+					label guard ifNotNil: [ :guard |
+							self unindented: ' when '.
+							guard accept: self ].
 					self
 						unindented: ':';
 						newLine ].
@@ -1234,6 +1237,9 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchRule: aFASTJavaSwitchRule [
 	aFASTJavaSwitchRule label caseExpressions ifEmpty: [ self output: 'default' ] ifNotEmpty: [ :caseExpressions |
 			self output: 'case '.
 			caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ] ].
+	aFASTJavaSwitchRule label guard ifNotNil: [ :guard |
+			self output: ' when '.
+			guard accept: self ].
 	self output: ' -> '.
 	aFASTJavaSwitchRule body accept: self.
 	aFASTJavaSwitchRule body isExpression ifTrue: [ self endOfStatement ]
