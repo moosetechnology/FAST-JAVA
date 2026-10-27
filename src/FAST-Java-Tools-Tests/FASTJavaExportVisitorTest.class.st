@@ -459,6 +459,47 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndI
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithTypeParameters [
+
+	"JLS 8.1.2: a class declaration writes the type parameters it declares between its
+	name and the clauses that follow it."
+
+	self export: (self astFor: 'class A<T, U extends Number> { }') equals: 'class A<T, U extends Number> {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitKeepsTheOrderOfItsTypeDeclarations [
+
+	"JLS 7.3: a compilation unit writes one list of type declarations, whatever kind each
+	of them is, so they are written back in the order it writes them."
+
+	self export: (self unitFor: 'class A { } interface I { } enum E { X } record R(int a) { }') equals: 'class A {
+}
+interface I {
+}
+enum E {
+  X;
+}
+record R(int a) {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitWritesItsEnumDeclarations [
+
+	"JLS 7.3: an enum declaration is a type declaration of the compilation unit that
+	writes it, as a class, an interface, an annotation interface and a record are."
+
+	self export: (self unitFor: 'public enum E { X, Y }') equals: 'public enum E {
+  X, Y;
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaConditionalExpression [
 
 	| expr |
@@ -952,6 +993,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMet
   void defaultMth() {
     return 1;
   }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithTypeParameters [
+
+	"JLS 9.1.2: an interface declaration writes the type parameters it declares between
+	its name and the interfaces it extends."
+
+	self export: (self astFor: 'interface I<E> extends List<E> { }') equals: 'interface I<E> extends List<E> {
 }
 '
 ]
@@ -1830,4 +1882,11 @@ FASTJavaExportVisitorTest >> testVisitFASTSwitchMultipleLabels [
     break;
 }
 '
+]
+
+{ #category : 'running' }
+FASTJavaExportVisitorTest >> unitFor: sourceCode [
+
+	^ ((JavaSmaCCProgramNodeImporterVisitor new parseCodeString: sourceCode)
+		   allWithType: FASTJavaCompilationUnit) first
 ]
