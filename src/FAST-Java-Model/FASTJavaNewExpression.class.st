@@ -59,6 +59,7 @@ new Patate()
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `isDiamond` | `Boolean` | false | Whether the type instantiated writes the diamond rather than type arguments (JLS 15.9.1)|
 | `startPos` | `Number` | nil | |
 
 "
@@ -68,6 +69,7 @@ Class {
 	#traits : 'FASTJavaTReceiver + FASTJavaTWithReceiver + FASTTExpression + FASTTWithArguments',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
 	#instVars : [
+		'#isDiamond => FMProperty defaultValue: false',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -82,6 +84,23 @@ FASTJavaNewExpression class >> annotation [
 	<FMClass: #NewExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaNewExpression >> isDiamond [
+
+	<FMProperty: #isDiamond type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether the type instantiated writes the diamond rather than type arguments (JLS 15.9.1)'>
+	^ isDiamond ifNil: [ isDiamond := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaNewExpression >> isDiamond: anObject [
+	<ignoreForCoverage>
+	<generated>
+	isDiamond := anObject
 ]
 
 { #category : 'testing' }

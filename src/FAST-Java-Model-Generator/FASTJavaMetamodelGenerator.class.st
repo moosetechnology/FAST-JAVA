@@ -1307,6 +1307,9 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 	(javaInitializer property: #isStatic type: #Boolean defaultValue: false) comment: 'Whether this initializer is static'.
 
+	(javaNewExpression property: #isDiamond type: #Boolean defaultValue: false) comment:
+		'Whether the type instantiated writes the diamond rather than type arguments (JLS 15.9.1)'.
+
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 

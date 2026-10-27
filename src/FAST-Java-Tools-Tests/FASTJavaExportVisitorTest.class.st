@@ -1229,6 +1229,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpression [
 	self export: node equals: 'new Object()'
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpressionQualifiedByAPrimaryKeepsItsTypeArguments [
+	"JLS 15.9: a creation qualified by a primary writes the name of the type it
+	instantiates as an identifier of its own, with the arguments beside it."
+
+	self export: (self methodAST: 'void m() { outer.new Inner<String>(); }') equals: 'void m() {
+  outer.new Inner<String>();
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpressionWithADiamond [
+	"JLS 15.9.1: the diamond is written back, a creation that writes it not being one that
+	writes no type argument."
+
+	self export: (self methodAST: 'void m() { Object x = new ArrayList<>(); }') equals: 'void m() {
+  Object x = new ArrayList<>();
+}
+'
+]
+
 { #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpressionWithReceiver [
 

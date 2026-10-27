@@ -187,6 +187,19 @@ JavaSmaCCProgramNodeImporterVisitor >> createTypeName: aName [
 	^ classTypeExpression
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> createTypeName: aName withArguments: typeArguments [
+	"I am a helper for visitNew, for the form qualified by a primary: there the name of
+	the type instantiated is an identifier of its own, and the arguments written for it
+	stand beside it rather than within it."
+
+	| classTypeExpression |
+	classTypeExpression := self createTypeName: aName.
+	typeArguments do: [ :argument |
+		classTypeExpression arguments add: (self clone accept: argument) ].
+	^ classTypeExpression
+]
+
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity [
 	^ currentFASTEntity 
@@ -1234,10 +1247,10 @@ public void onClick(ClickEvent event) {
   view.setDisplayView(view.new InnerClass());
 }"
 	aNewNode type
-		ifNotNil: [ 
-		currentFASTEntity type: (self clone accept: aNewNode type) ]
-		ifNil: [ 
-		currentFASTEntity type: (self clone createTypeName: aNewNode name) ].
+		ifNotNil: [ currentFASTEntity type: (self clone accept: aNewNode type) ]
+		ifNil: [
+			currentFASTEntity type: (self clone createTypeName: aNewNode name withArguments: aNewNode arguments) ].
+	currentFASTEntity isDiamond: (self writesDiamond: aNewNode).
 	^ currentFASTEntity
 ]
 
@@ -1273,11 +1286,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 	aNewClass expressions do: [ :expression | 
 		currentFASTEntity arguments add: (self clone accept: expression) ].
 	aNewClass type
-		ifNotNil: [
-		currentFASTEntity type: (self clone accept: aNewClass type) ]
+		ifNotNil: [ currentFASTEntity type: (self clone accept: aNewClass type) ]
 		ifNil: [
-			currentFASTEntity type: (self clone createTypeName: aNewClass name).
+			currentFASTEntity type: (self clone createTypeName: aNewClass name withArguments: aNewClass arguments).
 			currentFASTEntity receiver: (self clone accept: aNewClass primary) ].
+	currentFASTEntity isDiamond: (self writesDiamond: aNewClass).
 	aNewClass declarations do: [ :method | 
 		currentFASTEntity declarations add: (self clone accept: method) ].
 	^ currentFASTEntity
@@ -1811,4 +1824,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitYieldStatement: aYieldStatement [
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> withComments [
 	withComments := true
+]
+
+{ #category : 'testing' }
+JavaSmaCCProgramNodeImporterVisitor >> writesDiamond: aCreationNode [
+	"JLS 15.9.1: a creation writes the diamond where it writes the two angle brackets with
+	no type argument between them, asking for the arguments to be inferred. The brackets
+	belong to the name of the type instantiated, except in the form qualified by a
+	primary, where that name is an identifier and the creation holds them itself."
+
+	aCreationNode type ifNotNil: [ :type |
+		^ type name lt isNotNil and: [ type name arguments isEmpty ] ].
+
+	^ aCreationNode typeArgLeft isNotNil and: [ aCreationNode arguments isEmpty ]
 ]

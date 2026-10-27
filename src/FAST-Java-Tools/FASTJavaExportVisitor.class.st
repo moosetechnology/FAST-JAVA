@@ -1042,6 +1042,7 @@ FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpre
 	self checkForComments: aFASTJavaNewClassExpression andDo: [
 		self unindented: 'new '.
 		aFASTJavaNewClassExpression type accept: self.
+		aFASTJavaNewClassExpression isDiamond ifTrue: [ self unindented: '<>' ].
 		self visitFASTJavaArgumentsList: aFASTJavaNewClassExpression arguments.
 
 		self visitJavaClassMemberDeclarations: aFASTJavaNewClassExpression declarations
@@ -1058,6 +1059,7 @@ FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 		].
 		self unindented: 'new '.
 		aFASTJavaNewExpression type accept: self.
+		aFASTJavaNewExpression isDiamond ifTrue: [ self unindented: '<>' ].
 		self visitFASTJavaArgumentsList: aFASTJavaNewExpression arguments
 	]
 
