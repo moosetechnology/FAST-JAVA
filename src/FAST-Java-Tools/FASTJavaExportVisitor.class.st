@@ -337,13 +337,13 @@ FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTyp
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
+	"JLS 14.15: a break may name the label of the statement it leaves; without one it
+	leaves the innermost loop or switch, so dropping the name moves where control goes."
 
 	self checkForComments: aFASTJavaBreakStatement andDo: [
-		self
-			indented: 'break' ;
-			endOfStatement
-	]
-
+		self indented: 'break'.
+		aFASTJavaBreakStatement label ifNotNil: [ :label | self unindented: ' ' , label ].
+		self endOfStatement ]
 ]
 
 { #category : 'visiting expression' }
@@ -488,13 +488,13 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatement [
+	"JLS 14.16: a continue may name the label of the statement it continues; without one
+	it continues the innermost loop, so dropping the name moves where control goes."
 
 	self checkForComments: aFASTJavaContinueStatement andDo: [
-		self
-			indented: 'continue' ;
-			endOfStatement
-	]
-
+		self indented: 'continue'.
+		aFASTJavaContinueStatement label ifNotNil: [ :label | self unindented: ' ' , label ].
+		self endOfStatement ]
 ]
 
 { #category : 'visiting statement' }

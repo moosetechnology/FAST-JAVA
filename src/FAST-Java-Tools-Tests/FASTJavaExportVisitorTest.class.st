@@ -370,6 +370,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAttributeModifiers [
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaBreakStatementWithALabel [
+	"JLS 14.15: the label names the statement the break leaves, so writing it back is what
+	keeps control going where it went."
+
+	| ast |
+	ast := self methodAST: 'void mth() { loop: while (true) { break loop; } }'.
+
+	self export: ast equals: 'void mth() {
+  loop:  while (true) {
+      break loop;
+    }
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 	| node |
@@ -539,6 +555,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaContinueStatement [
 	ast := self methodAST: 'public void mth() { continue; }'.
 
 	self export: ast statements first equals: 'continue;
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaContinueStatementWithALabel [
+	"JLS 14.16: the label names the statement the continue continues, so writing it back is
+	what keeps control going where it went."
+
+	| ast |
+	ast := self methodAST: 'void mth() { loop: while (true) { continue loop; } }'.
+
+	self export: ast equals: 'void mth() {
+  loop:  while (true) {
+      continue loop;
+    }
+}
 '
 ]
 
