@@ -188,6 +188,20 @@ JavaSmaCCProgramNodeImporterVisitor >> createComment: aCodeString from: start to
 	^comment
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> createQualifiedSuper: anExpression at: aSuperToken [
+	"JLS 15.11.2 and 15.12.1: `T.super` is what a member of the superinterface T is reached
+	through, and it names neither T nor the superclass. Its two parts make one receiver,
+	written the way the model writes any other qualified name."
+
+	^ self addToModel: (FASTJavaFieldAccess new
+			   receiver: anExpression;
+			   fieldName: aSuperToken value;
+			   startPos: anExpression startPos;
+			   endPos: aSuperToken stopPosition;
+			   yourself)
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> createTypeName: aName [
 	"I am a helper for visitNew"
@@ -901,7 +915,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
 	currentFASTEntity := self addToModel: FASTJavaFieldAccess new.
 	self setStartEndPos: aFieldAccess.
 	aFieldAccess receiver
-		ifNotNil: [ :receiver | currentFASTEntity receiver: (self clone accept: receiver) ]
+		ifNotNil: [ :receiver |
+			| expression |
+			expression := self clone accept: receiver.
+			currentFASTEntity receiver: (aFieldAccess superToken
+					 ifNil: [ expression ]
+					 ifNotNil: [ :superToken | self createQualifiedSuper: expression at: superToken ]) ]
 		ifNil: [
 			aFieldAccess superToken
 				ifNotNil: [ currentFASTEntity receiver: (self clone visitSuperMemberAcessor: aFieldAccess) ]
@@ -1182,18 +1201,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 	self setStartEndPos: aMethodInvocation.
 	aMethodInvocation expressions do: [ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
 	aMethodInvocation receiver
-		ifNotNil: [ :receiver | 
-			(receiver isMemberOf: JavaNameNode)
-				ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
-					currentFASTEntity
-						receiver:
-							(FASTJavaIdentifier new
-								name: receiver name value;
-								startPos: receiver startPosition;
-								endPos: receiver stopPosition;
-								yourself).
-					self addToModel: currentFASTEntity receiver ]
-				ifFalse: [ currentFASTEntity receiver: (self clone accept: receiver) ] ]
+		ifNotNil: [ :receiver |
+			| expression |
+			expression := (receiver isMemberOf: JavaNameNode)
+				              ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
+					              self addToModel: (FASTJavaIdentifier new
+							               name: receiver name value;
+							               startPos: receiver startPosition;
+							               endPos: receiver stopPosition;
+							               yourself) ]
+				              ifFalse: [ self clone accept: receiver ].
+			currentFASTEntity receiver: (aMethodInvocation superToken
+					 ifNil: [ expression ]
+					 ifNotNil: [ :superToken | self createQualifiedSuper: expression at: superToken ]) ]
 		ifNil: [ aMethodInvocation superToken
 				ifNotNil: [ :superToken | 
 					currentFASTEntity

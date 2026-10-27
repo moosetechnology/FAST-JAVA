@@ -842,6 +842,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionStatement [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnQualifiedSuper [
+	"JLS 15.11.2: `Walker.super.depth` reads the field the superinterface Walker declares,
+	and both names are written back."
+
+	| expr |
+	expr := self methodAST: 'int mth() { return Walker.super.depth; }'.
+
+	self export: expr equals: 'int mth() {
+  return Walker.super.depth;
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFieldAccessOnSuper [
 	
 	| expr |
@@ -1192,6 +1206,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationArguments [
 			        (builder literalInt: 42) }.
 
 	self export: node equals: 'methodA(aVar, 42)'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationOnQualifiedSuper [
+	"JLS 15.12.1: `Walker.super.walk()` calls the method the superinterface Walker declares,
+	and both names are written back."
+
+	| expr |
+	expr := self methodAST: 'void mth() { Walker.super.walk(); }'.
+
+	self export: expr equals: 'void mth() {
+  Walker.super.walk();
+}
+'
 ]
 
 { #category : 'test from FAST model' }
