@@ -1432,6 +1432,41 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionInsideAnother [
+	"JLS 3.5: the longest run of characters that can make a token is the token, so writing
+	two negations with nothing between them would make a decrement of them. `--y` is a
+	different program from `-(-y)` and `--128` is not a program at all."
+
+	self export: (self methodAST: 'int mth() { return -(-y); }') equals: 'int mth() {
+  return - -y;
+}
+'.
+	self export: (self methodAST: 'int mth() { return -(--y); }') equals: 'int mth() {
+  return - --y;
+}
+'.
+	self export: (self methodAST: 'int mth() { return +(+y); }') equals: 'int mth() {
+  return + +y;
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionThatCannotMerge [
+	"Only `+` and `-` make a longer operator of themselves, so the others are written
+	straight after one another as they were."
+
+	self export: (self methodAST: 'boolean mth() { return !(!b); }') equals: 'boolean mth() {
+  return !!b;
+}
+'.
+	self export: (self methodAST: 'int mth() { return -(+y); }') equals: 'int mth() {
+  return -+y;
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaRecordDeclaration [
 
 	| ast |

@@ -117,6 +117,16 @@ FASTJavaExportVisitor >> languageOperatorsPrecedence [
 ]
 
 { #category : 'outputting' }
+FASTJavaExportVisitor >> mergesWithLastWritten: anOperator [
+	"JLS 3.5: a token is the longest run of characters that can make one, so a `-` written
+	straight after another `-` stops being two negations and becomes the decrement
+	operator, and `+` after `+` the increment. No other operator written here can merge
+	with what precedes it."
+
+	^ ('+-' includes: anOperator first) and: [ self outputStream peekLast = anOperator first ]
+]
+
+{ #category : 'outputting' }
 FASTJavaExportVisitor >> outputBlockComment: aComment [
 	"assuming block comments need a new line afterTest This is not always true, but difficult to decide"
 
@@ -1152,11 +1162,16 @@ FASTJavaExportVisitor >> visitFASTJavaPostfixedUnaryExpression: aFASTJavaUnaryEx
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaPrefixedUnaryExpression: aFASTJavaUnaryExpression [
+	"A space keeps the operator apart from what was written before it, where the two would
+	otherwise be read as one. The operand of an infix operation is spaced whatever the
+	operator is, as `x + ++a` must be; an operand of another prefix operation is spaced
+	only where it would merge, so `-(-y)` comes back as `- -y` and not as `--y`."
 
 	self
 		outputExpression: [
-			aFASTJavaUnaryExpression infixOperationRightOperandOwner ifNotNil: [
-				self space ].
+			(aFASTJavaUnaryExpression infixOperationRightOperandOwner isNotNil or: [
+				 self mergesWithLastWritten: aFASTJavaUnaryExpression operator ])
+				ifTrue: [ self space ].
 			self unindented: aFASTJavaUnaryExpression operator.
 			aFASTJavaUnaryExpression expression accept: self ]
 		withOperator: aFASTJavaUnaryExpression operator , 'unary'
