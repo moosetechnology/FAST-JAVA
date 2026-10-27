@@ -277,6 +277,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpressionWithAParameterizedComponent [
+	"JLS 10.1: the component type of an array may itself be parameterized, and the
+	arguments written for it are written back with it."
+
+	| ast |
+	ast := self astFor: 'class Blah { Class<?>[] types; Map<String, Integer>[][] grids; }'.
+
+	self export: ast equals: 'class Blah {
+  Class<?>[] types;
+  Map<String, Integer>[][] grids;
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaArrayVariableDeclarator [
 	"JLS 10.2: the brackets written after a variable are written back there, so a
 	declaration comes out as it went in."

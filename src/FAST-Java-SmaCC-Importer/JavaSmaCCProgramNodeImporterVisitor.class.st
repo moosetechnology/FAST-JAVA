@@ -41,6 +41,25 @@ JavaSmaCCProgramNodeImporterVisitor >> acceptAnnotationInterfaceMember: aMemberN
 ]
 
 { #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> acceptComponentType: aTypeNode [
+	"JLS 10.1: the component type of an array may itself be a parameterized type. Where a
+	type stands on its own the grammar wraps its name in a class type, and the arguments
+	are read from there; the component of an array type is the bare name, which carries
+	them itself. Give it the class type they belong to, so that `Class<?>[]` keeps the
+	arguments `Class<?>` keeps."
+
+	| visitor classType |
+	((aTypeNode isKindOf: JavaTypeNameNode) and: [ aTypeNode arguments isNotEmpty ]) ifFalse: [
+		^ self clone accept: aTypeNode ].
+
+	visitor := self clone.
+	classType := visitor create: FASTJavaClassTypeExpression from: aTypeNode.
+	classType typeName: (visitor clone accept: aTypeNode).
+	aTypeNode arguments do: [ :typeArgument | classType addArgument: (visitor clone accept: typeArgument) ].
+	^ classType
+]
+
+{ #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
 	"A switch used as a statement is a switch statement (JLS 14.11.1) whatever form its
 	block takes, but SmaCC types the node after the form, not the position. Only the
@@ -517,8 +536,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayType: anArrayType [
 
 	currentFASTEntity := self addToModel:
 		                     (FASTJavaArrayTypeExpression new
-			                      baseType:
-				                      (self clone accept: anArrayType baseType);
+			                      baseType: (self acceptComponentType: anArrayType baseType);
 			                      yourself).
 	currentFASTEntity
 		startPos: anArrayType startPosition;

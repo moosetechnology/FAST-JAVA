@@ -168,7 +168,7 @@ FASTJavaExportVisitor >> typeDeclarationsOf: aFASTJavaCompilationUnit do: aBlock
 		addAll: aFASTJavaCompilationUnit recordDeclarations.
 
 	(declarations allSatisfy: [ :declaration | declaration startPos isNotNil ]) ifTrue: [
-		declarations := declarations asSortedCollection: [ :one :another | one startPos <= another startPos ] ].
+		declarations sort: [ :one :another | one startPos <= another startPos ] ].
 
 	declarations do: aBlock
 ]
