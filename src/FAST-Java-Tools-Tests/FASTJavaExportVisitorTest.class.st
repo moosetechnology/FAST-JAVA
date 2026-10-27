@@ -158,6 +158,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationInterfaceDeclarationWith
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithAQualifiedName [
+	"JLS 9.7: an annotation names the type it is an instance of, and that name is written
+	back as it was written, qualified or not."
+
+	self export: (self methodAST: '@java.io.Serial void mth() { }') equals: '@java.io.Serial
+void mth() {
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithArrayElement [
 	
 	| expr |
@@ -460,7 +471,6 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclassAndI
 
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithTypeParameters [
-
 	"JLS 8.1.2: a class declaration writes the type parameters it declares between its
 	name and the clauses that follow it."
 
@@ -471,7 +481,6 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithTypeParameters
 
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitKeepsTheOrderOfItsTypeDeclarations [
-
 	"JLS 7.3: a compilation unit writes one list of type declarations, whatever kind each
 	of them is, so they are written back in the order it writes them."
 
@@ -489,7 +498,6 @@ record R(int a) {
 
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitWritesItsEnumDeclarations [
-
 	"JLS 7.3: an enum declaration is a type declaration of the compilation unit that
 	writes it, as a class, an interface, an annotation interface and a record are."
 
@@ -999,7 +1007,6 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMet
 
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithTypeParameters [
-
 	"JLS 9.1.2: an interface declaration writes the type parameters it declares between
 	its name and the interfaces it extends."
 
