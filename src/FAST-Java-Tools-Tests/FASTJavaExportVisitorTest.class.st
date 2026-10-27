@@ -478,6 +478,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithModifiers [
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithPermittedSubtypes [
+	"JLS 8.1.6: the permits clause is written last in the header, after what the class
+	extends and implements."
+
+	| ast |
+	ast := self astFor: 'sealed class Shape implements Drawable permits Circle, Square { }'.
+
+	self export: ast equals: 'sealed class Shape implements Drawable permits Circle, Square {
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclass [
 	| node |
@@ -1062,6 +1075,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMet
   void defaultMth() {
     return 1;
   }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithPermittedSubtypes [
+	"JLS 9.1.4: the permits clause is written after what the interface extends."
+
+	| ast |
+	ast := self astFor: 'sealed interface Shape extends Drawable permits Circle, Square { }'.
+
+	self export: ast equals: 'sealed interface Shape extends Drawable permits Circle, Square {
 }
 '
 ]

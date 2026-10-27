@@ -719,6 +719,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration 
 
 	aClassDeclaration superclass ifNotNil: [ :superclass | currentFASTEntity superclass: (self clone accept: superclass) ].
 	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
+	aClassDeclaration permits do: [ :permitted | currentFASTEntity addPermittedSubtype: (self clone accept: permitted) ].
 	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
 
 	^ currentFASTEntity
@@ -1109,6 +1110,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInterfaceDeclaration: anInterfaceDec
 	self addTypeParametersOf: anInterfaceDeclaration.
 
 	anInterfaceDeclaration interfaceTypes do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
+	anInterfaceDeclaration permits do: [ :permitted | currentFASTEntity addPermittedSubtype: (self clone accept: permitted) ].
 	anInterfaceDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
 
 	^ currentFASTEntity

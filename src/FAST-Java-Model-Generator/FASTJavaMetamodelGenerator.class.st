@@ -1634,6 +1634,15 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeExpression property: #javaClassDeclarationInterfaceOwner)
 			 comment: 'The class that implements me').
 
+	"JLS 8.1.6: a sealed class names the classes permitted to extend it directly, and a
+	class it does not name cannot, whatever that class declares."
+	((javaClassDeclaration property: #permittedSubtypes) comment:
+		 'The types I permit to extend me')
+	<>-*
+		((javaTypeExpression property:
+			  #javaClassDeclarationPermittedSubtypeOwner) comment:
+			 'The sealed class that permits me to extend it').
+
 	((javaEnumDeclaration property: #interfaces) comment:
 		 'The interfaces I implement')
 	<>-*
@@ -1651,6 +1660,15 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeExpression property:
 			  #javaInterfaceDeclarationInterfaceOwner) comment:
 			 'The interface that extends me').
+
+	"JLS 9.1.4: a sealed interface names the classes and interfaces permitted to extend or
+	implement it directly."
+	((javaInterfaceDeclaration property: #permittedSubtypes) comment:
+		 'The types I permit to extend or implement me')
+	<>-*
+		((javaTypeExpression property:
+			  #javaInterfaceDeclarationPermittedSubtypeOwner) comment:
+			 'The sealed interface that permits me to extend it').
 
 	"JLS 8.10.1: the components of a record are declared in its header, like the
 	parameters of the canonical constructor they define."

@@ -425,6 +425,12 @@ FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaratio
 				do: [ :interface | interface accept: self ]
 				separatedBy: [ self unindented: ', ' ] ].
 
+		aFASTJavaClassDeclaration permittedSubtypes ifNotEmpty: [ :permittedSubtypes |
+			self unindented: ' permits '.
+			permittedSubtypes
+				do: [ :permitted | permitted accept: self ]
+				separatedBy: [ self unindented: ', ' ] ].
+
 		aFASTJavaClassDeclaration declarations
 			ifNotNil: [ :declarations | self visitJavaClassMemberDeclarations: declarations ].
 		self newLine
@@ -820,6 +826,12 @@ FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDe
 			self unindented: ' extends '.
 			interfaces
 				do: [ :interface | interface accept: self ]
+				separatedBy: [ self unindented: ', ' ] ].
+
+		aFASTJavaInterfaceDeclaration permittedSubtypes ifNotEmpty: [ :permittedSubtypes |
+			self unindented: ' permits '.
+			permittedSubtypes
+				do: [ :permitted | permitted accept: self ]
 				separatedBy: [ self unindented: ', ' ] ].
 
 		aFASTJavaInterfaceDeclaration declarations

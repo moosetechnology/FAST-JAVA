@@ -33,6 +33,7 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 | `interfaces` | `FASTJavaClassDeclaration` | `javaClassDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | The interfaces I implement|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `permittedSubtypes` | `FASTJavaClassDeclaration` | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | The types I permit to extend me|
 | `superclass` | `FASTJavaClassDeclaration` | `javaClassDeclarationSuperclassOwner` | `FASTJavaTypeExpression` | My superclass|
 | `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
@@ -61,6 +62,7 @@ Class {
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #classDeclarations',
 		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwner',
+		'#permittedSubtypes => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner',
 		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -83,6 +85,14 @@ FASTJavaClassDeclaration >> addInterface: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self interfaces add: anObject
+]
+
+{ #category : 'adding' }
+FASTJavaClassDeclaration >> addPermittedSubtype: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self permittedSubtypes add: anObject
 ]
 
 { #category : 'accessing' }
@@ -129,6 +139,25 @@ FASTJavaClassDeclaration >> isClassDeclaration [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaClassDeclaration >> permittedSubtypes [
+	"Relation named: #permittedSubtypes type: #FASTJavaTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The types I permit to extend me'>
+	<derived>
+	^ permittedSubtypes
+]
+
+{ #category : 'accessing' }
+FASTJavaClassDeclaration >> permittedSubtypes: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	permittedSubtypes value: anObject
 ]
 
 { #category : 'accessing' }

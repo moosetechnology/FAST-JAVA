@@ -9,10 +9,12 @@ I am an abstract class representing a type
 |---|
 | `catchOwner` | `FASTJavaTypeExpression` | `catchedTypes` | `FASTJavaCatchPartStatement` | The catch part that owns me (ie. where I am catched)|
 | `javaClassDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaClassDeclaration` | The class that implements me|
+| `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaClassDeclaration` | The sealed class that permits me to extend it|
 | `javaClassDeclarationSuperclassOwner` | `FASTJavaTypeExpression` | `superclass` | `FASTJavaClassDeclaration` | The class that extends me|
 | `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaEnumDeclaration` | The enum that implements me|
 | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaInterfaceDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaInterfaceDeclaration` | The interface that extends me|
+| `javaInterfaceDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaInterfaceDeclaration` | The sealed interface that permits me to extend it|
 | `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaMethodInvocation` | The invocation that writes me as one of its type arguments|
 | `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaRecordDeclaration` | The record that implements me|
 | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
@@ -26,10 +28,12 @@ Class {
 	#instVars : [
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
 		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
+		'#javaClassDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaClassDeclaration opposite: #permittedSubtypes',
 		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
 		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
 		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces',
+		'#javaInterfaceDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes',
 		'#javaMethodInvocationTypeArgumentOwner => FMOne type: #FASTJavaMethodInvocation opposite: #typeArguments',
 		'#javaRecordDeclarationInterfaceOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #interfaces',
 		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type'
@@ -92,6 +96,25 @@ FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaClassDeclarationInterfaceOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaClassDeclarationPermittedSubtypeOwner [
+	"Relation named: #javaClassDeclarationPermittedSubtypeOwner type: #FASTJavaClassDeclaration opposite: #permittedSubtypes"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The sealed class that permits me to extend it'>
+	<container>
+	^ javaClassDeclarationPermittedSubtypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaClassDeclarationPermittedSubtypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaClassDeclarationPermittedSubtypeOwner := anObject
 ]
 
 { #category : 'accessing' }
@@ -170,6 +193,25 @@ FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaInterfaceDeclarationInterfaceOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaInterfaceDeclarationPermittedSubtypeOwner [
+	"Relation named: #javaInterfaceDeclarationPermittedSubtypeOwner type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The sealed interface that permits me to extend it'>
+	<container>
+	^ javaInterfaceDeclarationPermittedSubtypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaInterfaceDeclarationPermittedSubtypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaInterfaceDeclarationPermittedSubtypeOwner := anObject
 ]
 
 { #category : 'accessing' }
