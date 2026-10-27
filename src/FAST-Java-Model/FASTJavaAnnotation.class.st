@@ -21,6 +21,7 @@ example:
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationElement` | ""Arguments"" of the annotation, eg. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
+| `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
 
 
 ## Properties
@@ -36,8 +37,8 @@ example:
 Class {
 	#name : 'FASTJavaAnnotation',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAnnotationElement + FASTJavaTModifier + FASTTNamedEntity',
-	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTModifier classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTAnnotationElement + FASTJavaTModifier + FASTJavaTWithQualifiedName + FASTTNamedEntity',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTModifier classTrait + FASTJavaTWithQualifiedName classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation'
 	],

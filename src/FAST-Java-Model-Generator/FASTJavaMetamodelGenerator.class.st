@@ -1242,6 +1242,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAnnotationExpression --|> tNamedEntity.
 	javaAnnotationExpression --|> tModifier.
 	javaAnnotationExpression --|> tAnnotationElement.
+	"JLS 9.7: an annotation names the type it is an instance of, which it may write qualified"
+	javaAnnotationExpression --|> tWithQualifiedName.
 
 	javaParameterExpression --|> tExpression.
 	javaParameterExpression --|> tVariableEntity.

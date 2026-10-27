@@ -176,9 +176,10 @@ FASTJavaExportVisitor >> typeDeclarationsOf: aFASTJavaCompilationUnit do: aBlock
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self checkForComments: aFASTJavaAnnotation andDo: [
-		self
-			unindented: $@ ;
-			unindented: aFASTJavaAnnotation name.
+		self unindented: $@.
+		aFASTJavaAnnotation qualifiedName
+			ifNil: [ self unindented: aFASTJavaAnnotation name ]
+			ifNotNil: [ :qualifiedName | self visitFASTJavaQualifiedName: qualifiedName ].
 		aFASTJavaAnnotation elements ifNotEmpty: [ :arguments |
 			self unindented: $(.
 			self visitNodeListSeparatedByCommas: arguments.

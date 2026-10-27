@@ -32,3 +32,10 @@ JavaSmaCCAnnotationTest >> testNumberOfAnnotation [
 JavaSmaCCAnnotationTest >> testNumberOfElementsToAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 0
 ]
+
+{ #category : 'tests' }
+JavaSmaCCAnnotationTest >> testQualifiedNameOfAnnotation [
+	"JLS 9.7: an annotation that writes no qualifier has none."
+
+	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne qualifiedName isNil
+]

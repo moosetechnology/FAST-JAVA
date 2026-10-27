@@ -359,6 +359,26 @@ JavaSmaCCProgramNodeImporterVisitor >> parseCodeString: aCodeString [
 	^ self model
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> qualifiedNameOf: aNameNode [
+	"JLS 6.5: the parts written before the last one qualify a name, each of them a name of
+	its own. The rule that reads a qualified name reads it as a field access wherever it
+	stands inside a type declaration, which the name of an annotation is not, so a name
+	that is a name whatever encloses it is built here."
+
+	| qualifiedName |
+	qualifiedName := (self addToModel: FASTJavaQualifiedName new)
+		                 startPos: aNameNode startPosition;
+		                 endPos: aNameNode stopPosition;
+		                 name: aNameNode name value;
+		                 yourself.
+
+	(aNameNode isKindOf: JavaQualifiedNameNode) ifTrue: [
+		qualifiedName namespace: (self qualifiedNameOf: aNameNode nspace) ].
+
+	^ qualifiedName
+]
+
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> setStartEndPos: aNodeEntity [
 	currentFASTEntity startPos: aNodeEntity startPosition.
@@ -415,8 +435,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstrac
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
+
 	self create: FASTJavaAnnotation from: anAnnotation.
 	currentFASTEntity name: anAnnotation name name value.
+
+	"JLS 9.7: an annotation names the type it is an instance of, and that name may be
+	written qualified."
+	(anAnnotation name isKindOf: JavaQualifiedNameNode) ifTrue: [
+		currentFASTEntity qualifiedName: (self qualifiedNameOf: anAnnotation name) ].
 
 	anAnnotation values do: [ :expression |
 		currentFASTEntity addElement: (self clone accept: expression) ].
