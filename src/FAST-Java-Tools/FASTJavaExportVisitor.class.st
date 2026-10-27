@@ -152,6 +152,28 @@ FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
 ]
 
 { #category : 'visiting' }
+FASTJavaExportVisitor >> typeDeclarationsOf: aFASTJavaCompilationUnit do: aBlock [
+	"JLS 7.3: the type declarations a compilation unit writes, in the order it writes
+	them. The model holds one relation for each kind of declaration, so the order is read
+	back from the positions they were imported at; a unit built rather than imported has
+	none, and keeps the order of the relations."
+
+	| declarations |
+	declarations := OrderedCollection new.
+	declarations
+		addAll: aFASTJavaCompilationUnit interfaceDeclarations;
+		addAll: aFASTJavaCompilationUnit annotationInterfaceDeclarations;
+		addAll: aFASTJavaCompilationUnit classDeclarations;
+		addAll: aFASTJavaCompilationUnit enumDeclarations;
+		addAll: aFASTJavaCompilationUnit recordDeclarations.
+
+	(declarations allSatisfy: [ :declaration | declaration startPos isNotNil ]) ifTrue: [
+		declarations := declarations asSortedCollection: [ :one :another | one startPos <= another startPos ] ].
+
+	declarations do: aBlock
+]
+
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 	self checkForComments: aFASTJavaAnnotation andDo: [
 		self
@@ -387,6 +409,12 @@ FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaratio
 		self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
 		self unindented: 'class '.
 		self unindented: aFASTJavaClassDeclaration name.
+
+		aFASTJavaClassDeclaration typeParameters ifNotEmpty: [ :typeParameters |
+			self unindented: $<.
+			self visitNodeListSeparatedByCommas: typeParameters.
+			self unindented: $> ].
+
 		aFASTJavaClassDeclaration superclass ifNotNil: [ :superclass |
 			self unindented: ' extends '.
 			superclass accept: self ].
@@ -428,23 +456,15 @@ FASTJavaExportVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExp
 
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaCompilationUnit: aFASTJavaCompilationUnit [
-	self checkForComments: aFASTJavaCompilationUnit andDo: [
-	aFASTJavaCompilationUnit packageDeclaration ifNotNil: [ :decl | 
-		self visitFASTJavaPackageDeclaration: decl.
-		self newLine ].
-	aFASTJavaCompilationUnit importDeclarations ifNotEmpty: [ :decls | 
-		decls do: [ :decl | self visitFASTJavaImportDeclaration: decl ].
-		self newLine ].
-	aFASTJavaCompilationUnit interfaceDeclarations do: [ :decl | 
-		self visitFASTJavaInterfaceDeclaration: decl ].
-	aFASTJavaCompilationUnit annotationInterfaceDeclarations do: [ :decl | 
-		self visitFASTJavaAnnotationInterfaceDeclaration: decl ].
-	aFASTJavaCompilationUnit classDeclarations do: [ :decl | 
-		self visitFASTJavaClassDeclaration: decl ].
-	aFASTJavaCompilationUnit recordDeclarations do: [ :decl | 
-		self visitFASTJavaRecordDeclaration: decl ]
-]
 
+	self checkForComments: aFASTJavaCompilationUnit andDo: [
+		aFASTJavaCompilationUnit packageDeclaration ifNotNil: [ :decl |
+			self visitFASTJavaPackageDeclaration: decl.
+			self newLine ].
+		aFASTJavaCompilationUnit importDeclarations ifNotEmpty: [ :decls |
+			decls do: [ :decl | self visitFASTJavaImportDeclaration: decl ].
+			self newLine ].
+		self typeDeclarationsOf: aFASTJavaCompilationUnit do: [ :decl | decl accept: self ] ]
 ]
 
 { #category : 'visiting expression' }
@@ -789,6 +809,12 @@ FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDe
 		self visitFASTJavaModifiers: aFASTJavaInterfaceDeclaration modifiers.
 		self unindented: 'interface '.
 		self unindented: aFASTJavaInterfaceDeclaration name.
+
+		aFASTJavaInterfaceDeclaration typeParameters ifNotEmpty: [ :typeParameters |
+			self unindented: $<.
+			self visitNodeListSeparatedByCommas: typeParameters.
+			self unindented: $> ].
+
 		aFASTJavaInterfaceDeclaration interfaces ifNotEmpty: [ :interfaces |
 			self unindented: ' extends '.
 			interfaces
