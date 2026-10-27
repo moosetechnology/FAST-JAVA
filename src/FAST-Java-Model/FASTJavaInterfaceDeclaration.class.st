@@ -30,6 +30,7 @@ public interface MyInterface {
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 | `interfaces` | `FASTJavaInterfaceDeclaration` | `javaInterfaceDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | My super interfaces|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `permittedSubtypes` | `FASTJavaInterfaceDeclaration` | `javaInterfaceDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | The types I permit to extend or implement me|
 | `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
 ### Other
@@ -56,7 +57,8 @@ Class {
 	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTJavaTWithTypeParameters classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #interfaceDeclarations',
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner'
+		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner',
+		'#permittedSubtypes => FMMany type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationPermittedSubtypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -78,6 +80,14 @@ FASTJavaInterfaceDeclaration >> addInterface: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self interfaces add: anObject
+]
+
+{ #category : 'adding' }
+FASTJavaInterfaceDeclaration >> addPermittedSubtype: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self permittedSubtypes add: anObject
 ]
 
 { #category : 'accessing' }
@@ -124,4 +134,23 @@ FASTJavaInterfaceDeclaration >> isInterfaceDeclaration [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaInterfaceDeclaration >> permittedSubtypes [
+	"Relation named: #permittedSubtypes type: #FASTJavaTypeExpression opposite: #javaInterfaceDeclarationPermittedSubtypeOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The types I permit to extend or implement me'>
+	<derived>
+	^ permittedSubtypes
+]
+
+{ #category : 'accessing' }
+FASTJavaInterfaceDeclaration >> permittedSubtypes: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	permittedSubtypes value: anObject
 ]

@@ -478,6 +478,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithModifiers [
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithPermittedSubtypes [
+	"JLS 8.1.6: the permits clause is written last in the header, after what the class
+	extends and implements."
+
+	| ast |
+	ast := self astFor: 'sealed class Shape implements Drawable permits Circle, Square { }'.
+
+	self export: ast equals: 'sealed class Shape implements Drawable permits Circle, Square {
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithSuperclass [
 	| node |
@@ -1067,6 +1080,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithDefaultMet
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithPermittedSubtypes [
+	"JLS 9.1.4: the permits clause is written after what the interface extends."
+
+	| ast |
+	ast := self astFor: 'sealed interface Shape extends Drawable permits Circle, Square { }'.
+
+	self export: ast equals: 'sealed interface Shape extends Drawable permits Circle, Square {
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithTypeParameters [
 	"JLS 9.1.2: an interface declaration writes the type parameters it declares between
 	its name and the interfaces it extends."
@@ -1404,6 +1429,41 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpression [
 		export:
 		ast statements first declarators first expression rightOperand
 		equals: ' !true'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionInsideAnother [
+	"JLS 3.5: the longest run of characters that can make a token is the token, so writing
+	two negations with nothing between them would make a decrement of them. `--y` is a
+	different program from `-(-y)` and `--128` is not a program at all."
+
+	self export: (self methodAST: 'int mth() { return -(-y); }') equals: 'int mth() {
+  return - -y;
+}
+'.
+	self export: (self methodAST: 'int mth() { return -(--y); }') equals: 'int mth() {
+  return - --y;
+}
+'.
+	self export: (self methodAST: 'int mth() { return +(+y); }') equals: 'int mth() {
+  return + +y;
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionThatCannotMerge [
+	"Only `+` and `-` make a longer operator of themselves, so the others are written
+	straight after one another as they were."
+
+	self export: (self methodAST: 'boolean mth() { return !(!b); }') equals: 'boolean mth() {
+  return !!b;
+}
+'.
+	self export: (self methodAST: 'int mth() { return -(+y); }') equals: 'int mth() {
+  return -+y;
+}
+'
 ]
 
 { #category : 'test from source code' }
