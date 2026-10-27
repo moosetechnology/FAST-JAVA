@@ -8,6 +8,7 @@ I am an abstract class representing a type
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `catchOwner` | `FASTJavaTypeExpression` | `catchedTypes` | `FASTJavaCatchPartStatement` | The catch part that owns me (ie. where I am catched)|
+| `javaCastExpressionAdditionalBoundOwner` | `FASTJavaTypeExpression` | `additionalBounds` | `FASTJavaCastExpression` | The cast that writes me as one of its additional bounds|
 | `javaClassDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaClassDeclaration` | The class that implements me|
 | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaClassDeclaration` | The sealed class that permits me to extend it|
 | `javaClassDeclarationSuperclassOwner` | `FASTJavaTypeExpression` | `superclass` | `FASTJavaClassDeclaration` | The class that extends me|
@@ -27,6 +28,7 @@ Class {
 	#superclass : 'FASTJavaVariableExpression',
 	#instVars : [
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
+		'#javaCastExpressionAdditionalBoundOwner => FMOne type: #FASTJavaCastExpression opposite: #additionalBounds',
 		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
 		'#javaClassDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaClassDeclaration opposite: #permittedSubtypes',
 		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
@@ -77,6 +79,25 @@ FASTJavaTypeExpression >> isTypeExpression [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaCastExpressionAdditionalBoundOwner [
+	"Relation named: #javaCastExpressionAdditionalBoundOwner type: #FASTJavaCastExpression opposite: #additionalBounds"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The cast that writes me as one of its additional bounds'>
+	<container>
+	^ javaCastExpressionAdditionalBoundOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaCastExpressionAdditionalBoundOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaCastExpressionAdditionalBoundOwner := anObject
 ]
 
 { #category : 'accessing' }

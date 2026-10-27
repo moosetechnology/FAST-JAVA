@@ -1389,6 +1389,16 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((javaVariableExpression property: #javaCastExpressionTypeOwner)
 			 comment: 'The javaCastExpression owner (if possible)').
 
+	"JLS 4.9: a cast may write interface types after the first, each an additional bound of
+	the intersection type it casts to. The bounds are what makes the cast worth writing,
+	as a lambda cast to `Comparator & Serializable` shows."
+	((javaCastExpression property: #additionalBounds) comment:
+		 'The interface types I write after the first, as additional bounds')
+	<>-*
+		((javaTypeExpression property:
+			  #javaCastExpressionAdditionalBoundOwner) comment:
+			 'The cast that writes me as one of its additional bounds').
+
 	((javaClassProperty property: #type) comment:
 		 'The type of the property')
 	<>-
