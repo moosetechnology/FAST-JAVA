@@ -411,6 +411,7 @@ FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStat
 
 	self checkForComments: aFASTJavaCatchPartStatement andDo: [ 
 		self indented: 'catch ('.
+		self visitFASTJavaModifiersInline: aFASTJavaCatchPartStatement modifiers.
 
 		aFASTJavaCatchPartStatement catchedTypes do: [ :catchType | catchType accept: self ]
 			separatedBy: [ self unindented: ' | ' ].
@@ -592,8 +593,11 @@ FASTJavaExportVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMeth
 
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
+	"JLS 8.9.1: the only modifier a constant may write is an annotation, and it writes it
+	before its name."
 
 	self checkForComments: aFASTJavaEnumConstant andDo: [
+		self visitFASTJavaModifiersInline: aFASTJavaEnumConstant modifiers.
 		self unindented: aFASTJavaEnumConstant name.
 		aFASTJavaEnumConstant arguments ifNotEmpty: [ :arguments | self visitFASTJavaArgumentsList: arguments ].
 		aFASTJavaEnumConstant declarations ifNotEmpty: [ :declarations | self visitJavaClassMemberDeclarations: declarations ]
@@ -679,6 +683,7 @@ FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExp
 FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatement [
 	self checkForComments: aFASTJavaForEachStatement andDo: [
 		self indented: 'for ('.
+		self visitFASTJavaModifiersInline: aFASTJavaForEachStatement modifiers.
 		aFASTJavaForEachStatement type accept: self.
 		self space.
 		aFASTJavaForEachStatement fieldname accept: self.
@@ -1029,6 +1034,18 @@ FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
 
 ]
 
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaModifiersInline: aFASTJavaModifierCollection [
+	"Write the modifiers in the order they are held, on the line the declaration is written
+	on. A type or a method writes its annotations on lines of their own, which is what
+	visitFASTJavaModifiers: does; a declaration small enough to be written on one line
+	keeps its modifiers there."
+
+	aFASTJavaModifierCollection do: [ :modifier |
+		modifier accept: self.
+		self space ]
+]
+
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 
@@ -1106,13 +1123,8 @@ FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclar
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	self checkForComments: aFASTJavaParameter andDo: [
-		"JLS 8.4.1: the modifiers a parameter writes come before its type, and stay on the
-		line it is written on."
-		aFASTJavaParameter modifiers do: [
-			:modifier |
-			modifier accept: self.
-			self space
-		].
+		"JLS 8.4.1: the modifiers a parameter writes come before its type."
+		self visitFASTJavaModifiersInline: aFASTJavaParameter modifiers.
 		aFASTJavaParameter type 
 			ifNotNil: [ :parameterType |
 				"Lambda parameters may be typeless"
@@ -1395,9 +1407,11 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaTypePattern: aFASTJavaTypePattern [
-	"JLS 14.30.1: a type pattern writes the type it matches, then the variable it declares."
+	"JLS 14.30.1: a type pattern writes the modifiers it declares its variable with, then
+	the type it matches, then the variable itself."
 
 	self checkForComments: aFASTJavaTypePattern andDo: [
+			self visitFASTJavaModifiersInline: aFASTJavaTypePattern modifiers.
 			aFASTJavaTypePattern type accept: self.
 			self space.
 			aFASTJavaTypePattern variable accept: self ]
@@ -1423,10 +1437,7 @@ FASTJavaExportVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression 
 FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 	self checkForComments: aFASTJavaVarDeclStatement andDo: [
 		self indented: ''.
-		aFASTJavaVarDeclStatement modifiers do: [:modifier |
-			modifier accept: self.
-			self space.
-		].
+		self visitFASTJavaModifiersInline: aFASTJavaVarDeclStatement modifiers.
 		aFASTJavaVarDeclStatement type accept: self.
 		self space.
 		self visitNodeListSeparatedByCommas: aFASTJavaVarDeclStatement declarators.

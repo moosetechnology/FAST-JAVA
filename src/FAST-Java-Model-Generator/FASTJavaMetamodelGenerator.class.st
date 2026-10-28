@@ -1094,6 +1094,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaEnumConstant --|> javaVariableExpression.
 	javaEnumConstant --|> tWithDeclarations.
+	javaEnumConstant --|> tWithModifiers.
 	javaEnumConstant --|> #TWithArguments.
 
 	javaInterfaceDeclaration --|> tStatement.
@@ -1155,6 +1156,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTryCatchStatement --|> tStatement.
 	javaForEachStatement --|> tStatement.
 	javaForEachStatement --|> tLoopStatement.
+	"JLS 14.14.2: the modifiers of the loop variable, whose type and name are held here"
+	javaForEachStatement --|> tWithModifiers.
 	javaUnaryExpression --|> tExpression.
 
 	javaNewExpression --|> tExpression.
@@ -1199,6 +1202,8 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaOuterThis --|> tReceiver.
 
 	javaCatchPartStatement --|> tStatement.
+	"JLS 14.20: the modifiers of the catch formal parameter, whose types and name are held here"
+	javaCatchPartStatement --|> tWithModifiers.
 
 	javaLambdaExpression --|> tExpression.
 	javaLambdaExpression --|> tWithParameters.
@@ -1262,6 +1267,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	qualifiedName --|> tAssignable.
 
 	javaTypePattern --|> tExpression.
+	javaTypePattern --|> tWithModifiers.
 
 	compilationUnit --|> tEntity.
 	compilationUnit --|> #THasImmediateSource.

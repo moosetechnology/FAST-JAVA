@@ -477,15 +477,22 @@ JavaSmaCCProgramNodeImporterVisitor >> statementsOfForHeader: aNode [
 { #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> typePatternOf: aNode [
 	"JLS 14.30.1: a type pattern names a type and declares the variable bound to what it
-	matches. SmaCC writes the two into whichever node holds the pattern, an instanceof
-	operation or a case label."
+	matches, with the modifiers any local variable declaration may write before its type.
+	SmaCC writes all three into whichever node holds the pattern, an instanceof operation
+	or a case label."
 
-	^ (self addToModel: FASTJavaTypePattern new)
-		  startPos: aNode type startPosition;
-		  endPos: aNode variable stopPosition;
-		  type: (self clone accept: aNode type);
-		  variable: (self clone accept: aNode variable);
-		  yourself
+	| pattern firstWritten |
+	firstWritten := aNode modifiers
+		                ifEmpty: [ aNode type ]
+		                ifNotEmpty: [ :modifiers | modifiers first ].
+	pattern := (self addToModel: FASTJavaTypePattern new)
+		           startPos: firstWritten startPosition;
+		           endPos: aNode variable stopPosition;
+		           type: (self clone accept: aNode type);
+		           variable: (self clone accept: aNode variable);
+		           yourself.
+	aNode modifiers do: [ :modifier | pattern addModifier: (self clone accept: modifier) ].
+	^ pattern
 ]
 
 { #category : 'visitor' }
@@ -710,9 +717,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchClause: aCatchClause [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
+	"JLS 14.20: a catch clause writes a formal parameter, and the catch part holds all of
+	it: the modifiers it writes, the types it catches and the name it declares."
+
 	| param |
 	param := self visitName: aCatchParameter variable.
 	self parentFASTEntity parameter: param.
+	aCatchParameter modifiers do: [ :modifier |
+		self parentFASTEntity addModifier: (self clone accept: modifier) ].
 	aCatchParameter types do: [ :catchedType |
 		self parentFASTEntity addCatchedType: (self clone accept: catchedType)
 	].
@@ -908,11 +920,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitEnumConstant: anEnumConstant [
-	"JLS 8.9.1: a constant writes the arguments the constructor of its enum takes, and may
-	write a class body, which declares a class of its own extending that enum."
+	"JLS 8.9.1: a constant may write annotations before its name, then the arguments the
+	constructor of its enum takes, and may write a class body, which declares a class of
+	its own extending that enum."
 
 	currentFASTEntity := self addToModel: FASTJavaEnumConstant new.
 	self setStartEndPos: anEnumConstant.
+	anEnumConstant annotations do: [ :annotation |
+		currentFASTEntity addModifier: (self clone accept: annotation) ].
 	currentFASTEntity
 			name: anEnumConstant name value.
 	anEnumConstant expressions do: [ :expression |
@@ -1010,12 +1025,16 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement [
+	"JLS 14.14.2: the variable a for-each writes is a local variable declaration, so it may
+	write modifiers before its type."
 
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
 	self setStartEndPos: aForEachStatement.
 	currentFASTEntity body: (self acceptStatement: aForEachStatement statement).
 	currentFASTEntity fieldname: (self clone visitIdentifier: aForEachStatement name).
 	currentFASTEntity type: (self clone accept: aForEachStatement type).
+	aForEachStatement modifiers do: [ :modifier |
+		currentFASTEntity addModifier: (self clone accept: modifier) ].
 	currentFASTEntity list: (self clone accept: aForEachStatement expression).
 	^ currentFASTEntity
 ]
