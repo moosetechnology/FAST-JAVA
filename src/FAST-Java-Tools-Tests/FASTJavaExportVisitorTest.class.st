@@ -1002,6 +1002,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopSingleStatement [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopWithAVariableWithModifiers [
+	"JLS 14.14.1: the declaration in the first part of a for header writes its modifiers
+	before its type, and they are written back there."
+
+	| expr |
+	expr := self methodAST: 'public void mth() { for (@SuppressWarnings("unchecked") final int i = 0; i<=10; i++) { } }'.
+
+	self export: expr statements first equals: 'for (@SuppressWarnings("unchecked") final int i = 0; i<=10; i++) {
+  }
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFullyQualifiedName [
 
 	| ast |
@@ -1727,6 +1740,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryFinally [
   }
   finally {
   }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryWithAResourceWithModifiers [
+	"JLS 14.20.3: a resource is a local variable declaration, and whatever it writes
+	before its type is written back there."
+
+	| expr |
+	expr := self methodAST: 'void mth() { try (@SuppressWarnings("removal") final InputStream in = open()) { } }'.
+
+	self export: expr statements first equals: 'try (@SuppressWarnings("removal") final InputStream in = open()) {
 }
 '
 ]

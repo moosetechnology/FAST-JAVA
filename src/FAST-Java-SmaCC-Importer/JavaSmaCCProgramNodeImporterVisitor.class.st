@@ -1145,9 +1145,16 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression 
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVariableDeclaration [
+	"JLS 14.4: a local variable declaration may write modifiers and annotations before its
+	type. This is the declaration written where no statement surrounds it, as a resource
+	of a try or the first part of a for header, and what is written there is as much part
+	of it as it is of the declarations that stand alone."
+
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self setStartEndPos: aLocalVariableDeclaration.
 	aLocalVariableDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aLocalVariableDeclaration type) ].
+	aLocalVariableDeclaration modifiers do: [ :modifier |
+		currentFASTEntity addModifier: (self clone accept: modifier) ].
 	aLocalVariableDeclaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity
