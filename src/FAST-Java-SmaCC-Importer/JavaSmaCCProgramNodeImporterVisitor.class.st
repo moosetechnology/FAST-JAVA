@@ -128,6 +128,35 @@ JavaSmaCCProgramNodeImporterVisitor >> attachComments: aCodeString [
 		self attach: fastComment ]
 ]
 
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> caseStatementOfLabels: labelNodes [
+	"JLS 14.11: a group is the default of the switch when the first label it writes writes
+	no case constant, and whatever labels follow that one belong to the same group."
+
+	currentFASTEntity := self addToModel: (labelNodes first class = JavaSwitchLabelNode
+			                      ifTrue: [ FASTJavaLabeledCaseStatement new ]
+			                      ifFalse: [ FASTJavaDefaultCaseStatement new ]).
+	currentFASTEntity
+		startPos: labelNodes first startPosition;
+		endPos: labelNodes last stopPosition.
+	labelNodes do: [ :label | currentFASTEntity labels add: (self clone accept: label) ].
+	^ currentFASTEntity
+]
+
+{ #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> casesOfSwitchBlock: aSwitchBlock [
+	"JLS 14.11: a switch block writes groups of labelled statements and may then write
+	labels that no statement follows. Those trailing labels still say where control may
+	enter the block, so they make a case like the others, one with no statements of its
+	own."
+
+	| cases |
+	cases := OrderedCollection new.
+	aSwitchBlock statementGroups do: [ :statementGroup | cases add: (self clone accept: statementGroup) ].
+	aSwitchBlock labels ifNotEmpty: [ :trailingLabels | cases add: (self clone caseStatementOfLabels: trailingLabels) ].
+	^ cases
+]
+
 { #category : 'copying' }
 JavaSmaCCProgramNodeImporterVisitor >> clone [
 	^ self class new
@@ -1606,11 +1635,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockExpressionGroup: aSwitchB
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBlockStatementGroup [
 
-	currentFASTEntity := self addToModel: (aSwitchBlockStatementGroup labels first class = JavaSwitchLabelNode
-			                      ifTrue: [ FASTJavaLabeledCaseStatement new ]
-			                      ifFalse: [ FASTJavaDefaultCaseStatement new ]).
+	currentFASTEntity := self caseStatementOfLabels: aSwitchBlockStatementGroup labels.
 	self setStartEndPos: aSwitchBlockStatementGroup.
-	aSwitchBlockStatementGroup labels do: [ :label | currentFASTEntity labels add: (self clone accept: label) ].
 	aSwitchBlockStatementGroup statements do: [ :statement | currentFASTEntity statements add: (self acceptStatement: statement) ].
 	^ currentFASTEntity
 ]
@@ -1655,8 +1681,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchLabel: aSwitchLabel [
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchStatement: aSwitchStatement [
 	currentFASTEntity := self addToModel: FASTJavaSwitchStatement new.
 	self setStartEndPos: aSwitchStatement.
-	aSwitchStatement block statementGroups do: [ :aStatementGroup |
-		 currentFASTEntity cases add: (self clone accept: aStatementGroup) ].
+	(self casesOfSwitchBlock: aSwitchStatement block) do: [ :aCase | currentFASTEntity cases add: aCase ].
 	currentFASTEntity condition: (self clone accept: aSwitchStatement expression).
 	^ currentFASTEntity
 ]

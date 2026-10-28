@@ -1659,6 +1659,42 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchStatementWithRules [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchWithADefaultSharingItsGroup [
+	"JLS 14.11: the default may be written beside the case labels of the same group, and
+	every label of that group is written back."
+
+	| expr |
+	expr := self methodAST: 'void mth() { switch (x) { default: case 0: f(); break; case 2: g(); } }'.
+
+	self export: expr statements first equals: 'switch (x) {
+  default:
+  case 0:
+    f();
+    break;
+  case 2:
+    g();
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchWithALabelFollowedByNoStatement [
+	"JLS 14.11: a switch block may end with a label that no statement follows, and it is
+	written back where it was written."
+
+	| expr |
+	expr := self methodAST: 'void mth() { switch (x) { case 1: f(); break; default: } }'.
+
+	self export: expr statements first equals: 'switch (x) {
+  case 1:
+    f();
+    break;
+  default:
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSynchronizedBlock [
 
 	| expr |
