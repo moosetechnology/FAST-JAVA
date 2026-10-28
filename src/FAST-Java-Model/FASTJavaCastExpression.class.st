@@ -44,6 +44,7 @@ I represent a cast expression, e.g. `(int) 0.5`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `additionalBounds` | `FASTJavaCastExpression` | `javaCastExpressionAdditionalBoundOwner` | `FASTJavaTypeExpression` | The interface types I write after the first, as additional bounds|
 | `expression` | `FASTJavaCastExpression` | `javaCastExpressionOwner` | `FASTTExpression` | The expression to cast|
 | `type` | `FASTJavaCastExpression` | `javaCastExpressionTypeOwner` | `FASTJavaVariableExpression` | The type into which the expression will be cast|
 
@@ -63,6 +64,7 @@ Class {
 	#traits : 'FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
+		'#additionalBounds => FMMany type: #FASTJavaTypeExpression opposite: #javaCastExpressionAdditionalBoundOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -77,6 +79,33 @@ FASTJavaCastExpression class >> annotation [
 	<FMClass: #CastExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaCastExpression >> addAdditionalBound: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self additionalBounds add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCastExpression >> additionalBounds [
+	"Relation named: #additionalBounds type: #FASTJavaTypeExpression opposite: #javaCastExpressionAdditionalBoundOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The interface types I write after the first, as additional bounds'>
+	<derived>
+	^ additionalBounds
+]
+
+{ #category : 'accessing' }
+FASTJavaCastExpression >> additionalBounds: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	additionalBounds value: anObject
 ]
 
 { #category : 'accessing' }

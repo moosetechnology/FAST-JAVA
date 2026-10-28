@@ -394,12 +394,40 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithAnAdditionalBound [
+	"JLS 4.9: the interface types written after the first are the additional bounds of the
+	intersection type cast to, and they are written back with it."
+
+	| ast |
+	ast := self methodAST: 'Object mth() { return (Comparator<String> & Serializable) (a, b) -> 0; }'.
+
+	self export: ast equals: 'Object mth() {
+  return (Comparator<String> & Serializable) (a, b) -> 0;
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithParentheses [
 
 	| expr |
 	expr := self expressionAST: '((AClass) obj.m1()).m2()'.
 
 	self export: expr equals: '((AClass) obj.m1()).m2()'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithSeveralAdditionalBounds [
+	"JLS 4.9: a cast may write any number of interface types after the first, and each is
+	written back after an ampersand."
+
+	| ast |
+	ast := self methodAST: 'Object mth() { return (Runnable & Serializable & Cloneable) job; }'.
+
+	self export: ast equals: 'Object mth() {
+  return (Runnable & Serializable & Cloneable) job;
+}
+'
 ]
 
 { #category : 'test from source code' }

@@ -657,9 +657,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitByteType: aByteType [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitCastExpression: aCastExpression [
+	"JLS 4.9: a cast writes a reference type and may write interface types after it, each
+	one an additional bound of the intersection type cast to."
+
 	currentFASTEntity := self addToModel: FASTJavaCastExpression new.
 	self setStartEndPos: aCastExpression.
 	currentFASTEntity type: (self clone accept: aCastExpression type).
+	aCastExpression interfaceTypes do: [ :interfaceType |
+		currentFASTEntity addAdditionalBound: (self clone accept: interfaceType) ].
 	currentFASTEntity
 		expression: (self clone accept: aCastExpression expression).
 	^ currentFASTEntity

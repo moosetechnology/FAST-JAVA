@@ -370,7 +370,11 @@ FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 		self
 			outputExpression: [
 				self
-					outputExpression: [ aFASTJavaCastExpression type accept: self ]
+					outputExpression: [
+						aFASTJavaCastExpression type accept: self.
+						aFASTJavaCastExpression additionalBounds do: [ :bound |
+							self unindented: ' & '.
+							bound accept: self ] ]
 					inParentheses: true.
 				self space.
 				aFASTJavaCastExpression expression accept: self
