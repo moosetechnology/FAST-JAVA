@@ -364,6 +364,28 @@ FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpre
 
 ]
 
+{ #category : 'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaCaseStatement: aFASTJavaCaseStatement [
+	"JLS 14.11: a group writes every label control may enter it through, then the
+	statements they share. A label that writes no case expression is the default, and a
+	group may write it beside labels that do write one, so none of them may be assumed."
+
+	self checkForComments: aFASTJavaCaseStatement andDo: [
+			aFASTJavaCaseStatement labels do: [ :label |
+					label caseExpressions ifEmpty: [ self indented: 'default' ] ifNotEmpty: [
+							self indented: 'case '.
+							label caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ] ].
+					label guard ifNotNil: [ :guard |
+							self unindented: ' when '.
+							guard accept: self ].
+					self
+						unindented: ':';
+						newLine ].
+			self indent.
+			aFASTJavaCaseStatement statements do: [ :caseStatement | caseStatement accept: self ].
+			self unindent ]
+]
+
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
 	self checkForComments: aFASTJavaCastExpression andDo: [
@@ -515,20 +537,6 @@ FASTJavaExportVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatem
 		self indented: 'continue'.
 		aFASTJavaContinueStatement label ifNotNil: [ :label | self unindented: ' ' , label ].
 		self endOfStatement ]
-]
-
-{ #category : 'visiting statement' }
-FASTJavaExportVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatement [
-	self checkForComments: aFASTJavaDefaultCaseStatement andDo: [ 
-		self
-			indented: 'default:' ;
-			newLine ;
-			indent.
-		aFASTJavaDefaultCaseStatement statements do: [ :caseStatement |
-			caseStatement accept: self
-		].
-		self unindent 
-	]
 ]
 
 { #category : 'visiting statement' }
@@ -852,28 +860,6 @@ FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDe
 			ifNotNil: [ :declarations | self visitJavaClassMemberDeclarations: declarations ].
 		self newLine
 	]
-]
-
-{ #category : 'visiting statement' }
-FASTJavaExportVisitor >> visitFASTJavaLabeledCaseStatement: aFASTJavaLabeledCaseStatement [
-
-	self checkForComments: aFASTJavaLabeledCaseStatement andDo: [
-			aFASTJavaLabeledCaseStatement labels do: [ :label |
-					"JLS 14.11: a label that writes no case expression is the default of the group."
-					label caseExpressions
-						ifEmpty: [ self indented: 'default' ]
-						ifNotEmpty: [
-								self indented: 'case '.
-								label caseExpressions do: [ :expression | expression accept: self ] separatedBy: [ self output: ', ' ] ].
-					label guard ifNotNil: [ :guard |
-							self unindented: ' when '.
-							guard accept: self ].
-					self
-						unindented: ':';
-						newLine ].
-			self indent.
-			aFASTJavaLabeledCaseStatement statements do: [ :caseStatement | caseStatement accept: self ].
-			self unindent ]
 ]
 
 { #category : 'visiting statement' }
