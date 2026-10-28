@@ -1547,6 +1547,23 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchExpressionInColonForm [
+	"JLS 14.11.1: a switch expression may write its block in colon form, each group
+	yielding the value, and that block is written back as the body of the expression."
+
+	| expr |
+	expr := self methodAST: 'int mth() { return switch (x) { case 1: yield 2; default: yield 3; }; }'.
+
+	self export: expr statements first equals: 'return switch (x) {
+  case 1:
+    yield 2;
+  default:
+    yield 3;
+};
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchLabelWithGuardedTypePattern [
 
 	| ast |

@@ -1643,23 +1643,31 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockStatementGroup: aSwitchBl
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchExpression: aSwitchExpression [
+	"JLS 14.11.1: a switch writes its block in arrow form or in colon form. SmaCC carries
+	the arrow rules on the node itself and the colon block beside them, so one of the two
+	is always empty."
 
 	currentFASTEntity := self addToModel: FASTJavaSwitchExpression new.
 	self setStartEndPos: aSwitchExpression.
 	currentFASTEntity condition: (self clone accept: aSwitchExpression expression).
 	aSwitchExpression statementGroups do: [ :statementGroup | currentFASTEntity rules add: (self clone accept: statementGroup) ].
+	aSwitchExpression block ifNotNil: [ :block |
+		(self casesOfSwitchBlock: block) do: [ :aCase | currentFASTEntity cases add: aCase ] ].
 	^ currentFASTEntity
 ]
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitSwitchExpressionAsStatement: aSwitchExpression [
 	"JLS 14.11.1: a switch whose block is in arrow form is a switch statement when it is
-	used as one."
+	used as one. The block is read the way a switch expression reads its own, either form
+	of it."
 
 	currentFASTEntity := self addToModel: FASTJavaSwitchStatement new.
 	self setStartEndPos: aSwitchExpression.
 	currentFASTEntity condition: (self clone accept: aSwitchExpression expression).
 	aSwitchExpression statementGroups do: [ :statementGroup | currentFASTEntity rules add: (self clone accept: statementGroup) ].
+	aSwitchExpression block ifNotNil: [ :block |
+		(self casesOfSwitchBlock: block) do: [ :aCase | currentFASTEntity cases add: aCase ] ].
 	^ currentFASTEntity
 ]
 

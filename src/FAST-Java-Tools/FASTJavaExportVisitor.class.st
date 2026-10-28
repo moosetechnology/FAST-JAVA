@@ -1270,7 +1270,11 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchExpression: aFASTJavaSwitchExpressio
 		output: ') {';
 		newLine;
 		indent.
+
+	"A switch block is in colon form or in arrow form, so one of these is empty."
+	aFASTJavaSwitchExpression cases do: [ :switchCase | switchCase accept: self ].
 	aFASTJavaSwitchExpression rules do: [ :rule | rule accept: self ].
+
 	self
 		unindent;
 		indented: $}
