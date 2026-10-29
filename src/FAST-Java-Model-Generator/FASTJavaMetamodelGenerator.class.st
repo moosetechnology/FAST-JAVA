@@ -1218,6 +1218,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTypeName --|> tNamedEntity.
 	javaTypeName --|> tExpression.
 	javaTypeName --|> tAnnotationElement.
+	"JLS 4.3: a name that qualifies a type is itself a type, so it may write type arguments
+	of its own, as the `ArrayList<E>` of `ArrayList<E>.ArrayListSpliterator` does"
+	javaTypeName --|> #TWithArguments.
 	javaQualifiedTypeName --|> javaTypeName.
 
 	"types"
@@ -1585,16 +1588,18 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeParameter property: #javaTypeParameterOwner) comment:
 			 'The generic declaration that declares me').
 
+	"JLS 4.5.1: the bound of a wildcard is a reference type, which an array type such as
+	the `T[]` of `Class<? extends T[]>` is."
 	((javaTypeParameter property: #types) comment:
 		 'The list of types I extend or implements')
 	<>-*
-		((javaClassTypeExpression property: #typeParameterOwner) comment:
+		((javaTypeExpression property: #typeParameterOwner) comment:
 			 'The type parameter I specify').
 
 	((javaTypeParameter property: #superType) comment:
 		 'The lower bound a wildcard writes, as in `? super Number`')
 	<>-
-		((javaClassTypeExpression property: #typeParameterSuperTypeOwner) comment:
+		((javaTypeExpression property: #typeParameterSuperTypeOwner) comment:
 			 'The wildcard I bound from below').
 
 	((javaParameterExpression property: #type) comment:

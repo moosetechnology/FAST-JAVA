@@ -489,12 +489,7 @@ FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 FASTJavaExportVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
 	self checkForComments: aFASTJavaClassTypeExpression andDo: [
 		aFASTJavaClassTypeExpression typeName accept: self.
-		aFASTJavaClassTypeExpression arguments
-			ifNotEmpty: [ :typeArguments |
-				self unindented: $<.
-				self visitNodeListSeparatedByCommas: typeArguments.
-				self unindented: $>.
-			]
+		self visitFASTJavaTypeArguments: aFASTJavaClassTypeExpression arguments
 	]
 ]
 
@@ -1189,12 +1184,14 @@ FASTJavaExportVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
+	"JLS 4.3: a qualified type writes the name that qualifies it, a dot, then its own name
+	and the type arguments that name writes."
 
 	aFASTJavaQualifiedTypeName namespace accept: self.
 	self
 		unindented: $. ;
-		unindented: aFASTJavaQualifiedTypeName name .
-
+		unindented: aFASTJavaQualifiedTypeName name.
+	self visitFASTJavaTypeArguments: aFASTJavaQualifiedTypeName arguments
 ]
 
 { #category : 'visiting' }
@@ -1380,12 +1377,23 @@ FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatem
 
 ]
 
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaTypeArguments: aFASTJavaTypeArgumentCollection [
+	"Write type arguments between angle brackets, and nothing at all where there are none.
+	A type writes them after the name they apply to, as `Map<K, V>` and the `ArrayList<E>`
+	of `ArrayList<E>.ArrayListSpliterator` do."
+
+	aFASTJavaTypeArgumentCollection ifEmpty: [ ^ self ].
+	self unindented: $<.
+	self visitNodeListSeparatedByCommas: aFASTJavaTypeArgumentCollection.
+	self unindented: $>
+]
+
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
 	self checkForComments: aFASTJavaTypeName andDo: [
-	self unindented: aFASTJavaTypeName name
-]
-
+		self unindented: aFASTJavaTypeName name.
+		self visitFASTJavaTypeArguments: aFASTJavaTypeName arguments ]
 ]
 
 { #category : 'visiting expression' }
