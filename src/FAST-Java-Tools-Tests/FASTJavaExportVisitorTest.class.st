@@ -566,6 +566,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithTypeParameters
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaClassWithAnnotationAfterAModifier [
+	"JLS 8.1.1: a class writes its annotations and keywords in any order, so one written
+	after a keyword stays on the line the declaration begins."
+
+	| expr |
+	expr := self astFor: 'public @Deprecated class C {}'.
+
+	self export: expr equals: 'public @Deprecated class C {
+}
+'
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitKeepsTheOrderOfItsTypeDeclarations [
 	"JLS 7.3: a compilation unit writes one list of type declarations, whatever kind each
@@ -1399,6 +1412,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReferenceWithTypeArguments [
 	self export: expr equals: 'void mth() {
   use(Collection<T>::add);
 }
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodWithInterleavedModifiers [
+	"JLS 8.4.3: a method writes annotations and keywords in any order, and the order it
+	writes them in is written back. The annotations it begins with go on lines of their
+	own; what follows the first keyword stays on the line the declaration begins."
+
+	| expr |
+	expr := self methodAST: '@IntrinsicCandidate public final native @PolymorphicSignature Object m();'.
+
+	self export: expr equals: '@IntrinsicCandidate
+public final native @PolymorphicSignature Object m() ;
 '
 ]
 

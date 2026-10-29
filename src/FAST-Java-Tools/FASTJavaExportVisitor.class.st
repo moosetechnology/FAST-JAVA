@@ -1013,20 +1013,24 @@ FASTJavaExportVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
 
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaModifiers: aFASTJavaModifierCollection [
-	self checkForComments: aFASTJavaModifierCollection andDo: [
-	aFASTJavaModifierCollection
-		select: [ :modifier | modifier isAnnotation ]
-		thenDo: [ :aFASTJavaAnnotation | 
-			self visitFASTJavaAnnotation: aFASTJavaAnnotation.
-			self newLine.
-			self indented: '' ].
-	aFASTJavaModifierCollection
-		select: [ :modifier | modifier isModifier ]
-		thenDo: [ :aFASTJavaModifier | 
-			self visitFASTJavaModifier: aFASTJavaModifier.
-			self space ]
-]
+	"JLS 8.1.1, 8.3.1 and 8.4.3: the modifiers of a type or a member are annotations and
+	keywords in whatever order the declaration writes them, so write them in that order.
+	The annotations a declaration begins with go on lines of their own, which is how a type
+	and a method are written; from the first keyword on, everything stays on the line the
+	declaration begins, where the source writes it."
 
+	| keywordWritten |
+	keywordWritten := false.
+	self checkForComments: aFASTJavaModifierCollection andDo: [
+		aFASTJavaModifierCollection do: [ :modifier |
+			modifier accept: self.
+			(modifier isAnnotation and: [ keywordWritten not ])
+				ifTrue: [
+					self newLine.
+					self indented: '' ]
+				ifFalse: [
+					self space.
+					keywordWritten := true ] ] ]
 ]
 
 { #category : 'visiting' }
