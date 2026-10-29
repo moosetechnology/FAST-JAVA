@@ -1388,6 +1388,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReference [
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReferenceWithTypeArguments [
+	"JLS 15.13: a method reference writes its receiver before `::`, with the type arguments
+	that receiver writes."
+
+	| expr |
+	expr := self methodAST: 'void mth() { use(Collection<T>::add); }'.
+
+	self export: expr equals: 'void mth() {
+  use(Collection<T>::add);
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayIntArg [
 	| node |
@@ -1543,6 +1557,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionThatCannotM
 '.
 	self export: (self methodAST: 'int mth() { return -(+y); }') equals: 'int mth() {
   return -+y;
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaQualifiedTypeNameWithTypeArguments [
+	"JLS 4.3: the name that qualifies a type writes type arguments of its own."
+
+	| expr |
+	expr := self methodAST: 'void mth(ArrayList<E>.ArrayListSpliterator s) { }'.
+
+	self export: expr equals: 'void mth(ArrayList<E>.ArrayListSpliterator s) {
 }
 '
 ]
@@ -1948,6 +1974,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 	expr := self methodAST: 'public Collection<?> meth() {}'.
 
 	self export: expr equals: 'public Collection<?> meth() {
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithArrayUpperBound [
+	"JLS 4.5.1: the bound of a wildcard is a reference type, which an array type is as much
+	as a class is."
+
+	| expr |
+	expr := self methodAST: 'void mth(Class<? extends T[]> newType) { }'.
+
+	self export: expr equals: 'void mth(Class<? extends T[]> newType) {
 }
 '
 ]

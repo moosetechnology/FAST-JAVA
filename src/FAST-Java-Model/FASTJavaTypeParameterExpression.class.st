@@ -45,8 +45,8 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `superType` | `FASTJavaTypeParameterExpression` | `typeParameterSuperTypeOwner` | `FASTJavaClassTypeExpression` | The lower bound a wildcard writes, as in `? super Number`|
-| `types` | `FASTJavaTypeParameterExpression` | `typeParameterOwner` | `FASTJavaClassTypeExpression` | The list of types I extend or implements|
+| `superType` | `FASTJavaTypeParameterExpression` | `typeParameterSuperTypeOwner` | `FASTJavaTypeExpression` | The lower bound a wildcard writes, as in `? super Number`|
+| `types` | `FASTJavaTypeParameterExpression` | `typeParameterOwner` | `FASTJavaTypeExpression` | The list of types I extend or implements|
 
 
 ## Properties
@@ -66,8 +66,8 @@ Class {
 	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaTypeParameterOwner => FMOne type: #FASTJavaTWithTypeParameters opposite: #typeParameters',
-		'#superType => FMOne type: #FASTJavaClassTypeExpression opposite: #typeParameterSuperTypeOwner',
-		'#types => FMMany type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner'
+		'#superType => FMOne type: #FASTJavaTypeExpression opposite: #typeParameterSuperTypeOwner',
+		'#types => FMMany type: #FASTJavaTypeExpression opposite: #typeParameterOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -120,7 +120,7 @@ FASTJavaTypeParameterExpression >> javaTypeParameterOwner: anObject [
 
 { #category : 'accessing' }
 FASTJavaTypeParameterExpression >> superType [
-	"Relation named: #superType type: #FASTJavaClassTypeExpression opposite: #typeParameterSuperTypeOwner"
+	"Relation named: #superType type: #FASTJavaTypeExpression opposite: #typeParameterSuperTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>
@@ -138,7 +138,7 @@ FASTJavaTypeParameterExpression >> superType: anObject [
 
 { #category : 'accessing' }
 FASTJavaTypeParameterExpression >> types [
-	"Relation named: #types type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner"
+	"Relation named: #types type: #FASTJavaTypeExpression opposite: #typeParameterOwner"
 
 	<ignoreForCoverage>
 	<generated>

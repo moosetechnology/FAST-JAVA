@@ -19,6 +19,8 @@ I am an abstract class representing a type
 | `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaMethodInvocation` | The invocation that writes me as one of its type arguments|
 | `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaRecordDeclaration` | The record that implements me|
 | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
+| `typeParameterOwner` | `FASTJavaTypeExpression` | `types` | `FASTJavaTypeParameterExpression` | The type parameter I specify|
+| `typeParameterSuperTypeOwner` | `FASTJavaTypeExpression` | `superType` | `FASTJavaTypeParameterExpression` | The wildcard I bound from below|
 
 
 
@@ -38,7 +40,9 @@ Class {
 		'#javaInterfaceDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes',
 		'#javaMethodInvocationTypeArgumentOwner => FMOne type: #FASTJavaMethodInvocation opposite: #typeArguments',
 		'#javaRecordDeclarationInterfaceOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #interfaces',
-		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type'
+		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type',
+		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types',
+		'#typeParameterSuperTypeOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #superType'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -291,4 +295,43 @@ FASTJavaTypeExpression >> javaTypePatternTypeOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaTypePatternTypeOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> typeParameterOwner [
+	"Relation named: #typeParameterOwner type: #FASTJavaTypeParameterExpression opposite: #types"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The type parameter I specify'>
+	<container>
+	^ typeParameterOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> typeParameterOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typeParameterOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> typeParameterSuperTypeOwner [
+	"Relation named: #typeParameterSuperTypeOwner type: #FASTJavaTypeParameterExpression opposite: #superType"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The wildcard I bound from below'>
+	<container>
+	<derived>
+	^ typeParameterSuperTypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> typeParameterSuperTypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typeParameterSuperTypeOwner := anObject
 ]

@@ -475,6 +475,28 @@ JavaSmaCCProgramNodeImporterVisitor >> statementsOfForHeader: aNode [
 ]
 
 { #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> typeNameOf: aNameNode [
+	"JLS 15.13: a method reference writes a reference type before `::`, which the rule that
+	reads it takes for an expression name; only the type arguments that may follow tell the
+	two apart. Build the name as the type name it is, one part at a time."
+
+	| isQualified typeName |
+	isQualified := aNameNode isKindOf: JavaQualifiedNameNode.
+	typeName := (self addToModel: (isQualified
+			             ifTrue: [ FASTJavaQualifiedTypeName new ]
+			             ifFalse: [ FASTJavaTypeName new ]))
+		            startPos: aNameNode startPosition;
+		            endPos: aNameNode stopPosition;
+		            name: aNameNode name value;
+		            yourself.
+
+	isQualified ifTrue: [
+		typeName namespace: (self typeNameOf: aNameNode nspace) ].
+
+	^ typeName
+]
+
+{ #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> typePatternOf: aNode [
 	"JLS 14.30.1: a type pattern names a type and declares the variable bound to what it
 	matches, with the modifiers any local variable declaration may write before its type.
@@ -493,6 +515,23 @@ JavaSmaCCProgramNodeImporterVisitor >> typePatternOf: aNode [
 		           yourself.
 	aNode modifiers do: [ :modifier | pattern addModifier: (self clone accept: modifier) ].
 	^ pattern
+]
+
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> typeReceiverOf: aMethodReference [
+	"JLS 15.13: only a reference type may write type arguments before `::`, so a receiver
+	that writes them is a type, whatever its name alone would read as. Build it as the type
+	it is, the way `ArrayList<String>::new` already arrives as one."
+
+	| type |
+	type := (self addToModel: FASTJavaClassTypeExpression new)
+		        startPos: aMethodReference receiver startPosition;
+		        endPos: aMethodReference gt stopPosition;
+		        typeName: (self typeNameOf: aMethodReference receiver);
+		        yourself.
+	aMethodReference arguments do: [ :argument |
+		type addArgument: (self clone accept: argument) ].
+	^ type
 ]
 
 { #category : 'visitor' }
@@ -1299,13 +1338,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodReference: aMethodReference [
-	currentFASTEntity := self
-		addToModel: FASTJavaMethodReference new.
+	"JLS 15.13: a method reference names what it refers to after `::` and writes before it
+	the receiver, which is a type when it writes type arguments of its own."
+
+	currentFASTEntity := self addToModel: FASTJavaMethodReference new.
 	self setStartEndPos: aMethodReference.
-	currentFASTEntity
-		receiver: (self clone accept: aMethodReference receiver).
-	currentFASTEntity
-		name: (aMethodReference name value).
+	currentFASTEntity receiver: (aMethodReference arguments
+			 ifEmpty: [ self clone accept: aMethodReference receiver ]
+			 ifNotEmpty: [ self typeReceiverOf: aMethodReference ]).
+	currentFASTEntity name: aMethodReference name value.
 	^ currentFASTEntity
 ]
 
@@ -1529,10 +1570,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeName [
+	"JLS 4.3: the name that qualifies a type is itself a type, so it may write type
+	arguments of its own, as `ArrayList<E>.ArrayListSpliterator` does. The type expression
+	holds the arguments the last name writes; a name before it holds its own."
+
+	| namespace |
 	currentFASTEntity := self addToModel: FASTJavaQualifiedTypeName new.
 	self setStartEndPos: aQualifiedTypeName.
 	currentFASTEntity name: aQualifiedTypeName name value.
-	currentFASTEntity namespace: (self clone accept: aQualifiedTypeName nspace).
+	namespace := self clone accept: aQualifiedTypeName nspace.
+	aQualifiedTypeName nspace arguments do: [ :argument |
+		namespace addArgument: (self clone accept: argument) ].
+	currentFASTEntity namespace: namespace.
 	^ currentFASTEntity
 ]
 
@@ -1781,15 +1830,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
 			currentFASTEntity name: '?'.
 
 			"JLS 4.5.1: `? extends B` writes an upper bound, which is what the types of a
-			type parameter are, and `? super B` writes a lower one. Both are class types
-			here, so an array bound such as the one of `Class<? extends T[]>` has no place
-			among them."
+			type parameter are, and `? super B` writes a lower one. Either is a reference
+			type, which the `T[]` of `Class<? extends T[]>` is as much as a class is."
 			aTypeArgument token ifNotNil: [ :keyword |
-				(aTypeArgument type isKindOf: JavaClassTypeNode) ifTrue: [
-					keyword value = 'extends' ifTrue: [
-						currentFASTEntity addType: (self clone accept: aTypeArgument type) ].
-					keyword value = 'super' ifTrue: [
-						currentFASTEntity superType: (self clone accept: aTypeArgument type) ] ] ].
+				keyword value = 'extends' ifTrue: [
+					currentFASTEntity addType: (self clone accept: aTypeArgument type) ].
+				keyword value = 'super' ifTrue: [
+					currentFASTEntity superType: (self clone accept: aTypeArgument type) ] ].
 
 			currentFASTEntity
 		]
