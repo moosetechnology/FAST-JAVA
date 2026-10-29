@@ -1562,6 +1562,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionThatCannotM
 ]
 
 { #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaQualifiedSuperConstructorInvocation [
+	"JLS 8.8.7.1: a superclass constructor invocation writes before it the expression naming
+	the instance the superclass is to be enclosed by."
+
+	| expr |
+	expr := self methodAST: 'Patate(Outer o) { o.super("Hello"); }'.
+
+	self export: expr equals: 'Patate(Outer o) {
+  o.super("Hello");
+}
+'
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaQualifiedTypeNameWithTypeArguments [
 	"JLS 4.3: the name that qualifies a type writes type arguments of its own."
 
@@ -1609,6 +1623,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSumAndPreIncrement [
 	expr := self methodAST: 'void meth() { a = 12 + ++a; }'.
 
 	self export: expr statements first equals: 'a = 12+ ++a;
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSuperConstructorInvocationQualifiedByOuterThis [
+	"The qualifier is any primary expression, `Outer.this` among them."
+
+	| expr |
+	expr := self methodAST: 'Patate() { Outer.this.super(); }'.
+
+	self export: expr equals: 'Patate() {
+  Outer.this.super();
+}
 '
 ]
 

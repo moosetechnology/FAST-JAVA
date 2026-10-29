@@ -13,6 +13,20 @@ JavaSmaCCSuperConstructorInvocationTest >> javaMethod [
 ]
 
 { #category : 'tests' }
+JavaSmaCCSuperConstructorInvocationTest >> testQualifiedSuperConstructorKeepsItsQualifier [
+	"JLS 8.8.7.1: `o.super(k)` names the instance the superclass is to be enclosed by, and
+	the model holds the expression written before the dot as the receiver of the invocation
+	the keyword names."
+
+	| qualified invocation |
+	qualified := self parseMethodString: 'Patate (Outer o) { o.super("Hello"); }'.
+	invocation := (qualified allWithType: FASTJavaMethodInvocation) anyOne.
+
+	self assert: invocation name equals: 'super'.
+	self assert: invocation receiver name equals: 'o'
+]
+
+{ #category : 'tests' }
 JavaSmaCCSuperConstructorInvocationTest >> testSuperConstructorArgumentsParent [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne arguments anyOne parentNode equals: (fastModel allWithType: FASTJavaMethodInvocation) anyOne
 ]
@@ -35,4 +49,11 @@ JavaSmaCCSuperConstructorInvocationTest >> testSuperConstructorParent [
 { #category : 'tests' }
 JavaSmaCCSuperConstructorInvocationTest >> testSuperConstructorSize [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) size equals: 1
+]
+
+{ #category : 'tests' }
+JavaSmaCCSuperConstructorInvocationTest >> testUnqualifiedSuperConstructorHasNoReceiver [
+	"A constructor invocation written with no qualifier keeps none."
+
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver isNil
 ]

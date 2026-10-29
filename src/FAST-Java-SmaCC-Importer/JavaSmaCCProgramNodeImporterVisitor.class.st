@@ -1662,6 +1662,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStringLiteral: aStringLiteral [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperConstructorInvocation [
+	"JLS 8.8.7.1: a superclass constructor invocation may be written after an expression
+	and a dot, which names the instance the superclass is to be enclosed by. The model
+	writes such an invocation as one named after the keyword, so the expression written
+	before the dot is the receiver of that invocation, as it is in the source."
+
 	| expressionStatement |
 	currentFASTEntity := self addToModel: FASTJavaExpressionStatement new.
 	expressionStatement := currentFASTEntity. 
@@ -1670,6 +1675,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperCo
 	currentFASTEntity expression: (self addToModel: FASTJavaMethodInvocation new).
 	currentFASTEntity := currentFASTEntity expression.
 	self setStartEndPos: aSuperConstructorInvocation.
+	aSuperConstructorInvocation primary ifNotNil: [ :qualifier |
+		currentFASTEntity receiver: (self clone accept: qualifier) ].
 	aSuperConstructorInvocation expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity name: aSuperConstructorInvocation superToken value.
 	^ expressionStatement
