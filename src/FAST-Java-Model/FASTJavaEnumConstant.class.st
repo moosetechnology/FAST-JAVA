@@ -10,9 +10,9 @@
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 
 
 
@@ -20,8 +20,8 @@
 Class {
 	#name : 'FASTJavaEnumConstant',
 	#superclass : 'FASTJavaVariableExpression',
-	#traits : 'FASTJavaTWithDeclarations + FASTJavaTWithModifiers + FASTTWithArguments',
-	#classTraits : 'FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTTWithArguments classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithDeclarations + FASTTWithArguments',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#parentEnum => FMOne type: #FASTJavaEnumDeclaration opposite: #constants'
 	],

@@ -43,6 +43,7 @@ switch (day) {
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
+| `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
 | `returnOwner` | `FASTTExpression` | `expression` | `FASTTReturnStatement` | The return statement that own the expression (if it's the case)|
 | `switchConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchStatement` | I represent a condition for my owner|
 | `switchExpressionConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchExpression` | The switch expression whose condition I am|
@@ -70,8 +71,8 @@ switch (day) {
 Class {
 	#name : 'FASTJavaSwitchExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithSwitchBlock + FASTTExpression',
-	#classTraits : 'FASTJavaTWithSwitchBlock classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithSwitchBlock + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithSwitchBlock classTrait + FASTTExpression classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'

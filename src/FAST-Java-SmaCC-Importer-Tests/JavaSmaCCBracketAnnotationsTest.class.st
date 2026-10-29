@@ -9,7 +9,7 @@ Class {
 JavaSmaCCBracketAnnotationsTest >> annotationsOf: aDimensionCollection [
 
 	^ (aDimensionCollection collect: [ :dimension |
-		   (dimension modifiers collect: [ :modifier | modifier name ]) asArray ]) asArray
+		   (dimension annotations collect: [ :modifier | modifier name ]) asArray ]) asArray
 ]
 
 { #category : 'resources' }
@@ -87,9 +87,9 @@ JavaSmaCCBracketAnnotationsTest >> testEachPairOfBracketsOfATypeKeepsItsOwnAnnot
 	outer := (fastModel allWithType: FASTJavaArrayTypeExpression)
 		         detect: [ :each | each baseType isArrayTypeExpression ].
 
-	self assert: (outer modifiers collect: [ :modifier | modifier name ]) asArray
+	self assert: (outer annotations collect: [ :modifier | modifier name ]) asArray
 		equals: #( 'B' ).
-	self assert: (outer baseType modifiers collect: [ :modifier | modifier name ]) asArray
+	self assert: (outer baseType annotations collect: [ :modifier | modifier name ]) asArray
 		equals: #( 'A' ).
 	self assert: outer baseType baseType name equals: 'String'
 ]
@@ -103,7 +103,7 @@ JavaSmaCCBracketAnnotationsTest >> testTheEllipsisOfAVariableArityParameterKeeps
 	parameter := (fastModel allWithType: FASTJavaParameter) detect: [ :each | each hasVariableArguments ].
 
 	self assert: parameter variableArguments isNotNil.
-	self assert: (parameter variableArguments modifiers collect: [ :modifier | modifier name ]) asArray equals: #( 'A' ).
+	self assert: (parameter variableArguments annotations collect: [ :modifier | modifier name ]) asArray equals: #( 'A' ).
 	self assert: parameter modifiers isEmpty.
 	self assert: parameter brackets isEmpty
 ]

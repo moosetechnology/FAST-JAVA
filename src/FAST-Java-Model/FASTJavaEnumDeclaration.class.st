@@ -49,6 +49,8 @@ public enum MyEnum {
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasBodySemicolon` | `Boolean` | false | Whether the semicolon opening the body is written where the enum declares no member, which JLS 8.9 allows; where it declares one the semicolon is written either way|
+| `hasTrailingComma` | `Boolean` | false | Whether a comma is written after the last constant, which JLS 8.9 allows|
 | `name` | `String` | nil | |
 | `source` | `String` | nil | Actual source code of the source entity|
 | `startPos` | `Number` | nil | |
@@ -62,6 +64,8 @@ Class {
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #enumDeclarations',
 		'#constants => FMMany type: #FASTJavaEnumConstant opposite: #parentEnum',
+		'#hasBodySemicolon => FMProperty defaultValue: false',
+		'#hasTrailingComma => FMProperty defaultValue: false',
 		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -130,6 +134,40 @@ FASTJavaEnumDeclaration >> constants: anObject [
 	<ignoreForCoverage>
 	<generated>
 	constants value: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumDeclaration >> hasBodySemicolon [
+
+	<FMProperty: #hasBodySemicolon type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether the semicolon opening the body is written where the enum declares no member, which JLS 8.9 allows; where it declares one the semicolon is written either way'>
+	^ hasBodySemicolon ifNil: [ hasBodySemicolon := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumDeclaration >> hasBodySemicolon: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasBodySemicolon := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumDeclaration >> hasTrailingComma [
+
+	<FMProperty: #hasTrailingComma type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether a comma is written after the last constant, which JLS 8.9 allows'>
+	^ hasTrailingComma ifNil: [ hasTrailingComma := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumDeclaration >> hasTrailingComma: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasTrailingComma := anObject
 ]
 
 { #category : 'accessing' }

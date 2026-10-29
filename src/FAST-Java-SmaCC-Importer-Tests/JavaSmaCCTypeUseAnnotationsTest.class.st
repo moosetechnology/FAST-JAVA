@@ -32,7 +32,7 @@ JavaSmaCCTypeUseAnnotationsTest >> testATypeArgumentKeepsItsAnnotations [
 
 	self assert: argument class equals: FASTJavaClassTypeExpression.
 	self assert: argument typeName name equals: 'String'.
-	self assert: (argument modifiers collect: [ :modifier | modifier name ]) asArray equals: #( 'Ann' )
+	self assert: (argument annotations collect: [ :annotation | annotation name ]) asArray equals: #( 'Ann' )
 ]
 
 { #category : 'tests' }
@@ -45,12 +45,12 @@ JavaSmaCCTypeUseAnnotationsTest >> testAWildcardKeepsItsOwnAnnotationsApartFromI
 	bounded := self typeArgumentOf: 'bounded'.
 
 	self assert: wildcard name equals: '?'.
-	self assert: (wildcard modifiers collect: [ :modifier | modifier name ]) asArray equals: #( 'Ann' ).
+	self assert: (wildcard annotations collect: [ :annotation | annotation name ]) asArray equals: #( 'Ann' ).
 	self assert: wildcard types isEmpty.
 
 	self assert: bounded name equals: '?'.
-	self assert: bounded modifiers isEmpty.
-	self assert: (bounded types anyOne modifiers collect: [ :modifier | modifier name ]) asArray equals: #( 'Ann' )
+	self assert: bounded annotations isEmpty.
+	self assert: (bounded types anyOne annotations collect: [ :annotation | annotation name ]) asArray equals: #( 'Ann' )
 ]
 
 { #category : 'tests' }
@@ -61,9 +61,9 @@ JavaSmaCCTypeUseAnnotationsTest >> testEveryBoundOfATypeParameterKeepsItsAnnotat
 	| parameter |
 	parameter := (fastModel allWithType: FASTJavaTypeParameterExpression) detect: [ :each | each name = 'T' ].
 
-	self assert: parameter modifiers isEmpty.
+	self assert: parameter annotations isEmpty.
 	self assert: (parameter types collect: [ :bound | bound typeName name ]) asArray equals: #( 'Object' 'Cloneable' ).
-	parameter types do: [ :bound | self assert: (bound modifiers collect: [ :modifier | modifier name ]) asArray equals: #( 'Ann' ) ]
+	parameter types do: [ :bound | self assert: (bound annotations collect: [ :annotation | annotation name ]) asArray equals: #( 'Ann' ) ]
 ]
 
 { #category : 'tests' }
@@ -75,7 +75,7 @@ JavaSmaCCTypeUseAnnotationsTest >> testTheTypeAMethodReferenceNamesKeepsItsAnnot
 
 	self assert: reference receiver class equals: FASTJavaClassTypeExpression.
 	self assert: reference receiver typeName name equals: 'TypeUse'.
-	self assert: (reference receiver modifiers collect: [ :modifier | modifier name ]) asArray equals: #( 'Ann' )
+	self assert: (reference receiver annotations collect: [ :annotation | annotation name ]) asArray equals: #( 'Ann' )
 ]
 
 { #category : 'accessing' }

@@ -258,14 +258,13 @@ FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayAnnotationElement: aFASTJavaArrayAnnotationElement [
-
 	self checkForComments: aFASTJavaArrayAnnotationElement andDo: [
 		self unindented: '{ '.
 		self
 			visitNodeListSeparatedByCommas: aFASTJavaArrayAnnotationElement values.
+		aFASTJavaArrayAnnotationElement hasTrailingComma ifTrue: [ self unindented: $, ].
 		self unindented: ' }'.
 	]
-
 ]
 
 { #category : 'visiting expression' }
@@ -273,6 +272,7 @@ FASTJavaExportVisitor >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitialize
 	self checkForComments: aFASTJavaArrayInitializer andDo: [
 		self unindented: '{ '.
 		self visitNodeListSeparatedByCommas: aFASTJavaArrayInitializer initializers.
+		aFASTJavaArrayInitializer hasTrailingComma ifTrue: [ self unindented: $, ].
 		self unindented: ' }'.
 	]
 ]
@@ -284,8 +284,8 @@ FASTJavaExportVisitor >> visitFASTJavaArrayTypeExpression: aFASTJavaArrayTypeExp
 
 	self checkForComments: aFASTJavaArrayTypeExpression andDo: [
 	aFASTJavaArrayTypeExpression baseType accept: self.
-	aFASTJavaArrayTypeExpression modifiers ifNotEmpty: [ self space ].
-	self visitFASTJavaModifiersInline: aFASTJavaArrayTypeExpression modifiers.
+	aFASTJavaArrayTypeExpression annotations ifNotEmpty: [ self space ].
+	self visitFASTJavaModifiersInline: aFASTJavaArrayTypeExpression annotations.
 	self unindented: '[]'.
 ]
 
@@ -348,7 +348,7 @@ FASTJavaExportVisitor >> visitFASTJavaBooleanLiteral: aFASTJavaBooleanLiteral [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaBooleanTypeExpression: aFASTJavaBooleanTypeExpression [
 	self checkForComments: aFASTJavaBooleanTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaBooleanTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaBooleanTypeExpression annotations.
 	self unindented: 'boolean'
 ]
 
@@ -368,7 +368,7 @@ FASTJavaExportVisitor >> visitFASTJavaBreakStatement: aFASTJavaBreakStatement [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaByteTypeExpression: aFASTJavaByteTypeExpression [
 	self checkForComments: aFASTJavaByteTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaByteTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaByteTypeExpression annotations.
 	self unindented: 'byte'
 ]
 
@@ -438,7 +438,7 @@ FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStat
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaCharTypeExpression: aFASTJavaCharTypeExpression [
 	self checkForComments: aFASTJavaCharTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaCharTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaCharTypeExpression annotations.
 	self unindented: 'char'
 ]
 
@@ -501,7 +501,7 @@ FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
 	self checkForComments: aFASTJavaClassTypeExpression andDo: [
-		self visitFASTJavaModifiersInline: aFASTJavaClassTypeExpression modifiers.
+		self visitFASTJavaModifiersInline: aFASTJavaClassTypeExpression annotations.
 		aFASTJavaClassTypeExpression typeName accept: self.
 		self visitFASTJavaTypeArguments: aFASTJavaClassTypeExpression arguments
 	]
@@ -559,8 +559,8 @@ FASTJavaExportVisitor >> visitFASTJavaDimension: aFASTJavaDimension [
 	what comes before them is a name or a type, which needs a space after it."
 
 	self checkForComments: aFASTJavaDimension andDo: [
-			aFASTJavaDimension modifiers ifNotEmpty: [ self space ].
-			self visitFASTJavaModifiersInline: aFASTJavaDimension modifiers.
+			aFASTJavaDimension annotations ifNotEmpty: [ self space ].
+			self visitFASTJavaModifiersInline: aFASTJavaDimension annotations.
 			self unindented: '[]' ]
 ]
 
@@ -587,7 +587,7 @@ FASTJavaExportVisitor >> visitFASTJavaDoubleLiteral: aFASTJavaDoubleLiteral [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
 	self checkForComments: aFASTJavaDoubleTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaDoubleTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaDoubleTypeExpression annotations.
 	self unindented: 'double'
 ]
 
@@ -622,7 +622,7 @@ FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 	before its name."
 
 	self checkForComments: aFASTJavaEnumConstant andDo: [
-		self visitFASTJavaModifiersInline: aFASTJavaEnumConstant modifiers.
+		self visitFASTJavaModifiersInline: aFASTJavaEnumConstant annotations.
 		self unindented: aFASTJavaEnumConstant name.
 		aFASTJavaEnumConstant arguments ifNotEmpty: [ :arguments | self visitFASTJavaArgumentsList: arguments ].
 		aFASTJavaEnumConstant declarations ifNotEmpty: [ :declarations | self visitJavaClassMemberDeclarations: declarations ]
@@ -631,8 +631,9 @@ FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration [
-	"JLS 8.9.1: the semicolon after the constants opens the body of the enum, so it is
-	written where the enum declares members and left out where it declares none."
+	"JLS 8.9: the semicolon after the constants opens the body of the enum, so it is
+	written wherever the enum declares members, and where it declares none only where the
+	source wrote one. The comma JLS 8.9 allows after the last constant is kept likewise."
 
 	self checkForComments: aFASTJavaEnumDeclaration andDo: [
 		self visitFASTJavaModifiers: aFASTJavaEnumDeclaration modifiers.
@@ -653,7 +654,9 @@ FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration 
 
 		self indented: ''.
 		self visitNodeListSeparatedByCommas: aFASTJavaEnumDeclaration constants.
-		aFASTJavaEnumDeclaration declarations ifNotEmpty: [ self unindented: $; ].
+		aFASTJavaEnumDeclaration hasTrailingComma ifTrue: [ self unindented: $, ].
+		(aFASTJavaEnumDeclaration hasBodySemicolon or: [
+			 aFASTJavaEnumDeclaration declarations isNotEmpty ]) ifTrue: [ self unindented: $; ].
 		self newLine.
 
 		aFASTJavaEnumDeclaration declarations
@@ -713,7 +716,7 @@ FASTJavaExportVisitor >> visitFASTJavaFloatLiteral: aFASTJavaFloatLiteral [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExpression [
 	self checkForComments: aFASTJavaFloatTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaFloatTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaFloatTypeExpression annotations.
 	self unindented: 'float'
 ]
 
@@ -865,7 +868,7 @@ FASTJavaExportVisitor >> visitFASTJavaInitializer: aFASTJavaInitializer [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaIntTypeExpression: aFASTJavaIntTypeExpression [
 	self checkForComments: aFASTJavaIntTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaIntTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaIntTypeExpression annotations.
 	self unindented: 'int'
 ]
 
@@ -948,7 +951,7 @@ FASTJavaExportVisitor >> visitFASTJavaLongLiteral: aFASTJavaLongLiteral [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression [
 	self checkForComments: aFASTJavaLongTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaLongTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaLongTypeExpression annotations.
 	self unindented: 'long'
 ]
 
@@ -984,7 +987,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 		"JLS 8.4: the brackets written after the parameter list are written back there, each
 		with the annotations it carries; a bare pair still stands apart from the list."
 		aFASTJavaMethodEntity brackets do: [ :bracket |
-			bracket modifiers ifEmpty: [ self space ].
+			bracket annotations ifEmpty: [ self space ].
 			bracket accept: self ].
 		self space.
 		self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.
@@ -1110,7 +1113,7 @@ FASTJavaExportVisitor >> visitFASTJavaModuleDeclaration: aFASTJavaModuleDeclarat
 
 	self checkForComments: aFASTJavaModuleDeclaration andDo: [
 		self indented: ''.
-		self visitFASTJavaModifiers: aFASTJavaModuleDeclaration modifiers.
+		self visitFASTJavaModifiers: aFASTJavaModuleDeclaration annotations.
 		aFASTJavaModuleDeclaration isOpen ifTrue: [ self unindented: 'open ' ].
 		self unindented: 'module '.
 		self visitFASTJavaQualifiedName: aFASTJavaModuleDeclaration qualifiedName.
@@ -1158,6 +1161,12 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
 	self checkForComments: aFASTJavaNewClassExpression andDo: [
+		"JLS 15.9: an inner class may be instantiated through an instance of the class
+		enclosing it, as `outer.new Inner() { }` does, the qualifier being that instance."
+		aFASTJavaNewClassExpression receiver ifNotNil: [ :receiver |
+			receiver accept: self.
+			self unindented: '.'
+		].
 		self unindented: 'new '.
 		"JLS 15.9: the type arguments of the constructor called come between `new` and the
 		type instantiated."
@@ -1168,7 +1177,6 @@ FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpre
 
 		self visitJavaClassMemberDeclarations: aFASTJavaNewClassExpression declarations
 	]
-
 ]
 
 { #category : 'visiting expression' }
@@ -1217,14 +1225,15 @@ FASTJavaExportVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 	]
 ]
 
-{ #category : 'visiting statement' }
+{ #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [
 	self checkForComments: aFASTJavaPackageDeclaration andDo: [
-	self unindented: 'package '.
-	self visitFASTJavaQualifiedName: aFASTJavaPackageDeclaration qualifiedName.
-	self endOfStatement
-]
-
+		"JLS 7.4.1: the annotations a package declaration writes go before `package`, each
+		on a line of its own, which is how package-info.java is written."
+		self visitFASTJavaModifiers: aFASTJavaPackageDeclaration annotations.
+		self unindented: 'package '.
+		self visitFASTJavaQualifiedName: aFASTJavaPackageDeclaration qualifiedName.
+		self endOfStatement ]
 ]
 
 { #category : 'visiting expression' }
@@ -1240,9 +1249,9 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 					"JLS 8.4.1: the annotations written on the ellipsis stand between the
 					type and it, the dimension it adds being what they are written on."
 					aFASTJavaParameter variableArguments ifNotNil: [ :ellipsis |
-						ellipsis modifiers ifNotEmpty: [ :modifiers |
+						ellipsis annotations ifNotEmpty: [ :annotations |
 							self space.
-							self visitFASTJavaModifiersInline: modifiers ] ].
+							self visitFASTJavaModifiersInline: annotations ] ].
 					self unindented: '...'
 				].
 				self space
@@ -1335,7 +1344,7 @@ FASTJavaExportVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeN
 
 	aFASTJavaQualifiedTypeName namespace accept: self.
 	self unindented: $. .
-	self visitFASTJavaModifiersInline: aFASTJavaQualifiedTypeName modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaQualifiedTypeName annotations.
 	self unindented: aFASTJavaQualifiedTypeName name.
 	self visitFASTJavaTypeArguments: aFASTJavaQualifiedTypeName arguments
 ]
@@ -1346,7 +1355,7 @@ FASTJavaExportVisitor >> visitFASTJavaReceiverParameter: aFASTJavaReceiverParame
 	method is called on, and `this`, qualified by a name where a constructor writes it."
 
 	self checkForComments: aFASTJavaReceiverParameter andDo: [
-			self visitFASTJavaModifiersInline: aFASTJavaReceiverParameter modifiers.
+			self visitFASTJavaModifiersInline: aFASTJavaReceiverParameter annotations.
 			aFASTJavaReceiverParameter type accept: self.
 			self space.
 			aFASTJavaReceiverParameter qualifier ifNotNil: [ :qualifier |
@@ -1417,7 +1426,7 @@ FASTJavaExportVisitor >> visitFASTJavaReturnStatement: aFASTJavaReturnStatement 
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaShortTypeExpression: aFASTJavaShortTypeExpression [
 	self checkForComments: aFASTJavaShortTypeExpression andDo: [
-	self visitFASTJavaModifiersInline: aFASTJavaShortTypeExpression modifiers.
+	self visitFASTJavaModifiersInline: aFASTJavaShortTypeExpression annotations.
 	self unindented: 'short'
 ]
 
@@ -1549,7 +1558,10 @@ FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatem
 		self indented: 'try '.
 
 		aFASTJavaTryCatchStatement resources
-			ifNotEmpty: [ :tryResources | self visitTryResources: tryResources ].
+			ifNotEmpty: [ :tryResources |
+				self
+					visitTryResources: tryResources
+					trailingSemicolon: aFASTJavaTryCatchStatement hasTrailingSemicolon ].
 
 		aFASTJavaTryCatchStatement try accept: self.
 
@@ -1563,7 +1575,6 @@ FASTJavaExportVisitor >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatem
 				finallyPart accept: self
 		]
 	]
-
 ]
 
 { #category : 'visiting' }
@@ -1590,7 +1601,7 @@ FASTJavaExportVisitor >> visitFASTJavaTypeParameter: aFASTJavaTypeParameterExpre
 	"JLS 4.4: a type parameter writes the annotations it declares before its name."
 
 	self checkForComments: aFASTJavaTypeParameterExpression andDo: [
-		self visitFASTJavaModifiersInline: aFASTJavaTypeParameterExpression modifiers.
+		self visitFASTJavaModifiersInline: aFASTJavaTypeParameterExpression annotations.
 		self unindented: aFASTJavaTypeParameterExpression name.
 		aFASTJavaTypeParameterExpression types ifNotEmpty: [ :typeArgumentSuperclasses |
 			self unindented: ' extends '.
@@ -1736,9 +1747,18 @@ FASTJavaExportVisitor >> visitNodeListSeparatedByCommas: aCollection [
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitTryResources: tryResources [
+	"Write the resources with no semicolon after the last, which is how a model that does
+	not say otherwise writes them."
+
+	self visitTryResources: tryResources trailingSemicolon: false
+]
+
+{ #category : 'visiting statement' }
+FASTJavaExportVisitor >> visitTryResources: tryResources trailingSemicolon: aBoolean [
 	"A resource is either a declaration or an expression referring to an existing variable.
 	Declarations are statements: #visitFASTJavaVarDeclStatement: ends them with a semicolon
-	and a newline, which are removed here so that all resources are printed uniformly."
+	and a newline, which are removed here so that all resources are printed uniformly.
+	JLS 14.20.3 allows a semicolon after the last resource, which aBoolean says was written."
 
 	| tmpIndent |
 	tmpIndent := self indentLevel.
@@ -1751,6 +1771,8 @@ FASTJavaExportVisitor >> visitTryResources: tryResources [
 				aResource accept: self.
 				aResource isVarDeclStatement ifTrue: [ self goBack: 2 ] ]
 		separatedBy: [ self unindented: '; ' ].
+
+	aBoolean ifTrue: [ self unindented: $; ].
 
 	self unindented: ') '.
 

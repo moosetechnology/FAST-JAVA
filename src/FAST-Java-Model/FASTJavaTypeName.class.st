@@ -50,8 +50,8 @@ I represent the name of a type
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 
 
 ## Properties
@@ -67,8 +67,8 @@ I represent the name of a type
 Class {
 	#name : 'FASTJavaTypeName',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAnnotationElement + FASTJavaTWithModifiers + FASTTExpression + FASTTNamedEntity + FASTTWithArguments',
-	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
+	#traits : 'FASTJavaTAnnotationElement + FASTJavaTWithAnnotations + FASTTExpression + FASTTNamedEntity + FASTTWithArguments',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'

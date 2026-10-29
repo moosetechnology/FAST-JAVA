@@ -119,6 +119,20 @@ JavaSmaCCProgramNodeImporterVisitor >> addTypeParametersOf: aDeclarationNode [
 		typeParameters parameters do: [ :typeParameter | currentFASTEntity addTypeParameter: (self clone accept: typeParameter) ] ]
 ]
 
+{ #category : 'private' }
+JavaSmaCCProgramNodeImporterVisitor >> anyOf: aTokenCollection between: aStartPosition and: anEndPosition [
+	"JLS 8.9, 9.7.1, 10.6 and 14.20.3 each write a piece of punctuation as an optional
+	element of a production of its own. SmaCC gathers that token into the same collection
+	as the separators of the list it follows, and as the separators of any other list the
+	same production holds, so `enum E implements I, J { A, B; }` answers as many commas as
+	it has constants. Where the token stands is what tells it apart: after the last element
+	of the list and before the token closing it."
+
+	^ aTokenCollection anySatisfy: [ :token |
+		  token startPosition > aStartPosition and: [
+			  token startPosition < anEndPosition ] ]
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> arrayDimensionsOf: aVariableNode [
 	"JLS 10.2: the brackets of an array type may be written after the variable instead of
@@ -323,7 +337,7 @@ JavaSmaCCProgramNodeImporterVisitor >> dimensionOf: aNode [
 
 	| dimension |
 	dimension := self addToModel: FASTJavaDimension new.
-	aNode annotations do: [ :annotation | dimension addModifier: (self clone accept: annotation) ].
+	aNode annotations do: [ :annotation | dimension addAnnotation: (self clone accept: annotation) ].
 	^ dimension
 ]
 
@@ -356,8 +370,12 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 
 { #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
+	"JLS 9.7.1 writes the value of an annotation element as an expression, so a name among
+	those values is a variable and not the name of a package, wherever the annotation is
+	written. An annotation therefore counts as inside, which only matters where nothing
+	else makes it so: on a package declaration and on a module, outside every type."
 
-	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaAnnotationInterfaceDeclaration . FASTJavaRecordDeclaration . FASTJavaMethodEntity }
+	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaAnnotationInterfaceDeclaration . FASTJavaRecordDeclaration . FASTJavaMethodEntity . FASTJavaAnnotation }
 		includes: currentFASTEntity class )
 		ifTrue: [ ^ false ].
 
@@ -649,6 +667,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayAccess: anArrayAccess [
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer [
 	currentFASTEntity := self create: FASTJavaArrayInitializer from: anArrayInitializer.
+	currentFASTEntity hasTrailingComma: (self
+			 anyOf: anArrayInitializer commas
+			 between: (anArrayInitializer initializers
+					  ifEmpty: [ anArrayInitializer leftBrace startPosition ]
+					  ifNotEmpty: [ :initializers | initializers last stopPosition ])
+			 and: anArrayInitializer rightBrace startPosition).
 	anArrayInitializer initializers do: [ :initializer | currentFASTEntity initializers add: (self clone accept: initializer) ].
 	^ currentFASTEntity
 ]
@@ -666,7 +690,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayType: anArrayType [
 	"JLS 10.2: each pair of brackets writes its own annotations, which belong to the array
 	that pair makes and not to the one the pair before it makes."
 	(anArrayType dimensions at: 1) annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 
 	"Arrays with more than one dimension are nested"
 	2 to: anArrayType leftBrackets size do: [ :index |
@@ -678,7 +702,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayType: anArrayType [
 			startPos: anArrayType startPosition;
 			endPos: (anArrayType rightBrackets at: index) stopPosition.
 		(anArrayType dimensions at: index) annotations do: [ :annotation |
-			currentFASTEntity addModifier: (self clone accept: annotation) ] ].
+			currentFASTEntity addAnnotation: (self clone accept: annotation) ] ].
 
 	^ currentFASTEntity
 ]
@@ -747,7 +771,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aBooleanType [
 				name: aBooleanType token value;
 				yourself).
 	aBooleanType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aBooleanType.
 	^ currentFASTEntity
 ]
@@ -768,7 +792,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitByteType: aByteType [
 				name: aByteType token value;
 				yourself).
 	aByteType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
@@ -821,7 +845,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCharType: aByteType [
 				name: aByteType token value;
 				yourself).
 	aByteType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
@@ -879,7 +903,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	self setStartEndPos: aClassType.
 	aClassType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	currentFASTEntity typeName: (self clone accept: aClassType name).
 
 	aClassType name arguments do: [ :typeArgument | currentFASTEntity addArgument: (self clone accept: typeArgument) ].
@@ -961,7 +985,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
 				name: aByteType token value;
 				yourself).
 	aByteType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
@@ -970,6 +994,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
 JavaSmaCCProgramNodeImporterVisitor >> visitElementArrayInitializer: anElementArrayInitializer [
 
 	currentFASTEntity := self create: FASTJavaArrayAnnotationElement from: anElementArrayInitializer.
+	currentFASTEntity hasTrailingComma: (self
+			 anyOf: anElementArrayInitializer commas
+			 between: (anElementArrayInitializer values
+					  ifEmpty: [ anElementArrayInitializer leftBrace startPosition ]
+					  ifNotEmpty: [ :values | values last stopPosition ])
+			 and: anElementArrayInitializer rightBrace startPosition).
 	anElementArrayInitializer values do: [ :value |
 		currentFASTEntity  addValue: (self clone accept: value) ].
 	^ currentFASTEntity
@@ -1019,7 +1049,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEnumConstant: anEnumConstant [
 	currentFASTEntity := self addToModel: FASTJavaEnumConstant new.
 	self setStartEndPos: anEnumConstant.
 	anEnumConstant annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	currentFASTEntity
 			name: anEnumConstant name value.
 	anEnumConstant expressions do: [ :expression |
@@ -1035,6 +1065,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEnumDeclaration: anEnumDeclaration [
 
 	self create: FASTJavaEnumDeclaration from: anEnumDeclaration.
 	currentFASTEntity name: anEnumDeclaration name value.
+	currentFASTEntity hasTrailingComma: (self
+			 anyOf: anEnumDeclaration commas
+			 between: (anEnumDeclaration constants
+					  ifEmpty: [ anEnumDeclaration leftBrace startPosition ]
+					  ifNotEmpty: [ :constants | constants last stopPosition ])
+			 and: (anEnumDeclaration semicolon
+					  ifNil: [ anEnumDeclaration rightBrace startPosition ]
+					  ifNotNil: [ :semicolon | semicolon startPosition ])).
+	currentFASTEntity hasBodySemicolon: anEnumDeclaration semicolon isNotNil.
 
 	anEnumDeclaration constants do: [ :constant | currentFASTEntity addConstant: (self clone accept: constant) ].
 	anEnumDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
@@ -1112,7 +1151,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
 				name: aByteType token value;
 				yourself).
 	aByteType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
@@ -1226,7 +1265,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIntType: aByteType [
 				name: aByteType token value;
 				yourself).
 	aByteType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
@@ -1327,7 +1366,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLongType: aByteType [
 				name: aByteType token value;
 				yourself).
 	aByteType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
@@ -1428,7 +1467,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodReference: aMethodReference [
 		            ifNotEmpty: [ self typeReceiverOf: aMethodReference ].
 	receiver ifNotNil: [
 		aMethodReference annotations do: [ :annotation |
-			receiver addModifier: (self clone accept: annotation) ].
+			receiver addAnnotation: (self clone accept: annotation) ].
 		aMethodReference superToken ifNotNil: [ :superToken |
 			receiver := self createQualifiedSuper: receiver at: superToken ] ].
 	currentFASTEntity receiver: receiver.
@@ -1461,7 +1500,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModule: aModule [
 	currentFASTEntity
 		isOpen: aModule openToken isNotNil;
 		qualifiedName: (self clone accept: aModule name).
-	aModule annotations do: [ :annotation | currentFASTEntity addModifier: (self clone accept: annotation) ].
+	aModule annotations do: [ :annotation | currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	aModule directives do: [ :directive | currentFASTEntity addDirective: (self clone accept: directive) ].
 	unit moduleDeclaration: currentFASTEntity.
 	^ unit
@@ -1637,6 +1676,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
 JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaPackageDeclaration new.
 	self setStartEndPos: aPackageDeclaration.
+	"JLS 7.4.1: a package declaration carries annotations, which is what package-info.java
+	is written to hold."
+	aPackageDeclaration annotations do: [ :annotation |
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	currentFASTEntity qualifiedName: (self clone accept: aPackageDeclaration name).
 	^ currentFASTEntity
 ]
@@ -1752,7 +1795,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedTypeName: aQualifiedTypeNam
 	currentFASTEntity := self addToModel: FASTJavaQualifiedTypeName new.
 	self setStartEndPos: aQualifiedTypeName.
 	aQualifiedTypeName annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	currentFASTEntity name: aQualifiedTypeName name value.
 	namespace := self clone accept: aQualifiedTypeName nspace.
 	aQualifiedTypeName nspace arguments do: [ :argument |
@@ -1773,7 +1816,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitReceiverParameter: aReceiverParamete
 	aReceiverParameter qualifier ifNotNil: [ :qualifier |
 		currentFASTEntity qualifier: qualifier value ].
 	aReceiverParameter annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	^ currentFASTEntity
 ]
 
@@ -1826,7 +1869,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
 				name: aByteType token value;
 				yourself).
 	aByteType annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
 	^ currentFASTEntity
 ]
@@ -2038,6 +2081,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThrowStatement: aThrowStatement [
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitTryStatement: aTryStatement [
 	currentFASTEntity := self create: FASTJavaTryCatchStatement from: aTryStatement.
+	currentFASTEntity hasTrailingSemicolon: (aTryStatement resources isNotEmpty and: [
+			 self
+				 anyOf: aTryStatement semicolons
+				 between: aTryStatement resources last stopPosition
+				 and: aTryStatement rightParen startPosition ]).
 
 	aTryStatement resources do: [ :tryResource |
 		currentFASTEntity addResource: (self clone accept: tryResource)
@@ -2068,7 +2116,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
 			"JLS 4.11: the annotations written before a wildcard are its own, as the `@A` of
 			`List<@A ?>` is, and not the ones of whatever bound follows it."
 			aTypeArgument annotations do: [ :annotation |
-				currentFASTEntity addModifier: (self clone accept: annotation) ].
+				currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 
 			"JLS 4.5.1: `? extends B` writes an upper bound, which is what the types of a
 			type parameter are, and `? super B` writes a lower one. Either is a reference
@@ -2111,7 +2159,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeParameter: aTypeParameter [
 	self setStartEndPos: aTypeParameter.
 	currentFASTEntity name: aTypeParameter name value.
 	aTypeParameter annotations do: [ :annotation |
-		currentFASTEntity addModifier: (self clone accept: annotation) ].
+		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	aTypeParameter types do: [ :type |
 		currentFASTEntity addType: (self clone accept: type)
 	].

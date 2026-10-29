@@ -152,7 +152,8 @@ Class {
 		'javaOpensDirective',
 		'javaUsesDirective',
 		'javaProvidesDirective',
-		'javaDimension'
+		'javaDimension',
+		'tWithAnnotations'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -760,6 +761,19 @@ public, proctected, private'
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaTWithAnnotations [
+	^ 'I carry annotations and nothing else, where a declaration would carry modifiers.
+
+The JLS writes `{Annotation}` rather than a modifier list wherever a keyword would mean
+nothing: on a type parameter and its bounds (JLS 4.4), on a type wherever one is written
+(4.11), on a package declaration (7.4.1), on a module declaration (7.7), on a receiver
+parameter (8.4.1), on an enum constant (8.9.1) and on a pair of brackets (10.2).
+
+Holding these in `modifiers` would let any of them carry `public` or `static`, which no
+Java compiler accepts there, so they are held apart.'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaThis [
 	^ 'A FASTJavaThis corresponds to ''this'' in Java'
 ]
@@ -1199,7 +1213,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaEnumConstant --|> javaVariableExpression.
 	javaEnumConstant --|> tWithDeclarations.
-	javaEnumConstant --|> tWithModifiers.
+	javaEnumConstant --|> tWithAnnotations.
 	javaEnumConstant --|> #TWithArguments.
 
 	javaInterfaceDeclaration --|> tStatement.
@@ -1325,7 +1339,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTypeName --|> tAnnotationElement.
 	"JLS 4.3 and 4.11: the name a type is qualified by writes its own annotations after
 	the dot, as the `java.util.@Ann List` of a field declaration does"
-	javaTypeName --|> tWithModifiers.
+	javaTypeName --|> tWithAnnotations.
 	"JLS 4.3: a name that qualifies a type is itself a type, so it may write type arguments
 	of its own, as the `ArrayList<E>` of `ArrayList<E>.ArrayListSpliterator` does"
 	javaTypeName --|> #TWithArguments.
@@ -1335,7 +1349,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTypeExpression --|> javaVariableExpression.
 	"JLS 4.11: an annotation is written on a type wherever a type appears, which is not
 	where the declaration that writes the type writes its own modifiers"
-	javaTypeExpression --|> tWithModifiers.
+	javaTypeExpression --|> tWithAnnotations.
 	javaArrayTypeExpression --|> javaTypeExpression.
 	javaPrimitiveTypeExpression --|> javaTypeExpression.
 	javaBooleanTypeExpression --|> javaPrimitiveTypeExpression.
@@ -1356,7 +1370,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTypeParameter --|> tNamedEntity.
 	"JLS 4.4: a type parameter writes annotations of its own before its name, as the
 	`@jdk.internal.RequiresIdentity` of `Reference<@jdk.internal.RequiresIdentity T>` does"
-	javaTypeParameter --|> tWithModifiers.
+	javaTypeParameter --|> tWithAnnotations.
 
 	javaModifier --|> tModifier.
 	javaModifier --|> tExpression.
@@ -1394,7 +1408,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"JLS 8.4.1: a receiver parameter declares nothing, carrying only the annotations
 	written on the type of the instance the method is called on"
 	javaReceiverParameter --|> tEntity.
-	javaReceiverParameter --|> tWithModifiers.
+	javaReceiverParameter --|> tWithAnnotations.
 
 	compilationUnit --|> tEntity.
 	compilationUnit --|> #THasImmediateSource.
@@ -1403,6 +1417,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"package and import do not use TDeclaration on purpose: they are only contained in a compilation unit"
 	packageDeclaration --|> tEntity.
 	packageDeclaration --|> tWithQualifiedName.
+	packageDeclaration --|> tWithAnnotations.
 	importDeclaration --|> tEntity.
 	importDeclaration --|> tWithQualifiedName.
 
@@ -1410,7 +1425,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	writes the annotations it carries, and each of its directives names one module,
 	package or service, which is the qualified name it writes."
 	javaModuleDeclaration --|> tEntity.
-	javaModuleDeclaration --|> tWithModifiers.
+	javaModuleDeclaration --|> tWithAnnotations.
 	javaModuleDeclaration --|> tWithQualifiedName.
 	javaModuleDirective --|> tEntity.
 	javaModuleDirective --|> tWithQualifiedName.
@@ -1418,7 +1433,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	carries the annotations written on it; the ellipsis of a variable arity parameter is
 	the same, the dimension it adds being what its annotations are written on."
 	javaDimension --|> tEntity.
-	javaDimension --|> tWithModifiers.
+	javaDimension --|> tWithAnnotations.
 
 	javaRequiresDirective --|> javaModuleDirective.
 	javaExportsDirective --|> javaModuleDirective.
@@ -1428,6 +1443,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaSwitchExpression --|> tExpression.
 	javaSwitchExpression --|> tWithSwitchBlock.
+	"JLS 15.12: a switch expression answers a value like any other, so a method may be
+	called on it, as `switch (x) { default -> o; }.hashCode()` does."
+	javaSwitchExpression --|> tReceiver.
 	javaSwitchLabel --|> tEntity.
 	javaSwitchRule --|> tEntity.
 	javaYieldStatement --|> tStatement
@@ -1481,6 +1499,21 @@ FASTJavaMetamodelGenerator >> defineProperties [
 		'Whether the module required is needed at compile time only (JLS 7.7.1)'.
 	(javaRequiresDirective property: #isTransitive type: #Boolean defaultValue: false) comment:
 		'Whether a module reading mine also reads the module required (JLS 7.7.1)'.
+
+	(javaArrayInitializer property: #hasTrailingComma type: #Boolean defaultValue: false) comment:
+		'Whether a comma is written after the last initializer, which JLS 10.6 allows and which tells `{ 1, 2, }` from `{ 1, 2 }`'.
+
+	(javaArrayAnnotationElement property: #hasTrailingComma type: #Boolean defaultValue: false) comment:
+		'Whether a comma is written after the last value, which JLS 9.7.1 allows'.
+
+	(javaEnumDeclaration property: #hasTrailingComma type: #Boolean defaultValue: false) comment:
+		'Whether a comma is written after the last constant, which JLS 8.9 allows'.
+
+	(javaEnumDeclaration property: #hasBodySemicolon type: #Boolean defaultValue: false) comment:
+		'Whether the semicolon opening the body is written where the enum declares no member, which JLS 8.9 allows; where it declares one the semicolon is written either way'.
+
+	(javaTryCatchStatement property: #hasTrailingSemicolon type: #Boolean defaultValue: false) comment:
+		'Whether a semicolon is written after the last resource, which JLS 14.20.3 allows'.
 
 	(javaBreakStatement property: #label type: #String) comment: 'The label targeted by this break statement'.
 
@@ -1875,6 +1908,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-* ((tDeclaration property: #javaDeclarationOwner) comment:
 			 'The element that declares me').
 
+	"JLS 4.4, 4.11, 7.4.1, 7.7, 8.4.1, 8.9.1 and 10.2 write {Annotation} where a
+	declaration writes its modifiers, and allow no keyword there, so what carries them
+	holds annotations rather than modifiers."
+	((tWithAnnotations property: #annotations) comment: 'The annotations written on me')
+	<>-* ((javaAnnotationExpression property: #javaAnnotationOwner) comment:
+			 'The element I am written on').
+
 	((tWithModifiers property: #modifiers) comment: 'My modifiers')
 	<>-* ((tModifier property: #javaModifierOwner) comment:
 			 'The owner of the modifier').
@@ -2037,6 +2077,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 
 	tModifier := self newTraitNamed: #TModifier comment: self commentForJavaTModifier.
 	tWithModifiers := self newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
+
+	tWithAnnotations := self newTraitNamed: #TWithAnnotations comment: self commentForJavaTWithAnnotations.
 
 	tAssignable := self newTraitNamed: #TAssignable comment: self commentForJavaTAssignable.
 	tWithAssignable := self newTraitNamed: #TWithAssignable comment: 'I have an assignable'.

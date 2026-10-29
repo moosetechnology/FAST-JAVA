@@ -290,6 +290,33 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaArrayAccess [
 	self export: exprBi equals: 'testArray[4][2]'
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaArrayAccessOnAnArrayCreation [
+	"JLS 15.10.3: an array creation that writes an initializer may be indexed at once."
+
+	self
+		export: (self astFor: 'class Indexed { int m() { return new int[] { 1, 2 }[0]; } }')
+		equals: 'class Indexed {
+  int m() {
+    return new int[] { 1, 2 }[0];
+  }
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaArrayInitializerWithATrailingComma [
+	"JLS 10.6 allows a comma after the last initializer, which the model records so that
+	the array is written back as the source had it."
+
+	self
+		export: (self astFor: 'class Trailing { int[] a = { 1, 2, }; }')
+		equals: 'class Trailing {
+  int[] a = { 1, 2, };
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaArrayTypeExpression [
 
@@ -744,7 +771,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithAnAnnotation [
 	self
 		export: (self astFor: 'enum Modifiers { @Deprecated ANNOTATED, PLAIN; }')
 		equals: 'enum Modifiers {
-  @Deprecated ANNOTATED, PLAIN
+  @Deprecated ANNOTATED, PLAIN;
 }
 '
 ]
@@ -758,7 +785,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithArguments [
 }'.
 
 	self export: ast equals: 'enum AnEnum {
-  CONST1("a"), CONST2("b", 2)
+  CONST1("a"), CONST2("b", 2);
 }
 '
 ]
@@ -780,7 +807,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithBody [
     int kind() {
       return 1;
     }
-}
+};
 }
 '
 ]
@@ -796,6 +823,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclaration [
 	self export: ast equals: 'class Blah {
   void method() {
   }
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithATrailingCommaAndASemicolon [
+	"JLS 8.9 allows a comma after the last constant and opens the body with a semicolon,
+	both of which an enum declaring no member may write."
+
+	self
+		export: (self astFor: 'enum Constants { A, B, ; }')
+		equals: 'enum Constants {
+  A, B,;
 }
 '
 ]
@@ -1586,6 +1626,23 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayNoArg [
 ]
 
 { #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewClassExpressionKeepsItsQualifier [
+	"JLS 15.9: an inner class may be instantiated through an instance of the class
+	enclosing it, which the creation writes before `new`, a body of its own or not."
+
+	self
+		export: (self astFor: 'class Qualified { void m() { outer.new Inner() { int x; }; } }')
+		equals: 'class Qualified {
+  void m() {
+    outer.new Inner() {
+      int x;
+};
+  }
+}
+'
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpression [
 
 	| node |
@@ -1651,6 +1708,38 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaOuterThis [
 	self
 		export: ast statements first expression
 		equals: 'EnclosingClass.this'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPackageDeclarationWithANameAsAnAnnotationValue [
+	"JLS 9.7.1 writes the value of an annotation element as an expression, so a name among
+	those values is a variable. Outside every type declaration, as a package is, a name is
+	otherwise read as the name of a package."
+
+	| unit |
+	unit := ((JavaSmaCCProgramNodeImporterVisitor new parseCodeString:
+		          '@XmlSchema(namespace = W3CEndpointReference.NS, location = "ws-addr.xsd") package javax.xml.ws.wsaddressing;')
+		         allWithType: FASTJavaCompilationUnit) anyOne.
+	self
+		assert: (FASTJavaExportVisitor new export: unit packageDeclaration)
+		equals: '@XmlSchema(namespace = W3CEndpointReference.NS, location = "ws-addr.xsd")
+package javax.xml.ws.wsaddressing;
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaPackageDeclarationWithAnAnnotation [
+	"JLS 7.4.1: a package declaration carries annotations, which is what package-info.java
+	is written to hold."
+
+	| unit |
+	unit := ((JavaSmaCCProgramNodeImporterVisitor new parseCodeString:
+		          '@Deprecated package java.net;') allWithType: FASTJavaCompilationUnit) anyOne.
+	self
+		assert: (FASTJavaExportVisitor new export: unit packageDeclaration)
+		equals: '@Deprecated
+package java.net;
+'
 ]
 
 { #category : 'test from FAST model' }
@@ -1871,6 +1960,23 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSuperConstructorInvocationWithType
 
 	self export: expr equals: 'Patate(Outer o) {
   o.<String>super("Hello");
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchExpressionAsAReceiver [
+	"JLS 15.12: a switch expression answers a value like any other, so a method may be
+	called on it."
+
+	self
+		export: (self astFor: 'class Receiver { int m(int x) { return switch (x) { default -> 1; }.hashCode(); } }')
+		equals: 'class Receiver {
+  int m(int x) {
+    return switch (x) {
+      default -> 1;
+    }.hashCode();
+  }
 }
 '
 ]
@@ -2135,6 +2241,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatchMultipleExceptinoClasses [
   try {
   }
   catch (SomeError | OtherError err) {
+  }
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTryCatchStatementWithATrailingSemicolon [
+	"JLS 14.20.3 allows a semicolon after the last resource."
+
+	self
+		export: (self astFor: 'class Resources { void m(R i) throws Exception { try (R a = i; R b = i;) { } } }')
+		equals: 'class Resources {
+  void m(R i)  throws Exception{
+    try (R a = i; R b = i;) {
+    }
   }
 }
 '

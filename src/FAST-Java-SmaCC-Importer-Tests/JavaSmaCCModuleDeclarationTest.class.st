@@ -101,7 +101,7 @@ JavaSmaCCModuleDeclarationTest >> testTheUnitDeclaresTheModuleAndNoType [
 	self assert: unit importDeclarations size equals: 1.
 	self assert: module qualifiedName fullName equals: 'com.example.app'.
 	self deny: module isOpen.
-	self assert: (module modifiers collect: [ :modifier | modifier name ]) asArray equals: #( 'Deprecated' )
+	self assert: (module annotations collect: [ :annotation | annotation name ]) asArray equals: #( 'Deprecated' )
 ]
 
 { #category : 'tests' }

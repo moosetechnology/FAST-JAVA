@@ -16,8 +16,8 @@ module com.example.app { requires java.logging; }
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `directives` | `FASTJavaModuleDeclaration` | `moduleDeclaration` | `FASTJavaModuleDirective` | The directives I write, in the order I write them|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
 
 
@@ -34,8 +34,8 @@ module com.example.app { requires java.logging; }
 Class {
 	#name : 'FASTJavaModuleDeclaration',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTJavaTWithQualifiedName + FASTTEntity',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithQualifiedName + FASTTEntity',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #moduleDeclaration',
 		'#directives => FMMany type: #FASTJavaModuleDirective opposite: #moduleDeclaration',

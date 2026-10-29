@@ -29,7 +29,7 @@ I am an abstract class representing a type
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 
 
 
@@ -37,8 +37,8 @@ I am an abstract class representing a type
 Class {
 	#name : 'FASTJavaTypeExpression',
 	#superclass : 'FASTJavaVariableExpression',
-	#traits : 'FASTJavaTWithModifiers',
-	#classTraits : 'FASTJavaTWithModifiers classTrait',
+	#traits : 'FASTJavaTWithAnnotations',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait',
 	#instVars : [
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
 		'#javaCastExpressionAdditionalBoundOwner => FMOne type: #FASTJavaCastExpression opposite: #additionalBounds',

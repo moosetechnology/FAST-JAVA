@@ -12,7 +12,7 @@ I represent the receiver parameter a method writes to carry the annotations of t
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `type` | `FASTJavaReceiverParameter` | `javaReceiverParameterTypeOwner` | `FASTJavaTypeExpression` | The type of the instance the method is called on|
 
 
@@ -29,8 +29,8 @@ I represent the receiver parameter a method writes to carry the annotations of t
 Class {
 	#name : 'FASTJavaReceiverParameter',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTTEntity',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTEntity classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTTEntity',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTEntity classTrait',
 	#instVars : [
 		'#methodOwner => FMOne type: #FASTJavaMethodEntity opposite: #receiver',
 		'#qualifier => FMProperty',

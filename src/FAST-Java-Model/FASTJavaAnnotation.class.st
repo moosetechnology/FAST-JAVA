@@ -14,6 +14,7 @@ example:
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
 | `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
+| `javaAnnotationOwner` | `FASTJavaAnnotation` | `annotations` | `FASTJavaTWithAnnotations` | The element I am written on|
 | `javaModifierOwner` | `FASTJavaTModifier` | `modifiers` | `FASTJavaTWithModifiers` | The owner of the modifier|
 | `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
@@ -40,7 +41,8 @@ Class {
 	#traits : 'FASTJavaTAnnotationElement + FASTJavaTModifier + FASTJavaTWithQualifiedName + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTModifier classTrait + FASTJavaTWithQualifiedName classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
-		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation'
+		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation',
+		'#javaAnnotationOwner => FMOne type: #FASTJavaTWithAnnotations opposite: #annotations'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -90,4 +92,23 @@ FASTJavaAnnotation >> isAnnotation [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaAnnotation >> javaAnnotationOwner [
+	"Relation named: #javaAnnotationOwner type: #FASTJavaTWithAnnotations opposite: #annotations"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The element I am written on'>
+	<container>
+	^ javaAnnotationOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaAnnotation >> javaAnnotationOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaAnnotationOwner := anObject
 ]

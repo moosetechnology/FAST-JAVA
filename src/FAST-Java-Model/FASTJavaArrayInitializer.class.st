@@ -65,6 +65,7 @@ My initializers are
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasTrailingComma` | `Boolean` | false | Whether a comma is written after the last initializer, which JLS 10.6 allows and which tells `{ 1, 2, }` from `{ 1, 2 }`|
 | `startPos` | `Number` | nil | |
 
 "
@@ -73,6 +74,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTTExpression',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait',
+	#instVars : [
+		'#hasTrailingComma => FMProperty defaultValue: false'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -93,6 +97,23 @@ FASTJavaArrayInitializer >> addInitializer: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self initializers add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayInitializer >> hasTrailingComma [
+
+	<FMProperty: #hasTrailingComma type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether a comma is written after the last initializer, which JLS 10.6 allows and which tells `{ 1, 2, }` from `{ 1, 2 }`'>
+	^ hasTrailingComma ifNil: [ hasTrailingComma := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayInitializer >> hasTrailingComma: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasTrailingComma := anObject
 ]
 
 { #category : 'accessing' }

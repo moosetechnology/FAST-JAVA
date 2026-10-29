@@ -43,6 +43,7 @@ void tryCatch() {
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasTrailingSemicolon` | `Boolean` | false | Whether a semicolon is written after the last resource, which JLS 14.20.3 allows|
 | `startPos` | `Number` | nil | |
 
 "
@@ -54,6 +55,7 @@ Class {
 	#instVars : [
 		'#catches => FMMany type: #FASTJavaCatchPartStatement opposite: #tryOwner',
 		'#finally => FMOne type: #FASTJavaStatementBlock opposite: #javaTryFinallyOwner',
+		'#hasTrailingSemicolon => FMProperty defaultValue: false',
 		'#resources => FMMany type: #FASTJavaTTryResource opposite: #javaTryResourceOwner',
 		'#try => FMOne type: #FASTJavaStatementBlock opposite: #javaTryCatchOwner'
 	],
@@ -122,6 +124,23 @@ FASTJavaTryCatchStatement >> finally: anObject [
 	<ignoreForCoverage>
 	<generated>
 	finally := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTryCatchStatement >> hasTrailingSemicolon [
+
+	<FMProperty: #hasTrailingSemicolon type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether a semicolon is written after the last resource, which JLS 14.20.3 allows'>
+	^ hasTrailingSemicolon ifNil: [ hasTrailingSemicolon := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaTryCatchStatement >> hasTrailingSemicolon: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasTrailingSemicolon := anObject
 ]
 
 { #category : 'testing' }

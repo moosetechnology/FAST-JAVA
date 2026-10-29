@@ -46,7 +46,7 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `superType` | `FASTJavaTypeParameterExpression` | `typeParameterSuperTypeOwner` | `FASTJavaTypeExpression` | The lower bound a wildcard writes, as in `? super Number`|
 | `types` | `FASTJavaTypeParameterExpression` | `typeParameterOwner` | `FASTJavaTypeExpression` | The list of types I extend or implements|
 
@@ -64,8 +64,8 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 Class {
 	#name : 'FASTJavaTypeParameterExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTTExpression + FASTTNamedEntity',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTTExpression + FASTTNamedEntity',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaTypeParameterOwner => FMOne type: #FASTJavaTWithTypeParameters opposite: #typeParameters',
 		'#superType => FMOne type: #FASTJavaTypeExpression opposite: #typeParameterSuperTypeOwner',

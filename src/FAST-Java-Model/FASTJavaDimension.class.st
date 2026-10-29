@@ -20,7 +20,7 @@ void m(Object @Ann ... args);
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 
 
 ## Properties
@@ -35,8 +35,8 @@ void m(Object @Ann ... args);
 Class {
 	#name : 'FASTJavaDimension',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTTEntity',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTEntity classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTTEntity',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTEntity classTrait',
 	#instVars : [
 		'#methodOwner => FMOne type: #FASTJavaMethodEntity opposite: #brackets',
 		'#parameterOwner => FMOne type: #FASTJavaParameter opposite: #brackets',

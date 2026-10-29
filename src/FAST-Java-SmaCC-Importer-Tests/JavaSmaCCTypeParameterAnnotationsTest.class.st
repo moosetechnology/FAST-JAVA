@@ -19,7 +19,7 @@ JavaSmaCCTypeParameterAnnotationsTest >> testTypeParameterKeepsItsAnnotations [
 	parameter := (fastModel allWithType: FASTJavaTypeParameterExpression) anyOne.
 
 	self assert: parameter name equals: 'T'.
-	self assert: (parameter modifiers collect: [ :modifier | modifier name ]) asArray
+	self assert: (parameter annotations collect: [ :annotation | annotation name ]) asArray
 		equals: #( 'Deprecated' ).
 	self assert: parameter types anyOne typeName name equals: 'Number'
 ]
@@ -30,5 +30,5 @@ JavaSmaCCTypeParameterAnnotationsTest >> testTypeParameterWithoutAnnotationsHasN
 	| model |
 	model := self parseClassString: 'class Holder<T> { }'.
 
-	self assert: (model allWithType: FASTJavaTypeParameterExpression) anyOne modifiers isEmpty
+	self assert: (model allWithType: FASTJavaTypeParameterExpression) anyOne annotations isEmpty
 ]
