@@ -229,6 +229,14 @@ FASTJavaTEntityCreator >> newDefaultCaseStatement [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newDimension [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaDimension new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newDoWhileStatement [
 
 	<ignoreForCoverage>

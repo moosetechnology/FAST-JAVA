@@ -156,6 +156,21 @@ JavaSmaCCProgramNodeImporterVisitor >> attachComments: aCodeString [
 		self attach: fastComment ]
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> bracketsOf: aVariableNode [
+	"JLS 10.2: the brackets of an array type may be written after the variable instead of
+	after the type, once per dimension, each pair carrying its own annotations. The
+	production nests them, so the pair written last is the one read first."
+
+	| brackets node |
+	brackets := OrderedCollection new.
+	node := aVariableNode.
+	[ node isKindOf: JavaArrayVariableNameNode ] whileTrue: [
+			brackets addFirst: (self dimensionOf: node).
+			node := node variable ].
+	^ brackets
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> caseStatementOfLabels: labelNodes [
 	"JLS 14.11: a group is the default of the switch when the first label it writes writes
@@ -299,6 +314,17 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity [
 JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity: anObject [
 
 	currentFASTEntity := anObject 
+]
+
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> dimensionOf: aNode [
+	"JLS 10.2: a pair of brackets is an entity of its own, because it carries the
+	annotations written on it."
+
+	| dimension |
+	dimension := self addToModel: FASTJavaDimension new.
+	aNode annotations do: [ :annotation | dimension addModifier: (self clone accept: annotation) ].
+	^ dimension
 ]
 
 { #category : 'visitor' }
@@ -631,26 +657,28 @@ JavaSmaCCProgramNodeImporterVisitor >> visitArrayInitializer: anArrayInitializer
 JavaSmaCCProgramNodeImporterVisitor >> visitArrayType: anArrayType [
 
 	currentFASTEntity := self addToModel:
-		                     (FASTJavaArrayTypeExpression new
-			                      baseType: (self acceptComponentType: anArrayType baseType);
-			                      yourself).
+		(FASTJavaArrayTypeExpression new
+			baseType: (self acceptComponentType: anArrayType baseType);
+			yourself).
 	currentFASTEntity
 		startPos: anArrayType startPosition;
 		endPos: (anArrayType rightBrackets at: 1) stopPosition.
-	"JLS 10.2: each pair of brackets writes its own annotations, which this reads as the
-	annotations of the array the first pair makes."
-	anArrayType annotations do: [ :annotation |
+	"JLS 10.2: each pair of brackets writes its own annotations, which belong to the array
+	that pair makes and not to the one the pair before it makes."
+	(anArrayType dimensions at: 1) annotations do: [ :annotation |
 		currentFASTEntity addModifier: (self clone accept: annotation) ].
 
 	"Arrays with more than one dimension are nested"
-	2 to: anArrayType leftBrackets size do: [ :index | 
+	2 to: anArrayType leftBrackets size do: [ :index |
 		currentFASTEntity := self addToModel:
-			                     (FASTJavaArrayTypeExpression new
-				                      baseType: currentFASTEntity;
-				                      yourself).
+			(FASTJavaArrayTypeExpression new
+				baseType: currentFASTEntity;
+				yourself).
 		currentFASTEntity
 			startPos: anArrayType startPosition;
-			endPos: (anArrayType rightBrackets at: index) stopPosition ].
+			endPos: (anArrayType rightBrackets at: index) stopPosition.
+		(anArrayType dimensions at: index) annotations do: [ :annotation |
+			currentFASTEntity addModifier: (self clone accept: annotation) ] ].
 
 	^ currentFASTEntity
 ]
@@ -1158,9 +1186,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitIfStatement: anIfStatementNode [
 JavaSmaCCProgramNodeImporterVisitor >> visitInitializedVariableDeclaration: anInitializedVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self setStartEndPos: anInitializedVariableDeclaration.
-	currentFASTEntity
-		variable: (self clone accept: anInitializedVariableDeclaration variable);
-		dimensions: (self arrayDimensionsOf: anInitializedVariableDeclaration variable).
+	currentFASTEntity variable: (self clone accept: anInitializedVariableDeclaration variable).
+	(self bracketsOf: anInitializedVariableDeclaration variable) do: [ :bracket | currentFASTEntity addBracket: bracket ].
 	currentFASTEntity
 		expression: (self clone accept: anInitializedVariableDeclaration initializer).
 	^ currentFASTEntity
@@ -1317,18 +1344,18 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMatchAllPattern: aMatchAllPattern [
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaration [
 
-	| methodBody declarator dimensions |
+	| methodBody declarator brackets |
 	self create: FASTJavaMethodEntity from: aMethodDeclaration.
 
 	"JLS 8.4: `int values() []` writes the brackets of the array returned after the
 	parameter list rather than after the return type, each pair wrapping the declarator in
-	one more."
+	one more and carrying its own annotations."
 	declarator := aMethodDeclaration declarator.
-	dimensions := 0.
+	brackets := OrderedCollection new.
 	[ declarator isKindOf: JavaArrayMethodDeclaratorNode ] whileTrue: [
-		dimensions := dimensions + 1.
+		brackets addFirst: (self dimensionOf: declarator).
 		declarator := declarator declarator ].
-	currentFASTEntity dimensions: dimensions.
+	brackets do: [ :bracket | currentFASTEntity addBracket: bracket ].
 
 	currentFASTEntity name: declarator name value.
 
@@ -1623,7 +1650,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	self setStartEndPos: aParameter.
 	currentFASTEntity variable: (self clone accept: aParameter variable).
 	currentFASTEntity type: (self clone accept: aParameter type).
-	currentFASTEntity dimensions: (self arrayDimensionsOf: aParameter variable).
+	(self bracketsOf: aParameter variable) do: [ :bracket | currentFASTEntity addBracket: bracket ].
 	aParameter modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
 	^ currentFASTEntity
 ]
@@ -2154,10 +2181,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitUnarySubtraction: anUnarySubtraction
 	^ currentFASTEntity
 ]
 
-{ #category : 'generated' }
+{ #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableArgumentParameter: aVariableArgumentParameter [
+	"JLS 8.4.1: the annotations written before the ellipsis are written on the array type
+	it makes, which is the dimension the ellipsis adds."
+
 	self visitParameter: aVariableArgumentParameter.
 	currentFASTEntity hasVariableArguments: true.
+	currentFASTEntity variableArguments: (self dimensionOf: aVariableArgumentParameter).
 	^ currentFASTEntity
 ]
 
@@ -2165,9 +2196,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableArgumentParameter: aVariable
 JavaSmaCCProgramNodeImporterVisitor >> visitVariableDeclaration: aVariableDeclaration [
 	currentFASTEntity := self addToModel: FASTJavaVariableDeclarator new.
 	self setStartEndPos: aVariableDeclaration.
-	currentFASTEntity
-		variable: (self clone accept: aVariableDeclaration variable);
-		dimensions: (self arrayDimensionsOf: aVariableDeclaration variable).
+	currentFASTEntity variable: (self clone accept: aVariableDeclaration variable).
+	(self bracketsOf: aVariableDeclaration variable) do: [ :bracket | currentFASTEntity addBracket: bracket ].
 	^ currentFASTEntity
 ]
 

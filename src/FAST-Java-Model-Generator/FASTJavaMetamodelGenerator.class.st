@@ -151,7 +151,8 @@ Class {
 		'javaExportsDirective',
 		'javaOpensDirective',
 		'javaUsesDirective',
-		'javaProvidesDirective'
+		'javaProvidesDirective',
+		'javaDimension'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -348,6 +349,16 @@ FASTJavaMetamodelGenerator >> commentForJavaDefaultCaseStatement [
 ex.:
 
 default:'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaDimension [
+	^ 'I am one pair of brackets, written after a name or after a type, and I carry the annotations written on that pair (JLS 10.2). The ellipsis of a variable arity parameter is one of me too, the dimension it adds being the one the annotations before it are written on (JLS 8.4.1).
+
+```language=text
+int a @Ann [];
+void m(Object @Ann ... args);
+```'
 ]
 
 { #category : 'comments' }
@@ -1092,7 +1103,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaUsesDirective := self newClassNamed: #UsesDirective comment: self commentForJavaUsesDirective.
 	javaUsesDirective withTesting.
 	javaProvidesDirective := self newClassNamed: #ProvidesDirective comment: self commentForJavaProvidesDirective.
-	javaProvidesDirective withTesting
+	javaProvidesDirective withTesting.
+	javaDimension := self newClassNamed: #Dimension comment: self commentForJavaDimension.
+	javaDimension withTesting
 ]
 
 { #category : 'definition' }
@@ -1401,6 +1414,12 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaModuleDeclaration --|> tWithQualifiedName.
 	javaModuleDirective --|> tEntity.
 	javaModuleDirective --|> tWithQualifiedName.
+	"JLS 10.2: a pair of brackets written after a name belongs to that name alone, and
+	carries the annotations written on it; the ellipsis of a variable arity parameter is
+	the same, the dimension it adds being what its annotations are written on."
+	javaDimension --|> tEntity.
+	javaDimension --|> tWithModifiers.
+
 	javaRequiresDirective --|> javaModuleDirective.
 	javaExportsDirective --|> javaModuleDirective.
 	javaOpensDirective --|> javaModuleDirective.
@@ -1454,21 +1473,6 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
-
-	"JLS 10.2: the brackets of an array type may be written after the name of a variable
-	rather than after the type, where they belong to that variable alone. They are kept
-	where they are written, so the type a variable declares is the one its declaration
-	writes with these dimensions added."
-	(javaParameterExpression property: #dimensions type: #Number defaultValue: 0) comment:
-		'The bracket pairs written after my name, eg. the one of `char cbuf[]`'.
-
-	(javaVariableDeclarator property: #dimensions type: #Number defaultValue: 0) comment:
-		'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'.
-
-	"JLS 8.4: a method may write the brackets of the array it returns after its parameter
-	list rather than after its return type, a form the JLS keeps only for compatibility."
-	(javaMethodEntity property: #dimensions type: #Number defaultValue: 0) comment:
-		'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`'.
 
 	(javaModuleDeclaration property: #isOpen type: #Boolean defaultValue: false) comment:
 		'Whether this module writes `open`, which opens every one of its packages to reflection (JLS 7.7)'.
@@ -1975,6 +1979,30 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The directives I write, in the order I write them')
 	<>-* ((javaModuleDirective property: #moduleDeclaration) comment:
 			 'The module declaration that owns me').
+
+	"JLS 10.2: the brackets of an array type may be written after the name of a variable,
+	or after the parameter list of a method, rather than after the type. They belong to
+	what writes them, each pair carrying its own annotations, so the type declared is the
+	one the declaration writes with these added."
+	((javaParameterExpression property: #brackets) comment:
+		 'The bracket pairs written after my name, eg. the one of `char cbuf[]`')
+	<>-* ((javaDimension property: #parameterOwner) comment:
+			 'The parameter that writes me after its name').
+	((javaVariableDeclarator property: #brackets) comment:
+		 'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not')
+	<>-* ((javaDimension property: #variableDeclaratorOwner) comment:
+			 'The declarator that writes me after its name').
+	((javaMethodEntity property: #brackets) comment:
+		 'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`')
+	<>-* ((javaDimension property: #methodOwner) comment:
+			 'The method that writes me after its parameter list').
+
+	"JLS 8.4.1: the annotations a variable arity parameter writes before its ellipsis are
+	written on the array type that ellipsis makes, which is the dimension it adds."
+	((javaParameterExpression property: #variableArguments) comment:
+		 'The ellipsis I write before my name, and the annotations written on it')
+	<>- ((javaDimension property: #variableArgumentsOwner) comment:
+			 'The parameter whose ellipsis I am').
 
 	"JLS 7.7.2 and 7.7.4: a directive may name modules or classes beside the package or
 	service it is about."

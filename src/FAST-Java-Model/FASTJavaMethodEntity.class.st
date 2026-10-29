@@ -14,6 +14,7 @@ Represents a Java method
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `brackets` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaDimension` | The bracket pairs written after my parameter list, eg. the one of `int[] values() []`|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `parameters` | `FASTTWithParameters` | `parameterOwner` | `FASTTVariableEntity` | My parameters|
 | `receiver` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaReceiverParameter` | The receiver parameter I write|
@@ -33,7 +34,6 @@ Represents a Java method
 
 | Name | Type | Default value | Comment |
 |---|
-| `dimensions` | `Number` | 0 | The bracket pairs written after my parameter list, eg. the one of `int[] values() []`|
 | `endPos` | `Number` | nil | |
 | `name` | `String` | nil | |
 | `source` | `String` | nil | Actual source code of the source entity|
@@ -46,8 +46,8 @@ Class {
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTJavaTWithTypeParameters + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTJavaTWithTypeParameters classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
+		'#brackets => FMMany type: #FASTJavaDimension opposite: #methodOwner',
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #methodDeclarations',
-		'#dimensions => FMProperty defaultValue: 0',
 		'#receiver => FMOne type: #FASTJavaReceiverParameter opposite: #methodOwner',
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
@@ -67,11 +67,37 @@ FASTJavaMethodEntity class >> annotation [
 ]
 
 { #category : 'adding' }
+FASTJavaMethodEntity >> addBracket: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self brackets add: anObject
+]
+
+{ #category : 'adding' }
 FASTJavaMethodEntity >> addThrow: anObject [
 
 	<ignoreForCoverage>
 	<generated>
 	^ self throws add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> brackets [
+	"Relation named: #brackets type: #FASTJavaDimension opposite: #methodOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`'>
+	^ brackets
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> brackets: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	brackets value: anObject
 ]
 
 { #category : 'accessing' }
@@ -91,23 +117,6 @@ FASTJavaMethodEntity >> compilationUnit: anObject [
 	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaMethodEntity >> dimensions [
-
-	<FMProperty: #dimensions type: #Number defaultValue: 0>
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`'>
-	^ dimensions ifNil: [ dimensions := 0 ]
-]
-
-{ #category : 'accessing' }
-FASTJavaMethodEntity >> dimensions: anObject [
-	<ignoreForCoverage>
-	<generated>
-	dimensions := anObject
 ]
 
 { #category : 'testing' }

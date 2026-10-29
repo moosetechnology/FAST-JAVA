@@ -154,6 +154,11 @@ FASTJavaVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatem
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaDimension: aFASTJavaDimension [
+	^ self visitFASTTEntity: aFASTJavaDimension
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	^ self visitFASTTStatement: aFASTJavaDoWhileStatement
 ]

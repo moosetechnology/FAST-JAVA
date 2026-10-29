@@ -272,6 +272,14 @@ FASTJavaEntity >> isDefaultCaseStatement [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isDimension [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isDoWhileStatement [
 
 	<ignoreForCoverage>

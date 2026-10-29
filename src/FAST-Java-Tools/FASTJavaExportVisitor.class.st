@@ -553,6 +553,17 @@ FASTJavaExportVisitor >> visitFASTJavaContinueStatement: aFASTJavaContinueStatem
 		self endOfStatement ]
 ]
 
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaDimension: aFASTJavaDimension [
+	"JLS 10.2: a pair of brackets writes the annotations it carries before itself, and
+	what comes before them is a name or a type, which needs a space after it."
+
+	self checkForComments: aFASTJavaDimension andDo: [
+			aFASTJavaDimension modifiers ifNotEmpty: [ self space ].
+			self visitFASTJavaModifiersInline: aFASTJavaDimension modifiers.
+			self unindented: '[]' ]
+]
+
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	self checkForComments: aFASTJavaDoWhileStatement andDo: [
@@ -970,11 +981,12 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 
 		self unindented: aFASTJavaMethodEntity name.
 		self visitFASTJavaParametersOf: aFASTJavaMethodEntity.
-		"JLS 8.4: the brackets written after the parameter list are written back there, and
-		they take the space the list leaves before whatever follows them."
-		aFASTJavaMethodEntity dimensions > 0 ifTrue: [
-			aFASTJavaMethodEntity dimensions timesRepeat: [ self unindented: '[]' ].
-			aFASTJavaMethodEntity throws ifEmpty: [ self space ] ].
+		"JLS 8.4: the brackets written after the parameter list are written back there, each
+		with the annotations it carries; a bare pair still stands apart from the list."
+		aFASTJavaMethodEntity brackets do: [ :bracket |
+			bracket modifiers ifEmpty: [ self space ].
+			bracket accept: self ].
+		self space.
 		self visitFASTJavaMethodThrows: aFASTJavaMethodEntity throws.
 
 		aFASTJavaMethodEntity statementBlock
@@ -985,8 +997,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 					newLine
 			]
 			ifNotNil: [ :statementBlock | statementBlock accept: self ]
-]
-
+	]
 ]
 
 { #category : 'visiting expression' }
@@ -1226,13 +1237,20 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 				"Lambda parameters may be typeless"
 				parameterType accept: self.
 				aFASTJavaParameter hasVariableArguments ifTrue: [
+					"JLS 8.4.1: the annotations written on the ellipsis stand between the
+					type and it, the dimension it adds being what they are written on."
+					aFASTJavaParameter variableArguments ifNotNil: [ :ellipsis |
+						ellipsis modifiers ifNotEmpty: [ :modifiers |
+							self space.
+							self visitFASTJavaModifiersInline: modifiers ] ].
 					self unindented: '...'
 				].
 				self space
 			].
 		aFASTJavaParameter variable accept: self.
-		"JLS 10.2: the brackets written after a name are written back there."
-		aFASTJavaParameter dimensions timesRepeat: [ self unindented: '[]' ]
+		"JLS 10.2: the brackets written after a name are written back there, each with the
+		annotations it carries."
+		aFASTJavaParameter brackets do: [ :bracket | bracket accept: self ]
 	]
 ]
 
@@ -1249,14 +1267,15 @@ FASTJavaExportVisitor >> visitFASTJavaParameters: aFASTJavaParameterCollection [
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaParametersOf: aFASTJavaMethodEntity [
 	"JLS 8.4.1: the receiver parameter is written first, before the parameters the method
-	declares, and a comma stands between it and them."
+	declares, and a comma stands between it and them. What follows the list is written by
+	my sender, which knows whether a space belongs before it."
 
 	self unindented: $(.
 	aFASTJavaMethodEntity receiver ifNotNil: [ :receiver |
 			receiver accept: self.
 			aFASTJavaMethodEntity parameters ifNotEmpty: [ self unindented: ', ' ] ].
 	self visitNodeListSeparatedByCommas: aFASTJavaMethodEntity parameters.
-	self unindented: ') '
+	self unindented: $)
 ]
 
 { #category : 'visiting expression' }
@@ -1647,13 +1666,13 @@ FASTJavaExportVisitor >> visitFASTJavaVarTypeExpression: aFASTJavaVarTypeExpress
 FASTJavaExportVisitor >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	self checkForComments: aFASTJavaVariableDeclarator andDo: [
 		aFASTJavaVariableDeclarator variable accept: self.
-		"JLS 10.2: the brackets written after a name are written back there."
-		aFASTJavaVariableDeclarator dimensions timesRepeat: [ self unindented: '[]' ].
+		"JLS 10.2: the brackets written after a name are written back there, each with the
+		annotations it carries."
+		aFASTJavaVariableDeclarator brackets do: [ :bracket | bracket accept: self ].
 		aFASTJavaVariableDeclarator expression ifNil: [ ^ self ].
 		self unindented: ' = '.
 		aFASTJavaVariableDeclarator expression accept: self
-]
-
+	]
 ]
 
 { #category : 'visiting expression' }
