@@ -37,6 +37,20 @@ JavaSmaCCSuperConstructorInvocationTest >> testSuperConstructorArgumentsSize [
 ]
 
 { #category : 'tests' }
+JavaSmaCCSuperConstructorInvocationTest >> testSuperConstructorKeepsItsTypeArguments [
+	"JLS 8.8.7.1: an explicit constructor invocation may write the type arguments of the
+	constructor it calls before the keyword."
+
+	| qualified invocation |
+	qualified := self parseMethodString: 'Patate (Outer o) { o.<String>super("Hello"); }'.
+	invocation := (qualified allWithType: FASTJavaMethodInvocation) anyOne.
+
+	self assert: invocation typeArguments size equals: 1.
+	self assert: invocation typeArguments anyOne typeName name equals: 'String'.
+	self assert: invocation receiver name equals: 'o'
+]
+
+{ #category : 'tests' }
 JavaSmaCCSuperConstructorInvocationTest >> testSuperConstructorName [
 	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne name equals: 'super'
 ]
