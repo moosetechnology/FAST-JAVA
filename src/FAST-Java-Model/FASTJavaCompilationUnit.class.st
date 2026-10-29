@@ -10,8 +10,11 @@ I represent a compilation unit, I can contain declarations for a package, import
 | `annotationInterfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaAnnotationInterfaceDeclaration` | My annotation interface declarations|
 | `classDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaClassDeclaration` | My class declarations|
 | `enumDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaEnumDeclaration` | My enum declaration|
+| `fieldDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaVarDeclStatement` | The fields a compact compilation unit writes at the top level|
 | `importDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaImportDeclaration` | My import declarations|
 | `interfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaInterfaceDeclaration` | My interface declarations|
+| `methodDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaMethodEntity` | The methods a compact compilation unit writes at the top level|
+| `moduleDeclaration` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaModuleDeclaration` | The module a modular compilation unit declares|
 | `packageDeclaration` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaPackageDeclaration` | My package declaration, or nil for the default package|
 | `recordDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaRecordDeclaration` | My record declarations|
 
@@ -40,8 +43,11 @@ Class {
 		'#annotationInterfaceDeclarations => FMMany type: #FASTJavaAnnotationInterfaceDeclaration opposite: #compilationUnit',
 		'#classDeclarations => FMMany type: #FASTJavaClassDeclaration opposite: #compilationUnit',
 		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit',
+		'#fieldDeclarations => FMMany type: #FASTJavaVarDeclStatement opposite: #compilationUnit',
 		'#importDeclarations => FMMany type: #FASTJavaImportDeclaration opposite: #compilationUnit',
 		'#interfaceDeclarations => FMMany type: #FASTJavaInterfaceDeclaration opposite: #compilationUnit',
+		'#methodDeclarations => FMMany type: #FASTJavaMethodEntity opposite: #compilationUnit',
+		'#moduleDeclaration => FMOne type: #FASTJavaModuleDeclaration opposite: #compilationUnit',
 		'#packageDeclaration => FMOne type: #FASTJavaPackageDeclaration opposite: #compilationUnit',
 		'#recordDeclarations => FMMany type: #FASTJavaRecordDeclaration opposite: #compilationUnit'
 	],
@@ -84,6 +90,14 @@ FASTJavaCompilationUnit >> addEnumDeclaration: anObject [
 ]
 
 { #category : 'adding' }
+FASTJavaCompilationUnit >> addFieldDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self fieldDeclarations add: anObject
+]
+
+{ #category : 'adding' }
 FASTJavaCompilationUnit >> addImportDeclaration: anObject [
 
 	<ignoreForCoverage>
@@ -97,6 +111,14 @@ FASTJavaCompilationUnit >> addInterfaceDeclaration: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self interfaceDeclarations add: anObject
+]
+
+{ #category : 'adding' }
+FASTJavaCompilationUnit >> addMethodDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self methodDeclarations add: anObject
 ]
 
 { #category : 'adding' }
@@ -165,6 +187,25 @@ FASTJavaCompilationUnit >> enumDeclarations: anObject [
 ]
 
 { #category : 'accessing' }
+FASTJavaCompilationUnit >> fieldDeclarations [
+	"Relation named: #fieldDeclarations type: #FASTJavaVarDeclStatement opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The fields a compact compilation unit writes at the top level'>
+	<derived>
+	^ fieldDeclarations
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> fieldDeclarations: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	fieldDeclarations value: anObject
+]
+
+{ #category : 'accessing' }
 FASTJavaCompilationUnit >> importDeclarations [
 	"Relation named: #importDeclarations type: #FASTJavaImportDeclaration opposite: #compilationUnit"
 
@@ -208,6 +249,43 @@ FASTJavaCompilationUnit >> isCompilationUnit [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> methodDeclarations [
+	"Relation named: #methodDeclarations type: #FASTJavaMethodEntity opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The methods a compact compilation unit writes at the top level'>
+	<derived>
+	^ methodDeclarations
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> methodDeclarations: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	methodDeclarations value: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> moduleDeclaration [
+	"Relation named: #moduleDeclaration type: #FASTJavaModuleDeclaration opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The module a modular compilation unit declares'>
+	^ moduleDeclaration
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> moduleDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	moduleDeclaration := anObject
 ]
 
 { #category : 'accessing' }

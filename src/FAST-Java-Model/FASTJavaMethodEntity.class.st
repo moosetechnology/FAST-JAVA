@@ -7,6 +7,7 @@ Represents a Java method
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `compilationUnit` | `FASTJavaMethodEntity` | `methodDeclarations` | `FASTJavaCompilationUnit` | The compilation unit that owns me|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaDeclarationOwner` | `FASTJavaTDeclaration` | `declarations` | `FASTJavaTWithDeclarations` | The element that declares me|
 
@@ -15,6 +16,7 @@ Represents a Java method
 |---|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `parameters` | `FASTTWithParameters` | `parameterOwner` | `FASTTVariableEntity` | My parameters|
+| `receiver` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaReceiverParameter` | The receiver parameter I write|
 | `statementBlock` | `FASTTWithStatements` | `fastBehaviouralParent` | `FASTTStatementBlock` | Statements block of the behavioural entity|
 | `throws` | `FASTJavaMethodEntity` | `javaMethodThrowsOwner` | `FASTJavaClassTypeExpression` | The list of throws exception|
 | `type` | `FASTJavaMethodEntity` | `javaMethodTypeOwner` | `FASTJavaVariableExpression` | The type of the method|
@@ -31,6 +33,7 @@ Represents a Java method
 
 | Name | Type | Default value | Comment |
 |---|
+| `dimensions` | `Number` | 0 | The bracket pairs written after my parameter list, eg. the one of `int[] values() []`|
 | `endPos` | `Number` | nil | |
 | `name` | `String` | nil | |
 | `source` | `String` | nil | Actual source code of the source entity|
@@ -43,6 +46,9 @@ Class {
 	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTJavaTWithTypeParameters + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTJavaTWithTypeParameters classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #methodDeclarations',
+		'#dimensions => FMProperty defaultValue: 0',
+		'#receiver => FMOne type: #FASTJavaReceiverParameter opposite: #methodOwner',
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
 	],
@@ -68,12 +74,66 @@ FASTJavaMethodEntity >> addThrow: anObject [
 	^ self throws add: anObject
 ]
 
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> compilationUnit [
+	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #methodDeclarations"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The compilation unit that owns me'>
+	<container>
+	^ compilationUnit
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> compilationUnit: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	compilationUnit := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> dimensions [
+
+	<FMProperty: #dimensions type: #Number defaultValue: 0>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`'>
+	^ dimensions ifNil: [ dimensions := 0 ]
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> dimensions: anObject [
+	<ignoreForCoverage>
+	<generated>
+	dimensions := anObject
+]
+
 { #category : 'testing' }
 FASTJavaMethodEntity >> isMethodEntity [
 
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> receiver [
+	"Relation named: #receiver type: #FASTJavaReceiverParameter opposite: #methodOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The receiver parameter I write'>
+	^ receiver
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> receiver: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	receiver := anObject
 ]
 
 { #category : 'accessing' }
