@@ -430,6 +430,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpressionWithSeveralAdditiona
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCatchWithAParameterWithModifiers [
+	"JLS 14.20: the modifiers of the catch formal parameter are written back inside the
+	parentheses, before the types it catches."
+
+	| expr |
+	expr := self methodAST: 'void mth() { try { } catch (@SuppressWarnings("caught") final Error e) { } }'.
+
+	self export: expr statements first equals: 'try {
+}
+catch (@SuppressWarnings("caught") final Error e) {
+}
+'
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCharacterLiterals [
 
@@ -634,6 +649,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaDoubleLiteral [
 	| node |
 	node := builder literal: FASTJavaDoubleLiteral value: '37.2'.
 	self export: node equals: '37.2'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithAnAnnotation [
+	"JLS 8.9.1: an annotation written on a constant is written back before its name."
+
+	self
+		export: (self astFor: 'enum Modifiers { @Deprecated ANNOTATED, PLAIN; }')
+		equals: 'enum Modifiers {
+  @Deprecated ANNOTATED, PLAIN;
+}
+'
 ]
 
 { #category : 'test from source code' }
@@ -935,6 +962,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForEachLoop [
 
 	self export: expr statements first equals: 'for (String s : collection) 
   ;
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForEachWithAVariableWithModifiers [
+	"JLS 14.14.2: the loop variable writes its modifiers before its type, and they are
+	written back there."
+
+	| expr |
+	expr := self methodAST: 'void mth() { for (@SuppressWarnings("each") final String w : words) { } }'.
+
+	self export: expr statements first equals: 'for (@SuppressWarnings("each") final String w : words) {
+  }
 '
 ]
 
@@ -1966,6 +2006,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypePattern [
   if (obj instanceof AClass aVar) {
     aBool = true;
   }
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypePatternWithModifiers [
+	"JLS 14.30.1: a type pattern writes the modifiers of the variable it declares before
+	the type it matches."
+
+	| expr |
+	expr := self methodAST: 'void mth() { if (v instanceof @SuppressWarnings("matched") final String s) { } }'.
+
+	self export: expr statements first equals: 'if (v instanceof @SuppressWarnings("matched") final String s) {
 }
 '
 ]
