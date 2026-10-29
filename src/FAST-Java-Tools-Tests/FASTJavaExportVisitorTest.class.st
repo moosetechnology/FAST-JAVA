@@ -1416,6 +1416,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReferenceWithTypeArguments [
 ]
 
 { #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReferenceWithTypeArgumentsOfItsMethod [
+	"JLS 15.13: a method reference writes the type arguments of the method it names between
+	the `::` and that name."
+
+	| expr |
+	expr := self methodAST: 'void mth() { use(List::<String>of); }'.
+
+	self export: expr equals: 'void mth() {
+  use(List::<String>of);
+}
+'
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodWithInterleavedModifiers [
 	"JLS 8.4.3: a method writes annotations and keywords in any order, and the order it
 	writes them in is written back. The annotations it begins with go on lines of their
@@ -1662,6 +1676,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSuperConstructorInvocationQualifie
 
 	self export: expr equals: 'Patate() {
   Outer.this.super();
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSuperConstructorInvocationWithTypeArguments [
+	"JLS 8.8.7.1: an explicit constructor invocation writes the type arguments of the
+	constructor it calls before the keyword, after the qualifier where it writes one."
+
+	| expr |
+	expr := self methodAST: 'Patate(Outer o) { o.<String>super("Hello"); }'.
+
+	self export: expr equals: 'Patate(Outer o) {
+  o.<String>super("Hello");
 }
 '
 ]

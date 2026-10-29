@@ -83,6 +83,19 @@ JavaSmaCCProgramNodeImporterVisitor >> addToModel: anEntity [
 	^ anEntity
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> addTypeArgumentsOf: aNodeCollection to: aFASTJavaEntity [
+	"JLS 15.12, 15.13 and 8.8.7.1: an invocation, a method reference and an explicit
+	constructor invocation each may write the type arguments of what they call. They are
+	types, a wildcard being no part of them."
+
+	aNodeCollection do: [ :argument |
+		| typeArgument |
+		typeArgument := self clone accept: argument.
+		typeArgument isTypeExpression ifTrue: [
+			aFASTJavaEntity addTypeArgument: typeArgument ] ]
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> addTypeParametersOf: aDeclarationNode [
 	"JLS 4.4: class, interface, method and constructor declarations can be generic."
@@ -1326,12 +1339,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 								yourself).
 					self addToModel: currentFASTEntity receiver ] ].
 	"JLS 15.12: an invocation may write the type arguments of a generic method before
-	its name, as `Collections.<String>emptyList()` does. They are types, a wildcard being
-	no part of them."
-	aMethodInvocation arguments do: [ :argument |
-		| typeArgument |
-		typeArgument := self clone accept: argument.
-		typeArgument isTypeExpression ifTrue: [ currentFASTEntity addTypeArgument: typeArgument ] ].
+	its name, as `Collections.<String>emptyList()` does."
+	self addTypeArgumentsOf: aMethodInvocation arguments to: currentFASTEntity.
 	currentFASTEntity name: aMethodInvocation name value.
 	^ currentFASTEntity
 ]
@@ -1346,6 +1355,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodReference: aMethodReference [
 	currentFASTEntity receiver: (aMethodReference arguments
 			 ifEmpty: [ self clone accept: aMethodReference receiver ]
 			 ifNotEmpty: [ self typeReceiverOf: aMethodReference ]).
+	"JLS 15.13: the type arguments written after the `::` are the ones of the method named,
+	where those written before it belong to the type the receiver is."
+	self addTypeArgumentsOf: aMethodReference methodTypeArguments to: currentFASTEntity.
 	currentFASTEntity name: aMethodReference name value.
 	^ currentFASTEntity
 ]
@@ -1677,6 +1689,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperCo
 	self setStartEndPos: aSuperConstructorInvocation.
 	aSuperConstructorInvocation primary ifNotNil: [ :qualifier |
 		currentFASTEntity receiver: (self clone accept: qualifier) ].
+	self addTypeArgumentsOf: aSuperConstructorInvocation arguments to: currentFASTEntity.
 	aSuperConstructorInvocation expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity name: aSuperConstructorInvocation superToken value.
 	^ expressionStatement
@@ -1791,6 +1804,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitThisConstructorInvocation: aThisCons
 	currentFASTEntity expression: (self addToModel: FASTJavaMethodInvocation new).
 	currentFASTEntity := currentFASTEntity expression.
 	self setStartEndPos: aThisConstructorInvocation.
+	self addTypeArgumentsOf: aThisConstructorInvocation arguments to: currentFASTEntity.
 	aThisConstructorInvocation expressions
 		do:
 			[ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].

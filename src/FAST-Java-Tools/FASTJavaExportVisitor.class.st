@@ -949,11 +949,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 
 				"JLS 15.12: the type arguments an invocation writes come between the receiver
 				and the name."
-				aFASTJavaMethodInvocation typeArguments ifNotEmpty: [ :typeArguments |
-					self unindented: $<.
-					self visitNodeListSeparatedByCommas: typeArguments.
-					self unindented: $>
-				].
+				self visitFASTJavaTypeArguments: aFASTJavaMethodInvocation typeArguments.
 
 				self unindented: aFASTJavaMethodInvocation name.
 
@@ -979,7 +975,8 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodI
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodReference: aFASTJavaMethodReference [
 	"JLS 15.13: a method reference writes the name it refers to after `::`, `new` for a
-	constructor. A reference on `super` is the one form that keeps no receiver."
+	constructor, with the type arguments of that method between the two. A reference on
+	`super` is the one form that keeps no receiver."
 
 	self checkForComments: aFASTJavaMethodReference andDo: [
 		self
@@ -988,6 +985,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodReference: aFASTJavaMethodReference 
 					ifNil: [ self unindented: 'super' ]
 					ifNotNil: [ :receiver | receiver accept: self ].
 				self unindented: '::'.
+				self visitFASTJavaTypeArguments: aFASTJavaMethodReference typeArguments.
 				self unindented: aFASTJavaMethodReference name ]
 			withOperator: #memberAccess ]
 ]

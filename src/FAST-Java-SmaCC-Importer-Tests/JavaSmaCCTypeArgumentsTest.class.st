@@ -16,6 +16,7 @@ JavaSmaCCTypeArgumentsTest >> javaClass [
 
 	void collect() {
 		use(Collection<T>::add);
+		use(List::<String>of);
 		use(String::valueOf);
 	}
 }'
@@ -40,6 +41,18 @@ JavaSmaCCTypeArgumentsTest >> testLastNameWritesItsTypeArgumentsOnTheTypeExpress
 ]
 
 { #category : 'tests' }
+JavaSmaCCTypeArgumentsTest >> testMethodReferenceKeepsTheTypeArgumentsOfTheMethod [
+	"JLS 15.13: the type arguments written after the `::` are the method's, where those
+	written before it belong to the type the receiver is."
+
+	| reference |
+	reference := self methodReferenceNamed: 'of'.
+	self assert: reference receiver class equals: FASTJavaVariableExpression.
+	self assert: reference typeArguments size equals: 1.
+	self assert: reference typeArguments anyOne typeName name equals: 'String'
+]
+
+{ #category : 'tests' }
 JavaSmaCCTypeArgumentsTest >> testMethodReferenceReceiverIsATypeWhenItWritesTypeArguments [
 	"JLS 15.13: only a reference type may write type arguments before `::`, so the receiver
 	of `Collection<T>::add` is the type `Collection<T>`."
@@ -60,6 +73,14 @@ JavaSmaCCTypeArgumentsTest >> testMethodReferenceReceiverIsLeftAloneWithoutTypeA
 	self
 		assert: (self methodReferenceNamed: 'valueOf') receiver class
 		equals: FASTJavaVariableExpression
+]
+
+{ #category : 'tests' }
+JavaSmaCCTypeArgumentsTest >> testMethodReferenceWithoutTypeArgumentsOfItsOwnKeepsNone [
+	"The type arguments of `Collection<T>::add` belong to the receiver type, so the
+	reference itself writes none."
+
+	self assertEmpty: (self methodReferenceNamed: 'add') typeArguments
 ]
 
 { #category : 'tests' }

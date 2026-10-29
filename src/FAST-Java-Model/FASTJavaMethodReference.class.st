@@ -45,6 +45,7 @@ I represent a method reference
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
+| `typeArguments` | `FASTJavaMethodReference` | `javaMethodReferenceTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after the `::`, eg. the String of `List::<String>of`|
 
 
 ## Properties
@@ -62,6 +63,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTWithReceiver + FASTTExpression + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
+	#instVars : [
+		'#typeArguments => FMMany type: #FASTJavaTypeExpression opposite: #javaMethodReferenceTypeArgumentOwner'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -76,10 +80,37 @@ FASTJavaMethodReference class >> annotation [
 	<generated>
 ]
 
+{ #category : 'adding' }
+FASTJavaMethodReference >> addTypeArgument: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self typeArguments add: anObject
+]
+
 { #category : 'testing' }
 FASTJavaMethodReference >> isMethodReference [
 
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodReference >> typeArguments [
+	"Relation named: #typeArguments type: #FASTJavaTypeExpression opposite: #javaMethodReferenceTypeArgumentOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The type arguments I write after the `::`, eg. the String of `List::<String>of`'>
+	<derived>
+	^ typeArguments
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodReference >> typeArguments: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typeArguments value: anObject
 ]

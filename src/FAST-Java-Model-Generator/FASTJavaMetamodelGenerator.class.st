@@ -1562,6 +1562,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeExpression property: #javaMethodInvocationTypeArgumentOwner)
 			 comment: 'The invocation that writes me as one of its type arguments').
 
+	"JLS 15.13: a method reference may write the type arguments of the method it names
+	after the `::`, where an invocation writes them before the name."
+	((javaMethodReference property: #typeArguments) comment:
+		 'The type arguments I write after the `::`, eg. the String of `List::<String>of`')
+	<>-*
+		((javaTypeExpression property: #javaMethodReferenceTypeArgumentOwner)
+			 comment: 'The method reference that writes me as one of its type arguments').
+
 	((javaSynchronizedStatement property: #expression) comment:
 		 'The instance on which the statement block is synchronized')
 	<>-
