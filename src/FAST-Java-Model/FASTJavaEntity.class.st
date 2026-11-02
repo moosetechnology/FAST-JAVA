@@ -280,6 +280,14 @@ FASTJavaEntity >> isDimension [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isDimensionExpression [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isDoWhileStatement [
 
 	<ignoreForCoverage>
@@ -297,14 +305,6 @@ FASTJavaEntity >> isDoubleLiteral [
 
 { #category : 'testing' }
 FASTJavaEntity >> isDoubleTypeExpression [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FASTJavaEntity >> isEmptyDimExpression [
 
 	<ignoreForCoverage>
 	<generated>

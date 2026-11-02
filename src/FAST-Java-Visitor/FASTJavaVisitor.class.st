@@ -159,6 +159,11 @@ FASTJavaVisitor >> visitFASTJavaDimension: aFASTJavaDimension [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaDimensionExpression: aFASTJavaDimensionExpression [
+	^ self visitFASTJavaDimension: aFASTJavaDimensionExpression
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	^ self visitFASTTStatement: aFASTJavaDoWhileStatement
 ]
@@ -176,11 +181,6 @@ FASTJavaVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpress
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaElsePartStatement: aFASTJavaElsePartStatement [
 	^ self visitFASTTStatement: aFASTJavaElsePartStatement
-]
-
-{ #category : 'generated' }
-FASTJavaVisitor >> visitFASTJavaEmptyDimExpression: aFASTJavaAssignmentExpression [
-	^ self visitFASTTExpression: aFASTJavaAssignmentExpression
 ]
 
 { #category : 'generated' }

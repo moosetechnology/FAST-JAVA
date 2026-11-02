@@ -42,17 +42,20 @@ JavaSmaCCNewArrayTest >> testNewArraySimpleArrayParent [
 
 { #category : 'tests' }
 JavaSmaCCNewArrayTest >> testNewArraySimpleArraySize [
-	self assert: (fastModel allWithType: FASTJavaNewArray) second arguments size equals: 1
+	self assert: (fastModel allWithType: FASTJavaNewArray) second dimensions size equals: 1
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewArrayTest >> testNewArraySimpleArraySizeParent [
-	self assert: (fastModel allWithType: FASTJavaNewArray) second arguments anyOne parentNode equals: (fastModel allWithType: FASTJavaNewArray) second 
+	| newArray |
+	newArray := (fastModel allWithType: FASTJavaNewArray) second.
+	self assert: newArray dimensions anyOne parentNode equals: newArray.
+	self assert: newArray dimensions anyOne expression parentNode equals: newArray dimensions anyOne
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewArrayTest >> testNewArraySimpleArraySizeType [
-	self assert: (fastModel allWithType: FASTJavaNewArray) second arguments anyOne class equals: FASTJavaIntegerLiteral 
+	self assert: (fastModel allWithType: FASTJavaNewArray) second dimensions anyOne expression class equals: FASTJavaIntegerLiteral
 ]
 
 { #category : 'tests' }

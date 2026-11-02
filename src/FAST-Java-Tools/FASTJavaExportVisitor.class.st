@@ -564,6 +564,19 @@ FASTJavaExportVisitor >> visitFASTJavaDimension: aFASTJavaDimension [
 			self unindented: '[]' ]
 ]
 
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaDimensionExpression: aFASTJavaDimensionExpression [
+	"JLS 15.10.1: a pair of brackets that says a length writes it between them, after the
+	annotations the pair carries."
+
+	self checkForComments: aFASTJavaDimensionExpression andDo: [
+		aFASTJavaDimensionExpression annotations ifNotEmpty: [ self space ].
+		self visitFASTJavaModifiersInline: aFASTJavaDimensionExpression annotations.
+		self unindented: $[.
+		aFASTJavaDimensionExpression expression accept: self.
+		self unindented: $] ]
+]
+
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	self checkForComments: aFASTJavaDoWhileStatement andDo: [
@@ -1140,22 +1153,16 @@ FASTJavaExportVisitor >> visitFASTJavaModuleTargets: aFASTJavaQualifiedNameColle
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
+	"JLS 15.10.1: a creation writes its pairs of brackets after the type, in the order it
+	holds them, and each pair writes the annotations it carries."
 
 	self checkForComments: aFASTJavaNewArray andDo: [
 		self unindented: 'new '.
 		aFASTJavaNewArray type accept: self.
-		aFASTJavaNewArray arguments do: [ :arg |
-			self unindented: $[.
-			arg accept: self.
-			self unindented: $].
-		].
-
-		aFASTJavaNewArray initializer
-		ifNotNil: [ :init |
+		aFASTJavaNewArray dimensions do: [ :dimension | dimension accept: self ].
+		aFASTJavaNewArray initializer ifNotNil: [ :initializer |
 			self unindented: ' '.
-			init accept: self
-		]
-	]
+			initializer accept: self ] ]
 ]
 
 { #category : 'visiting expression' }

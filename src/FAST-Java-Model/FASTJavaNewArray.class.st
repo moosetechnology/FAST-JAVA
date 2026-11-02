@@ -10,6 +10,7 @@ new String()[""10px"", ""Hello world""]
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `dimensions` | `FASTJavaNewArray` | `newArrayOwner` | `FASTJavaDimension` | The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`|
 | `initializer` | `FASTJavaNewArray` | `javaNewArrayInitialOwner` | `FASTTExpression` | The initializer of the array|
 
 
@@ -18,6 +19,9 @@ new String()[""10px"", ""Hello world""]
 Class {
 	#name : 'FASTJavaNewArray',
 	#superclass : 'FASTJavaNewExpression',
+	#instVars : [
+		'#dimensions => FMMany type: #FASTJavaDimension opposite: #newArrayOwner'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -30,6 +34,32 @@ FASTJavaNewArray class >> annotation [
 	<FMClass: #NewArray super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaNewArray >> addDimension: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self dimensions add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaNewArray >> dimensions [
+	"Relation named: #dimensions type: #FASTJavaDimension opposite: #newArrayOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`'>
+	^ dimensions
+]
+
+{ #category : 'accessing' }
+FASTJavaNewArray >> dimensions: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	dimensions value: anObject
 ]
 
 { #category : 'accessing' }

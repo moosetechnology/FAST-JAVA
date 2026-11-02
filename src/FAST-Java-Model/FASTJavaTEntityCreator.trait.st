@@ -237,6 +237,14 @@ FASTJavaTEntityCreator >> newDimension [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newDimensionExpression [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaDimensionExpression new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newDoWhileStatement [
 
 	<ignoreForCoverage>
@@ -258,14 +266,6 @@ FASTJavaTEntityCreator >> newDoubleTypeExpression [
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaDoubleTypeExpression new
-]
-
-{ #category : 'entity creation' }
-FASTJavaTEntityCreator >> newEmptyDimExpression [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FASTJavaEmptyDimExpression new
 ]
 
 { #category : 'entity creation' }

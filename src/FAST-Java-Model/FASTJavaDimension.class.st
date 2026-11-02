@@ -13,6 +13,7 @@ void m(Object @Ann ... args);
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `methodOwner` | `FASTJavaDimension` | `brackets` | `FASTJavaMethodEntity` | The method that writes me after its parameter list|
+| `newArrayOwner` | `FASTJavaDimension` | `dimensions` | `FASTJavaNewArray` | The array creation that writes me|
 | `parameterOwner` | `FASTJavaDimension` | `brackets` | `FASTJavaParameter` | The parameter that writes me after its name|
 | `variableArgumentsOwner` | `FASTJavaDimension` | `variableArguments` | `FASTJavaParameter` | The parameter whose ellipsis I am|
 | `variableDeclaratorOwner` | `FASTJavaDimension` | `brackets` | `FASTJavaVariableDeclarator` | The declarator that writes me after its name|
@@ -39,6 +40,7 @@ Class {
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTEntity classTrait',
 	#instVars : [
 		'#methodOwner => FMOne type: #FASTJavaMethodEntity opposite: #brackets',
+		'#newArrayOwner => FMOne type: #FASTJavaNewArray opposite: #dimensions',
 		'#parameterOwner => FMOne type: #FASTJavaParameter opposite: #brackets',
 		'#variableArgumentsOwner => FMOne type: #FASTJavaParameter opposite: #variableArguments',
 		'#variableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #brackets'
@@ -82,6 +84,25 @@ FASTJavaDimension >> methodOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	methodOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaDimension >> newArrayOwner [
+	"Relation named: #newArrayOwner type: #FASTJavaNewArray opposite: #dimensions"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The array creation that writes me'>
+	<container>
+	^ newArrayOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaDimension >> newArrayOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	newArrayOwner := anObject
 ]
 
 { #category : 'accessing' }

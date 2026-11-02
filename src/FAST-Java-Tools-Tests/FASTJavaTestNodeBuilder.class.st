@@ -111,10 +111,26 @@ FASTJavaTestNodeBuilder >> declarator: aName init: aNode [
 ]
 
 { #category : 'api - building' }
+FASTJavaTestNodeBuilder >> dimensionOfLength: anExpression [
+	"JLS 15.10.1: a pair of brackets saying how long the dimension it opens is."
+
+	^ FASTJavaDimensionExpression new
+		  expression: anExpression;
+		  yourself
+]
+
+{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> doubleArrayType [
 	^ FASTJavaArrayTypeExpression new
 		  baseType: FASTJavaDoubleTypeExpression new;
 		  yourself
+]
+
+{ #category : 'api - building' }
+FASTJavaTestNodeBuilder >> emptyDimension [
+	"JLS 15.10.1: a pair of brackets an array creation leaves empty."
+
+	^ FASTJavaDimension new
 ]
 
 { #category : 'api - building' }
@@ -197,11 +213,11 @@ FASTJavaTestNodeBuilder >> newExpression: className args: args [
 ]
 
 { #category : 'api - building' }
-FASTJavaTestNodeBuilder >> newStringArrayExpression: args [
+FASTJavaTestNodeBuilder >> newStringArrayExpression: dimensions [
 
 	^FASTJavaNewArray new
 		type: (FASTJavaClassTypeExpression new typeName: (self type: 'String'));
-		arguments: args;
+		dimensions: dimensions;
 		yourself
 ]
 

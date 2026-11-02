@@ -15,11 +15,28 @@ JavaSmaCCNewArray2DTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCNewArray2DTest >> testNewArrayEmptySize [
-	self assert: (fastModel allWithType: FASTJavaNewArray) first arguments first class equals: FASTJavaEmptyDimExpression .
-	self assert: (fastModel allWithType: FASTJavaNewArray) first arguments second class equals: FASTJavaEmptyDimExpression.
+	"JLS 15.10.1: a creation that writes an initializer leaves every pair of brackets
+	empty, so no pair of this one says a length."
+
+	| newArray |
+	newArray := (fastModel allWithType: FASTJavaNewArray) first.
+	self assert: newArray dimensions first class equals: FASTJavaDimension.
+	self assert: newArray dimensions second class equals: FASTJavaDimension
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewArray2DTest >> testNewArraySimpleArraySize [
-	self assert: (fastModel allWithType: FASTJavaNewArray) first arguments size equals: 2
+	self assert: (fastModel allWithType: FASTJavaNewArray) first dimensions size equals: 2
+]
+
+{ #category : 'tests' }
+JavaSmaCCNewArray2DTest >> testNewArrayWrittenSizes [
+	"JLS 15.10.1: `new String[3][4]` says a length for both of its dimensions."
+
+	| newArray |
+	newArray := (fastModel allWithType: FASTJavaNewArray) second.
+	self assert: (newArray dimensions collect: [ :dimension | dimension class ]) asArray
+		equals: { FASTJavaDimensionExpression. FASTJavaDimensionExpression }.
+	self assert: (newArray dimensions collect: [ :dimension | dimension expression primitiveValue ]) asArray
+		equals: #( '3' '4' )
 ]

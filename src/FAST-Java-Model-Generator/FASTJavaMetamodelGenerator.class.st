@@ -123,7 +123,6 @@ Class {
 		'tWithComments',
 		'javaEntity',
 		'javaComment',
-		'javaEmptyDimExpression',
 		'javaEnumConstant',
 		'tAnnotationElement',
 		'javaLiteral',
@@ -153,7 +152,8 @@ Class {
 		'javaUsesDirective',
 		'javaProvidesDirective',
 		'javaDimension',
-		'tWithAnnotations'
+		'tWithAnnotations',
+		'javaDimensionExpression'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -363,6 +363,15 @@ void m(Object @Ann ... args);
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaDimensionExpression [
+	^ 'I am a pair of brackets that writes how long the dimension I open is, which only an array creation does (JLS 15.10.1). Like any other pair I carry the annotations written before my brackets, and they are written on the array type that dimension makes.
+
+```language=text
+new int @Ann [3]
+```'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaDoWhileStatement [
 	^ 'A node of a do-while statement.
 
@@ -381,13 +390,6 @@ double d1 = 12.3;
 double d2 = 12.3d;
 ```
 `12.3` and `12.3d` are double literals'
-]
-
-{ #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaEmptyDimExpression [
-	^ 'A node representing an empty expression when creating an array, for example:
-	
-	new String[] {"a"};'
 ]
 
 { #category : 'comments' }
@@ -1001,8 +1003,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaConditionalExpression := self newClassNamed: #ConditionalExpression comment: self commentForJavaConditionalStatement.
 	javaConditionalExpression withTesting.
 	javaVariableExpression := self newClassNamed: #VariableExpression.
-	javaEmptyDimExpression := self newClassNamed: #EmptyDimExpression comment: self commentForJavaEmptyDimExpression.
-	javaEmptyDimExpression withTesting.
 	javaAnnotationExpression := self newClassNamed: #Annotation comment: self commentForJavaAnnotation.
 	javaAnnotationExpression withTesting.
 	javaArrayAnnotationElement := self
@@ -1119,7 +1119,9 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaProvidesDirective := self newClassNamed: #ProvidesDirective comment: self commentForJavaProvidesDirective.
 	javaProvidesDirective withTesting.
 	javaDimension := self newClassNamed: #Dimension comment: self commentForJavaDimension.
-	javaDimension withTesting
+	javaDimension withTesting.
+	javaDimensionExpression := self newClassNamed: #DimensionExpression comment: self commentForJavaDimensionExpression.
+	javaDimensionExpression withTesting
 ]
 
 { #category : 'definition' }
@@ -1289,7 +1291,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaNewClassExpression --|> #TWithArguments.
 
 	javaNewArray --|> javaNewExpression.
-	javaEmptyDimExpression --|> tExpression.
 	javaConditionalExpression --|> tExpression.
 
 	javaArrayAccess --|> tExpression.
@@ -1434,6 +1435,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	the same, the dimension it adds being what its annotations are written on."
 	javaDimension --|> tEntity.
 	javaDimension --|> tWithAnnotations.
+	javaDimensionExpression --|> javaDimension.
 
 	javaRequiresDirective --|> javaModuleDirective.
 	javaExportsDirective --|> javaModuleDirective.
@@ -2043,6 +2045,18 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The ellipsis I write before my name, and the annotations written on it')
 	<>- ((javaDimension property: #variableArgumentsOwner) comment:
 			 'The parameter whose ellipsis I am').
+
+	"JLS 15.10.1: an array creation writes one pair of brackets per dimension, the leading
+	ones giving a length and the trailing ones left empty, and each pair carries the
+	annotations written on the array type that dimension makes."
+	((javaNewArray property: #dimensions) comment:
+		 'The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`')
+	<>-* ((javaDimension property: #newArrayOwner) comment:
+			 'The array creation that writes me').
+	((javaDimensionExpression property: #expression) comment:
+		 'The expression saying how long the dimension I open is, eg. the 3 of `new int[3]`')
+	<>- ((tExpression property: #javaDimensionExpressionOwner) comment:
+			 'The pair of brackets whose length I give').
 
 	"JLS 7.7.2 and 7.7.4: a directive may name modules or classes beside the package or
 	service it is about."

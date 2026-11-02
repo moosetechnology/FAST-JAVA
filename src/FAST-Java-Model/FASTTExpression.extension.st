@@ -365,6 +365,36 @@ FASTTExpression >> javaCastExpressionOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
+FASTTExpression >> javaDimensionExpressionOwner [
+	"Relation named: #javaDimensionExpressionOwner type: #FASTJavaDimensionExpression opposite: #expression"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The pair of brackets whose length I give'>
+	<container>
+	<FMProperty: #javaDimensionExpressionOwner type: #FASTJavaDimensionExpression opposite: #expression>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #javaDimensionExpressionOwner ifAbsent: [ nil ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> javaDimensionExpressionOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'FAST-Java-Model'>
+
+	(self attributeAt: #javaDimensionExpressionOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaDimensionExpressionOwner.
+		self attributeAt: #javaDimensionExpressionOwner put: anObject.
+		otherSide expression: nil ]
+	ifNotNil: [ 
+		self attributeAt: #javaDimensionExpressionOwner put: anObject.
+		anObject expression: self ]
+]
+
+{ #category : '*FAST-Java-Model' }
 FASTTExpression >> javaForEachStatementOwner [
 	"Relation named: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #list"
 

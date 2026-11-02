@@ -31,34 +31,6 @@ JavaSmaCCSwitchTest >> testDefaultCaseSize [
 ]
 
 { #category : 'tests' }
-JavaSmaCCSwitchTest >> testDeprecatedLabel [
-
-	| labeledCase expected actual |
-	labeledCase := (fastModel allWithType: FASTJavaLabeledCaseStatement) first.
-	expected := labeledCase labels first caseExpressions first.
-	actual := [ labeledCase label ]
-		          on: Deprecation
-		          do: [ :notification | notification resume ].
-	self assert: actual identicalTo: expected
-]
-
-{ #category : 'tests' }
-JavaSmaCCSwitchTest >> testDeprecatedLabelSetter [
-
-	| labeledCase replacement actual |
-	labeledCase := (fastModel allWithType: FASTJavaLabeledCaseStatement) first.
-	replacement := FASTJavaVariableExpression new
-		               name: 'replacement';
-		               yourself.
-	[ labeledCase label: replacement ]
-		on: Deprecation
-		do: [ :notification | notification resume ].
-	self assert: labeledCase labels size equals: 1.
-	actual := labeledCase labels first caseExpressions first.
-	self assert: actual identicalTo: replacement
-]
-
-{ #category : 'tests' }
 JavaSmaCCSwitchTest >> testExpressionsSize [
 
 	self

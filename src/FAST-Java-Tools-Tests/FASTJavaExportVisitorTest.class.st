@@ -1611,17 +1611,31 @@ class Blah {
 '
 ]
 
-{ #category : 'test from FAST model' }
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayAnnotatedDimensions [
+	"JLS 15.10.1: each pair of brackets writes the annotations carried on it before itself,
+	whether it says a length or is left empty."
+
+	| node sized empty |
+	sized := builder dimensionOfLength: (builder literalInt: 3).
+	sized addAnnotation: (builder annotation: 'Ann').
+	empty := builder emptyDimension.
+	empty addAnnotation: (builder annotation: 'Other').
+	node := builder newStringArrayExpression: { sized. empty }.
+	self export: node equals: 'new String @Ann [3] @Other []'
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayIntArg [
 	| node |
-	node := builder newStringArrayExpression: { builder literalInt: 5 }.
+	node := builder newStringArrayExpression: { builder dimensionOfLength: (builder literalInt: 5) }.
 	self export: node equals: 'new String[5]'
 ]
 
-{ #category : 'test from FAST model' }
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayNoArg [
 	| node |
-	node := builder newStringArrayExpression:  {FASTJavaEmptyDimExpression new}.
+	node := builder newStringArrayExpression: { builder emptyDimension }.
 	self export: node equals: 'new String[]'
 ]
 
@@ -2521,18 +2535,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaUnaryExpression [
 	self export: nodeInt equals: '42++'
 ]
 
-{ #category : 'test from FAST model' }
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaVarDeclArrayWithInitializer [
 
 	| stmt type |
-	type := builder newStringArrayExpression:  {FASTJavaEmptyDimExpression new}.
+	type := builder newStringArrayExpression: { builder emptyDimension }.
 	type initializer: (builder arrayInitializer: { builder literalString: 'a' }).
 	stmt := builder
 		declarator: 'strArray'
 		init: type.
-	
-	self export: stmt equals: 'strArray = new String[] { "a" }'.
 
+	self export: stmt equals: 'strArray = new String[] { "a" }'
 ]
 
 { #category : 'test from FAST model' }

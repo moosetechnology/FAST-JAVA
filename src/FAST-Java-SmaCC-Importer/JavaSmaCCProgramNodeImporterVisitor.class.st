@@ -331,6 +331,19 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity: anObject [
 ]
 
 { #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> dimensionExpressionOf: aNode [
+	"JLS 15.10.1: a pair of brackets that says how long the dimension it opens is, which
+	only an array creation writes, and only before the pairs it leaves empty."
+
+	| dimension |
+	dimension := self addToModel: FASTJavaDimensionExpression new.
+	aNode annotations do: [ :annotation |
+		dimension addAnnotation: (self clone accept: annotation) ].
+	dimension expression: (self clone accept: aNode expression).
+	^ dimension
+]
+
+{ #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> dimensionOf: aNode [
 	"JLS 10.2: a pair of brackets is an entity of its own, because it carries the
 	annotations written on it."
@@ -1026,14 +1039,6 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration
 ]
 
 { #category : 'visitor' }
-JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDimExpression: aToken [
-	currentFASTEntity := self
-		addToModel: FASTJavaEmptyDimExpression new.
-	self setStartEndPos: aToken.
-	^ currentFASTEntity
-]
-
-{ #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyStatement: anEmptyStatement [
 	currentFASTEntity := self addToModel: FASTJavaStatement new.
 	self setStartEndPos: anEmptyStatement.
@@ -1609,25 +1614,19 @@ public void onClick(ClickEvent event) {
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
-	| dimExprs emptyExprs |
+	"JLS 15.10.1: a creation writes one pair of brackets per dimension of the array it
+	makes, the pairs that say a length first and the empty ones after, each pair carrying
+	the annotations written on it."
+
 	currentFASTEntity := self addToModel: FASTJavaNewArray new.
-		self setStartEndPos: aNewArray.
-
+	self setStartEndPos: aNewArray.
 	currentFASTEntity type: (self clone accept: aNewArray type).
-	aNewArray initializer
-		ifNotNil: [ :initialize | 
-			currentFASTEntity initializer: (self clone accept: initialize) ].
-
-	dimExprs := aNewArray dimExpressions
-		collect: [ :dimExpression | self clone accept: dimExpression expression ].
-	"for empty dim, no dimExpression is generated but tokens in 'leftBrackets' collection"
-	emptyExprs := aNewArray leftBrackets
-		collect: [ :emptyDimExpression | self clone visitEmptyDimExpression: emptyDimExpression ].
-
-	"put them in correct order following their startPos"
-	currentFASTEntity arguments:
-		((dimExprs , emptyExprs) sorted: [ :a :b | a startPos < b startPos ]).
-
+	aNewArray initializer ifNotNil: [ :initializer |
+		currentFASTEntity initializer: (self clone accept: initializer) ].
+	aNewArray dimExpressions do: [ :dimExpression |
+		currentFASTEntity dimensions add: (self dimensionExpressionOf: dimExpression) ].
+	aNewArray dimensions do: [ :dimension |
+		currentFASTEntity dimensions add: (self dimensionOf: dimension) ].
 	^ currentFASTEntity
 ]
 
