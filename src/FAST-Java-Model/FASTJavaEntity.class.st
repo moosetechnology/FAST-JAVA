@@ -272,6 +272,14 @@ FASTJavaEntity >> isDefaultCaseStatement [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isDimension [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isDoWhileStatement [
 
 	<ignoreForCoverage>
@@ -321,6 +329,14 @@ FASTJavaEntity >> isEnumConstant [
 
 { #category : 'testing' }
 FASTJavaEntity >> isEnumDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isExportsDirective [
 
 	<ignoreForCoverage>
 	<generated>
@@ -504,6 +520,14 @@ FASTJavaEntity >> isLongTypeExpression [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isMatchAllPattern [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isMethodEntity [
 
 	<ignoreForCoverage>
@@ -521,6 +545,22 @@ FASTJavaEntity >> isMethodReference [
 
 { #category : 'testing' }
 FASTJavaEntity >> isModifier [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isModuleDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isModuleDirective [
 
 	<ignoreForCoverage>
 	<generated>
@@ -560,6 +600,14 @@ FASTJavaEntity >> isNullPointerLiteral [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isOpensDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isOuterThis [
 
 	<ignoreForCoverage>
@@ -592,6 +640,14 @@ FASTJavaEntity >> isPrimitiveTypeExpression [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isProvidesDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isQualifiedName [
 
 	<ignoreForCoverage>
@@ -608,7 +664,31 @@ FASTJavaEntity >> isQualifiedTypeName [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isReceiverParameter [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isRecordDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isRecordPattern [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isRequiresDirective [
 
 	<ignoreForCoverage>
 	<generated>
@@ -753,6 +833,14 @@ FASTJavaEntity >> isTypeParameterExpression [
 
 { #category : 'testing' }
 FASTJavaEntity >> isTypePattern [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTJavaEntity >> isUsesDirective [
 
 	<ignoreForCoverage>
 	<generated>

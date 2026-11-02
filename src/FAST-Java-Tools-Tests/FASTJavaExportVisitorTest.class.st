@@ -107,6 +107,20 @@ FASTJavaExportVisitorTest >> testVisitFASTEmptyReturnAttributeAccess [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedArrayType [
+	"JLS 10.2: the annotations a pair of brackets writes come between the component type
+	and that pair."
+
+	| expr |
+	expr := self astFor: 'class Blah { String @Deprecated [] names; }'.
+
+	self export: expr equals: 'class Blah {
+  String @Deprecated [] names;
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethod [
 	
 	| expr |
@@ -126,6 +140,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedMethodWithArgument [
 
 	self export: expr equals: '@Useless("anArgument")
 void mth() {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedQualifiedType [
+	"JLS 4.11: a type qualified by a name writes its annotations after the dot."
+
+	| expr |
+	expr := self astFor: 'class Blah { java.util.@Deprecated List<String> items; }'.
+
+	self export: expr equals: 'class Blah {
+  java.util.@Deprecated List<String> items;
 }
 '
 ]
@@ -580,6 +607,24 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassWithAnnotationAfterAModifier 
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCompactCompilationUnit [
+	"JLS 7.3: a compact compilation unit writes the members of the class it implies, in the
+	order it writes them, beside any type it declares."
+
+	| unit |
+	unit := self unitFor: 'int x = 1;
+void main() { }
+class Test { }'.
+
+	self export: unit equals: 'int x = 1;
+void main() {
+}
+class Test {
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitKeepsTheOrderOfItsTypeDeclarations [
 	"JLS 7.3: a compilation unit writes one list of type declarations, whatever kind each
 	of them is, so they are written back in the order it writes them."
@@ -589,7 +634,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitKeepsTheOrderOfItsT
 interface I {
 }
 enum E {
-  X;
+  X
 }
 record R(int a) {
 }
@@ -602,7 +647,35 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitWritesItsEnumDeclar
 	writes it, as a class, an interface, an annotation interface and a record are."
 
 	self export: (self unitFor: 'public enum E { X, Y }') equals: 'public enum E {
-  X, Y;
+  X, Y
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitWritesItsModuleDeclaration [
+	"JLS 7.7: a modular compilation unit writes its imports, then the module it declares
+	with the directives that module holds, each on a line of its own."
+
+	self
+		export: (self unitFor: 'import java.util.List;
+@Deprecated
+open module com.example.app {
+	requires static transitive java.sql;
+	exports com.example.api to java.logging, java.desktop;
+	opens com.example.model;
+	uses com.example.api.Service;
+	provides com.example.api.Service with com.example.internal.Impl;
+}')
+		equals: 'import java.util.List;
+
+@Deprecated
+open module com.example.app {
+  requires static transitive java.sql;
+  exports com.example.api to java.logging, java.desktop;
+  opens com.example.model;
+  uses com.example.api.Service;
+  provides com.example.api.Service with com.example.internal.Impl;
 }
 '
 ]
@@ -671,7 +744,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithAnAnnotation [
 	self
 		export: (self astFor: 'enum Modifiers { @Deprecated ANNOTATED, PLAIN; }')
 		equals: 'enum Modifiers {
-  @Deprecated ANNOTATED, PLAIN;
+  @Deprecated ANNOTATED, PLAIN
 }
 '
 ]
@@ -685,7 +758,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithArguments [
 }'.
 
 	self export: ast equals: 'enum AnEnum {
-  CONST1("a"), CONST2("b", 2);
+  CONST1("a"), CONST2("b", 2)
 }
 '
 ]
@@ -707,7 +780,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithBody [
     int kind() {
       return 1;
     }
-};
+}
 }
 '
 ]
@@ -739,6 +812,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithInitializedFiel
 	self export: ast equals: 'enum AnEnum {
   CONST1, CONST2;
   AnEnum aField = CONST1;
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumDeclarationWithMembersKeepsItsSemicolon [
+	"JLS 8.9.1: the semicolon after the constants opens the body of the enum, so an enum
+	that declares members writes it and one that declares none does not."
+
+	self export: (self astFor: 'enum E { A, B; void m() { } }') equals: 'enum E {
+  A, B;
+  void m() {
+  }
 }
 '
 ]
@@ -1308,6 +1394,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodDeclaration [
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodEntityWritesTheBracketsAfterItsParameterList [
+	"JLS 8.4: `int[] values() []` writes the brackets of the array returned after the
+	parameter list, which is where they are written back."
+
+	self export: (self astFor: 'class C { int[] values() [] { return null; } }') equals: 'class C {
+  int[] values() [] {
+    return null;
+  }
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocation [
 
@@ -1430,6 +1529,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReferenceWithTypeArgumentsOf
 ]
 
 { #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodReferenceWritesAQualifiedSuper [
+	"JLS 15.13: `T.super::m` writes the qualifier and `super` as one receiver."
+
+	self
+		export: (self astFor: 'class C { class In { java.util.function.Supplier<String> s = C.super::toString; } }')
+		equals: 'class C {
+class In {
+    java.util.function.Supplier<String> s = C.super::toString;
+}
+}
+'
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodWithInterleavedModifiers [
 	"JLS 8.4.3: a method writes annotations and keywords in any order, and the order it
 	writes them in is written back. The annotations it begins with go on lines of their
@@ -1440,6 +1553,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodWithInterleavedModifiers [
 
 	self export: expr equals: '@IntrinsicCandidate
 public final native @PolymorphicSignature Object m() ;
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaModuleImport [
+	"JLS 7.5.5: an import may name a module rather than a type."
+
+	| unit |
+	unit := self unitFor: 'import module java.base;
+class Blah { }'.
+
+	self export: unit equals: 'import module java.base;
+
+class Blah {
+}
 '
 ]
 
@@ -1494,6 +1622,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpressionWithReceiver [
 	node := builder newExpression: 'InnerClass' args: #(  ).
 	node receiver: (builder newExpression: 'OuterClass' args: #(  )).
 	self export: node equals: 'new OuterClass().new InnerClass()'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewExpressionWritesTheTypeArgumentsOfItsConstructor [
+	"JLS 15.9: the type arguments of the constructor called come between `new` and the
+	type instantiated."
+
+	self export: (self astFor: 'class C { Object o = new <String>C(); }') equals: 'class C {
+  Object o = new <String>C();
+}
+'
 ]
 
 { #category : 'test from FAST model' }
@@ -1629,6 +1768,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaQualifiedTypeNameWithTypeArguments
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaReceiverParameter [
+	"JLS 8.4.1: a receiver parameter is written first, before the parameters the method
+	declares."
+
+	| expr |
+	expr := self methodAST: 'void mth(Blah this, int a) { }'.
+
+	self export: expr equals: 'void mth(Blah this, int a) {
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaRecordDeclaration [
 
 	| ast |
@@ -1646,6 +1798,35 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaRecordDeclarationGenericImplements
 	ast := self astFor: 'record Pair<A, B>(A first, B second) implements Shape { }'.
 
 	self export: ast equals: 'record Pair<A, B>(A first, B second) implements Shape {
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaRecordPattern [
+	"JLS 14.30.1: a record pattern writes the record type it matches, then between
+	parentheses the patterns its components are matched against."
+
+	| expr |
+	expr := self methodAST: 'void mth(Object o) { if (o instanceof Point(int x, int y)) { } }'.
+
+	self export: expr equals: 'void mth(Object o) {
+  if (o instanceof Point(int x, int y)) {
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaRecordPatternWithAMatchAllComponent [
+	"JLS 14.30.1: a component a record pattern binds nothing to is written `_`."
+
+	| expr |
+	expr := self methodAST: 'void mth(Object o) { if (o instanceof Point(_, int y)) { } }'.
+
+	self export: expr equals: 'void mth(Object o) {
+  if (o instanceof Point(_, int y)) {
+  }
 }
 '
 ]
@@ -1712,6 +1893,23 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchExpressionInColonForm [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchLabelOverNullAndDefault [
+	"JLS 14.11.1: a label over null writes `default` after the constants rather than
+	instead of them."
+
+	| expr |
+	expr := self methodAST: 'void mth(Object o) { switch (o) { case null, default: break; } }'.
+
+	self export: expr equals: 'void mth(Object o) {
+  switch (o) {
+    case null, default:
+      break;
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchLabelWithGuardedTypePattern [
 
 	| ast |
@@ -1742,6 +1940,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchLabelWithTypePattern [
       break;
     default:
       last();
+  }
+}
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchRuleOverNullAndDefault [
+
+	| expr |
+	expr := self methodAST: 'void mth(Object o) { switch (o) { case null, default -> { } } }'.
+
+	self export: expr equals: 'void mth(Object o) {
+  switch (o) {
+    case null, default -> {
+    }
   }
 }
 '
@@ -2060,6 +2273,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWildCard [
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithAnnotations [
+	"JLS 4.4: a type parameter writes the annotations it declares before its name."
+
+	| expr |
+	expr := self astFor: 'class Blah<@Deprecated T> { }'.
+
+	self export: expr equals: 'class Blah<@Deprecated T> {
+}
+'
+]
+
 { #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaTypeParameterWithArrayUpperBound [
 	"JLS 4.5.1: the bound of a wildcard is a reference type, which an array type is as much
@@ -2140,6 +2365,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTypePatternWithModifiers [
 	expr := self methodAST: 'void mth() { if (v instanceof @SuppressWarnings("matched") final String s) { } }'.
 
 	self export: expr statements first equals: 'if (v instanceof @SuppressWarnings("matched") final String s) {
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTypeWritesTheAnnotationsOfItsBoundsAndWildcards [
+	"JLS 4.4 and 4.5.1: each bound of a type parameter writes its own annotations, and a
+	wildcard writes the ones that are its own before the question mark."
+
+	self
+		export: (self astFor: 'class C<T extends @Ann Object & @Ann Cloneable> { java.util.List<@Ann ?> w; }')
+		equals: 'class C<T extends @Ann Object & @Ann Cloneable> {
+  java.util.List<@Ann ?> w;
 }
 '
 ]

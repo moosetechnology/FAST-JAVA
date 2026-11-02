@@ -25,6 +25,7 @@ I represent a parameter of a method declaration
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -47,9 +48,11 @@ I represent a parameter of a method declaration
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `brackets` | `FASTJavaParameter` | `parameterOwner` | `FASTJavaDimension` | The bracket pairs written after my name, eg. the one of `char cbuf[]`|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `type` | `FASTJavaParameter` | `javaParameterTypeOwner` | `FASTJavaVariableExpression` | The type of the parameter|
 | `variable` | `FASTJavaParameter` | `javaParameterVariableOwner` | `FASTJavaVariableExpression` | parameter variable|
+| `variableArguments` | `FASTJavaParameter` | `variableArgumentsOwner` | `FASTJavaDimension` | The ellipsis I write before my name, and the annotations written on it|
 
 
 ## Properties
@@ -57,7 +60,6 @@ I represent a parameter of a method declaration
 
 | Name | Type | Default value | Comment |
 |---|
-| `dimensions` | `Number` | 0 | The bracket pairs written after my name, eg. the one of `char cbuf[]`|
 | `endPos` | `Number` | nil | |
 | `hasVariableArguments` | `Boolean` | false | Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)|
 | `name` | `String` | nil | |
@@ -70,11 +72,12 @@ Class {
 	#traits : 'FASTJavaTWithModifiers + FASTTExpression + FASTTVariableEntity',
 	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
-		'#dimensions => FMProperty defaultValue: 0',
+		'#brackets => FMMany type: #FASTJavaDimension opposite: #parameterOwner',
 		'#hasVariableArguments => FMProperty defaultValue: false',
 		'#recordOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #components',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
-		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
+		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner',
+		'#variableArguments => FMOne type: #FASTJavaDimension opposite: #variableArgumentsOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -90,21 +93,30 @@ FASTJavaParameter class >> annotation [
 	<generated>
 ]
 
-{ #category : 'accessing' }
-FASTJavaParameter >> dimensions [
+{ #category : 'adding' }
+FASTJavaParameter >> addBracket: anObject [
 
-	<FMProperty: #dimensions type: #Number defaultValue: 0>
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The bracket pairs written after my name, eg. the one of `char cbuf[]`'>
-	^ dimensions ifNil: [ dimensions := 0 ]
+	^ self brackets add: anObject
 ]
 
 { #category : 'accessing' }
-FASTJavaParameter >> dimensions: anObject [
+FASTJavaParameter >> brackets [
+	"Relation named: #brackets type: #FASTJavaDimension opposite: #parameterOwner"
+
 	<ignoreForCoverage>
 	<generated>
-	dimensions := anObject
+	<FMComment: 'The bracket pairs written after my name, eg. the one of `char cbuf[]`'>
+	^ brackets
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> brackets: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	brackets value: anObject
 ]
 
 { #category : 'accessing' }
@@ -185,4 +197,22 @@ FASTJavaParameter >> variable: anObject [
 	<ignoreForCoverage>
 	<generated>
 	variable := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> variableArguments [
+	"Relation named: #variableArguments type: #FASTJavaDimension opposite: #variableArgumentsOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The ellipsis I write before my name, and the annotations written on it'>
+	^ variableArguments
+]
+
+{ #category : 'accessing' }
+FASTJavaParameter >> variableArguments: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	variableArguments := anObject
 ]

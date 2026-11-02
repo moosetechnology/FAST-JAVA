@@ -27,6 +27,7 @@ I represent the name of a type
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -50,6 +51,7 @@ I represent the name of a type
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 
 
 ## Properties
@@ -65,8 +67,8 @@ I represent the name of a type
 Class {
 	#name : 'FASTJavaTypeName',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAnnotationElement + FASTTExpression + FASTTNamedEntity + FASTTWithArguments',
-	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
+	#traits : 'FASTJavaTAnnotationElement + FASTJavaTWithModifiers + FASTTExpression + FASTTNamedEntity + FASTTWithArguments',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'

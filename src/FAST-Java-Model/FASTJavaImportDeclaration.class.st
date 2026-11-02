@@ -21,6 +21,7 @@ I represent an import declaration, e.g. `import java.util.List;`
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `isModule` | `Boolean` | false | Whether this import names a module rather than a type, as `import module java.base;` does (JLS 7.5.5)|
 | `isOnDemand` | `Boolean` | false | Whether this import is on-demand (wildcard) or single-type|
 | `isStatic` | `Boolean` | false | True if importing static members|
 | `startPos` | `Number` | nil | |
@@ -33,6 +34,7 @@ Class {
 	#classTraits : 'FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #importDeclarations',
+		'#isModule => FMProperty defaultValue: false',
 		'#isOnDemand => FMProperty defaultValue: false',
 		'#isStatic => FMProperty defaultValue: false'
 	],
@@ -75,6 +77,23 @@ FASTJavaImportDeclaration >> isImportDeclaration [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaImportDeclaration >> isModule [
+
+	<FMProperty: #isModule type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether this import names a module rather than a type, as `import module java.base;` does (JLS 7.5.5)'>
+	^ isModule ifNil: [ isModule := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaImportDeclaration >> isModule: anObject [
+	<ignoreForCoverage>
+	<generated>
+	isModule := anObject
 ]
 
 { #category : 'accessing' }

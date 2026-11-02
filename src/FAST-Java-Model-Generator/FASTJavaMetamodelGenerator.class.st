@@ -141,7 +141,18 @@ Class {
 		'tWithSwitchBlock',
 		'javaAnnotationInterfaceDeclaration',
 		'javaAnnotationElementDeclaration',
-		'javaRecordDeclaration'
+		'javaRecordDeclaration',
+		'javaRecordPattern',
+		'javaMatchAllPattern',
+		'javaReceiverParameter',
+		'javaModuleDeclaration',
+		'javaModuleDirective',
+		'javaRequiresDirective',
+		'javaExportsDirective',
+		'javaOpensDirective',
+		'javaUsesDirective',
+		'javaProvidesDirective',
+		'javaDimension'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -341,6 +352,16 @@ default:'
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaDimension [
+	^ 'I am one pair of brackets, written after a name or after a type, and I carry the annotations written on that pair (JLS 10.2). The ellipsis of a variable arity parameter is one of me too, the dimension it adds being the one the annotations before it are written on (JLS 8.4.1).
+
+```language=text
+int a @Ann [];
+void m(Object @Ann ... args);
+```'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaDoWhileStatement [
 	^ 'A node of a do-while statement.
 
@@ -396,6 +417,15 @@ public enum MyEnum {
 	void methodDeclaration(){
 	}
 }'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaExportsDirective [
+	^ 'I export a package of my module, either to every module or to the ones I name (JLS 7.7.2).
+
+```language=text
+exports com.example.api to java.logging, java.desktop;
+```'
 ]
 
 { #category : 'comments' }
@@ -553,6 +583,20 @@ for methods:
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaModuleDeclaration [
+	^ 'I am the module a modular compilation unit declares (JLS 7.7), and I hold the directives it writes.
+
+```language=text
+module com.example.app { requires java.logging; }
+```'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaModuleDirective [
+	^ 'I am one directive of a module declaration (JLS 7.7.1), and I name the module, package or service I am about.'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaNewArray [
 	^ 'I represent a java new array node.
 ex.
@@ -593,12 +637,30 @@ FASTJavaMetamodelGenerator >> commentForJavaNullLiteral [
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaOpensDirective [
+	^ 'I open a package of my module to reflection, either to every module or to the ones I name (JLS 7.7.2).
+
+```language=text
+opens com.example.model to java.logging;
+```'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaOuterThis [
 	^ 'I represent a java outer this (only a call to ''this'' to a class)
 	
 ex.:
 
 hello(MyClass.this)'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaProvidesDirective [
+	^ 'I name a service my module implements, and the classes that implement it (JLS 7.7.4).
+
+```language=text
+provides com.example.Service with com.example.Impl;
+```'
 ]
 
 { #category : 'comments' }
@@ -627,6 +689,15 @@ Example:
 ```language=text
 public record Point(int x, int y) {
 }
+```'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaRequiresDirective [
+	^ 'I name a module mine depends on, and whether that dependency is static or transitive (JLS 7.7.1).
+
+```language=text
+requires static transitive java.logging;
 ```'
 ]
 
@@ -750,6 +821,15 @@ i--
 -i
 
 see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaUsesDirective [
+	^ 'I name a service my module consumes through a service loader (JLS 7.7.3).
+
+```language=text
+uses com.example.Service;
+```'
 ]
 
 { #category : 'comments' }
@@ -917,6 +997,15 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaArrayAnnotationElement withTesting.
 	javaTypePattern := self newClassNamed: #TypePattern comment: self commentForJavaTypePattern.
 	javaTypePattern withTesting.
+	javaRecordPattern := self newClassNamed: #RecordPattern comment:
+		'I represent a record pattern, which matches a record and its components in turn (JLS 14.30.1)'.
+	javaRecordPattern withTesting.
+	javaMatchAllPattern := self newClassNamed: #MatchAllPattern comment:
+		'I represent the `_` a record pattern writes for a component it binds nothing to (JLS 14.30.1)'.
+	javaMatchAllPattern withTesting.
+	javaReceiverParameter := self newClassNamed: #ReceiverParameter comment:
+		'I represent the receiver parameter a method writes to carry the annotations of the instance it is called on (JLS 8.4.1)'.
+	javaReceiverParameter withTesting.
 	javaSwitchExpression := self newClassNamed: #SwitchExpression comment: self commentForJavaSwitchExpression.
 	javaSwitchExpression withTesting.
 
@@ -1000,7 +1089,23 @@ FASTJavaMetamodelGenerator >> defineClasses [
 		                     comment: 'I represent an import declaration, e.g. `import java.util.List;`'.
 	importDeclaration withTesting.
 	qualifiedName := self newClassNamed: #QualifiedName.
-	qualifiedName withTesting
+	qualifiedName withTesting.
+	javaModuleDeclaration := self newClassNamed: #ModuleDeclaration comment: self commentForJavaModuleDeclaration.
+	javaModuleDeclaration withTesting.
+	javaModuleDirective := self newClassNamed: #ModuleDirective comment: self commentForJavaModuleDirective.
+	javaModuleDirective withTesting.
+	javaRequiresDirective := self newClassNamed: #RequiresDirective comment: self commentForJavaRequiresDirective.
+	javaRequiresDirective withTesting.
+	javaExportsDirective := self newClassNamed: #ExportsDirective comment: self commentForJavaExportsDirective.
+	javaExportsDirective withTesting.
+	javaOpensDirective := self newClassNamed: #OpensDirective comment: self commentForJavaOpensDirective.
+	javaOpensDirective withTesting.
+	javaUsesDirective := self newClassNamed: #UsesDirective comment: self commentForJavaUsesDirective.
+	javaUsesDirective withTesting.
+	javaProvidesDirective := self newClassNamed: #ProvidesDirective comment: self commentForJavaProvidesDirective.
+	javaProvidesDirective withTesting.
+	javaDimension := self newClassNamed: #Dimension comment: self commentForJavaDimension.
+	javaDimension withTesting
 ]
 
 { #category : 'definition' }
@@ -1218,6 +1323,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTypeName --|> tNamedEntity.
 	javaTypeName --|> tExpression.
 	javaTypeName --|> tAnnotationElement.
+	"JLS 4.3 and 4.11: the name a type is qualified by writes its own annotations after
+	the dot, as the `java.util.@Ann List` of a field declaration does"
+	javaTypeName --|> tWithModifiers.
 	"JLS 4.3: a name that qualifies a type is itself a type, so it may write type arguments
 	of its own, as the `ArrayList<E>` of `ArrayList<E>.ArrayListSpliterator` does"
 	javaTypeName --|> #TWithArguments.
@@ -1225,6 +1333,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	"types"
 	javaTypeExpression --|> javaVariableExpression.
+	"JLS 4.11: an annotation is written on a type wherever a type appears, which is not
+	where the declaration that writes the type writes its own modifiers"
+	javaTypeExpression --|> tWithModifiers.
 	javaArrayTypeExpression --|> javaTypeExpression.
 	javaPrimitiveTypeExpression --|> javaTypeExpression.
 	javaBooleanTypeExpression --|> javaPrimitiveTypeExpression.
@@ -1243,6 +1354,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaTypeParameter --|> tExpression.
 	javaTypeParameter --|> tNamedEntity.
+	"JLS 4.4: a type parameter writes annotations of its own before its name, as the
+	`@jdk.internal.RequiresIdentity` of `Reference<@jdk.internal.RequiresIdentity T>` does"
+	javaTypeParameter --|> tWithModifiers.
 
 	javaModifier --|> tModifier.
 	javaModifier --|> tExpression.
@@ -1272,6 +1386,16 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaTypePattern --|> tExpression.
 	javaTypePattern --|> tWithModifiers.
 
+	"JLS 14.30.1: a pattern is a type pattern or a record pattern, and a record pattern
+	writes a match-all `_` where a component binds nothing"
+	javaRecordPattern --|> tExpression.
+	javaMatchAllPattern --|> tExpression.
+
+	"JLS 8.4.1: a receiver parameter declares nothing, carrying only the annotations
+	written on the type of the instance the method is called on"
+	javaReceiverParameter --|> tEntity.
+	javaReceiverParameter --|> tWithModifiers.
+
 	compilationUnit --|> tEntity.
 	compilationUnit --|> #THasImmediateSource.
 	compilationUnit withPrecedenceOf: #THasImmediateSource.
@@ -1281,6 +1405,26 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	packageDeclaration --|> tWithQualifiedName.
 	importDeclaration --|> tEntity.
 	importDeclaration --|> tWithQualifiedName.
+
+	"JLS 7.7: a modular compilation unit declares a module instead of a type. The module
+	writes the annotations it carries, and each of its directives names one module,
+	package or service, which is the qualified name it writes."
+	javaModuleDeclaration --|> tEntity.
+	javaModuleDeclaration --|> tWithModifiers.
+	javaModuleDeclaration --|> tWithQualifiedName.
+	javaModuleDirective --|> tEntity.
+	javaModuleDirective --|> tWithQualifiedName.
+	"JLS 10.2: a pair of brackets written after a name belongs to that name alone, and
+	carries the annotations written on it; the ellipsis of a variable arity parameter is
+	the same, the dimension it adds being what its annotations are written on."
+	javaDimension --|> tEntity.
+	javaDimension --|> tWithModifiers.
+
+	javaRequiresDirective --|> javaModuleDirective.
+	javaExportsDirective --|> javaModuleDirective.
+	javaOpensDirective --|> javaModuleDirective.
+	javaUsesDirective --|> javaModuleDirective.
+	javaProvidesDirective --|> javaModuleDirective.
 
 	javaSwitchExpression --|> tExpression.
 	javaSwitchExpression --|> tWithSwitchBlock.
@@ -1313,6 +1457,14 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(importDeclaration property: #isStatic type: #Boolean defaultValue: false) comment: 'True if importing static members'.
 	(importDeclaration property: #isOnDemand type: #Boolean defaultValue: false) comment:
 		'Whether this import is on-demand (wildcard) or single-type'.
+	(importDeclaration property: #isModule type: #Boolean defaultValue: false) comment:
+		'Whether this import names a module rather than a type, as `import module java.base;` does (JLS 7.5.5)'.
+
+	(javaReceiverParameter property: #qualifier type: #String) comment:
+		'The name written before `this`, as the `Outer` of `Outer.this` (JLS 8.4.1)'.
+
+	(javaSwitchLabel property: #isDefault type: #Boolean defaultValue: false) comment:
+		'Whether this label writes `default`, which it may do beside the constants it writes (JLS 14.11.1)'.
 
 	(javaInitializer property: #isStatic type: #Boolean defaultValue: false) comment: 'Whether this initializer is static'.
 
@@ -1322,15 +1474,13 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 
-	"JLS 10.2: the brackets of an array type may be written after the name of a variable
-	rather than after the type, where they belong to that variable alone. They are kept
-	where they are written, so the type a variable declares is the one its declaration
-	writes with these dimensions added."
-	(javaParameterExpression property: #dimensions type: #Number defaultValue: 0) comment:
-		'The bracket pairs written after my name, eg. the one of `char cbuf[]`'.
+	(javaModuleDeclaration property: #isOpen type: #Boolean defaultValue: false) comment:
+		'Whether this module writes `open`, which opens every one of its packages to reflection (JLS 7.7)'.
 
-	(javaVariableDeclarator property: #dimensions type: #Number defaultValue: 0) comment:
-		'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'.
+	(javaRequiresDirective property: #isStatic type: #Boolean defaultValue: false) comment:
+		'Whether the module required is needed at compile time only (JLS 7.7.1)'.
+	(javaRequiresDirective property: #isTransitive type: #Boolean defaultValue: false) comment:
+		'Whether a module reading mine also reads the module required (JLS 7.7.1)'.
 
 	(javaBreakStatement property: #label type: #String) comment: 'The label targeted by this break statement'.
 
@@ -1562,6 +1712,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeExpression property: #javaMethodInvocationTypeArgumentOwner)
 			 comment: 'The invocation that writes me as one of its type arguments').
 
+	"JLS 15.9: a creation may write the type arguments of the constructor it calls, which
+	come between `new` and the type instantiated and are no part of that type."
+	((javaNewExpression property: #typeArguments) comment:
+		 'The type arguments I write after `new`, eg. the String of `new <String>C()`')
+	<>-*
+		((javaTypeExpression property: #javaNewExpressionTypeArgumentOwner)
+			 comment: 'The creation that writes me as one of its type arguments').
+
 	"JLS 15.13: a method reference may write the type arguments of the method it names
 	after the `::`, where an invocation writes them before the name."
 	((javaMethodReference property: #typeArguments) comment:
@@ -1751,6 +1909,25 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeExpression property: #javaTypePatternTypeOwner) comment:
 			 'The javaTypePattern type owner (if possible)').
 
+	"JLS 14.30.1: a record pattern names the record type it matches and the patterns
+	its components are matched against, in the order the record declares them."
+	((javaRecordPattern property: #type) comment: 'The record type I match')
+	<>- ((javaTypeExpression property: #javaRecordPatternTypeOwner) comment:
+		 'The record pattern that matches me').
+	((javaRecordPattern property: #patterns) comment:
+		 'The patterns my components are matched against, in order')
+	<>-* ((tExpression property: #javaRecordPatternOwner) comment:
+		 'The record pattern that matches me as one of its components').
+
+	"JLS 8.4.1: the receiver parameter a method writes, which names the type of the
+	instance it is called on and may qualify `this` with the name of an enclosing type."
+	((javaMethodEntity property: #receiver) comment: 'The receiver parameter I write')
+	<>- ((javaReceiverParameter property: #methodOwner) comment: 'The method that writes me').
+	((javaReceiverParameter property: #type) comment:
+		 'The type of the instance the method is called on')
+	<>- ((javaTypeExpression property: #javaReceiverParameterTypeOwner) comment:
+		 'The receiver parameter that writes me').
+
 	"do not use TDeclaration and TWithDeclaration on purpose: what a compilation unit can contain is strict"
 	((compilationUnit property: #packageDeclaration) comment:
 		 'My package declaration, or nil for the default package')
@@ -1780,6 +1957,67 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'My record declarations')
 	<>-* ((javaRecordDeclaration property: #compilationUnit) comment:
 			 'The compilation unit that owns me').
+
+	"JLS 7.3: a compact compilation unit declares no type of its own. It writes the members
+	of the class it implies, so a method and a field may stand at the top level."
+	((compilationUnit property: #methodDeclarations) comment:
+		 'The methods a compact compilation unit writes at the top level')
+	<>-* ((javaMethodEntity property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((compilationUnit property: #fieldDeclarations) comment:
+		 'The fields a compact compilation unit writes at the top level')
+	<>-* ((javaVarDeclStatement property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+
+	"JLS 7.7: a modular compilation unit writes one module declaration where another unit
+	writes its types, and the directives of that module stand in the order it writes them."
+	((compilationUnit property: #moduleDeclaration) comment:
+		 'The module a modular compilation unit declares')
+	<>- ((javaModuleDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that owns me').
+	((javaModuleDeclaration property: #directives) comment:
+		 'The directives I write, in the order I write them')
+	<>-* ((javaModuleDirective property: #moduleDeclaration) comment:
+			 'The module declaration that owns me').
+
+	"JLS 10.2: the brackets of an array type may be written after the name of a variable,
+	or after the parameter list of a method, rather than after the type. They belong to
+	what writes them, each pair carrying its own annotations, so the type declared is the
+	one the declaration writes with these added."
+	((javaParameterExpression property: #brackets) comment:
+		 'The bracket pairs written after my name, eg. the one of `char cbuf[]`')
+	<>-* ((javaDimension property: #parameterOwner) comment:
+			 'The parameter that writes me after its name').
+	((javaVariableDeclarator property: #brackets) comment:
+		 'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not')
+	<>-* ((javaDimension property: #variableDeclaratorOwner) comment:
+			 'The declarator that writes me after its name').
+	((javaMethodEntity property: #brackets) comment:
+		 'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`')
+	<>-* ((javaDimension property: #methodOwner) comment:
+			 'The method that writes me after its parameter list').
+
+	"JLS 8.4.1: the annotations a variable arity parameter writes before its ellipsis are
+	written on the array type that ellipsis makes, which is the dimension it adds."
+	((javaParameterExpression property: #variableArguments) comment:
+		 'The ellipsis I write before my name, and the annotations written on it')
+	<>- ((javaDimension property: #variableArgumentsOwner) comment:
+			 'The parameter whose ellipsis I am').
+
+	"JLS 7.7.2 and 7.7.4: a directive may name modules or classes beside the package or
+	service it is about."
+	((javaExportsDirective property: #targets) comment:
+		 'The modules I export to, eg. the java.logging of `exports a.b to java.logging;`')
+	<>-* ((qualifiedName property: #javaExportsDirectiveTargetOwner) comment:
+			 'The exports directive that writes me as one of its targets').
+	((javaOpensDirective property: #targets) comment:
+		 'The modules I open to, eg. the java.logging of `opens a.b to java.logging;`')
+	<>-* ((qualifiedName property: #javaOpensDirectiveTargetOwner) comment:
+			 'The opens directive that writes me as one of its targets').
+	((javaProvidesDirective property: #implementations) comment:
+		 'The classes implementing the service I provide, eg. the a.Impl of `provides a.S with a.Impl;`')
+	<>-* ((qualifiedName property: #javaProvidesDirectiveImplementationOwner) comment:
+			 'The provides directive that writes me as one of its implementations').
 
 	((javaSwitchExpression property: #condition) comment: 'The condition of the switch expression') <>- ((tExpression property: #switchExpressionConditionOwner) comment: 'The switch expression whose condition I am').
 	((tWithSwitchBlock property: #rules) comment: 'The rules of my switch block, in arrow form') <>-* ((javaSwitchRule property: #switchOwner) comment: 'The switch that owns me').
