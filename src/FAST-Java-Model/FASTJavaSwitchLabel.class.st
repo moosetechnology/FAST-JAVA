@@ -23,6 +23,7 @@ I represent a label of a switch case. I contain all expressions associated with 
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `isDefault` | `Boolean` | false | Whether this label writes `default`, which it may do beside the constants it writes (JLS 14.11.1)|
 | `startPos` | `Number` | nil | |
 
 "
@@ -33,6 +34,7 @@ Class {
 	#classTraits : 'FASTTEntity classTrait',
 	#instVars : [
 		'#caseStatementOwner => FMOne type: #FASTJavaCaseStatement opposite: #labels',
+		'#isDefault => FMProperty defaultValue: false',
 		'#switchRuleOwner => FMOne type: #FASTJavaSwitchRule opposite: #label'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -121,6 +123,23 @@ FASTJavaSwitchLabel >> guard: anObject [
 	ifNotNil: [ 
 		self attributeAt: #guard put: anObject.
 		anObject switchLabelGuardOwner: self ]
+]
+
+{ #category : 'accessing' }
+FASTJavaSwitchLabel >> isDefault [
+
+	<FMProperty: #isDefault type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether this label writes `default`, which it may do beside the constants it writes (JLS 14.11.1)'>
+	^ isDefault ifNil: [ isDefault := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaSwitchLabel >> isDefault: anObject [
+	<ignoreForCoverage>
+	<generated>
+	isDefault := anObject
 ]
 
 { #category : 'testing' }

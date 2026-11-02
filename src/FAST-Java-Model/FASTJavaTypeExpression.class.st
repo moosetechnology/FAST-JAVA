@@ -18,10 +18,18 @@ I am an abstract class representing a type
 | `javaInterfaceDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaInterfaceDeclaration` | The sealed interface that permits me to extend it|
 | `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaMethodInvocation` | The invocation that writes me as one of its type arguments|
 | `javaMethodReferenceTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaMethodReference` | The method reference that writes me as one of its type arguments|
+| `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaNewExpression` | The creation that writes me as one of its type arguments|
+| `javaReceiverParameterTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaReceiverParameter` | The receiver parameter that writes me|
 | `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaRecordDeclaration` | The record that implements me|
+| `javaRecordPatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaRecordPattern` | The record pattern that matches me|
 | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaTypePattern` | The javaTypePattern type owner (if possible)|
 | `typeParameterOwner` | `FASTJavaTypeExpression` | `types` | `FASTJavaTypeParameterExpression` | The type parameter I specify|
 | `typeParameterSuperTypeOwner` | `FASTJavaTypeExpression` | `superType` | `FASTJavaTypeParameterExpression` | The wildcard I bound from below|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 
 
 
@@ -29,6 +37,8 @@ I am an abstract class representing a type
 Class {
 	#name : 'FASTJavaTypeExpression',
 	#superclass : 'FASTJavaVariableExpression',
+	#traits : 'FASTJavaTWithAnnotations',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait',
 	#instVars : [
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #catchedTypes',
 		'#javaCastExpressionAdditionalBoundOwner => FMOne type: #FASTJavaCastExpression opposite: #additionalBounds',
@@ -41,7 +51,10 @@ Class {
 		'#javaInterfaceDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes',
 		'#javaMethodInvocationTypeArgumentOwner => FMOne type: #FASTJavaMethodInvocation opposite: #typeArguments',
 		'#javaMethodReferenceTypeArgumentOwner => FMOne type: #FASTJavaMethodReference opposite: #typeArguments',
+		'#javaNewExpressionTypeArgumentOwner => FMOne type: #FASTJavaNewExpression opposite: #typeArguments',
+		'#javaReceiverParameterTypeOwner => FMOne type: #FASTJavaReceiverParameter opposite: #type',
 		'#javaRecordDeclarationInterfaceOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #interfaces',
+		'#javaRecordPatternTypeOwner => FMOne type: #FASTJavaRecordPattern opposite: #type',
 		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type',
 		'#typeParameterOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #types',
 		'#typeParameterSuperTypeOwner => FMOne type: #FASTJavaTypeParameterExpression opposite: #superType'
@@ -280,6 +293,45 @@ FASTJavaTypeExpression >> javaMethodReferenceTypeArgumentOwner: anObject [
 ]
 
 { #category : 'accessing' }
+FASTJavaTypeExpression >> javaNewExpressionTypeArgumentOwner [
+	"Relation named: #javaNewExpressionTypeArgumentOwner type: #FASTJavaNewExpression opposite: #typeArguments"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The creation that writes me as one of its type arguments'>
+	<container>
+	^ javaNewExpressionTypeArgumentOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaNewExpressionTypeArgumentOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaNewExpressionTypeArgumentOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaReceiverParameterTypeOwner [
+	"Relation named: #javaReceiverParameterTypeOwner type: #FASTJavaReceiverParameter opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The receiver parameter that writes me'>
+	<container>
+	<derived>
+	^ javaReceiverParameterTypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaReceiverParameterTypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaReceiverParameterTypeOwner := anObject
+]
+
+{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaRecordDeclarationInterfaceOwner [
 	"Relation named: #javaRecordDeclarationInterfaceOwner type: #FASTJavaRecordDeclaration opposite: #interfaces"
 
@@ -296,6 +348,26 @@ FASTJavaTypeExpression >> javaRecordDeclarationInterfaceOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaRecordDeclarationInterfaceOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaRecordPatternTypeOwner [
+	"Relation named: #javaRecordPatternTypeOwner type: #FASTJavaRecordPattern opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The record pattern that matches me'>
+	<container>
+	<derived>
+	^ javaRecordPatternTypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaRecordPatternTypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaRecordPatternTypeOwner := anObject
 ]
 
 { #category : 'accessing' }

@@ -154,6 +154,11 @@ FASTJavaVisitor >> visitFASTJavaDefaultCaseStatement: aFASTJavaDefaultCaseStatem
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaDimension: aFASTJavaDimension [
+	^ self visitFASTTEntity: aFASTJavaDimension
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaDoWhileStatement: aFASTJavaDoWhileStatement [
 	^ self visitFASTTStatement: aFASTJavaDoWhileStatement
 ]
@@ -191,6 +196,11 @@ FASTJavaVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration [
 	^ self visitFASTTStatement: aFASTJavaEnumDeclaration
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaExportsDirective: aFASTJavaExportsDirective [
+	^ self visitFASTJavaModuleDirective: aFASTJavaExportsDirective
 ]
 
 { #category : 'generated' }
@@ -305,6 +315,11 @@ FASTJavaVisitor >> visitFASTJavaLongTypeExpression: aFASTJavaLongTypeExpression 
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaMatchAllPattern: aFASTJavaMatchAllPattern [
+	^ self visitFASTTExpression: aFASTJavaMatchAllPattern
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	^ self visitFASTTNamedBehaviouralEntity: aFASTJavaMethodEntity
 ]
@@ -322,6 +337,16 @@ FASTJavaVisitor >> visitFASTJavaMethodReference: aFASTJavaMethodReference [
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaModifier: aFASTJavaModifier [
 	^ self visitFASTTExpression: aFASTJavaModifier
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaModuleDeclaration: aFASTJavaModuleDeclaration [
+	^ self visitFASTTEntity: aFASTJavaModuleDeclaration
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaModuleDirective: aFASTJavaModuleDirective [
+	^ self visitFASTTEntity: aFASTJavaModuleDirective
 ]
 
 { #category : 'generated' }
@@ -347,6 +372,11 @@ FASTJavaVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
 	^ self visitFASTTNullPointerLiteral: aFASTJavaNullLiteral
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaOpensDirective: aFASTJavaOpensDirective [
+	^ self visitFASTJavaModuleDirective: aFASTJavaOpensDirective
 ]
 
 { #category : 'generated' }
@@ -380,6 +410,11 @@ FASTJavaVisitor >> visitFASTJavaPrimitiveTypeExpression: aFASTJavaPrimitiveTypeE
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaProvidesDirective: aFASTJavaProvidesDirective [
+	^ self visitFASTJavaModuleDirective: aFASTJavaProvidesDirective
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
 	^ self visitFASTTEntity: aFASTJavaQualifiedName
 ]
@@ -390,9 +425,24 @@ FASTJavaVisitor >> visitFASTJavaQualifiedTypeName: aFASTJavaQualifiedTypeName [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaReceiverParameter: aFASTJavaReceiverParameter [
+	^ self visitFASTTEntity: aFASTJavaReceiverParameter
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaRecordDeclaration: aFASTJavaRecordDeclaration [
 
 	^ self visitFASTTStatement: aFASTJavaRecordDeclaration
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaRecordPattern: aFASTJavaRecordPattern [
+	^ self visitFASTTExpression: aFASTJavaRecordPattern
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaRequiresDirective: aFASTJavaRequiresDirective [
+	^ self visitFASTJavaModuleDirective: aFASTJavaRequiresDirective
 ]
 
 { #category : 'generated' }
@@ -498,6 +548,11 @@ FASTJavaVisitor >> visitFASTJavaTypePattern: aFASTJavaTypePattern [
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
 	^ self visitFASTTExpression: aFASTJavaUnaryExpression
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaUsesDirective: aFASTJavaUsesDirective [
+	^ self visitFASTJavaModuleDirective: aFASTJavaUsesDirective
 ]
 
 { #category : 'generated' }

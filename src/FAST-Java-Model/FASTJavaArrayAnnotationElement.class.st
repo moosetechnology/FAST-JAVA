@@ -26,6 +26,7 @@ I represent an array as argument of an annotationExpression
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -55,6 +56,7 @@ I represent an array as argument of an annotationExpression
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasTrailingComma` | `Boolean` | false | Whether a comma is written after the last value, which JLS 9.7.1 allows|
 | `startPos` | `Number` | nil | |
 
 "
@@ -64,6 +66,7 @@ Class {
 	#traits : 'FASTJavaTAnnotationElement + FASTTExpression',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait',
 	#instVars : [
+		'#hasTrailingComma => FMProperty defaultValue: false',
 		'#values => FMMany type: #FASTJavaTAnnotationElement opposite: #arrayOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -86,6 +89,23 @@ FASTJavaArrayAnnotationElement >> addValue: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self values add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayAnnotationElement >> hasTrailingComma [
+
+	<FMProperty: #hasTrailingComma type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether a comma is written after the last value, which JLS 9.7.1 allows'>
+	^ hasTrailingComma ifNil: [ hasTrailingComma := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayAnnotationElement >> hasTrailingComma: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasTrailingComma := anObject
 ]
 
 { #category : 'testing' }

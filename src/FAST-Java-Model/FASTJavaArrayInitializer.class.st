@@ -35,6 +35,7 @@ My initializers are
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -64,6 +65,7 @@ My initializers are
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasTrailingComma` | `Boolean` | false | Whether a comma is written after the last initializer, which JLS 10.6 allows and which tells `{ 1, 2, }` from `{ 1, 2 }`|
 | `startPos` | `Number` | nil | |
 
 "
@@ -72,6 +74,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTAnnotationElement + FASTTExpression',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait',
+	#instVars : [
+		'#hasTrailingComma => FMProperty defaultValue: false'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -92,6 +97,23 @@ FASTJavaArrayInitializer >> addInitializer: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self initializers add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayInitializer >> hasTrailingComma [
+
+	<FMProperty: #hasTrailingComma type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether a comma is written after the last initializer, which JLS 10.6 allows and which tells `{ 1, 2, }` from `{ 1, 2 }`'>
+	^ hasTrailingComma ifNil: [ hasTrailingComma := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayInitializer >> hasTrailingComma: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasTrailingComma := anObject
 ]
 
 { #category : 'accessing' }

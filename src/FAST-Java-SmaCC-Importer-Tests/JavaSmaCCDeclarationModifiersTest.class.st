@@ -6,6 +6,11 @@ Class {
 }
 
 { #category : 'resources' }
+JavaSmaCCDeclarationModifiersTest >> annotationsOf: aFASTJavaEntity [
+	^ aFASTJavaEntity annotations asOrderedCollection
+]
+
+{ #category : 'resources' }
 JavaSmaCCDeclarationModifiersTest >> javaClass [
 
 	^ 'enum Modifiers {
@@ -55,13 +60,13 @@ JavaSmaCCDeclarationModifiersTest >> testEnumConstantKeepsItsAnnotation [
 	| constants |
 	constants := (fastModel allWithType: FASTJavaEnumConstant) asOrderedCollection.
 	self
-		assert: (self modifiersOf: (constants detect: [ :constant | constant name = 'ANNOTATED' ])) size
+		assert: (self annotationsOf: (constants detect: [ :constant | constant name = 'ANNOTATED' ])) size
 		equals: 1.
 	self
-		assert: (self modifiersOf: (constants detect: [ :constant | constant name = 'ANNOTATED' ])) first name
+		assert: (self annotationsOf: (constants detect: [ :constant | constant name = 'ANNOTATED' ])) first name
 		equals: 'Deprecated'.
 	self assert:
-		(self modifiersOf: (constants detect: [ :constant | constant name = 'PLAIN' ])) isEmpty
+		(self annotationsOf: (constants detect: [ :constant | constant name = 'PLAIN' ])) isEmpty
 ]
 
 { #category : 'tests' }
