@@ -184,6 +184,33 @@ or not: a class type expression answers its type name's. Code that already handl
 exported differently — a class type with no arguments writes its name and nothing else, so
 `Byte[]` is still written back as `Byte[]`.
 
+## A type name is not an expression
+
+`FASTJavaTypeName`, and `FASTJavaQualifiedTypeName` with it, used `FASTTExpression` and
+`FASTJavaTAnnotationElement`, so the name a type is written as could stand wherever a value
+stands: as an argument, as the expression of a `return`, on either side of an infix
+operation, as the element of an annotation. It is now a `FASTJavaEntity` using
+`FASTTNamedEntity`, `FASTJavaTWithAnnotations` and `FASTTWithArguments`.
+
+Nothing is lost, because nothing was ever there. The two traits contribute 37 relation ends
+between them, and over 600 files of JDK 8 and JDK 25 — 18,938 type names — not one was ever
+filled. `FASTJavaArrayTypeExpression>>baseType` was the last relation that could put a type
+name where an expression goes, and the section above took it away.
+
+What it keeps is what the language writes: a name (JLS 4.3), the annotations a qualifying
+part writes after the dot — the `java.util.@Ann List` of JLS 4.11 — and the type arguments
+such a part writes, as `ArrayList<E>.ArrayListSpliterator` does.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aTypeName argumentOwner`, `returnOwner`, `parentExpression`, 31 more | gone; each was always nil |
+| `aTypeName arrayOwner`, `defaultValueOwner`, `parentAnnotation` | gone; each was always nil |
+| `aModel allUsing: FASTTExpression` | no longer answers type names; add `allWithSubTypesOf: FASTJavaTypeName` if you want them |
+
+`FASTJavaVisitor>>visitFASTJavaTypeName:` now forwards to `visitFASTTNamedEntity:` rather
+than `visitFASTTExpression:`, which matters to a visitor that overrode the latter to catch
+every expression at once.
+
 ## An enum constant is no longer a variable expression either
 
 `FASTJavaEnumConstant` declares a name, writes arguments where the constructor takes them

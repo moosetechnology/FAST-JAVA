@@ -1337,9 +1337,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaSynchronizedStatement --|> tStatement.
 
 	"types name"
+	"JLS 4.3: a type name is the name a type is written as, and no more. Being an
+	expression would let it stand where a value stands, and being an annotation element
+	would let it be written as one."
 	javaTypeName --|> tNamedEntity.
-	javaTypeName --|> tExpression.
-	javaTypeName --|> tAnnotationElement.
 	"JLS 4.3 and 4.11: the name a type is qualified by writes its own annotations after
 	the dot, as the `java.util.@Ann List` of a field declaration does"
 	javaTypeName --|> tWithAnnotations.

@@ -532,7 +532,7 @@ FASTJavaVisitor >> visitFASTJavaTypeExpression: aFASTJavaTypeExpression [
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaTypeName: aFASTJavaTypeName [
-	^ self visitFASTTExpression: aFASTJavaTypeName
+	^ self visitFASTTNamedEntity: aFASTJavaTypeName
 ]
 
 { #category : 'generated' }
