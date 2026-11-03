@@ -395,37 +395,6 @@ FASTTExpression >> javaForEachStatementOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
-FASTTExpression >> javaNewArrayInitialOwner [
-	"Relation named: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'I belong to a new array initialization'>
-	<container>
-	<FMProperty: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer>
-	<package: #'FAST-Java-Model'>
-	<derived>
-	^ self attributeAt: #javaNewArrayInitialOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model' }
-FASTTExpression >> javaNewArrayInitialOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	<package: #'FAST-Java-Model'>
-
-	(self attributeAt: #javaNewArrayInitialOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaNewArrayInitialOwner.
-		self attributeAt: #javaNewArrayInitialOwner put: anObject.
-		otherSide initializer: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaNewArrayInitialOwner put: anObject.
-		anObject initializer: self ]
-]
-
-{ #category : '*FAST-Java-Model' }
 FASTTExpression >> javaRecordPatternOwner [
 	"Relation named: #javaRecordPatternOwner type: #FASTJavaRecordPattern opposite: #patterns"
 

@@ -10,7 +10,6 @@ I am an abstract class representing a type
 | `argumentOwner` | `FASTTExpression` | `arguments` | `FASTTWithArguments` | my owner|
 | `assertConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaAssertStatement` | I represent a condition for my owner|
 | `assignedIn` | `FASTTExpression` | `expression` | `FASTTAssignment` | Optional assignment where this expression is used|
-| `catchOwner` | `FASTJavaTypeExpression` | `caughtTypes` | `FASTJavaCatchPartStatement` | The catch clause that catches me|
 | `conditionalConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaConditionalExpression` | I represent a condition for my owner|
 | `conditionalElsePartOwner` | `FASTTExpression` | `elsePart` | `FASTJavaConditionalExpression` | The if owner (if possible)|
 | `conditionalThenPartOwner` | `FASTTExpression` | `thenPart` | `FASTJavaConditionalExpression` | The if owner (if possible)|
@@ -22,29 +21,19 @@ I am an abstract class representing a type
 | `javaArrayBaseTypeOwner` | `FASTJavaTypeExpression` | `baseType` | `FASTJavaArrayTypeExpression` | The array type that makes an array of me|
 | `javaArrayInitializers` | `FASTTExpression` | `initializers` | `FASTJavaArrayInitializer` | The owner of the expression|
 | `javaAssignmentExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaAssignmentExpression` | The javaAssignmentExpression owner (if possible)|
-| `javaCastExpressionAdditionalBoundOwner` | `FASTJavaTypeExpression` | `additionalBounds` | `FASTJavaCastExpression` | The cast that writes me as one of its additional bounds|
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaCastExpressionTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
-| `javaClassDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaClassDeclaration` | The class that implements me|
-| `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaClassDeclaration` | The sealed class that permits me to extend it|
-| `javaClassDeclarationSuperclassOwner` | `FASTJavaTypeExpression` | `superclass` | `FASTJavaClassDeclaration` | The class that extends me|
 | `javaClassLiteralTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaClassLiteral` | The class literal that reads my Class object|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
-| `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaEnumDeclaration` | The enum that implements me|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaInterfaceDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaInterfaceDeclaration` | The interface that extends me|
-| `javaInterfaceDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaInterfaceDeclaration` | The sealed interface that permits me to extend it|
 | `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaMethodInvocation` | The invocation that writes me as one of its type arguments|
 | `javaMethodReferenceTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaMethodReference` | The method reference that writes me as one of its type arguments|
 | `javaMethodTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaMethodEntity` | The variable expression owner (if possible)|
-| `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaNewArrayTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaNewArray` | The array creation that makes an array of me|
 | `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaNewExpression` | The creation that writes me as one of its type arguments|
-| `javaNewExpressionTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaNewExpression` | The class instance creation that instantiates me|
 | `javaParameterTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaParameter` | The variable expression owner (if possible)|
 | `javaReceiverParameterTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaReceiverParameter` | The receiver parameter that writes me|
-| `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaRecordDeclaration` | The record that implements me|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaRecordPatternTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaRecordPattern` | The record pattern that matches me|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
@@ -89,27 +78,17 @@ Class {
 	#traits : 'FASTJavaTReceiver + FASTJavaTWithAnnotations + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait',
 	#instVars : [
-		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #caughtTypes',
 		'#javaArrayBaseTypeOwner => FMOne type: #FASTJavaArrayTypeExpression opposite: #baseType',
-		'#javaCastExpressionAdditionalBoundOwner => FMOne type: #FASTJavaCastExpression opposite: #additionalBounds',
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
-		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
-		'#javaClassDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaClassDeclaration opposite: #permittedSubtypes',
-		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
 		'#javaClassLiteralTypeOwner => FMOne type: #FASTJavaClassLiteral opposite: #type',
-		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
-		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces',
-		'#javaInterfaceDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes',
 		'#javaMethodInvocationTypeArgumentOwner => FMOne type: #FASTJavaMethodInvocation opposite: #typeArguments',
 		'#javaMethodReferenceTypeArgumentOwner => FMOne type: #FASTJavaMethodReference opposite: #typeArguments',
 		'#javaMethodTypeOwner => FMOne type: #FASTJavaMethodEntity opposite: #type',
 		'#javaNewArrayTypeOwner => FMOne type: #FASTJavaNewArray opposite: #type',
 		'#javaNewExpressionTypeArgumentOwner => FMOne type: #FASTJavaNewExpression opposite: #typeArguments',
-		'#javaNewExpressionTypeOwner => FMOne type: #FASTJavaNewExpression opposite: #type',
 		'#javaParameterTypeOwner => FMOne type: #FASTJavaParameter opposite: #type',
 		'#javaReceiverParameterTypeOwner => FMOne type: #FASTJavaReceiverParameter opposite: #type',
-		'#javaRecordDeclarationInterfaceOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #interfaces',
 		'#javaRecordPatternTypeOwner => FMOne type: #FASTJavaRecordPattern opposite: #type',
 		'#javaTypePatternTypeOwner => FMOne type: #FASTJavaTypePattern opposite: #type',
 		'#javaVarDeclTypeOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #type',
@@ -128,25 +107,6 @@ FASTJavaTypeExpression class >> annotation [
 	<FMClass: #TypeExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> catchOwner [
-	"Relation named: #catchOwner type: #FASTJavaCatchPartStatement opposite: #caughtTypes"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The catch clause that catches me'>
-	<container>
-	^ catchOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> catchOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	catchOwner := anObject
 ]
 
 { #category : 'testing' }
@@ -177,25 +137,6 @@ FASTJavaTypeExpression >> javaArrayBaseTypeOwner: anObject [
 ]
 
 { #category : 'accessing' }
-FASTJavaTypeExpression >> javaCastExpressionAdditionalBoundOwner [
-	"Relation named: #javaCastExpressionAdditionalBoundOwner type: #FASTJavaCastExpression opposite: #additionalBounds"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The cast that writes me as one of its additional bounds'>
-	<container>
-	^ javaCastExpressionAdditionalBoundOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaCastExpressionAdditionalBoundOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaCastExpressionAdditionalBoundOwner := anObject
-]
-
-{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaCastExpressionTypeOwner [
 	"Relation named: #javaCastExpressionTypeOwner type: #FASTJavaCastExpression opposite: #type"
 
@@ -212,64 +153,6 @@ FASTJavaTypeExpression >> javaCastExpressionTypeOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaCastExpressionTypeOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner [
-	"Relation named: #javaClassDeclarationInterfaceOwner type: #FASTJavaClassDeclaration opposite: #interfaces"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The class that implements me'>
-	<container>
-	^ javaClassDeclarationInterfaceOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaClassDeclarationInterfaceOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaClassDeclarationInterfaceOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaClassDeclarationPermittedSubtypeOwner [
-	"Relation named: #javaClassDeclarationPermittedSubtypeOwner type: #FASTJavaClassDeclaration opposite: #permittedSubtypes"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The sealed class that permits me to extend it'>
-	<container>
-	^ javaClassDeclarationPermittedSubtypeOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaClassDeclarationPermittedSubtypeOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaClassDeclarationPermittedSubtypeOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner [
-	"Relation named: #javaClassDeclarationSuperclassOwner type: #FASTJavaClassDeclaration opposite: #superclass"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The class that extends me'>
-	<container>
-	<derived>
-	^ javaClassDeclarationSuperclassOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaClassDeclarationSuperclassOwner := anObject
 ]
 
 { #category : 'accessing' }
@@ -292,25 +175,6 @@ FASTJavaTypeExpression >> javaClassLiteralTypeOwner: anObject [
 ]
 
 { #category : 'accessing' }
-FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner [
-	"Relation named: #javaEnumDeclarationInterfaceOwner type: #FASTJavaEnumDeclaration opposite: #interfaces"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The enum that implements me'>
-	<container>
-	^ javaEnumDeclarationInterfaceOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaEnumDeclarationInterfaceOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaEnumDeclarationInterfaceOwner := anObject
-]
-
-{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaForEachStatementTypeOwner [
 	"Relation named: #javaForEachStatementTypeOwner type: #FASTJavaForEachStatement opposite: #type"
 
@@ -328,44 +192,6 @@ FASTJavaTypeExpression >> javaForEachStatementTypeOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaForEachStatementTypeOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner [
-	"Relation named: #javaInterfaceDeclarationInterfaceOwner type: #FASTJavaInterfaceDeclaration opposite: #interfaces"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The interface that extends me'>
-	<container>
-	^ javaInterfaceDeclarationInterfaceOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaInterfaceDeclarationInterfaceOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaInterfaceDeclarationInterfaceOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaInterfaceDeclarationPermittedSubtypeOwner [
-	"Relation named: #javaInterfaceDeclarationPermittedSubtypeOwner type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The sealed interface that permits me to extend it'>
-	<container>
-	^ javaInterfaceDeclarationPermittedSubtypeOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaInterfaceDeclarationPermittedSubtypeOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaInterfaceDeclarationPermittedSubtypeOwner := anObject
 ]
 
 { #category : 'accessing' }
@@ -464,25 +290,6 @@ FASTJavaTypeExpression >> javaNewExpressionTypeArgumentOwner: anObject [
 ]
 
 { #category : 'accessing' }
-FASTJavaTypeExpression >> javaNewExpressionTypeOwner [
-	"Relation named: #javaNewExpressionTypeOwner type: #FASTJavaNewExpression opposite: #type"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The class instance creation that instantiates me'>
-	<container>
-	^ javaNewExpressionTypeOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaNewExpressionTypeOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaNewExpressionTypeOwner := anObject
-]
-
-{ #category : 'accessing' }
 FASTJavaTypeExpression >> javaParameterTypeOwner [
 	"Relation named: #javaParameterTypeOwner type: #FASTJavaParameter opposite: #type"
 
@@ -519,25 +326,6 @@ FASTJavaTypeExpression >> javaReceiverParameterTypeOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaReceiverParameterTypeOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaRecordDeclarationInterfaceOwner [
-	"Relation named: #javaRecordDeclarationInterfaceOwner type: #FASTJavaRecordDeclaration opposite: #interfaces"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The record that implements me'>
-	<container>
-	^ javaRecordDeclarationInterfaceOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeExpression >> javaRecordDeclarationInterfaceOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaRecordDeclarationInterfaceOwner := anObject
 ]
 
 { #category : 'accessing' }

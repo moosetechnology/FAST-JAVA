@@ -29,7 +29,7 @@ public record Point(int x, int y) {
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `components` | `FASTJavaRecordDeclaration` | `recordOwner` | `FASTJavaParameter` | The record components I declare|
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
-| `interfaces` | `FASTJavaRecordDeclaration` | `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | The interfaces I implement|
+| `interfaces` | `FASTJavaRecordDeclaration` | `javaRecordDeclarationInterfaceOwner` | `FASTJavaClassTypeExpression` | The interfaces I implement|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
@@ -58,7 +58,7 @@ Class {
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #recordDeclarations',
 		'#components => FMMany type: #FASTJavaParameter opposite: #recordOwner',
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaRecordDeclarationInterfaceOwner'
+		'#interfaces => FMMany type: #FASTJavaClassTypeExpression opposite: #javaRecordDeclarationInterfaceOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -130,7 +130,7 @@ FASTJavaRecordDeclaration >> components: anObject [
 
 { #category : 'accessing' }
 FASTJavaRecordDeclaration >> interfaces [
-	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaRecordDeclarationInterfaceOwner"
+	"Relation named: #interfaces type: #FASTJavaClassTypeExpression opposite: #javaRecordDeclarationInterfaceOwner"
 
 	<ignoreForCoverage>
 	<generated>

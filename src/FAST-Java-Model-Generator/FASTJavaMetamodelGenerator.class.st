@@ -1620,7 +1620,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaCastExpression property: #additionalBounds) comment:
 		 'The interface types I write after the first, as additional bounds')
 	<>-*
-		((javaTypeExpression property:
+		((javaClassTypeExpression property:
 			  #javaCastExpressionAdditionalBoundOwner) comment:
 			 'The cast that writes me as one of its additional bounds').
 
@@ -1636,9 +1636,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaUnaryExpressionOwner) comment:
 			 'The javaUnaryExpression owner (if possible)').
 
+	"JLS 15.9: a class instance creation instantiates a class or interface type — never a
+	primitive, and never an array, which is a creation of its own."
 	((javaNewExpression property: #type) comment: 'The type I instantiate')
 	<>-
-		((javaTypeExpression property: #javaNewExpressionTypeOwner)
+		((javaClassTypeExpression property: #javaNewExpressionTypeOwner)
 			 comment: 'The class instance creation that instantiates me').
 
 	((javaArrayAccess property: #expression) comment:
@@ -1713,9 +1715,10 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((tTryResource property: #javaTryResourceOwner) comment:
 			 'The try-with-resource that owns me').
 
+	"JLS 14.20: a catch clause catches class types, each of them a subtype of Throwable."
 	((javaCatchPartStatement property: #caughtTypes) comment:
 		 'The exception types I catch')
-	<>-* ((javaTypeExpression property: #catchOwner) comment:
+	<>-* ((javaClassTypeExpression property: #catchOwner) comment:
 			 'The catch clause that catches me').
 	((javaCatchPartStatement property: #parameter) comment:
 		 'The parameter of the catch part')
@@ -1778,9 +1781,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The type of my elements, eg. the `int` of `new int[3]`')
 	<>- ((javaTypeExpression property: #javaNewArrayTypeOwner) comment:
 			 'The array creation that makes an array of me').
+	"JLS 10.6: the initializer written after an array creation is an array initializer, and
+	the only thing that may be written there."
 	((javaNewArray property: #initializer) comment:
 		 'The initializer of the array')
-	<>- ((tExpression property: #javaNewArrayInitialOwner) comment:
+	<>- ((javaArrayInitializer property: #javaNewArrayInitialOwner) comment:
 			 'I belong to a new array initialization').
 
 	((javaLambdaExpression property: #expression) comment:
@@ -1896,30 +1901,34 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((tExpression property: #javaStringAssertStatementOwner) comment:
 			 'The assertion which I describe').
 
+	"JLS 8.1.4: a class extends a class type."
 	((javaClassDeclaration property: #superclass) comment:
 		 'My superclass')
 	<>-
-		((javaTypeExpression property: #javaClassDeclarationSuperclassOwner)
+		((javaClassTypeExpression property: #javaClassDeclarationSuperclassOwner)
 			 comment: 'The class that extends me').
+	"JLS 8.1.5: a class implements interface types."
 	((javaClassDeclaration property: #interfaces) comment:
 		 'The interfaces I implement')
 	<>-*
-		((javaTypeExpression property: #javaClassDeclarationInterfaceOwner)
+		((javaClassTypeExpression property: #javaClassDeclarationInterfaceOwner)
 			 comment: 'The class that implements me').
 
 	"JLS 8.1.6: a sealed class names the classes permitted to extend it directly, and a
 	class it does not name cannot, whatever that class declares."
+	"JLS 8.1.6: a sealed class permits type names."
 	((javaClassDeclaration property: #permittedSubtypes) comment:
 		 'The types I permit to extend me')
 	<>-*
-		((javaTypeExpression property:
+		((javaClassTypeExpression property:
 			  #javaClassDeclarationPermittedSubtypeOwner) comment:
 			 'The sealed class that permits me to extend it').
 
+	"JLS 8.9.1: an enum implements interface types."
 	((javaEnumDeclaration property: #interfaces) comment:
 		 'The interfaces I implement')
 	<>-*
-		((javaTypeExpression property: #javaEnumDeclarationInterfaceOwner)
+		((javaClassTypeExpression property: #javaEnumDeclarationInterfaceOwner)
 			 comment: 'The enum that implements me').
 
 	((javaEnumDeclaration property: #constants) comment:
@@ -1927,19 +1936,21 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-* ((javaEnumConstant property: #parentEnum) comment:
 			 'The enum type that contains me').
 
+	"JLS 9.1.3: an interface extends interface types."
 	((javaInterfaceDeclaration property: #interfaces) comment:
 		 'My super interfaces')
 	<>-*
-		((javaTypeExpression property:
+		((javaClassTypeExpression property:
 			  #javaInterfaceDeclarationInterfaceOwner) comment:
 			 'The interface that extends me').
 
 	"JLS 9.1.4: a sealed interface names the classes and interfaces permitted to extend or
 	implement it directly."
+	"JLS 9.1.4: a sealed interface permits type names."
 	((javaInterfaceDeclaration property: #permittedSubtypes) comment:
 		 'The types I permit to extend or implement me')
 	<>-*
-		((javaTypeExpression property:
+		((javaClassTypeExpression property:
 			  #javaInterfaceDeclarationPermittedSubtypeOwner) comment:
 			 'The sealed interface that permits me to extend it').
 
@@ -1950,10 +1961,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-* ((javaParameterExpression property: #recordOwner) comment:
 			 'The record that declares me as one of its components').
 
+	"JLS 8.10.1: a record implements interface types."
 	((javaRecordDeclaration property: #interfaces) comment:
 		 'The interfaces I implement')
 	<>-*
-		((javaTypeExpression property: #javaRecordDeclarationInterfaceOwner)
+		((javaClassTypeExpression property: #javaRecordDeclarationInterfaceOwner)
 			 comment: 'The record that implements me').
 
 	((tWithDeclarations property: #declarations) comment:

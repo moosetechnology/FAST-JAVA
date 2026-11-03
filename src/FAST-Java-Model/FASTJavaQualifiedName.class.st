@@ -25,7 +25,6 @@
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaExportsDirectiveTargetOwner` | `FASTJavaQualifiedName` | `targets` | `FASTJavaExportsDirective` | The exports directive that writes me as one of its targets|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaOpensDirectiveTargetOwner` | `FASTJavaQualifiedName` | `targets` | `FASTJavaOpensDirective` | The opens directive that writes me as one of its targets|
 | `javaProvidesDirectiveImplementationOwner` | `FASTJavaQualifiedName` | `implementations` | `FASTJavaProvidesDirective` | The provides directive that writes me as one of its implementations|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|

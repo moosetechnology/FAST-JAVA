@@ -32,10 +32,10 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 |---|
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
-| `interfaces` | `FASTJavaClassDeclaration` | `javaClassDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | The interfaces I implement|
+| `interfaces` | `FASTJavaClassDeclaration` | `javaClassDeclarationInterfaceOwner` | `FASTJavaClassTypeExpression` | The interfaces I implement|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
-| `permittedSubtypes` | `FASTJavaClassDeclaration` | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | The types I permit to extend me|
-| `superclass` | `FASTJavaClassDeclaration` | `javaClassDeclarationSuperclassOwner` | `FASTJavaTypeExpression` | My superclass|
+| `permittedSubtypes` | `FASTJavaClassDeclaration` | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaClassTypeExpression` | The types I permit to extend me|
+| `superclass` | `FASTJavaClassDeclaration` | `javaClassDeclarationSuperclassOwner` | `FASTJavaClassTypeExpression` | My superclass|
 | `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
 ### Other
@@ -62,9 +62,9 @@ Class {
 	#classTraits : '(FASTJavaTDeclaration classTrait + FASTJavaTWithAnnotations classTrait + FASTJavaTWithDeclarations classTrait + FASTJavaTWithModifiers classTrait + FASTJavaTWithTypeParameters classTrait + FASTTNamedEntity classTrait + FASTTStatement classTrait + FamixTHasImmediateSource classTrait withPrecedenceOf: FamixTHasImmediateSource classTrait)',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #classDeclarations',
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwner',
-		'#permittedSubtypes => FMMany type: #FASTJavaTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner',
-		'#superclass => FMOne type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwner'
+		'#interfaces => FMMany type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationInterfaceOwner',
+		'#permittedSubtypes => FMMany type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner',
+		'#superclass => FMOne type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationSuperclassOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -117,7 +117,7 @@ FASTJavaClassDeclaration >> compilationUnit: anObject [
 
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> interfaces [
-	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaClassDeclarationInterfaceOwner"
+	"Relation named: #interfaces type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationInterfaceOwner"
 
 	<ignoreForCoverage>
 	<generated>
@@ -144,7 +144,7 @@ FASTJavaClassDeclaration >> isClassDeclaration [
 
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> permittedSubtypes [
-	"Relation named: #permittedSubtypes type: #FASTJavaTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner"
+	"Relation named: #permittedSubtypes type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner"
 
 	<ignoreForCoverage>
 	<generated>
@@ -163,7 +163,7 @@ FASTJavaClassDeclaration >> permittedSubtypes: anObject [
 
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> superclass [
-	"Relation named: #superclass type: #FASTJavaTypeExpression opposite: #javaClassDeclarationSuperclassOwner"
+	"Relation named: #superclass type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationSuperclassOwner"
 
 	<ignoreForCoverage>
 	<generated>

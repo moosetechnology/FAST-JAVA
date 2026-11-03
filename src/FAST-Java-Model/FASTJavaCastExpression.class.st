@@ -23,7 +23,6 @@ I represent a cast expression, e.g. `(int) 0.5`
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
@@ -45,7 +44,7 @@ I represent a cast expression, e.g. `(int) 0.5`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `additionalBounds` | `FASTJavaCastExpression` | `javaCastExpressionAdditionalBoundOwner` | `FASTJavaTypeExpression` | The interface types I write after the first, as additional bounds|
+| `additionalBounds` | `FASTJavaCastExpression` | `javaCastExpressionAdditionalBoundOwner` | `FASTJavaClassTypeExpression` | The interface types I write after the first, as additional bounds|
 | `expression` | `FASTJavaCastExpression` | `javaCastExpressionOwner` | `FASTTExpression` | The expression to cast|
 | `type` | `FASTJavaCastExpression` | `javaCastExpressionTypeOwner` | `FASTJavaTypeExpression` | The type into which the expression will be cast|
 
@@ -65,7 +64,7 @@ Class {
 	#traits : 'FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
-		'#additionalBounds => FMMany type: #FASTJavaTypeExpression opposite: #javaCastExpressionAdditionalBoundOwner',
+		'#additionalBounds => FMMany type: #FASTJavaClassTypeExpression opposite: #javaCastExpressionAdditionalBoundOwner',
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaCastExpressionTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -92,7 +91,7 @@ FASTJavaCastExpression >> addAdditionalBound: anObject [
 
 { #category : 'accessing' }
 FASTJavaCastExpression >> additionalBounds [
-	"Relation named: #additionalBounds type: #FASTJavaTypeExpression opposite: #javaCastExpressionAdditionalBoundOwner"
+	"Relation named: #additionalBounds type: #FASTJavaClassTypeExpression opposite: #javaCastExpressionAdditionalBoundOwner"
 
 	<ignoreForCoverage>
 	<generated>

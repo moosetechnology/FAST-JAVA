@@ -21,7 +21,7 @@ I represent the 'catch' part of the TryCatch Statement
 |---|
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `body` | `FASTJavaCatchPartStatement` | `javaCatchPartStatementOwner` | `FASTJavaStatementBlock` | The body of the catch part|
-| `caughtTypes` | `FASTJavaCatchPartStatement` | `catchOwner` | `FASTJavaTypeExpression` | The exception types I catch|
+| `caughtTypes` | `FASTJavaCatchPartStatement` | `catchOwner` | `FASTJavaClassTypeExpression` | The exception types I catch|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `parameter` | `FASTJavaCatchPartStatement` | `javaCatchParameterOwner` | `FASTJavaVariableExpression` | The parameter of the catch part|
 
@@ -42,7 +42,7 @@ Class {
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTStatement classTrait',
 	#instVars : [
 		'#body => FMOne type: #FASTJavaStatementBlock opposite: #javaCatchPartStatementOwner',
-		'#caughtTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
+		'#caughtTypes => FMMany type: #FASTJavaClassTypeExpression opposite: #catchOwner',
 		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwner',
 		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches'
 	],
@@ -88,7 +88,7 @@ FASTJavaCatchPartStatement >> body: anObject [
 
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> caughtTypes [
-	"Relation named: #caughtTypes type: #FASTJavaTypeExpression opposite: #catchOwner"
+	"Relation named: #caughtTypes type: #FASTJavaClassTypeExpression opposite: #catchOwner"
 
 	<ignoreForCoverage>
 	<generated>

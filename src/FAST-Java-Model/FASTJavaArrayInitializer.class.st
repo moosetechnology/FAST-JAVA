@@ -34,7 +34,7 @@ My initializers are
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaNewArrayInitialOwner` | `FASTJavaArrayInitializer` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
@@ -75,7 +75,8 @@ Class {
 	#traits : 'FASTJavaTAnnotationElement + FASTTExpression',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTTExpression classTrait',
 	#instVars : [
-		'#hasTrailingComma => FMProperty defaultValue: false'
+		'#hasTrailingComma => FMProperty defaultValue: false',
+		'#javaNewArrayInitialOwner => FMOne type: #FASTJavaNewArray opposite: #initializer'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -143,4 +144,23 @@ FASTJavaArrayInitializer >> isArrayInitializer [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayInitializer >> javaNewArrayInitialOwner [
+	"Relation named: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'I belong to a new array initialization'>
+	<container>
+	^ javaNewArrayInitialOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaArrayInitializer >> javaNewArrayInitialOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaNewArrayInitialOwner := anObject
 ]

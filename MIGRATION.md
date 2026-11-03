@@ -95,6 +95,43 @@ type expression.
 `FASTJavaThis>>type` is a sixth, but what it holds changes with it, so it has a section of
 its own below.
 
+## Eleven more relations are declared as narrowly as the grammar allows
+
+A relation declared wider than what it can hold tells a reader nothing and lets a
+transformation build what Java cannot write. Eleven of them were found by sweeping every
+relation in the model over 6013 files of JDK 8 and JDK 25 — recording what each one actually
+held — and keeping only the ones the JLS grammar bounds to a single kind.
+
+| relation | v4.4.0 | v5 | why |
+| --- | --- | --- | --- |
+| `FASTJavaNewExpression>>type` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 15.9: a creation instantiates a class or interface type |
+| `FASTJavaCatchPartStatement>>caughtTypes` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 14.20: a catch clause catches class types |
+| `FASTJavaClassDeclaration>>superclass` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 8.1.4 |
+| `FASTJavaClassDeclaration>>interfaces` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 8.1.5 |
+| `FASTJavaInterfaceDeclaration>>interfaces` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 9.1.3 |
+| `FASTJavaEnumDeclaration>>interfaces` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 8.9.1 |
+| `FASTJavaRecordDeclaration>>interfaces` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 8.10.1 |
+| `FASTJavaClassDeclaration>>permittedSubtypes` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 8.1.6 |
+| `FASTJavaInterfaceDeclaration>>permittedSubtypes` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 9.1.4 |
+| `FASTJavaCastExpression>>additionalBounds` | `FASTJavaTypeExpression` | `FASTJavaClassTypeExpression` | JLS 4.9: each additional bound is an interface type |
+| `FASTJavaNewArray>>initializer` | `FASTTExpression` | `FASTJavaArrayInitializer` | JLS 10.6 |
+
+Reading them is unchanged: over those 6013 files none held anything else. Code that *writes*
+one, in a transformation or a hand-built model, must now pass the narrower entity. The
+opposites move with them — `javaNewExpressionTypeOwner`, `catchOwner`,
+`javaClassDeclarationSuperclassOwner` and the rest are on `FASTJavaClassTypeExpression`
+rather than on `FASTJavaTypeExpression`, and `javaNewArrayInitialOwner` is on
+`FASTJavaArrayInitializer` rather than on every expression in the model.
+
+**Three that look the same and are not.** `FASTJavaTypeParameterExpression>>types`,
+`FASTJavaTypeParameterExpression>>superType` and
+`FASTJavaMethodInvocation>>typeArguments` held nothing but class types over the whole
+sample as well, and are unchanged: JLS 4.5.1 writes a *reference* type in each, so
+`? extends Number[]`, `? super String[]` and `List.<String[]>of()` are all legal Java that
+the corpus simply never writes. The suite says so where the corpus does not —
+`JavaSmaCCMethodBoundedWildCardParameterTypeTest` asserts that `Class<? extends Number[]>`
+keeps an array type as its bound.
+
 ## A type is no longer a variable expression
 
 `FASTJavaTypeExpression` was a subclass of `FASTJavaVariableExpression`, so every type

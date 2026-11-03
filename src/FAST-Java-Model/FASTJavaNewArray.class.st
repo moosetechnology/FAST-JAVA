@@ -26,7 +26,6 @@ new String()[""10px"", ""Hello world""]
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
@@ -49,7 +48,7 @@ new String()[""10px"", ""Hello world""]
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `brackets` | `FASTJavaNewArray` | `newArrayOwner` | `FASTJavaDimension` | The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`|
-| `initializer` | `FASTJavaNewArray` | `javaNewArrayInitialOwner` | `FASTTExpression` | The initializer of the array|
+| `initializer` | `FASTJavaNewArray` | `javaNewArrayInitialOwner` | `FASTJavaArrayInitializer` | The initializer of the array|
 | `type` | `FASTJavaNewArray` | `javaNewArrayTypeOwner` | `FASTJavaTypeExpression` | The type of my elements, eg. the `int` of `new int[3]`|
 
 
@@ -69,6 +68,7 @@ Class {
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#brackets => FMMany type: #FASTJavaDimension opposite: #newArrayOwner',
+		'#initializer => FMOne type: #FASTJavaArrayInitializer opposite: #javaNewArrayInitialOwner',
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaNewArrayTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -113,13 +113,12 @@ FASTJavaNewArray >> brackets: anObject [
 
 { #category : 'accessing' }
 FASTJavaNewArray >> initializer [
-	"Relation named: #initializer type: #FASTTExpression opposite: #javaNewArrayInitialOwner"
+	"Relation named: #initializer type: #FASTJavaArrayInitializer opposite: #javaNewArrayInitialOwner"
 
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The initializer of the array'>
-	<FMProperty: #initializer type: #FASTTExpression opposite: #javaNewArrayInitialOwner>
-	^ self attributeAt: #initializer ifAbsent: [ nil ]
+	^ initializer
 ]
 
 { #category : 'accessing' }
@@ -127,14 +126,7 @@ FASTJavaNewArray >> initializer: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	(self attributeAt: #initializer ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self initializer.
-		self attributeAt: #initializer put: anObject.
-		otherSide javaNewArrayInitialOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #initializer put: anObject.
-		anObject javaNewArrayInitialOwner: self ]
+	initializer := anObject
 ]
 
 { #category : 'testing' }

@@ -35,7 +35,7 @@ public enum MyEnum {
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `constants` | `FASTJavaEnumDeclaration` | `parentEnum` | `FASTJavaEnumConstant` | The constants I define|
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
-| `interfaces` | `FASTJavaEnumDeclaration` | `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | The interfaces I implement|
+| `interfaces` | `FASTJavaEnumDeclaration` | `javaEnumDeclarationInterfaceOwner` | `FASTJavaClassTypeExpression` | The interfaces I implement|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 
 ### Other
@@ -67,7 +67,7 @@ Class {
 		'#constants => FMMany type: #FASTJavaEnumConstant opposite: #parentEnum',
 		'#hasBodySemicolon => FMProperty defaultValue: false',
 		'#hasTrailingComma => FMProperty defaultValue: false',
-		'#interfaces => FMMany type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner'
+		'#interfaces => FMMany type: #FASTJavaClassTypeExpression opposite: #javaEnumDeclarationInterfaceOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -173,7 +173,7 @@ FASTJavaEnumDeclaration >> hasTrailingComma: anObject [
 
 { #category : 'accessing' }
 FASTJavaEnumDeclaration >> interfaces [
-	"Relation named: #interfaces type: #FASTJavaTypeExpression opposite: #javaEnumDeclarationInterfaceOwner"
+	"Relation named: #interfaces type: #FASTJavaClassTypeExpression opposite: #javaEnumDeclarationInterfaceOwner"
 
 	<ignoreForCoverage>
 	<generated>

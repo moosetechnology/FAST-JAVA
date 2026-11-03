@@ -27,7 +27,6 @@ new Patate()
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
@@ -51,7 +50,7 @@ new Patate()
 |---|
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
-| `type` | `FASTJavaNewExpression` | `javaNewExpressionTypeOwner` | `FASTJavaTypeExpression` | The type I instantiate|
+| `type` | `FASTJavaNewExpression` | `javaNewExpressionTypeOwner` | `FASTJavaClassTypeExpression` | The type I instantiate|
 | `typeArguments` | `FASTJavaNewExpression` | `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after `new`, eg. the String of `new <String>C()`|
 
 
@@ -72,7 +71,7 @@ Class {
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#isDiamond => FMProperty defaultValue: false',
-		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeOwner',
+		'#type => FMOne type: #FASTJavaClassTypeExpression opposite: #javaNewExpressionTypeOwner',
 		'#typeArguments => FMMany type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeArgumentOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -124,7 +123,7 @@ FASTJavaNewExpression >> isNewExpression [
 
 { #category : 'accessing' }
 FASTJavaNewExpression >> type [
-	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeOwner"
+	"Relation named: #type type: #FASTJavaClassTypeExpression opposite: #javaNewExpressionTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>
