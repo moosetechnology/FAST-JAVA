@@ -1214,14 +1214,6 @@ FASTJavaExportVisitor >> visitFASTJavaOpensDirective: aFASTJavaOpensDirective [
 		self endOfStatement ]
 ]
 
-{ #category : 'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
-	self checkForComments: aFASTJavaOuterThis andDo: [
-		aFASTJavaOuterThis type accept: self.
-		self unindented: '.this'
-	]
-]
-
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [
 	self checkForComments: aFASTJavaPackageDeclaration andDo: [
@@ -1544,6 +1536,18 @@ FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 		self visitFASTJavaBlockOrStatement: aFASTJavaStatement
 ]
 
+]
+
+{ #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaThis: aFASTJavaThis [
+	"JLS 15.8.3 and 15.8.4: `this` writes the type name that qualifies it, a dot, then the
+	keyword."
+
+	self checkForComments: aFASTJavaThis andDo: [
+		aFASTJavaThis type ifNotNil: [ :type |
+			type accept: self.
+			self unindented: $. ].
+		self unindented: 'this' ]
 ]
 
 { #category : 'visiting statement' }

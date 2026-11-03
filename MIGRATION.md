@@ -92,8 +92,8 @@ Reading them is unchanged — over the whole of JDK 8 and JDK 25 they never held
 else. Code that *writes* one, in a transformation or a hand-built model, must now pass a
 type expression.
 
-`FASTJavaOuterThis>>type` is a sixth, but what it holds changes with it, so it has a
-section of its own below.
+`FASTJavaThis>>type` is a sixth, but what it holds changes with it, so it has a section of
+its own below.
 
 ## A type is no longer a variable expression
 
@@ -206,29 +206,6 @@ such a part writes, as `ArrayList<E>.ArrayListSpliterator` does.
 than `visitFASTTExpression:`, which matters to a visitor that overrode the latter to catch
 every expression at once.
 
-## The qualifier of a qualified `this` is a type name
-
-JLS 15.8.4 writes a qualified `this` as `TypeName . this`: the qualifier names the class
-whose enclosing instance is read, and nothing else parses there. v4 read it as a value —
-`FASTJavaOuterThis>>type` held a `FASTJavaVariableExpression` for `Outer.this` and a
-`FASTJavaClassProperty` for `p.q.Outer.this` — so the relation named `type` held the one
-thing it was not.
-
-It now holds a `FASTJavaTypeName`, or a `FASTJavaQualifiedTypeName` when the qualifier is
-dotted, built part by part by the same `typeNameOf:` that already read the type before a
-method reference's `::` (JLS 15.13).
-
-| v4.4.0 | v5 |
-| --- | --- |
-| `anOuterThis type` of `Outer.this` is a `FASTJavaVariableExpression` | a `FASTJavaTypeName` |
-| `anOuterThis type` of `p.q.Outer.this` is a `FASTJavaClassProperty` | a `FASTJavaQualifiedTypeName` |
-| walking a dotted qualifier by `fieldName` and `type` | by `name` and `namespace` |
-| `anExpression javaOuterThisOwner` | `aTypeName javaOuterThisOwner` |
-
-`anOuterThis type name` is unchanged. `anOuterThis type fullName` now answers the whole
-qualifier, dotted or not, which nothing in v4 could do: a variable expression has no
-`fullName`.
-
 ## `super` is an entity, and not a field named `super`
 
 `super` is a keyword, not a name (JLS 15.11.2, 15.12 and 15.13), and it is only ever
@@ -265,6 +242,46 @@ A method reference always has a receiver now, so `FASTJavaExportVisitor` no long
 An explicit constructor invocation is **not** affected: `super(...)` and `o.super(...)`
 stay a `FASTJavaMethodInvocation` named `'super'`, because JLS 8.8.7.1 writes a *Primary*
 before that dot, not a type name.
+
+## `this` is one entity, and its qualifier is a type name
+
+JLS 15.8.3 writes `this` as a primary, and JLS 15.8.4 writes `TypeName . this` for the
+enclosing instance of a named class. One keyword, one optional qualifier. v4 read it three
+ways, and read the qualifier as a value:
+
+| written | v4.4.0 |
+| --- | --- |
+| `this.go()` | the receiver is a `FASTJavaIdentifier` named `'this'` |
+| `go(this)`, `return this`, `this.f` | a `FASTJavaVariableExpression` named `'this'` |
+| `Outer.this` | a `FASTJavaOuterThis`, unrelated to either, whose `type` held a `FASTJavaVariableExpression` |
+| `p.q.Outer.this` | the same, whose `type` held a `FASTJavaClassProperty` |
+
+`FASTJavaOuterThis` is removed. `FASTJavaThis` — a class v4 already declared and never
+built — is the keyword in every position, and its `type` is the `FASTJavaTypeName` or
+`FASTJavaQualifiedTypeName` that qualifies it, or nil. It is a `FASTJavaEntity` using
+`FASTTExpression` and `FASTJavaTReceiver`: `this` **is** an expression, unlike `super`, but
+it is not a variable expression — nothing declares it, nothing assigns to it, and
+`this = x` is not Java.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `FASTJavaOuterThis` | `FASTJavaThis` |
+| `anEntity isOuterThis` | `anEntity isThis` |
+| `aModel newOuterThis` | `aModel newThis` |
+| `visitFASTJavaOuterThis:` | `visitFASTJavaThis:` |
+| `aTypeName javaOuterThisOwner` | `aTypeName javaThisOwner` |
+| `aReceiver name = 'this'` | `aReceiver isThis` |
+| `anOuterThis type`, a `FASTJavaVariableExpression` or `FASTJavaClassProperty` | `aThis type`, a `FASTJavaTypeName` or `FASTJavaQualifiedTypeName`, or nil |
+| walking a dotted qualifier by `fieldName` and `type` | by `name` and `namespace` |
+
+`aThis type name` is unchanged for a simple qualifier, and `aThis type fullName` answers
+the whole one, dotted or not, which nothing in v4 could do.
+`FASTJavaVisitor>>visitFASTJavaThis:` forwards to `visitFASTTExpression:` rather than
+`visitFASTTVariableExpression:`.
+
+An explicit constructor invocation is **not** affected: `this(...)` stays a
+`FASTJavaMethodInvocation` named `'this'`, as `super(...)` does, because JLS 8.8.7.1 writes
+a *Primary* before that dot.
 
 ## An enum constant is no longer a variable expression either
 

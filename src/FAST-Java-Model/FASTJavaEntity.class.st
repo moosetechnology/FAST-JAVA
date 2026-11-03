@@ -608,14 +608,6 @@ FASTJavaEntity >> isOpensDirective [
 ]
 
 { #category : 'testing' }
-FASTJavaEntity >> isOuterThis [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
 FASTJavaEntity >> isPackageDeclaration [
 
 	<ignoreForCoverage>

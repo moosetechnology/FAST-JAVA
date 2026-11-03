@@ -43,7 +43,6 @@ Class {
 		'javaConditionalExpression',
 		'javaArrayAccess',
 		'javaInitializer',
-		'javaOuterThis',
 		'javaThrowStatement',
 		'javaLabeledCaseStatement',
 		'javaDefaultCaseStatement',
@@ -631,15 +630,6 @@ opens com.example.model to java.logging;
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaOuterThis [
-	^ 'I represent a java outer this (only a call to ''this'' to a class)
-	
-ex.:
-
-hello(MyClass.this)'
-]
-
-{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaProvidesDirective [
 	^ 'I name a service my module implements, and the classes that implement it (JLS 7.7.4).
 
@@ -775,7 +765,17 @@ construct that uses me also uses.'
 
 { #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaThis [
-	^ 'A FASTJavaThis corresponds to ''this'' in Java'
+	^ 'I am the `this` of a method, a constructor or an initializer: the instance it runs on
+(JLS 15.8.3).
+
+I am a keyword, not a name. Nothing declares me, nothing assigns to me, and `this = x` is
+not Java. I may be qualified by a type name, and `Outer.this` then names the enclosing
+instance of Outer rather than the innermost one (JLS 15.8.4).
+
+```language=text
+this.toString()
+Outer.this.toString()
+```'
 ]
 
 { #category : 'comments' }
@@ -903,8 +903,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaMethodInvocation := self newClassNamed: #MethodInvocation comment: self commentForJavaMethodInvocation.
 	javaThis := self newClassNamed: #This comment: self commentForJavaThis.
 	javaThis withTesting.
-	javaOuterThis := self newClassNamed: #OuterThis comment: self commentForJavaOuterThis.
-	javaOuterThis withTesting.
 	javaSuper := self newClassNamed: #Super comment: self commentForJavaSuper.
 	javaSuper withTesting.
 	javaVariableDeclarator := self newClassNamed: #VariableDeclarator comment: self commentForJavaVariableDeclarator.
@@ -1263,7 +1261,12 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaSwitchStatement --|> tStatement.
 	javaSwitchStatement --|> tWithSwitchBlock.
-	javaThis --|> javaVariableExpression.
+	"JLS 15.8.3: `this` is a keyword naming the instance a method, a constructor or an
+	initializer runs on, and a primary. Being a variable expression would let it be assigned
+	to, be a resource of a try and carry a name of its own, none of which Java allows."
+	javaThis --|> tExpression.
+	"JLS 15.11.2 and 15.12: `this.f` and `this.go()` write it before the dot."
+	javaThis --|> tReceiver.
 
 	javaVarDeclStatement --|> tStatement.
 	javaVarDeclStatement --|> tTryResource.
@@ -1337,9 +1340,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInitializer --|> tScopableEntity.
 	javaInitializer --|> #THasImmediateSource.
 	javaInitializer --|> tDeclaration.
-
-	javaOuterThis --|> tExpression.
-	javaOuterThis --|> tReceiver.
 
 	"JLS 15.11.2, 15.12 and 15.13: `super` is written before the dot or the `::` of what it
 	reaches, and nowhere else — it is not an expression of its own, and `x = super` is not
@@ -1660,12 +1660,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaArrayArrayAccessOwner) comment:
 			 'The javaArrayArrayAccess owner (if possible)').
 
-	"JLS 15.8.4: a qualified `this` writes a type name before the dot, and nothing else
-	parses there — `Outer.this` names the enclosing instance of `Outer`."
-	((javaOuterThis property: #type) comment:
+	"JLS 15.8.4: `this` may be qualified by a type name, and `Outer.this` then names the
+	enclosing instance of Outer rather than the innermost one."
+	((javaThis property: #type) comment:
 		 'The type whose enclosing instance I name, eg. the `Outer` of `Outer.this`')
-	<>- ((javaTypeName property: #javaOuterThisOwner) comment:
-			 'The qualified `this` that names my enclosing instance').
+	<>- ((javaTypeName property: #javaThisOwner) comment:
+			 'The `this` I qualify').
 
 	"JLS 15.11.2: `super` may be qualified by a type name, and `T.super` then reaches a
 	member of the superinterface T rather than of the superclass."

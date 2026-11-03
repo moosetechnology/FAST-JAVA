@@ -557,14 +557,6 @@ FASTJavaTEntityCreator >> newOpensDirective [
 ]
 
 { #category : 'entity creation' }
-FASTJavaTEntityCreator >> newOuterThis [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FASTJavaOuterThis new
-]
-
-{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newPackageDeclaration [
 
 	<ignoreForCoverage>

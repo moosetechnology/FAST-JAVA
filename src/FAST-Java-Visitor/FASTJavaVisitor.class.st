@@ -390,11 +390,6 @@ FASTJavaVisitor >> visitFASTJavaOperationRightOperand: aFASTJavaOperationRightOp
 ]
 
 { #category : 'generated' }
-FASTJavaVisitor >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
-	^ self visitFASTTExpression: aFASTJavaOuterThis
-]
-
-{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclaration [ 
 	^ self visitFASTTEntity: aFASTJavaPackageDeclaration
 ]
@@ -512,7 +507,7 @@ FASTJavaVisitor >> visitFASTJavaThenPartStatement: aFASTJavaThenPartStatement [
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaThis: aFASTJavaThis [
-	^ self visitFASTTVariableExpression: aFASTJavaThis
+	^ self visitFASTTExpression: aFASTJavaThis
 ]
 
 { #category : 'generated' }

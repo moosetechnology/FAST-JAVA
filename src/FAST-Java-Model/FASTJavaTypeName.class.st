@@ -8,9 +8,9 @@ I represent the name of a type
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
-| `javaOuterThisOwner` | `FASTJavaTypeName` | `type` | `FASTJavaOuterThis` | The qualified `this` that names my enclosing instance|
 | `javaQualifiedTypeNameOwner` | `FASTJavaTypeName` | `namespace` | `FASTJavaQualifiedTypeName` | the name I qualify|
 | `javaSuperOwner` | `FASTJavaTypeName` | `type` | `FASTJavaSuper` | The `super` I qualify|
+| `javaThisOwner` | `FASTJavaTypeName` | `type` | `FASTJavaThis` | The `this` I qualify|
 | `javaTypeNameTypeExpressionOwner` | `FASTJavaTypeName` | `typeName` | `FASTJavaClassTypeExpression` | The type expression that owns me|
 
 ### Children
@@ -36,9 +36,9 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTTNamedEntity + FASTTWithArguments',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
-		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaQualifiedTypeNameOwner => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
 		'#javaSuperOwner => FMOne type: #FASTJavaSuper opposite: #type',
+		'#javaThisOwner => FMOne type: #FASTJavaThis opposite: #type',
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -61,25 +61,6 @@ FASTJavaTypeName >> isTypeName [
 	<ignoreForCoverage>
 	<generated>
 	^ true
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeName >> javaOuterThisOwner [
-	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The qualified `this` that names my enclosing instance'>
-	<container>
-	^ javaOuterThisOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaTypeName >> javaOuterThisOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaOuterThisOwner := anObject
 ]
 
 { #category : 'accessing' }
@@ -118,6 +99,25 @@ FASTJavaTypeName >> javaSuperOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaSuperOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaThisOwner [
+	"Relation named: #javaThisOwner type: #FASTJavaThis opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The `this` I qualify'>
+	<container>
+	^ javaThisOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaThisOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaThisOwner := anObject
 ]
 
 { #category : 'accessing' }

@@ -559,6 +559,17 @@ JavaSmaCCProgramNodeImporterVisitor >> superAt: aSuperToken qualifiedBy: aNameNo
 ]
 
 { #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> thisOf: aNode [
+	"JLS 15.8.3: `this` is a keyword naming the instance that is running, and JLS 3.9 keeps
+	it out of every identifier, so a name that reads as the keyword is the keyword."
+
+	^ (self addToModel: FASTJavaThis new)
+		  startPos: aNode startPosition;
+		  endPos: aNode stopPosition;
+		  yourself
+]
+
+{ #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> typeNameOf: aNameNode [
 	"JLS 15.8.4 and 15.13: a qualified `this` and a method reference both write a type name
 	where the rule that reads it takes an expression name, `Outer.this` and `String::length`
@@ -1393,7 +1404,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 			currentFASTEntity receiver: (self superAt: superToken qualifiedBy: aMethodInvocation receiver) ]
 		ifNil: [
 			aMethodInvocation receiver ifNotNil: [ :receiver |
-				currentFASTEntity receiver: ((receiver isMemberOf: JavaNameNode)
+				currentFASTEntity receiver: (((receiver isMemberOf: JavaNameNode) and: [ receiver name value ~= 'this' ])
 						 ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
 							 self addToModel: (FASTJavaIdentifier new
 									  name: receiver name value;
@@ -1528,8 +1539,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModuleUses: aModuleUses [
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
 	"JLS 6.5: a simple name standing in an expression is a variable until something resolves
 	it. The name of a package, an import or a module directive is built where it is written,
-	by #qualifiedNameOf:."
+	by #qualifiedNameOf:. JLS 3.9 keeps `this` out of every identifier, so a name that reads
+	as the keyword is the keyword."
 
+	aName name value = 'this' ifTrue: [ ^ currentFASTEntity := self thisOf: aName ].
 	currentFASTEntity := self create: FASTJavaVariableExpression from: aName.
 	currentFASTEntity name: aName name value.
 	^ currentFASTEntity
@@ -1613,10 +1626,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNull: aNull [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: anOuterThis [
-	"JLS 15.8.4: a qualified `this` writes a type name before the dot — the `Outer` of
-	`Outer.this` names the enclosing instance it reads — and nothing else parses there."
+	"JLS 15.8.4: `Outer.this` names the enclosing instance of Outer rather than the
+	innermost one. The qualifier is a type name, and nothing else parses there."
 
-	currentFASTEntity := self create: FASTJavaOuterThis from: anOuterThis.
+	currentFASTEntity := self thisOf: anOuterThis.
 	currentFASTEntity type: (self typeNameOf: anOuterThis name).
 	^ currentFASTEntity
 ]

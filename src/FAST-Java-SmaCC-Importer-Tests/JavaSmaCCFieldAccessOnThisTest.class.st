@@ -13,15 +13,15 @@ JavaSmaCCFieldAccessOnThisTest >> javaMethod [
 ]
 
 { #category : 'tests' }
-JavaSmaCCFieldAccessOnThisTest >> testFieldAccessReceiverName [
-	self
-		assert: (fastModel allWithType: FASTJavaFieldAccess) first receiver name
-		equals: 'this'.
+JavaSmaCCFieldAccessOnThisTest >> testFieldAccessReceiverIsAnUnqualifiedThis [
+	"JLS 15.8.3: `this.aField` writes the keyword alone, so the receiver qualifies no type."
+
+	self assert: (fastModel allWithType: FASTJavaFieldAccess) first receiver type isNil
 ]
 
 { #category : 'tests' }
 JavaSmaCCFieldAccessOnThisTest >> testFieldAccessReceiverType [
 	self
 		assert: (fastModel allWithType: FASTJavaFieldAccess) first receiver class
-		equals: FASTJavaVariableExpression.
+		equals: FASTJavaThis
 ]
