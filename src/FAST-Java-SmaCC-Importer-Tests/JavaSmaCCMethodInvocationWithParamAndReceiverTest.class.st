@@ -92,10 +92,7 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testReceiverMethodInvocatio
 	self
 		assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver class
 		equals: FASTJavaMethodInvocation.
-	self assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver receiver equals: nil.
-	self
-		assert: methodInvocationWithVariableAsReceiver statements first containedEntities anyOne receiver class
-		equals: FASTJavaIdentifier
+	self assert: fastModel statementBlock containedEntities anyOne containedEntities anyOne expression receiver receiver equals: nil
 ]
 
 { #category : 'tests' }
@@ -111,8 +108,11 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testTypeOfArguments [
 
 { #category : 'tests' }
 JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testVariableReceiverMethodInvocations [
+	"JLS 6.5: a simple name written before the dot of an invocation is ambiguous until it is
+	resolved, so it reads as what the same text reads as anywhere else — a variable
+	expression, and not a kind of its own."
 
 	self
 		assert: methodInvocationWithVariableAsReceiver statements first containedEntities anyOne receiver class
-		equals: FASTJavaIdentifier
+		equals: FASTJavaVariableExpression
 ]

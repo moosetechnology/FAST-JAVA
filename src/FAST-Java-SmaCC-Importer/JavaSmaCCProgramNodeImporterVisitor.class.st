@@ -1398,20 +1398,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
 	self setStartEndPos: aMethodInvocation.
 	aMethodInvocation expressions do: [ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
-	"JLS 15.12: an invocation writes a primary, `super` or `T.super` before the dot."
+	"JLS 15.12: an invocation writes a primary, `super` or `T.super` before the dot. JLS 6.5:
+	a simple name written there is ambiguous until it is resolved, so it is read as what the
+	same text is read as anywhere else."
 	aMethodInvocation superToken
 		ifNotNil: [ :superToken |
 			currentFASTEntity receiver: (self superAt: superToken qualifiedBy: aMethodInvocation receiver) ]
 		ifNil: [
 			aMethodInvocation receiver ifNotNil: [ :receiver |
-				currentFASTEntity receiver: (((receiver isMemberOf: JavaNameNode) and: [ receiver name value ~= 'this' ])
-						 ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
-							 self addToModel: (FASTJavaIdentifier new
-									  name: receiver name value;
-									  startPos: receiver startPosition;
-									  endPos: receiver stopPosition;
-									  yourself) ]
-						 ifFalse: [ self clone accept: receiver ]) ] ].
+				currentFASTEntity receiver: (self clone accept: receiver) ] ].
 	"JLS 15.12: an invocation may write the type arguments of a generic method before
 	its name, as `Collections.<String>emptyList()` does."
 	self addTypeArgumentsOf: aMethodInvocation arguments to: currentFASTEntity.

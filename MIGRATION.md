@@ -361,6 +361,30 @@ own used to read its names as package names, so `a = 1` as a fragment made `a` a
 `FASTJavaQualifiedName` where the same text inside a class made it a
 `FASTJavaVariableExpression`. Both now read the same way.
 
+## A simple invocation receiver is read like any other simple name
+
+`foo.bar()` wrote `foo` as a `FASTJavaIdentifier`, while `go(foo)`, `return foo` and
+`foo + 1` wrote the same text as a `FASTJavaVariableExpression`. The branch that did it
+said as much — *"It is more than propably an Identifier and not just an named element. So
+you pass over the normal rules of the importer"*.
+
+JLS 6.5 is why there was nothing to go on: a parser cannot resolve a simple name, since
+`foo` may name a variable, a type or a package, so the choice was made on position alone.
+Over 300 files of JDK 25 it produced 2734 of the 2809 `FASTJavaIdentifier` in the model.
+
+A simple name written before the dot of an invocation is now a
+`FASTJavaVariableExpression`, the same entity the same text gives anywhere else. A dotted
+one is a `FASTJavaQualifiedName`, `this` is a `FASTJavaThis` and `super` a `FASTJavaSuper`,
+as the sections above describe.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `anInvocation receiver class = FASTJavaIdentifier` | `= FASTJavaVariableExpression` |
+| `aModel allWithType: FASTJavaIdentifier` | answers only the variable a for-each declares |
+
+`FASTJavaIdentifier` itself is unchanged, and still holds the variable a for-each declares
+— `FASTJavaForEachStatement>>fieldName`, its one declared relation.
+
 ## A stray semicolon is no longer a method
 
 JLS 8.1.6 lets a class body write a bare `;` where a member would go. `v4` modelled it as
