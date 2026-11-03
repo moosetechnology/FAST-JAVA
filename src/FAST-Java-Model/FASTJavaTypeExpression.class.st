@@ -17,7 +17,6 @@ I am an abstract class representing a type
 | `expressionStatementOwner` | `FASTTExpression` | `expression` | `FASTTExpressionStatement` | The expression statement that own me (if it's the case|
 | `infixOperationLeftOperandOwner` | `FASTTExpression` | `leftOperand` | `FASTJavaInfixOperation` | The left operand (if possible)|
 | `infixOperationRightOperandOwner` | `FASTTExpression` | `rightOperand` | `FASTJavaInfixOperation` | The right operand (if possible)|
-| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaArrayAccessOwner` | `FASTTExpression` | `expression` | `FASTJavaArrayAccess` | The javaArrayAccess owner (if possible)|
 | `javaArrayArrayAccessOwner` | `FASTTExpression` | `array` | `FASTJavaArrayAccess` | The javaArrayArrayAccess owner (if possible)|
 | `javaArrayInitializers` | `FASTTExpression` | `initializers` | `FASTJavaArrayInitializer` | The owner of the expression|
@@ -82,15 +81,14 @@ I am an abstract class representing a type
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
-| `name` | `String` | nil | |
 | `startPos` | `Number` | nil | |
 
 "
 Class {
 	#name : 'FASTJavaTypeExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTReceiver + FASTJavaTWithAnnotations + FASTTExpression + FASTTNamedEntity',
-	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithAnnotations + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #caughtTypes',
 		'#javaCastExpressionAdditionalBoundOwner => FMOne type: #FASTJavaCastExpression opposite: #additionalBounds',

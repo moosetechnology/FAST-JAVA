@@ -777,11 +777,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBooleanLiteral: aBooleanLiteral [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitBooleanType: aBooleanType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaBooleanTypeExpression new
-				name: aBooleanType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaBooleanTypeExpression new.
 	aBooleanType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aBooleanType.
@@ -798,11 +794,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitBreakStatement: aBreakStatement [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitByteType: aByteType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaByteTypeExpression new
-				name: aByteType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaByteTypeExpression new.
 	aByteType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
@@ -850,11 +842,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitCharType: aByteType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaCharTypeExpression new
-				name: aByteType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaCharTypeExpression new.
 	aByteType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
@@ -904,11 +892,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
 
 	(self isVarTypeNode: aClassType) ifTrue: [
-			currentFASTEntity := self addToModel: (FASTJavaVarTypeExpression new
-					                      name: aClassType name name value;
-					                      yourself).
-			self setStartEndPos: aClassType.
-			^ currentFASTEntity ].
+		currentFASTEntity := self addToModel: FASTJavaVarTypeExpression new.
+		self setStartEndPos: aClassType.
+		^ currentFASTEntity ].
 
 	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	self setStartEndPos: aClassType.
@@ -989,11 +975,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDoWhileStatement: aDoWhileStatement 
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitDoubleType: aByteType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaDoubleTypeExpression new
-				name: aByteType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaDoubleTypeExpression new.
 	aByteType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
@@ -1147,11 +1129,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatLiteral: aFloatLiteral [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaFloatTypeExpression new
-				name: aByteType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaFloatTypeExpression new.
 	aByteType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
@@ -1260,11 +1238,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInstanceofPatternExpression: anInsta
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitIntType: aByteType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaIntTypeExpression new
-				name: aByteType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaIntTypeExpression new.
 	aByteType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
@@ -1359,11 +1333,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: a
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitLongType: aByteType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaLongTypeExpression new
-				name: aByteType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaLongTypeExpression new.
 	aByteType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
@@ -1731,17 +1701,6 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPreIncrementExpression: aPreIncremen
 	^ currentFASTEntity
 ]
 
-{ #category : 'visitor' }
-JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaPrimitiveTypeExpression new
-				name: aPrimitiveType token value;
-				yourself).
-	self setStartEndPos: aPrimitiveType.
-	^ currentFASTEntity
-]
-
 { #category : 'generated' }
 JavaSmaCCProgramNodeImporterVisitor >> visitProgramFile: aProgramFile [
 	currentFASTEntity := self addToModel: FASTJavaCompilationUnit new.
@@ -1844,11 +1803,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitReturnStatement: aReturnStatement [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitShortType: aByteType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaShortTypeExpression new
-				name: aByteType token value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaShortTypeExpression new.
 	aByteType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	self setStartEndPos: aByteType.
@@ -2238,11 +2193,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableName: aVariableName [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitVoidType: aVoidType [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaVoidTypeExpression new
-				name: aVoidType voidToken value;
-				yourself).
+	currentFASTEntity := self addToModel: FASTJavaVoidTypeExpression new.
 	self setStartEndPos: aVoidType.
 	^ currentFASTEntity
 ]

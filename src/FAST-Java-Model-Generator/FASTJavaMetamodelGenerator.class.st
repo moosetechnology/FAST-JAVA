@@ -1353,9 +1353,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	variable expression would let it be assigned to, be a resource of a try and carry a
 	name of its own."
 	javaTypeExpression --|> tExpression.
-	"JLS 4: a type is written as a name, and a primitive type writes the keyword that
-	names it."
-	javaTypeExpression --|> tNamedEntity.
 	"JLS 15.13: a method reference may name a type as what it reads the method from,
 	as `String::length` does, so a type is a receiver."
 	javaTypeExpression --|> tReceiver.

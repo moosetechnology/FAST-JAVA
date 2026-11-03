@@ -252,13 +252,6 @@ FASTJavaTestNodeBuilder >> type: aName [
 ]
 
 { #category : 'api - building' }
-FASTJavaTestNodeBuilder >> typeExpression: aName [
-	^FASTJavaTypeExpression new
-		name: aName ;
-		yourself
-]
-
-{ #category : 'api - building' }
 FASTJavaTestNodeBuilder >> unaryOp: anOperator prefix: aBoolean expr: anExpr [
 
 	^ FASTJavaUnaryExpression new

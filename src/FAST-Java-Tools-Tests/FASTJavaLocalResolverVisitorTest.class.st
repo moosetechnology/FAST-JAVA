@@ -29,11 +29,11 @@ FASTJavaLocalResolverVisitorTest >> testBindToDeclaration [
 
 	| varAccess body ast |
 	ast := FASTJavaMethodEntity new
-		       type: (FASTJavaVoidTypeExpression new name: 'void');
+		       type: FASTJavaVoidTypeExpression new;
 		       name: 'meth';
 		       statementBlock: (FASTJavaStatementBlock new statements: {
 						        (FASTJavaVarDeclStatement new
-							         type: (FASTJavaIntTypeExpression new name: 'int');
+							         type: FASTJavaIntTypeExpression new;
 							         declarators: { (FASTJavaVariableDeclarator new variable: (FASTJavaVariableExpression new name: 'x')) };
 							         startPos: 1).
 						        (FASTJavaExpressionStatement new
@@ -66,14 +66,13 @@ FASTJavaLocalResolverVisitorTest >> testBindToLoopVariable [
 	| varAccess loop ast |
 
 	ast := FASTJavaMethodEntity new
-		type: (FASTJavaVoidTypeExpression new name: 'void');
+		type: FASTJavaVoidTypeExpression new;
 		name: 'meth' ;
 		statementBlock: (FASTJavaStatementBlock new
 			 statements: {
 					 (FASTJavaForStatement new
 					  initializers: { (FASTJavaVarDeclStatement new
-							   type: (FASTJavaIntTypeExpression new
-									    name: 'int');
+							   type: FASTJavaIntTypeExpression new;
 							   declarators: { (FASTJavaVariableDeclarator new
 									    variable: (FASTJavaVariableExpression new
 											     name: 'i');
@@ -124,11 +123,11 @@ FASTJavaLocalResolverVisitorTest >> testBindToParameter [
 	| varAccess body ast |
 
 	ast := FASTJavaMethodEntity new
-		type: (FASTJavaVoidTypeExpression new name: 'void');
+		type: FASTJavaVoidTypeExpression new;
 		name: 'meth';
 		parameters: { (FASTJavaParameter new
 			 variable: (FASTJavaVariableExpression new name: 'x');
-			 type: (FASTJavaIntTypeExpression new name: 'int')) };
+			 type: FASTJavaIntTypeExpression new) };
 		statementBlock: (FASTJavaStatementBlock new
 			 statements: {
 					 (FASTJavaExpressionStatement new
@@ -158,7 +157,7 @@ FASTJavaLocalResolverVisitorTest >> testBindingNotFound [
 	| varAccess body ast |
 
 	ast := FASTJavaMethodEntity new
-		type: (FASTJavaVoidTypeExpression new name: 'void');
+		type: FASTJavaVoidTypeExpression new;
 		name: 'meth';
 		statementBlock: (FASTJavaStatementBlock new
 			 statements: {
@@ -188,14 +187,14 @@ FASTJavaLocalResolverVisitorTest >> testLoopVariableHidesParameter [
 
 	| varAccess loop ast |
 	ast := FASTJavaMethodEntity new
-		       type: (FASTJavaVoidTypeExpression new name: 'void');
+		       type: FASTJavaVoidTypeExpression new;
 		       name: 'meth';
 		       parameters: { (FASTJavaParameter new
 				        variable: (FASTJavaVariableExpression new name: 'i');
-				        type: (FASTJavaIntTypeExpression new name: 'int')) };
+				        type: FASTJavaIntTypeExpression new) };
 		       statementBlock: (FASTJavaStatementBlock new statements: { (FASTJavaForStatement new
 					         initializers: { (FASTJavaVarDeclStatement new
-							          type: (FASTJavaIntTypeExpression new name: 'int');
+							          type: FASTJavaIntTypeExpression new;
 							          declarators: { (FASTJavaVariableDeclarator new
 									           variable: (FASTJavaVariableExpression new name: 'i');
 									           expression: (FASTJavaIntegerLiteral new primitiveValue: '1')) }) };

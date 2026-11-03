@@ -33,6 +33,5 @@ JavaSmaCCVarTypeTest >> testVarIsAVarTypeExpression [
 	| declaration |
 	declaration := (fastModel allWithType: FASTJavaVarDeclStatement) detect: [ :each |
 		               each declarators anyOne variable name = 'inferred' ].
-	self assert: declaration type class equals: FASTJavaVarTypeExpression.
-	self assert: declaration type name equals: 'var'
+	self assert: declaration type class equals: FASTJavaVarTypeExpression
 ]

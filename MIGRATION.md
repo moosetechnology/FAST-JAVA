@@ -100,15 +100,15 @@ The two that genuinely hold a variable expression go the other way and are widen
 `FASTJavaTypeExpression` was a subclass of `FASTJavaVariableExpression`, so every type
 written in source could be assigned to, closed as a resource of a try, and written as an
 element of an annotation. It is now a `FASTJavaEntity` using `FASTTExpression`,
-`FASTTNamedEntity`, `FASTJavaTReceiver` and `FASTJavaTWithAnnotations`.
+`FASTJavaTReceiver` and `FASTJavaTWithAnnotations`.
 
-What it keeps: `name` — a primitive type writes the keyword that names it — and being a
-receiver, since JLS 15.13 lets `String::length` name a type as what it reads the method
-from. What it loses: `FASTJavaTAssignable` (`javaVariableAssignmentOwner`),
+What it keeps: being a receiver, since JLS 15.13 lets `String::length` name a type as what
+it reads the method from. What it loses: `FASTJavaTAssignable` (`javaVariableAssignmentOwner`),
 `FASTJavaTTryResource` (`javaTryResourceOwner`), `FASTJavaTAnnotationElement`
 (`arrayOwner`, `defaultValueOwner`, `parentAnnotation`), and the variable-side owners
 `javaCatchParameterOwner`, `javaParameterVariableOwner`, `javaTypePatternVariableOwner`
-and `javaVariableDeclaratorOwner`. None of them was ever filled on a type.
+and `javaVariableDeclaratorOwner`. None of them was ever filled on a type. It also loses
+its `name`, which the next section covers.
 
 `isKindOf: FASTJavaVariableExpression` and `allWithSubTypesOf: FASTJavaVariableExpression`
 no longer answer for a type; ask for `FASTJavaTypeExpression`, or send `isTypeExpression`.
@@ -116,11 +116,39 @@ no longer answer for a type; ask for `FASTJavaTypeExpression`, or send `isTypeEx
 rather than `visitFASTTVariableExpression:`, which matters to a visitor that overrode the
 latter.
 
-Two relations that hold what is written before `.class` and before `.this` are widened
-from `FASTJavaVariableExpression` to `FASTTExpression` to make this possible:
-`FASTJavaClassProperty>>type` and `FASTJavaOuterThis>>type`. Both really do hold a plain
-variable expression most of the time — in `a.b.C.class` the name before `.class` is read as
-one — so they are widened rather than narrowed, and reading them is unchanged.
+`FASTJavaOuterThis>>type`, which holds what is written before `.this`, is widened from
+`FASTJavaVariableExpression` to `FASTTExpression` to make this possible. It really does
+hold a plain variable expression most of the time, so it is widened rather than narrowed,
+and reading it is unchanged.
+
+## A type no longer carries a name
+
+`FASTJavaTypeExpression` used `FASTTNamedEntity`, so every type written in source carried a
+`name` String beside whatever already said what the type was. On a class type it said it
+twice — `name` held a String and `typeName` held a `FASTJavaTypeName` — and on every other
+type the class said it alone. That is what
+[#42](https://github.com/moosetechnology/FAST-JAVA/issues/42),
+[#50](https://github.com/moosetechnology/FAST-JAVA/issues/50) and
+[#147](https://github.com/moosetechnology/FAST-JAVA/issues/147) asked to remove. The trait
+is gone, and with it `name`, `name:` and `invokedIn`, which was never filled.
+
+Reading `name` does not raise. `MooseObject` answers `#noname` for an entity with no name
+property, so v4 code that read `'int'` now reads `#noname` and reports nothing. Search out
+the senders rather than waiting for one to fail.
+
+What a type is, the class says:
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aPrimitiveType name` (`'int'`, `'void'`, …) | `aPrimitiveType class` (`FASTJavaIntTypeExpression`, …) |
+| `aVarType name` (`'var'`) | `aType isKindOf: FASTJavaVarTypeExpression` |
+| `aClassType name` | `aClassType typeName name`, or `aClassType fullName` for the dotted one |
+| `anArrayType name` | `anArrayType baseType` |
+| `aType isKindOf: FASTTNamedEntity` | `aType isTypeExpression` |
+
+`FASTJavaPrimitiveTypeExpression` is now abstract in fact as well as in name: the grammar
+only ever builds one of its nine subclasses, so the importer's `visitPrimitiveType:` — which
+built a bare one named by the keyword it had read — is gone with the name it wrote.
 
 ## An enum constant is no longer a variable expression either
 
@@ -130,12 +158,6 @@ used as a value. It is now a `FASTJavaEntity` using `FASTTNamedEntity` and the t
 it already had, so `name`, `annotations`, `arguments` and `declarations` are unchanged.
 `FASTJavaVisitor>>visitFASTJavaEnumConstant:` forwards to `visitFASTTNamedEntity:` rather
 than `visitFASTTVariableExpression:`.
-
-`FASTJavaClassProperty` is **not** changed, though its name suggests it should be. It is
-not only `Foo.class`: it is the model's reading of any dotted name used as a value, and
-JLS 15.26 lets one stand on the left of an assignment, as `Foo.bar = 1` does. It is a
-variable expression, it keeps `FASTJavaTAssignable` with the rest, and only its name is
-wrong.
 
 ## A class literal is an entity of its own
 
@@ -158,9 +180,8 @@ so it does not carry `FASTJavaTAssignable`, which it used to inherit.
 | `aClassProperty type` | `aClassLiteral type`, declared `FASTJavaTypeExpression` |
 | `aTypeExpression javaClassPropertyOwner` | `javaClassLiteralTypeOwner` |
 
-`FASTJavaClassProperty` keeps the other 732. It is a dotted name used as a value, which
-JLS 15.26 lets you assign to, so it stays a variable expression — only its name is wrong,
-and renaming it waits for a decision about whether it is a `FASTJavaFieldAccess` at all.
+The other 732 are dotted names used as values, which the next section reads as
+`FASTJavaQualifiedName`.
 
 ## A dotted name is one entity, wherever it stands
 
@@ -173,7 +194,9 @@ described the same text.
 `FASTJavaClassProperty` is removed. A dotted name is a `FASTJavaQualifiedName` everywhere,
 and that class is now an expression: it gained `FASTTExpression`, `FASTJavaTReceiver`,
 `FASTJavaTTryResource` and `FASTJavaTAnnotationElement` beside the `FASTJavaTAssignable`,
-`FASTTNamedEntity` and `FASTTEntity` it already had.
+`FASTTNamedEntity` and `FASTTEntity` it already had. `FASTJavaTAssignable` is finally
+earned rather than vestigial: JLS 15.26 lets a dotted name stand on the left of an
+assignment, as `Foo.bar = 1` does, where an import name never can.
 
 | v4.4.0 | v5 |
 | --- | --- |
