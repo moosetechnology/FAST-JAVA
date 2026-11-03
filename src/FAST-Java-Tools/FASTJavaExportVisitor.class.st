@@ -498,17 +498,6 @@ FASTJavaExportVisitor >> visitFASTJavaClassLiteral: aFASTJavaClassLiteral [
 ]
 
 { #category : 'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
-	self checkForComments: aFASTJavaClassProperty andDo: [
-	aFASTJavaClassProperty type accept: self.
-	self
-		<< '.' ;
-		<< aFASTJavaClassProperty fieldName
-]
-
-]
-
-{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
 	self checkForComments: aFASTJavaClassTypeExpression andDo: [
 		self visitFASTJavaModifiersInline: aFASTJavaClassTypeExpression annotations.

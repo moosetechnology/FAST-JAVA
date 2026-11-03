@@ -53,13 +53,13 @@ JavaSmaCCAnnotationInterfaceTest >> testAnnotationInterfaceModifiers [
 ]
 
 { #category : 'tests' }
-JavaSmaCCAnnotationInterfaceTest >> testAnnotationOnAnnotationInterfaceReadsItsElementsAsClassProperties [
-	"A dotted name is read as a class property inside a type declaration and as a qualified
-	name outside one, and an annotation interface is a type declaration."
+JavaSmaCCAnnotationInterfaceTest >> testAnnotationOnAnnotationInterfaceReadsItsElementsAsQualifiedNames [
+	"JLS 6.5: a dotted name is read the same way wherever it stands, an annotation element
+	included, since a parser cannot tell a package from a type from a field."
 
 	| annotation |
 	annotation := self authorAnnotationInterface annotations anyOne.
-	self assert: annotation elements anyOne class equals: FASTJavaClassProperty
+	self assert: annotation elements anyOne class equals: FASTJavaQualifiedName
 ]
 
 { #category : 'tests' }

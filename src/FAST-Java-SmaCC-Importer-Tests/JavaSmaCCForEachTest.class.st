@@ -46,7 +46,7 @@ JavaSmaCCForEachTest >> testForEachListParent [
 
 { #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachListType [
-	self assert: fastMethod statements first list class equals: FASTJavaClassProperty
+	self assert: fastMethod statements first list class equals: FASTJavaQualifiedName
 ]
 
 { #category : 'tests' }

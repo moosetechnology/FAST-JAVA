@@ -396,22 +396,6 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 	withComments := false
 ]
 
-{ #category : 'creating' }
-JavaSmaCCProgramNodeImporterVisitor >> isOutsideTypeDeclaration [
-	"JLS 9.7.1 writes the value of an annotation element as an expression, so a name among
-	those values is a variable and not the name of a package, wherever the annotation is
-	written. An annotation therefore counts as inside, which only matters where nothing
-	else makes it so: on a package declaration and on a module, outside every type."
-
-	({ FASTJavaClassDeclaration . FASTJavaInterfaceDeclaration . FASTJavaEnumDeclaration . FASTJavaAnnotationInterfaceDeclaration . FASTJavaRecordDeclaration . FASTJavaMethodEntity . FASTJavaAnnotation }
-		includes: currentFASTEntity class )
-		ifTrue: [ ^ false ].
-
-	^self parentFASTVisitor
-		ifNil: [ true ]
-		ifNotNil: [ self parentFASTVisitor isOutsideTypeDeclaration ]
-]
-
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> isVarTypeNode: aClassType [
 	"JLS 14.4.1: `var` is a reserved type name standing for an inferred type. It is
@@ -1514,7 +1498,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModule: aModule [
 	self setStartEndPos: aModule.
 	currentFASTEntity
 		isOpen: aModule openToken isNotNil;
-		qualifiedName: (self clone accept: aModule name).
+		qualifiedName: (self qualifiedNameOf: aModule name).
 	aModule annotations do: [ :annotation | currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	aModule directives do: [ :directive | currentFASTEntity addDirective: (self clone accept: directive) ].
 	unit moduleDeclaration: currentFASTEntity.
@@ -1528,8 +1512,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModuleExports: aModuleExports [
 
 	currentFASTEntity := self addToModel: FASTJavaExportsDirective new.
 	self setStartEndPos: aModuleExports.
-	currentFASTEntity qualifiedName: (self clone accept: aModuleExports name).
-	aModuleExports toNames do: [ :toName | currentFASTEntity addTarget: (self clone accept: toName) ].
+	currentFASTEntity qualifiedName: (self qualifiedNameOf: aModuleExports name).
+	aModuleExports toNames do: [ :toName | currentFASTEntity addTarget: (self qualifiedNameOf: toName) ].
 	^ currentFASTEntity
 ]
 
@@ -1540,8 +1524,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModuleOpens: aModuleOpens [
 
 	currentFASTEntity := self addToModel: FASTJavaOpensDirective new.
 	self setStartEndPos: aModuleOpens.
-	currentFASTEntity qualifiedName: (self clone accept: aModuleOpens name).
-	aModuleOpens toNames do: [ :toName | currentFASTEntity addTarget: (self clone accept: toName) ].
+	currentFASTEntity qualifiedName: (self qualifiedNameOf: aModuleOpens name).
+	aModuleOpens toNames do: [ :toName | currentFASTEntity addTarget: (self qualifiedNameOf: toName) ].
 	^ currentFASTEntity
 ]
 
@@ -1552,8 +1536,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModuleProvides: aModuleProvides [
 
 	currentFASTEntity := self addToModel: FASTJavaProvidesDirective new.
 	self setStartEndPos: aModuleProvides.
-	currentFASTEntity qualifiedName: (self clone accept: aModuleProvides name).
-	aModuleProvides withNames do: [ :withName | currentFASTEntity addImplementation: (self clone accept: withName) ].
+	currentFASTEntity qualifiedName: (self qualifiedNameOf: aModuleProvides name).
+	aModuleProvides withNames do: [ :withName | currentFASTEntity addImplementation: (self qualifiedNameOf: withName) ].
 	^ currentFASTEntity
 ]
 
@@ -1567,7 +1551,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModuleRequires: aModuleRequires [
 	currentFASTEntity
 		isStatic: aModuleRequires staticToken isNotNil;
 		isTransitive: aModuleRequires transitiveToken isNotNil;
-		qualifiedName: (self clone accept: aModuleRequires name).
+		qualifiedName: (self qualifiedNameOf: aModuleRequires name).
 	^ currentFASTEntity
 ]
 
@@ -1577,21 +1561,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModuleUses: aModuleUses [
 
 	currentFASTEntity := self addToModel: FASTJavaUsesDirective new.
 	self setStartEndPos: aModuleUses.
-	currentFASTEntity qualifiedName: (self clone accept: aModuleUses name).
+	currentFASTEntity qualifiedName: (self qualifiedNameOf: aModuleUses name).
 	^ currentFASTEntity
 ]
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitName: aName [
+	"JLS 6.5: a simple name standing in an expression is a variable until something resolves
+	it. The name of a package, an import or a module directive is built where it is written,
+	by #qualifiedNameOf:."
 
-	self isOutsideTypeDeclaration
-		ifTrue: [ 
-			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
-			self setStartEndPos: aName ]
-		ifFalse: [ 
-			currentFASTEntity := self
-				                     create: FASTJavaVariableExpression
-				                     from: aName ].
+	currentFASTEntity := self create: FASTJavaVariableExpression from: aName.
 	currentFASTEntity name: aName name value.
 	^ currentFASTEntity
 ]
@@ -1689,7 +1669,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclarat
 	is written to hold."
 	aPackageDeclaration annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
-	currentFASTEntity qualifiedName: (self clone accept: aPackageDeclaration name).
+	currentFASTEntity qualifiedName: (self qualifiedNameOf: aPackageDeclaration name).
 	^ currentFASTEntity
 ]
 
@@ -1779,19 +1759,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitProgramFile: aProgramFile [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitQualifiedName: aQualifiedName [
+	"JLS 6.5: a dotted name is ambiguous until it is resolved — `a.b` may name a package, a
+	type or a field, and a parser cannot tell which. It is read as the name it is written
+	as, wherever it stands."
 
-	self isOutsideTypeDeclaration
-		ifTrue: [
-			currentFASTEntity := self addToModel: FASTJavaQualifiedName new.
-			self setStartEndPos: aQualifiedName.
-			currentFASTEntity namespace: (self clone accept: aQualifiedName nspace).
-			currentFASTEntity name: aQualifiedName name value ]
-		ifFalse: [ 
-			currentFASTEntity := self addToModel: FASTJavaClassProperty new.
-			self setStartEndPos: aQualifiedName.
-			currentFASTEntity type: (self clone accept: aQualifiedName nspace).
-			currentFASTEntity fieldName: aQualifiedName name value ].
-	^ currentFASTEntity
+	^ currentFASTEntity := self qualifiedNameOf: aQualifiedName
 ]
 
 { #category : 'visitor' }
@@ -1892,7 +1864,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSingleModuleImportDeclaration: aSing
 	self setStartEndPos: aSingleModuleImportDeclaration.
 	currentFASTEntity
 		isModule: true;
-		qualifiedName: (self clone accept: aSingleModuleImportDeclaration name).
+		qualifiedName: (self qualifiedNameOf: aSingleModuleImportDeclaration name).
 	^ currentFASTEntity
 ]
 
@@ -1901,7 +1873,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSingleTypeImportDeclaration: aSingle
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self setStartEndPos: aSingleTypeImportDeclaration.
 	currentFASTEntity isStatic: aSingleTypeImportDeclaration staticToken isNotNil.
-	currentFASTEntity qualifiedName: (self clone accept: aSingleTypeImportDeclaration name).
+	currentFASTEntity qualifiedName: (self qualifiedNameOf: aSingleTypeImportDeclaration name).
 	^ currentFASTEntity
 ]
 

@@ -35,7 +35,6 @@ Class {
 		'javaVariableDeclarator',
 		'javaWhileStatement',
 		'javaCastExpression',
-		'javaClassProperty',
 		'javaForEachStatement',
 		'javaUnaryExpression',
 		'javaNewExpression',
@@ -302,41 +301,6 @@ annotation.
 ```language=text
 String.class
 ```'
-]
-
-{ #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaClassProperty [
-	^ 'A FASTJavaClassProperty corresponds to the access to a class property
-	
-	It is not the same as the field access because there are some specific usage of class property to access the current object.
-	
-ex.
-
-class Enclosing {
-    void method(Enclosing other) {
-        // ...
-    }
-
-    void otherMethod() {
-        new Runnable() {
-            public void run() {
-                method(this);
-
-
-								--> Does not compile. ''this'' is a Runnable!
-
-
-
-                method(Enclosing.this);
-
-								--> Compiles fine.
-
-
-            }
-        }.run();
-    }
-}
-'
 ]
 
 { #category : 'comments' }
@@ -928,8 +892,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaVariableDeclarator withTesting.
 	javaClassLiteral := self newClassNamed: #ClassLiteral comment: self commentForJavaClassLiteral.
 	javaClassLiteral withTesting.
-	javaClassProperty := self newClassNamed: #ClassProperty comment: self commentForJavaClassProperty.
-	javaClassProperty withTesting.
 	javaNewArray := self newClassNamed: #NewArray comment: self commentForJavaNewArray.
 	javaNewArray withTesting.
 	javaArrayAccess := self newClassNamed: #ArrayAccess comment: self commentForJavaArrayAccess.
@@ -1306,9 +1268,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaClassLiteral --|> tReceiver.
 	javaClassLiteral --|> tAnnotationElement.
 
-	javaClassProperty --|> javaVariableExpression.
-	javaClassProperty --|> tReceiver.
-	javaClassProperty --|> tAnnotationElement.
 
 	javaTryCatchStatement --|> tStatement.
 	javaForEachStatement --|> tStatement.
@@ -1451,6 +1410,15 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	as a qualified name even where it stands on the left of an assignment, so this stays
 	until the importer stops reading a bare fragment as a name outside every type."
 	qualifiedName --|> tAssignable.
+	"JLS 6.5: a dotted name is ambiguous until it is resolved — `a.b` may name a package,
+	a type or a field, and a parser cannot tell. Wherever one stands in an expression it is
+	the same name it is in an import, so it is read the same way and it is an expression:
+	it may be assigned to, be a receiver, be a resource of a try and be written as an
+	element of an annotation."
+	qualifiedName --|> tExpression.
+	qualifiedName --|> tReceiver.
+	qualifiedName --|> tTryResource.
+	qualifiedName --|> tAnnotationElement.
 
 	javaTypePattern --|> tExpression.
 	javaTypePattern --|> tWithModifiers.
@@ -1519,7 +1487,6 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 	(javaFieldAccess property: #fieldName type: #String) comment: 'Name of accessed field'.
 
-	(javaClassProperty property: #fieldName type: #String) comment: 'Name of accessed field'.
 
 	(javaUnaryExpression property: #operator type: #String) comment: 'The operator to apply to the expression'.
 	(javaUnaryExpression property: #isPrefixedUnaryExpression type: #Boolean) comment:
@@ -1652,11 +1619,6 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The type whose Class object I read, eg. the `String` of `String.class`')
 	<>- ((javaTypeExpression property: #javaClassLiteralTypeOwner) comment:
 			 'The class literal that reads my Class object').
-	((javaClassProperty property: #type) comment:
-		 'The type of the property')
-	<>-
-		((tExpression property: #javaClassPropertyOwner)
-			 comment: 'The javaClassProperty owner (if possible)').
 
 	((javaUnaryExpression property: #expression) comment:
 		 'The affected expression')

@@ -46,7 +46,7 @@ JavaSmaCCMethodInvocationWithParamAndReceiverTest >> testClassPropertyReceiverMe
 
 	self
 		assert: methodInvocationWithClassPropertyAsReceiver statements first containedEntities anyOne receiver class
-		equals: FASTJavaClassProperty
+		equals: FASTJavaQualifiedName
 ]
 
 { #category : 'tests' }

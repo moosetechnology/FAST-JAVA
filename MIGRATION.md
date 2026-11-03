@@ -162,6 +162,49 @@ so it does not carry `FASTJavaTAssignable`, which it used to inherit.
 JLS 15.26 lets you assign to, so it stays a variable expression — only its name is wrong,
 and renaming it waits for a decision about whether it is a `FASTJavaFieldAccess` at all.
 
+## A dotted name is one entity, wherever it stands
+
+JLS 6.5 says a dotted name is ambiguous until it is resolved: `a.b` may name a package, a
+type or a field, and a parser cannot tell which. v4 read it two ways depending on where it
+stood — a `FASTJavaQualifiedName` outside every type declaration, in an import, a package
+declaration or a module directive, and a `FASTJavaClassProperty` inside one. The two
+described the same text.
+
+`FASTJavaClassProperty` is removed. A dotted name is a `FASTJavaQualifiedName` everywhere,
+and that class is now an expression: it gained `FASTTExpression`, `FASTJavaTReceiver`,
+`FASTJavaTTryResource` and `FASTJavaTAnnotationElement` beside the `FASTJavaTAssignable`,
+`FASTTNamedEntity` and `FASTTEntity` it already had.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `FASTJavaClassProperty` | `FASTJavaQualifiedName` |
+| `aClassProperty fieldName` | `aQualifiedName name` |
+| `aClassProperty type` | `aQualifiedName namespace` |
+| `anExpression javaClassPropertyOwner` | `aQualifiedName namespaceOwner` |
+| `anEntity isClassProperty` | `anEntity isQualifiedName` |
+| `aModel newClassProperty` | `aModel newQualifiedName` |
+| `visitFASTJavaClassProperty:` | `visitFASTJavaQualifiedName:` |
+
+The shape changes with the class. `Hello.property` was one entity whose `type` held a
+`FASTJavaVariableExpression`; it is now two, `property` with `Hello` as its `namespace`,
+both of them `FASTJavaQualifiedName`. A **simple** name in an expression is still a
+`FASTJavaVariableExpression` — only the parts of a dotted name are names.
+
+`FASTJavaFieldAccess` is untouched and still means what it says. The grammar's FieldAccess
+rule matches `Primary . Identifier`, `super . Identifier` and `TypeName . super .
+Identifier`, where a package or type qualifier is impossible, so there the parser really
+does know it is a field access. Merging the ambiguous names into it would have made the
+model assert field accesses that do not exist: in `com.foo.Bar.CONSTANT`, `com.foo` is a
+package, and nothing reads a field `Bar` from it.
+
+With the two readings merged, the importer no longer guesses from where a name stands:
+`isOutsideTypeDeclaration` is gone, and the places that write a name rather than an
+expression — imports, package declarations, module directives, annotation names — ask for
+one explicitly. One consequence is worth knowing: a bare expression or block parsed on its
+own used to read its names as package names, so `a = 1` as a fragment made `a` a
+`FASTJavaQualifiedName` where the same text inside a class made it a
+`FASTJavaVariableExpression`. Both now read the same way.
+
 ## A stray semicolon is no longer a method
 
 JLS 8.1.6 lets a class body write a bare `;` where a member would go. `v4` modelled it as

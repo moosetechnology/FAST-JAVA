@@ -232,14 +232,6 @@ FASTJavaEntity >> isClassLiteral [
 ]
 
 { #category : 'testing' }
-FASTJavaEntity >> isClassProperty [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
 FASTJavaEntity >> isClassTypeExpression [
 
 	<ignoreForCoverage>

@@ -113,11 +113,6 @@ FASTJavaVisitor >> visitFASTJavaClassLiteral: aFASTJavaClassLiteral [
 ]
 
 { #category : 'generated' }
-FASTJavaVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
-	^ self visitFASTTVariableExpression: aFASTJavaClassProperty
-]
-
-{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
 	^ self visitFASTJavaTypeExpression: aFASTJavaClassTypeExpression
 ]
@@ -421,7 +416,7 @@ FASTJavaVisitor >> visitFASTJavaProvidesDirective: aFASTJavaProvidesDirective [
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaQualifiedName: aFASTJavaQualifiedName [
-	^ self visitFASTTEntity: aFASTJavaQualifiedName
+	^ self visitFASTTExpression: aFASTJavaQualifiedName
 ]
 
 { #category : 'generated' }

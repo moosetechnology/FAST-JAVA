@@ -365,36 +365,6 @@ FASTTExpression >> javaCastExpressionOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
-FASTTExpression >> javaClassPropertyOwner [
-	"Relation named: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The javaClassProperty owner (if possible)'>
-	<container>
-	<FMProperty: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaClassPropertyOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model' }
-FASTTExpression >> javaClassPropertyOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	<package: #'FAST-Java-Model'>
-
-	(self attributeAt: #javaClassPropertyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaClassPropertyOwner.
-		self attributeAt: #javaClassPropertyOwner put: anObject.
-		otherSide type: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaClassPropertyOwner put: anObject.
-		anObject type: self ]
-]
-
-{ #category : '*FAST-Java-Model' }
 FASTTExpression >> javaDimensionExpressionOwner [
 	"Relation named: #javaDimensionExpressionOwner type: #FASTJavaDimensionExpression opposite: #expression"
 

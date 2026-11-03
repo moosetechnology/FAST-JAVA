@@ -22,7 +22,7 @@ JavaSmaCCAnnotationWithSpecialElementsTest >> testAnnotationFirstElementType [
 JavaSmaCCAnnotationWithSpecialElementsTest >> testAnnotationSecondElementType [
 	self
 		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements second expression class 
-		equals: FASTJavaClassProperty
+		equals: FASTJavaQualifiedName
 ]
 
 { #category : 'tests' }

@@ -25,13 +25,13 @@ JavaSmaCCMethodCastTest >> testCastAsAReceiverOfAnInvocation [
 { #category : 'tests' }
 JavaSmaCCMethodCastTest >> testCastExpressionName [
 
-	self assert: fastMethod statements third containedEntities anyOne receiver expression fieldName equals: 'pListModel'
+	self assert: fastMethod statements third containedEntities anyOne receiver expression name equals: 'pListModel'
 ]
 
 { #category : 'tests' }
 JavaSmaCCMethodCastTest >> testCastExpressionType [
 
-	self assert: fastMethod statements third containedEntities anyOne receiver expression class equals: FASTJavaClassProperty
+	self assert: fastMethod statements third containedEntities anyOne receiver expression class equals: FASTJavaQualifiedName
 ]
 
 { #category : 'tests' }

@@ -30,7 +30,6 @@ I am an abstract class representing a type
 | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaClassDeclaration` | The sealed class that permits me to extend it|
 | `javaClassDeclarationSuperclassOwner` | `FASTJavaTypeExpression` | `superclass` | `FASTJavaClassDeclaration` | The class that extends me|
 | `javaClassLiteralTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaClassLiteral` | The class literal that reads my Class object|
-| `javaClassPropertyOwner` | `FASTTExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaEnumDeclaration` | The enum that implements me|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
