@@ -8,9 +8,9 @@ FASTTExpression >> assertConditionOwner [
 	<generated>
 	<FMComment: 'I represent a condition for my owner'>
 	<container>
-	<derived>
 	<FMProperty: #assertConditionOwner type: #FASTJavaAssertStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #assertConditionOwner ifAbsent: [ nil ]
 ]
 
@@ -39,9 +39,9 @@ FASTTExpression >> conditionalConditionOwner [
 	<generated>
 	<FMComment: 'I represent a condition for my owner'>
 	<container>
-	<derived>
 	<FMProperty: #conditionalConditionOwner type: #FASTJavaConditionalExpression opposite: #condition>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #conditionalConditionOwner ifAbsent: [ nil ]
 ]
 
@@ -70,9 +70,9 @@ FASTTExpression >> conditionalElsePartOwner [
 	<generated>
 	<FMComment: 'The if owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #conditionalElsePartOwner type: #FASTJavaConditionalExpression opposite: #elsePart>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #conditionalElsePartOwner ifAbsent: [ nil ]
 ]
 
@@ -101,9 +101,9 @@ FASTTExpression >> conditionalThenPartOwner [
 	<generated>
 	<FMComment: 'The if owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #conditionalThenPartOwner type: #FASTJavaConditionalExpression opposite: #thenPart>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #conditionalThenPartOwner ifAbsent: [ nil ]
 ]
 
@@ -132,9 +132,9 @@ FASTTExpression >> infixOperationLeftOperandOwner [
 	<generated>
 	<FMComment: 'The left operand (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #infixOperationLeftOperandOwner type: #FASTJavaInfixOperation opposite: #leftOperand>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #infixOperationLeftOperandOwner ifAbsent: [ nil ]
 ]
 
@@ -163,9 +163,9 @@ FASTTExpression >> infixOperationRightOperandOwner [
 	<generated>
 	<FMComment: 'The right operand (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #infixOperationRightOperandOwner type: #FASTJavaInfixOperation opposite: #rightOperand>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #infixOperationRightOperandOwner ifAbsent: [ nil ]
 ]
 
@@ -194,9 +194,9 @@ FASTTExpression >> javaArrayAccessOwner [
 	<generated>
 	<FMComment: 'The javaArrayAccess owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaArrayAccessOwner type: #FASTJavaArrayAccess opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaArrayAccessOwner ifAbsent: [ nil ]
 ]
 
@@ -225,9 +225,9 @@ FASTTExpression >> javaArrayArrayAccessOwner [
 	<generated>
 	<FMComment: 'The javaArrayArrayAccess owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaArrayArrayAccessOwner type: #FASTJavaArrayAccess opposite: #array>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaArrayArrayAccessOwner ifAbsent: [ nil ]
 ]
 
@@ -279,9 +279,9 @@ FASTTExpression >> javaArrayTypeNameOwner [
 	<generated>
 	<FMComment: 'The variable expression owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaArrayTypeNameOwner ifAbsent: [ nil ]
 ]
 
@@ -310,9 +310,9 @@ FASTTExpression >> javaAssignmentExpressionOwner [
 	<generated>
 	<FMComment: 'The javaAssignmentExpression owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaAssignmentExpressionOwner type: #FASTJavaAssignmentExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaAssignmentExpressionOwner ifAbsent: [ nil ]
 ]
 
@@ -341,9 +341,9 @@ FASTTExpression >> javaCastExpressionOwner [
 	<generated>
 	<FMComment: 'The javaCastExpression owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaCastExpressionOwner type: #FASTJavaCastExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaCastExpressionOwner ifAbsent: [ nil ]
 ]
 
@@ -362,6 +362,36 @@ FASTTExpression >> javaCastExpressionOwner: anObject [
 	ifNotNil: [ 
 		self attributeAt: #javaCastExpressionOwner put: anObject.
 		anObject expression: self ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> javaClassPropertyOwner [
+	"Relation named: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The javaClassProperty owner (if possible)'>
+	<container>
+	<FMProperty: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #javaClassPropertyOwner ifAbsent: [ nil ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> javaClassPropertyOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'FAST-Java-Model'>
+
+	(self attributeAt: #javaClassPropertyOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaClassPropertyOwner.
+		self attributeAt: #javaClassPropertyOwner put: anObject.
+		otherSide type: nil ]
+	ifNotNil: [ 
+		self attributeAt: #javaClassPropertyOwner put: anObject.
+		anObject type: self ]
 ]
 
 { #category : '*FAST-Java-Model' }
@@ -402,9 +432,9 @@ FASTTExpression >> javaForEachStatementOwner [
 	<generated>
 	<FMComment: 'The javaForEachStatement owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaForEachStatementOwner type: #FASTJavaForEachStatement opposite: #list>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaForEachStatementOwner ifAbsent: [ nil ]
 ]
 
@@ -433,9 +463,9 @@ FASTTExpression >> javaNewArrayInitialOwner [
 	<generated>
 	<FMComment: 'I belong to a new array initialization'>
 	<container>
-	<derived>
 	<FMProperty: #javaNewArrayInitialOwner type: #FASTJavaNewArray opposite: #initializer>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaNewArrayInitialOwner ifAbsent: [ nil ]
 ]
 
@@ -454,6 +484,36 @@ FASTTExpression >> javaNewArrayInitialOwner: anObject [
 	ifNotNil: [ 
 		self attributeAt: #javaNewArrayInitialOwner put: anObject.
 		anObject initializer: self ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> javaOuterThisOwner [
+	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The javaOuterThis owner (if possible)'>
+	<container>
+	<FMProperty: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #javaOuterThisOwner ifAbsent: [ nil ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> javaOuterThisOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'FAST-Java-Model'>
+
+	(self attributeAt: #javaOuterThisOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self javaOuterThisOwner.
+		self attributeAt: #javaOuterThisOwner put: anObject.
+		otherSide type: nil ]
+	ifNotNil: [ 
+		self attributeAt: #javaOuterThisOwner put: anObject.
+		anObject type: self ]
 ]
 
 { #category : '*FAST-Java-Model' }
@@ -487,9 +547,9 @@ FASTTExpression >> javaStringAssertStatementOwner [
 	<generated>
 	<FMComment: 'The assertion which I describe'>
 	<container>
-	<derived>
 	<FMProperty: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaStringAssertStatementOwner ifAbsent: [ nil ]
 ]
 
@@ -518,9 +578,9 @@ FASTTExpression >> javaSynchronizedStatementOwner [
 	<generated>
 	<FMComment: 'The owner of the synchronized block (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaSynchronizedStatementOwner type: #FASTJavaSynchronizedStatement opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaSynchronizedStatementOwner ifAbsent: [ nil ]
 ]
 
@@ -549,9 +609,9 @@ FASTTExpression >> javaThrowStatementOwner [
 	<generated>
 	<FMComment: 'The javaThrowStatement owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaThrowStatementOwner type: #FASTJavaThrowStatement opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaThrowStatementOwner ifAbsent: [ nil ]
 ]
 
@@ -580,9 +640,9 @@ FASTTExpression >> javaUnaryExpressionOwner [
 	<generated>
 	<FMComment: 'The javaUnaryExpression owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaUnaryExpressionOwner type: #FASTJavaUnaryExpression opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaUnaryExpressionOwner ifAbsent: [ nil ]
 ]
 
@@ -611,9 +671,9 @@ FASTTExpression >> javaVariableDeclaratorExpressionOwner [
 	<generated>
 	<FMComment: 'The javaVariableDeclarator owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #javaVariableDeclaratorExpressionOwner type: #FASTJavaVariableDeclarator opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #javaVariableDeclaratorExpressionOwner ifAbsent: [ nil ]
 ]
 
@@ -642,9 +702,9 @@ FASTTExpression >> switchConditionOwner [
 	<generated>
 	<FMComment: 'I represent a condition for my owner'>
 	<container>
-	<derived>
 	<FMProperty: #switchConditionOwner type: #FASTJavaSwitchStatement opposite: #condition>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #switchConditionOwner ifAbsent: [ nil ]
 ]
 
@@ -673,9 +733,9 @@ FASTTExpression >> switchExpressionConditionOwner [
 	<generated>
 	<FMComment: 'The switch expression whose condition I am'>
 	<container>
-	<derived>
 	<FMProperty: #switchExpressionConditionOwner type: #FASTJavaSwitchExpression opposite: #condition>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #switchExpressionConditionOwner ifAbsent: [ nil ]
 ]
 
@@ -704,9 +764,9 @@ FASTTExpression >> switchLabelGuardOwner [
 	<generated>
 	<FMComment: 'The switch label I guard'>
 	<container>
-	<derived>
 	<FMProperty: #switchLabelGuardOwner type: #FASTJavaSwitchLabel opposite: #guard>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #switchLabelGuardOwner ifAbsent: [ nil ]
 ]
 
@@ -758,9 +818,9 @@ FASTTExpression >> yieldStatementOwner [
 	<generated>
 	<FMComment: 'The yield statement that owns me'>
 	<container>
-	<derived>
 	<FMProperty: #yieldStatementOwner type: #FASTJavaYieldStatement opposite: #expression>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #yieldStatementOwner ifAbsent: [ nil ]
 ]
 

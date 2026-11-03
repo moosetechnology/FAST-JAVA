@@ -8,3 +8,11 @@ FASTJavaParameter >> dimensions [
 
 	^ self brackets size
 ]
+
+{ #category : '*FAST-Java-Model-Extension' }
+FASTJavaParameter >> hasVariableArguments [
+	"JLS 8.4.1: a parameter has variable arity exactly when it writes an ellipsis, which the
+	`ellipsis` relation holds, so there is nothing else to record."
+
+	^ self ellipsis isNotNil
+]

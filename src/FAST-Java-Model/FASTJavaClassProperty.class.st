@@ -45,7 +45,7 @@ class Enclosing {
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `type` | `FASTJavaClassProperty` | `javaClassPropertyOwner` | `FASTJavaVariableExpression` | The type of the property|
+| `type` | `FASTJavaClassProperty` | `javaClassPropertyOwner` | `FASTTExpression` | The type of the property|
 
 
 ## Properties
@@ -62,8 +62,7 @@ Class {
 	#traits : 'FASTJavaTAnnotationElement + FASTJavaTReceiver',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTReceiver classTrait',
 	#instVars : [
-		'#fieldName => FMProperty',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner'
+		'#fieldName => FMProperty'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -106,12 +105,13 @@ FASTJavaClassProperty >> isClassProperty [
 
 { #category : 'accessing' }
 FASTJavaClassProperty >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaClassPropertyOwner"
+	"Relation named: #type type: #FASTTExpression opposite: #javaClassPropertyOwner"
 
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type of the property'>
-	^ type
+	<FMProperty: #type type: #FASTTExpression opposite: #javaClassPropertyOwner>
+	^ self attributeAt: #type ifAbsent: [ nil ]
 ]
 
 { #category : 'accessing' }
@@ -119,5 +119,12 @@ FASTJavaClassProperty >> type: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	type := anObject
+	(self attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self type.
+		self attributeAt: #type put: anObject.
+		otherSide javaClassPropertyOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #type put: anObject.
+		anObject javaClassPropertyOwner: self ]
 ]

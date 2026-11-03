@@ -84,18 +84,92 @@ on.
 ## A relation that holds a written type is typed as one
 
 Five relations were declared to hold a `FASTJavaVariableExpression` where only a type can
-be written, which is why `FASTJavaTypeExpression` is a subclass of
-`FASTJavaVariableExpression` at all. They now hold a `FASTJavaTypeExpression`:
-`FASTJavaCastExpression>>type`, `FASTJavaMethodEntity>>type`,
-`FASTJavaNewExpression>>type`, `FASTJavaParameter>>type` and
+be written. They now hold a `FASTJavaTypeExpression`: `FASTJavaCastExpression>>type`,
+`FASTJavaMethodEntity>>type`, `FASTJavaNewExpression>>type`, `FASTJavaParameter>>type` and
 `FASTJavaVarDeclStatement>>type`.
 
 Reading them is unchanged — over the whole of JDK 8 and JDK 25 they never held anything
 else. Code that *writes* one, in a transformation or a hand-built model, must now pass a
 type expression.
 
-`FASTJavaClassProperty>>type` and `FASTJavaOuterThis>>type` are left alone: the name before
-`.class` or `.this` really can be a plain variable expression, as in `a.b.C.class`.
+The two that genuinely hold a variable expression go the other way and are widened to
+`FASTTExpression`: see the next section.
+
+## A type is no longer a variable expression
+
+`FASTJavaTypeExpression` was a subclass of `FASTJavaVariableExpression`, so every type
+written in source could be assigned to, closed as a resource of a try, and written as an
+element of an annotation. It is now a `FASTJavaEntity` using `FASTTExpression`,
+`FASTTNamedEntity`, `FASTJavaTReceiver` and `FASTJavaTWithAnnotations`.
+
+What it keeps: `name` — a primitive type writes the keyword that names it — and being a
+receiver, since JLS 15.13 lets `String::length` name a type as what it reads the method
+from. What it loses: `FASTJavaTAssignable` (`javaVariableAssignmentOwner`),
+`FASTJavaTTryResource` (`javaTryResourceOwner`), `FASTJavaTAnnotationElement`
+(`arrayOwner`, `defaultValueOwner`, `parentAnnotation`), and the variable-side owners
+`javaCatchParameterOwner`, `javaParameterVariableOwner`, `javaTypePatternVariableOwner`
+and `javaVariableDeclaratorOwner`. None of them was ever filled on a type.
+
+`isKindOf: FASTJavaVariableExpression` and `allWithSubTypesOf: FASTJavaVariableExpression`
+no longer answer for a type; ask for `FASTJavaTypeExpression`, or send `isTypeExpression`.
+`FASTJavaVisitor>>visitFASTJavaTypeExpression:` now forwards to `visitFASTTExpression:`
+rather than `visitFASTTVariableExpression:`, which matters to a visitor that overrode the
+latter.
+
+Two relations that hold what is written before `.class` and before `.this` are widened
+from `FASTJavaVariableExpression` to `FASTTExpression` to make this possible:
+`FASTJavaClassProperty>>type` and `FASTJavaOuterThis>>type`. Both really do hold a plain
+variable expression most of the time — in `a.b.C.class` the name before `.class` is read as
+one — so they are widened rather than narrowed, and reading them is unchanged.
+
+## An enum constant is no longer a variable expression either
+
+`FASTJavaEnumConstant` declares a name, writes arguments where the constructor takes them
+and a class body where it overrides something (JLS 8.9.1) — it is a declaration, not a name
+used as a value. It is now a `FASTJavaEntity` using `FASTTNamedEntity` and the three traits
+it already had, so `name`, `annotations`, `arguments` and `declarations` are unchanged.
+`FASTJavaVisitor>>visitFASTJavaEnumConstant:` forwards to `visitFASTTNamedEntity:` rather
+than `visitFASTTVariableExpression:`.
+
+`FASTJavaClassProperty` is **not** changed, though its name suggests it should be. It is
+not only `Foo.class`: it is the model's reading of any dotted name used as a value, and
+JLS 15.26 lets one stand on the left of an assignment, as `Foo.bar = 1` does. It is a
+variable expression, it keeps `FASTJavaTAssignable` with the rest, and only its name is
+wrong.
+
+## A stray semicolon is no longer a method
+
+JLS 8.1.6 lets a class body write a bare `;` where a member would go. `v4` modelled it as
+`FASTJavaEmptyMethodDeclaration`, a subclass of `FASTJavaMethodEntity`, so a semicolon
+carried a name, modifiers, annotations, parameters, throws, type parameters and a statement
+block — and `allWithType: FASTJavaMethodEntity` counted it as a method: 12 of them in 9 of
+400 JDK 25 files, among 3438 method entities.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `FASTJavaEmptyMethodDeclaration` | `FASTJavaEmptyDeclaration` |
+| `anEntity isEmptyMethodDeclaration` | `anEntity isEmptyDeclaration` |
+| `aModel newEmptyMethodDeclaration` | `aModel newEmptyDeclaration` |
+| `visitFASTJavaEmptyMethodDeclaration:` | `visitFASTJavaEmptyDeclaration:` |
+
+It is a `FASTJavaEntity` using `FASTJavaTDeclaration`, so it still sits in `declarations`
+beside the real members, and it still writes itself back as `;`.
+
+## A variable arity parameter writes an ellipsis
+
+`FASTJavaParameter>>variableArguments` held the `FASTJavaDimension` of the `...`, under a
+plural name for a single value, beside a `hasVariableArguments` boolean that said the same
+thing twice.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aParameter variableArguments` | `aParameter ellipsis` |
+| `aParameter variableArguments:` | `aParameter ellipsis:` |
+| `aDimension variableArgumentsOwner` | `aDimension ellipsisOwner` |
+| `aParameter hasVariableArguments:` | nothing — set `ellipsis:` |
+
+`hasVariableArguments` still answers, as `self ellipsis isNotNil`. It is no longer a stored
+property, so it no longer appears in MSE.
 
 ## Renamed relations
 

@@ -9,6 +9,7 @@ I represent a compilation unit, I can contain declarations for a package, import
 |---|
 | `annotationInterfaceDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaAnnotationInterfaceDeclaration` | My annotation interface declarations|
 | `classDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaClassDeclaration` | My class declarations|
+| `emptyDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaEmptyDeclaration` | The bare semicolons I write between my declarations|
 | `enumDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaEnumDeclaration` | My enum declaration|
 | `fieldDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaVarDeclStatement` | The fields a compact compilation unit writes at the top level|
 | `importDeclarations` | `FASTJavaCompilationUnit` | `compilationUnit` | `FASTJavaImportDeclaration` | My import declarations|
@@ -42,6 +43,7 @@ Class {
 	#instVars : [
 		'#annotationInterfaceDeclarations => FMMany type: #FASTJavaAnnotationInterfaceDeclaration opposite: #compilationUnit',
 		'#classDeclarations => FMMany type: #FASTJavaClassDeclaration opposite: #compilationUnit',
+		'#emptyDeclarations => FMMany type: #FASTJavaEmptyDeclaration opposite: #compilationUnit',
 		'#enumDeclarations => FMMany type: #FASTJavaEnumDeclaration opposite: #compilationUnit',
 		'#fieldDeclarations => FMMany type: #FASTJavaVarDeclStatement opposite: #compilationUnit',
 		'#importDeclarations => FMMany type: #FASTJavaImportDeclaration opposite: #compilationUnit',
@@ -79,6 +81,14 @@ FASTJavaCompilationUnit >> addClassDeclaration: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self classDeclarations add: anObject
+]
+
+{ #category : 'adding' }
+FASTJavaCompilationUnit >> addEmptyDeclaration: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self emptyDeclarations add: anObject
 ]
 
 { #category : 'adding' }
@@ -165,6 +175,24 @@ FASTJavaCompilationUnit >> classDeclarations: anObject [
 	<ignoreForCoverage>
 	<generated>
 	classDeclarations value: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> emptyDeclarations [
+	"Relation named: #emptyDeclarations type: #FASTJavaEmptyDeclaration opposite: #compilationUnit"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bare semicolons I write between my declarations'>
+	^ emptyDeclarations
+]
+
+{ #category : 'accessing' }
+FASTJavaCompilationUnit >> emptyDeclarations: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	emptyDeclarations value: anObject
 ]
 
 { #category : 'accessing' }

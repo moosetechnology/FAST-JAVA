@@ -24,11 +24,11 @@
 | `javaAssignmentExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaAssignmentExpression` | The javaAssignmentExpression owner (if possible)|
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaCatchParameterOwner` | `FASTJavaVariableExpression` | `parameter` | `FASTJavaCatchPartStatement` | The javaCatchPartParameterOwner owner (if possible)|
-| `javaClassPropertyOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
+| `javaClassPropertyOwner` | `FASTTExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
-| `javaOuterThisOwner` | `FASTJavaVariableExpression` | `type` | `FASTJavaOuterThis` | The javaOuterThis owner (if possible)|
+| `javaOuterThisOwner` | `FASTTExpression` | `type` | `FASTJavaOuterThis` | The javaOuterThis owner (if possible)|
 | `javaParameterVariableOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaParameter` | The variable expression owner (if possible)|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
@@ -71,8 +71,6 @@ Class {
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTJavaTTryResource classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
 		'#javaCatchParameterOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
-		'#javaClassPropertyOwner => FMOne type: #FASTJavaClassProperty opposite: #type',
-		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
 		'#javaTypePatternVariableOwner => FMOne type: #FASTJavaTypePattern opposite: #variable',
 		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
@@ -108,46 +106,6 @@ FASTJavaVariableExpression >> javaCatchParameterOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaCatchParameterOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaVariableExpression >> javaClassPropertyOwner [
-	"Relation named: #javaClassPropertyOwner type: #FASTJavaClassProperty opposite: #type"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The javaClassProperty owner (if possible)'>
-	<container>
-	<derived>
-	^ javaClassPropertyOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaVariableExpression >> javaClassPropertyOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaClassPropertyOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaVariableExpression >> javaOuterThisOwner [
-	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The javaOuterThis owner (if possible)'>
-	<container>
-	<derived>
-	^ javaOuterThisOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaVariableExpression >> javaOuterThisOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	javaOuterThisOwner := anObject
 ]
 
 { #category : 'accessing' }

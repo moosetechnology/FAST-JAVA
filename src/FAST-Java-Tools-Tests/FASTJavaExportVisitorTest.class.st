@@ -66,6 +66,20 @@ FASTJavaExportVisitorTest >> setUp [
 ]
 
 { #category : 'tests' }
+FASTJavaExportVisitorTest >> testABareSemicolonBetweenTypeDeclarationsIsWrittenBack [
+	"JLS 7.6: a unit may write a bare `;` between the types it declares. It declares nothing,
+	and the only thing to do with it is write it back where it stood, so it survives a turn
+	through the exporter and the importer."
+
+	| unit |
+	unit := self unitFor: 'import a.B;
+;
+public final class C { }'.
+	self assert: unit emptyDeclarations size equals: 1.
+	self assert: (self unitFor: (FASTJavaExportVisitor new export: unit)) emptyDeclarations size equals: 1
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testADeclarationBuiltByHandWritesItsAnnotationsFirst [
 	"A declaration built by hand carries no positions, so there is no written order to
 	recover and the annotations go first, which is where Java writes them."

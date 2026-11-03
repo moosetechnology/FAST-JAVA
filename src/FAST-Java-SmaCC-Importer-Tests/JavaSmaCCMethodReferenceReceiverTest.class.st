@@ -22,6 +22,18 @@ JavaSmaCCMethodReferenceReceiverTest >> references [
 ]
 
 { #category : 'tests' }
+JavaSmaCCMethodReferenceReceiverTest >> testATypeIsAReceiverAndNotAVariableExpression [
+	"JLS 15.13: a method reference may name a type as what it reads the method from, so a
+	type is a receiver. It is not a variable expression: nothing assigns to a type, closes
+	it as a resource of a try, or writes it as an element of an annotation."
+
+	| receiver |
+	receiver := (fastModel allWithType: FASTJavaMethodReference) anyOne receiver.
+	self assert: (receiver isKindOf: FASTJavaTypeExpression).
+	self deny: (receiver isKindOf: FASTJavaVariableExpression)
+]
+
+{ #category : 'tests' }
 JavaSmaCCMethodReferenceReceiverTest >> testReceiverKind [
 	"JLS 15.13: the receiver of a method reference is any expression that may be one."
 

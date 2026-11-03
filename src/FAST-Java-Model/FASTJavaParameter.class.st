@@ -23,9 +23,11 @@ I represent a parameter of a method declaration
 | `javaArrayTypeNameOwner` | `FASTTExpression` | `baseType` | `FASTJavaArrayTypeExpression` | The variable expression owner (if possible)|
 | `javaAssignmentExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaAssignmentExpression` | The javaAssignmentExpression owner (if possible)|
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
+| `javaClassPropertyOwner` | `FASTTExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaOuterThisOwner` | `FASTTExpression` | `type` | `FASTJavaOuterThis` | The javaOuterThis owner (if possible)|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
@@ -51,10 +53,10 @@ I represent a parameter of a method declaration
 |---|
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `brackets` | `FASTJavaParameter` | `parameterOwner` | `FASTJavaDimension` | The bracket pairs written after my name, eg. the one of `char cbuf[]`|
+| `ellipsis` | `FASTJavaParameter` | `ellipsisOwner` | `FASTJavaDimension` | The ellipsis I write before my name, and the annotations written on it|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `type` | `FASTJavaParameter` | `javaParameterTypeOwner` | `FASTJavaTypeExpression` | The type of the parameter|
 | `variable` | `FASTJavaParameter` | `javaParameterVariableOwner` | `FASTJavaVariableExpression` | parameter variable|
-| `variableArguments` | `FASTJavaParameter` | `variableArgumentsOwner` | `FASTJavaDimension` | The ellipsis I write before my name, and the annotations written on it|
 
 
 ## Properties
@@ -63,7 +65,6 @@ I represent a parameter of a method declaration
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
-| `hasVariableArguments` | `Boolean` | false | Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)|
 | `name` | `String` | nil | |
 | `startPos` | `Number` | nil | |
 
@@ -75,11 +76,10 @@ Class {
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
 		'#brackets => FMMany type: #FASTJavaDimension opposite: #parameterOwner',
-		'#hasVariableArguments => FMProperty defaultValue: false',
+		'#ellipsis => FMOne type: #FASTJavaDimension opposite: #ellipsisOwner',
 		'#recordOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #components',
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaParameterTypeOwner',
-		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner',
-		'#variableArguments => FMOne type: #FASTJavaDimension opposite: #variableArgumentsOwner'
+		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -122,20 +122,21 @@ FASTJavaParameter >> brackets: anObject [
 ]
 
 { #category : 'accessing' }
-FASTJavaParameter >> hasVariableArguments [
+FASTJavaParameter >> ellipsis [
+	"Relation named: #ellipsis type: #FASTJavaDimension opposite: #ellipsisOwner"
 
-	<FMProperty: #hasVariableArguments type: #Boolean defaultValue: false>
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'>
-	^ hasVariableArguments ifNil: [ hasVariableArguments := false ]
+	<FMComment: 'The ellipsis I write before my name, and the annotations written on it'>
+	^ ellipsis
 ]
 
 { #category : 'accessing' }
-FASTJavaParameter >> hasVariableArguments: anObject [
+FASTJavaParameter >> ellipsis: anObject [
+
 	<ignoreForCoverage>
 	<generated>
-	hasVariableArguments := anObject
+	ellipsis := anObject
 ]
 
 { #category : 'testing' }
@@ -199,22 +200,4 @@ FASTJavaParameter >> variable: anObject [
 	<ignoreForCoverage>
 	<generated>
 	variable := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaParameter >> variableArguments [
-	"Relation named: #variableArguments type: #FASTJavaDimension opposite: #variableArgumentsOwner"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The ellipsis I write before my name, and the annotations written on it'>
-	^ variableArguments
-]
-
-{ #category : 'accessing' }
-FASTJavaParameter >> variableArguments: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	variableArguments := anObject
 ]

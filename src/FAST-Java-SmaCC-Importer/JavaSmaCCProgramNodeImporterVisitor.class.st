@@ -103,7 +103,8 @@ JavaSmaCCProgramNodeImporterVisitor >> addToCompilationUnit: aFASTJavaEntity [
 		^ currentFASTEntity addAnnotationInterfaceDeclaration: aFASTJavaEntity ].
 	aFASTJavaEntity isRecordDeclaration ifTrue: [ ^ currentFASTEntity addRecordDeclaration: aFASTJavaEntity ].
 	aFASTJavaEntity isMethodEntity ifTrue: [ ^ currentFASTEntity addMethodDeclaration: aFASTJavaEntity ].
-	aFASTJavaEntity isVarDeclStatement ifTrue: [ ^ currentFASTEntity addFieldDeclaration: aFASTJavaEntity ]
+	aFASTJavaEntity isVarDeclStatement ifTrue: [ ^ currentFASTEntity addFieldDeclaration: aFASTJavaEntity ].
+	aFASTJavaEntity isEmptyDeclaration ifTrue: [ ^ currentFASTEntity addEmptyDeclaration: aFASTJavaEntity ]
 ]
 
 { #category : 'initialization' }
@@ -1046,7 +1047,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitElementValuePair: anElementValuePair
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitEmptyDeclaration: anEmptyDeclaration [
-	currentFASTEntity := self addToModel: FASTJavaEmptyMethodDeclaration new.
+	currentFASTEntity := self addToModel: FASTJavaEmptyDeclaration new.
 	self setStartEndPos: anEmptyDeclaration.
 	^ currentFASTEntity
 ]
@@ -2244,8 +2245,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableArgumentParameter: aVariable
 	it makes, which is the dimension the ellipsis adds."
 
 	self visitParameter: aVariableArgumentParameter.
-	currentFASTEntity hasVariableArguments: true.
-	currentFASTEntity variableArguments: (self dimensionOf: aVariableArgumentParameter).
+	currentFASTEntity ellipsis: (self dimensionOf: aVariableArgumentParameter).
 	^ currentFASTEntity
 ]
 

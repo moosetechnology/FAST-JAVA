@@ -48,7 +48,6 @@ Class {
 		'javaThrowStatement',
 		'javaLabeledCaseStatement',
 		'javaDefaultCaseStatement',
-		'javaEmptyMethodDeclaration',
 		'javaArrayInitializer',
 		'javaClassDeclaration',
 		'javaModifier',
@@ -152,7 +151,8 @@ Class {
 		'javaProvidesDirective',
 		'javaDimension',
 		'tWithAnnotations',
-		'javaDimensionExpression'
+		'javaDimensionExpression',
+		'javaEmptyDeclaration'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -392,17 +392,19 @@ double d2 = 12.3d;
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaEmptyMethodDeclaration [
-	^ 'I reprensent an empty method declaration
-	
-ex.:
-void newMethod() {
-	new Patate() {
-		//The empty method declaration is ";" 
-		;
-		
+FASTJavaMetamodelGenerator >> commentForJavaEmptyDeclaration [
+	^ 'I am a bare `;` written where a class body expects a declaration, and I declare nothing.
+
+JLS 8.1.6 allows one wherever a member may be written, so the source keeps parsing and the
+compiler has nothing to do with me. I am held so that the source can be written back as it
+was; I write no name, no modifiers and no body, which is why I am not a method.
+
+```language=text
+class Blah {
+	void method() {
 	};
-}'
+}
+```'
 ]
 
 { #category : 'comments' }
@@ -1087,8 +1089,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaAnnotationElementDeclaration withTesting.
 	javaRecordDeclaration := self newClassNamed: #RecordDeclaration comment: self commentForJavaRecordDeclaration.
 	javaRecordDeclaration withTesting.
-	javaEmptyMethodDeclaration := self newClassNamed: #EmptyMethodDeclaration comment: self commentForJavaEmptyMethodDeclaration.
-	javaEmptyMethodDeclaration withTesting.
+	javaEmptyDeclaration := self newClassNamed: #EmptyDeclaration comment: self commentForJavaEmptyDeclaration.
+	javaEmptyDeclaration withTesting.
 	compilationUnit := self
 		                   newClassNamed: #CompilationUnit
 		                   comment: 'I represent a compilation unit, I can contain declarations for a package, imports, and types'.
@@ -1215,7 +1217,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaEnumDeclaration --|> #THasImmediateSource.
 	javaEnumDeclaration withPrecedenceOf: #THasImmediateSource.
 
-	javaEnumConstant --|> javaVariableExpression.
+	"JLS 8.9.1: a constant declares a name, writes arguments where the constructor takes
+	them and a class body where it overrides something. It is a declaration, not a name
+	used as a value."
+	javaEnumConstant --|> tNamedEntity.
 	javaEnumConstant --|> tWithDeclarations.
 	javaEnumConstant --|> tWithAnnotations.
 	javaEnumConstant --|> #TWithArguments.
@@ -1319,7 +1324,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaThrowStatement --|> tStatement.
 	javaLabeledCaseStatement --|> javaCaseStatement.
 	javaDefaultCaseStatement --|> javaCaseStatement.
-	javaEmptyMethodDeclaration --|> javaMethodEntity.
+	"JLS 8.1.6: a class body may write a bare `;`, which declares nothing at all. It is a
+	declaration of its own and not a method with everything a method writes."
+	javaEmptyDeclaration --|> tDeclaration.
 
 	javaArrayInitializer --|> tExpression.
 	javaArrayInitializer --|> tAnnotationElement.
@@ -1358,7 +1365,16 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaQualifiedTypeName --|> javaTypeName.
 
 	"types"
-	javaTypeExpression --|> javaVariableExpression.
+	"JLS 4: a type written in source is an expression in the tree and nothing more. Being a
+	variable expression would let it be assigned to, be a resource of a try and carry a
+	name of its own."
+	javaTypeExpression --|> tExpression.
+	"JLS 4: a type is written as a name, and a primitive type writes the keyword that
+	names it."
+	javaTypeExpression --|> tNamedEntity.
+	"JLS 15.13: a method reference may name a type as what it reads the method from,
+	as `String::length` does, so a type is a receiver."
+	javaTypeExpression --|> tReceiver.
 	"JLS 4.11: an annotation is written on a type wherever a type appears, which is not
 	where the declaration that writes the type writes its own modifiers"
 	javaTypeExpression --|> tWithAnnotations.
@@ -1502,8 +1518,6 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaNewExpression property: #isDiamond type: #Boolean defaultValue: false) comment:
 		'Whether the type instantiated writes the diamond rather than type arguments (JLS 15.9.1)'.
 
-	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
-		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 
 	(javaModuleDeclaration property: #isOpen type: #Boolean defaultValue: false) comment:
 		'Whether this module writes `open`, which opens every one of its packages to reflection (JLS 7.7)'.
@@ -1607,7 +1621,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaClassProperty property: #type) comment:
 		 'The type of the property')
 	<>-
-		((javaVariableExpression property: #javaClassPropertyOwner)
+		((tExpression property: #javaClassPropertyOwner)
 			 comment: 'The javaClassProperty owner (if possible)').
 
 	((javaUnaryExpression property: #expression) comment:
@@ -1629,7 +1643,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The javaArrayArrayAccess owner (if possible)').
 
 	((javaOuterThis property: #type) comment: 'The accessed type')
-	<>- ((javaVariableExpression property: #javaOuterThisOwner) comment:
+	<>- ((tExpression property: #javaOuterThisOwner) comment:
 			 'The javaOuterThis owner (if possible)').
 
 	((javaThrowStatement property: #expression) comment:
@@ -1995,6 +2009,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'My import declarations')
 	<>-* ((importDeclaration property: #compilationUnit) comment:
 			 'The compilation unit that owns me').
+	"JLS 7.6: a unit may write a bare `;` between the types it declares, which declares
+	nothing and is a declaration of its own kind."
+	((compilationUnit property: #emptyDeclarations) comment:
+		 'The bare semicolons I write between my declarations')
+	<>-* ((javaEmptyDeclaration property: #compilationUnit) comment:
+			 'The compilation unit that writes me').
 	((compilationUnit property: #classDeclarations) comment:
 		 'My class declarations')
 	<>-* ((javaClassDeclaration property: #compilationUnit) comment:
@@ -2057,9 +2077,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	"JLS 8.4.1: the annotations a variable arity parameter writes before its ellipsis are
 	written on the array type that ellipsis makes, which is the dimension it adds."
-	((javaParameterExpression property: #variableArguments) comment:
+	((javaParameterExpression property: #ellipsis) comment:
 		 'The ellipsis I write before my name, and the annotations written on it')
-	<>- ((javaDimension property: #variableArgumentsOwner) comment:
+	<>- ((javaDimension property: #ellipsisOwner) comment:
 			 'The parameter whose ellipsis I am').
 
 	"JLS 15.10.1: an array creation writes one pair of brackets per dimension, the leading

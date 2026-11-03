@@ -26,9 +26,11 @@ hello(MyClass.this)
 | `javaArrayTypeNameOwner` | `FASTTExpression` | `baseType` | `FASTJavaArrayTypeExpression` | The variable expression owner (if possible)|
 | `javaAssignmentExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaAssignmentExpression` | The javaAssignmentExpression owner (if possible)|
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
+| `javaClassPropertyOwner` | `FASTTExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaOuterThisOwner` | `FASTTExpression` | `type` | `FASTJavaOuterThis` | The javaOuterThis owner (if possible)|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
@@ -50,7 +52,7 @@ hello(MyClass.this)
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `type` | `FASTJavaOuterThis` | `javaOuterThisOwner` | `FASTJavaVariableExpression` | The accessed type|
+| `type` | `FASTJavaOuterThis` | `javaOuterThisOwner` | `FASTTExpression` | The accessed type|
 
 
 ## Properties
@@ -67,9 +69,6 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTReceiver + FASTTExpression',
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
-	#instVars : [
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner'
-	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -94,12 +93,13 @@ FASTJavaOuterThis >> isOuterThis [
 
 { #category : 'accessing' }
 FASTJavaOuterThis >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaOuterThisOwner"
+	"Relation named: #type type: #FASTTExpression opposite: #javaOuterThisOwner"
 
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The accessed type'>
-	^ type
+	<FMProperty: #type type: #FASTTExpression opposite: #javaOuterThisOwner>
+	^ self attributeAt: #type ifAbsent: [ nil ]
 ]
 
 { #category : 'accessing' }
@@ -107,5 +107,12 @@ FASTJavaOuterThis >> type: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	type := anObject
+	(self attributeAt: #type ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self type.
+		self attributeAt: #type put: anObject.
+		otherSide javaOuterThisOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #type put: anObject.
+		anObject javaOuterThisOwner: self ]
 ]

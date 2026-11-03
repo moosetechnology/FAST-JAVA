@@ -269,11 +269,11 @@ FASTJavaTEntityCreator >> newDoubleTypeExpression [
 ]
 
 { #category : 'entity creation' }
-FASTJavaTEntityCreator >> newEmptyMethodDeclaration [
+FASTJavaTEntityCreator >> newEmptyDeclaration [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FASTJavaEmptyMethodDeclaration new
+	^ self add: FASTJavaEmptyDeclaration new
 ]
 
 { #category : 'entity creation' }

@@ -184,13 +184,13 @@ FASTJavaVisitor >> visitFASTJavaElsePartStatement: aFASTJavaElsePartStatement [
 ]
 
 { #category : 'generated' }
-FASTJavaVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
-	^ self visitFASTJavaMethodEntity: aFASTJavaEmptyMethodDeclaration
+FASTJavaVisitor >> visitFASTJavaEmptyDeclaration: aFASTJavaEmptyDeclaration [
+	^ self visitFASTTEntity: aFASTJavaEmptyDeclaration
 ]
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
-	^ self visitFASTTVariableExpression: aFASTJavaEnumConstant
+	^ self visitFASTTNamedEntity: aFASTJavaEnumConstant
 ]
 
 { #category : 'generated' }
@@ -527,7 +527,7 @@ FASTJavaVisitor >> visitFASTJavaTryPartStatement: aFASTJavaTryPartStatement [
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaTypeExpression: aFASTJavaTypeExpression [
-	^ self visitFASTTVariableExpression: aFASTJavaTypeExpression
+	^ self visitFASTTExpression: aFASTJavaTypeExpression
 ]
 
 { #category : 'generated' }

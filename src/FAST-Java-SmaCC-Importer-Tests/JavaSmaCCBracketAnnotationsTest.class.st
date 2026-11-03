@@ -101,9 +101,8 @@ JavaSmaCCBracketAnnotationsTest >> testTheEllipsisOfAVariableArityParameterKeeps
 
 	| parameter |
 	parameter := (fastModel allWithType: FASTJavaParameter) detect: [ :each | each hasVariableArguments ].
-
-	self assert: parameter variableArguments isNotNil.
-	self assert: (parameter variableArguments annotations collect: [ :modifier | modifier name ]) asArray equals: #( 'A' ).
+	self assert: parameter ellipsis isNotNil.
+	self assert: (parameter ellipsis annotations collect: [ :modifier | modifier name ] as: Array) equals: #( 'A' ).
 	self assert: parameter modifiers isEmpty.
 	self assert: parameter brackets isEmpty
 ]

@@ -44,6 +44,17 @@ JavaSmaCCEnumDeclarationTest >> testConstantNameInEnum [
 ]
 
 { #category : 'tests' }
+JavaSmaCCEnumDeclarationTest >> testEnumConstantIsNotAVariableExpression [
+	"JLS 8.9.1: a constant declares a name, writes arguments and may write a class body. It
+	is a declaration, not a name used as a value."
+
+	| constant |
+	constant := (fastModel allWithType: FASTJavaEnumConstant) anyOne.
+	self deny: (constant isKindOf: FASTJavaVariableExpression).
+	self assert: constant name isNotNil
+]
+
+{ #category : 'tests' }
 JavaSmaCCEnumDeclarationTest >> testEnumDeclarationName [
 	self assert: ( fastModel allWithType: FASTJavaEnumDeclaration) anyOne name equals: 'MyEnum' 
 ]

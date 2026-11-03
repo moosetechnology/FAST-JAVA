@@ -5,6 +5,7 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `parentEnum` | `FASTJavaEnumConstant` | `constants` | `FASTJavaEnumDeclaration` | The enum type that contains me|
 
 ### Children
@@ -15,13 +16,21 @@
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `name` | `String` | nil | |
+| `startPos` | `Number` | nil | |
 
 "
 Class {
 	#name : 'FASTJavaEnumConstant',
-	#superclass : 'FASTJavaVariableExpression',
-	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithDeclarations + FASTTWithArguments',
-	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
+	#superclass : 'FASTJavaEntity',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithDeclarations + FASTTNamedEntity + FASTTWithArguments',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithDeclarations classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#parentEnum => FMOne type: #FASTJavaEnumDeclaration opposite: #constants'
 	],
@@ -34,7 +43,7 @@ Class {
 FASTJavaEnumConstant class >> annotation [
 
 	<ignoreForCoverage>
-	<FMClass: #EnumConstant super: #FASTJavaVariableExpression>
+	<FMClass: #EnumConstant super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
 ]

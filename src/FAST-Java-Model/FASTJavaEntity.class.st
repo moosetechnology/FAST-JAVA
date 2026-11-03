@@ -312,7 +312,7 @@ FASTJavaEntity >> isDoubleTypeExpression [
 ]
 
 { #category : 'testing' }
-FASTJavaEntity >> isEmptyMethodDeclaration [
+FASTJavaEntity >> isEmptyDeclaration [
 
 	<ignoreForCoverage>
 	<generated>

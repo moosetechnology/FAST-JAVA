@@ -56,7 +56,8 @@ FASTJavaExportVisitor >> declarationsOf: aFASTJavaCompilationUnit do: aBlock [
 		addAll: aFASTJavaCompilationUnit enumDeclarations;
 		addAll: aFASTJavaCompilationUnit recordDeclarations;
 		addAll: aFASTJavaCompilationUnit methodDeclarations;
-		addAll: aFASTJavaCompilationUnit fieldDeclarations.
+		addAll: aFASTJavaCompilationUnit fieldDeclarations;
+		addAll: aFASTJavaCompilationUnit emptyDeclarations.
 
 	(declarations allSatisfy: [ :declaration | declaration startPos isNotNil ]) ifTrue: [
 		declarations sort: [ :one :another | one startPos <= another startPos ] ].
@@ -617,14 +618,9 @@ FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 ]
 
 { #category : 'visiting' }
-FASTJavaExportVisitor >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
-	"An emptyMethodDeclaration is a semicolon where a MethodDeclaration is expected
-	eg: In this example, the class has a MethodDeclaration and an EmptyMethodDeclaration
-	`class Blah {
-	   void method() {
-	   };
-	}`
-	 This is assumed probably a mistake of the but we keep it just in case"
+FASTJavaExportVisitor >> visitFASTJavaEmptyDeclaration: aFASTJavaEmptyDeclaration [
+	"JLS 8.1.6: a class body may write a bare `;` where a member would go. It declares
+	nothing, and writing it back is all there is to do with it."
 
 	self endOfStatement
 ]
@@ -1247,26 +1243,22 @@ FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	self checkForComments: aFASTJavaParameter andDo: [
 		"JLS 8.4.1: the modifiers a parameter writes come before its type."
 		self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaParameter).
-		aFASTJavaParameter type 
+		aFASTJavaParameter type
 			ifNotNil: [ :parameterType |
 				"Lambda parameters may be typeless"
 				parameterType accept: self.
-				aFASTJavaParameter hasVariableArguments ifTrue: [
+				aFASTJavaParameter ellipsis ifNotNil: [ :ellipsis |
 					"JLS 8.4.1: the annotations written on the ellipsis stand between the
 					type and it, the dimension it adds being what they are written on."
-					aFASTJavaParameter variableArguments ifNotNil: [ :ellipsis |
-						ellipsis annotations ifNotEmpty: [ :annotations |
-							self space.
-							self visitFASTJavaModifiersInline: annotations ] ].
-					self unindented: '...'
-				].
-				self space
-			].
+					ellipsis annotations ifNotEmpty: [ :annotations |
+						self space.
+						self visitFASTJavaModifiersInline: annotations ].
+					self unindented: '...' ].
+				self space ].
 		aFASTJavaParameter variable accept: self.
 		"JLS 10.2: the brackets written after a name are written back there, each with the
 		annotations it carries."
-		aFASTJavaParameter brackets do: [ :bracket | bracket accept: self ]
-	]
+		aFASTJavaParameter brackets do: [ :bracket | bracket accept: self ] ]
 ]
 
 { #category : 'visiting' }

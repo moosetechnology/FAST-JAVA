@@ -12,10 +12,10 @@ void m(Object @Ann ... args);
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `ellipsisOwner` | `FASTJavaDimension` | `ellipsis` | `FASTJavaParameter` | The parameter whose ellipsis I am|
 | `methodOwner` | `FASTJavaDimension` | `brackets` | `FASTJavaMethodEntity` | The method that writes me after its parameter list|
 | `newArrayOwner` | `FASTJavaDimension` | `brackets` | `FASTJavaNewArray` | The array creation that writes me|
 | `parameterOwner` | `FASTJavaDimension` | `brackets` | `FASTJavaParameter` | The parameter that writes me after its name|
-| `variableArgumentsOwner` | `FASTJavaDimension` | `variableArguments` | `FASTJavaParameter` | The parameter whose ellipsis I am|
 | `variableDeclaratorOwner` | `FASTJavaDimension` | `brackets` | `FASTJavaVariableDeclarator` | The declarator that writes me after its name|
 
 ### Children
@@ -39,10 +39,10 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTTEntity',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTEntity classTrait',
 	#instVars : [
+		'#ellipsisOwner => FMOne type: #FASTJavaParameter opposite: #ellipsis',
 		'#methodOwner => FMOne type: #FASTJavaMethodEntity opposite: #brackets',
 		'#newArrayOwner => FMOne type: #FASTJavaNewArray opposite: #brackets',
 		'#parameterOwner => FMOne type: #FASTJavaParameter opposite: #brackets',
-		'#variableArgumentsOwner => FMOne type: #FASTJavaParameter opposite: #variableArguments',
 		'#variableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #brackets'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -57,6 +57,25 @@ FASTJavaDimension class >> annotation [
 	<FMClass: #Dimension super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaDimension >> ellipsisOwner [
+	"Relation named: #ellipsisOwner type: #FASTJavaParameter opposite: #ellipsis"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The parameter whose ellipsis I am'>
+	<container>
+	^ ellipsisOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaDimension >> ellipsisOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	ellipsisOwner := anObject
 ]
 
 { #category : 'testing' }
@@ -122,25 +141,6 @@ FASTJavaDimension >> parameterOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	parameterOwner := anObject
-]
-
-{ #category : 'accessing' }
-FASTJavaDimension >> variableArgumentsOwner [
-	"Relation named: #variableArgumentsOwner type: #FASTJavaParameter opposite: #variableArguments"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The parameter whose ellipsis I am'>
-	<container>
-	^ variableArgumentsOwner
-]
-
-{ #category : 'accessing' }
-FASTJavaDimension >> variableArgumentsOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	variableArgumentsOwner := anObject
 ]
 
 { #category : 'accessing' }
