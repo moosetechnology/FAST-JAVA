@@ -213,11 +213,11 @@ FASTJavaTestNodeBuilder >> newExpression: className args: args [
 ]
 
 { #category : 'api - building' }
-FASTJavaTestNodeBuilder >> newStringArrayExpression: dimensions [
+FASTJavaTestNodeBuilder >> newStringArrayExpression: brackets [
 
 	^FASTJavaNewArray new
 		type: (FASTJavaClassTypeExpression new typeName: (self type: 'String'));
-		dimensions: dimensions;
+		brackets: brackets;
 		yourself
 ]
 

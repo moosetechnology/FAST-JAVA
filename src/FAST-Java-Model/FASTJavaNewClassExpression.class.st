@@ -20,7 +20,6 @@ new SecureAsyncCallback<Void>() {
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 
 
@@ -29,8 +28,8 @@ new SecureAsyncCallback<Void>() {
 Class {
 	#name : 'FASTJavaNewClassExpression',
 	#superclass : 'FASTJavaNewExpression',
-	#traits : 'FASTJavaTWithDeclarations + FASTTWithArguments',
-	#classTraits : 'FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
+	#traits : 'FASTJavaTWithDeclarations',
+	#classTraits : 'FASTJavaTWithDeclarations classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'

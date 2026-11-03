@@ -8,7 +8,7 @@ I represent the 'catch' part of the TryCatch Statement
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementors` | `FASTJavaForStatement` | I am an incrementor of the for|
-| `forIninitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
+| `forInitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
@@ -19,10 +19,11 @@ I represent the 'catch' part of the TryCatch Statement
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `body` | `FASTJavaCatchPartStatement` | `javaCatchPartStatementOwner` | `FASTJavaStatementBlock` | The body of the catch part|
-| `catchedTypes` | `FASTJavaCatchPartStatement` | `catchOwner` | `FASTJavaTypeExpression` | The types (exception) that are catched|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
-| `parameter` | `FASTJavaCatchPartStatement` | `javaCatchParameterOwnler` | `FASTJavaVariableExpression` | The parameter of the catch part|
+| `caughtTypes` | `FASTJavaCatchPartStatement` | `catchOwner` | `FASTJavaTypeExpression` | The exception types I catch|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
+| `parameter` | `FASTJavaCatchPartStatement` | `javaCatchParameterOwner` | `FASTJavaVariableExpression` | The parameter of the catch part|
 
 
 ## Properties
@@ -37,12 +38,12 @@ I represent the 'catch' part of the TryCatch Statement
 Class {
 	#name : 'FASTJavaCatchPartStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTTStatement',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTStatement classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithModifiers + FASTTStatement',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTStatement classTrait',
 	#instVars : [
 		'#body => FMOne type: #FASTJavaStatementBlock opposite: #javaCatchPartStatementOwner',
-		'#catchedTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
-		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler',
+		'#caughtTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',
+		'#parameter => FMOne type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwner',
 		'#tryOwner => FMOne type: #FASTJavaTryCatchStatement opposite: #catches'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -60,11 +61,11 @@ FASTJavaCatchPartStatement class >> annotation [
 ]
 
 { #category : 'adding' }
-FASTJavaCatchPartStatement >> addCatchedType: anObject [
+FASTJavaCatchPartStatement >> addCaughtType: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self catchedTypes add: anObject
+	^ self caughtTypes add: anObject
 ]
 
 { #category : 'accessing' }
@@ -86,22 +87,21 @@ FASTJavaCatchPartStatement >> body: anObject [
 ]
 
 { #category : 'accessing' }
-FASTJavaCatchPartStatement >> catchedTypes [
-	"Relation named: #catchedTypes type: #FASTJavaTypeExpression opposite: #catchOwner"
+FASTJavaCatchPartStatement >> caughtTypes [
+	"Relation named: #caughtTypes type: #FASTJavaTypeExpression opposite: #catchOwner"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The types (exception) that are catched'>
-	<derived>
-	^ catchedTypes
+	<FMComment: 'The exception types I catch'>
+	^ caughtTypes
 ]
 
 { #category : 'accessing' }
-FASTJavaCatchPartStatement >> catchedTypes: anObject [
+FASTJavaCatchPartStatement >> caughtTypes: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	catchedTypes value: anObject
+	caughtTypes value: anObject
 ]
 
 { #category : 'testing' }
@@ -114,7 +114,7 @@ FASTJavaCatchPartStatement >> isCatchPartStatement [
 
 { #category : 'accessing' }
 FASTJavaCatchPartStatement >> parameter [
-	"Relation named: #parameter type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwnler"
+	"Relation named: #parameter type: #FASTJavaVariableExpression opposite: #javaCatchParameterOwner"
 
 	<ignoreForCoverage>
 	<generated>

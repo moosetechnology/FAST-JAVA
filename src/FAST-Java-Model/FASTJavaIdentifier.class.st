@@ -7,7 +7,7 @@ A FASTJavaIdentifier is an identifier in a Java program
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | `fieldname` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
+| `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | `fieldName` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
 
 
@@ -19,7 +19,7 @@ Class {
 	#traits : 'FASTJavaTReceiver',
 	#classTraits : 'FASTJavaTReceiver classTrait',
 	#instVars : [
-		'#javaForEachStatementFieldNameOwner => FMOne type: #FASTJavaForEachStatement opposite: #fieldname'
+		'#javaForEachStatementFieldNameOwner => FMOne type: #FASTJavaForEachStatement opposite: #fieldName'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -45,7 +45,7 @@ FASTJavaIdentifier >> isIdentifier [
 
 { #category : 'accessing' }
 FASTJavaIdentifier >> javaForEachStatementFieldNameOwner [
-	"Relation named: #javaForEachStatementFieldNameOwner type: #FASTJavaForEachStatement opposite: #fieldname"
+	"Relation named: #javaForEachStatementFieldNameOwner type: #FASTJavaForEachStatement opposite: #fieldName"
 
 	<ignoreForCoverage>
 	<generated>

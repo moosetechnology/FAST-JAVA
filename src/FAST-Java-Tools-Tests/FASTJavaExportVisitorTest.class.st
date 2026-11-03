@@ -65,6 +65,28 @@ FASTJavaExportVisitorTest >> setUp [
 	builder := FASTJavaTestNodeBuilder new
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testADeclarationBuiltByHandWritesItsAnnotationsFirst [
+	"A declaration built by hand carries no positions, so there is no written order to
+	recover and the annotations go first, which is where Java writes them."
+
+	| node |
+	node := builder class: 'Blah'.
+	node addModifier: (builder modifier: 'public').
+	node addAnnotation: (builder annotation: 'Test').
+	self assert: ((FASTJavaExportVisitor new export: node) beginsWith: '@Test')
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testADeclarationWritesItsKeywordsAndAnnotationsInSourceOrder [
+	"JLS 8.1.1: a declaration may write a keyword before an annotation. The model holds the
+	two apart, so the positions they carry are what puts the run back in order."
+
+	| unit |
+	unit := self unitFor: 'class C { public @Dep final void m() {} }'.
+	self assert: ((FASTJavaExportVisitor new export: unit) includesSubstring: 'public @Dep final void m')
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTAssignmentInMessageSend [
 
@@ -534,7 +556,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotatedMetho
 FASTJavaExportVisitorTest >> testVisitFASTJavaClassDeclarationWithAnnotation [
 	| node |
 	node := builder class: 'Blah'.
-	node addModifier: (builder annotation: 'Test').
+	node addAnnotation: (builder annotation: 'Test').
 	self export: node equals: '@Test
 class Blah {
 }

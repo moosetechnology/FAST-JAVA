@@ -351,7 +351,7 @@ FASTJavaVisitor >> visitFASTJavaModuleDirective: aFASTJavaModuleDirective [
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
-	^ self visitFASTJavaNewExpression: aFASTJavaNewArray
+	^ self visitFASTTExpression: aFASTJavaNewArray
 ]
 
 { #category : 'generated' }

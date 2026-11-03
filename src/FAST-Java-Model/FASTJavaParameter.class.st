@@ -49,9 +49,10 @@ I represent a parameter of a method declaration
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `brackets` | `FASTJavaParameter` | `parameterOwner` | `FASTJavaDimension` | The bracket pairs written after my name, eg. the one of `char cbuf[]`|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
-| `type` | `FASTJavaParameter` | `javaParameterTypeOwner` | `FASTJavaVariableExpression` | The type of the parameter|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
+| `type` | `FASTJavaParameter` | `javaParameterTypeOwner` | `FASTJavaTypeExpression` | The type of the parameter|
 | `variable` | `FASTJavaParameter` | `javaParameterVariableOwner` | `FASTJavaVariableExpression` | parameter variable|
 | `variableArguments` | `FASTJavaParameter` | `variableArgumentsOwner` | `FASTJavaDimension` | The ellipsis I write before my name, and the annotations written on it|
 
@@ -70,13 +71,13 @@ I represent a parameter of a method declaration
 Class {
 	#name : 'FASTJavaParameter',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTTExpression + FASTTVariableEntity',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTVariableEntity classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithModifiers + FASTTExpression + FASTTVariableEntity',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTExpression classTrait + FASTTVariableEntity classTrait',
 	#instVars : [
 		'#brackets => FMMany type: #FASTJavaDimension opposite: #parameterOwner',
 		'#hasVariableArguments => FMProperty defaultValue: false',
 		'#recordOwner => FMOne type: #FASTJavaRecordDeclaration opposite: #components',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner',
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaParameterTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaParameterVariableOwner',
 		'#variableArguments => FMOne type: #FASTJavaDimension opposite: #variableArgumentsOwner'
 	],
@@ -166,7 +167,7 @@ FASTJavaParameter >> recordOwner: anObject [
 
 { #category : 'accessing' }
 FASTJavaParameter >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaParameterTypeOwner"
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaParameterTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>

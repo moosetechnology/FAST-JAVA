@@ -13,7 +13,7 @@ for(Patate p : list) {
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementors` | `FASTJavaForStatement` | I am an incrementor of the for|
-| `forIninitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
+| `forInitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
@@ -23,10 +23,11 @@ for(Patate p : list) {
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `body` | `FASTTLoopStatement` | `parentLoopStatement` | `FASTTStatement` | The body of the loop|
-| `fieldname` | `FASTJavaForEachStatement` | `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | The identifier of the created local variable|
+| `fieldName` | `FASTJavaForEachStatement` | `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | The identifier of the created local variable|
 | `list` | `FASTJavaForEachStatement` | `javaForEachStatementOwner` | `FASTTExpression` | The list that the for-each statement iterates over|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `type` | `FASTJavaForEachStatement` | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | The type of the created local variable|
 
 
@@ -42,10 +43,10 @@ for(Patate p : list) {
 Class {
 	#name : 'FASTJavaForEachStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTTLoopStatement + FASTTStatement',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTLoopStatement classTrait + FASTTStatement classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithModifiers + FASTTLoopStatement + FASTTStatement',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTLoopStatement classTrait + FASTTStatement classTrait',
 	#instVars : [
-		'#fieldname => FMOne type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner',
+		'#fieldName => FMOne type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner',
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -63,21 +64,21 @@ FASTJavaForEachStatement class >> annotation [
 ]
 
 { #category : 'accessing' }
-FASTJavaForEachStatement >> fieldname [
-	"Relation named: #fieldname type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner"
+FASTJavaForEachStatement >> fieldName [
+	"Relation named: #fieldName type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner"
 
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The identifier of the created local variable'>
-	^ fieldname
+	^ fieldName
 ]
 
 { #category : 'accessing' }
-FASTJavaForEachStatement >> fieldname: anObject [
+FASTJavaForEachStatement >> fieldName: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	fieldname := anObject
+	fieldName := anObject
 ]
 
 { #category : 'testing' }

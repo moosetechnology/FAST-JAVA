@@ -16,7 +16,7 @@ JavaSmaCCAnnotationWithNamedElementsTest >> javaClass [
 { #category : 'tests' }
 JavaSmaCCAnnotationWithNamedElementsTest >> testAnnotatedEntity [
 	self
-		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne javaModifierOwner class
+		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne javaAnnotationOwner class
 		equals: FASTJavaMethodEntity
 ]
 

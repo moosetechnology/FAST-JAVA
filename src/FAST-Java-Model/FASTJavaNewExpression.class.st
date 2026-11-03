@@ -52,7 +52,7 @@ new Patate()
 |---|
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
-| `type` | `FASTJavaNewExpression` | `javaNewExpressionOwner` | `FASTJavaVariableExpression` | The type of the array|
+| `type` | `FASTJavaNewExpression` | `javaNewExpressionTypeOwner` | `FASTJavaTypeExpression` | The type I instantiate|
 | `typeArguments` | `FASTJavaNewExpression` | `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after `new`, eg. the String of `new <String>C()`|
 
 
@@ -73,7 +73,7 @@ Class {
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#isDiamond => FMProperty defaultValue: false',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner',
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeOwner',
 		'#typeArguments => FMMany type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeArgumentOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -125,11 +125,11 @@ FASTJavaNewExpression >> isNewExpression [
 
 { #category : 'accessing' }
 FASTJavaNewExpression >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner"
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type of the array'>
+	<FMComment: 'The type I instantiate'>
 	^ type
 ]
 

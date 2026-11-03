@@ -39,16 +39,16 @@ JavaSmaCCAnnotationInterfaceTest >> testAnnotationInterfaceIsACompilationUnitDec
 
 { #category : 'tests' }
 JavaSmaCCAnnotationInterfaceTest >> testAnnotationInterfaceModifiers [
+	"JLS 9.6: an annotation interface writes keywords and annotations before `@interface`,
+	and the model holds the keywords apart from the annotations."
 
-	| modifiers |
-	modifiers := self authorAnnotationInterface modifiers.
+	| declaration |
+	declaration := self authorAnnotationInterface.
 	self
-		assertCollection:
-		(modifiers select: [ :modifier | modifier isModifier ] thenCollect: [ :modifier | modifier token ])
+		assertCollection: (declaration modifiers collect: [ :modifier | modifier token ] as: OrderedCollection)
 		equals: #( 'public' ) asOrderedCollection.
 	self
-		assertCollection:
-		(modifiers select: [ :modifier | modifier isAnnotation ] thenCollect: [ :annotation | annotation name ])
+		assertCollection: (declaration annotations collect: [ :annotation | annotation name ] as: OrderedCollection)
 		equals: #( 'Retention' ) asOrderedCollection
 ]
 
@@ -58,7 +58,7 @@ JavaSmaCCAnnotationInterfaceTest >> testAnnotationOnAnnotationInterfaceReadsItsE
 	name outside one, and an annotation interface is a type declaration."
 
 	| annotation |
-	annotation := self authorAnnotationInterface modifiers detect: [ :modifier | modifier isAnnotation ].
+	annotation := self authorAnnotationInterface annotations anyOne.
 	self assert: annotation elements anyOne class equals: FASTJavaClassProperty
 ]
 

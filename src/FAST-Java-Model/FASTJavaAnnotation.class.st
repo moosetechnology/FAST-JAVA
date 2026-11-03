@@ -15,7 +15,6 @@ example:
 | `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaAnnotationOwner` | `FASTJavaAnnotation` | `annotations` | `FASTJavaTWithAnnotations` | The element I am written on|
-| `javaModifierOwner` | `FASTJavaTModifier` | `modifiers` | `FASTJavaTWithModifiers` | The owner of the modifier|
 | `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 ### Children
@@ -38,8 +37,8 @@ example:
 Class {
 	#name : 'FASTJavaAnnotation',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAnnotationElement + FASTJavaTModifier + FASTJavaTWithQualifiedName + FASTTNamedEntity',
-	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTModifier classTrait + FASTJavaTWithQualifiedName classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTAnnotationElement + FASTJavaTWithQualifiedName + FASTTNamedEntity',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTWithQualifiedName classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation',
 		'#javaAnnotationOwner => FMOne type: #FASTJavaTWithAnnotations opposite: #annotations'

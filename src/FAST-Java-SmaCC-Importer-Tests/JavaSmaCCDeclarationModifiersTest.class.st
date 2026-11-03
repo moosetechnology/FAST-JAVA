@@ -36,7 +36,7 @@ JavaSmaCCDeclarationModifiersTest >> javaClass [
 { #category : 'resources' }
 JavaSmaCCDeclarationModifiersTest >> modifiersOf: aFASTJavaEntity [
 
-	^ aFASTJavaEntity modifiers asOrderedCollection
+	^ (self writtenModifiersOf: aFASTJavaEntity) asOrderedCollection
 ]
 
 { #category : 'tests' }

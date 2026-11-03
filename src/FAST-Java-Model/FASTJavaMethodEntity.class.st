@@ -14,13 +14,14 @@ Represents a Java method
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `brackets` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaDimension` | The bracket pairs written after my parameter list, eg. the one of `int[] values() []`|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `parameters` | `FASTTWithParameters` | `parameterOwner` | `FASTTVariableEntity` | My parameters|
 | `receiver` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaReceiverParameter` | The receiver parameter I write|
 | `statementBlock` | `FASTTWithStatements` | `fastBehaviouralParent` | `FASTTStatementBlock` | Statements block of the behavioural entity|
 | `throws` | `FASTJavaMethodEntity` | `javaMethodThrowsOwner` | `FASTJavaClassTypeExpression` | The list of throws exception|
-| `type` | `FASTJavaMethodEntity` | `javaMethodTypeOwner` | `FASTJavaVariableExpression` | The type of the method|
+| `type` | `FASTJavaMethodEntity` | `javaMethodTypeOwner` | `FASTJavaTypeExpression` | The type of the method|
 | `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
 ### Other
@@ -43,14 +44,14 @@ Represents a Java method
 Class {
 	#name : 'FASTJavaMethodEntity',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTDeclaration + FASTJavaTWithModifiers + FASTJavaTWithTypeParameters + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithModifiers classTrait + FASTJavaTWithTypeParameters classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTWithAnnotations + FASTJavaTWithModifiers + FASTJavaTWithTypeParameters + FASTTNamedBehaviouralEntity + FamixTHasImmediateSource',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTJavaTWithTypeParameters classTrait + FASTTNamedBehaviouralEntity classTrait + FamixTHasImmediateSource classTrait',
 	#instVars : [
 		'#brackets => FMMany type: #FASTJavaDimension opposite: #methodOwner',
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #methodDeclarations',
 		'#receiver => FMOne type: #FASTJavaReceiverParameter opposite: #methodOwner',
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaMethodTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -166,7 +167,7 @@ FASTJavaMethodEntity >> throws: anObject [
 
 { #category : 'accessing' }
 FASTJavaMethodEntity >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner"
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaMethodTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>

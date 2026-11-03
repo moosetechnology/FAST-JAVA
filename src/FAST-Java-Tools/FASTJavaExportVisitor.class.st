@@ -207,7 +207,7 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotationElementDeclaration: aFASTJavaAnn
 
 	self checkForComments: aFASTJavaAnnotationElementDeclaration andDo: [
 			self indented: ''.
-			self visitFASTJavaModifiers: aFASTJavaAnnotationElementDeclaration modifiers.
+			self visitFASTJavaModifiers: (self writtenModifiersOf: aFASTJavaAnnotationElementDeclaration).
 			aFASTJavaAnnotationElementDeclaration type accept: self.
 			self space.
 			self unindented: aFASTJavaAnnotationElementDeclaration name.
@@ -226,7 +226,7 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotationElementDeclaration: aFASTJavaAnn
 FASTJavaExportVisitor >> visitFASTJavaAnnotationInterfaceDeclaration: aFASTJavaAnnotationInterfaceDeclaration [
 
 	self checkForComments: aFASTJavaAnnotationInterfaceDeclaration andDo: [
-			self visitFASTJavaModifiers: aFASTJavaAnnotationInterfaceDeclaration modifiers.
+			self visitFASTJavaModifiers: (self writtenModifiersOf: aFASTJavaAnnotationInterfaceDeclaration).
 			self unindented: '@interface '.
 			self unindented: aFASTJavaAnnotationInterfaceDeclaration name.
 
@@ -423,9 +423,9 @@ FASTJavaExportVisitor >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStat
 
 	self checkForComments: aFASTJavaCatchPartStatement andDo: [ 
 		self indented: 'catch ('.
-		self visitFASTJavaModifiersInline: aFASTJavaCatchPartStatement modifiers.
+		self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaCatchPartStatement).
 
-		aFASTJavaCatchPartStatement catchedTypes do: [ :catchType | catchType accept: self ]
+		aFASTJavaCatchPartStatement caughtTypes do: [ :catchType | catchType accept: self ]
 			separatedBy: [ self unindented: ' | ' ].
 		self space.
 		aFASTJavaCatchPartStatement parameter accept: self.
@@ -457,7 +457,7 @@ FASTJavaExportVisitor >> visitFASTJavaCharacterLiteral: aFASTJavaCharacterLitera
 FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
 
 	self checkForComments: aFASTJavaClassDeclaration andDo: [
-		self visitFASTJavaModifiers: aFASTJavaClassDeclaration modifiers.
+		self visitFASTJavaModifiers: (self writtenModifiersOf: aFASTJavaClassDeclaration).
 		self unindented: 'class '.
 		self unindented: aFASTJavaClassDeclaration name.
 
@@ -649,7 +649,7 @@ FASTJavaExportVisitor >> visitFASTJavaEnumDeclaration: aFASTJavaEnumDeclaration 
 	source wrote one. The comma JLS 8.9 allows after the last constant is kept likewise."
 
 	self checkForComments: aFASTJavaEnumDeclaration andDo: [
-		self visitFASTJavaModifiers: aFASTJavaEnumDeclaration modifiers.
+		self visitFASTJavaModifiers: (self writtenModifiersOf: aFASTJavaEnumDeclaration).
 		self
 			unindented: 'enum ' ;
 			unindented: aFASTJavaEnumDeclaration name.
@@ -739,10 +739,10 @@ FASTJavaExportVisitor >> visitFASTJavaFloatTypeExpression: aFASTJavaFloatTypeExp
 FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatement [
 	self checkForComments: aFASTJavaForEachStatement andDo: [
 		self indented: 'for ('.
-		self visitFASTJavaModifiersInline: aFASTJavaForEachStatement modifiers.
+		self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaForEachStatement).
 		aFASTJavaForEachStatement type accept: self.
 		self space.
-		aFASTJavaForEachStatement fieldname accept: self.
+		aFASTJavaForEachStatement fieldName accept: self.
 		self unindented: ' : '.
 		aFASTJavaForEachStatement list accept: self.
 		self unindented: ') '.
@@ -750,7 +750,6 @@ FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatemen
 		self visitFASTJavaBlockOrStatement: aFASTJavaForEachStatement body.
 		self unindent.
 ]
-
 ]
 
 { #category : 'visiting statement' }
@@ -898,7 +897,7 @@ FASTJavaExportVisitor >> visitFASTJavaIntegerLiteral: aFASTJavaIntegerLiteral [
 FASTJavaExportVisitor >> visitFASTJavaInterfaceDeclaration: aFASTJavaInterfaceDeclaration [
 
 	self checkForComments: aFASTJavaInterfaceDeclaration andDo: [
-		self visitFASTJavaModifiers: aFASTJavaInterfaceDeclaration modifiers.
+		self visitFASTJavaModifiers: (self writtenModifiersOf: aFASTJavaInterfaceDeclaration).
 		self unindented: 'interface '.
 		self unindented: aFASTJavaInterfaceDeclaration name.
 
@@ -981,7 +980,7 @@ FASTJavaExportVisitor >> visitFASTJavaMatchAllPattern: aFASTJavaMatchAllPattern 
 FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self checkForComments: aFASTJavaMethodEntity andDo: [
 		self indented: ''.
-		self visitFASTJavaModifiers: aFASTJavaMethodEntity modifiers.
+		self visitFASTJavaModifiers: (self writtenModifiersOf: aFASTJavaMethodEntity).
 
 		aFASTJavaMethodEntity typeParameters ifNotEmpty: [ :typeParameters |
 			self unindented: $<.
@@ -1159,7 +1158,7 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 	self checkForComments: aFASTJavaNewArray andDo: [
 		self unindented: 'new '.
 		aFASTJavaNewArray type accept: self.
-		aFASTJavaNewArray dimensions do: [ :dimension | dimension accept: self ].
+		aFASTJavaNewArray brackets do: [ :dimension | dimension accept: self ].
 		aFASTJavaNewArray initializer ifNotNil: [ :initializer |
 			self unindented: ' '.
 			initializer accept: self ] ]
@@ -1247,7 +1246,7 @@ FASTJavaExportVisitor >> visitFASTJavaPackageDeclaration: aFASTJavaPackageDeclar
 FASTJavaExportVisitor >> visitFASTJavaParameter: aFASTJavaParameter [
 	self checkForComments: aFASTJavaParameter andDo: [
 		"JLS 8.4.1: the modifiers a parameter writes come before its type."
-		self visitFASTJavaModifiersInline: aFASTJavaParameter modifiers.
+		self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaParameter).
 		aFASTJavaParameter type 
 			ifNotNil: [ :parameterType |
 				"Lambda parameters may be typeless"
@@ -1376,7 +1375,7 @@ FASTJavaExportVisitor >> visitFASTJavaReceiverParameter: aFASTJavaReceiverParame
 FASTJavaExportVisitor >> visitFASTJavaRecordDeclaration: aFASTJavaRecordDeclaration [
 
 	self checkForComments: aFASTJavaRecordDeclaration andDo: [
-			self visitFASTJavaModifiers: aFASTJavaRecordDeclaration modifiers.
+			self visitFASTJavaModifiers: (self writtenModifiersOf: aFASTJavaRecordDeclaration).
 			self unindented: 'record '.
 			self unindented: aFASTJavaRecordDeclaration name.
 
@@ -1629,7 +1628,7 @@ FASTJavaExportVisitor >> visitFASTJavaTypePattern: aFASTJavaTypePattern [
 	the type it matches, then the variable itself."
 
 	self checkForComments: aFASTJavaTypePattern andDo: [
-			self visitFASTJavaModifiersInline: aFASTJavaTypePattern modifiers.
+			self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaTypePattern).
 			aFASTJavaTypePattern type accept: self.
 			self space.
 			aFASTJavaTypePattern variable accept: self ]
@@ -1665,13 +1664,12 @@ FASTJavaExportVisitor >> visitFASTJavaUsesDirective: aFASTJavaUsesDirective [
 FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 	self checkForComments: aFASTJavaVarDeclStatement andDo: [
 		self indented: ''.
-		self visitFASTJavaModifiersInline: aFASTJavaVarDeclStatement modifiers.
+		self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaVarDeclStatement).
 		aFASTJavaVarDeclStatement type accept: self.
 		self space.
 		self visitNodeListSeparatedByCommas: aFASTJavaVarDeclStatement declarators.
 		self endOfStatement
 	]
-
 ]
 
 { #category : 'visiting type' }
@@ -1784,4 +1782,16 @@ FASTJavaExportVisitor >> visitTryResources: tryResources trailingSemicolon: aBoo
 	self unindented: ') '.
 
 	indentLevel := tmpIndent
+]
+
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> writtenModifiersOf: aFASTEntity [
+	"JLS 8.1.1: a declaration writes its keywords and its annotations in one list, in any
+	order it likes, so give them back in the order the source wrote them. A declaration
+	built by hand carries no positions, and writes its annotations first."
+
+	| written |
+	written := aFASTEntity annotations asArray , aFASTEntity modifiers asArray.
+	(written allSatisfy: [ :each | each startPos isNotNil ]) ifFalse: [ ^ written ].
+	^ written sorted: [ :a :b | a startPos <= b startPos ]
 ]

@@ -23,7 +23,7 @@ JavaSmaCCParameterWithModifiersTest >> parameters [
 { #category : 'tests' }
 JavaSmaCCParameterWithModifiersTest >> testParameterKeepsTheAnnotationItWrites [
 
-	self assert: (self parameters first modifiers detect: [ :each | each isAnnotation ]) name equals: 'Deprecated'
+	self assert: self parameters first annotations anyOne name equals: 'Deprecated'
 ]
 
 { #category : 'tests' }
@@ -35,8 +35,9 @@ JavaSmaCCParameterWithModifiersTest >> testParameterKeepsTheModifierItWrites [
 { #category : 'tests' }
 JavaSmaCCParameterWithModifiersTest >> testParameterKeepsTheModifiersInTheOrderItWritesThem [
 
-	self assert: (self parameters first modifiers collect: [ :each | each class ]) asArray
-		equals: { FASTJavaAnnotation. FASTJavaModifier }
+	self assert: ((self writtenModifiersOf: self parameters first) collect: [ :each | each class ]) equals: {
+			FASTJavaAnnotation.
+			FASTJavaModifier }
 ]
 
 { #category : 'tests' }

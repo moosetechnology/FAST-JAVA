@@ -27,6 +27,8 @@ Metacello new
   load: 'all'
 ```
 
+Coming from v4? [MIGRATION.md](MIGRATION.md) lists what v5 changes and what to write instead.
+
 ## Create FAST-Java Models Using Java Source Strings
 
 Thanks to the [SmaCC project](https://github.com/j-brant/SmaCC), it is possible to parse Java methods and classes.

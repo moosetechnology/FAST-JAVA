@@ -70,6 +70,20 @@ JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
 	^ self clone accept: aStatementNode
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> addModifiers: aNodeCollection to: aFASTEntity [
+	"JLS 8.1.1: a declaration writes its keywords and its annotations in one list, in any
+	order it likes. The model keeps the keywords in `modifiers` and the annotations in
+	`annotations`, and the positions they carry say which order the source wrote them in."
+
+	aNodeCollection do: [ :node |
+		| modifier |
+		modifier := self clone accept: node.
+		modifier isAnnotation
+			ifTrue: [ aFASTEntity addAnnotation: modifier ]
+			ifFalse: [ aFASTEntity addModifier: modifier ] ]
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> addThrowsOf: aDeclarationNode [
 
@@ -605,7 +619,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstrac
 		                     name: anAbstractMethodDeclaration declarator name value;
 		                     yourself.
 
-	anAbstractMethodDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: anAbstractMethodDeclaration modifiers to: currentFASTEntity.
 	currentFASTEntity type: (self clone accept: anAbstractMethodDeclaration type).
 
 	self addTypeParametersOf: anAbstractMethodDeclaration.
@@ -644,7 +658,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationElementDeclaration: anElem
 		                     name: anElementDeclaration declarator name value;
 		                     yourself.
 
-	anElementDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: anElementDeclaration modifiers to: currentFASTEntity.
 	currentFASTEntity type: (self clone accept: anElementDeclaration type).
 
 	(anElementDeclaration isKindOf: JavaAnnotationMethodDeclarationNode) ifTrue: [
@@ -660,7 +674,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationInterface: anAnnotationInt
 	self create: FASTJavaAnnotationInterfaceDeclaration from: anAnnotationInterface.
 	currentFASTEntity name: anAnnotationInterface name value.
 
-	anAnnotationInterface modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: anAnnotationInterface modifiers to: currentFASTEntity.
 	anAnnotationInterface declarations do: [ :declaration |
 		currentFASTEntity addDeclaration: (self acceptAnnotationInterfaceMember: declaration) ].
 
@@ -842,10 +856,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitCatchParameter: aCatchParameter [
 	| param |
 	param := self visitName: aCatchParameter variable.
 	self parentFASTEntity parameter: param.
-	aCatchParameter modifiers do: [ :modifier |
-		self parentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aCatchParameter modifiers to: self parentFASTEntity.
 	aCatchParameter types do: [ :catchedType |
-		self parentFASTEntity addCatchedType: (self clone accept: catchedType)
+		self parentFASTEntity addCaughtType: (self clone accept: catchedType)
 	].
 	^ param
 ]
@@ -880,7 +893,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration 
 	self create: FASTJavaClassDeclaration from: aClassDeclaration.
 	currentFASTEntity name: aClassDeclaration name value.
 
-	aClassDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aClassDeclaration modifiers to: currentFASTEntity.
 
 	self addTypeParametersOf: aClassDeclaration.
 
@@ -965,7 +978,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 	self addThrowsOf: aConstructorDeclaration.
 
 	currentFASTEntity statementBlock: (self clone accept: aConstructorDeclaration body).
-	aConstructorDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aConstructorDeclaration modifiers to: currentFASTEntity.
 
 	^ currentFASTEntity
 ]
@@ -1083,7 +1096,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEnumDeclaration: anEnumDeclaration [
 	anEnumDeclaration constants do: [ :constant | currentFASTEntity addConstant: (self clone accept: constant) ].
 	anEnumDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
 	anEnumDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
-	anEnumDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: anEnumDeclaration modifiers to: currentFASTEntity.
 	^ currentFASTEntity
 ]
 
@@ -1121,7 +1134,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFieldDeclaration: aFieldDeclaration 
 	self setStartEndPos: aFieldDeclaration.
 	aFieldDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aFieldDeclaration type) ].
 	aFieldDeclaration variableDeclarations do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
-		aFieldDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aFieldDeclaration modifiers to: currentFASTEntity.
 	^ currentFASTEntity
 ]
 
@@ -1169,10 +1182,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement 
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
 	self setStartEndPos: aForEachStatement.
 	currentFASTEntity body: (self acceptStatement: aForEachStatement statement).
-	currentFASTEntity fieldname: (self clone visitIdentifier: aForEachStatement name).
+	currentFASTEntity fieldName: (self clone visitIdentifier: aForEachStatement name).
 	currentFASTEntity type: (self clone accept: aForEachStatement type).
-	aForEachStatement modifiers do: [ :modifier |
-		currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aForEachStatement modifiers to: currentFASTEntity.
 	currentFASTEntity list: (self clone accept: aForEachStatement expression).
 	^ currentFASTEntity
 ]
@@ -1298,7 +1310,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInterfaceDeclaration: anInterfaceDec
 	self create: FASTJavaInterfaceDeclaration from: anInterfaceDeclaration.
 	currentFASTEntity name: anInterfaceDeclaration name value.
 
-	anInterfaceDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: anInterfaceDeclaration modifiers to: currentFASTEntity.
 
 	self addTypeParametersOf: anInterfaceDeclaration.
 
@@ -1341,8 +1353,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVari
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self setStartEndPos: aLocalVariableDeclaration.
 	aLocalVariableDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aLocalVariableDeclaration type) ].
-	aLocalVariableDeclaration modifiers do: [ :modifier |
-		currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aLocalVariableDeclaration modifiers to: currentFASTEntity.
 	aLocalVariableDeclaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 	^ currentFASTEntity
@@ -1355,8 +1366,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: a
 
 	aLocalVariableDeclarationStatement declaration type ifNotNil: [ :declaredType |
 		currentFASTEntity type: (self clone accept: declaredType) ].
-	aLocalVariableDeclarationStatement declaration modifiers do: [ :modifier | 
-		currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aLocalVariableDeclarationStatement declaration modifiers to: currentFASTEntity.
 	aLocalVariableDeclarationStatement declaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
 
@@ -1403,7 +1413,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 
 	currentFASTEntity name: declarator name value.
 
-	aMethodDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aMethodDeclaration modifiers to: currentFASTEntity.
 
 	aMethodDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aMethodDeclaration type) ].
 
@@ -1624,9 +1634,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 	aNewArray initializer ifNotNil: [ :initializer |
 		currentFASTEntity initializer: (self clone accept: initializer) ].
 	aNewArray dimExpressions do: [ :dimExpression |
-		currentFASTEntity dimensions add: (self dimensionExpressionOf: dimExpression) ].
+		currentFASTEntity brackets add: (self dimensionExpressionOf: dimExpression) ].
 	aNewArray dimensions do: [ :dimension |
-		currentFASTEntity dimensions add: (self dimensionOf: dimension) ].
+		currentFASTEntity brackets add: (self dimensionOf: dimension) ].
 	^ currentFASTEntity
 ]
 
@@ -1693,7 +1703,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	currentFASTEntity variable: (self clone accept: aParameter variable).
 	currentFASTEntity type: (self clone accept: aParameter type).
 	(self bracketsOf: aParameter variable) do: [ :bracket | currentFASTEntity addBracket: bracket ].
-	aParameter modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aParameter modifiers to: currentFASTEntity.
 	^ currentFASTEntity
 ]
 
@@ -1827,7 +1837,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitRecordDeclaration: aRecordDeclaratio
 	self create: FASTJavaRecordDeclaration from: aRecordDeclaration.
 	currentFASTEntity name: aRecordDeclaration name value.
 
-	aRecordDeclaration modifiers do: [ :modifier | currentFASTEntity addModifier: (self clone accept: modifier) ].
+	self addModifiers: aRecordDeclaration modifiers to: currentFASTEntity.
 
 	self addTypeParametersOf: aRecordDeclaration.
 
@@ -2180,7 +2190,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypePattern: aTypePattern [
 		           type: (self clone accept: aTypePattern type);
 		           variable: (self clone accept: aTypePattern variable);
 		           yourself.
-	aTypePattern modifiers do: [ :modifier | pattern addModifier: (self clone accept: modifier) ].
+	self addModifiers: aTypePattern modifiers to: pattern.
 	^ pattern
 ]
 

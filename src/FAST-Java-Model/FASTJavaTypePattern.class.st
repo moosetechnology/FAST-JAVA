@@ -54,7 +54,8 @@ Example:
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `type` | `FASTJavaTypePattern` | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | The type of the declared variable|
 | `variable` | `FASTJavaTypePattern` | `javaTypePatternVariableOwner` | `FASTJavaVariableExpression` | The local variable declared by this type pattern|
 
@@ -71,8 +72,8 @@ Example:
 Class {
 	#name : 'FASTJavaTypePattern',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithModifiers + FASTTExpression',
-	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithModifiers + FASTTExpression',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner'

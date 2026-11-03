@@ -1,13 +1,13 @@
 "
-I carry annotations and nothing else, where a declaration would carry modifiers.
+I hold the annotations written on me, which is every annotation a construct carries.
 
-The JLS writes `{Annotation}` rather than a modifier list wherever a keyword would mean
-nothing: on a type parameter and its bounds (JLS 4.4), on a type wherever one is written
-(4.11), on a package declaration (7.4.1), on a module declaration (7.7), on a receiver
-parameter (8.4.1), on an enum constant (8.9.1) and on a pair of brackets (10.2).
-
-Holding these in `modifiers` would let any of them carry `public` or `static`, which no
-Java compiler accepts there, so they are held apart.
+A declaration writes its annotations and its keywords in one list and in any order it likes
+(JLS 8.1.1), and the JLS writes `{Annotation}` alone wherever a keyword would mean nothing:
+on a type parameter and its bounds (4.4), on a type wherever one is written (4.11), on a
+package declaration (7.4.1), on a module declaration (7.7), on a receiver parameter (8.4.1),
+on an enum constant (8.9.1) and on a pair of brackets (10.2). An annotation is not a modifier
+in either place, so I hold it and `modifiers` holds the keywords. The order the source writes
+them in is the order their positions give.
 
 ## Relations
 ======================

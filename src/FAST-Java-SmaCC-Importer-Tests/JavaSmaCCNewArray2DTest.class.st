@@ -20,23 +20,23 @@ JavaSmaCCNewArray2DTest >> testNewArrayEmptySize [
 
 	| newArray |
 	newArray := (fastModel allWithType: FASTJavaNewArray) first.
-	self assert: newArray dimensions first class equals: FASTJavaDimension.
-	self assert: newArray dimensions second class equals: FASTJavaDimension
+	self assert: newArray brackets first class equals: FASTJavaDimension.
+	self assert: newArray brackets second class equals: FASTJavaDimension
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewArray2DTest >> testNewArraySimpleArraySize [
-	self assert: (fastModel allWithType: FASTJavaNewArray) first dimensions size equals: 2
+	self assert: (fastModel allWithType: FASTJavaNewArray) first brackets size equals: 2
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewArray2DTest >> testNewArrayWrittenSizes [
-	"JLS 15.10.1: `new String[3][4]` says a length for both of its dimensions."
+	"JLS 15.10.1: `new String[3][4]` says a length for both of its brackets."
 
 	| newArray |
 	newArray := (fastModel allWithType: FASTJavaNewArray) second.
-	self assert: (newArray dimensions collect: [ :dimension | dimension class ]) asArray
+	self assert: (newArray brackets collect: [ :dimension | dimension class ]) asArray
 		equals: { FASTJavaDimensionExpression. FASTJavaDimensionExpression }.
-	self assert: (newArray dimensions collect: [ :dimension | dimension expression primitiveValue ]) asArray
+	self assert: (newArray brackets collect: [ :dimension | dimension expression primitiveValue ]) asArray
 		equals: #( '3' '4' )
 ]

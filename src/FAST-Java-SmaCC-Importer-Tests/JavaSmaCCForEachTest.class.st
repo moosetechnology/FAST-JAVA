@@ -26,17 +26,17 @@ JavaSmaCCForEachTest >> testForEachBodyType [
 
 { #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachFieldName [
-	self assert: fastMethod statements first fieldname name equals: 'hr'
+	self assert: fastMethod statements first fieldName name equals: 'hr'
 ]
 
 { #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachFieldNameParent [
-	self assert: fastMethod statements first fieldname parentNode equals: fastMethod statements first
+	self assert: fastMethod statements first fieldName parentNode equals: fastMethod statements first
 ]
 
 { #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachFieldNameType [
-	self assert: fastMethod statements first fieldname class equals: FASTJavaIdentifier
+	self assert: fastMethod statements first fieldName class equals: FASTJavaIdentifier
 ]
 
 { #category : 'tests' }

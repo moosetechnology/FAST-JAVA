@@ -28,11 +28,11 @@ I represent the name of a type
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaQualifiedTypeNameOwner` | `FASTJavaTypeName` | `namespace` | `FASTJavaQualifiedTypeName` | the name I qualify|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
-| `javaTypeNameQualify` | `FASTJavaTypeName` | `namespace` | `FASTJavaQualifiedTypeName` | the name I qualify|
 | `javaTypeNameTypeExpressionOwner` | `FASTJavaTypeName` | `typeName` | `FASTJavaClassTypeExpression` | The type expression that owns me|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
@@ -71,7 +71,7 @@ Class {
 	#traits : 'FASTJavaTAnnotationElement + FASTJavaTWithAnnotations + FASTTExpression + FASTTNamedEntity + FASTTWithArguments',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
-		'#javaTypeNameQualify => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
+		'#javaQualifiedTypeNameOwner => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -97,23 +97,22 @@ FASTJavaTypeName >> isTypeName [
 ]
 
 { #category : 'accessing' }
-FASTJavaTypeName >> javaTypeNameQualify [
-	"Relation named: #javaTypeNameQualify type: #FASTJavaQualifiedTypeName opposite: #namespace"
+FASTJavaTypeName >> javaQualifiedTypeNameOwner [
+	"Relation named: #javaQualifiedTypeNameOwner type: #FASTJavaQualifiedTypeName opposite: #namespace"
 
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'the name I qualify'>
 	<container>
-	<derived>
-	^ javaTypeNameQualify
+	^ javaQualifiedTypeNameOwner
 ]
 
 { #category : 'accessing' }
-FASTJavaTypeName >> javaTypeNameQualify: anObject [
+FASTJavaTypeName >> javaQualifiedTypeNameOwner: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	javaTypeNameQualify := anObject
+	javaQualifiedTypeNameOwner := anObject
 ]
 
 { #category : 'accessing' }

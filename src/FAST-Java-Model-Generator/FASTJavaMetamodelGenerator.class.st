@@ -82,7 +82,6 @@ Class {
 		'javaBooleanLiteral',
 		'tDeclaration',
 		'tWithDeclarations',
-		'tModifier',
 		'tWithModifiers',
 		'tWithReceiver',
 		'tReceiver',
@@ -755,24 +754,24 @@ this.hello = "hello"'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaTModifier [
-	^ 'I am a modifier in java
-example:
+FASTJavaMetamodelGenerator >> commentForJavaTWithAnnotations [
+	^ 'I hold the annotations written on me, which is every annotation a construct carries.
 
-public, proctected, private'
+A declaration writes its annotations and its keywords in one list and in any order it likes
+(JLS 8.1.1), and the JLS writes `{Annotation}` alone wherever a keyword would mean nothing:
+on a type parameter and its bounds (4.4), on a type wherever one is written (4.11), on a
+package declaration (7.4.1), on a module declaration (7.7), on a receiver parameter (8.4.1),
+on an enum constant (8.9.1) and on a pair of brackets (10.2). An annotation is not a modifier
+in either place, so I hold it and `modifiers` holds the keywords. The order the source writes
+them in is the order their positions give.'
 ]
 
 { #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaTWithAnnotations [
-	^ 'I carry annotations and nothing else, where a declaration would carry modifiers.
+FASTJavaMetamodelGenerator >> commentForJavaTWithModifiers [
+	^ 'I hold the keyword modifiers I write, such as `public`, `static` or `final` (JLS 8.1.1).
 
-The JLS writes `{Annotation}` rather than a modifier list wherever a keyword would mean
-nothing: on a type parameter and its bounds (JLS 4.4), on a type wherever one is written
-(4.11), on a package declaration (7.4.1), on a module declaration (7.7), on a receiver
-parameter (8.4.1), on an enum constant (8.9.1) and on a pair of brackets (10.2).
-
-Holding these in `modifiers` would let any of them carry `public` or `static`, which no
-Java compiler accepts there, so they are held apart.'
+The annotations written in the same list are held by TWithAnnotations, which every
+construct that uses me also uses.'
 ]
 
 { #category : 'comments' }
@@ -1194,12 +1193,14 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodEntity --|> #THasImmediateSource.
 	javaMethodEntity --|> tDeclaration.
 	javaMethodEntity --|> tWithModifiers.
+	javaMethodEntity --|> tWithAnnotations.
 	javaMethodEntity --|> tWithTypeParameters.
 
 	javaClassDeclaration --|> tStatement.
 	javaClassDeclaration --|> tDeclaration.
 	javaClassDeclaration --|> tWithDeclarations.
 	javaClassDeclaration --|> tWithModifiers.
+	javaClassDeclaration --|> tWithAnnotations.
 	javaClassDeclaration --|> tWithTypeParameters.
 	javaClassDeclaration --|> tNamedEntity.
 	javaClassDeclaration --|> #THasImmediateSource.
@@ -1209,6 +1210,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaEnumDeclaration --|> tDeclaration.
 	javaEnumDeclaration --|> tWithDeclarations.
 	javaEnumDeclaration --|> tWithModifiers.
+	javaEnumDeclaration --|> tWithAnnotations.
 	javaEnumDeclaration --|> tNamedEntity.
 	javaEnumDeclaration --|> #THasImmediateSource.
 	javaEnumDeclaration withPrecedenceOf: #THasImmediateSource.
@@ -1222,6 +1224,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaInterfaceDeclaration --|> tDeclaration.
 	javaInterfaceDeclaration --|> tWithDeclarations.
 	javaInterfaceDeclaration --|> tWithModifiers.
+	javaInterfaceDeclaration --|> tWithAnnotations.
 	javaInterfaceDeclaration --|> tWithTypeParameters.
 	javaInterfaceDeclaration --|> tNamedEntity.
 	javaInterfaceDeclaration --|> #THasImmediateSource.
@@ -1232,6 +1235,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAnnotationInterfaceDeclaration --|> tDeclaration.
 	javaAnnotationInterfaceDeclaration --|> tWithDeclarations.
 	javaAnnotationInterfaceDeclaration --|> tWithModifiers.
+	javaAnnotationInterfaceDeclaration --|> tWithAnnotations.
 	javaAnnotationInterfaceDeclaration --|> tNamedEntity.
 	javaAnnotationInterfaceDeclaration --|> #THasImmediateSource.
 	javaAnnotationInterfaceDeclaration withPrecedenceOf: #THasImmediateSource.
@@ -1243,6 +1247,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaRecordDeclaration --|> tDeclaration.
 	javaRecordDeclaration --|> tWithDeclarations.
 	javaRecordDeclaration --|> tWithModifiers.
+	javaRecordDeclaration --|> tWithAnnotations.
 	javaRecordDeclaration --|> tWithTypeParameters.
 	javaRecordDeclaration --|> tNamedEntity.
 	javaRecordDeclaration --|> #THasImmediateSource.
@@ -1261,6 +1266,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaVarDeclStatement --|> tDeclaration.
 	javaVarDeclStatement --|> tScopableEntity.
 	javaVarDeclStatement --|> tWithModifiers.
+	javaVarDeclStatement --|> tWithAnnotations.
 
 	javaVariableDeclarator --|> tEntity.
 	javaWhileStatement --|> tStatement.
@@ -1279,6 +1285,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaForEachStatement --|> tLoopStatement.
 	"JLS 14.14.2: the modifiers of the loop variable, whose type and name are held here"
 	javaForEachStatement --|> tWithModifiers.
+	javaForEachStatement --|> tWithAnnotations.
 	javaUnaryExpression --|> tExpression.
 
 	javaNewExpression --|> tExpression.
@@ -1288,9 +1295,12 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaNewClassExpression --|> javaNewExpression.
 	javaNewClassExpression --|> tWithDeclarations.
-	javaNewClassExpression --|> #TWithArguments.
 
-	javaNewArray --|> javaNewExpression.
+	"JLS 15.10.1: an array creation is not a class instance creation — it writes no
+	arguments, no type arguments and no enclosing instance — but it is an expression, and
+	`new int[3].length` makes it a receiver."
+	javaNewArray --|> tExpression.
+	javaNewArray --|> tReceiver.
 	javaConditionalExpression --|> tExpression.
 
 	javaArrayAccess --|> tExpression.
@@ -1324,6 +1334,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCatchPartStatement --|> tStatement.
 	"JLS 14.20: the modifiers of the catch formal parameter, whose types and name are held here"
 	javaCatchPartStatement --|> tWithModifiers.
+	javaCatchPartStatement --|> tWithAnnotations.
 
 	javaLambdaExpression --|> tExpression.
 	javaLambdaExpression --|> tWithParameters.
@@ -1373,11 +1384,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	`@jdk.internal.RequiresIdentity` of `Reference<@jdk.internal.RequiresIdentity T>` does"
 	javaTypeParameter --|> tWithAnnotations.
 
-	javaModifier --|> tModifier.
 	javaModifier --|> tExpression.
 
 	javaAnnotationExpression --|> tNamedEntity.
-	javaAnnotationExpression --|> tModifier.
 	javaAnnotationExpression --|> tAnnotationElement.
 	"JLS 9.7: an annotation names the type it is an instance of, which it may write qualified"
 	javaAnnotationExpression --|> tWithQualifiedName.
@@ -1385,6 +1394,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaParameterExpression --|> tExpression.
 	javaParameterExpression --|> tVariableEntity.
 	javaParameterExpression --|> tWithModifiers.
+	javaParameterExpression --|> tWithAnnotations.
 	javaConditionalExpression --|> tReceiver.
 
 	javaStatement --|> tStatement.
@@ -1400,6 +1410,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaTypePattern --|> tExpression.
 	javaTypePattern --|> tWithModifiers.
+	javaTypePattern --|> tWithAnnotations.
 
 	"JLS 14.30.1: a pattern is a type pattern or a record pattern, and a record pattern
 	writes a match-all `_` where a component binds nothing"
@@ -1580,7 +1591,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The javaCastExpression owner (if possible)').
 	((javaCastExpression property: #type) comment:
 		 'The type into which the expression will be cast')
-	<>- ((javaVariableExpression property: #javaCastExpressionTypeOwner)
+	<>- ((javaTypeExpression property: #javaCastExpressionTypeOwner)
 			 comment: 'The javaCastExpression owner (if possible)').
 
 	"JLS 4.9: a cast may write interface types after the first, each an additional bound of
@@ -1604,10 +1615,10 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaUnaryExpressionOwner) comment:
 			 'The javaUnaryExpression owner (if possible)').
 
-	((javaNewExpression property: #type) comment: 'The type of the array')
+	((javaNewExpression property: #type) comment: 'The type I instantiate')
 	<>-
-		((javaVariableExpression property: #javaNewExpressionOwner)
-			 comment: 'The javaNewExpression owner (if possible)').
+		((javaTypeExpression property: #javaNewExpressionTypeOwner)
+			 comment: 'The class instance creation that instantiates me').
 
 	((javaArrayAccess property: #expression) comment:
 		 'The accessed index')
@@ -1636,7 +1647,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The list that the for-each statement iterates over')
 	<>- ((tExpression property: #javaForEachStatementOwner) comment:
 			 'The javaForEachStatement owner (if possible)').
-	((javaForEachStatement property: #fieldname) comment:
+	((javaForEachStatement property: #fieldName) comment:
 		 'The identifier of the created local variable')
 	<>- ((javaIdentifier property: #javaForEachStatementFieldNameOwner)
 			 comment: 'The javaForEachStatement owner (if possible)').
@@ -1669,13 +1680,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((tTryResource property: #javaTryResourceOwner) comment:
 			 'The try-with-resource that owns me').
 
-	((javaCatchPartStatement property: #catchedTypes) comment:
-		 'The types (exception) that are catched')
+	((javaCatchPartStatement property: #caughtTypes) comment:
+		 'The exception types I catch')
 	<>-* ((javaTypeExpression property: #catchOwner) comment:
-			 'The catch part that owns me (ie. where I am catched)').
+			 'The catch clause that catches me').
 	((javaCatchPartStatement property: #parameter) comment:
 		 'The parameter of the catch part')
-	<>- ((javaVariableExpression property: #javaCatchParameterOwnler)
+	<>- ((javaVariableExpression property: #javaCatchParameterOwner)
 			 comment: 'The javaCatchPartParameterOwner owner (if possible)').
 
 	((javaIfStatement property: #elsePart) comment: 'else part')
@@ -1711,7 +1722,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'I am an incrementor of the for').
 	((javaForStatement property: #initializers) comment:
 		 'Statements evaluated at initialization phase of a for loop')
-	<>-* ((tStatement property: #forIninitializerOwner) comment:
+	<>-* ((tStatement property: #forInitializerOwner) comment:
 			 'I am an initializer of the for').
 
 	((javaSwitchStatement property: #condition) comment:
@@ -1729,6 +1740,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tStatement property: #labelStatementOwner) comment:
 			 'Label Statement entity containing this statement').
 
+	"JLS 15.10.1: an array creation writes the type of the elements it makes an array of."
+	((javaNewArray property: #type) comment:
+		 'The type of my elements, eg. the `int` of `new int[3]`')
+	<>- ((javaTypeExpression property: #javaNewArrayTypeOwner) comment:
+			 'The array creation that makes an array of me').
 	((javaNewArray property: #initializer) comment:
 		 'The initializer of the array')
 	<>- ((tExpression property: #javaNewArrayInitialOwner) comment:
@@ -1776,7 +1792,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaMethodEntity property: #type) comment: 'The type of the method')
 	<>-
-		((javaVariableExpression property: #javaMethodTypeOwner) comment:
+		((javaTypeExpression property: #javaMethodTypeOwner) comment:
 			 'The variable expression owner (if possible)').
 	((javaMethodEntity property: #throws) comment:
 		 'The list of throws exception')
@@ -1806,7 +1822,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaParameterExpression property: #type) comment:
 		 'The type of the parameter')
 	<>-
-		((javaVariableExpression property: #javaParameterTypeOwner)
+		((javaTypeExpression property: #javaParameterTypeOwner)
 			 comment: 'The variable expression owner (if possible)').
 	((javaParameterExpression property: #variable) comment:
 		 'parameter variable')
@@ -1816,7 +1832,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaVarDeclStatement property: #type) comment:
 		 'The type of the declared variables')
 	<>-
-		((javaVariableExpression property: #javaVarDeclTypeOwner) comment:
+		((javaTypeExpression property: #javaVarDeclTypeOwner) comment:
 			 'The variable expression owner (if possible)').
 
 	((javaArrayTypeExpression property: #baseType) comment:
@@ -1832,7 +1848,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	((javaQualifiedTypeName property: #namespace) comment:
 		 'The namespace of the name')
-	<>- ((javaTypeName property: #javaTypeNameQualify) comment:
+	<>- ((javaTypeName property: #javaQualifiedTypeNameOwner) comment:
 			 'the name I qualify').
 
 	((javaAssertStatement property: #condition) comment:
@@ -1917,9 +1933,9 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>-* ((javaAnnotationExpression property: #javaAnnotationOwner) comment:
 			 'The element I am written on').
 
-	((tWithModifiers property: #modifiers) comment: 'My modifiers')
-	<>-* ((tModifier property: #javaModifierOwner) comment:
-			 'The owner of the modifier').
+	((tWithModifiers property: #modifiers) comment: 'The keywords I write')
+	<>-* ((javaModifier property: #javaModifierOwner) comment:
+			 'The declaration that writes me').
 
 	((tWithAssignable property: #variable) comment: 'My variable')
 	<>- ((tAssignable property: #javaVariableAssignmentOwner) comment:
@@ -2049,7 +2065,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 15.10.1: an array creation writes one pair of brackets per dimension, the leading
 	ones giving a length and the trailing ones left empty, and each pair carries the
 	annotations written on the array type that dimension makes."
-	((javaNewArray property: #dimensions) comment:
+	((javaNewArray property: #brackets) comment:
 		 'The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`')
 	<>-* ((javaDimension property: #newArrayOwner) comment:
 			 'The array creation that writes me').
@@ -2089,8 +2105,7 @@ FASTJavaMetamodelGenerator >> defineTraits [
 	tDeclaration := self newTraitNamed: #TDeclaration comment: 'I am a declaration in java'.
 	tWithDeclarations := self newTraitNamed: #TWithDeclarations comment: 'I have declarations'.
 
-	tModifier := self newTraitNamed: #TModifier comment: self commentForJavaTModifier.
-	tWithModifiers := self newTraitNamed: #TWithModifiers comment: 'I have modifiers'.
+	tWithModifiers := self newTraitNamed: #TWithModifiers comment: self commentForJavaTWithModifiers.
 
 	tWithAnnotations := self newTraitNamed: #TWithAnnotations comment: self commentForJavaTWithAnnotations.
 

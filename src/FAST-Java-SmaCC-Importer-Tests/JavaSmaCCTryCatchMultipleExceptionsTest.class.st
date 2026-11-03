@@ -43,12 +43,12 @@ JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchCatchParametersType [
 
 { #category : 'tests' }
 JavaSmaCCTryCatchMultipleExceptionsTest >> testTryCatchCatchedType [
-	| catchedTypes |
-	catchedTypes := fastMethod statements second catches first catchedTypes.
+	| caughtTypes |
+	caughtTypes := fastMethod statements second catches first caughtTypes.
 
-	self assert: catchedTypes size equals: 2.
-	self assert: catchedTypes first typeName name equals: 'Exception'.
-	self assert: catchedTypes second typeName name equals: 'PatateException'
+	self assert: caughtTypes size equals: 2.
+	self assert: caughtTypes first typeName name equals: 'Exception'.
+	self assert: caughtTypes second typeName name equals: 'PatateException'
 ]
 
 { #category : 'tests' }

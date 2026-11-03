@@ -22,9 +22,9 @@ JavaSmaCCLocalVariableModifiersTest >> javaMethod [
 { #category : 'resources' }
 JavaSmaCCLocalVariableModifiersTest >> modifiersOfDeclarationOf: aVariableName [
 
-	^ ((fastModel allWithType: FASTJavaVarDeclStatement) detect: [ :declaration |
-		   declaration declarators asOrderedCollection anySatisfy: [ :declarator | declarator variable name = aVariableName ] ])
-		  modifiers asOrderedCollection
+	^ (self writtenModifiersOf: ((fastModel allWithType: FASTJavaVarDeclStatement) detect: [ :declaration |
+			    declaration declarators asOrderedCollection anySatisfy: [ :declarator | declarator variable name = aVariableName ] ]))
+		  asOrderedCollection
 ]
 
 { #category : 'tests' }

@@ -13,7 +13,7 @@ for(_;_;_) {
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementors` | `FASTJavaForStatement` | I am an incrementor of the for|
-| `forIninitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
+| `forInitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `labelStatementOwner` | `FASTTStatement` | `labeledStatement` | `FASTJavaLabeledStatement` | Label Statement entity containing this statement|
@@ -26,7 +26,7 @@ for(_;_;_) {
 | `body` | `FASTTLoopStatement` | `parentLoopStatement` | `FASTTStatement` | The body of the loop|
 | `condition` | `FASTTWithCondition` | `parentConditional` | `FASTTExpression` | The boolean condition tested|
 | `incrementors` | `FASTJavaForStatement` | `forIncrementorOwner` | `FASTTStatement` | Statements evaluated at the end of each loop|
-| `initializers` | `FASTJavaForStatement` | `forIninitializerOwner` | `FASTTStatement` | Statements evaluated at initialization phase of a for loop|
+| `initializers` | `FASTJavaForStatement` | `forInitializerOwner` | `FASTTStatement` | Statements evaluated at initialization phase of a for loop|
 
 
 ## Properties
@@ -80,9 +80,9 @@ FASTJavaForStatement >> incrementors [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Statements evaluated at the end of each loop'>
-	<derived>
 	<FMProperty: #incrementors type: #FASTTStatement opposite: #forIncrementorOwner>
 	<multivalued>
+	<derived>
 	^ self attributeAt: #incrementors ifAbsentPut: [ FMMultivalueLink on: self opposite: #forIncrementorOwner: ]
 ]
 
@@ -96,15 +96,15 @@ FASTJavaForStatement >> incrementors: anObject [
 
 { #category : 'accessing' }
 FASTJavaForStatement >> initializers [
-	"Relation named: #initializers type: #FASTTStatement opposite: #forIninitializerOwner"
+	"Relation named: #initializers type: #FASTTStatement opposite: #forInitializerOwner"
 
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Statements evaluated at initialization phase of a for loop'>
-	<derived>
-	<FMProperty: #initializers type: #FASTTStatement opposite: #forIninitializerOwner>
+	<FMProperty: #initializers type: #FASTTStatement opposite: #forInitializerOwner>
 	<multivalued>
-	^ self attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #forIninitializerOwner: ]
+	<derived>
+	^ self attributeAt: #initializers ifAbsentPut: [ FMMultivalueLink on: self opposite: #forInitializerOwner: ]
 ]
 
 { #category : 'accessing' }

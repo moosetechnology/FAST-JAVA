@@ -1,5 +1,8 @@
 "
-I have modifiers
+I hold the keyword modifiers I write, such as `public`, `static` or `final` (JLS 8.1.1).
+
+The annotations written in the same list are held by TWithAnnotations, which every
+construct that uses me also uses.
 
 ## Relations
 ======================
@@ -7,7 +10,7 @@ I have modifiers
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 
 
 
@@ -15,7 +18,7 @@ I have modifiers
 Trait {
 	#name : 'FASTJavaTWithModifiers',
 	#instVars : [
-		'#modifiers => FMMany type: #FASTJavaTModifier opposite: #javaModifierOwner'
+		'#modifiers => FMMany type: #FASTJavaModifier opposite: #javaModifierOwner'
 	],
 	#category : 'FAST-Java-Model-Traits',
 	#package : 'FAST-Java-Model',
@@ -41,11 +44,11 @@ FASTJavaTWithModifiers >> addModifier: anObject [
 
 { #category : 'accessing' }
 FASTJavaTWithModifiers >> modifiers [
-	"Relation named: #modifiers type: #FASTJavaTModifier opposite: #javaModifierOwner"
+	"Relation named: #modifiers type: #FASTJavaModifier opposite: #javaModifierOwner"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'My modifiers'>
+	<FMComment: 'The keywords I write'>
 	<derived>
 	^ modifiers
 ]

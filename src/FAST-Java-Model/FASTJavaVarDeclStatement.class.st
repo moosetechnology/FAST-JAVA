@@ -15,7 +15,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 |---|
 | `compilationUnit` | `FASTJavaVarDeclStatement` | `fieldDeclarations` | `FASTJavaCompilationUnit` | The compilation unit that owns me|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementors` | `FASTJavaForStatement` | I am an incrementor of the for|
-| `forIninitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
+| `forInitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `ifThenPartOwner` | `FASTTStatement` | `thenPart` | `FASTJavaIfStatement` | The if owner (if possible)|
 | `javaDeclarationOwner` | `FASTJavaTDeclaration` | `declarations` | `FASTJavaTWithDeclarations` | The element that declares me|
@@ -27,9 +27,10 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `declarators` | `FASTJavaVarDeclStatement` | `varDeclOwner` | `FASTJavaVariableDeclarator` | The declarators for the type|
-| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
-| `type` | `FASTJavaVarDeclStatement` | `javaVarDeclTypeOwner` | `FASTJavaVariableExpression` | The type of the declared variables|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
+| `type` | `FASTJavaVarDeclStatement` | `javaVarDeclTypeOwner` | `FASTJavaTypeExpression` | The type of the declared variables|
 
 
 ## Properties
@@ -44,12 +45,12 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 Class {
 	#name : 'FASTJavaVarDeclStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTDeclaration + FASTJavaTTryResource + FASTJavaTWithModifiers + FASTTScopableEntity + FASTTStatement',
-	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTTryResource classTrait + FASTJavaTWithModifiers classTrait + FASTTScopableEntity classTrait + FASTTStatement classTrait',
+	#traits : 'FASTJavaTDeclaration + FASTJavaTTryResource + FASTJavaTWithAnnotations + FASTJavaTWithModifiers + FASTTScopableEntity + FASTTStatement',
+	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTTryResource classTrait + FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTScopableEntity classTrait + FASTTStatement classTrait',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #fieldDeclarations',
 		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner'
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaVarDeclTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -121,7 +122,7 @@ FASTJavaVarDeclStatement >> isVarDeclStatement [
 
 { #category : 'accessing' }
 FASTJavaVarDeclStatement >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner"
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaVarDeclTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>

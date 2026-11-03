@@ -20,7 +20,7 @@ new Canard.Poulet(){
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `namespace` | `FASTJavaQualifiedTypeName` | `javaTypeNameQualify` | `FASTJavaTypeName` | The namespace of the name|
+| `namespace` | `FASTJavaQualifiedTypeName` | `javaQualifiedTypeNameOwner` | `FASTJavaTypeName` | The namespace of the name|
 
 
 
@@ -29,7 +29,7 @@ Class {
 	#name : 'FASTJavaQualifiedTypeName',
 	#superclass : 'FASTJavaTypeName',
 	#instVars : [
-		'#namespace => FMOne type: #FASTJavaTypeName opposite: #javaTypeNameQualify'
+		'#namespace => FMOne type: #FASTJavaTypeName opposite: #javaQualifiedTypeNameOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -55,7 +55,7 @@ FASTJavaQualifiedTypeName >> isQualifiedTypeName [
 
 { #category : 'accessing' }
 FASTJavaQualifiedTypeName >> namespace [
-	"Relation named: #namespace type: #FASTJavaTypeName opposite: #javaTypeNameQualify"
+	"Relation named: #namespace type: #FASTJavaTypeName opposite: #javaQualifiedTypeNameOwner"
 
 	<ignoreForCoverage>
 	<generated>

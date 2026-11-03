@@ -48,7 +48,7 @@ for methods:
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
-| `javaModifierOwner` | `FASTJavaTModifier` | `modifiers` | `FASTJavaTWithModifiers` | The owner of the modifier|
+| `javaModifierOwner` | `FASTJavaModifier` | `modifiers` | `FASTJavaTWithModifiers` | The declaration that writes me|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
@@ -81,9 +81,10 @@ for methods:
 Class {
 	#name : 'FASTJavaModifier',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTModifier + FASTTExpression',
-	#classTraits : 'FASTJavaTModifier classTrait + FASTTExpression classTrait',
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#instVars : [
+		'#javaModifierOwner => FMOne type: #FASTJavaTWithModifiers opposite: #modifiers',
 		'#token => FMProperty'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -106,6 +107,25 @@ FASTJavaModifier >> isModifier [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaModifier >> javaModifierOwner [
+	"Relation named: #javaModifierOwner type: #FASTJavaTWithModifiers opposite: #modifiers"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The declaration that writes me'>
+	<container>
+	^ javaModifierOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaModifier >> javaModifierOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaModifierOwner := anObject
 ]
 
 { #category : 'accessing' }

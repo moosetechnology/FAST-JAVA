@@ -24,26 +24,26 @@ FASTTStatement >> forIncrementorOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
-FASTTStatement >> forIninitializerOwner [
-	"Relation named: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializers"
+FASTTStatement >> forInitializerOwner [
+	"Relation named: #forInitializerOwner type: #FASTJavaForStatement opposite: #initializers"
 
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'I am an initializer of the for'>
 	<container>
-	<FMProperty: #forIninitializerOwner type: #FASTJavaForStatement opposite: #initializers>
+	<FMProperty: #forInitializerOwner type: #FASTJavaForStatement opposite: #initializers>
 	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #forIninitializerOwner ifAbsent: [ nil ]
+	^ self attributeAt: #forInitializerOwner ifAbsent: [ nil ]
 ]
 
 { #category : '*FAST-Java-Model' }
-FASTTStatement >> forIninitializerOwner: anObject [
+FASTTStatement >> forInitializerOwner: anObject [
 
 	<ignoreForCoverage>
 	<generated>
 	<package: #'FAST-Java-Model'>
 
-	self attributeAt: #forIninitializerOwner put: (FMMultivalueLink on: self update: #initializers from: self forIninitializerOwner to: anObject).
+	self attributeAt: #forInitializerOwner put: (FMMultivalueLink on: self update: #initializers from: self forInitializerOwner to: anObject).
 ]
 
 { #category : '*FAST-Java-Model' }
@@ -54,9 +54,9 @@ FASTTStatement >> ifElsePartOwner [
 	<generated>
 	<FMComment: 'The if owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #ifElsePartOwner type: #FASTJavaIfStatement opposite: #elsePart>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #ifElsePartOwner ifAbsent: [ nil ]
 ]
 
@@ -85,9 +85,9 @@ FASTTStatement >> ifThenPartOwner [
 	<generated>
 	<FMComment: 'The if owner (if possible)'>
 	<container>
-	<derived>
 	<FMProperty: #ifThenPartOwner type: #FASTJavaIfStatement opposite: #thenPart>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #ifThenPartOwner ifAbsent: [ nil ]
 ]
 
@@ -116,9 +116,9 @@ FASTTStatement >> labelStatementOwner [
 	<generated>
 	<FMComment: 'Label Statement entity containing this statement'>
 	<container>
-	<derived>
 	<FMProperty: #labelStatementOwner type: #FASTJavaLabeledStatement opposite: #labeledStatement>
 	<package: #'FAST-Java-Model'>
+	<derived>
 	^ self attributeAt: #labelStatementOwner ifAbsent: [ nil ]
 ]
 

@@ -68,9 +68,7 @@ JavaSmaCCTypeAnnotationsTest >> testTheAnnotationOfADeclarationStaysOnTheDeclara
 	| model statement |
 	model := self parseClassString: 'class Annotated { @Deprecated String name; }'.
 	statement := (model allWithType: FASTJavaVarDeclStatement) anyOne.
-
-	self assert: (statement modifiers collect: [ :modifier | modifier name ]) asArray
-		equals: #( 'Deprecated' ).
+	self assert: (statement annotations collect: [ :annotation | annotation name ] as: Array) equals: #( 'Deprecated' ).
 	self assert: statement type annotations isEmpty
 ]
 

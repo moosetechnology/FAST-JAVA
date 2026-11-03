@@ -25,6 +25,26 @@ JavaSmaCCNewArrayTest >> testNewArrayAutoCreatedArrayInitializersSize [
 ]
 
 { #category : 'tests' }
+JavaSmaCCNewArrayTest >> testNewArrayDimensionsCountsItsBrackets [
+	"JLS 15.10.1: `dimensions` answers how many pairs of brackets a creation writes, as it
+	does for a parameter, a declarator and a method."
+
+	self assert: (fastModel allWithType: FASTJavaNewArray) second dimensions equals: 1
+]
+
+{ #category : 'tests' }
+JavaSmaCCNewArrayTest >> testNewArrayIsNotAClassInstanceCreation [
+	"JLS 15.10.1: an array creation writes no arguments, no type arguments and no enclosing
+	instance, so it is an expression of its own and not a class instance creation."
+
+	| newArray |
+	newArray := (fastModel allWithType: FASTJavaNewArray) second.
+	self deny: (newArray isKindOf: FASTJavaNewExpression).
+	self deny: newArray isNewExpression.
+	self assert: newArray isNewArray
+]
+
+{ #category : 'tests' }
 JavaSmaCCNewArrayTest >> testNewArrayParent [
 	self assert: (fastModel allWithType: FASTJavaNewArray) first parentNode equals: fastMethod statementBlock statements first declarators first.
 	self assert: (fastModel allWithType: FASTJavaNewArray) second parentNode equals: fastMethod statementBlock statements second declarators first.
@@ -42,20 +62,20 @@ JavaSmaCCNewArrayTest >> testNewArraySimpleArrayParent [
 
 { #category : 'tests' }
 JavaSmaCCNewArrayTest >> testNewArraySimpleArraySize [
-	self assert: (fastModel allWithType: FASTJavaNewArray) second dimensions size equals: 1
+	self assert: (fastModel allWithType: FASTJavaNewArray) second brackets size equals: 1
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewArrayTest >> testNewArraySimpleArraySizeParent [
 	| newArray |
 	newArray := (fastModel allWithType: FASTJavaNewArray) second.
-	self assert: newArray dimensions anyOne parentNode equals: newArray.
-	self assert: newArray dimensions anyOne expression parentNode equals: newArray dimensions anyOne
+	self assert: newArray brackets anyOne parentNode equals: newArray.
+	self assert: newArray brackets anyOne expression parentNode equals: newArray brackets anyOne
 ]
 
 { #category : 'tests' }
 JavaSmaCCNewArrayTest >> testNewArraySimpleArraySizeType [
-	self assert: (fastModel allWithType: FASTJavaNewArray) second dimensions anyOne expression class equals: FASTJavaIntegerLiteral
+	self assert: (fastModel allWithType: FASTJavaNewArray) second brackets anyOne expression class equals: FASTJavaIntegerLiteral
 ]
 
 { #category : 'tests' }

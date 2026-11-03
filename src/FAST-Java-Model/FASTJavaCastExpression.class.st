@@ -48,7 +48,7 @@ I represent a cast expression, e.g. `(int) 0.5`
 |---|
 | `additionalBounds` | `FASTJavaCastExpression` | `javaCastExpressionAdditionalBoundOwner` | `FASTJavaTypeExpression` | The interface types I write after the first, as additional bounds|
 | `expression` | `FASTJavaCastExpression` | `javaCastExpressionOwner` | `FASTTExpression` | The expression to cast|
-| `type` | `FASTJavaCastExpression` | `javaCastExpressionTypeOwner` | `FASTJavaVariableExpression` | The type into which the expression will be cast|
+| `type` | `FASTJavaCastExpression` | `javaCastExpressionTypeOwner` | `FASTJavaTypeExpression` | The type into which the expression will be cast|
 
 
 ## Properties
@@ -67,7 +67,7 @@ Class {
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#additionalBounds => FMMany type: #FASTJavaTypeExpression opposite: #javaCastExpressionAdditionalBoundOwner',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner'
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaCastExpressionTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -146,7 +146,7 @@ FASTJavaCastExpression >> isCastExpression [
 
 { #category : 'accessing' }
 FASTJavaCastExpression >> type [
-	"Relation named: #type type: #FASTJavaVariableExpression opposite: #javaCastExpressionTypeOwner"
+	"Relation named: #type type: #FASTJavaTypeExpression opposite: #javaCastExpressionTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>

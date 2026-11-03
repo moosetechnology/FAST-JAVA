@@ -24,3 +24,11 @@ JavaSmaCCImporterAbstractTest >> parseClassString: aString [
 JavaSmaCCImporterAbstractTest >> parseMethodString: aString [
 	^ JavaSmaCCProgramNodeImporterVisitor new parseCodeMethodString: aString
 ]
+
+{ #category : 'resources' }
+JavaSmaCCImporterAbstractTest >> writtenModifiersOf: aFASTJavaEntity [
+	"JLS 8.1.1: a declaration writes its keywords and its annotations in one list. The model
+	holds them apart, and the positions they carry give back the run the source writes."
+
+	^ aFASTJavaEntity annotations asArray , aFASTJavaEntity modifiers asArray sorted: [ :a :b | a startPos <= b startPos ]
+]
