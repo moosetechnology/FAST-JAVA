@@ -108,6 +108,11 @@ FASTJavaVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaration [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaClassLiteral: aFASTJavaClassLiteral [
+	^ self visitFASTTExpression: aFASTJavaClassLiteral
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 	^ self visitFASTTVariableExpression: aFASTJavaClassProperty
 ]

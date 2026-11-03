@@ -137,6 +137,31 @@ JLS 15.26 lets one stand on the left of an assignment, as `Foo.bar = 1` does. It
 variable expression, it keeps `FASTJavaTAssignable` with the rest, and only its name is
 wrong.
 
+## A class literal is an entity of its own
+
+`FASTJavaClassProperty` held two different things under one name. Over 300 JDK 25 files it
+carried 124 class literals — `String.class`, `int[].class`, `void.class` (JLS 15.8.2) — and
+732 dotted names used as values, such as `System.out` (JLS 6.5.6.2). The only way to tell
+them apart was `fieldName = 'class'`, and `type` meant a different thing in each: in the
+124 it held a type expression every time, in the 732 it held a variable expression every
+time, with no overlap at all.
+
+`FASTJavaClassLiteral` is now its own entity: a `FASTJavaEntity` using `FASTTExpression`,
+`FASTJavaTReceiver` and `FASTJavaTAnnotationElement` — one is often written as the element
+of an annotation, and `String.class.getName()` makes it a receiver. Nothing assigns to it,
+so it does not carry `FASTJavaTAssignable`, which it used to inherit.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| a `FASTJavaClassProperty` with `fieldName = 'class'` | `FASTJavaClassLiteral` |
+| `aClassProperty fieldName` (always `'class'`) | nothing — the entity says it |
+| `aClassProperty type` | `aClassLiteral type`, declared `FASTJavaTypeExpression` |
+| `aTypeExpression javaClassPropertyOwner` | `javaClassLiteralTypeOwner` |
+
+`FASTJavaClassProperty` keeps the other 732. It is a dotted name used as a value, which
+JLS 15.26 lets you assign to, so it stays a variable expression — only its name is wrong,
+and renaming it waits for a decision about whether it is a `FASTJavaFieldAccess` at all.
+
 ## A stray semicolon is no longer a method
 
 JLS 8.1.6 lets a class body write a bare `;` where a member would go. `v4` modelled it as

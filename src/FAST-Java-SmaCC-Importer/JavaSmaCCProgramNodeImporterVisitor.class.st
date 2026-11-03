@@ -908,12 +908,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration 
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
-	currentFASTEntity := self addToModel: FASTJavaClassProperty new.
-	self setStartEndPos: aClassExpression.
+	"JLS 15.8.2: a class literal writes a type and then `.class`, and the keyword is all
+	there is to write, so only the type is held."
 
+	currentFASTEntity := self create: FASTJavaClassLiteral from: aClassExpression.
 	currentFASTEntity type: (self clone accept: aClassExpression type).
-	currentFASTEntity fieldName: aClassExpression classToken value.
-
 	^ currentFASTEntity
 ]
 

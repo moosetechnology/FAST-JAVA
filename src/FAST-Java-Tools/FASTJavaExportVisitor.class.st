@@ -489,6 +489,15 @@ FASTJavaExportVisitor >> visitFASTJavaClassDeclaration: aFASTJavaClassDeclaratio
 ]
 
 { #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaClassLiteral: aFASTJavaClassLiteral [
+	"JLS 15.8.2: a class literal writes its type, then `.class`."
+
+	self checkForComments: aFASTJavaClassLiteral andDo: [
+		aFASTJavaClassLiteral type accept: self.
+		self << '.class' ]
+]
+
+{ #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
 	self checkForComments: aFASTJavaClassProperty andDo: [
 	aFASTJavaClassProperty type accept: self.

@@ -34,5 +34,9 @@ JavaSmaCCArrayTypeNameTest >> testArrayTypeInModelSize [
 
 { #category : 'tests' }
 JavaSmaCCArrayTypeNameTest >> testArrayTypeParentNode [
-	self assert: ((fastModel allWithType: FASTJavaArrayTypeExpression) sort: [:a :b | a startPos < b startPos ]) last parentNode class equals: FASTJavaClassProperty.
+	"JLS 15.8.2: `int[].class` is a class literal, and the array type it names belongs to it."
+
+	self
+		assert: ((fastModel allWithType: FASTJavaArrayTypeExpression) sort: [ :a :b | a startPos < b startPos ]) last parentNode class
+		equals: FASTJavaClassLiteral
 ]

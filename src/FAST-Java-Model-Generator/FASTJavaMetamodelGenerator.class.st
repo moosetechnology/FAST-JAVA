@@ -152,7 +152,8 @@ Class {
 		'javaDimension',
 		'tWithAnnotations',
 		'javaDimensionExpression',
-		'javaEmptyDeclaration'
+		'javaEmptyDeclaration',
+		'javaClassLiteral'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -286,6 +287,21 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 	void methodDeclaration(){
 	}
 }'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaClassLiteral [
+	^ 'I am a class literal: a type written before `.class`, which reads the Class object of
+that type (JLS 15.8.2).
+
+The type may be a class or interface, an array type, a primitive type or `void`, so
+`String.class`, `int[].class`, `boolean.class` and `void.class` are all class literals. I am
+not a field access and nothing assigns to me; I am often written as the element of an
+annotation.
+
+```language=text
+String.class
+```'
 ]
 
 { #category : 'comments' }
@@ -910,6 +926,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaOuterThis withTesting.
 	javaVariableDeclarator := self newClassNamed: #VariableDeclarator comment: self commentForJavaVariableDeclarator.
 	javaVariableDeclarator withTesting.
+	javaClassLiteral := self newClassNamed: #ClassLiteral comment: self commentForJavaClassLiteral.
+	javaClassLiteral withTesting.
 	javaClassProperty := self newClassNamed: #ClassProperty comment: self commentForJavaClassProperty.
 	javaClassProperty withTesting.
 	javaNewArray := self newClassNamed: #NewArray comment: self commentForJavaNewArray.
@@ -1281,6 +1299,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCastExpression --|> tExpression.
 	javaCastExpression --|> tReceiver.
 
+	"JLS 15.8.2: a class literal writes a type and then `.class`. It reads the Class object
+	of that type, so it is an expression and a receiver, and a very common element of an
+	annotation; nothing assigns to it."
+	javaClassLiteral --|> tExpression.
+	javaClassLiteral --|> tReceiver.
+	javaClassLiteral --|> tAnnotationElement.
+
 	javaClassProperty --|> javaVariableExpression.
 	javaClassProperty --|> tReceiver.
 	javaClassProperty --|> tAnnotationElement.
@@ -1422,6 +1447,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	qualifiedName --|> tNamedEntity.
 	qualifiedName --|> tEntity.
+	"A name parsed on its own, rather than inside a compilation unit, reaches the model
+	as a qualified name even where it stands on the left of an assignment, so this stays
+	until the importer stops reading a bare fragment as a name outside every type."
 	qualifiedName --|> tAssignable.
 
 	javaTypePattern --|> tExpression.
@@ -1618,6 +1646,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			  #javaCastExpressionAdditionalBoundOwner) comment:
 			 'The cast that writes me as one of its additional bounds').
 
+	"JLS 15.8.2: the type whose Class object a class literal reads, which may be a class,
+	an interface, an array, a primitive type or `void`."
+	((javaClassLiteral property: #type) comment:
+		 'The type whose Class object I read, eg. the `String` of `String.class`')
+	<>- ((javaTypeExpression property: #javaClassLiteralTypeOwner) comment:
+			 'The class literal that reads my Class object').
 	((javaClassProperty property: #type) comment:
 		 'The type of the property')
 	<>-

@@ -29,6 +29,7 @@ I am an abstract class representing a type
 | `javaClassDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaClassDeclaration` | The class that implements me|
 | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeExpression` | `permittedSubtypes` | `FASTJavaClassDeclaration` | The sealed class that permits me to extend it|
 | `javaClassDeclarationSuperclassOwner` | `FASTJavaTypeExpression` | `superclass` | `FASTJavaClassDeclaration` | The class that extends me|
+| `javaClassLiteralTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaClassLiteral` | The class literal that reads my Class object|
 | `javaClassPropertyOwner` | `FASTTExpression` | `type` | `FASTJavaClassProperty` | The javaClassProperty owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaEnumDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaEnumDeclaration` | The enum that implements me|
@@ -98,6 +99,7 @@ Class {
 		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
 		'#javaClassDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaClassDeclaration opposite: #permittedSubtypes',
 		'#javaClassDeclarationSuperclassOwner => FMOne type: #FASTJavaClassDeclaration opposite: #superclass',
+		'#javaClassLiteralTypeOwner => FMOne type: #FASTJavaClassLiteral opposite: #type',
 		'#javaEnumDeclarationInterfaceOwner => FMOne type: #FASTJavaEnumDeclaration opposite: #interfaces',
 		'#javaForEachStatementTypeOwner => FMOne type: #FASTJavaForEachStatement opposite: #type',
 		'#javaInterfaceDeclarationInterfaceOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #interfaces',
@@ -252,6 +254,25 @@ FASTJavaTypeExpression >> javaClassDeclarationSuperclassOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaClassDeclarationSuperclassOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaClassLiteralTypeOwner [
+	"Relation named: #javaClassLiteralTypeOwner type: #FASTJavaClassLiteral opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The class literal that reads my Class object'>
+	<container>
+	^ javaClassLiteralTypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaClassLiteralTypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaClassLiteralTypeOwner := anObject
 ]
 
 { #category : 'accessing' }

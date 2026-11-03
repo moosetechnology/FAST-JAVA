@@ -173,6 +173,14 @@ FASTJavaTEntityCreator >> newClassDeclaration [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newClassLiteral [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaClassLiteral new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newClassProperty [
 
 	<ignoreForCoverage>
