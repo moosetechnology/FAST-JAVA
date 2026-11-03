@@ -42,15 +42,14 @@ JavaSmaCCProgramNodeImporterVisitor >> acceptAnnotationInterfaceMember: aMemberN
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> acceptComponentType: aTypeNode [
-	"JLS 10.1: the component type of an array may itself be a parameterized type. Where a
-	type stands on its own the grammar wraps its name in a class type, and the arguments
-	are read from there; the component of an array type is the bare name, which carries
-	them itself. Give it the class type they belong to, so that `Class<?>[]` keeps the
-	arguments `Class<?>` keeps."
+	"JLS 10.1: the element type of an array is a type — a primitive type, a class or
+	interface type, or another array type — and never a bare name. Where the element is
+	written as a name the grammar gives the name alone, carrying the type arguments that
+	follow it, so wrap it in the class type it stands for; `Byte[]` then holds what
+	`Class<?>[]` holds."
 
 	| visitor classType |
-	((aTypeNode isKindOf: JavaTypeNameNode) and: [ aTypeNode arguments isNotEmpty ]) ifFalse: [
-		^ self clone accept: aTypeNode ].
+	(aTypeNode isKindOf: JavaTypeNameNode) ifFalse: [ ^ self clone accept: aTypeNode ].
 
 	visitor := self clone.
 	classType := visitor create: FASTJavaClassTypeExpression from: aTypeNode.

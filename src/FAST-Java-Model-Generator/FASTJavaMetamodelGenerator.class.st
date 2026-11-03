@@ -1842,10 +1842,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaTypeExpression property: #javaVarDeclTypeOwner) comment:
 			 'The variable expression owner (if possible)').
 
+	"JLS 10.1: the element type of an array is a type — a primitive type, a class or
+	interface type, or another array type — and never a bare name."
 	((javaArrayTypeExpression property: #baseType) comment:
-		 'The type of the array')
-	<>- ((tExpression property: #javaArrayTypeNameOwner) comment:
-			 'The variable expression owner (if possible)').
+		 'The type of my elements, eg. the `Byte` of `Byte[]`')
+	<>- ((javaTypeExpression property: #javaArrayBaseTypeOwner) comment:
+			 'The array type that makes an array of me').
 
 	((javaClassTypeExpression property: #typeName) comment:
 		 'The name of the type')

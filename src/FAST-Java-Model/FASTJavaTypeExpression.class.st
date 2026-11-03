@@ -19,8 +19,8 @@ I am an abstract class representing a type
 | `infixOperationRightOperandOwner` | `FASTTExpression` | `rightOperand` | `FASTJavaInfixOperation` | The right operand (if possible)|
 | `javaArrayAccessOwner` | `FASTTExpression` | `expression` | `FASTJavaArrayAccess` | The javaArrayAccess owner (if possible)|
 | `javaArrayArrayAccessOwner` | `FASTTExpression` | `array` | `FASTJavaArrayAccess` | The javaArrayArrayAccess owner (if possible)|
+| `javaArrayBaseTypeOwner` | `FASTJavaTypeExpression` | `baseType` | `FASTJavaArrayTypeExpression` | The array type that makes an array of me|
 | `javaArrayInitializers` | `FASTTExpression` | `initializers` | `FASTJavaArrayInitializer` | The owner of the expression|
-| `javaArrayTypeNameOwner` | `FASTTExpression` | `baseType` | `FASTJavaArrayTypeExpression` | The variable expression owner (if possible)|
 | `javaAssignmentExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaAssignmentExpression` | The javaAssignmentExpression owner (if possible)|
 | `javaCastExpressionAdditionalBoundOwner` | `FASTJavaTypeExpression` | `additionalBounds` | `FASTJavaCastExpression` | The cast that writes me as one of its additional bounds|
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
@@ -91,6 +91,7 @@ Class {
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#catchOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #caughtTypes',
+		'#javaArrayBaseTypeOwner => FMOne type: #FASTJavaArrayTypeExpression opposite: #baseType',
 		'#javaCastExpressionAdditionalBoundOwner => FMOne type: #FASTJavaCastExpression opposite: #additionalBounds',
 		'#javaCastExpressionTypeOwner => FMOne type: #FASTJavaCastExpression opposite: #type',
 		'#javaClassDeclarationInterfaceOwner => FMOne type: #FASTJavaClassDeclaration opposite: #interfaces',
@@ -155,6 +156,25 @@ FASTJavaTypeExpression >> isTypeExpression [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaArrayBaseTypeOwner [
+	"Relation named: #javaArrayBaseTypeOwner type: #FASTJavaArrayTypeExpression opposite: #baseType"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The array type that makes an array of me'>
+	<container>
+	^ javaArrayBaseTypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeExpression >> javaArrayBaseTypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaArrayBaseTypeOwner := anObject
 ]
 
 { #category : 'accessing' }

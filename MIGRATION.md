@@ -92,7 +92,7 @@ Reading them is unchanged — over the whole of JDK 8 and JDK 25 they never held
 else. Code that *writes* one, in a transformation or a hand-built model, must now pass a
 type expression.
 
-The two that genuinely hold a variable expression go the other way and are widened to
+The one that genuinely holds a variable expression goes the other way and is widened to
 `FASTTExpression`: see the next section.
 
 ## A type is no longer a variable expression
@@ -149,6 +149,40 @@ What a type is, the class says:
 `FASTJavaPrimitiveTypeExpression` is now abstract in fact as well as in name: the grammar
 only ever builds one of its nine subclasses, so the importer's `visitPrimitiveType:` — which
 built a bare one named by the keyword it had read — is gone with the name it wrote.
+
+## An array's element type is a type
+
+`FASTJavaArrayTypeExpression>>baseType` was declared `FASTTExpression`, the widest thing it
+could be, and held four different kinds of entity, chosen by nothing but how the element
+type happened to be written:
+
+| written | v4.4.0 `baseType` |
+| --- | --- |
+| `int[]` | `FASTJavaIntTypeExpression` |
+| `Byte[]` | `FASTJavaTypeName` |
+| `java.util.List[]` | `FASTJavaQualifiedTypeName` |
+| `List<String>[]` | `FASTJavaClassTypeExpression` |
+| `Byte[][]` | `FASTJavaArrayTypeExpression` |
+
+The second and third are not types at all. A `FASTJavaTypeName` is the *name* that a
+`FASTJavaClassTypeExpression` holds in its `typeName`, and `Byte` and `List<String>` are
+the same construct — a class type written as the element of an array (JLS 10.1). The only
+thing deciding which of the two a reader got was whether type arguments happened to follow.
+
+A name written as an element type is now read as the class type it stands for, so
+`baseType` always holds a `FASTJavaTypeExpression` and the relation is declared as one.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `anArrayType baseType name` | `anArrayType baseType typeName name` |
+| `anArrayType baseType class = FASTJavaTypeName` | `anArrayType baseType isClassTypeExpression` |
+| `aTypeName javaArrayTypeNameOwner` | `aTypeExpression javaArrayBaseTypeOwner` |
+
+`anArrayType baseType fullName` is unchanged and is the shortest way to the name, dotted
+or not: a class type expression answers its type name's. Code that already handled
+`List<String>[]` needs no change at all; code that assumed the bare name does. Nothing is
+exported differently — a class type with no arguments writes its name and nothing else, so
+`Byte[]` is still written back as `Byte[]`.
 
 ## An enum constant is no longer a variable expression either
 
@@ -275,6 +309,7 @@ Each rename applies to the setter too, and to the `addX:` of a multivalued relat
 | `FASTJavaVariableExpression>>javaCatchParameterOwnler` | `javaCatchParameterOwner` |
 | `FASTJavaTypeName>>javaTypeNameQualify` | `javaQualifiedTypeNameOwner` |
 | `FASTJavaVariableExpression>>javaNewExpressionOwner` | `FASTJavaTypeExpression>>javaNewExpressionTypeOwner` |
+| `FASTTExpression>>javaArrayTypeNameOwner` | `FASTJavaTypeExpression>>javaArrayBaseTypeOwner` |
 
 ## The deprecated package is gone
 

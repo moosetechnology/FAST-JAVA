@@ -272,37 +272,6 @@ FASTTExpression >> javaArrayInitializers: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
-FASTTExpression >> javaArrayTypeNameOwner [
-	"Relation named: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The variable expression owner (if possible)'>
-	<container>
-	<FMProperty: #javaArrayTypeNameOwner type: #FASTJavaArrayTypeExpression opposite: #baseType>
-	<package: #'FAST-Java-Model'>
-	<derived>
-	^ self attributeAt: #javaArrayTypeNameOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model' }
-FASTTExpression >> javaArrayTypeNameOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	<package: #'FAST-Java-Model'>
-
-	(self attributeAt: #javaArrayTypeNameOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaArrayTypeNameOwner.
-		self attributeAt: #javaArrayTypeNameOwner put: anObject.
-		otherSide baseType: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaArrayTypeNameOwner put: anObject.
-		anObject baseType: self ]
-]
-
-{ #category : '*FAST-Java-Model' }
 FASTTExpression >> javaAssignmentExpressionOwner [
 	"Relation named: #javaAssignmentExpressionOwner type: #FASTJavaAssignmentExpression opposite: #expression"
 

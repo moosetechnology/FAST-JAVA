@@ -232,7 +232,7 @@ FASTJavaTestNodeBuilder >> return: aNode [
 FASTJavaTestNodeBuilder >> stringArrayType [
 
 	^ FASTJavaArrayTypeExpression new
-		  baseType: (FASTJavaTypeName new name: 'String');
+		  baseType: (FASTJavaClassTypeExpression new typeName: (self type: 'String'));
 		  yourself
 ]
 

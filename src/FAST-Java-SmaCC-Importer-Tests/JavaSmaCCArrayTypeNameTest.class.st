@@ -14,7 +14,7 @@ JavaSmaCCArrayTypeNameTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCArrayTypeNameTest >> testArrayTypeBaseTypeName [
-	self assert: (fastModel allWithType: FASTJavaArrayTypeExpression) first baseType name equals: 'Byte'.
+	self assert: (fastModel allWithType: FASTJavaArrayTypeExpression) first baseType typeName name equals: 'Byte'
 ]
 
 { #category : 'tests' }
@@ -24,7 +24,10 @@ JavaSmaCCArrayTypeNameTest >> testArrayTypeBaseTypeParentNode [
 
 { #category : 'tests' }
 JavaSmaCCArrayTypeNameTest >> testArrayTypeBaseTypeType [
-	self assert: (fastModel allWithType: FASTJavaArrayTypeExpression) first baseType class equals: FASTJavaTypeName.
+	"JLS 10.1: the element type of an array is a type, so a name written as one is read as
+	the class type it stands for."
+
+	self assert: (fastModel allWithType: FASTJavaArrayTypeExpression) first baseType class equals: FASTJavaClassTypeExpression
 ]
 
 { #category : 'tests' }
@@ -39,4 +42,17 @@ JavaSmaCCArrayTypeNameTest >> testArrayTypeParentNode [
 	self
 		assert: ((fastModel allWithType: FASTJavaArrayTypeExpression) sort: [ :a :b | a startPos < b startPos ]) last parentNode class
 		equals: FASTJavaClassLiteral
+]
+
+{ #category : 'tests' }
+JavaSmaCCArrayTypeNameTest >> testEveryElementTypeIsAType [
+	"JLS 10.1: the element type of an array is a type, however the array is written — a
+	class type, a primitive type or another array type — so `baseType` holds one kind of
+	thing and never a bare name."
+
+	| arrays model |
+	model := self parseMethodString: 'void m(Byte[] a, int[] b, java.util.List<String>[] c, String[][] d) {}'.
+	arrays := model allWithType: FASTJavaArrayTypeExpression.
+	self assert: arrays size equals: 5.
+	self assert: (arrays allSatisfy: [ :array | array baseType isTypeExpression ])
 ]

@@ -91,7 +91,7 @@ JavaSmaCCBracketAnnotationsTest >> testEachPairOfBracketsOfATypeKeepsItsOwnAnnot
 		equals: #( 'B' ).
 	self assert: (outer baseType annotations collect: [ :modifier | modifier name ]) asArray
 		equals: #( 'A' ).
-	self assert: outer baseType baseType name equals: 'String'
+	self assert: outer baseType baseType typeName name equals: 'String'
 ]
 
 { #category : 'tests' }

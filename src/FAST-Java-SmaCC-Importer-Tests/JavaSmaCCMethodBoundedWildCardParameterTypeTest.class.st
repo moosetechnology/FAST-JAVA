@@ -21,7 +21,7 @@ JavaSmaCCMethodBoundedWildCardParameterTypeTest >> testMethodArrayBoundIsKept [
 
 	bound := (fastModelWithArrayBound allWithType: FASTJavaMethodEntity) anyOne type arguments anyOne types anyOne.
 	self assert: bound class equals: FASTJavaArrayTypeExpression.
-	self assert: bound baseType name equals: 'Number'
+	self assert: bound baseType typeName name equals: 'Number'
 ]
 
 { #category : 'tests' }

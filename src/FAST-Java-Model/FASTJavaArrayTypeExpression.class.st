@@ -7,7 +7,7 @@ I represent an array type
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `baseType` | `FASTJavaArrayTypeExpression` | `javaArrayTypeNameOwner` | `FASTTExpression` | The type of the array|
+| `baseType` | `FASTJavaArrayTypeExpression` | `javaArrayBaseTypeOwner` | `FASTJavaTypeExpression` | The type of my elements, eg. the `Byte` of `Byte[]`|
 
 
 
@@ -15,6 +15,9 @@ I represent an array type
 Class {
 	#name : 'FASTJavaArrayTypeExpression',
 	#superclass : 'FASTJavaTypeExpression',
+	#instVars : [
+		'#baseType => FMOne type: #FASTJavaTypeExpression opposite: #javaArrayBaseTypeOwner'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -31,13 +34,12 @@ FASTJavaArrayTypeExpression class >> annotation [
 
 { #category : 'accessing' }
 FASTJavaArrayTypeExpression >> baseType [
-	"Relation named: #baseType type: #FASTTExpression opposite: #javaArrayTypeNameOwner"
+	"Relation named: #baseType type: #FASTJavaTypeExpression opposite: #javaArrayBaseTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type of the array'>
-	<FMProperty: #baseType type: #FASTTExpression opposite: #javaArrayTypeNameOwner>
-	^ self attributeAt: #baseType ifAbsent: [ nil ]
+	<FMComment: 'The type of my elements, eg. the `Byte` of `Byte[]`'>
+	^ baseType
 ]
 
 { #category : 'accessing' }
@@ -45,14 +47,7 @@ FASTJavaArrayTypeExpression >> baseType: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	(self attributeAt: #baseType ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self baseType.
-		self attributeAt: #baseType put: anObject.
-		otherSide javaArrayTypeNameOwner: nil ]
-	ifNotNil: [ 
-		self attributeAt: #baseType put: anObject.
-		anObject javaArrayTypeNameOwner: self ]
+	baseType := anObject
 ]
 
 { #category : 'testing' }

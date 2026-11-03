@@ -35,7 +35,7 @@ JavaSmaCCArrayOfParameterizedTypeTest >> javaClass [
 JavaSmaCCArrayOfParameterizedTypeTest >> parameterizedComponents [
 
 	^ (self arrayTypes collect: [ :array | array baseType ]) select: [ :component |
-		  component isClassTypeExpression ]
+		  component isClassTypeExpression and: [ component arguments isNotEmpty ] ]
 ]
 
 { #category : 'tests' }
@@ -70,11 +70,13 @@ JavaSmaCCArrayOfParameterizedTypeTest >> testComponentWritingArgumentsIsAParamet
 ]
 
 { #category : 'tests' }
-JavaSmaCCArrayOfParameterizedTypeTest >> testComponentWritingNoArgumentsStaysABareName [
-	"JLS 10.1: `String[]` writes no arguments for its component, so there are none to keep
-	and the component stays the name it is written as."
+JavaSmaCCArrayOfParameterizedTypeTest >> testComponentWritingNoArgumentsIsStillAClassType [
+	"JLS 10.1: the element type of an array is a type, so `String[]` reads `String` as the
+	class type it stands for, writing no arguments, and not as the bare name it is written
+	as."
 
-	self deny: (self parameterizedComponents anySatisfy: [ :component | component typeName name = 'String' ]).
-	self assert: (self arrayTypes anySatisfy: [ :array |
-		 array baseType class = FASTJavaTypeName and: [ array baseType name = 'String' ] ])
+	| component |
+	component := (self arrayTypes collect: [ :array | array baseType ]) detect: [ :each |
+		             each isClassTypeExpression and: [ each typeName name = 'String' ] ].
+	self assert: component arguments isEmpty
 ]
