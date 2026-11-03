@@ -27,7 +27,6 @@
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaOpensDirectiveTargetOwner` | `FASTJavaQualifiedName` | `targets` | `FASTJavaOpensDirective` | The opens directive that writes me as one of its targets|
-| `javaOuterThisOwner` | `FASTTExpression` | `type` | `FASTJavaOuterThis` | The javaOuterThis owner (if possible)|
 | `javaProvidesDirectiveImplementationOwner` | `FASTJavaQualifiedName` | `implementations` | `FASTJavaProvidesDirective` | The provides directive that writes me as one of its implementations|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|

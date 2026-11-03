@@ -26,7 +26,6 @@
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
-| `javaOuterThisOwner` | `FASTTExpression` | `type` | `FASTJavaOuterThis` | The javaOuterThis owner (if possible)|
 | `javaParameterVariableOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaParameter` | The variable expression owner (if possible)|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|

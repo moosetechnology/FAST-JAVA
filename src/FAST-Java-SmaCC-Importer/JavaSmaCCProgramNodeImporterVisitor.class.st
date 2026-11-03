@@ -559,9 +559,9 @@ JavaSmaCCProgramNodeImporterVisitor >> statementsOfForHeader: aNode [
 
 { #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> typeNameOf: aNameNode [
-	"JLS 15.13: a method reference writes a reference type before `::`, which the rule that
-	reads it takes for an expression name; only the type arguments that may follow tell the
-	two apart. Build the name as the type name it is, one part at a time."
+	"JLS 15.8.4 and 15.13: a qualified `this` and a method reference both write a type name
+	where the rule that reads it takes an expression name, `Outer.this` and `String::length`
+	alike. Build the name as the type name it is, one part at a time."
 
 	| isQualified typeName |
 	isQualified := aNameNode isKindOf: JavaQualifiedNameNode.
@@ -1622,11 +1622,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNull: aNull [
 ]
 
 { #category : 'visitor' }
-JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: aFASTJavaOuterThis [
-	currentFASTEntity := FASTJavaOuterThis new.
-	self setStartEndPos: aFASTJavaOuterThis.
-	currentFASTEntity type: (self clone accept: aFASTJavaOuterThis name).
-	self addToModel: currentFASTEntity.
+JavaSmaCCProgramNodeImporterVisitor >> visitOuterThis: anOuterThis [
+	"JLS 15.8.4: a qualified `this` writes a type name before the dot — the `Outer` of
+	`Outer.this` names the enclosing instance it reads — and nothing else parses there."
+
+	currentFASTEntity := self create: FASTJavaOuterThis from: anOuterThis.
+	currentFASTEntity type: (self typeNameOf: anOuterThis name).
 	^ currentFASTEntity
 ]
 

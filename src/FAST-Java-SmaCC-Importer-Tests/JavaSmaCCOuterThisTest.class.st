@@ -23,6 +23,18 @@ JavaSmaCCOuterThisTest >> testOuterThisParent [
 ]
 
 { #category : 'tests' }
+JavaSmaCCOuterThisTest >> testOuterThisQualifierIsATypeName [
+	"JLS 15.8.4: a qualified `this` writes a type name before the dot, so a dotted qualifier
+	is a chain of type names and not the ambiguous dotted name a value would be read as."
+
+	| model outerThis |
+	model := self parseMethodString: 'void m() { call(p.q.Outer.this); }'.
+	outerThis := (model allWithType: FASTJavaOuterThis) anyOne.
+	self assert: outerThis type class equals: FASTJavaQualifiedTypeName.
+	self assert: outerThis type fullName equals: 'p.q.Outer'
+]
+
+{ #category : 'tests' }
 JavaSmaCCOuterThisTest >> testOuterThisSize [
 	self assert: (fastModel allWithType: FASTJavaOuterThis ) size equals: 1
 ]

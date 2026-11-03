@@ -1636,9 +1636,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	<>- ((tExpression property: #javaArrayArrayAccessOwner) comment:
 			 'The javaArrayArrayAccess owner (if possible)').
 
-	((javaOuterThis property: #type) comment: 'The accessed type')
-	<>- ((tExpression property: #javaOuterThisOwner) comment:
-			 'The javaOuterThis owner (if possible)').
+	"JLS 15.8.4: a qualified `this` writes a type name before the dot, and nothing else
+	parses there — `Outer.this` names the enclosing instance of `Outer`."
+	((javaOuterThis property: #type) comment:
+		 'The type whose enclosing instance I name, eg. the `Outer` of `Outer.this`')
+	<>- ((javaTypeName property: #javaOuterThisOwner) comment:
+			 'The qualified `this` that names my enclosing instance').
 
 	((javaThrowStatement property: #expression) comment:
 		 'The thrown element')

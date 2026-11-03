@@ -426,36 +426,6 @@ FASTTExpression >> javaNewArrayInitialOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
-FASTTExpression >> javaOuterThisOwner [
-	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The javaOuterThis owner (if possible)'>
-	<container>
-	<FMProperty: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type>
-	<package: #'FAST-Java-Model'>
-	^ self attributeAt: #javaOuterThisOwner ifAbsent: [ nil ]
-]
-
-{ #category : '*FAST-Java-Model' }
-FASTTExpression >> javaOuterThisOwner: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	<package: #'FAST-Java-Model'>
-
-	(self attributeAt: #javaOuterThisOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self javaOuterThisOwner.
-		self attributeAt: #javaOuterThisOwner put: anObject.
-		otherSide type: nil ]
-	ifNotNil: [ 
-		self attributeAt: #javaOuterThisOwner put: anObject.
-		anObject type: self ]
-]
-
-{ #category : '*FAST-Java-Model' }
 FASTTExpression >> javaRecordPatternOwner [
 	"Relation named: #javaRecordPatternOwner type: #FASTJavaRecordPattern opposite: #patterns"
 

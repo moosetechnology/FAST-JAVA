@@ -8,6 +8,7 @@ I represent the name of a type
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
+| `javaOuterThisOwner` | `FASTJavaTypeName` | `type` | `FASTJavaOuterThis` | The qualified `this` that names my enclosing instance|
 | `javaQualifiedTypeNameOwner` | `FASTJavaTypeName` | `namespace` | `FASTJavaQualifiedTypeName` | the name I qualify|
 | `javaTypeNameTypeExpressionOwner` | `FASTJavaTypeName` | `typeName` | `FASTJavaClassTypeExpression` | The type expression that owns me|
 
@@ -34,6 +35,7 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTTNamedEntity + FASTTWithArguments',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
+		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaQualifiedTypeNameOwner => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'
 	],
@@ -57,6 +59,25 @@ FASTJavaTypeName >> isTypeName [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaOuterThisOwner [
+	"Relation named: #javaOuterThisOwner type: #FASTJavaOuterThis opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The qualified `this` that names my enclosing instance'>
+	<container>
+	^ javaOuterThisOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaOuterThisOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaOuterThisOwner := anObject
 ]
 
 { #category : 'accessing' }

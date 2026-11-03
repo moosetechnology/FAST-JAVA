@@ -92,8 +92,8 @@ Reading them is unchanged — over the whole of JDK 8 and JDK 25 they never held
 else. Code that *writes* one, in a transformation or a hand-built model, must now pass a
 type expression.
 
-The one that genuinely holds a variable expression goes the other way and is widened to
-`FASTTExpression`: see the next section.
+`FASTJavaOuterThis>>type` is a sixth, but what it holds changes with it, so it has a
+section of its own below.
 
 ## A type is no longer a variable expression
 
@@ -115,11 +115,6 @@ no longer answer for a type; ask for `FASTJavaTypeExpression`, or send `isTypeEx
 `FASTJavaVisitor>>visitFASTJavaTypeExpression:` now forwards to `visitFASTTExpression:`
 rather than `visitFASTTVariableExpression:`, which matters to a visitor that overrode the
 latter.
-
-`FASTJavaOuterThis>>type`, which holds what is written before `.this`, is widened from
-`FASTJavaVariableExpression` to `FASTTExpression` to make this possible. It really does
-hold a plain variable expression most of the time, so it is widened rather than narrowed,
-and reading it is unchanged.
 
 ## A type no longer carries a name
 
@@ -210,6 +205,29 @@ such a part writes, as `ArrayList<E>.ArrayListSpliterator` does.
 `FASTJavaVisitor>>visitFASTJavaTypeName:` now forwards to `visitFASTTNamedEntity:` rather
 than `visitFASTTExpression:`, which matters to a visitor that overrode the latter to catch
 every expression at once.
+
+## The qualifier of a qualified `this` is a type name
+
+JLS 15.8.4 writes a qualified `this` as `TypeName . this`: the qualifier names the class
+whose enclosing instance is read, and nothing else parses there. v4 read it as a value —
+`FASTJavaOuterThis>>type` held a `FASTJavaVariableExpression` for `Outer.this` and a
+`FASTJavaClassProperty` for `p.q.Outer.this` — so the relation named `type` held the one
+thing it was not.
+
+It now holds a `FASTJavaTypeName`, or a `FASTJavaQualifiedTypeName` when the qualifier is
+dotted, built part by part by the same `typeNameOf:` that already read the type before a
+method reference's `::` (JLS 15.13).
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `anOuterThis type` of `Outer.this` is a `FASTJavaVariableExpression` | a `FASTJavaTypeName` |
+| `anOuterThis type` of `p.q.Outer.this` is a `FASTJavaClassProperty` | a `FASTJavaQualifiedTypeName` |
+| walking a dotted qualifier by `fieldName` and `type` | by `name` and `namespace` |
+| `anExpression javaOuterThisOwner` | `aTypeName javaOuterThisOwner` |
+
+`anOuterThis type name` is unchanged. `anOuterThis type fullName` now answers the whole
+qualifier, dotted or not, which nothing in v4 could do: a variable expression has no
+`fullName`.
 
 ## An enum constant is no longer a variable expression either
 

@@ -42,7 +42,6 @@ I am an abstract class representing a type
 | `javaNewArrayTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaNewArray` | The array creation that makes an array of me|
 | `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | `typeArguments` | `FASTJavaNewExpression` | The creation that writes me as one of its type arguments|
 | `javaNewExpressionTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaNewExpression` | The class instance creation that instantiates me|
-| `javaOuterThisOwner` | `FASTTExpression` | `type` | `FASTJavaOuterThis` | The javaOuterThis owner (if possible)|
 | `javaParameterTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaParameter` | The variable expression owner (if possible)|
 | `javaReceiverParameterTypeOwner` | `FASTJavaTypeExpression` | `type` | `FASTJavaReceiverParameter` | The receiver parameter that writes me|
 | `javaRecordDeclarationInterfaceOwner` | `FASTJavaTypeExpression` | `interfaces` | `FASTJavaRecordDeclaration` | The record that implements me|
