@@ -13,15 +13,15 @@ JavaSmaCCFieldAccessOnSuperTest >> javaMethod [
 ]
 
 { #category : 'tests' }
-JavaSmaCCFieldAccessOnSuperTest >> testFieldAccessReceiverName [
-	self
-		assert: (fastModel allWithType: FASTJavaFieldAccess) first receiver name
-		equals: 'super'.
+JavaSmaCCFieldAccessOnSuperTest >> testFieldAccessReceiverIsAnUnqualifiedSuper [
+	"JLS 15.11.2: `super.aField` writes the keyword alone, so the receiver qualifies no type."
+
+	self assert: (fastModel allWithType: FASTJavaFieldAccess) first receiver type isNil
 ]
 
 { #category : 'tests' }
 JavaSmaCCFieldAccessOnSuperTest >> testFieldAccessReceiverType [
 	self
 		assert: (fastModel allWithType: FASTJavaFieldAccess) first receiver class
-		equals: FASTJavaVariableExpression.
+		equals: FASTJavaSuper
 ]

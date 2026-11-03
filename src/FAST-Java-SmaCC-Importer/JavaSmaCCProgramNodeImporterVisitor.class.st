@@ -288,20 +288,6 @@ JavaSmaCCProgramNodeImporterVisitor >> createComment: aCodeString from: start to
 	^comment
 ]
 
-{ #category : 'creating' }
-JavaSmaCCProgramNodeImporterVisitor >> createQualifiedSuper: anExpression at: aSuperToken [
-	"JLS 15.11.2 and 15.12.1: `T.super` is what a member of the superinterface T is reached
-	through, and it names neither T nor the superclass. Its two parts make one receiver,
-	written the way the model writes any other qualified name."
-
-	^ self addToModel: (FASTJavaFieldAccess new
-			   receiver: anExpression;
-			   fieldName: aSuperToken value;
-			   startPos: anExpression startPos;
-			   endPos: aSuperToken stopPosition;
-			   yourself)
-]
-
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> createTypeName: aName [
 	"I am a helper for visitNew"
@@ -555,6 +541,21 @@ JavaSmaCCProgramNodeImporterVisitor >> statementsOfForHeader: aNode [
 	^ imported isCollection
 		  ifTrue: [ imported ]
 		  ifFalse: [ OrderedCollection with: imported ]
+]
+
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> superAt: aSuperToken qualifiedBy: aNameNode [
+	"JLS 15.11.2, 15.12 and 15.13: `super` reaches a member of the superclass, and `T.super`
+	one of the superinterface T. The qualifier is a type name, and the keyword itself names
+	nothing, so there is nothing else to hold."
+
+	| superKeyword |
+	superKeyword := self addToModel: FASTJavaSuper new.
+	superKeyword
+		startPos: (aNameNode ifNil: [ aSuperToken startPosition ] ifNotNil: [ :node | node startPosition ]);
+		endPos: aSuperToken stopPosition.
+	aNameNode ifNotNil: [ :node | superKeyword type: (self typeNameOf: node) ].
+	^ superKeyword
 ]
 
 { #category : 'creating' }
@@ -1076,19 +1077,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitExpressionStatement: anExpressionSta
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitFieldAccess: aFieldAccess [
-	currentFASTEntity := self addToModel: FASTJavaFieldAccess new.
-	self setStartEndPos: aFieldAccess.
-	aFieldAccess receiver
-		ifNotNil: [ :receiver |
-			| expression |
-			expression := self clone accept: receiver.
-			currentFASTEntity receiver: (aFieldAccess superToken
-					 ifNil: [ expression ]
-					 ifNotNil: [ :superToken | self createQualifiedSuper: expression at: superToken ]) ]
+	"JLS 15.11.2: a field access writes a primary, `super` or `T.super` before the dot."
+
+	currentFASTEntity := self create: FASTJavaFieldAccess from: aFieldAccess.
+	aFieldAccess superToken
 		ifNil: [
-			aFieldAccess superToken
-				ifNotNil: [ currentFASTEntity receiver: (self clone visitSuperMemberAcessor: aFieldAccess) ]
-		].
+			aFieldAccess receiver ifNotNil: [ :receiver |
+				currentFASTEntity receiver: (self clone accept: receiver) ] ]
+		ifNotNil: [ :superToken |
+			currentFASTEntity receiver: (self superAt: superToken qualifiedBy: aFieldAccess receiver) ].
 	currentFASTEntity fieldName: aFieldAccess name value.
 	^ currentFASTEntity
 ]
@@ -1390,30 +1387,20 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 	currentFASTEntity := self addToModel: FASTJavaMethodInvocation new.
 	self setStartEndPos: aMethodInvocation.
 	aMethodInvocation expressions do: [ :expression | currentFASTEntity addArgument: (self clone accept: expression) ].
-	aMethodInvocation receiver
-		ifNotNil: [ :receiver |
-			| expression |
-			expression := (receiver isMemberOf: JavaNameNode)
-				              ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
-					              self addToModel: (FASTJavaIdentifier new
-							               name: receiver name value;
-							               startPos: receiver startPosition;
-							               endPos: receiver stopPosition;
-							               yourself) ]
-				              ifFalse: [ self clone accept: receiver ].
-			currentFASTEntity receiver: (aMethodInvocation superToken
-					 ifNil: [ expression ]
-					 ifNotNil: [ :superToken | self createQualifiedSuper: expression at: superToken ]) ]
-		ifNil: [ aMethodInvocation superToken
-				ifNotNil: [ :superToken | 
-					currentFASTEntity
-						receiver:
-							(FASTJavaIdentifier new
-								name: superToken value;
-								startPos: superToken startPosition;
-								endPos: superToken stopPosition;
-								yourself).
-					self addToModel: currentFASTEntity receiver ] ].
+	"JLS 15.12: an invocation writes a primary, `super` or `T.super` before the dot."
+	aMethodInvocation superToken
+		ifNotNil: [ :superToken |
+			currentFASTEntity receiver: (self superAt: superToken qualifiedBy: aMethodInvocation receiver) ]
+		ifNil: [
+			aMethodInvocation receiver ifNotNil: [ :receiver |
+				currentFASTEntity receiver: ((receiver isMemberOf: JavaNameNode)
+						 ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
+							 self addToModel: (FASTJavaIdentifier new
+									  name: receiver name value;
+									  startPos: receiver startPosition;
+									  endPos: receiver stopPosition;
+									  yourself) ]
+						 ifFalse: [ self clone accept: receiver ]) ] ].
 	"JLS 15.12: an invocation may write the type arguments of a generic method before
 	its name, as `Collections.<String>emptyList()` does."
 	self addTypeArgumentsOf: aMethodInvocation arguments to: currentFASTEntity.
@@ -1425,19 +1412,22 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodReference: aMethodReference [
 	"JLS 15.13: a method reference names what it refers to after `::` and writes before it
 	the receiver, which is a type when it writes type arguments or annotations of its own.
-	`T.super::m` names a method of the superclass of T, so `T.super` is the receiver."
+	`super::m` names a method of the superclass and `T.super::m` one of the superinterface T,
+	so the keyword and the name that qualifies it are the receiver."
 
 	| receiver |
 	currentFASTEntity := self addToModel: FASTJavaMethodReference new.
 	self setStartEndPos: aMethodReference.
-	receiver := aMethodReference arguments
-		            ifEmpty: [ self clone accept: aMethodReference receiver ]
-		            ifNotEmpty: [ self typeReceiverOf: aMethodReference ].
-	receiver ifNotNil: [
-		aMethodReference annotations do: [ :annotation |
-			receiver addAnnotation: (self clone accept: annotation) ].
-		aMethodReference superToken ifNotNil: [ :superToken |
-			receiver := self createQualifiedSuper: receiver at: superToken ] ].
+	aMethodReference superToken
+		ifNotNil: [ :superToken |
+			receiver := self superAt: superToken qualifiedBy: aMethodReference receiver ]
+		ifNil: [
+			receiver := aMethodReference arguments
+				            ifEmpty: [ self clone accept: aMethodReference receiver ]
+				            ifNotEmpty: [ self typeReceiverOf: aMethodReference ].
+			receiver ifNotNil: [
+				aMethodReference annotations do: [ :annotation |
+					receiver addAnnotation: (self clone accept: annotation) ] ] ].
 	currentFASTEntity receiver: receiver.
 	"JLS 15.13: the type arguments written after the `::` are the ones of the method named,
 	where those written before it belong to the type the receiver is."
@@ -1880,13 +1870,6 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSuperConstructorInvocation: aSuperCo
 	aSuperConstructorInvocation expressions do: [ :expression | currentFASTEntity arguments add: (self clone accept: expression) ].
 	currentFASTEntity name: aSuperConstructorInvocation superToken value.
 	^ expressionStatement
-]
-
-{ #category : 'visitor' }
-JavaSmaCCProgramNodeImporterVisitor >> visitSuperMemberAcessor: aFieldAccess [
-	currentFASTEntity := self create: FASTJavaVariableExpression from: aFieldAccess superToken.
-	currentFASTEntity name: aFieldAccess superToken value.
-	^ currentFASTEntity 
 ]
 
 { #category : 'visitor' }

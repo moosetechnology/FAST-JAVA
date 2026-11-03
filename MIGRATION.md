@@ -229,6 +229,43 @@ method reference's `::` (JLS 15.13).
 qualifier, dotted or not, which nothing in v4 could do: a variable expression has no
 `fullName`.
 
+## `super` is an entity, and not a field named `super`
+
+`super` is a keyword, not a name (JLS 15.11.2, 15.12 and 15.13), and it is only ever
+written before the dot or the `::` of what it reaches. v4 read it four ways:
+
+| written | v4.4.0 |
+| --- | --- |
+| `super.go()` | the receiver is a `FASTJavaIdentifier` named `'super'` |
+| `super.f` | the receiver is a `FASTJavaVariableExpression` named `'super'` |
+| `super::go` | there is no receiver at all, and the exporter wrote the keyword back from nothing |
+| `T.super.go()`, `T.super.f`, `T.super::go` | the receiver is a `FASTJavaFieldAccess` whose `fieldName` is the String `'super'`, holding the qualifier as its own receiver |
+
+and the qualifier of the fourth was read two ways in its turn — a `FASTJavaIdentifier` for
+`Outer`, a `FASTJavaClassProperty` for `p.q.Outer` — neither of them the type name JLS
+15.11.2 writes there.
+
+`FASTJavaSuper` is one entity for all of it. It holds nothing but an optional `type`, the
+`FASTJavaTypeName` or `FASTJavaQualifiedTypeName` that qualifies it, and it is the receiver
+of the field access, the invocation or the method reference that writes it. It is a
+`FASTJavaEntity` using `FASTJavaTReceiver` and nothing else: `super` is not an expression,
+and `x = super` is not Java.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aReceiver name = 'super'` | `aReceiver isSuper` |
+| `aFieldAccess fieldName = 'super'` | `aFieldAccess receiver isSuper` |
+| the qualifier, read through the inner field access's `receiver` | `aSuper type` |
+| `aMethodReference receiver isNil`, meaning `super::m` | `aMethodReference receiver isSuper`, with a nil `type` |
+| — | `FASTJavaSuper`, `isSuper`, `aModel newSuper`, `visitFASTJavaSuper:` |
+
+A method reference always has a receiver now, so `FASTJavaExportVisitor` no longer writes
+`super` for a nil one, and a visitor that walked receivers no longer skips the keyword.
+
+An explicit constructor invocation is **not** affected: `super(...)` and `o.super(...)`
+stay a `FASTJavaMethodInvocation` named `'super'`, because JLS 8.8.7.1 writes a *Primary*
+before that dot, not a type name.
+
 ## An enum constant is no longer a variable expression either
 
 `FASTJavaEnumConstant` declares a name, writes arguments where the constructor takes them

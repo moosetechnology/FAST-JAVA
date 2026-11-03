@@ -476,6 +476,11 @@ FASTJavaVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaSuper: aFASTJavaSuper [
+	^ self visitFASTTEntity: aFASTJavaSuper
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaSwitchExpression: aFASTJavaSwitchExpression [
 	^ self visitFASTTExpression: aFASTJavaSwitchExpression
 ]

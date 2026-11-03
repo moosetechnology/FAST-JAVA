@@ -32,13 +32,11 @@ JavaSmaCCQualifiedMethodReferenceTest >> testAPlainReferenceKeepsItsReceiverAlon
 
 { #category : 'tests' }
 JavaSmaCCQualifiedMethodReferenceTest >> testAReferenceOnAQualifiedSuperKeepsTheQualifier [
-	"JLS 15.13: `T.super::m` names a method of the superclass of T, so T and `super` make
-	one receiver, written the way a qualified super is written anywhere else."
+	"JLS 15.13: `T.super::m` names a method of the superclass of T, so the keyword and the
+	type name that qualifies it are the receiver."
 
 	| reference |
 	reference := (fastModel allWithType: FASTJavaMethodReference) detect: [ :each | each name = 'toString' ].
-
-	self assert: reference receiver class equals: FASTJavaFieldAccess.
-	self assert: reference receiver fieldName equals: 'super'.
-	self assert: reference receiver receiver name equals: 'References'
+	self assert: reference receiver class equals: FASTJavaSuper.
+	self assert: reference receiver type fullName equals: 'References'
 ]

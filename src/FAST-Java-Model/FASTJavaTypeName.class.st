@@ -10,6 +10,7 @@ I represent the name of a type
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaOuterThisOwner` | `FASTJavaTypeName` | `type` | `FASTJavaOuterThis` | The qualified `this` that names my enclosing instance|
 | `javaQualifiedTypeNameOwner` | `FASTJavaTypeName` | `namespace` | `FASTJavaQualifiedTypeName` | the name I qualify|
+| `javaSuperOwner` | `FASTJavaTypeName` | `type` | `FASTJavaSuper` | The `super` I qualify|
 | `javaTypeNameTypeExpressionOwner` | `FASTJavaTypeName` | `typeName` | `FASTJavaClassTypeExpression` | The type expression that owns me|
 
 ### Children
@@ -37,6 +38,7 @@ Class {
 	#instVars : [
 		'#javaOuterThisOwner => FMOne type: #FASTJavaOuterThis opposite: #type',
 		'#javaQualifiedTypeNameOwner => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
+		'#javaSuperOwner => FMOne type: #FASTJavaSuper opposite: #type',
 		'#javaTypeNameTypeExpressionOwner => FMOne type: #FASTJavaClassTypeExpression opposite: #typeName'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -97,6 +99,25 @@ FASTJavaTypeName >> javaQualifiedTypeNameOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaQualifiedTypeNameOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaSuperOwner [
+	"Relation named: #javaSuperOwner type: #FASTJavaSuper opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The `super` I qualify'>
+	<container>
+	^ javaSuperOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaSuperOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaSuperOwner := anObject
 ]
 
 { #category : 'accessing' }

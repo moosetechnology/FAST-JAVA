@@ -685,6 +685,14 @@ FASTJavaTEntityCreator >> newStringLiteral [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newSuper [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaSuper new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newSwitchExpression [
 
 	<ignoreForCoverage>

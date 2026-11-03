@@ -744,6 +744,14 @@ FASTJavaEntity >> isStringLiteral [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isSuper [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isSwitchExpression [
 
 	<ignoreForCoverage>

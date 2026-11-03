@@ -152,7 +152,8 @@ Class {
 		'tWithAnnotations',
 		'javaDimensionExpression',
 		'javaEmptyDeclaration',
-		'javaClassLiteral'
+		'javaClassLiteral',
+		'javaSuper'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -691,6 +692,22 @@ FASTJavaMetamodelGenerator >> commentForJavaStringLiteral [
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaSuper [
+	^ 'I am the `super` of a superclass field access, a superclass method invocation or a
+method reference on `super` (JLS 15.11.2, 15.12 and 15.13).
+
+I am a keyword, not a name and not an expression of my own: `x = super` is not Java, and I
+am only ever written before the dot or the `::` of what I reach. I may be qualified by a
+type name, and `T.super` then reaches a member of the superinterface T rather than of the
+superclass.
+
+```language=text
+super.toString()
+Outer.super.toString()
+```'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaSwitchExpression [
 
 	^ 'I represent a switch expression, introduced in Java 14 by [JEP 361](https://openjdk.org/jeps/361).
@@ -888,6 +905,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaThis withTesting.
 	javaOuterThis := self newClassNamed: #OuterThis comment: self commentForJavaOuterThis.
 	javaOuterThis withTesting.
+	javaSuper := self newClassNamed: #Super comment: self commentForJavaSuper.
+	javaSuper withTesting.
 	javaVariableDeclarator := self newClassNamed: #VariableDeclarator comment: self commentForJavaVariableDeclarator.
 	javaVariableDeclarator withTesting.
 	javaClassLiteral := self newClassNamed: #ClassLiteral comment: self commentForJavaClassLiteral.
@@ -1322,6 +1341,11 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaOuterThis --|> tExpression.
 	javaOuterThis --|> tReceiver.
 
+	"JLS 15.11.2, 15.12 and 15.13: `super` is written before the dot or the `::` of what it
+	reaches, and nowhere else — it is not an expression of its own, and `x = super` is not
+	Java."
+	javaSuper --|> tReceiver.
+
 	javaCatchPartStatement --|> tStatement.
 	"JLS 14.20: the modifiers of the catch formal parameter, whose types and name are held here"
 	javaCatchPartStatement --|> tWithModifiers.
@@ -1642,6 +1666,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The type whose enclosing instance I name, eg. the `Outer` of `Outer.this`')
 	<>- ((javaTypeName property: #javaOuterThisOwner) comment:
 			 'The qualified `this` that names my enclosing instance').
+
+	"JLS 15.11.2: `super` may be qualified by a type name, and `T.super` then reaches a
+	member of the superinterface T rather than of the superclass."
+	((javaSuper property: #type) comment:
+		 'The type whose superinterface I reach, eg. the `Outer` of `Outer.super`')
+	<>- ((javaTypeName property: #javaSuperOwner) comment:
+			 'The `super` I qualify').
 
 	((javaThrowStatement property: #expression) comment:
 		 'The thrown element')

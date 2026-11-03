@@ -14,12 +14,14 @@ JavaSmaCCSuperMethodInvocationTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiver [
-	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver name equals: 'super'
+	"JLS 15.12.1: `super.superMethodInvocation()` writes the keyword alone before the dot."
+
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver type isNil
 ]
 
 { #category : 'tests' }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverAsChild [
-	self assert: (fastModel allWithType: FASTJavaIdentifier) anyOne equals: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver
+	self assert: (fastModel allWithType: FASTJavaSuper) anyOne equals: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver
 ]
 
 { #category : 'tests' }
@@ -29,5 +31,5 @@ JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverParent [
 
 { #category : 'tests' }
 JavaSmaCCSuperMethodInvocationTest >> testMethodInvocationReceiverType [
-	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver class equals: FASTJavaIdentifier
+	self assert: (fastModel allWithType: FASTJavaMethodInvocation) anyOne receiver class equals: FASTJavaSuper
 ]

@@ -1044,15 +1044,12 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodI
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaMethodReference: aFASTJavaMethodReference [
 	"JLS 15.13: a method reference writes the name it refers to after `::`, `new` for a
-	constructor, with the type arguments of that method between the two. A reference on
-	`super` is the one form that keeps no receiver."
+	constructor, with the type arguments of that method between the two."
 
 	self checkForComments: aFASTJavaMethodReference andDo: [
 		self
 			outputExpression: [
-				aFASTJavaMethodReference receiver
-					ifNil: [ self unindented: 'super' ]
-					ifNotNil: [ :receiver | receiver accept: self ].
+				aFASTJavaMethodReference receiver accept: self.
 				self unindented: '::'.
 				self visitFASTJavaTypeArguments: aFASTJavaMethodReference typeArguments.
 				self unindented: aFASTJavaMethodReference name ]
@@ -1461,6 +1458,17 @@ FASTJavaExportVisitor >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 		self visitFASTJavaLiteral: aFASTJavaStringLiteral.
 		self unindented: $"
 	]
+]
+
+{ #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaSuper: aFASTJavaSuper [
+	"JLS 15.11.2: `super` writes the type name that qualifies it, a dot, then the keyword."
+
+	self checkForComments: aFASTJavaSuper andDo: [
+		aFASTJavaSuper type ifNotNil: [ :type |
+			type accept: self.
+			self unindented: $. ].
+		self unindented: 'super' ]
 ]
 
 { #category : 'visiting expression' }
