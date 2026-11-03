@@ -736,7 +736,7 @@ FASTJavaExportVisitor >> visitFASTJavaForEachStatement: aFASTJavaForEachStatemen
 		self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaForEachStatement).
 		aFASTJavaForEachStatement type accept: self.
 		self space.
-		aFASTJavaForEachStatement fieldName accept: self.
+		aFASTJavaForEachStatement variable accept: self.
 		self unindented: ' : '.
 		aFASTJavaForEachStatement list accept: self.
 		self unindented: ') '.
@@ -805,14 +805,6 @@ FASTJavaExportVisitor >> visitFASTJavaForStatementInitializers: statements [
 		separatedBy: [ self unindented: ', ' ].
 
 	self unindented: '; '
-]
-
-{ #category : 'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
-	self checkForComments: aFASTJavaIdentifier andDo: [
-		self unindented: aFASTJavaIdentifier name
-	]
-
 ]
 
 { #category : 'visiting statement' }

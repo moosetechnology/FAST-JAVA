@@ -349,14 +349,6 @@ FASTJavaTEntityCreator >> newForStatement [
 ]
 
 { #category : 'entity creation' }
-FASTJavaTEntityCreator >> newIdentifier [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FASTJavaIdentifier new
-]
-
-{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newIfStatement [
 
 	<ignoreForCoverage>

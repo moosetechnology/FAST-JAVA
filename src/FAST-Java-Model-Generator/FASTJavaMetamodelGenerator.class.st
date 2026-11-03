@@ -21,7 +21,6 @@ Class {
 		'javaFieldAccess',
 		'javaFloatLiteral',
 		'javaForStatement',
-		'javaIdentifier',
 		'javaIfStatement',
 		'javaInfixOperation',
 		'javaIntegerLiteral',
@@ -445,11 +444,6 @@ eg.
 for(_;_;_) {
 ...
 }'
-]
-
-{ #category : 'comments' }
-FASTJavaMetamodelGenerator >> commentForJavaIdentifier [
-	^ 'A FASTJavaIdentifier is an identifier in a Java program'
 ]
 
 { #category : 'comments' }
@@ -894,8 +888,6 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaComment := self newClassNamed: #Comment comment: self commentForJavaComment.
 	javaFieldAccess := self newClassNamed: #FieldAccess comment: self commentForJavaFieldAccess.
 	javaFieldAccess withTesting.
-	javaIdentifier := self newClassNamed: #Identifier comment: self commentForJavaIdentifier.
-	javaIdentifier withTesting.
 	javaInfixOperation := self newClassNamed: #InfixOperation comment: self commentForJavaInfixOperation.
 	javaInfixOperation withTesting.
 	javaMethodEntity := self newClassNamed: #MethodEntity comment: self commentForJavaMethodEntity.
@@ -1157,9 +1149,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaForStatement --|> tStatement.
 	javaForStatement --|> tConditionalStatement.
 	javaForStatement --|> tLoopStatement.
-
-	javaIdentifier --|> javaVariableExpression.
-	javaIdentifier --|> tReceiver.
 
 	javaIfStatement --|> tStatement.
 	javaIfStatement --|> tConditionalStatement.
@@ -1689,10 +1678,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The list that the for-each statement iterates over')
 	<>- ((tExpression property: #javaForEachStatementOwner) comment:
 			 'The javaForEachStatement owner (if possible)').
-	((javaForEachStatement property: #fieldName) comment:
-		 'The identifier of the created local variable')
-	<>- ((javaIdentifier property: #javaForEachStatementFieldNameOwner)
-			 comment: 'The javaForEachStatement owner (if possible)').
+	"JLS 14.14.2: the header of a for-each writes a local variable declaration, so what it
+	declares is a variable like the one a parameter or a declarator declares."
+	((javaForEachStatement property: #variable) comment:
+		 'The variable I declare, eg. the `s` of `for (String s : list)`')
+	<>- ((javaVariableExpression property: #javaForEachStatementVariableOwner)
+			 comment: 'The for-each that declares me').
 	((javaForEachStatement property: #type) comment:
 		 'The type of the created local variable')
 	<>- ((javaTypeExpression property: #javaForEachStatementTypeOwner)

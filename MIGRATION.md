@@ -380,10 +380,39 @@ as the sections above describe.
 | v4.4.0 | v5 |
 | --- | --- |
 | `anInvocation receiver class = FASTJavaIdentifier` | `= FASTJavaVariableExpression` |
-| `aModel allWithType: FASTJavaIdentifier` | answers only the variable a for-each declares |
 
-`FASTJavaIdentifier` itself is unchanged, and still holds the variable a for-each declares
-— `FASTJavaForEachStatement>>fieldName`, its one declared relation.
+That left `FASTJavaIdentifier` holding only the variable a for-each declares, which the
+next section gives to `FASTJavaVariableExpression` as well.
+
+## The variable a for-each declares is a variable
+
+Five relations in the model hold a variable that a declaration introduces. Four of them
+agreed, and `FASTJavaForEachStatement` did not:
+
+| relation | v4.4.0 type |
+| --- | --- |
+| `FASTJavaParameter>>variable` | `FASTJavaVariableExpression` |
+| `FASTJavaVariableDeclarator>>variable` | `FASTJavaVariableExpression` |
+| `FASTJavaTypePattern>>variable` | `FASTJavaVariableExpression` |
+| `FASTJavaCatchPartStatement>>parameter` | `FASTJavaVariableExpression` |
+| `FASTJavaForEachStatement>>fieldName` | `FASTJavaIdentifier` |
+
+JLS 14.14.2 writes the header of a for-each as a local variable declaration, so what it
+declares is a variable like the other four, and it is certainly not a field. The relation
+is `variable` now and holds a `FASTJavaVariableExpression`.
+
+`FASTJavaIdentifier` had nothing left to hold, so it is removed.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aForEach fieldName` | `aForEach variable` |
+| `aForEach fieldName:` | `aForEach variable:` |
+| `anIdentifier javaForEachStatementFieldNameOwner` | `aVariableExpression javaForEachStatementVariableOwner` |
+| `FASTJavaIdentifier` | `FASTJavaVariableExpression` |
+| `anEntity isIdentifier` | `anEntity isVariableExpression` |
+| `aModel newIdentifier` | `aModel newVariableExpression` |
+| `visitFASTJavaIdentifier:` | `visitFASTJavaVariableExpression:` |
+| `aGroup allFASTJavaIdentifier` | `aGroup allWithType: FASTJavaVariableExpression` |
 
 ## A stray semicolon is no longer a method
 
@@ -427,7 +456,7 @@ Each rename applies to the setter too, and to the `addX:` of a multivalued relat
 | --- | --- |
 | `FASTJavaCatchPartStatement>>catchedTypes` | `caughtTypes` |
 | `FASTJavaCatchPartStatement>>addCatchedType:` | `addCaughtType:` |
-| `FASTJavaForEachStatement>>fieldname` | `fieldName` |
+| `FASTJavaForEachStatement>>fieldname` | `variable` |
 | `FASTTStatement>>forIninitializerOwner` | `forInitializerOwner` |
 | `FASTJavaVariableExpression>>javaCatchParameterOwnler` | `javaCatchParameterOwner` |
 | `FASTJavaTypeName>>javaTypeNameQualify` | `javaQualifiedTypeNameOwner` |

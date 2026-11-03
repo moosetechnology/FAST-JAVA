@@ -25,6 +25,7 @@
 | `javaCatchParameterOwner` | `FASTJavaVariableExpression` | `parameter` | `FASTJavaCatchPartStatement` | The javaCatchPartParameterOwner owner (if possible)|
 | `javaDimensionExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaDimensionExpression` | The pair of brackets whose length I give|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
+| `javaForEachStatementVariableOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaForEachStatement` | The for-each that declares me|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
 | `javaParameterVariableOwner` | `FASTJavaVariableExpression` | `variable` | `FASTJavaParameter` | The variable expression owner (if possible)|
 | `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
@@ -68,6 +69,7 @@ Class {
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTAssignable classTrait + FASTJavaTReceiver classTrait + FASTJavaTTryResource classTrait + FASTTVariableExpression classTrait',
 	#instVars : [
 		'#javaCatchParameterOwner => FMOne type: #FASTJavaCatchPartStatement opposite: #parameter',
+		'#javaForEachStatementVariableOwner => FMOne type: #FASTJavaForEachStatement opposite: #variable',
 		'#javaParameterVariableOwner => FMOne type: #FASTJavaParameter opposite: #variable',
 		'#javaTypePatternVariableOwner => FMOne type: #FASTJavaTypePattern opposite: #variable',
 		'#javaVariableDeclaratorOwner => FMOne type: #FASTJavaVariableDeclarator opposite: #variable'
@@ -103,6 +105,25 @@ FASTJavaVariableExpression >> javaCatchParameterOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaCatchParameterOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaVariableExpression >> javaForEachStatementVariableOwner [
+	"Relation named: #javaForEachStatementVariableOwner type: #FASTJavaForEachStatement opposite: #variable"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The for-each that declares me'>
+	<container>
+	^ javaForEachStatementVariableOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaVariableExpression >> javaForEachStatementVariableOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaForEachStatementVariableOwner := anObject
 ]
 
 { #category : 'accessing' }

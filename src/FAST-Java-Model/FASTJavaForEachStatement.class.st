@@ -25,10 +25,10 @@ for(Patate p : list) {
 |---|
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `body` | `FASTTLoopStatement` | `parentLoopStatement` | `FASTTStatement` | The body of the loop|
-| `fieldName` | `FASTJavaForEachStatement` | `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | The identifier of the created local variable|
 | `list` | `FASTJavaForEachStatement` | `javaForEachStatementOwner` | `FASTTExpression` | The list that the for-each statement iterates over|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `type` | `FASTJavaForEachStatement` | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | The type of the created local variable|
+| `variable` | `FASTJavaForEachStatement` | `javaForEachStatementVariableOwner` | `FASTJavaVariableExpression` | The variable I declare, eg. the `s` of `for (String s : list)`|
 
 
 ## Properties
@@ -46,8 +46,8 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithModifiers + FASTTLoopStatement + FASTTStatement',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithModifiers classTrait + FASTTLoopStatement classTrait + FASTTStatement classTrait',
 	#instVars : [
-		'#fieldName => FMOne type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner',
-		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner'
+		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner',
+		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaForEachStatementVariableOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -61,24 +61,6 @@ FASTJavaForEachStatement class >> annotation [
 	<FMClass: #ForEachStatement super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
-]
-
-{ #category : 'accessing' }
-FASTJavaForEachStatement >> fieldName [
-	"Relation named: #fieldName type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner"
-
-	<ignoreForCoverage>
-	<generated>
-	<FMComment: 'The identifier of the created local variable'>
-	^ fieldName
-]
-
-{ #category : 'accessing' }
-FASTJavaForEachStatement >> fieldName: anObject [
-
-	<ignoreForCoverage>
-	<generated>
-	fieldName := anObject
 ]
 
 { #category : 'testing' }
@@ -131,4 +113,22 @@ FASTJavaForEachStatement >> type: anObject [
 	<ignoreForCoverage>
 	<generated>
 	type := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaForEachStatement >> variable [
+	"Relation named: #variable type: #FASTJavaVariableExpression opposite: #javaForEachStatementVariableOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The variable I declare, eg. the `s` of `for (String s : list)`'>
+	^ variable
+]
+
+{ #category : 'accessing' }
+FASTJavaForEachStatement >> variable: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	variable := anObject
 ]

@@ -234,11 +234,6 @@ FASTJavaVisitor >> visitFASTJavaForStatement: aFASTJavaForStatement [
 ]
 
 { #category : 'generated' }
-FASTJavaVisitor >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
-	^ self visitFASTTVariableExpression: aFASTJavaIdentifier
-]
-
-{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	^ self visitFASTTStatement: aFASTJavaIfStatement
 ]

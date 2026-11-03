@@ -400,14 +400,6 @@ FASTJavaEntity >> isForStatement [
 ]
 
 { #category : 'testing' }
-FASTJavaEntity >> isIdentifier [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
 FASTJavaEntity >> isIfStatement [
 
 	<ignoreForCoverage>

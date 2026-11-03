@@ -25,21 +25,6 @@ JavaSmaCCForEachTest >> testForEachBodyType [
 ]
 
 { #category : 'tests' }
-JavaSmaCCForEachTest >> testForEachFieldName [
-	self assert: fastMethod statements first fieldName name equals: 'hr'
-]
-
-{ #category : 'tests' }
-JavaSmaCCForEachTest >> testForEachFieldNameParent [
-	self assert: fastMethod statements first fieldName parentNode equals: fastMethod statements first
-]
-
-{ #category : 'tests' }
-JavaSmaCCForEachTest >> testForEachFieldNameType [
-	self assert: fastMethod statements first fieldName class equals: FASTJavaIdentifier
-]
-
-{ #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachListParent [
 	self assert: fastMethod statements first list parentNode equals: fastMethod statements first
 ]
@@ -62,4 +47,22 @@ JavaSmaCCForEachTest >> testForEachTypeName [
 { #category : 'tests' }
 JavaSmaCCForEachTest >> testForEachTypeType [
 	self assert: fastMethod statements first type class equals: FASTJavaClassTypeExpression
+]
+
+{ #category : 'tests' }
+JavaSmaCCForEachTest >> testForEachVariableName [
+	self assert: fastMethod statements first variable name equals: 'hr'
+]
+
+{ #category : 'tests' }
+JavaSmaCCForEachTest >> testForEachVariableParent [
+	self assert: fastMethod statements first variable parentNode equals: fastMethod statements first
+]
+
+{ #category : 'tests' }
+JavaSmaCCForEachTest >> testForEachVariableType [
+	"JLS 14.14.2: a for-each header is a local variable declaration, so what it declares is
+	a variable like the one a parameter or a declarator declares."
+
+	self assert: fastMethod statements first variable class equals: FASTJavaVariableExpression
 ]

@@ -1145,13 +1145,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitFloatType: aByteType [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement [
-	"JLS 14.14.2: the variable a for-each writes is a local variable declaration, so it may
-	write modifiers before its type."
+	"JLS 14.14.2: the header of a for-each writes a local variable declaration, so it may
+	write modifiers before its type, and what it declares is a variable."
 
 	currentFASTEntity := self addToModel: FASTJavaForEachStatement new.
 	self setStartEndPos: aForEachStatement.
 	currentFASTEntity body: (self acceptStatement: aForEachStatement statement).
-	currentFASTEntity fieldName: (self clone visitIdentifier: aForEachStatement name).
+	currentFASTEntity variable: (self clone accept: aForEachStatement name).
 	currentFASTEntity type: (self clone accept: aForEachStatement type).
 	self addModifiers: aForEachStatement modifiers to: currentFASTEntity.
 	currentFASTEntity list: (self clone accept: aForEachStatement expression).
@@ -1173,14 +1173,6 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForStatement: aForStatement [
 	aForStatement statement
 		ifNotNil:
 			[ :statement | currentFASTEntity body: (self acceptStatement: statement) ].
-	^ currentFASTEntity
-]
-
-{ #category : 'visitor' }
-JavaSmaCCProgramNodeImporterVisitor >> visitIdentifier: aNameNode [
-	currentFASTEntity := self addToModel: FASTJavaIdentifier new.
-	self setStartEndPos: aNameNode.
-	currentFASTEntity name: aNameNode name value.
 	^ currentFASTEntity
 ]
 
