@@ -58,6 +58,22 @@ JavaSmaCCProgramNodeImporterVisitor >> acceptComponentType: aTypeNode [
 	^ classType
 ]
 
+{ #category : 'visiting' }
+JavaSmaCCProgramNodeImporterVisitor >> acceptInferableType: aTypeNode [
+	"JLS 14.4.1 and 15.27.1: `var` stands for an inferred type as the type of a local
+	variable declaration or of a lambda parameter, and nowhere else. JLS 3.9 keeps it from
+	naming a class, an interface or a type parameter, so written anywhere else it is a name
+	that resolves to nothing, and reading it as the keyword would say more than the source
+	does."
+
+	^ (self isVarTypeNode: aTypeNode)
+		  ifTrue: [ (self addToModel: FASTJavaVarTypeExpression new)
+				  startPos: aTypeNode startPosition;
+				  endPos: aTypeNode stopPosition;
+				  yourself ]
+		  ifFalse: [ self clone accept: aTypeNode ]
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
 	"A switch used as a statement is a switch statement (JLS 14.11.1) whatever form its
@@ -382,12 +398,14 @@ JavaSmaCCProgramNodeImporterVisitor >> initialize [
 ]
 
 { #category : 'visitor' }
-JavaSmaCCProgramNodeImporterVisitor >> isVarTypeNode: aClassType [
-	"JLS 14.4.1: `var` is a reserved type name standing for an inferred type. It is
-	never generic and never qualified, so a simple name is enough to tell."
+JavaSmaCCProgramNodeImporterVisitor >> isVarTypeNode: aTypeNode [
+	"JLS 14.4.1: `var` is a reserved type name standing for an inferred type. It is never
+	generic, never qualified and never primitive, so a simple name is enough to tell, and
+	anything that is not written as a class type is not it."
 
 	| name |
-	name := aClassType name.
+	(aTypeNode isKindOf: JavaClassTypeNode) ifFalse: [ ^ false ].
+	name := aTypeNode name.
 	^ (name isKindOf: JavaTypeNameNode) and: [ name arguments isEmpty and: [ name name value = 'var' ] ]
 ]
 
@@ -899,20 +917,12 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassExpression: aClassExpression [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitClassType: aClassType [
-
-	(self isVarTypeNode: aClassType) ifTrue: [
-		currentFASTEntity := self addToModel: FASTJavaVarTypeExpression new.
-		self setStartEndPos: aClassType.
-		^ currentFASTEntity ].
-
 	currentFASTEntity := self addToModel: FASTJavaClassTypeExpression new.
 	self setStartEndPos: aClassType.
 	aClassType annotations do: [ :annotation |
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	currentFASTEntity typeName: (self clone accept: aClassType name).
-
 	aClassType name arguments do: [ :typeArgument | currentFASTEntity addArgument: (self clone accept: typeArgument) ].
-
 	^ currentFASTEntity
 ]
 
@@ -1150,7 +1160,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitForEachStatement: aForEachStatement 
 	self setStartEndPos: aForEachStatement.
 	currentFASTEntity body: (self acceptStatement: aForEachStatement statement).
 	currentFASTEntity variable: (self clone accept: aForEachStatement name).
-	currentFASTEntity type: (self clone accept: aForEachStatement type).
+	currentFASTEntity type: (self acceptInferableType: aForEachStatement type).
 	self addModifiers: aForEachStatement modifiers to: currentFASTEntity.
 	currentFASTEntity list: (self clone accept: aForEachStatement expression).
 	^ currentFASTEntity
@@ -1309,7 +1319,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclaration: aLocalVari
 
 	currentFASTEntity := self addToModel: FASTJavaVarDeclStatement new.
 	self setStartEndPos: aLocalVariableDeclaration.
-	aLocalVariableDeclaration type ifNotNil: [ currentFASTEntity type: (self clone accept: aLocalVariableDeclaration type) ].
+	aLocalVariableDeclaration type ifNotNil: [ currentFASTEntity type: (self acceptInferableType: aLocalVariableDeclaration type) ].
 	self addModifiers: aLocalVariableDeclaration modifiers to: currentFASTEntity.
 	aLocalVariableDeclaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
@@ -1322,7 +1332,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLocalVariableDeclarationStatement: a
 	self setStartEndPos: aLocalVariableDeclarationStatement.
 
 	aLocalVariableDeclarationStatement declaration type ifNotNil: [ :declaredType |
-		currentFASTEntity type: (self clone accept: declaredType) ].
+		currentFASTEntity type: (self acceptInferableType: declaredType) ].
 	self addModifiers: aLocalVariableDeclarationStatement declaration modifiers to: currentFASTEntity.
 	aLocalVariableDeclarationStatement declaration variableDeclarations
 		do: [ :each | currentFASTEntity declarators add: (self clone accept: each) ].
@@ -1636,12 +1646,15 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPackageDeclaration: aPackageDeclarat
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitParameter: aParameter [
 	"JLS 8.4.1: a parameter writes the modifiers it is declared with, an annotation
-	(JLS 9.7.4) and `final` among them."
+	(JLS 9.7.4) and `final` among them. JLS 15.27.1: a lambda may write `var` for the type
+	of a parameter, which a method may not."
 
 	currentFASTEntity := self addToModel: FASTJavaParameter new.
 	self setStartEndPos: aParameter.
 	currentFASTEntity variable: (self clone accept: aParameter variable).
-	currentFASTEntity type: (self clone accept: aParameter type).
+	currentFASTEntity type: ((aParameter parent isKindOf: JavaLambdaExpressionNode)
+			 ifTrue: [ self acceptInferableType: aParameter type ]
+			 ifFalse: [ self clone accept: aParameter type ]).
 	(self bracketsOf: aParameter variable) do: [ :bracket | currentFASTEntity addBracket: bracket ].
 	self addModifiers: aParameter modifiers to: currentFASTEntity.
 	^ currentFASTEntity

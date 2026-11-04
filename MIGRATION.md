@@ -398,6 +398,35 @@ own used to read its names as package names, so `a = 1` as a fragment made `a` a
 `FASTJavaQualifiedName` where the same text inside a class made it a
 `FASTJavaVariableExpression`. Both now read the same way.
 
+## `var` is the inferred type only where Java infers it
+
+The importer read `var` as `FASTJavaVarTypeExpression` wherever a class type was written,
+deciding on spelling alone. JLS 14.4.1 and 15.27.1 write `var` as the type of a local
+variable declaration — standing on its own, in the first part of a `for`, as a resource of a
+`try`, or in a for-each header — and of a lambda parameter, and nowhere else. JLS 3.9 keeps
+`var` from naming a class, an interface or a type parameter, so anywhere else it is a name
+that resolves to nothing.
+
+Written elsewhere, `var` is now the `FASTJavaClassTypeExpression` its text says, with a
+`typeName` named `var`. Five of those positions used to raise `SlotNotFound` rather than
+build anything, because a var type expression is not a class type and the relations hold
+one: `new var()`, `extends var`, `implements var`, `catch (var e)` and `throws var`.
+
+| written | v4.4.0 | v5 |
+| --- | --- | --- |
+| `var x = 1;` | `FASTJavaVarTypeExpression` | unchanged |
+| `for (var s : l)` | `FASTJavaVarTypeExpression` | unchanged |
+| `try (var r = …)` | `FASTJavaVarTypeExpression` | unchanged |
+| `(var a) -> a` | `FASTJavaVarTypeExpression` | unchanged |
+| `var f;` as a field | `FASTJavaVarTypeExpression` | `FASTJavaClassTypeExpression` |
+| `void m(var p)` | `FASTJavaVarTypeExpression` | `FASTJavaClassTypeExpression` |
+| `var m()` | `FASTJavaVarTypeExpression` | `FASTJavaClassTypeExpression` |
+| `List<var>`, `(var) o`, `o instanceof var` | `FASTJavaVarTypeExpression` | `FASTJavaClassTypeExpression` |
+| `new var()`, `extends var`, `catch (var e)` | raised `SlotNotFound` | `FASTJavaClassTypeExpression` |
+
+No valid Java is read differently: a type named `var` cannot exist, so none of the changed
+positions appears in code that compiles. Nothing is exported differently.
+
 ## A permits clause holds type names
 
 `FASTJavaClassDeclaration>>permittedSubtypes` and
