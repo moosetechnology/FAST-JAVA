@@ -31,7 +31,7 @@ public interface MyInterface {
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 | `interfaces` | `FASTJavaInterfaceDeclaration` | `javaInterfaceDeclarationInterfaceOwner` | `FASTJavaClassTypeExpression` | My super interfaces|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
-| `permittedSubtypes` | `FASTJavaInterfaceDeclaration` | `javaInterfaceDeclarationPermittedSubtypeOwner` | `FASTJavaClassTypeExpression` | The types I permit to extend or implement me|
+| `permittedSubtypes` | `FASTJavaInterfaceDeclaration` | `javaInterfaceDeclarationPermittedSubtypeOwner` | `FASTJavaTypeName` | The types I permit to extend or implement me|
 | `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
 ### Other
@@ -59,7 +59,7 @@ Class {
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #interfaceDeclarations',
 		'#interfaces => FMMany type: #FASTJavaClassTypeExpression opposite: #javaInterfaceDeclarationInterfaceOwner',
-		'#permittedSubtypes => FMMany type: #FASTJavaClassTypeExpression opposite: #javaInterfaceDeclarationPermittedSubtypeOwner'
+		'#permittedSubtypes => FMMany type: #FASTJavaTypeName opposite: #javaInterfaceDeclarationPermittedSubtypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -139,7 +139,7 @@ FASTJavaInterfaceDeclaration >> isInterfaceDeclaration [
 
 { #category : 'accessing' }
 FASTJavaInterfaceDeclaration >> permittedSubtypes [
-	"Relation named: #permittedSubtypes type: #FASTJavaClassTypeExpression opposite: #javaInterfaceDeclarationPermittedSubtypeOwner"
+	"Relation named: #permittedSubtypes type: #FASTJavaTypeName opposite: #javaInterfaceDeclarationPermittedSubtypeOwner"
 
 	<ignoreForCoverage>
 	<generated>

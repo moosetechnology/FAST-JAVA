@@ -9,6 +9,8 @@ I represent the name of a type
 |---|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaAnnotationTypeOwner` | `FASTJavaTypeName` | `type` | `FASTJavaAnnotation` | The annotation whose type I name|
+| `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeName` | `permittedSubtypes` | `FASTJavaClassDeclaration` | The sealed class that permits me to extend it|
+| `javaInterfaceDeclarationPermittedSubtypeOwner` | `FASTJavaTypeName` | `permittedSubtypes` | `FASTJavaInterfaceDeclaration` | The sealed interface that permits me to extend it|
 | `javaQualifiedTypeNameOwner` | `FASTJavaTypeName` | `namespace` | `FASTJavaQualifiedTypeName` | the name I qualify|
 | `javaSuperOwner` | `FASTJavaTypeName` | `type` | `FASTJavaSuper` | The `super` I qualify|
 | `javaThisOwner` | `FASTJavaTypeName` | `type` | `FASTJavaThis` | The `this` I qualify|
@@ -38,6 +40,8 @@ Class {
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#javaAnnotationTypeOwner => FMOne type: #FASTJavaAnnotation opposite: #type',
+		'#javaClassDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaClassDeclaration opposite: #permittedSubtypes',
+		'#javaInterfaceDeclarationPermittedSubtypeOwner => FMOne type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes',
 		'#javaQualifiedTypeNameOwner => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
 		'#javaSuperOwner => FMOne type: #FASTJavaSuper opposite: #type',
 		'#javaThisOwner => FMOne type: #FASTJavaThis opposite: #type',
@@ -82,6 +86,44 @@ FASTJavaTypeName >> javaAnnotationTypeOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaAnnotationTypeOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaClassDeclarationPermittedSubtypeOwner [
+	"Relation named: #javaClassDeclarationPermittedSubtypeOwner type: #FASTJavaClassDeclaration opposite: #permittedSubtypes"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The sealed class that permits me to extend it'>
+	<container>
+	^ javaClassDeclarationPermittedSubtypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaClassDeclarationPermittedSubtypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaClassDeclarationPermittedSubtypeOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaInterfaceDeclarationPermittedSubtypeOwner [
+	"Relation named: #javaInterfaceDeclarationPermittedSubtypeOwner type: #FASTJavaInterfaceDeclaration opposite: #permittedSubtypes"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The sealed interface that permits me to extend it'>
+	<container>
+	^ javaInterfaceDeclarationPermittedSubtypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaInterfaceDeclarationPermittedSubtypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaInterfaceDeclarationPermittedSubtypeOwner := anObject
 ]
 
 { #category : 'accessing' }

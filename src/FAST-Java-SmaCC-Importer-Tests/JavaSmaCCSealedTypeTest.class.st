@@ -37,6 +37,29 @@ JavaSmaCCSealedTypeTest >> namesPermittedBy: aDeclaration [
 ]
 
 { #category : 'tests' }
+JavaSmaCCSealedTypeTest >> testADottedPermittedSubtypeIsOneQualifiedTypeName [
+	"JLS 6.5: a type name written with dots is one name, and the permits clause writes it
+	the way every other type name is written."
+
+	| permitted |
+	permitted := ((self parseClassString: 'sealed class A permits p.q.B {}')
+		              allWithType: FASTJavaClassDeclaration) anyOne permittedSubtypes anyOne.
+	self assert: permitted class equals: FASTJavaQualifiedTypeName.
+	self assert: permitted fullName equals: 'p.q.B'
+]
+
+{ #category : 'tests' }
+JavaSmaCCSealedTypeTest >> testAPermittedSubtypeIsATypeName [
+	"JLS 8.1.6 and 9.1.4: `permits TypeName {, TypeName}` writes a name, not a type, so no
+	type arguments and no annotations may stand there."
+
+	self
+		assert: ((self interfaceNamed: 'Shape') permittedSubtypes
+			 collect: [ :each | each class ]) asArray
+		equals: { FASTJavaTypeName. FASTJavaTypeName }
+]
+
+{ #category : 'tests' }
 JavaSmaCCSealedTypeTest >> testPermittedSubtypesAreNotTheInterfacesImplemented [
 	"JLS 8.1.5 and 8.1.6: what a class implements and what it permits to extend it are two
 	clauses pointing opposite ways, and the model keeps them apart."

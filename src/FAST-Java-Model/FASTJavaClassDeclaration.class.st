@@ -34,7 +34,7 @@ public class ClassName extends SomeClass implements OneClass, TwoClass {
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 | `interfaces` | `FASTJavaClassDeclaration` | `javaClassDeclarationInterfaceOwner` | `FASTJavaClassTypeExpression` | The interfaces I implement|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
-| `permittedSubtypes` | `FASTJavaClassDeclaration` | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaClassTypeExpression` | The types I permit to extend me|
+| `permittedSubtypes` | `FASTJavaClassDeclaration` | `javaClassDeclarationPermittedSubtypeOwner` | `FASTJavaTypeName` | The types I permit to extend me|
 | `superclass` | `FASTJavaClassDeclaration` | `javaClassDeclarationSuperclassOwner` | `FASTJavaClassTypeExpression` | My superclass|
 | `typeParameters` | `FASTJavaTWithTypeParameters` | `javaTypeParameterOwner` | `FASTJavaTypeParameterExpression` | The type parameters I declare|
 
@@ -63,7 +63,7 @@ Class {
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #classDeclarations',
 		'#interfaces => FMMany type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationInterfaceOwner',
-		'#permittedSubtypes => FMMany type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner',
+		'#permittedSubtypes => FMMany type: #FASTJavaTypeName opposite: #javaClassDeclarationPermittedSubtypeOwner',
 		'#superclass => FMOne type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationSuperclassOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -144,7 +144,7 @@ FASTJavaClassDeclaration >> isClassDeclaration [
 
 { #category : 'accessing' }
 FASTJavaClassDeclaration >> permittedSubtypes [
-	"Relation named: #permittedSubtypes type: #FASTJavaClassTypeExpression opposite: #javaClassDeclarationPermittedSubtypeOwner"
+	"Relation named: #permittedSubtypes type: #FASTJavaTypeName opposite: #javaClassDeclarationPermittedSubtypeOwner"
 
 	<ignoreForCoverage>
 	<generated>

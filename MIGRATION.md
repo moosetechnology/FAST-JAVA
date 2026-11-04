@@ -398,6 +398,31 @@ own used to read its names as package names, so `a = 1` as a fragment made `a` a
 `FASTJavaQualifiedName` where the same text inside a class made it a
 `FASTJavaVariableExpression`. Both now read the same way.
 
+## A permits clause holds type names
+
+`FASTJavaClassDeclaration>>permittedSubtypes` and
+`FASTJavaInterfaceDeclaration>>permittedSubtypes` held `FASTJavaClassTypeExpression`, a type
+that can carry type arguments and annotations. JLS 8.1.6 and 9.1.4 write
+`permits TypeName {, TypeName}`: the clause names what may extend or implement the sealed
+type, and a name is all it writes. SmaCC's grammar read a type there too, so
+`sealed class A<T> permits B<T>` parsed where javac refuses it; the grammar now reads a
+type name of its own, and the importer builds the type name it is.
+
+Both relations hold a `FASTJavaTypeName`, or a `FASTJavaQualifiedTypeName` when the name is
+written dotted — the same pair that `FASTJavaThis>>type`, `FASTJavaSuper>>type` and
+`FASTJavaAnnotation>>type` hold.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aDeclaration permittedSubtypes anyOne typeName name` | `aDeclaration permittedSubtypes anyOne name` |
+| `aDeclaration permittedSubtypes anyOne arguments` | gone; the clause writes none |
+| `aDeclaration permittedSubtypes anyOne annotations` | gone; the clause writes none |
+| `aClassType javaClassDeclarationPermittedSubtypeOwner` | `aTypeName javaClassDeclarationPermittedSubtypeOwner` |
+| `aClassType javaInterfaceDeclarationPermittedSubtypeOwner` | `aTypeName javaInterfaceDeclarationPermittedSubtypeOwner` |
+
+`aDeclaration permittedSubtypes anyOne fullName` is unchanged and is the shortest way to the
+name, dotted or not. Nothing is exported differently.
+
 ## An annotation names its type, once
 
 `FASTJavaAnnotation` used both `FASTTNamedEntity` and `FASTJavaTWithQualifiedName`, and the

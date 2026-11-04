@@ -1918,13 +1918,12 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		((javaClassTypeExpression property: #javaClassDeclarationInterfaceOwner)
 			 comment: 'The class that implements me').
 
-	"JLS 8.1.6: a sealed class names the classes permitted to extend it directly, and a
-	class it does not name cannot, whatever that class declares."
-	"JLS 8.1.6: a sealed class permits type names."
+	"JLS 8.1.6: a sealed class names the classes permitted to extend it directly, and it
+	names them: `permits TypeName {, TypeName}` writes no arguments and no annotations."
 	((javaClassDeclaration property: #permittedSubtypes) comment:
 		 'The types I permit to extend me')
 	<>-*
-		((javaClassTypeExpression property:
+		((javaTypeName property:
 			  #javaClassDeclarationPermittedSubtypeOwner) comment:
 			 'The sealed class that permits me to extend it').
 
@@ -1949,12 +1948,11 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The interface that extends me').
 
 	"JLS 9.1.4: a sealed interface names the classes and interfaces permitted to extend or
-	implement it directly."
-	"JLS 9.1.4: a sealed interface permits type names."
+	implement it directly, and it names them: the clause writes a type name and no more."
 	((javaInterfaceDeclaration property: #permittedSubtypes) comment:
 		 'The types I permit to extend or implement me')
 	<>-*
-		((javaClassTypeExpression property:
+		((javaTypeName property:
 			  #javaInterfaceDeclarationPermittedSubtypeOwner) comment:
 			 'The sealed interface that permits me to extend it').
 

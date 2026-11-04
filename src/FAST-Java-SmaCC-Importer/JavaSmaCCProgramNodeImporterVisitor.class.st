@@ -879,7 +879,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitClassDeclaration: aClassDeclaration 
 
 	aClassDeclaration superclass ifNotNil: [ :superclass | currentFASTEntity superclass: (self clone accept: superclass) ].
 	aClassDeclaration interfaces do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
-	aClassDeclaration permits do: [ :permitted | currentFASTEntity addPermittedSubtype: (self clone accept: permitted) ].
+	"JLS 8.1.6 and 9.1.4: a permits clause names what may extend or implement what it is
+	written on, and a type name is all it writes."
+	aClassDeclaration permits do: [ :permitted | currentFASTEntity addPermittedSubtype: (self clone accept: permitted name) ].
 	aClassDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
 
 	^ currentFASTEntity
@@ -1268,7 +1270,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInterfaceDeclaration: anInterfaceDec
 	self addTypeParametersOf: anInterfaceDeclaration.
 
 	anInterfaceDeclaration interfaceTypes do: [ :interface | currentFASTEntity addInterface: (self clone accept: interface) ].
-	anInterfaceDeclaration permits do: [ :permitted | currentFASTEntity addPermittedSubtype: (self clone accept: permitted) ].
+	"JLS 8.1.6 and 9.1.4: a permits clause names what may extend or implement what it is
+	written on, and a type name is all it writes."
+	anInterfaceDeclaration permits do: [ :permitted | currentFASTEntity addPermittedSubtype: (self clone accept: permitted name) ].
 	anInterfaceDeclaration declarations do: [ :declaration | currentFASTEntity addDeclaration: (self clone accept: declaration) ].
 
 	^ currentFASTEntity
