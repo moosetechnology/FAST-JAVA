@@ -1379,13 +1379,12 @@ FASTJavaExportVisitor >> visitFASTJavaRecordPattern: aFASTJavaRecordPattern [
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaRequiresDirective: aFASTJavaRequiresDirective [
-	"JLS 7.7.1: `static` and `transitive` are written between `requires` and the name of
-	the module required, in that order."
+	"JLS 7.7.1: `static` and `transitive` are written between `requires` and the name of the
+	module required, in whichever order the source writes them."
 
 	self checkForComments: aFASTJavaRequiresDirective andDo: [
 		self indented: 'requires '.
-		aFASTJavaRequiresDirective isStatic ifTrue: [ self unindented: 'static ' ].
-		aFASTJavaRequiresDirective isTransitive ifTrue: [ self unindented: 'transitive ' ].
+		self visitFASTJavaModifiersInline: aFASTJavaRequiresDirective modifiers.
 		self visitFASTJavaQualifiedName: aFASTJavaRequiresDirective qualifiedName.
 		self endOfStatement ]
 ]

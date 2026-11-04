@@ -1468,7 +1468,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaDimension --|> tWithAnnotations.
 	javaDimensionExpression --|> javaDimension.
 
+	"JLS 7.7.1: a requires directive may write `transitive`, `static`, both or neither, and
+	in either order, so what it writes there is a list of modifiers and not two flags."
 	javaRequiresDirective --|> javaModuleDirective.
+	javaRequiresDirective --|> tWithModifiers.
 	javaExportsDirective --|> javaModuleDirective.
 	javaOpensDirective --|> javaModuleDirective.
 	javaUsesDirective --|> javaModuleDirective.
@@ -1524,11 +1527,6 @@ FASTJavaMetamodelGenerator >> defineProperties [
 
 	(javaModuleDeclaration property: #isOpen type: #Boolean defaultValue: false) comment:
 		'Whether this module writes `open`, which opens every one of its packages to reflection (JLS 7.7)'.
-
-	(javaRequiresDirective property: #isStatic type: #Boolean defaultValue: false) comment:
-		'Whether the module required is needed at compile time only (JLS 7.7.1)'.
-	(javaRequiresDirective property: #isTransitive type: #Boolean defaultValue: false) comment:
-		'Whether a module reading mine also reads the module required (JLS 7.7.1)'.
 
 	(javaArrayInitializer property: #hasTrailingComma type: #Boolean defaultValue: false) comment:
 		'Whether a comma is written after the last initializer, which JLS 10.6 allows and which tells `{ 1, 2, }` from `{ 1, 2 }`'.

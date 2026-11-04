@@ -419,6 +419,18 @@ JavaSmaCCProgramNodeImporterVisitor >> model: aModel [
 	model := aModel
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> modifierOf: aToken [
+	"A modifier the grammar keeps as a token of its own rather than as a modifier node of
+	its own, which is how `requires` writes `static` and `transitive`."
+
+	^ (self addToModel: FASTJavaModifier new)
+		  startPos: aToken startPosition;
+		  endPos: aToken stopPosition;
+		  token: aToken value;
+		  yourself
+]
+
 { #category : 'initialization' }
 JavaSmaCCProgramNodeImporterVisitor >> parentFASTEntity [
 	
@@ -1511,14 +1523,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitModuleProvides: aModuleProvides [
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitModuleRequires: aModuleRequires [
 	"JLS 7.7.1: `requires` names a module mine reads. `static` asks for it at compile time
-	only, and `transitive` gives it to whoever reads mine."
+	only and `transitive` gives it to whoever reads mine, and a directive may write both, in
+	either order, so they are held as the modifiers they are and in the order written."
 
+	| modifierTokens |
+	modifierTokens := (Array
+		                   with: aModuleRequires staticToken
+		                   with: aModuleRequires transitiveToken) reject: [ :token |
+		                  token isNil ].
 	currentFASTEntity := self addToModel: FASTJavaRequiresDirective new.
 	self setStartEndPos: aModuleRequires.
-	currentFASTEntity
-		isStatic: aModuleRequires staticToken isNotNil;
-		isTransitive: aModuleRequires transitiveToken isNotNil;
-		qualifiedName: (self qualifiedNameOf: aModuleRequires name).
+	(modifierTokens sorted: [ :a :b | a startPosition <= b startPosition ]) do: [
+		:token | currentFASTEntity addModifier: (self modifierOf: token) ].
+	currentFASTEntity qualifiedName: (self qualifiedNameOf: aModuleRequires name).
 	^ currentFASTEntity
 ]
 

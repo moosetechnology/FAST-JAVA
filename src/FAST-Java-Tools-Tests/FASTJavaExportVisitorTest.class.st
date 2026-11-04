@@ -1970,6 +1970,19 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaRecordPatternWithAMatchAllComponen
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaRequiresDirectiveKeepsTheOrderOfItsModifiers [
+	"JLS 7.7.1: the modifiers of a requires directive are written in whichever order the
+	source writes them, so writing them back in a fixed one would rewrite the source."
+
+	self
+		export: (self unitFor: 'module m { requires transitive static java.sql; }')
+		equals: 'module m {
+  requires transitive static java.sql;
+}
+'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |

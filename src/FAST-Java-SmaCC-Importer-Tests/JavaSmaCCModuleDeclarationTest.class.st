@@ -69,8 +69,35 @@ JavaSmaCCModuleDeclarationTest >> testRequiresKeepsItsModifiers [
 	self
 		assert: (requires collect: [ :each | each qualifiedName fullName ]) asArray
 		equals: #( 'java.base' 'java.logging' 'java.sql' ).
+	self
+		assert: (requires collect: [ :each |
+			 (each modifiers collect: [ :modifier | modifier token ]) asArray ]) asArray
+		equals: #( #(  ) #( 'transitive' ) #( 'static' 'transitive' ) ).
 	self assert: (requires collect: [ :each | each isStatic ]) asArray equals: #( false false true ).
 	self assert: (requires collect: [ :each | each isTransitive ]) asArray equals: #( false true true )
+]
+
+{ #category : 'tests' }
+JavaSmaCCModuleDeclarationTest >> testRequiresKeepsItsModifiersInTheOrderTheyAreWritten [
+	"JLS 7.7.1: `requires {RequiresModifier} ModuleName ;` imposes no order on the
+	modifiers, so both orders are Java and each one is kept as it is written."
+
+	| transitiveFirst staticFirst |
+	transitiveFirst := ((self parseClassString:
+		                     'module m { requires transitive static java.sql; }')
+		                    allWithType: FASTJavaRequiresDirective) anyOne.
+	staticFirst := ((self parseClassString:
+		                 'module m { requires static transitive java.sql; }')
+		                allWithType: FASTJavaRequiresDirective) anyOne.
+
+	self
+		assert: (transitiveFirst modifiers collect: [ :each | each token ]) asArray
+		equals: #( 'transitive' 'static' ).
+	self
+		assert: (staticFirst modifiers collect: [ :each | each token ]) asArray
+		equals: #( 'static' 'transitive' ).
+	self assert: transitiveFirst isStatic.
+	self assert: transitiveFirst isTransitive
 ]
 
 { #category : 'tests' }

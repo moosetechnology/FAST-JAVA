@@ -570,6 +570,35 @@ thing twice.
 `hasVariableArguments` still answers, as `self ellipsis isNotNil`. It is no longer a stored
 property, so it no longer appears in MSE.
 
+## A requires directive holds the modifiers it writes
+
+`FASTJavaRequiresDirective` held `isStatic` and `isTransitive`, two booleans. JLS 7.7.1
+writes `requires {RequiresModifier} ModuleName ;`, where a `RequiresModifier` is `transitive`
+or `static` and nothing fixes their order, so `requires transitive static M;` and
+`requires static transitive M;` are both Java. Two booleans cannot tell them apart, and v4
+wrote both back as `requires static transitive M;`.
+
+The directive now uses `FASTJavaTWithModifiers`, like every other declaration that writes a
+keyword, and holds `FASTJavaModifier` entities in the order the source writes them, each
+carrying its own positions. The export writes them in that order, so a source that writes
+`transitive` first keeps it there.
+
+`isStatic` and `isTransitive` still answer, computed over `modifiers` in
+`FAST-Java-Model-Extension`, so code that only reads them is unchanged. They are no longer
+properties of the metamodel, which is what breaks: they have no setters any more and they no
+longer appear in an MSE export, where `modifiers` appears instead.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aRequires isStatic: true` | `aRequires addModifier: aStaticModifier` |
+| `aRequires isTransitive: true` | `aRequires addModifier: aTransitiveModifier` |
+| `aRequires isStatic` | unchanged |
+| `aRequires isTransitive` | unchanged |
+| — | `aRequires modifiers`, in the order the source writes them |
+
+A `FASTJavaModifier` passed to `addModifier:` belongs to the model like any other entity, so
+build it with the model that holds the directive rather than with `new` alone.
+
 ## Renamed relations
 
 Each rename applies to the setter too, and to the `addX:` of a multivalued relation.
