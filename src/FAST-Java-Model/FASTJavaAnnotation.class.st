@@ -13,7 +13,6 @@ example:
 |---|
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
 | `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
-| `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
 | `javaAnnotationOwner` | `FASTJavaAnnotation` | `annotations` | `FASTJavaTWithAnnotations` | The element I am written on|
 | `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
@@ -21,27 +20,20 @@ example:
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationElement` | ""Arguments"" of the annotation, eg. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
-| `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
+| `type` | `FASTJavaAnnotation` | `javaAnnotationTypeOwner` | `FASTJavaTypeName` | The type I am an instance of, eg. the `java.io.Serial` of `@java.io.Serial`|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `endPos` | `Number` | nil | |
-| `name` | `String` | nil | |
-| `startPos` | `Number` | nil | |
 
 "
 Class {
 	#name : 'FASTJavaAnnotation',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAnnotationElement + FASTJavaTWithQualifiedName + FASTTNamedEntity',
-	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTWithQualifiedName classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTAnnotationElement',
+	#classTraits : 'FASTJavaTAnnotationElement classTrait',
 	#instVars : [
 		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation',
-		'#javaAnnotationOwner => FMOne type: #FASTJavaTWithAnnotations opposite: #annotations'
+		'#javaAnnotationOwner => FMOne type: #FASTJavaTWithAnnotations opposite: #annotations',
+		'#type => FMOne type: #FASTJavaTypeName opposite: #javaAnnotationTypeOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -110,4 +102,22 @@ FASTJavaAnnotation >> javaAnnotationOwner: anObject [
 	<ignoreForCoverage>
 	<generated>
 	javaAnnotationOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaAnnotation >> type [
+	"Relation named: #type type: #FASTJavaTypeName opposite: #javaAnnotationTypeOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The type I am an instance of, eg. the `java.io.Serial` of `@java.io.Serial`'>
+	^ type
+]
+
+{ #category : 'accessing' }
+FASTJavaAnnotation >> type: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	type := anObject
 ]

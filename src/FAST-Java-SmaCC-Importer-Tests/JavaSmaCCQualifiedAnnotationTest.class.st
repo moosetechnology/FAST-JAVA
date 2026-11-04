@@ -12,18 +12,19 @@ JavaSmaCCQualifiedAnnotationTest >> javaMethod [
 ]
 
 { #category : 'tests' }
-JavaSmaCCQualifiedAnnotationTest >> testNameOfAnnotation [
-	"JLS 6.5: the last of the names written is the name of what is named."
+JavaSmaCCQualifiedAnnotationTest >> testAnAnnotationMayWriteTheNameOfItsTypeQualified [
+	"JLS 9.7: an annotation may write the name of its type qualified, and the whole of what
+	it writes is one type name."
 
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne name equals: 'Serial'
+	| type |
+	type := (fastModel allWithType: FASTJavaAnnotation) anyOne type.
+	self assert: type class equals: FASTJavaQualifiedTypeName.
+	self assert: type fullName equals: 'java.io.Serial'
 ]
 
 { #category : 'tests' }
-JavaSmaCCQualifiedAnnotationTest >> testQualifiedNameOfAnnotation [
-	"JLS 9.7: an annotation names the type it is an instance of, and may write that name
-	qualified."
+JavaSmaCCQualifiedAnnotationTest >> testNameOfAnnotation [
+	"JLS 6.5: the last of the names written is the name of what is named."
 
-	self
-		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne qualifiedName fullName
-		equals: 'java.io.Serial'
+	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne type name equals: 'Serial'
 ]

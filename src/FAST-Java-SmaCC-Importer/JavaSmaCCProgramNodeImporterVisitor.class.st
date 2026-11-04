@@ -630,18 +630,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstrac
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
+	"JLS 9.7: an annotation writes `@` and the name of the annotation type it is an instance
+	of. That name is a type name wherever it stands, qualified or not, so it is held as one
+	rather than as a string beside an optional qualified name."
 
 	self create: FASTJavaAnnotation from: anAnnotation.
-	currentFASTEntity name: anAnnotation name name value.
-
-	"JLS 9.7: an annotation names the type it is an instance of, and that name may be
-	written qualified."
-	(anAnnotation name isKindOf: JavaQualifiedNameNode) ifTrue: [
-		currentFASTEntity qualifiedName: (self qualifiedNameOf: anAnnotation name) ].
-
+	currentFASTEntity type: (self typeNameOf: anAnnotation name).
 	anAnnotation values do: [ :expression |
 		currentFASTEntity addElement: (self clone accept: expression) ].
-
 	^ currentFASTEntity
 ]
 

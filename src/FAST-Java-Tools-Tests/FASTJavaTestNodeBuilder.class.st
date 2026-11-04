@@ -9,7 +9,7 @@ Class {
 { #category : 'api - building' }
 FASTJavaTestNodeBuilder >> annotation: aString [
 	^FASTJavaAnnotation new
-		name: aString ;
+		type: (FASTJavaTypeName new name: aString ; yourself) ;
 		yourself
 ]
 

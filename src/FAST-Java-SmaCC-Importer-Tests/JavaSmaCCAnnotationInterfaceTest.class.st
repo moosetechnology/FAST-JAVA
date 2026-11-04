@@ -48,7 +48,7 @@ JavaSmaCCAnnotationInterfaceTest >> testAnnotationInterfaceModifiers [
 		assertCollection: (declaration modifiers collect: [ :modifier | modifier token ] as: OrderedCollection)
 		equals: #( 'public' ) asOrderedCollection.
 	self
-		assertCollection: (declaration annotations collect: [ :annotation | annotation name ] as: OrderedCollection)
+		assertCollection: (declaration annotations collect: [ :annotation | annotation type name ] as: OrderedCollection)
 		equals: #( 'Retention' ) asOrderedCollection
 ]
 

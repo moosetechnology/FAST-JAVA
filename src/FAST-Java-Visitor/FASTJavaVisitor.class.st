@@ -7,7 +7,7 @@ Class {
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
-	^ self visitFASTTExpression: aFASTJavaAnnotation
+	^ self visitFASTTEntity: aFASTJavaAnnotation
 ]
 
 { #category : 'generated' }

@@ -29,7 +29,7 @@ JavaSmaCCTypeAnnotationsTest >> testAQualifiedTypeKeepsTheAnnotationsAfterTheDot
 	qualified := (fastModel allWithType: FASTJavaQualifiedTypeName)
 		             detect: [ :each | each name = 'List' ].
 
-	self assert: (qualified annotations collect: [ :modifier | modifier name ]) asArray
+	self assert: (qualified annotations collect: [ :modifier | modifier type name ]) asArray
 		equals: #( 'Deprecated' )
 ]
 
@@ -40,9 +40,9 @@ JavaSmaCCTypeAnnotationsTest >> testASuperclassAndAThrownTypeKeepTheirAnnotation
 	declaration := (fastModel allWithType: FASTJavaClassDeclaration) anyOne.
 	thrower := (fastModel allWithType: FASTJavaMethodEntity) detect: [ :each | each name = 'thrower' ].
 
-	self assert: (declaration superclass annotations collect: [ :modifier | modifier name ]) asArray
+	self assert: (declaration superclass annotations collect: [ :modifier | modifier type name ]) asArray
 		equals: #( 'Deprecated' ).
-	self assert: (thrower throws anyOne annotations collect: [ :modifier | modifier name ]) asArray
+	self assert: (thrower throws anyOne annotations collect: [ :modifier | modifier type name ]) asArray
 		equals: #( 'Deprecated' )
 ]
 
@@ -54,7 +54,7 @@ JavaSmaCCTypeAnnotationsTest >> testAnArrayTypeKeepsTheAnnotationsOfItsBrackets 
 	| array |
 	array := (fastModel allWithType: FASTJavaArrayTypeExpression) anyOne.
 
-	self assert: (array annotations collect: [ :modifier | modifier name ]) asArray
+	self assert: (array annotations collect: [ :modifier | modifier type name ]) asArray
 		equals: #( 'Deprecated' ).
 	self assert: array baseType annotations isEmpty
 ]
@@ -68,7 +68,7 @@ JavaSmaCCTypeAnnotationsTest >> testTheAnnotationOfADeclarationStaysOnTheDeclara
 	| model statement |
 	model := self parseClassString: 'class Annotated { @Deprecated String name; }'.
 	statement := (model allWithType: FASTJavaVarDeclStatement) anyOne.
-	self assert: (statement annotations collect: [ :annotation | annotation name ] as: Array) equals: #( 'Deprecated' ).
+	self assert: (statement annotations collect: [ :annotation | annotation type name ] as: Array) equals: #( 'Deprecated' ).
 	self assert: statement type annotations isEmpty
 ]
 
@@ -78,6 +78,6 @@ JavaSmaCCTypeAnnotationsTest >> testTheTypeOfACastKeepsItsAnnotations [
 	| cast |
 	cast := (fastModel allWithType: FASTJavaCastExpression) anyOne.
 
-	self assert: (cast type annotations collect: [ :modifier | modifier name ]) asArray
+	self assert: (cast type annotations collect: [ :modifier | modifier type name ]) asArray
 		equals: #( 'Deprecated' )
 ]

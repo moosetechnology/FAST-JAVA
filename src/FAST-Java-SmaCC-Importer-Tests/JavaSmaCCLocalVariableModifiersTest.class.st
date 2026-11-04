@@ -36,7 +36,7 @@ JavaSmaCCLocalVariableModifiersTest >> testDeclarationStandingOnItsOwnKeepsItsMo
 	| modifiers |
 	modifiers := self modifiersOfDeclarationOf: 'plain'.
 	self assert: modifiers size equals: 2.
-	self assert: modifiers first name equals: 'SuppressWarnings'.
+	self assert: modifiers first type name equals: 'SuppressWarnings'.
 	self assert: modifiers second token equals: 'final'
 ]
 
@@ -49,7 +49,7 @@ JavaSmaCCLocalVariableModifiersTest >> testResourceOfATryKeepsItsModifiers [
 	| modifiers |
 	modifiers := self modifiersOfDeclarationOf: 'stream'.
 	self assert: modifiers size equals: 2.
-	self assert: modifiers first name equals: 'SuppressWarnings'.
+	self assert: modifiers first type name equals: 'SuppressWarnings'.
 	self assert: modifiers second token equals: 'final'
 ]
 
@@ -61,6 +61,6 @@ JavaSmaCCLocalVariableModifiersTest >> testVariableOfAForKeepsItsModifiers [
 	| modifiers |
 	modifiers := self modifiersOfDeclarationOf: 'index'.
 	self assert: modifiers size equals: 2.
-	self assert: modifiers first name equals: 'SuppressWarnings'.
+	self assert: modifiers first type name equals: 'SuppressWarnings'.
 	self assert: modifiers second token equals: 'final'
 ]

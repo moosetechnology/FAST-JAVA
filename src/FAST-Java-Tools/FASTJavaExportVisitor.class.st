@@ -189,18 +189,16 @@ FASTJavaExportVisitor >> returnsAString: aFASTJavaExpression [
 
 { #category : 'visiting' }
 FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
+	"JLS 9.7: an annotation writes `@`, the name of its type, and the elements it gives
+	between parentheses."
+
 	self checkForComments: aFASTJavaAnnotation andDo: [
 		self unindented: $@.
-		aFASTJavaAnnotation qualifiedName
-			ifNil: [ self unindented: aFASTJavaAnnotation name ]
-			ifNotNil: [ :qualifiedName | self visitFASTJavaQualifiedName: qualifiedName ].
+		aFASTJavaAnnotation type accept: self.
 		aFASTJavaAnnotation elements ifNotEmpty: [ :arguments |
 			self unindented: $(.
 			self visitNodeListSeparatedByCommas: arguments.
-			self unindented: $)
-		]
-	]
-
+			self unindented: $) ] ]
 ]
 
 { #category : 'visiting' }

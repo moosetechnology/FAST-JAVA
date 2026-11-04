@@ -29,7 +29,7 @@ JavaSmaCCMethodModifiersTest >> testMethodModifiersKeepTheOrderTheyAreWritten [
 	self
 		assert: (written collect: [ :modifier |
 					 modifier isAnnotation
-						 ifTrue: [ modifier name ]
+						 ifTrue: [ modifier type name ]
 						 ifFalse: [ modifier token ] ])
 		equals: #( 'A' 'public' 'final' 'B' )
 ]

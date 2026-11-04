@@ -12,6 +12,17 @@ JavaSmaCCAnnotationTest >> javaMethod [
 ]
 
 { #category : 'tests' }
+JavaSmaCCAnnotationTest >> testAnAnnotationWritingNoQualifierHasAPlainTypeName [
+	"JLS 9.7: an annotation names the type it is an instance of, and a name written with no
+	qualifier is a type name with nothing before it."
+
+	| type |
+	type := (fastModel allWithType: FASTJavaAnnotation) anyOne type.
+	self assert: type class equals: FASTJavaTypeName.
+	self assert: type fullName equals: 'Useless'
+]
+
+{ #category : 'tests' }
 JavaSmaCCAnnotationTest >> testAnnotatedEntity [
 	self
 		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne javaAnnotationOwner class
@@ -20,7 +31,7 @@ JavaSmaCCAnnotationTest >> testAnnotatedEntity [
 
 { #category : 'tests' }
 JavaSmaCCAnnotationTest >> testNameOfAnnotation [
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne name equals: 'Useless'
+	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne type name equals: 'Useless'
 ]
 
 { #category : 'tests' }
@@ -31,11 +42,4 @@ JavaSmaCCAnnotationTest >> testNumberOfAnnotation [
 { #category : 'tests' }
 JavaSmaCCAnnotationTest >> testNumberOfElementsToAnnotation [
 	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements size equals: 0
-]
-
-{ #category : 'tests' }
-JavaSmaCCAnnotationTest >> testQualifiedNameOfAnnotation [
-	"JLS 9.7: an annotation that writes no qualifier has none."
-
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne qualifiedName isNil
 ]

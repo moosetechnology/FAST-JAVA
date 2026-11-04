@@ -19,7 +19,7 @@ JavaSmaCCTypeParameterAnnotationsTest >> testTypeParameterKeepsItsAnnotations [
 	parameter := (fastModel allWithType: FASTJavaTypeParameterExpression) anyOne.
 
 	self assert: parameter name equals: 'T'.
-	self assert: (parameter annotations collect: [ :annotation | annotation name ]) asArray
+	self assert: (parameter annotations collect: [ :annotation | annotation type name ]) asArray
 		equals: #( 'Deprecated' ).
 	self assert: parameter types anyOne typeName name equals: 'Number'
 ]

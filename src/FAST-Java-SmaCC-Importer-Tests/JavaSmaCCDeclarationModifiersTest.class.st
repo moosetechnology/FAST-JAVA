@@ -48,7 +48,7 @@ JavaSmaCCDeclarationModifiersTest >> testCatchParameterKeepsItsModifiers [
 	| modifiers |
 	modifiers := self modifiersOf: (fastModel allWithType: FASTJavaCatchPartStatement) anyOne.
 	self assert: modifiers size equals: 2.
-	self assert: modifiers first name equals: 'SuppressWarnings'.
+	self assert: modifiers first type name equals: 'SuppressWarnings'.
 	self assert: modifiers second token equals: 'final'
 ]
 
@@ -63,7 +63,7 @@ JavaSmaCCDeclarationModifiersTest >> testEnumConstantKeepsItsAnnotation [
 		assert: (self annotationsOf: (constants detect: [ :constant | constant name = 'ANNOTATED' ])) size
 		equals: 1.
 	self
-		assert: (self annotationsOf: (constants detect: [ :constant | constant name = 'ANNOTATED' ])) first name
+		assert: (self annotationsOf: (constants detect: [ :constant | constant name = 'ANNOTATED' ])) first type name
 		equals: 'Deprecated'.
 	self assert:
 		(self annotationsOf: (constants detect: [ :constant | constant name = 'PLAIN' ])) isEmpty
@@ -77,7 +77,7 @@ JavaSmaCCDeclarationModifiersTest >> testForEachVariableKeepsItsModifiers [
 	| modifiers |
 	modifiers := self modifiersOf: (fastModel allWithType: FASTJavaForEachStatement) anyOne.
 	self assert: modifiers size equals: 2.
-	self assert: modifiers first name equals: 'SuppressWarnings'.
+	self assert: modifiers first type name equals: 'SuppressWarnings'.
 	self assert: modifiers second token equals: 'final'
 ]
 
@@ -89,7 +89,7 @@ JavaSmaCCDeclarationModifiersTest >> testTypePatternKeepsItsModifiers [
 	| modifiers |
 	modifiers := self modifiersOf: (fastModel allWithType: FASTJavaTypePattern) anyOne.
 	self assert: modifiers size equals: 2.
-	self assert: modifiers first name equals: 'SuppressWarnings'.
+	self assert: modifiers first type name equals: 'SuppressWarnings'.
 	self assert: modifiers second token equals: 'final'
 ]
 

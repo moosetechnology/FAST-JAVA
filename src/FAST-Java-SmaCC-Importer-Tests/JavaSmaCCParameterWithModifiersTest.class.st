@@ -23,7 +23,7 @@ JavaSmaCCParameterWithModifiersTest >> parameters [
 { #category : 'tests' }
 JavaSmaCCParameterWithModifiersTest >> testParameterKeepsTheAnnotationItWrites [
 
-	self assert: self parameters first annotations anyOne name equals: 'Deprecated'
+	self assert: self parameters first annotations anyOne type name equals: 'Deprecated'
 ]
 
 { #category : 'tests' }

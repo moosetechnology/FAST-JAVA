@@ -22,7 +22,7 @@ JavaSmaCCAnnotationWithNamedElementsTest >> testAnnotatedEntity [
 
 { #category : 'tests' }
 JavaSmaCCAnnotationWithNamedElementsTest >> testNameOfAnnotation [
-	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne name equals: 'Useless'
+	self assert: (fastModel allWithType: FASTJavaAnnotation) anyOne type name equals: 'Useless'
 ]
 
 { #category : 'tests' }

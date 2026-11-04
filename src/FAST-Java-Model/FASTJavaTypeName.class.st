@@ -8,6 +8,7 @@ I represent the name of a type
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
+| `javaAnnotationTypeOwner` | `FASTJavaTypeName` | `type` | `FASTJavaAnnotation` | The annotation whose type I name|
 | `javaQualifiedTypeNameOwner` | `FASTJavaTypeName` | `namespace` | `FASTJavaQualifiedTypeName` | the name I qualify|
 | `javaSuperOwner` | `FASTJavaTypeName` | `type` | `FASTJavaSuper` | The `super` I qualify|
 | `javaThisOwner` | `FASTJavaTypeName` | `type` | `FASTJavaThis` | The `this` I qualify|
@@ -36,6 +37,7 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTTNamedEntity + FASTTWithArguments',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
+		'#javaAnnotationTypeOwner => FMOne type: #FASTJavaAnnotation opposite: #type',
 		'#javaQualifiedTypeNameOwner => FMOne type: #FASTJavaQualifiedTypeName opposite: #namespace',
 		'#javaSuperOwner => FMOne type: #FASTJavaSuper opposite: #type',
 		'#javaThisOwner => FMOne type: #FASTJavaThis opposite: #type',
@@ -61,6 +63,25 @@ FASTJavaTypeName >> isTypeName [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaAnnotationTypeOwner [
+	"Relation named: #javaAnnotationTypeOwner type: #FASTJavaAnnotation opposite: #type"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The annotation whose type I name'>
+	<container>
+	^ javaAnnotationTypeOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaTypeName >> javaAnnotationTypeOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaAnnotationTypeOwner := anObject
 ]
 
 { #category : 'accessing' }

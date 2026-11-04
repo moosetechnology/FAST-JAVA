@@ -1397,10 +1397,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 
 	javaModifier --|> tExpression.
 
-	javaAnnotationExpression --|> tNamedEntity.
 	javaAnnotationExpression --|> tAnnotationElement.
-	"JLS 9.7: an annotation names the type it is an instance of, which it may write qualified"
-	javaAnnotationExpression --|> tWithQualifiedName.
 
 	javaParameterExpression --|> tExpression.
 	javaParameterExpression --|> tVariableEntity.
@@ -1664,6 +1661,13 @@ FASTJavaMetamodelGenerator >> defineRelations [
 		 'The type whose superinterface I reach, eg. the `Outer` of `Outer.super`')
 	<>- ((javaTypeName property: #javaSuperOwner) comment:
 			 'The `super` I qualify').
+
+	"JLS 9.7: an annotation writes `@` and the name of the annotation type it is an instance
+	of, which it may write qualified."
+	((javaAnnotationExpression property: #type) comment:
+		 'The type I am an instance of, eg. the `java.io.Serial` of `@java.io.Serial`')
+	<>- ((javaTypeName property: #javaAnnotationTypeOwner) comment:
+			 'The annotation whose type I name').
 
 	((javaThrowStatement property: #expression) comment:
 		 'The thrown element')

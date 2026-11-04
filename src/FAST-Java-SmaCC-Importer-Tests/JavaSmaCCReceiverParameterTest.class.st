@@ -39,7 +39,7 @@ JavaSmaCCReceiverParameterTest >> testQualifiedReceiverKeepsItsAnnotationsAndNam
 
 	self assert: receiver qualifier equals: 'Outer'.
 	self assert: receiver type typeName name equals: 'Outer'.
-	self assert: (receiver annotations collect: [ :annotation | annotation name ]) asArray
+	self assert: (receiver annotations collect: [ :annotation | annotation type name ]) asArray
 		equals: #( 'Deprecated' )
 ]
 

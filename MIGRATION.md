@@ -398,6 +398,37 @@ own used to read its names as package names, so `a = 1` as a fragment made `a` a
 `FASTJavaQualifiedName` where the same text inside a class made it a
 `FASTJavaVariableExpression`. Both now read the same way.
 
+## An annotation names its type, once
+
+`FASTJavaAnnotation` used both `FASTTNamedEntity` and `FASTJavaTWithQualifiedName`, and the
+importer filled them in turn: `@Override` set `name` to `'Override'` and left
+`qualifiedName` nil, while `@java.io.Serial` set `name` to `'Serial'` — the last part only —
+*and* built a `FASTJavaQualifiedName` holding the whole. One construct, read two ways, and
+the only thing choosing between them was whether a dot happened to be written. Over 1600
+files of JDK 8 and JDK 25 that is 4465 annotations read the first way and 555 the second.
+
+JLS 9.7 writes an annotation as `@` followed by a *TypeName*, so that name is now a
+`FASTJavaTypeName`, or a `FASTJavaQualifiedTypeName` when it is written qualified, held in
+one relation that is always there. It is the same `type` relation, built by the same
+`typeNameOf:`, that `FASTJavaThis` and `FASTJavaSuper` already use for their qualifiers.
+
+Reading `name` does not raise. `MooseObject` answers `#noname` for an entity with no name
+property, so v4 code that read `'Override'` now reads `#noname` and reports nothing. Search
+out the senders rather than waiting for one to fail.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `anAnnotation name` | `anAnnotation type name` |
+| `anAnnotation name: aString` | `anAnnotation type: aFASTJavaTypeName` |
+| `anAnnotation qualifiedName` | `anAnnotation type`, which is never nil |
+| `anAnnotation qualifiedName fullName` | `anAnnotation type fullName` |
+| `anAnnotation qualifiedName isNil` | `anAnnotation type class = FASTJavaTypeName` |
+| `aQualifiedName qualifiedNameOwner` | `aTypeName javaAnnotationTypeOwner` |
+
+`anAnnotation type fullName` answers what the source writes in either case — `'Override'`
+or `'java.io.Serial'` — which v4 could only get by testing `qualifiedName` first and
+falling back to `name`. Nothing is exported differently.
+
 ## A simple invocation receiver is read like any other simple name
 
 `foo.bar()` wrote `foo` as a `FASTJavaIdentifier`, while `go(foo)`, `return foo` and
