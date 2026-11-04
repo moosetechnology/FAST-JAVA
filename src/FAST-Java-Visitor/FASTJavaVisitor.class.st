@@ -496,6 +496,12 @@ FASTJavaVisitor >> visitFASTJavaSynchronizedStatement: aFASTJavaSynchronizedStat
 ]
 
 { #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaTextBlock: aFASTJavaTextBlock [
+
+	^ self visitFASTJavaStringLiteral: aFASTJavaTextBlock
+]
+
+{ #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaThenPartStatement: aFASTJavaThenPartStatement [
 	^ self visitFASTTStatement: aFASTJavaThenPartStatement
 ]

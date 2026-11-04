@@ -2263,6 +2263,23 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaTestOnCharacter [
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaTextBlockWritesItsThreeQuotes [
+	"JLS 3.10.6: a text block writes a run of three quote characters on either side of what
+	it holds, and what it holds is written back unchanged."
+
+	self
+		export: (self unitFor: 'class A { String s = """
+	hi
+	"""; }')
+		equals: 'class A {
+  String s = """
+	hi
+	""";
+}
+'
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaThrowStatement [
 

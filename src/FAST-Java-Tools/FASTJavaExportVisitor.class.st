@@ -1519,6 +1519,17 @@ FASTJavaExportVisitor >> visitFASTJavaSynchronizedStatement: aFASTJavaSynchroniz
 	]
 ]
 
+{ #category : 'visiting expression' }
+FASTJavaExportVisitor >> visitFASTJavaTextBlock: aFASTJavaTextBlock [
+	"JLS 3.10.6: a text block writes a run of three quote characters on either side of what
+	it holds."
+
+	self checkForComments: aFASTJavaTextBlock andDo: [
+		self unindented: '"""'.
+		self visitFASTJavaLiteral: aFASTJavaTextBlock.
+		self unindented: '"""' ]
+]
+
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [

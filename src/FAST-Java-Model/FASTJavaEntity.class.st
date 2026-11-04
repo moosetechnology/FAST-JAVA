@@ -776,6 +776,14 @@ FASTJavaEntity >> isSynchronizedStatement [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isTextBlock [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isThis [
 
 	<ignoreForCoverage>

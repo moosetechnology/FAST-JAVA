@@ -717,6 +717,14 @@ FASTJavaTEntityCreator >> newSynchronizedStatement [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newTextBlock [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaTextBlock new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newThis [
 
 	<ignoreForCoverage>

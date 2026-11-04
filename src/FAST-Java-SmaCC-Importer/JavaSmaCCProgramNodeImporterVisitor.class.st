@@ -1870,11 +1870,19 @@ JavaSmaCCProgramNodeImporterVisitor >> visitStaticInitializer: anInitializer [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitStringLiteral: aStringLiteral [
-	currentFASTEntity := self
-		addToModel:
-			(FASTJavaStringLiteral new
-				primitiveValue: ((aStringLiteral token value removePrefix: '"') removeSuffix: '"');
-				yourself).
+	"JLS 3.10.5 and 3.10.6: a string literal is written between two quote characters and a
+	text block between two runs of three, and each holds what its source writes between its
+	delimiters, before the escapes are read."
+
+	| written isTextBlock |
+	written := aStringLiteral token value.
+	isTextBlock := written beginsWith: '"""'.
+	currentFASTEntity := self addToModel: (isTextBlock
+			 ifTrue: [ FASTJavaTextBlock new ]
+			 ifFalse: [ FASTJavaStringLiteral new ]).
+	currentFASTEntity primitiveValue: (isTextBlock
+			 ifTrue: [ written copyFrom: 4 to: written size - 3 ]
+			 ifFalse: [ written copyFrom: 2 to: written size - 1 ]).
 	self setStartEndPos: aStringLiteral.
 	^ currentFASTEntity
 ]

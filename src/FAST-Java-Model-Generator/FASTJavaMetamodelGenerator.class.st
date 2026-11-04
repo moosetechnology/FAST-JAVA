@@ -151,7 +151,8 @@ Class {
 		'javaDimensionExpression',
 		'javaEmptyDeclaration',
 		'javaClassLiteral',
-		'javaSuper'
+		'javaSuper',
+		'javaTextBlock'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -758,6 +759,13 @@ construct that uses me also uses.'
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaTextBlock [
+	^ 'I am a text block, the string literal JLS 3.10.6 writes between two runs of three quote
+characters. I hold what the source writes between those runs, before the incidental white
+space is stripped and the escapes are read, so that what is written is what comes back out.'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaThis [
 	^ 'I am the `this` of a method, a constructor or an initializer: the instance it runs on
 (JLS 15.8.3).
@@ -936,6 +944,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 	javaIntegerLiteral withTesting.
 	javaNullLiteral := self newClassNamed: #NullLiteral comment: self commentForJavaNullLiteral.
 	javaStringLiteral := self newClassNamed: #StringLiteral comment: self commentForJavaStringLiteral.
+	javaTextBlock := self newClassNamed: #TextBlock comment: self commentForJavaTextBlock.
+	javaTextBlock withTesting.
 	javaBooleanLiteral := self newClassNamed: #BooleanLiteral comment: self commentForJavaBooleanLiteral.
 	javaLongLiteral := self newClassNamed: #LongLiteral comment: self commentForJavaLongLiteral.
 	javaLongLiteral withTesting.
@@ -1166,6 +1176,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaCharacterLiteral --|> javaLiteral.
 	javaStringLiteral --|> tStringLiteral.
 	javaStringLiteral --|> javaLiteral.
+	"JLS 3.10.6: a text block is a string literal written between two runs of three quote
+	characters, and JLS 15.8.1 writes it wherever a string literal is written."
+	javaTextBlock --|> javaStringLiteral.
 	javaIntegerLiteral --|> tLiteral.
 	javaIntegerLiteral --|> javaLiteral.
 	javaFloatLiteral --|> tLiteral.

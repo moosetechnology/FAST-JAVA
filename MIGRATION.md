@@ -599,6 +599,33 @@ longer appear in an MSE export, where `modifiers` appears instead.
 A `FASTJavaModifier` passed to `addModifier:` belongs to the model like any other entity, so
 build it with the model that holds the directive rather than with `new` alone.
 
+## A text block is a literal of its own
+
+JLS 3.10.5 writes a string literal between two quote characters and JLS 3.10.6 writes a text
+block between two runs of three; they are different productions, and v4 read both as a
+`FASTJavaStringLiteral`. Worse, it stripped one quote from each end whatever it had read, so
+a text block's `primitiveValue` came back holding two of its own delimiter quotes at each
+end — neither what the source writes nor what the block holds.
+
+`FASTJavaTextBlock` is a subclass of `FASTJavaStringLiteral`, so a text block is still a
+string literal to anything that asks, and `primitiveValue` now holds what stands between the
+two runs of three quotes: line terminators and indentation included, escapes unread, exactly
+as a string literal holds what stands between its two quotes.
+
+| v4.4.0 | v5 |
+| --- | --- |
+| `aTextBlock primitiveValue` → `""…""` | `aTextBlock primitiveValue` → the content, no quotes |
+| nothing distinguished the two | `aLiteral isKindOf: FASTJavaTextBlock` |
+| — | `aModel allWithType: FASTJavaTextBlock` |
+
+**This one breaks silently.** `allWithType:` answers a type and not its subclasses, so
+`aModel allWithType: FASTJavaStringLiteral` stops answering text blocks and says nothing
+about it. Ask for both, or use `isKindOf: FASTJavaStringLiteral`, which still holds for a
+text block.
+
+A visitor gains `visitFASTJavaTextBlock:`, which forwards to `visitFASTJavaStringLiteral:`,
+so a visitor that overrode only the latter keeps working.
+
 ## Renamed relations
 
 Each rename applies to the setter too, and to the `addX:` of a multivalued relation.
