@@ -79,6 +79,17 @@ JavaSmaCCBracketAnnotationsTest >> testEachPairOfBracketsAfterANameKeepsItsOwnAn
 ]
 
 { #category : 'tests' }
+JavaSmaCCBracketAnnotationsTest >> testEachPairOfBracketsIsWhereItIsWritten [
+	"JLS 10.2: a pair of brackets starts at the first annotation written on it and ends at
+	its closing bracket, wherever it is written. JLS 8.4.1: so does an ellipsis."
+
+	| sources |
+	sources := ((fastModel allWithType: FASTJavaDimension) sorted: [ :a :b | a startPos < b startPos ])
+		           collect: [ :dimension | self javaClass copyFrom: dimension startPos to: dimension endPos ].
+	self assert: sources asArray equals: #( '@A []' '@B []' '@A ...' '@A []' '@A []' )
+]
+
+{ #category : 'tests' }
 JavaSmaCCBracketAnnotationsTest >> testEachPairOfBracketsOfATypeKeepsItsOwnAnnotations [
 	"JLS 10.2: `String @A [] @B []` annotates each pair, and the model nests one array
 	type per pair, the innermost holding the one written first."
