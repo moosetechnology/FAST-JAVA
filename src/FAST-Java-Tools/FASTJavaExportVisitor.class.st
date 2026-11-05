@@ -221,11 +221,12 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotation: aFASTJavaAnnotation [
 		aFASTJavaAnnotation qualifiedName
 			ifNil: [ self unindented: aFASTJavaAnnotation name ]
 			ifNotNil: [ :qualifiedName | self visitFASTJavaQualifiedName: qualifiedName ].
-		aFASTJavaAnnotation elements ifNotEmpty: [ :arguments |
-			self unindented: $(.
-			self visitNodeListSeparatedByCommas: arguments.
-			self unindented: $)
-		]
+		aFASTJavaAnnotation elements
+			ifEmpty: [ aFASTJavaAnnotation hasParentheses ifTrue: [ self unindented: '()' ] ]
+			ifNotEmpty: [ :arguments |
+				self unindented: $(.
+				self visitNodeListSeparatedByCommas: arguments.
+				self unindented: $) ]
 	]
 
 ]
@@ -663,7 +664,9 @@ FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 	self checkForComments: aFASTJavaEnumConstant andDo: [
 		self visitFASTJavaModifiersInline: aFASTJavaEnumConstant annotations.
 		self unindented: aFASTJavaEnumConstant name.
-		aFASTJavaEnumConstant arguments ifNotEmpty: [ :arguments | self visitFASTJavaArgumentsList: arguments ].
+		aFASTJavaEnumConstant arguments
+			ifEmpty: [ aFASTJavaEnumConstant hasParentheses ifTrue: [ self unindented: '()' ] ]
+			ifNotEmpty: [ :arguments | self visitFASTJavaArgumentsList: arguments ].
 		aFASTJavaEnumConstant declarations ifNotEmpty: [ :declarations | self visitJavaClassMemberDeclarations: declarations ]
 	]
 ]
@@ -968,9 +971,10 @@ FASTJavaExportVisitor >> visitFASTJavaLabeledStatement: aFASTJavaLabeledStatemen
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpression [
 	self checkForComments: aFASTJavaLambdaExpression andDo: [
-		self unindented: $(.
+		aFASTJavaLambdaExpression hasConciseParameter ifFalse: [ self unindented: $( ].
 		self visitNodeListSeparatedByCommas: aFASTJavaLambdaExpression parameters.
-		self unindented: ') -> '.
+		aFASTJavaLambdaExpression hasConciseParameter ifFalse: [ self unindented: $) ].
+		self unindented: ' -> '.
 		"JLS 15.27.2: the body of a lambda is an expression of its own."
 		self outputTopLevelExpression: [
 			aFASTJavaLambdaExpression expression accept: self ]

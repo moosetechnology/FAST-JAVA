@@ -64,6 +64,7 @@ example:
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasParentheses` | `Boolean` | false | Whether parentheses are written after my name, which tells `@A()` from `@A` when no element value is given (JLS 9.7)|
 | `name` | `String` | nil | |
 | `startPos` | `Number` | nil | |
 
@@ -75,6 +76,7 @@ Class {
 	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTModifier classTrait + FASTJavaTWithQualifiedName classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation',
+		'#hasParentheses => FMProperty defaultValue: false',
 		'#javaAnnotationOwner => FMOne type: #FASTJavaTWithAnnotations opposite: #annotations'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -117,6 +119,23 @@ FASTJavaAnnotation >> elements: anObject [
 	<ignoreForCoverage>
 	<generated>
 	elements value: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaAnnotation >> hasParentheses [
+
+	<FMProperty: #hasParentheses type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether parentheses are written after my name, which tells `@A()` from `@A` when no element value is given (JLS 9.7)'>
+	^ hasParentheses ifNil: [ hasParentheses := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaAnnotation >> hasParentheses: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasParentheses := anObject
 ]
 
 { #category : 'testing' }

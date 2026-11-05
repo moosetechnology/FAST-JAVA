@@ -626,6 +626,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 
 	self create: FASTJavaAnnotation from: anAnnotation.
 	currentFASTEntity name: anAnnotation name name value.
+	"JLS 9.7: a marker annotation writes no parentheses, and a normal one may write them
+	around no element value."
+	currentFASTEntity hasParentheses: anAnnotation leftParen isNotNil.
 
 	"JLS 9.7: an annotation names the type it is an instance of, and that name may be
 	written qualified."
@@ -1071,6 +1074,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEnumConstant: anEnumConstant [
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	currentFASTEntity
 			name: anEnumConstant name value.
+	currentFASTEntity hasParentheses: anEnumConstant leftParen isNotNil.
 	anEnumConstant expressions do: [ :expression |
 		currentFASTEntity arguments add: (self clone accept: expression) ].
 	anEnumConstant declarations do: [ :declaration |
@@ -1339,6 +1343,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitLambdaExpression: aLambdaExpression 
 	currentFASTEntity := self
 		addToModel: FASTJavaLambdaExpression new.
 	self setStartEndPos: aLambdaExpression.
+	"JLS 15.27.1: one parameter written without a type may be written without parentheses."
+	currentFASTEntity hasConciseParameter: aLambdaExpression leftParen isNil.
 	aLambdaExpression parameters do: [ :parameter | currentFASTEntity addParameter: (self clone accept: parameter) ].
 	currentFASTEntity
 		expression: (self clone accept: aLambdaExpression value).

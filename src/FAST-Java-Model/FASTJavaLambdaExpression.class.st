@@ -54,6 +54,7 @@ I represent a lambda expression
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasConciseParameter` | `Boolean` | false | Whether my one parameter is written alone, without parentheses or a type, as in `x -> x + 1` (JLS 15.27.1)|
 | `startPos` | `Number` | nil | |
 
 "
@@ -63,7 +64,8 @@ Class {
 	#traits : 'FASTTExpression + FASTTWithParameters',
 	#classTraits : 'FASTTExpression classTrait + FASTTWithParameters classTrait',
 	#instVars : [
-		'#expression => FMOne type: #FASTJavaEntity opposite: #javaLambdaExpressionOwner'
+		'#expression => FMOne type: #FASTJavaEntity opposite: #javaLambdaExpressionOwner',
+		'#hasConciseParameter => FMProperty defaultValue: false'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -95,6 +97,23 @@ FASTJavaLambdaExpression >> expression: anObject [
 	<ignoreForCoverage>
 	<generated>
 	expression := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaLambdaExpression >> hasConciseParameter [
+
+	<FMProperty: #hasConciseParameter type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether my one parameter is written alone, without parentheses or a type, as in `x -> x + 1` (JLS 15.27.1)'>
+	^ hasConciseParameter ifNil: [ hasConciseParameter := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaLambdaExpression >> hasConciseParameter: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasConciseParameter := anObject
 ]
 
 { #category : 'testing' }

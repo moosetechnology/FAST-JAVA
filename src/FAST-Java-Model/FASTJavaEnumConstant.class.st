@@ -15,6 +15,12 @@
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `hasParentheses` | `Boolean` | false | Whether parentheses are written after my name, which tells `A()` from `A` when no argument is given (JLS 8.9.1)|
 
 "
 Class {
@@ -23,6 +29,7 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithDeclarations + FASTTWithArguments',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
 	#instVars : [
+		'#hasParentheses => FMProperty defaultValue: false',
 		'#parentEnum => FMOne type: #FASTJavaEnumDeclaration opposite: #constants'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -37,6 +44,23 @@ FASTJavaEnumConstant class >> annotation [
 	<FMClass: #EnumConstant super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumConstant >> hasParentheses [
+
+	<FMProperty: #hasParentheses type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether parentheses are written after my name, which tells `A()` from `A` when no argument is given (JLS 8.9.1)'>
+	^ hasParentheses ifNil: [ hasParentheses := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumConstant >> hasParentheses: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasParentheses := anObject
 ]
 
 { #category : 'testing' }

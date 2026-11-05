@@ -1500,6 +1500,15 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaMethodEntity property: #isCompactConstructor type: #Boolean defaultValue: false) comment:
 		'Whether I am a compact canonical constructor, which writes no parameter list and takes the components of its record as parameters (JLS 8.10.4.2)'.
 
+	(javaLambdaExpression property: #hasConciseParameter type: #Boolean defaultValue: false) comment:
+		'Whether my one parameter is written alone, without parentheses or a type, as in `x -> x + 1` (JLS 15.27.1)'.
+
+	(javaAnnotationExpression property: #hasParentheses type: #Boolean defaultValue: false) comment:
+		'Whether parentheses are written after my name, which tells `@A()` from `@A` when no element value is given (JLS 9.7)'.
+
+	(javaEnumConstant property: #hasParentheses type: #Boolean defaultValue: false) comment:
+		'Whether parentheses are written after my name, which tells `A()` from `A` when no argument is given (JLS 8.9.1)'.
+
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 

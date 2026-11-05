@@ -1455,7 +1455,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionOneStatement [
 	ast := self methodAST: 'void mth() { a = ( arg -> doSomething() ); }'.
 
 	self export: ast equals: 'void mth() {
-  a = (arg) -> doSomething();
+  a = arg -> doSomething();
 }
 '
 ]
