@@ -2120,13 +2120,17 @@ JavaSmaCCProgramNodeImporterVisitor >> visitTypeArgument: aTypeArgument [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitTypeImportOnDemandDeclaration: aTypeImportOnDemandDeclaration [
+	"JLS 7.5.2 and 7.5.4: an import on demand names the package or type it imports from,
+	and that name may be a single identifier, as the `tools` of `import tools.*;` is.
+	It is a name whatever it is written as, so it is built as the single-type import builds
+	its own."
+
 	currentFASTEntity := self addToModel: FASTJavaImportDeclaration new.
 	self setStartEndPos: aTypeImportOnDemandDeclaration.
 	currentFASTEntity
 		isStatic: aTypeImportOnDemandDeclaration staticToken isNotNil;
 		isOnDemand: true;
-		qualifiedName:
-			(self clone accept: aTypeImportOnDemandDeclaration name).
+		qualifiedName: (self qualifiedNameOf: aTypeImportOnDemandDeclaration name).
 	^ currentFASTEntity
 ]
 
