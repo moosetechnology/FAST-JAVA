@@ -89,6 +89,16 @@ FASTJavaExportVisitor >> goBack: aNumber [
 ]
 
 { #category : 'precedence' }
+FASTJavaExportVisitor >> isInfixOperation: anExpression withPrecedenceOf: anOperator [
+	"JLS 15.17 to 15.24: a binary operator groups left to right, so an operation of the same
+	precedence written as its right operand was written between parentheses, as `b + c` is
+	in `a - (b + c)`. One of a lower precedence is parenthesized already."
+
+	^ anExpression class = FASTJavaInfixOperation and: [
+		  (self operatorPrecedence: (self operatorOf: anExpression)) = (self operatorPrecedence: anOperator) ]
+]
+
+{ #category : 'precedence' }
 FASTJavaExportVisitor >> isStringConcatenation: aFASTJavaInfixOperation [
 
 	^(aFASTJavaInfixOperation operator = '+')
@@ -169,6 +179,15 @@ FASTJavaExportVisitor >> outputLineComment: aComment [
 
 	self unindented: aComment content.
 	self newLine
+]
+
+{ #category : 'precedence' }
+FASTJavaExportVisitor >> operatorOf: aFASTJavaInfixOperation [
+	"A `+` that concatenates strings has a precedence of its own here."
+
+	^ (self isStringConcatenation: aFASTJavaInfixOperation)
+		  ifTrue: [ #concat ]
+		  ifFalse: [ aFASTJavaInfixOperation operator ]
 ]
 
 { #category : 'precedence' }
@@ -529,7 +548,11 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 	self checkForComments: aFASTJavaConditionalExpression andDo: [
 		self
 			outputExpression: [
-				aFASTJavaConditionalExpression condition accept: self.
+				"JLS 15.25: a conditional groups right to left, so one written as the condition of
+				another was written between parentheses."
+				self
+					outputExpression: [ aFASTJavaConditionalExpression condition accept: self ]
+					inParentheses: aFASTJavaConditionalExpression condition class = FASTJavaConditionalExpression.
 				self unindented: ' ? '.
 				self outputTopLevelExpression: [
 					aFASTJavaConditionalExpression thenPart accept: self
@@ -839,9 +862,7 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 
 	| operator |
 
-	operator := (self isStringConcatenation: aFASTJavaInfixOperation)
-		ifTrue: [ #concat ]
-		ifFalse: [ aFASTJavaInfixOperation operator ].
+	operator := self operatorOf: aFASTJavaInfixOperation.
 
 	self checkForComments: aFASTJavaInfixOperation andDo: [
 		self
@@ -850,7 +871,9 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 				(aFASTJavaInfixOperation operator = 'instanceof')
 					ifTrue:  [ self space ; unindented: aFASTJavaInfixOperation operator ; space ]
 					ifFalse: [ self unindented: aFASTJavaInfixOperation operator].
-				aFASTJavaInfixOperation rightOperand accept: self.
+				self
+					outputExpression: [ aFASTJavaInfixOperation rightOperand accept: self ]
+					inParentheses: (self isInfixOperation: aFASTJavaInfixOperation rightOperand withPrecedenceOf: operator)
 			]
 			withOperator: operator
 ]
