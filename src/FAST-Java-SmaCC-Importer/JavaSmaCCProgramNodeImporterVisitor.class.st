@@ -151,17 +151,22 @@ JavaSmaCCProgramNodeImporterVisitor >> arrayDimensionsOf: aVariableNode [
 
 { #category : 'private - comments' }
 JavaSmaCCProgramNodeImporterVisitor >> attach: aFastComment [
+	"A block comment belongs to the code that follows it, and a line comment to the code
+	that precedes it. One with no code on that side, such as a line comment opening the
+	file, belongs to the code on the other side."
+
 	(aFastComment isBlockComment
-		ifTrue: [ self closestNextNode: aFastComment ]
-		ifFalse:  [ self closestPreviousNode: aFastComment ])
-	ifNotNil: [ :node | aFastComment container: node ]
+		 ifTrue: [ (self closestNextNode: aFastComment) ifNil: [ self closestPreviousNode: aFastComment ] ]
+		 ifFalse: [ (self closestPreviousNode: aFastComment) ifNil: [ self closestNextNode: aFastComment ] ])
+		ifNotNil: [ :node | aFastComment container: node ]
 ]
 
 { #category : 'private - comments' }
 JavaSmaCCProgramNodeImporterVisitor >> attachComments: aCodeString [
+	"The scanner reports a comment again when it reads the code again, as it does to split
+	the `>>` closing nested type arguments, so each comment is imported once."
 
-
-	parser scanner comments do: [ :pos |
+	(parser scanner comments asSet sorted: [ :a :b | a first < b first ]) do: [ :pos |
 		| fastComment |
 		fastComment := self
 			               createComment: aCodeString
@@ -231,8 +236,9 @@ JavaSmaCCProgramNodeImporterVisitor >> closestNextNode: aFastComment [
 JavaSmaCCProgramNodeImporterVisitor >> closestNodeTo: aFastComment relation: comparator [
 	| closest |
 	closest := nil.
+	"A comment belongs to code, never to another comment."
 	aFastComment mooseModel entities do: [ :node |
-		(self compare: node to: aFastComment comparator: comparator)
+		((node isKindOf: FASTJavaComment) not and: [ self compare: node to: aFastComment comparator: comparator ])
 		ifTrue: [
 			closest
 				ifNil: [ closest := node ]
