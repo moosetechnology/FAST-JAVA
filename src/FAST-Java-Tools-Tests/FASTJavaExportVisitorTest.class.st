@@ -936,6 +936,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesClearStackOnT
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesConditionalAsCondition [
+
+	| expr |
+	expr := self expressionAST: '(true ? false : true) ? 1 : 2'.
+
+	self export: expr equals: '(true ? false : true) ? 1 : 2'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesMessageOnStringConcatenation [
 	
 	| expr |
@@ -951,6 +960,13 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesNone [
 	expr := self expressionAST: '(4+5)'.
 
 	self export: expr equals: '4+5'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesRightOperandOfSamePrecedence [
+
+	#( '1-(2+3)' '1/(2*3)' 'true&&(false&&true)' '1==2!=(3==4)' '1<<(2>>3)' )
+		do: [ :source | self export: (self expressionAST: source) equals: source ]
 ]
 
 { #category : 'test from source code' }
