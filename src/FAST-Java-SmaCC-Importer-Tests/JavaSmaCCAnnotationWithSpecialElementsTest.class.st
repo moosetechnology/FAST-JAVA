@@ -13,15 +13,17 @@ JavaSmaCCAnnotationWithSpecialElementsTest >> javaMethod [
 
 { #category : 'tests' }
 JavaSmaCCAnnotationWithSpecialElementsTest >> testAnnotationFirstElementType [
+
 	self
-		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements first expression values anyOne class 
+		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements first value values anyOne class
 		equals: FASTJavaAnnotation
 ]
 
 { #category : 'tests' }
 JavaSmaCCAnnotationWithSpecialElementsTest >> testAnnotationSecondElementType [
+
 	self
-		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements second expression class 
+		assert: (fastModel allWithType: FASTJavaAnnotation) anyOne elements second value class
 		equals: FASTJavaQualifiedName
 ]
 

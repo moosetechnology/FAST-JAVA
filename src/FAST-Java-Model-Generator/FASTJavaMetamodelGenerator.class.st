@@ -152,7 +152,9 @@ Class {
 		'javaEmptyDeclaration',
 		'javaClassLiteral',
 		'javaSuper',
-		'javaTextBlock'
+		'javaTextBlock',
+		'javaElementValuePair',
+		'tAnnotationArgument'
 	],
 	#category : 'FAST-Java-Model-Generator',
 	#package : 'FAST-Java-Model-Generator'
@@ -369,6 +371,12 @@ double d1 = 12.3;
 double d2 = 12.3d;
 ```
 `12.3` and `12.3d` are double literals'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaElementValuePair [
+
+	^ 'I am an element-value pair of an annotation (JLS 9.7.1): the name of an element of the annotation interface, `=`, and the value given to it, as `value = "unchecked"` is in `@SuppressWarnings(value = "unchecked")`.'
 ]
 
 { #category : 'comments' }
@@ -730,6 +738,18 @@ switch (_) {
 ]
 
 { #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaTAnnotationArgument [
+
+	^ 'I am what an annotation gives between its parentheses: an element-value pair, as `value = "unchecked"` is in `@SuppressWarnings(value = "unchecked")`, or the single element value of a single-element annotation, as `"unchecked"` is in `@SuppressWarnings("unchecked")` (JLS 9.7.1).'
+]
+
+{ #category : 'comments' }
+FASTJavaMetamodelGenerator >> commentForJavaTAnnotationElement [
+
+	^ 'I am an element value (JLS 9.7.1): what an element-value pair gives, what a single-element annotation gives, what an element value array holds, and the default value of an annotation element. Java writes one as a constant expression, a class literal, an enum constant, an annotation, or an array of element values.'
+]
+
+{ #category : 'comments' }
 FASTJavaMetamodelGenerator >> commentForJavaTAssignable [
 	^ 'You can assign something to me
 example:
@@ -1009,6 +1029,8 @@ FASTJavaMetamodelGenerator >> defineClasses [
 		                              newClassNamed: #ArrayAnnotationElement
 		                              comment: 'I represent an array as argument of an annotationExpression'.
 	javaArrayAnnotationElement withTesting.
+	javaElementValuePair := self newClassNamed: #ElementValuePair comment: self commentForJavaElementValuePair.
+	javaElementValuePair withTesting.
 	javaTypePattern := self newClassNamed: #TypePattern comment: self commentForJavaTypePattern.
 	javaTypePattern withTesting.
 	javaRecordPattern := self newClassNamed: #RecordPattern comment:
@@ -1136,7 +1158,6 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaComment --|> tComment.
 
 	javaAssignmentExpression --|> tExpression.
-	javaAssignmentExpression --|> tAnnotationElement.
 	javaAssignmentExpression --|> tReceiver.
 	javaAssignmentExpression --|> tWithAssignable.
 
@@ -1163,8 +1184,13 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaIfStatement --|> tStatement.
 	javaIfStatement --|> tConditionalStatement.
 
+	"JLS 9.7.1: an annotation gives either element-value pairs or a single element value
+	between its parentheses, and a pair gives an element value. A pair is written nowhere
+	else, and an element value array writes element values and no pairs."
+	tAnnotationElement --|> tAnnotationArgument.
+	javaElementValuePair --|> tAnnotationArgument.
+	javaElementValuePair --|> tNamedEntity.
 	javaArrayAnnotationElement --|> tAnnotationElement.
-	javaArrayAnnotationElement --|> tExpression. "because annotationElement=value are modeled as assignment expression"
 
 	"javaLiteral  --|> tLiteral. // we use the specific tLiteral for each case"
 	javaLiteral --|> tReceiver.
@@ -1284,6 +1310,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodInvocation --|> tNamedEntity.
 	javaCastExpression --|> tExpression.
 	javaCastExpression --|> tReceiver.
+	javaCastExpression --|> tAnnotationElement.
 
 	"JLS 15.8.2: a class literal writes a type and then `.class`. It reads the Class object
 	of that type, so it is an expression and a receiver, and a very common element of an
@@ -1300,6 +1327,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaForEachStatement --|> tWithModifiers.
 	javaForEachStatement --|> tWithAnnotations.
 	javaUnaryExpression --|> tExpression.
+	"JLS 9.7.1 and 15.29: the value of an annotation element may be any constant expression,
+	and a constant expression may be written with a unary operator, a cast or a conditional."
+	javaUnaryExpression --|> tAnnotationElement.
 
 	javaNewExpression --|> tExpression.
 	javaNewExpression --|> #TWithArguments.
@@ -1315,6 +1345,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaNewArray --|> tExpression.
 	javaNewArray --|> tReceiver.
 	javaConditionalExpression --|> tExpression.
+	javaConditionalExpression --|> tAnnotationElement.
 
 	javaArrayAccess --|> tExpression.
 	javaArrayAccess --|> tAssignable.
@@ -1574,9 +1605,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	((javaAnnotationExpression property: #elements) comment:
 		 '"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")')
-	<>-* ((tAnnotationElement property: #parentAnnotation) comment:
+	<>-* ((tAnnotationArgument property: #parentAnnotation) comment:
 			 'An "argument" of an annotation, eg. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")').
+
+	((javaElementValuePair property: #value) comment:
+		 'The element value I give, eg. "unchecked" in `@SuppressWarnings(value = "unchecked")`')
+	<>- ((tAnnotationElement property: #elementValuePairOwner) comment:
+			 'The element-value pair I am the value of').
 
 	((javaArrayAnnotationElement property: #values) comment:
 		 'Annotation elements in the Array')
@@ -2183,8 +2219,8 @@ FASTJavaMetamodelGenerator >> defineTraits [
 
 	tWithQualifiedName := self newTraitNamed: #TWithQualifiedName comment: 'I have a qualified name.'.
 
-	tAnnotationElement := self newTraitNamed: #TAnnotationElement comment: 'I can be used as an annotation "argument" eg: @SuppressWarnings(value="unchecked")
-	Acceptable annotation elements are: literal, Enum constant, Annotation, Class, an array of the preceding (out of laziness we use ArrayInitializer which is too permissive)'.
+	tAnnotationArgument := self newTraitNamed: #TAnnotationArgument comment: self commentForJavaTAnnotationArgument.
+	tAnnotationElement := self newTraitNamed: #TAnnotationElement comment: self commentForJavaTAnnotationElement.
 
 	tTryResource := self newTraitNamed: #TTryResource comment: 'I am a resource in a try-with-resource'.
 

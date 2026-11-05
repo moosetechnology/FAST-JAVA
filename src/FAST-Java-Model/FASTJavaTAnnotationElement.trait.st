@@ -1,6 +1,5 @@
 "
-I can be used as an annotation ""argument"" eg: @SuppressWarnings(value=""unchecked"")
-	Acceptable annotation elements are: literal, Enum constant, Annotation, Class, an array of the preceding (out of laziness we use ArrayInitializer which is too permissive)
+I am an element value (JLS 9.7.1): what an element-value pair gives, what a single-element annotation gives, what an element value array holds, and the default value of an annotation element. Java writes one as a constant expression, a class literal, an enum constant, an annotation, or an array of element values.
 
 ## Relations
 ======================
@@ -10,7 +9,8 @@ I can be used as an annotation ""argument"" eg: @SuppressWarnings(value=""unchec
 |---|
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
 | `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
-| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `elementValuePairOwner` | `FASTJavaTAnnotationElement` | `value` | `FASTJavaElementValuePair` | The element-value pair I am the value of|
+| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 
 
@@ -20,8 +20,10 @@ Trait {
 	#instVars : [
 		'#arrayOwner => FMOne type: #FASTJavaArrayAnnotationElement opposite: #values',
 		'#defaultValueOwner => FMOne type: #FASTJavaAnnotationElementDeclaration opposite: #defaultValue',
-		'#parentAnnotation => FMOne type: #FASTJavaAnnotation opposite: #elements'
+		'#elementValuePairOwner => FMOne type: #FASTJavaElementValuePair opposite: #value'
 	],
+	#traits : 'FASTJavaTAnnotationArgument',
+	#classTraits : 'FASTJavaTAnnotationArgument classTrait',
 	#category : 'FAST-Java-Model-Traits',
 	#package : 'FAST-Java-Model',
 	#tag : 'Traits'
@@ -76,21 +78,20 @@ FASTJavaTAnnotationElement >> defaultValueOwner: anObject [
 ]
 
 { #category : 'accessing' }
-FASTJavaTAnnotationElement >> parentAnnotation [
-	"Relation named: #parentAnnotation type: #FASTJavaAnnotation opposite: #elements"
+FASTJavaTAnnotationElement >> elementValuePairOwner [
+	"Relation named: #elementValuePairOwner type: #FASTJavaElementValuePair opposite: #value"
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'An "argument" of an annotation, eg. "unchecked" in the following annotation:
-	@SuppressWarnings(value="unchecked")'>
+	<FMComment: 'The element-value pair I am the value of'>
 	<container>
-	^ parentAnnotation
+	^ elementValuePairOwner
 ]
 
 { #category : 'accessing' }
-FASTJavaTAnnotationElement >> parentAnnotation: anObject [
+FASTJavaTAnnotationElement >> elementValuePairOwner: anObject [
 
 	<ignoreForCoverage>
 	<generated>
-	parentAnnotation := anObject
+	elementValuePairOwner := anObject
 ]

@@ -603,6 +603,16 @@ FASTJavaExportVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeE
 
 ]
 
+{ #category : 'visiting' }
+FASTJavaExportVisitor >> visitFASTJavaElementValuePair: aFASTJavaElementValuePair [
+	"JLS 9.7.1: an element-value pair writes the name of an element, `=`, and the value it
+	gives that element."
+
+	self checkForComments: aFASTJavaElementValuePair andDo: [
+		self unindented: aFASTJavaElementValuePair name , ' = '.
+		aFASTJavaElementValuePair value accept: self ]
+]
+
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
 	self checkForComments: aFASTJavaStatement andDo: [

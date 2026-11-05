@@ -483,6 +483,41 @@ out the senders rather than waiting for one to fail.
 or `'java.io.Serial'` — which v4 could only get by testing `qualifiedName` first and
 falling back to `name`. Nothing is exported differently.
 
+## An element-value pair is not an assignment
+
+`@SuppressWarnings(value = "unchecked")` was read as a `FASTJavaAssignmentExpression`: the
+element name as a `FASTJavaVariableExpression` in `variable`, the operator `=`, and the value
+in `expression`. To fit there, the value had to be an expression, which is why
+`FASTJavaArrayAnnotationElement` used `FASTTExpression` and `FASTJavaAssignmentExpression`
+used `FASTJavaTAnnotationElement`. An annotation is not an expression, so
+`@Outer(inner = @Inner)` raised instead of importing.
+
+JLS 9.7.1 writes `Identifier = ElementValue`, which names an element of the annotation
+interface and assigns nothing. It is now a `FASTJavaElementValuePair`, using
+`FASTTNamedEntity` for the element name and holding the value in `value`, typed
+`FASTJavaTAnnotationElement` like the values of an element value array and the default
+value of an annotation element. An annotation's `elements` holds pairs or a single value,
+both `FASTJavaTAnnotationArgument`, which `FASTJavaTAnnotationElement` uses. A pair stands
+nowhere else.
+
+`FASTJavaAssignmentExpression` no longer uses `FASTJavaTAnnotationElement`, and
+`FASTJavaArrayAnnotationElement` no longer uses `FASTTExpression`. Both were there only
+for this reading.
+
+| v4.4.1 | v5 |
+| --- | --- |
+| `anAnnotation elements` holding `FASTJavaAssignmentExpression` | `anAnnotation elements` holding `FASTJavaElementValuePair` |
+| `aPair variable name` | `aPair name` |
+| `aPair expression` | `aPair value` |
+| `aPair operator` | gone; a pair always writes `=` |
+| `aValue javaAssignmentExpressionOwner` | `aValue elementValuePairOwner` |
+| `aPair isAssignmentExpression` | `aPair isElementValuePair` |
+| `visitFASTJavaAssignmentExpression:` for a pair | `visitFASTJavaElementValuePair:` |
+
+`FASTJavaVisitor>>visitFASTJavaElementValuePair:` forwards to `visitFASTTNamedEntity:`, and
+`visitFASTJavaArrayAnnotationElement:` now forwards to `visitFASTTEntity:` rather than
+`visitFASTTExpression:`. Nothing is exported differently.
+
 ## A simple invocation receiver is read like any other simple name
 
 `foo.bar()` wrote `foo` as a `FASTJavaIdentifier`, while `go(foo)`, `return foo` and

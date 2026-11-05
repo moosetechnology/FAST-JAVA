@@ -13,13 +13,14 @@ example:
 |---|
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
 | `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
+| `elementValuePairOwner` | `FASTJavaTAnnotationElement` | `value` | `FASTJavaElementValuePair` | The element-value pair I am the value of|
 | `javaAnnotationOwner` | `FASTJavaAnnotation` | `annotations` | `FASTJavaTWithAnnotations` | The element I am written on|
-| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationElement` | ""Arguments"" of the annotation, eg. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
+| `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationArgument` | ""Arguments"" of the annotation, eg. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
 | `type` | `FASTJavaAnnotation` | `javaAnnotationTypeOwner` | `FASTJavaTypeName` | The type I am an instance of, eg. the `java.io.Serial` of `@java.io.Serial`|
 
 
@@ -31,7 +32,7 @@ Class {
 	#traits : 'FASTJavaTAnnotationElement',
 	#classTraits : 'FASTJavaTAnnotationElement classTrait',
 	#instVars : [
-		'#elements => FMMany type: #FASTJavaTAnnotationElement opposite: #parentAnnotation',
+		'#elements => FMMany type: #FASTJavaTAnnotationArgument opposite: #parentAnnotation',
 		'#javaAnnotationOwner => FMOne type: #FASTJavaTWithAnnotations opposite: #annotations',
 		'#type => FMOne type: #FASTJavaTypeName opposite: #javaAnnotationTypeOwner'
 	],
@@ -59,7 +60,7 @@ FASTJavaAnnotation >> addElement: anObject [
 
 { #category : 'accessing' }
 FASTJavaAnnotation >> elements [
-	"Relation named: #elements type: #FASTJavaTAnnotationElement opposite: #parentAnnotation"
+	"Relation named: #elements type: #FASTJavaTAnnotationArgument opposite: #parentAnnotation"
 
 	<ignoreForCoverage>
 	<generated>

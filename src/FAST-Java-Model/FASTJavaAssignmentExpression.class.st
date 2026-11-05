@@ -10,13 +10,11 @@ Contains a referances to an assignee assignee and the expression that's being as
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `argumentOwner` | `FASTTExpression` | `arguments` | `FASTTWithArguments` | my owner|
-| `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
 | `assertConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaAssertStatement` | I represent a condition for my owner|
 | `assignedIn` | `FASTTExpression` | `expression` | `FASTTAssignment` | Optional assignment where this expression is used|
 | `conditionalConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaConditionalExpression` | I represent a condition for my owner|
 | `conditionalElsePartOwner` | `FASTTExpression` | `elsePart` | `FASTJavaConditionalExpression` | The if owner (if possible)|
 | `conditionalThenPartOwner` | `FASTTExpression` | `thenPart` | `FASTJavaConditionalExpression` | The if owner (if possible)|
-| `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
 | `expressionStatementOwner` | `FASTTExpression` | `expression` | `FASTTExpressionStatement` | The expression statement that own me (if it's the case|
 | `infixOperationLeftOperandOwner` | `FASTTExpression` | `leftOperand` | `FASTJavaInfixOperation` | The left operand (if possible)|
 | `infixOperationRightOperandOwner` | `FASTTExpression` | `rightOperand` | `FASTJavaInfixOperation` | The right operand (if possible)|
@@ -33,7 +31,6 @@ Contains a referances to an assignee assignee and the expression that's being as
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
-| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 | `parentConditional` | `FASTTExpression` | `condition` | `FASTTWithCondition` | Optional condition statement/expression where this expression is used|
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
@@ -66,8 +63,8 @@ Contains a referances to an assignee assignee and the expression that's being as
 Class {
 	#name : 'FASTJavaAssignmentExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTAnnotationElement + FASTJavaTReceiver + FASTJavaTWithAssignable + FASTTExpression',
-	#classTraits : 'FASTJavaTAnnotationElement classTrait + FASTJavaTReceiver classTrait + FASTJavaTWithAssignable classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithAssignable + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithAssignable classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#operator => FMProperty'
 	],

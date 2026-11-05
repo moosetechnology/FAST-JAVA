@@ -269,6 +269,14 @@ FASTJavaTEntityCreator >> newDoubleTypeExpression [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newElementValuePair [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaElementValuePair new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newEmptyDeclaration [
 
 	<ignoreForCoverage>

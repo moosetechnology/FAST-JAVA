@@ -29,7 +29,8 @@ FASTJavaVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaArrayAnnotationElement: aFASTJavaArrayAnnotationElement [
-	^ self visitFASTTExpression: aFASTJavaArrayAnnotationElement
+
+	^ self visitFASTTEntity: aFASTJavaArrayAnnotationElement
 ]
 
 { #category : 'generated' }
@@ -176,6 +177,12 @@ FASTJavaVisitor >> visitFASTJavaDoubleLiteral: aFASTJavaDoubleLiteral [
 { #category : 'generated' }
 FASTJavaVisitor >> visitFASTJavaDoubleTypeExpression: aFASTJavaDoubleTypeExpression [
 	^ self visitFASTJavaPrimitiveTypeExpression: aFASTJavaDoubleTypeExpression
+]
+
+{ #category : 'generated' }
+FASTJavaVisitor >> visitFASTJavaElementValuePair: aFASTJavaElementValuePair [
+
+	^ self visitFASTTNamedEntity: aFASTJavaElementValuePair
 ]
 
 { #category : 'generated' }

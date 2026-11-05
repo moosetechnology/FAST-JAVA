@@ -312,6 +312,14 @@ FASTJavaEntity >> isDoubleTypeExpression [
 ]
 
 { #category : 'testing' }
+FASTJavaEntity >> isElementValuePair [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTJavaEntity >> isEmptyDeclaration [
 
 	<ignoreForCoverage>

@@ -1049,14 +1049,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitElementArrayInitializer: anElementAr
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitElementValuePair: anElementValuePair [
-	"'key = value' as argument of an Annotation
-	 treat it as an Assignment Expression"
+	"JLS 9.7.1: an element-value pair names an element of the annotation interface and
+	gives it a value. It assigns nothing, and the value may be an annotation or an array
+	of element values, which no expression can be."
 
-	currentFASTEntity := self create: FASTJavaAssignmentExpression from: anElementValuePair.
-	currentFASTEntity variable: (self clone visitVariableName: anElementValuePair).
-	currentFASTEntity operator: '='.
-	currentFASTEntity expression: (self clone accept: anElementValuePair value).
-
+	self create: FASTJavaElementValuePair from: anElementValuePair.
+	currentFASTEntity
+		name: anElementValuePair name value;
+		value: (self clone accept: anElementValuePair value).
 	^ currentFASTEntity
 ]
 
