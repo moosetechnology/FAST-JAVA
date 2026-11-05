@@ -1280,8 +1280,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaForEachStatement --|> tWithModifiers.
 	javaUnaryExpression --|> tExpression.
 	"JLS 9.7.1 and 15.29: the value of an annotation element may be any constant expression,
-	as the `-1` of `@ValueSource(ints = {-1, 0, 1})` is, and a constant expression may be
-	written with a unary operator, a cast or a conditional."
+	and a constant expression may be written with a unary operator, a cast or a conditional."
 	javaUnaryExpression --|> tAnnotationElement.
 
 	javaNewExpression --|> tExpression.
