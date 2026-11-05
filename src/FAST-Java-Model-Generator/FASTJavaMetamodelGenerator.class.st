@@ -1267,6 +1267,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaMethodInvocation --|> tNamedEntity.
 	javaCastExpression --|> tExpression.
 	javaCastExpression --|> tReceiver.
+	javaCastExpression --|> tAnnotationElement.
 
 	javaClassProperty --|> javaVariableExpression.
 	javaClassProperty --|> tReceiver.
@@ -1278,6 +1279,10 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	"JLS 14.14.2: the modifiers of the loop variable, whose type and name are held here"
 	javaForEachStatement --|> tWithModifiers.
 	javaUnaryExpression --|> tExpression.
+	"JLS 9.7.1 and 15.29: the value of an annotation element may be any constant expression,
+	as the `-1` of `@ValueSource(ints = {-1, 0, 1})` is, and a constant expression may be
+	written with a unary operator, a cast or a conditional."
+	javaUnaryExpression --|> tAnnotationElement.
 
 	javaNewExpression --|> tExpression.
 	javaNewExpression --|> #TWithArguments.
@@ -1291,6 +1296,7 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaNewArray --|> javaNewExpression.
 	javaEmptyDimExpression --|> tExpression.
 	javaConditionalExpression --|> tExpression.
+	javaConditionalExpression --|> tAnnotationElement.
 
 	javaArrayAccess --|> tExpression.
 	javaArrayAccess --|> tAssignable.
