@@ -1378,6 +1378,9 @@ FASTJavaMetamodelGenerator >> defineHierarchy [
 	javaAnnotationExpression --|> tNamedEntity.
 	javaAnnotationExpression --|> tModifier.
 	javaAnnotationExpression --|> tAnnotationElement.
+	"JLS 9.7.1: the value of an element may be an annotation, as `joinColumns = @JoinColumn(...)` in JPA,
+	and `element = value` is modeled as an assignment expression, whose expression is a tExpression"
+	javaAnnotationExpression --|> tExpression.
 	"JLS 9.7: an annotation names the type it is an instance of, which it may write qualified"
 	javaAnnotationExpression --|> tWithQualifiedName.
 

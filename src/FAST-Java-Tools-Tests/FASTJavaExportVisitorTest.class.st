@@ -244,6 +244,18 @@ void mth() {
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithAnnotationAsElementValue [
+
+	| expr |
+	expr := self methodAST: '@JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id")) void mth() { }'.
+
+	self export: expr equals: '@JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id"))
+void mth() {
+}
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationWithNamedElements [
 	
 	| expr |
