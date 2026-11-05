@@ -35,6 +35,7 @@ Represents a Java method
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `isCompactConstructor` | `Boolean` | false | Whether I am a compact canonical constructor, which writes no parameter list and takes the components of its record as parameters (JLS 8.10.4.2)|
 | `name` | `String` | nil | |
 | `source` | `String` | nil | Actual source code of the source entity|
 | `startPos` | `Number` | nil | |
@@ -48,6 +49,7 @@ Class {
 	#instVars : [
 		'#brackets => FMMany type: #FASTJavaDimension opposite: #methodOwner',
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #methodDeclarations',
+		'#isCompactConstructor => FMProperty defaultValue: false',
 		'#receiver => FMOne type: #FASTJavaReceiverParameter opposite: #methodOwner',
 		'#throws => FMMany type: #FASTJavaClassTypeExpression opposite: #javaMethodThrowsOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaMethodTypeOwner'
@@ -117,6 +119,23 @@ FASTJavaMethodEntity >> compilationUnit: anObject [
 	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> isCompactConstructor [
+
+	<FMProperty: #isCompactConstructor type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether I am a compact canonical constructor, which writes no parameter list and takes the components of its record as parameters (JLS 8.10.4.2)'>
+	^ isCompactConstructor ifNil: [ isCompactConstructor := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodEntity >> isCompactConstructor: anObject [
+	<ignoreForCoverage>
+	<generated>
+	isCompactConstructor := anObject
 ]
 
 { #category : 'testing' }

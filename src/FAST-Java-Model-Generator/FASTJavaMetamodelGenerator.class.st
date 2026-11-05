@@ -1497,6 +1497,9 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaNewExpression property: #isDiamond type: #Boolean defaultValue: false) comment:
 		'Whether the type instantiated writes the diamond rather than type arguments (JLS 15.9.1)'.
 
+	(javaMethodEntity property: #isCompactConstructor type: #Boolean defaultValue: false) comment:
+		'Whether I am a compact canonical constructor, which writes no parameter list and takes the components of its record as parameters (JLS 8.10.4.2)'.
+
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 

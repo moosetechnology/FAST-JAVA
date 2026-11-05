@@ -957,6 +957,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitDeclaration: aConstructorDeclaration
 		                     name: aConstructorDeclaration name name value;
 		                     yourself.
 	self setStartEndPos: aConstructorDeclaration.
+	"JLS 8.10.4.2: a compact canonical constructor writes no parameter list, which tells it
+	from a constructor declaring none."
+	currentFASTEntity isCompactConstructor: aConstructorDeclaration leftParen isNil.
 
 	self addTypeParametersOf: aConstructorDeclaration.
 
