@@ -920,6 +920,46 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAsEnclosi
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesArgumentOfCreationAsReceiver [
+
+	| expr |
+	expr := self methodAST: 'void mth() { x = new F(a, "b"+c, (G) d).f(); }'.
+
+	self export: expr statements first equals: 'x = new F(a, "b"+c, (G) d).f();
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAsOperand [
+
+	| expr |
+	expr := self methodAST: 'void mth() { x = -(long) y + ~(int) z; }'.
+
+	self export: expr statements first equals: 'x = -(long) y+ ~(int) z;
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesDimensionOfCreation [
+
+	| expr |
+	expr := self methodAST: 'void mth() { x = (E[]) new Object[n << 1]; }'.
+
+	self export: expr statements first equals: 'x = (E[]) new Object[n<<1];
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesBodyOfLambda [
+
+	| expr |
+	expr := self methodAST: 'void mth() { x = (F) (y) -> y ? 1 : 2; }'.
+
+	self export: expr statements first equals: 'x = (F) (y) -> y ? 1 : 2;
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesClearStackOnTopLevelExpression [
 	"topLevelExpression
 	 Introduced to deal with an expression as argument of a method call because we are using a global stack,
@@ -965,7 +1005,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcate
 	| expr |
 	expr := self methodAST: 'void mth() { a=(b+1)+"string"; }'.
 
-	self export: expr statements first equals: 'a = (b+1)+"string";
+	self export: expr statements first equals: 'a = b+1+"string";
 '
 ]
 

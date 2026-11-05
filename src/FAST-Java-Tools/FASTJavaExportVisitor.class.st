@@ -124,8 +124,10 @@ FASTJavaExportVisitor >> languageOperatorsPrecedence [
 	operatorsPrecedence at: #messageSend put: 120.
 	operatorsPrecedence at: #memberAccess put: 120.
 
-	"unary operators"
+	"unary operators; JLS 15.15, 15.16: a cast is one, so a cast written as the operand of
+	another needs no parentheses, as in `-(long) x`"
 	operatorsPrecedence at: #'~unary' put: 110.
+	operatorsPrecedence at: #cast put: 110.
 	operatorsPrecedence at: #switch put: 110.
 	
 	"shift operators, between additive and relational"
@@ -140,6 +142,11 @@ FASTJavaExportVisitor >> languageOperatorsPrecedence [
 	operatorsPrecedence at: #'&' put: 46.
 	operatorsPrecedence at: #'^' put: 45.
 	operatorsPrecedence at: #'|' put: 44.
+
+	"JLS 15.18: a + that concatenates strings is an additive operator like any other, and
+	an operand of the same precedence written on its right was written between parentheses
+	(see #isInfixOperation:withPrecedenceOf:)."
+	operatorsPrecedence at: #concat put: 70.
 
 	"assignment operators"
 	operatorsPrecedence at: #'%=' put: 10.
@@ -184,7 +191,8 @@ FASTJavaExportVisitor >> outputLineComment: aComment [
 
 { #category : 'precedence' }
 FASTJavaExportVisitor >> operatorOf: aFASTJavaInfixOperation [
-	"A `+` that concatenates strings has a precedence of its own here."
+	"A `+` that concatenates strings is told apart from one that adds numbers, although JLS
+	15.18 gives both the same precedence."
 
 	^ (self isStringConcatenation: aFASTJavaInfixOperation)
 		  ifTrue: [ #concat ]
@@ -257,12 +265,15 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotationInterfaceDeclaration: aFASTJavaA
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
+	"JLS 15.9, 15.12: each argument is an expression of its own, whatever the expression the
+	list is written in."
+
 	self checkForComments: aFASTJavaArgumentList andDo: [
 		self unindented: $(.
-		self visitNodeListSeparatedByCommas: aFASTJavaArgumentList.
+		self outputTopLevelExpression: [
+			self visitNodeListSeparatedByCommas: aFASTJavaArgumentList ].
 		self unindented: $)
 	]
-
 ]
 
 { #category : 'visiting expression' }
@@ -960,7 +971,9 @@ FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpressio
 		self unindented: $(.
 		self visitNodeListSeparatedByCommas: aFASTJavaLambdaExpression parameters.
 		self unindented: ') -> '.
-		aFASTJavaLambdaExpression expression accept: self
+		"JLS 15.27.2: the body of a lambda is an expression of its own."
+		self outputTopLevelExpression: [
+			aFASTJavaLambdaExpression expression accept: self ]
 	]
 ]
 
@@ -1046,9 +1059,7 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 
 				self unindented: aFASTJavaMethodInvocation name.
 
-				self outputTopLevelExpression: [
-					self visitFASTJavaArgumentsList: aFASTJavaMethodInvocation arguments
-				]
+				self visitFASTJavaArgumentsList: aFASTJavaMethodInvocation arguments
 			]
 			withOperator: #messageSend
 	]
@@ -1174,9 +1185,10 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 	self checkForComments: aFASTJavaNewArray andDo: [
 		self unindented: 'new '.
 		aFASTJavaNewArray type accept: self.
+		"JLS 15.10.1: each dimension expression is an expression of its own."
 		aFASTJavaNewArray arguments do: [ :arg |
 			self unindented: $[.
-			arg accept: self.
+			self outputTopLevelExpression: [ arg accept: self ].
 			self unindented: $].
 		].
 
