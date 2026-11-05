@@ -123,5 +123,5 @@ BaselineOfFASTJava >> smaccRepository [
 	history loaded here. Not to the branch: that is what leaves a build at the mercy
 	of whatever landed since. Bump this deliberately."
 
-	^ 'github://j-brant/SmaCC:6ee6d3ebe1ede1011ca51290d8f828b2b1ddee79/src'
+	^ 'github://j-brant/SmaCC:8c1dd09d00f6cbdd0bc37e3722291056c851fabf/src'
 ]
