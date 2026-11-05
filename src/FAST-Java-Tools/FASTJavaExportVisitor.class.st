@@ -127,6 +127,7 @@ FASTJavaExportVisitor >> languageOperatorsPrecedence [
 
 	"unary operators"
 	operatorsPrecedence at: #'~unary' put: 110.
+	operatorsPrecedence at: #switch put: 110.
 	
 	"shift operators, between additive and relational"
 	operatorsPrecedence at: #'<<' put: 65.
@@ -265,13 +266,17 @@ FASTJavaExportVisitor >> visitFASTJavaArgumentsList: aFASTJavaArgumentList [
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
-	self checkForComments: aFASTJavaArrayAccess andDo: [
-	aFASTJavaArrayAccess array accept: self.
-	self unindented: '['.
-	aFASTJavaArrayAccess expression accept: self.
-	self unindented: ']'.
-]
+	"JLS 15.10.3: the array of an access is a primary, so a cast or a conditional written
+	there was written between parentheses."
 
+	self checkForComments: aFASTJavaArrayAccess andDo: [
+		self
+			outputExpression: [
+				aFASTJavaArrayAccess array accept: self.
+				self unindented: '['.
+				self outputTopLevelExpression: [ aFASTJavaArrayAccess expression accept: self ].
+				self unindented: ']' ]
+			withOperator: #arrayIndex ]
 ]
 
 { #category : 'visiting expression' }
@@ -1182,10 +1187,14 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
 	self checkForComments: aFASTJavaNewClassExpression andDo: [
 		"JLS 15.9: an inner class may be instantiated through an instance of the class
-		enclosing it, as `outer.new Inner() { }` does, the qualifier being that instance."
+		enclosing it, as `outer.new Inner() { }` does, the qualifier being that instance. It
+		is a primary, so a cast written there was written between parentheses."
 		aFASTJavaNewClassExpression receiver ifNotNil: [ :receiver |
-			receiver accept: self.
-			self unindented: '.'
+			self
+				outputExpression: [
+					receiver accept: self.
+					self unindented: '.' ]
+				withOperator: #memberAccess
 		].
 		self unindented: 'new '.
 		"JLS 15.9: the type arguments of the constructor called come between `new` and the
@@ -1202,9 +1211,14 @@ FASTJavaExportVisitor >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpre
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 	self checkForComments: aFASTJavaNewExpression andDo: [
+		"JLS 15.9: a qualified creation reads its enclosing instance from a primary, so a cast
+		written there was written between parentheses."
 		aFASTJavaNewExpression receiver ifNotNil: [ :receiver |
-			receiver accept: self.
-			self unindented: '.'
+			self
+				outputExpression: [
+					receiver accept: self.
+					self unindented: '.' ]
+				withOperator: #memberAccess
 		].
 		self unindented: 'new '.
 		"JLS 15.9: the type arguments of the constructor called come between `new` and the
@@ -1487,21 +1501,27 @@ FASTJavaExportVisitor >> visitFASTJavaSuper: aFASTJavaSuper [
 
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaSwitchExpression: aFASTJavaSwitchExpression [
-
-	self output: 'switch ('.
-	aFASTJavaSwitchExpression condition accept: self.
-	self
-		output: ') {';
-		newLine;
-		indent.
-
-	"A switch block is in colon form or in arrow form, so one of these is empty."
-	aFASTJavaSwitchExpression cases do: [ :switchCase | switchCase accept: self ].
-	aFASTJavaSwitchExpression rules do: [ :rule | rule accept: self ].
+	"JLS 15.15: a switch expression is a unary expression and not a primary, so one written
+	where a primary stands, as the receiver of an invocation, was written between parentheses."
 
 	self
-		unindent;
-		indented: $}
+		outputExpression: [
+			self outputTopLevelExpression: [
+				self output: 'switch ('.
+				aFASTJavaSwitchExpression condition accept: self.
+				self
+					output: ') {';
+					newLine;
+					indent.
+
+				"A switch block is in colon form or in arrow form, so one of these is empty."
+				aFASTJavaSwitchExpression cases do: [ :switchCase | switchCase accept: self ].
+				aFASTJavaSwitchExpression rules do: [ :rule | rule accept: self ].
+
+				self
+					unindent;
+					indented: $} ] ]
+		withOperator: #switch
 ]
 
 { #category : 'visiting' }
