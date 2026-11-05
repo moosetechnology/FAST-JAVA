@@ -180,7 +180,7 @@ JavaSmaCCProgramNodeImporterVisitor >> bracketsOf: aVariableNode [
 	brackets := OrderedCollection new.
 	node := aVariableNode.
 	[ node isKindOf: JavaArrayVariableNameNode ] whileTrue: [
-			brackets addFirst: (self dimensionOf: node).
+			brackets addFirst: (self dimensionOf: node from: node leftBracket to: node rightBracket).
 			node := node variable ].
 	^ brackets
 ]
@@ -338,6 +338,22 @@ JavaSmaCCProgramNodeImporterVisitor >> dimensionOf: aNode [
 	| dimension |
 	dimension := self addToModel: FASTJavaDimension new.
 	aNode annotations do: [ :annotation | dimension addAnnotation: (self clone accept: annotation) ].
+	^ dimension
+]
+
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> dimensionOf: aNode from: anOpeningToken to: aClosingToken [
+	"JLS 10.2: a pair of brackets starts at the first annotation written on it, or at its
+	opening bracket when it writes none, and ends at its closing bracket. JLS 8.4.1: an
+	ellipsis opens and closes with the same token."
+
+	| dimension |
+	dimension := self dimensionOf: aNode.
+	dimension
+		startPos: (aNode annotations
+				 ifEmpty: [ anOpeningToken startPosition ]
+				 ifNotEmpty: [ :annotations | annotations first startPosition ]);
+		endPos: aClosingToken stopPosition.
 	^ dimension
 ]
 
@@ -1392,7 +1408,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaratio
 	declarator := aMethodDeclaration declarator.
 	brackets := OrderedCollection new.
 	[ declarator isKindOf: JavaArrayMethodDeclaratorNode ] whileTrue: [
-		brackets addFirst: (self dimensionOf: declarator).
+		brackets addFirst: (self
+				 dimensionOf: declarator
+				 from: declarator leftBracket
+				 to: declarator rightBracket).
 		declarator := declarator declarator ].
 	brackets do: [ :bracket | currentFASTEntity addBracket: bracket ].
 
@@ -1960,6 +1979,11 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockExpressionGroup: aSwitchB
 	currentFASTEntity := self addToModel: FASTJavaSwitchRule new.
 	self setStartEndPos: aSwitchBlockExpressionGroup.
 	switchLabel := self addToModel: FASTJavaSwitchLabel new.
+	"JLS 14.11.1: the label of a rule is what it writes up to its arrow, as the label of a
+	group is what it writes up to its colon."
+	switchLabel
+		startPos: (aSwitchBlockExpressionGroup caseToken ifNil: [ aSwitchBlockExpressionGroup defaultToken ]) startPosition;
+		endPos: aSwitchBlockExpressionGroup arrowToken stopPosition.
 	aSwitchBlockExpressionGroup constants do: [ :constant | switchLabel caseExpressions add: (self clone accept: constant) ].
 	"JLS 14.11.1: a label over null writes `default` after it where it covers that too, and
 	a rule whose label is `default` alone writes the same token."
@@ -2236,7 +2260,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitVariableArgumentParameter: aVariable
 
 	self visitParameter: aVariableArgumentParameter.
 	currentFASTEntity hasVariableArguments: true.
-	currentFASTEntity variableArguments: (self dimensionOf: aVariableArgumentParameter).
+	currentFASTEntity variableArguments: (self
+			 dimensionOf: aVariableArgumentParameter
+			 from: aVariableArgumentParameter varArgsToken
+			 to: aVariableArgumentParameter varArgsToken).
 	^ currentFASTEntity
 ]
 

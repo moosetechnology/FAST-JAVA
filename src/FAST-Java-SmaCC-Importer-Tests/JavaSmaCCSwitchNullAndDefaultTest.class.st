@@ -26,6 +26,17 @@ JavaSmaCCSwitchNullAndDefaultTest >> javaClass [
 ]
 
 { #category : 'tests' }
+JavaSmaCCSwitchNullAndDefaultTest >> testALabelIsWrittenUpToItsArrowAsUpToItsColon [
+	"JLS 14.11.1: the label of a rule is what it writes up to its arrow, as the label of a
+	group is what it writes up to its colon."
+
+	| sources |
+	sources := ((fastModel allWithType: FASTJavaSwitchLabel) sorted: [ :a :b | a startPos < b startPos ])
+		           collect: [ :label | self javaClass copyFrom: label startPos to: label endPos ].
+	self assert: sources asArray equals: #( 'case null, default:' 'case null, default ->' )
+]
+
+{ #category : 'tests' }
 JavaSmaCCSwitchNullAndDefaultTest >> testArrowLabelOverNullAlsoCoversTheDefault [
 	"JLS 14.11.1: `case null, default ->` writes null as its one constant and the default
 	beside it."
