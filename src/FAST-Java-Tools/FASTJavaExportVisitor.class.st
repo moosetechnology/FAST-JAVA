@@ -1011,7 +1011,9 @@ FASTJavaExportVisitor >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 		].
 
 		self unindented: aFASTJavaMethodEntity name.
-		self visitFASTJavaParametersOf: aFASTJavaMethodEntity.
+		"JLS 8.10.4.2: a compact canonical constructor writes no parameter list."
+		aFASTJavaMethodEntity isCompactConstructor ifFalse: [
+			self visitFASTJavaParametersOf: aFASTJavaMethodEntity ].
 		"JLS 8.4: the brackets written after the parameter list are written back there, each
 		with the annotations it carries; a bare pair still stands apart from the list."
 		aFASTJavaMethodEntity brackets do: [ :bracket |
