@@ -1569,6 +1569,9 @@ FASTJavaMetamodelGenerator >> defineProperties [
 		'Whether the type instantiated writes the diamond rather than type arguments (JLS 15.9.1)'.
 
 
+	(javaMethodEntity property: #isCompactConstructor type: #Boolean defaultValue: false) comment:
+		'Whether I am a compact canonical constructor, which writes no parameter list and takes the components of its record as parameters (JLS 8.10.4.2)'.
+
 	(javaModuleDeclaration property: #isOpen type: #Boolean defaultValue: false) comment:
 		'Whether this module writes `open`, which opens every one of its packages to reflection (JLS 7.7)'.
 
