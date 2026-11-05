@@ -1621,7 +1621,10 @@ public void onClick(ClickEvent event) {
 	aNewNode type
 		ifNotNil: [ currentFASTEntity type: (self clone accept: aNewNode type) ]
 		ifNil: [
-			currentFASTEntity type: (self clone createTypeName: aNewNode name withArguments: aNewNode arguments) ].
+			currentFASTEntity type: (self clone createTypeName: aNewNode name withArguments: aNewNode arguments).
+			"JLS 15.9: the type a qualified creation instantiates ends with the type arguments
+			written for it."
+			aNewNode typeArgRight ifNotNil: [ :right | currentFASTEntity type endPos: right stopPosition ] ].
 	"JLS 15.9: a creation may write the type arguments of the constructor it calls between
 	`new` and the type, where they belong to that constructor and not to that type."
 	self addTypeArgumentsOf: aNewNode creationTypeArguments to: currentFASTEntity.
@@ -1779,6 +1782,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitPrimitiveType: aPrimitiveType [
 JavaSmaCCProgramNodeImporterVisitor >> visitProgramFile: aProgramFile [
 	currentFASTEntity := self addToModel: FASTJavaCompilationUnit new.
 	self setStartEndPos: aProgramFile.
+	"JLS 7.3: a unit that writes nothing but comments declares nothing. It is the empty
+	range at the end of its source, where the parser finds it, rather than a range that
+	ends before it starts."
+	aProgramFile startPosition > aProgramFile stopPosition ifTrue: [ | size |
+		size := (aProgramFile completeSource ifNil: [ '' ]) asString size.
+		currentFASTEntity
+			startPos: size + 1;
+			endPos: size ].
 	currentFASTEntity packageDeclaration: (self clone accept: aProgramFile packageDeclaration).
 	aProgramFile imports do: [ :import | currentFASTEntity addImportDeclaration: (self clone accept: import) ].
 	aProgramFile typeDeclarations do: [ :declaration |
