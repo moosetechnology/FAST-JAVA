@@ -54,6 +54,7 @@ I represent a record pattern, which matches a record and its components in turn 
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `startPos` | `Number` | nil | |
 
 "

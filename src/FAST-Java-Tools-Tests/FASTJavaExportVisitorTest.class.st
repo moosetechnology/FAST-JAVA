@@ -59,6 +59,17 @@ FASTJavaExportVisitorTest >> methodAST: sourceCode [
 ]
 
 { #category : 'running' }
+FASTJavaExportVisitorTest >> withoutParentheses: aFASTJavaEntity [
+	"The parentheses a source writes are imported and exported as written. Forgetting them
+	leaves a model like one built by hand, for which the exporter writes those the
+	precedence of the operators needs."
+
+	(aFASTJavaEntity mooseModel entities select: [ :entity | entity isExpression ]) do: [ :expression |
+		expression numberOfParentheses: nil ].
+	^ aFASTJavaEntity
+]
+
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> setUp [
 	super setUp.
 	
@@ -950,6 +961,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesDimensionOfCr
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesAsWritten [
+
+	#( '(4+5)' '((4))' '(4/5)-6' '4+(5)' '("a").length()' '!(!true)' '(true ? 1 : 2)' '(switch (1) {~  default -> 2;~})' )
+		do: [ :source | | written |
+			written := source copyReplaceAll: '~' with: String cr.
+			self export: (self expressionAST: written) equals: written ]
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesBodyOfLambda [
 
 	| expr |
@@ -986,7 +1006,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesNone [
 	| expr |
 	expr := self expressionAST: '(4+5)'.
 
-	self export: expr equals: '4+5'
+	self export: (self withoutParentheses: expr) equals: '4+5'
 ]
 
 { #category : 'test from source code' }
@@ -1005,7 +1025,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesStringConcate
 	| expr |
 	expr := self methodAST: 'void mth() { a=(b+1)+"string"; }'.
 
-	self export: expr statements first equals: 'a = b+1+"string";
+	self export: (self withoutParentheses: expr) statements first equals: 'a = b+1+"string";
 '
 ]
 
@@ -1044,7 +1064,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubHasHigherP
 	| expr |
 	expr := self expressionAST: '(4/5)-6'.
 
-	self export: expr equals: '4/5-6'
+	self export: (self withoutParentheses: expr) equals: '4/5-6'
 ]
 
 { #category : 'test from source code' }
@@ -1062,7 +1082,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesSubUnary [
 	| expr |
 	expr := self methodAST: 'void mth() { a = 2*(x++); }'.
 
-	self export: expr statements first equals: 'a = 2*x++;
+	self export: (self withoutParentheses: expr) statements first equals: 'a = 2*x++;
 '
 ]
 
@@ -1072,7 +1092,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernaryIsSubW
 	| expr |
 	expr := self methodAST: 'void mth() { a = (5>6 ? 7 : 8); }'.
 
-	self export: expr statements first equals: 'a = 5>6 ? 7 : 8;
+	self export: (self withoutParentheses: expr) statements first equals: 'a = 5>6 ? 7 : 8;
 '
 ]
 
@@ -1100,7 +1120,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHas
 	| expr |
 	expr := self methodAST: 'void mth() { a = ((b=4) ? 5 : 6) ; }'.
 
-	self export: expr statements first equals: 'a = (b = 4) ? 5 : 6;
+	self export: (self withoutParentheses: expr) statements first equals: 'a = (b = 4) ? 5 : 6;
 '
 ]
 
@@ -1111,7 +1131,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesTernarySubHas
 	| expr |
 	expr := self methodAST: 'void mth() { a = (4>=5 ? b+=3 : b-=3) ; }'.
 
-	self export: expr statements first equals: 'a = 4>=5 ? b += 3 : (b -= 3);
+	self export: (self withoutParentheses: expr) statements first equals: 'a = 4>=5 ? b += 3 : (b -= 3);
 '
 ]
 
@@ -1452,7 +1472,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLabeledStatementBlock [
 FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionOneStatement [
 
 	| ast |
-	ast := self methodAST: 'void mth() { a = ( arg -> doSomething() ); }'.
+	ast := self methodAST: 'void mth() { a = arg -> doSomething(); }'.
 
 	self export: ast equals: 'void mth() {
   a = arg -> doSomething();
@@ -1464,7 +1484,7 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionOneStatement [
 FASTJavaExportVisitorTest >> testVisitFASTJavaLambdaExpressionStatementBlock [
 
 	| ast |
-	ast := self methodAST: 'void mth() { a = ( (arg1,arg2) -> { doSomething(); doOtherThing(); }); }'.
+	ast := self methodAST: 'void mth() { a = (arg1,arg2) -> { doSomething(); doOtherThing(); }; }'.
 
 	self export: ast equals: 'void mth() {
   a = (arg1, arg2) -> {
@@ -1889,15 +1909,15 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionInsideAnoth
 	two negations with nothing between them would make a decrement of them. `--y` is a
 	different program from `-(-y)` and `--128` is not a program at all."
 
-	self export: (self methodAST: 'int mth() { return -(-y); }') equals: 'int mth() {
+	self export: (self withoutParentheses: (self methodAST: 'int mth() { return -(-y); }')) equals: 'int mth() {
   return - -y;
 }
 '.
-	self export: (self methodAST: 'int mth() { return -(--y); }') equals: 'int mth() {
+	self export: (self withoutParentheses: (self methodAST: 'int mth() { return -(--y); }')) equals: 'int mth() {
   return - --y;
 }
 '.
-	self export: (self methodAST: 'int mth() { return +(+y); }') equals: 'int mth() {
+	self export: (self withoutParentheses: (self methodAST: 'int mth() { return +(+y); }')) equals: 'int mth() {
   return + +y;
 }
 '
@@ -1908,11 +1928,11 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaPrefixedUnaryExpressionThatCannotM
 	"Only `+` and `-` make a longer operator of themselves, so the others are written
 	straight after one another as they were."
 
-	self export: (self methodAST: 'boolean mth() { return !(!b); }') equals: 'boolean mth() {
+	self export: (self withoutParentheses: (self methodAST: 'boolean mth() { return !(!b); }')) equals: 'boolean mth() {
   return !!b;
 }
 '.
-	self export: (self methodAST: 'int mth() { return -(+y); }') equals: 'int mth() {
+	self export: (self withoutParentheses: (self methodAST: 'int mth() { return -(+y); }')) equals: 'int mth() {
   return -+y;
 }
 '
@@ -2058,7 +2078,8 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchExpressionAsAReceiver [
 	may be called on it, but it is not a primary, so it is written between parentheses."
 
 	self
-		export: (self astFor: 'class Receiver { int m(int x) { return (switch (x) { default -> 1; }).hashCode(); } }')
+		export: (self withoutParentheses:
+				 (self astFor: 'class Receiver { int m(int x) { return (switch (x) { default -> 1; }).hashCode(); } }'))
 		equals: 'class Receiver {
   int m(int x) {
     return (switch (x) {

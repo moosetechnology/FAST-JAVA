@@ -605,6 +605,23 @@ FASTTExpression >> javaVariableDeclaratorExpressionOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
+FASTTExpression >> numberOfParentheses [
+
+	<FMProperty: #numberOfParentheses type: #Number>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)'>
+	^ self attributeAt: #numberOfParentheses ifAbsent: [ nil ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> numberOfParentheses: anObject [
+	<ignoreForCoverage>
+	<generated>
+	self attributeAt: #numberOfParentheses put: anObject
+]
+
+{ #category : '*FAST-Java-Model' }
 FASTTExpression >> switchConditionOwner [
 	"Relation named: #switchConditionOwner type: #FASTJavaSwitchStatement opposite: #condition"
 

@@ -54,6 +54,7 @@ double d2 = 12.3d;
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `primitiveValue` | `String` | nil | The literal itself as found in the source code. We use primitiveValue in order to override value from Object|
 | `startPos` | `Number` | nil | |
 

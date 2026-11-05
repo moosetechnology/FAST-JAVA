@@ -63,6 +63,7 @@ I represent a parameter of a method declaration
 | `endPos` | `Number` | nil | |
 | `hasVariableArguments` | `Boolean` | false | Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)|
 | `name` | `String` | nil | |
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `startPos` | `Number` | nil | |
 
 "

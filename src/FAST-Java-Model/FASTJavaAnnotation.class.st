@@ -66,6 +66,7 @@ example:
 | `endPos` | `Number` | nil | |
 | `hasParentheses` | `Boolean` | false | Whether parentheses are written after my name, which tells `@A()` from `@A` when no element value is given (JLS 9.7)|
 | `name` | `String` | nil | |
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `startPos` | `Number` | nil | |
 
 "

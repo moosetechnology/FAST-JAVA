@@ -28,13 +28,13 @@ FASTJavaExportVisitor >> checkForComments: aNode andDo: exportingBlock [
 	
 	aNode ifNil:               [ ^exportingBlock value ].
 	aNode isCollection ifTrue: [ ^exportingBlock value ].
-	aNode hasComments ifFalse: [ ^exportingBlock value ].
+	aNode hasComments ifFalse: [ ^ self outputParenthesesOf: aNode around: exportingBlock ].
 
 	allCmts := aNode comments sorted: [:cmtA :cmtB | cmtA startPos < cmtB startPos].
 
 	allCmts do: [ :cmt |
 		cmt isBlockComment ifTrue: [ self outputBlockComment: cmt ] ].
-	exportingBlock value.
+	self outputParenthesesOf: aNode around: exportingBlock.
 	allCmts do: [ :cmt | cmt isLineComment ifTrue: [ self outputLineComment: cmt ] ]
 
 ]
@@ -167,6 +167,21 @@ FASTJavaExportVisitor >> mergesWithLastWritten: anOperator [
 	with what precedes it."
 
 	^ ('+-' includes: anOperator first) and: [ self outputStream peekLast = anOperator first ]
+]
+
+{ #category : 'precedence' }
+FASTJavaExportVisitor >> outputParenthesesOf: anEntity around: aBlock [
+	"JLS 15.8.5: the parentheses written around an expression are written back, and what
+	they enclose is an expression of its own, which needs no more of them."
+
+	| parentheses |
+	parentheses := anEntity isExpression
+		               ifTrue: [ anEntity numberOfParentheses ifNil: [ 0 ] ]
+		               ifFalse: [ 0 ].
+	parentheses = 0 ifTrue: [ ^ aBlock value ].
+	self unindented: (String new: parentheses withAll: $().
+	self outputTopLevelExpression: aBlock.
+	self unindented: (String new: parentheses withAll: $))
 ]
 
 { #category : 'outputting' }
@@ -569,7 +584,8 @@ FASTJavaExportVisitor >> visitFASTJavaConditionalExpression: aFASTJavaConditiona
 				another was written between parentheses."
 				self
 					outputExpression: [ aFASTJavaConditionalExpression condition accept: self ]
-					inParentheses: aFASTJavaConditionalExpression condition class = FASTJavaConditionalExpression.
+					inParentheses: (aFASTJavaConditionalExpression condition class = FASTJavaConditionalExpression and: [
+							 aFASTJavaConditionalExpression condition numberOfParentheses isNil ]).
 				self unindented: ' ? '.
 				self outputTopLevelExpression: [
 					aFASTJavaConditionalExpression thenPart accept: self
@@ -892,7 +908,8 @@ FASTJavaExportVisitor >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
 					ifFalse: [ self unindented: aFASTJavaInfixOperation operator].
 				self
 					outputExpression: [ aFASTJavaInfixOperation rightOperand accept: self ]
-					inParentheses: (self isInfixOperation: aFASTJavaInfixOperation rightOperand withPrecedenceOf: operator)
+					inParentheses: (aFASTJavaInfixOperation rightOperand numberOfParentheses isNil and: [
+							 self isInfixOperation: aFASTJavaInfixOperation rightOperand withPrecedenceOf: operator ])
 			]
 			withOperator: operator
 ]
@@ -1071,13 +1088,12 @@ FASTJavaExportVisitor >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocatio
 ]
 
 { #category : 'visiting expression' }
-FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aFASTJavaMethodInvocation [
-	self checkForComments: aFASTJavaMethodInvocation andDo: [
-		aFASTJavaMethodInvocation ifNil: [ ^ self ].
-		aFASTJavaMethodInvocation accept: self.
-		self unindented: $.
-]
+FASTJavaExportVisitor >> visitFASTJavaMethodInvocationReceiver: aReceiver [
+	"The receiver writes its comments and its parentheses when it is visited."
 
+	aReceiver ifNil: [ ^ self ].
+	aReceiver accept: self.
+	self unindented: $.
 ]
 
 { #category : 'visiting expression' }
@@ -1527,24 +1543,25 @@ FASTJavaExportVisitor >> visitFASTJavaSwitchExpression: aFASTJavaSwitchExpressio
 	"JLS 15.15: a switch expression is a unary expression and not a primary, so one written
 	where a primary stands, as the receiver of an invocation, was written between parentheses."
 
-	self
-		outputExpression: [
-			self outputTopLevelExpression: [
-				self output: 'switch ('.
-				aFASTJavaSwitchExpression condition accept: self.
-				self
-					output: ') {';
-					newLine;
-					indent.
+	self outputParenthesesOf: aFASTJavaSwitchExpression around: [
+		self
+			outputExpression: [
+				self outputTopLevelExpression: [
+					self output: 'switch ('.
+					aFASTJavaSwitchExpression condition accept: self.
+					self
+						output: ') {';
+						newLine;
+						indent.
 
-				"A switch block is in colon form or in arrow form, so one of these is empty."
-				aFASTJavaSwitchExpression cases do: [ :switchCase | switchCase accept: self ].
-				aFASTJavaSwitchExpression rules do: [ :rule | rule accept: self ].
+					"A switch block is in colon form or in arrow form, so one of these is empty."
+					aFASTJavaSwitchExpression cases do: [ :switchCase | switchCase accept: self ].
+					aFASTJavaSwitchExpression rules do: [ :rule | rule accept: self ].
 
-				self
-					unindent;
-					indented: $} ] ]
-		withOperator: #switch
+					self
+						unindent;
+						indented: $} ] ]
+			withOperator: #switch ]
 ]
 
 { #category : 'visiting' }

@@ -1509,6 +1509,10 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaEnumConstant property: #hasParentheses type: #Boolean defaultValue: false) comment:
 		'Whether parentheses are written after my name, which tells `A()` from `A` when no argument is given (JLS 8.9.1)'.
 
+	"A remote property with a default value is generated with a getter that does not compile."
+	(tExpression property: #numberOfParentheses type: #Number) comment:
+		'How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)'.
+
 	(javaParameterExpression property: #hasVariableArguments type: #Boolean defaultValue: false) comment:
 		'Whether this parameter accepts a variable number of arguments (varargs), e.g. asList(T... a)'.
 

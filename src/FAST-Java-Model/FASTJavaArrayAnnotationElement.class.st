@@ -57,6 +57,7 @@ I represent an array as argument of an annotationExpression
 |---|
 | `endPos` | `Number` | nil | |
 | `hasTrailingComma` | `Boolean` | false | Whether a comma is written after the last value, which JLS 9.7.1 allows|
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `startPos` | `Number` | nil | |
 
 "

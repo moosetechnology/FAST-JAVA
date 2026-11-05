@@ -60,6 +60,18 @@ JavaSmaCCProgramNodeImporterVisitor >> acceptComponentType: aTypeNode [
 ]
 
 { #category : 'visitor' }
+JavaSmaCCProgramNodeImporterVisitor >> acceptNode: aNode [
+	"JLS 15.8.5: an expression written between parentheses is imported as the expression it
+	encloses, which remembers how many pairs are written around it."
+
+	| imported |
+	imported := super acceptNode: aNode.
+	((aNode isKindOf: JavaExpressionNode) and: [ aNode _leftParens isNotEmpty ]) ifTrue: [
+		imported numberOfParentheses: aNode _leftParens size ].
+	^ imported
+]
+
+{ #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
 	"A switch used as a statement is a switch statement (JLS 14.11.1) whatever form its
 	block takes, but SmaCC types the node after the form, not the position. Only the
@@ -1453,7 +1465,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMethodInvocation: aMethodInvocation 
 	aMethodInvocation receiver
 		ifNotNil: [ :receiver |
 			| expression |
-			expression := (receiver isMemberOf: JavaNameNode)
+			"JLS 15.8.5: a name written between parentheses is an expression, never the name
+			of a type or a package."
+			expression := ((receiver isMemberOf: JavaNameNode) and: [ receiver _leftParens isEmpty ])
 				              ifTrue: [ "If the element is named. It is more than propably an Identifier and not just an named element. So you pass over the normal rules of the importer"
 					              self addToModel: (FASTJavaIdentifier new
 							               name: receiver name value;

@@ -62,6 +62,7 @@ new Patate()
 |---|
 | `endPos` | `Number` | nil | |
 | `isDiamond` | `Boolean` | false | Whether the type instantiated writes the diamond rather than type arguments (JLS 15.9.1)|
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `startPos` | `Number` | nil | |
 
 "

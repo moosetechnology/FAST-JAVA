@@ -55,6 +55,7 @@ I represent a lambda expression
 |---|
 | `endPos` | `Number` | nil | |
 | `hasConciseParameter` | `Boolean` | false | Whether my one parameter is written alone, without parentheses or a type, as in `x -> x + 1` (JLS 15.27.1)|
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `startPos` | `Number` | nil | |
 
 "

@@ -69,6 +69,7 @@ see: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html
 |---|
 | `endPos` | `Number` | nil | |
 | `isPrefixedUnaryExpression` | `Boolean` | nil | True if the expression is prefixed (ex. ++i) else false|
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `operator` | `String` | nil | The operator to apply to the expression|
 | `startPos` | `Number` | nil | |
 

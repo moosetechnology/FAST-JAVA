@@ -66,6 +66,7 @@ My initializers are
 |---|
 | `endPos` | `Number` | nil | |
 | `hasTrailingComma` | `Boolean` | false | Whether a comma is written after the last initializer, which JLS 10.6 allows and which tells `{ 1, 2, }` from `{ 1, 2 }`|
+| `numberOfParentheses` | `Number` | nil | How many pairs of parentheses are written around me, as the two around `a` in `((a))`; nil where none is (JLS 15.8.5)|
 | `startPos` | `Number` | nil | |
 
 "
