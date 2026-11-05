@@ -900,6 +900,26 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAndAttrib
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAsArray [
+
+	| expr |
+	expr := self methodAST: 'void mth() { x = ((int[]) o)[i+1]; }'.
+
+	self export: expr statements first equals: 'x = ((int[]) o)[i+1];
+'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesCastAsEnclosingInstance [
+
+	| expr |
+	expr := self methodAST: 'void mth() { x = ((Outer) o).new Inner(); }'.
+
+	self export: expr statements first equals: 'x = ((Outer) o).new Inner();
+'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaExpressionParenthesesClearStackOnTopLevelExpression [
 	"topLevelExpression
 	 Introduced to deal with an expression as argument of a method call because we are using a global stack,
@@ -1994,16 +2014,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSuperConstructorInvocationWithType
 
 { #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchExpressionAsAReceiver [
-	"JLS 15.12: a switch expression answers a value like any other, so a method may be
-	called on it."
+	"JLS 15.12 and 15.15: a switch expression answers a value like any other, so a method
+	may be called on it, but it is not a primary, so it is written between parentheses."
 
 	self
-		export: (self astFor: 'class Receiver { int m(int x) { return switch (x) { default -> 1; }.hashCode(); } }')
+		export: (self astFor: 'class Receiver { int m(int x) { return (switch (x) { default -> 1; }).hashCode(); } }')
 		equals: 'class Receiver {
   int m(int x) {
-    return switch (x) {
+    return (switch (x) {
       default -> 1;
-    }.hashCode();
+    }).hashCode();
   }
 }
 '
