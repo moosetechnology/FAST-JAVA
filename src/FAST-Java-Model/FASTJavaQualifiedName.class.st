@@ -6,6 +6,9 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
+| `javaExportsDirectiveTargetOwner` | `FASTJavaQualifiedName` | `targets` | `FASTJavaExportsDirective` | The exports directive that writes me as one of its targets|
+| `javaOpensDirectiveTargetOwner` | `FASTJavaQualifiedName` | `targets` | `FASTJavaOpensDirective` | The opens directive that writes me as one of its targets|
+| `javaProvidesDirectiveImplementationOwner` | `FASTJavaQualifiedName` | `implementations` | `FASTJavaProvidesDirective` | The provides directive that writes me as one of its implementations|
 | `javaVariableAssignmentOwner` | `FASTJavaTAssignable` | `variable` | `FASTJavaTWithAssignable` | The owner of the assignment|
 | `namespaceOwner` | `FASTJavaQualifiedName` | `namespace` | `FASTJavaQualifiedName` | The namespace I qualify|
 | `qualifiedNameOwner` | `FASTJavaQualifiedName` | `qualifiedName` | `FASTJavaTWithQualifiedName` | The owner of the qualified name|
@@ -32,6 +35,9 @@ Class {
 	#traits : 'FASTJavaTAssignable + FASTTEntity + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTAssignable classTrait + FASTTEntity classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
+		'#javaExportsDirectiveTargetOwner => FMOne type: #FASTJavaExportsDirective opposite: #targets',
+		'#javaOpensDirectiveTargetOwner => FMOne type: #FASTJavaOpensDirective opposite: #targets',
+		'#javaProvidesDirectiveImplementationOwner => FMOne type: #FASTJavaProvidesDirective opposite: #implementations',
 		'#namespace => FMOne type: #FASTJavaQualifiedName opposite: #namespaceOwner',
 		'#namespaceOwner => FMOne type: #FASTJavaQualifiedName opposite: #namespace',
 		'#qualifiedNameOwner => FMOne type: #FASTJavaTWithQualifiedName opposite: #qualifiedName'
@@ -56,6 +62,63 @@ FASTJavaQualifiedName >> isQualifiedName [
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaQualifiedName >> javaExportsDirectiveTargetOwner [
+	"Relation named: #javaExportsDirectiveTargetOwner type: #FASTJavaExportsDirective opposite: #targets"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The exports directive that writes me as one of its targets'>
+	<container>
+	^ javaExportsDirectiveTargetOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaQualifiedName >> javaExportsDirectiveTargetOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaExportsDirectiveTargetOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaQualifiedName >> javaOpensDirectiveTargetOwner [
+	"Relation named: #javaOpensDirectiveTargetOwner type: #FASTJavaOpensDirective opposite: #targets"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The opens directive that writes me as one of its targets'>
+	<container>
+	^ javaOpensDirectiveTargetOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaQualifiedName >> javaOpensDirectiveTargetOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaOpensDirectiveTargetOwner := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaQualifiedName >> javaProvidesDirectiveImplementationOwner [
+	"Relation named: #javaProvidesDirectiveImplementationOwner type: #FASTJavaProvidesDirective opposite: #implementations"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The provides directive that writes me as one of its implementations'>
+	<container>
+	^ javaProvidesDirectiveImplementationOwner
+]
+
+{ #category : 'accessing' }
+FASTJavaQualifiedName >> javaProvidesDirectiveImplementationOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	javaProvidesDirectiveImplementationOwner := anObject
 ]
 
 { #category : 'accessing' }

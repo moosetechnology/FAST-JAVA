@@ -33,6 +33,7 @@ switch (day) {
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -42,6 +43,7 @@ switch (day) {
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
 | `parentExpressionRight` | `FASTTExpression` | `rightOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am right side|
+| `receiverOwner` | `FASTJavaTReceiver` | `receiver` | `FASTJavaTWithReceiver` | The owner of the receiver|
 | `returnOwner` | `FASTTExpression` | `expression` | `FASTTReturnStatement` | The return statement that own the expression (if it's the case)|
 | `switchConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchStatement` | I represent a condition for my owner|
 | `switchExpressionConditionOwner` | `FASTTExpression` | `condition` | `FASTJavaSwitchExpression` | The switch expression whose condition I am|
@@ -69,8 +71,8 @@ switch (day) {
 Class {
 	#name : 'FASTJavaSwitchExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithSwitchBlock + FASTTExpression',
-	#classTraits : 'FASTJavaTWithSwitchBlock classTrait + FASTTExpression classTrait',
+	#traits : 'FASTJavaTReceiver + FASTJavaTWithSwitchBlock + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithSwitchBlock classTrait + FASTTExpression classTrait',
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'

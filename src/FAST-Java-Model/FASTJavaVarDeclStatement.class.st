@@ -13,6 +13,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `compilationUnit` | `FASTJavaVarDeclStatement` | `fieldDeclarations` | `FASTJavaCompilationUnit` | The compilation unit that owns me|
 | `forIncrementorOwner` | `FASTTStatement` | `incrementors` | `FASTJavaForStatement` | I am an incrementor of the for|
 | `forIninitializerOwner` | `FASTTStatement` | `initializers` | `FASTJavaForStatement` | I am an initializer of the for|
 | `ifElsePartOwner` | `FASTTStatement` | `elsePart` | `FASTJavaIfStatement` | The if owner (if possible)|
@@ -46,6 +47,7 @@ Class {
 	#traits : 'FASTJavaTDeclaration + FASTJavaTTryResource + FASTJavaTWithModifiers + FASTTScopableEntity + FASTTStatement',
 	#classTraits : 'FASTJavaTDeclaration classTrait + FASTJavaTTryResource classTrait + FASTJavaTWithModifiers classTrait + FASTTScopableEntity classTrait + FASTTStatement classTrait',
 	#instVars : [
+		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #fieldDeclarations',
 		'#declarators => FMMany type: #FASTJavaVariableDeclarator opposite: #varDeclOwner',
 		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaVarDeclTypeOwner'
 	],
@@ -69,6 +71,25 @@ FASTJavaVarDeclStatement >> addDeclarator: anObject [
 	<ignoreForCoverage>
 	<generated>
 	^ self declarators add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaVarDeclStatement >> compilationUnit [
+	"Relation named: #compilationUnit type: #FASTJavaCompilationUnit opposite: #fieldDeclarations"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The compilation unit that owns me'>
+	<container>
+	^ compilationUnit
+]
+
+{ #category : 'accessing' }
+FASTJavaVarDeclStatement >> compilationUnit: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	compilationUnit := anObject
 ]
 
 { #category : 'accessing' }

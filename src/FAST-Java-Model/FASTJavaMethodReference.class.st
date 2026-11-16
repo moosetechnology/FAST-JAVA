@@ -25,6 +25,7 @@ I represent a method reference
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -45,6 +46,7 @@ I represent a method reference
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
+| `typeArguments` | `FASTJavaMethodReference` | `javaMethodReferenceTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after the `::`, eg. the String of `List::<String>of`|
 
 
 ## Properties
@@ -62,6 +64,9 @@ Class {
 	#superclass : 'FASTJavaEntity',
 	#traits : 'FASTJavaTWithReceiver + FASTTExpression + FASTTNamedEntity',
 	#classTraits : 'FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
+	#instVars : [
+		'#typeArguments => FMMany type: #FASTJavaTypeExpression opposite: #javaMethodReferenceTypeArgumentOwner'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -76,10 +81,37 @@ FASTJavaMethodReference class >> annotation [
 	<generated>
 ]
 
+{ #category : 'adding' }
+FASTJavaMethodReference >> addTypeArgument: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self typeArguments add: anObject
+]
+
 { #category : 'testing' }
 FASTJavaMethodReference >> isMethodReference [
 
 	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodReference >> typeArguments [
+	"Relation named: #typeArguments type: #FASTJavaTypeExpression opposite: #javaMethodReferenceTypeArgumentOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The type arguments I write after the `::`, eg. the String of `List::<String>of`'>
+	<derived>
+	^ typeArguments
+]
+
+{ #category : 'accessing' }
+FASTJavaMethodReference >> typeArguments: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typeArguments value: anObject
 ]

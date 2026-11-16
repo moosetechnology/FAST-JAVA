@@ -12,12 +12,16 @@ JavaSmaCCMethodBoundedWildCardParameterTypeTest >> javaMethod [
 ]
 
 { #category : 'tests' }
-JavaSmaCCMethodBoundedWildCardParameterTypeTest >> testMethodArrayBoundIsNotKept [
+JavaSmaCCMethodBoundedWildCardParameterTypeTest >> testMethodArrayBoundIsKept [
+	"JLS 4.5.1: the bound of a wildcard is a reference type, which an array type is as much
+	as a class is."
 
-	| fastModelWithArrayBound |
+	| fastModelWithArrayBound bound |
 	fastModelWithArrayBound := self parseMethodString: 'public Class<? extends Number[]> hello(){}'.
 
-	self assertEmpty: (fastModelWithArrayBound allWithType: FASTJavaMethodEntity) anyOne type arguments anyOne types
+	bound := (fastModelWithArrayBound allWithType: FASTJavaMethodEntity) anyOne type arguments anyOne types anyOne.
+	self assert: bound class equals: FASTJavaArrayTypeExpression.
+	self assert: bound baseType name equals: 'Number'
 ]
 
 { #category : 'tests' }

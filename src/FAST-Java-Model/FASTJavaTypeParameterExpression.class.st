@@ -25,6 +25,7 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -45,8 +46,9 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `superType` | `FASTJavaTypeParameterExpression` | `typeParameterSuperTypeOwner` | `FASTJavaClassTypeExpression` | The lower bound a wildcard writes, as in `? super Number`|
-| `types` | `FASTJavaTypeParameterExpression` | `typeParameterOwner` | `FASTJavaClassTypeExpression` | The list of types I extend or implements|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
+| `superType` | `FASTJavaTypeParameterExpression` | `typeParameterSuperTypeOwner` | `FASTJavaTypeExpression` | The lower bound a wildcard writes, as in `? super Number`|
+| `types` | `FASTJavaTypeParameterExpression` | `typeParameterOwner` | `FASTJavaTypeExpression` | The list of types I extend or implements|
 
 
 ## Properties
@@ -62,12 +64,12 @@ I represent JavaTypeParameter such as `void <T extends Hello> T myMethod()`
 Class {
 	#name : 'FASTJavaTypeParameterExpression',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTExpression + FASTTNamedEntity',
-	#classTraits : 'FASTTExpression classTrait + FASTTNamedEntity classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTTExpression + FASTTNamedEntity',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTTExpression classTrait + FASTTNamedEntity classTrait',
 	#instVars : [
 		'#javaTypeParameterOwner => FMOne type: #FASTJavaTWithTypeParameters opposite: #typeParameters',
-		'#superType => FMOne type: #FASTJavaClassTypeExpression opposite: #typeParameterSuperTypeOwner',
-		'#types => FMMany type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner'
+		'#superType => FMOne type: #FASTJavaTypeExpression opposite: #typeParameterSuperTypeOwner',
+		'#types => FMMany type: #FASTJavaTypeExpression opposite: #typeParameterOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -120,7 +122,7 @@ FASTJavaTypeParameterExpression >> javaTypeParameterOwner: anObject [
 
 { #category : 'accessing' }
 FASTJavaTypeParameterExpression >> superType [
-	"Relation named: #superType type: #FASTJavaClassTypeExpression opposite: #typeParameterSuperTypeOwner"
+	"Relation named: #superType type: #FASTJavaTypeExpression opposite: #typeParameterSuperTypeOwner"
 
 	<ignoreForCoverage>
 	<generated>
@@ -138,7 +140,7 @@ FASTJavaTypeParameterExpression >> superType: anObject [
 
 { #category : 'accessing' }
 FASTJavaTypeParameterExpression >> types [
-	"Relation named: #types type: #FASTJavaClassTypeExpression opposite: #typeParameterOwner"
+	"Relation named: #types type: #FASTJavaTypeExpression opposite: #typeParameterOwner"
 
 	<ignoreForCoverage>
 	<generated>

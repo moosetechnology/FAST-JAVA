@@ -28,6 +28,7 @@ new Patate()
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -51,6 +52,7 @@ new Patate()
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
 | `type` | `FASTJavaNewExpression` | `javaNewExpressionOwner` | `FASTJavaVariableExpression` | The type of the array|
+| `typeArguments` | `FASTJavaNewExpression` | `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after `new`, eg. the String of `new <String>C()`|
 
 
 ## Properties
@@ -70,7 +72,8 @@ Class {
 	#classTraits : 'FASTJavaTReceiver classTrait + FASTJavaTWithReceiver classTrait + FASTTExpression classTrait + FASTTWithArguments classTrait',
 	#instVars : [
 		'#isDiamond => FMProperty defaultValue: false',
-		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner'
+		'#type => FMOne type: #FASTJavaVariableExpression opposite: #javaNewExpressionOwner',
+		'#typeArguments => FMMany type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeArgumentOwner'
 	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
@@ -84,6 +87,14 @@ FASTJavaNewExpression class >> annotation [
 	<FMClass: #NewExpression super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaNewExpression >> addTypeArgument: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self typeArguments add: anObject
 ]
 
 { #category : 'accessing' }
@@ -127,4 +138,23 @@ FASTJavaNewExpression >> type: anObject [
 	<ignoreForCoverage>
 	<generated>
 	type := anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaNewExpression >> typeArguments [
+	"Relation named: #typeArguments type: #FASTJavaTypeExpression opposite: #javaNewExpressionTypeArgumentOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The type arguments I write after `new`, eg. the String of `new <String>C()`'>
+	<derived>
+	^ typeArguments
+]
+
+{ #category : 'accessing' }
+FASTJavaNewExpression >> typeArguments: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typeArguments value: anObject
 ]

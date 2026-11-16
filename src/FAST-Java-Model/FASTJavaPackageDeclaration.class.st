@@ -12,6 +12,7 @@ I represent a package declaration, e.g. `package fr.inria;`
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
 | `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
 
 
@@ -27,8 +28,8 @@ I represent a package declaration, e.g. `package fr.inria;`
 Class {
 	#name : 'FASTJavaPackageDeclaration',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTJavaTWithQualifiedName + FASTTEntity',
-	#classTraits : 'FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
+	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithQualifiedName + FASTTEntity',
+	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithQualifiedName classTrait + FASTTEntity classTrait',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FASTJavaCompilationUnit opposite: #packageDeclaration'
 	],

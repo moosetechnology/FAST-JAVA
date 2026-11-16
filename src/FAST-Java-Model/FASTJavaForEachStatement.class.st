@@ -26,6 +26,7 @@ for(Patate p : list) {
 | `body` | `FASTTLoopStatement` | `parentLoopStatement` | `FASTTStatement` | The body of the loop|
 | `fieldname` | `FASTJavaForEachStatement` | `javaForEachStatementFieldNameOwner` | `FASTJavaIdentifier` | The identifier of the created local variable|
 | `list` | `FASTJavaForEachStatement` | `javaForEachStatementOwner` | `FASTTExpression` | The list that the for-each statement iterates over|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `type` | `FASTJavaForEachStatement` | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | The type of the created local variable|
 
 
@@ -41,8 +42,8 @@ for(Patate p : list) {
 Class {
 	#name : 'FASTJavaForEachStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTLoopStatement + FASTTStatement',
-	#classTraits : 'FASTTLoopStatement classTrait + FASTTStatement classTrait',
+	#traits : 'FASTJavaTWithModifiers + FASTTLoopStatement + FASTTStatement',
+	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTLoopStatement classTrait + FASTTStatement classTrait',
 	#instVars : [
 		'#fieldname => FMOne type: #FASTJavaIdentifier opposite: #javaForEachStatementFieldNameOwner',
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaForEachStatementTypeOwner'

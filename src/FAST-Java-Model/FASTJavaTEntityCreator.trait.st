@@ -229,6 +229,14 @@ FASTJavaTEntityCreator >> newDefaultCaseStatement [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newDimension [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaDimension new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newDoWhileStatement [
 
 	<ignoreForCoverage>
@@ -282,6 +290,14 @@ FASTJavaTEntityCreator >> newEnumDeclaration [
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaEnumDeclaration new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newExportsDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaExportsDirective new
 ]
 
 { #category : 'entity creation' }
@@ -445,6 +461,14 @@ FASTJavaTEntityCreator >> newLongTypeExpression [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newMatchAllPattern [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaMatchAllPattern new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newMethodEntity [
 
 	<ignoreForCoverage>
@@ -474,6 +498,22 @@ FASTJavaTEntityCreator >> newModifier [
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaModifier new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newModuleDeclaration [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaModuleDeclaration new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newModuleDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaModuleDirective new
 ]
 
 { #category : 'entity creation' }
@@ -509,6 +549,14 @@ FASTJavaTEntityCreator >> newNullLiteral [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newOpensDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaOpensDirective new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newOuterThis [
 
 	<ignoreForCoverage>
@@ -541,6 +589,14 @@ FASTJavaTEntityCreator >> newPrimitiveTypeExpression [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newProvidesDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaProvidesDirective new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newQualifiedName [
 
 	<ignoreForCoverage>
@@ -557,11 +613,35 @@ FASTJavaTEntityCreator >> newQualifiedTypeName [
 ]
 
 { #category : 'entity creation' }
+FASTJavaTEntityCreator >> newReceiverParameter [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaReceiverParameter new
+]
+
+{ #category : 'entity creation' }
 FASTJavaTEntityCreator >> newRecordDeclaration [
 
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaRecordDeclaration new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newRecordPattern [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaRecordPattern new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newRequiresDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaRequiresDirective new
 ]
 
 { #category : 'entity creation' }
@@ -706,6 +786,14 @@ FASTJavaTEntityCreator >> newUnaryExpression [
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FASTJavaUnaryExpression new
+]
+
+{ #category : 'entity creation' }
+FASTJavaTEntityCreator >> newUsesDirective [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FASTJavaUsesDirective new
 ]
 
 { #category : 'entity creation' }

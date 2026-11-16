@@ -18,6 +18,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `brackets` | `FASTJavaVariableDeclarator` | `variableDeclaratorOwner` | `FASTJavaDimension` | The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not|
 | `expression` | `FASTJavaVariableDeclarator` | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | Expression to be assigned to the var during declaration|
 | `variable` | `FASTJavaVariableDeclarator` | `javaVariableDeclaratorOwner` | `FASTJavaVariableExpression` | The variable that is being declared|
 
@@ -27,7 +28,6 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 
 | Name | Type | Default value | Comment |
 |---|
-| `dimensions` | `Number` | 0 | The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not|
 | `endPos` | `Number` | nil | |
 | `startPos` | `Number` | nil | |
 
@@ -38,7 +38,7 @@ Class {
 	#traits : 'FASTTEntity',
 	#classTraits : 'FASTTEntity classTrait',
 	#instVars : [
-		'#dimensions => FMProperty defaultValue: 0',
+		'#brackets => FMMany type: #FASTJavaDimension opposite: #variableDeclaratorOwner',
 		'#varDeclOwner => FMOne type: #FASTJavaVarDeclStatement opposite: #declarators',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaVariableDeclaratorOwner'
 	],
@@ -56,21 +56,30 @@ FASTJavaVariableDeclarator class >> annotation [
 	<generated>
 ]
 
-{ #category : 'accessing' }
-FASTJavaVariableDeclarator >> dimensions [
+{ #category : 'adding' }
+FASTJavaVariableDeclarator >> addBracket: anObject [
 
-	<FMProperty: #dimensions type: #Number defaultValue: 0>
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'>
-	^ dimensions ifNil: [ dimensions := 0 ]
+	^ self brackets add: anObject
 ]
 
 { #category : 'accessing' }
-FASTJavaVariableDeclarator >> dimensions: anObject [
+FASTJavaVariableDeclarator >> brackets [
+	"Relation named: #brackets type: #FASTJavaDimension opposite: #variableDeclaratorOwner"
+
 	<ignoreForCoverage>
 	<generated>
-	dimensions := anObject
+	<FMComment: 'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'>
+	^ brackets
+]
+
+{ #category : 'accessing' }
+FASTJavaVariableDeclarator >> brackets: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	brackets value: anObject
 ]
 
 { #category : 'accessing' }

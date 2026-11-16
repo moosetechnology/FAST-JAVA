@@ -33,6 +33,7 @@ Example:
 | `javaCastExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaCastExpression` | The javaCastExpression owner (if possible)|
 | `javaForEachStatementOwner` | `FASTTExpression` | `list` | `FASTJavaForEachStatement` | The javaForEachStatement owner (if possible)|
 | `javaNewArrayInitialOwner` | `FASTTExpression` | `initializer` | `FASTJavaNewArray` | I belong to a new array initialization|
+| `javaRecordPatternOwner` | `FASTTExpression` | `patterns` | `FASTJavaRecordPattern` | The record pattern that matches me as one of its components|
 | `javaStringAssertStatementOwner` | `FASTTExpression` | `message` | `FASTJavaAssertStatement` | The assertion which I describe|
 | `javaSynchronizedStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaSynchronizedStatement` | The owner of the synchronized block (if possible)|
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
@@ -52,6 +53,7 @@ Example:
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `type` | `FASTJavaTypePattern` | `javaTypePatternTypeOwner` | `FASTJavaTypeExpression` | The type of the declared variable|
 | `variable` | `FASTJavaTypePattern` | `javaTypePatternVariableOwner` | `FASTJavaVariableExpression` | The local variable declared by this type pattern|
 
@@ -68,8 +70,8 @@ Example:
 Class {
 	#name : 'FASTJavaTypePattern',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTExpression',
-	#classTraits : 'FASTTExpression classTrait',
+	#traits : 'FASTJavaTWithModifiers + FASTTExpression',
+	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTExpression classTrait',
 	#instVars : [
 		'#type => FMOne type: #FASTJavaTypeExpression opposite: #javaTypePatternTypeOwner',
 		'#variable => FMOne type: #FASTJavaVariableExpression opposite: #javaTypePatternVariableOwner'

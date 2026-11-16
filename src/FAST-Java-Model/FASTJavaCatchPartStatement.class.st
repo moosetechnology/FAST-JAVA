@@ -21,6 +21,7 @@ I represent the 'catch' part of the TryCatch Statement
 |---|
 | `body` | `FASTJavaCatchPartStatement` | `javaCatchPartStatementOwner` | `FASTJavaStatementBlock` | The body of the catch part|
 | `catchedTypes` | `FASTJavaCatchPartStatement` | `catchOwner` | `FASTJavaTypeExpression` | The types (exception) that are catched|
+| `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaTModifier` | My modifiers|
 | `parameter` | `FASTJavaCatchPartStatement` | `javaCatchParameterOwnler` | `FASTJavaVariableExpression` | The parameter of the catch part|
 
 
@@ -36,8 +37,8 @@ I represent the 'catch' part of the TryCatch Statement
 Class {
 	#name : 'FASTJavaCatchPartStatement',
 	#superclass : 'FASTJavaEntity',
-	#traits : 'FASTTStatement',
-	#classTraits : 'FASTTStatement classTrait',
+	#traits : 'FASTJavaTWithModifiers + FASTTStatement',
+	#classTraits : 'FASTJavaTWithModifiers classTrait + FASTTStatement classTrait',
 	#instVars : [
 		'#body => FMOne type: #FASTJavaStatementBlock opposite: #javaCatchPartStatementOwner',
 		'#catchedTypes => FMMany type: #FASTJavaTypeExpression opposite: #catchOwner',

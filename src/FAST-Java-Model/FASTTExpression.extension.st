@@ -427,6 +427,29 @@ FASTTExpression >> javaNewArrayInitialOwner: anObject [
 ]
 
 { #category : '*FAST-Java-Model' }
+FASTTExpression >> javaRecordPatternOwner [
+	"Relation named: #javaRecordPatternOwner type: #FASTJavaRecordPattern opposite: #patterns"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The record pattern that matches me as one of its components'>
+	<container>
+	<FMProperty: #javaRecordPatternOwner type: #FASTJavaRecordPattern opposite: #patterns>
+	<package: #'FAST-Java-Model'>
+	^ self attributeAt: #javaRecordPatternOwner ifAbsent: [ nil ]
+]
+
+{ #category : '*FAST-Java-Model' }
+FASTTExpression >> javaRecordPatternOwner: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'FAST-Java-Model'>
+
+	self attributeAt: #javaRecordPatternOwner put: (FMMultivalueLink on: self update: #patterns from: self javaRecordPatternOwner to: anObject).
+]
+
+{ #category : '*FAST-Java-Model' }
 FASTTExpression >> javaStringAssertStatementOwner [
 	"Relation named: #javaStringAssertStatementOwner type: #FASTJavaAssertStatement opposite: #message"
 
