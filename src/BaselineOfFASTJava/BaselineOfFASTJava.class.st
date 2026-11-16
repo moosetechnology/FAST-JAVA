@@ -41,7 +41,7 @@ BaselineOfFASTJava >> defineDependencies: spec [
 	spec baseline: 'SmaCC' with: [ 
 		spec
 			loads: #( 'JavaParser' 'SmaCCRuntime' );
-			repository: 'github://j-brant/SmaCC:b24de3023a52b873f5423459806b56cd777340c/src' ].
+			repository: 'github://j-brant/SmaCC:b24de30230a52b873f5423459806b56cd777340c/src' ].
 
 	spec for: #NeedsMoose do: [ 
 		spec baseline: 'Famix' with: [ 
