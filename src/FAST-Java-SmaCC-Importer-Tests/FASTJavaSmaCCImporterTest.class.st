@@ -1,11 +1,13 @@
 "
 I test that the Java importer of FAST imports a second source into the model of a first one.
+
 "
 Class {
 	#name : 'FASTJavaSmaCCImporterTest',
 	#superclass : 'TestCase',
-	#category : 'FAST-Java-SmaCC-Importer-Tests',
-	#package : 'FAST-Java-SmaCC-Importer-Tests'
+	#category : 'FAST-Java-SmaCC-Importer-Tests-Tests',
+	#package : 'FAST-Java-SmaCC-Importer-Tests',
+	#tag : 'Tests'
 }
 
 { #category : 'tests' }

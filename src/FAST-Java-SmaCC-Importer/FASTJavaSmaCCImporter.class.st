@@ -1,13 +1,15 @@
 "
 I import the source of a Java file into a FAST Java model, with the FASTTImporter API. I use the SmaCC parser through JavaSmaCCProgramNodeImporterVisitor.
+
 "
 Class {
 	#name : 'FASTJavaSmaCCImporter',
 	#superclass : 'Object',
 	#traits : 'FASTTImporter',
 	#classTraits : 'FASTTImporter classTrait',
-	#category : 'FAST-Java-SmaCC-Importer',
-	#package : 'FAST-Java-SmaCC-Importer'
+	#category : 'FAST-Java-SmaCC-Importer-Importer',
+	#package : 'FAST-Java-SmaCC-Importer',
+	#tag : 'Importer'
 }
 
 { #category : 'accessing' }

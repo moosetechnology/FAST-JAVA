@@ -446,16 +446,16 @@ JavaSmaCCProgramNodeImporterVisitor >> statementsOfForHeader: aNode [
 ]
 
 { #category : 'creating' }
-JavaSmaCCProgramNodeImporterVisitor >> typePatternOf: aNode [
+JavaSmaCCProgramNodeImporterVisitor >> typePatternOf: aTypePattern [
 	"JLS 14.30.1: a type pattern names a type and declares the variable bound to what it
-	matches. SmaCC writes the two into whichever node holds the pattern, an instanceof
-	operation or a case label."
+	matches. SmaCC gives a type pattern a node of its own, held by an instanceof operation,
+	a case label or a switch group."
 
 	^ (self addToModel: FASTJavaTypePattern new)
-		  startPos: aNode type startPosition;
-		  endPos: aNode variable stopPosition;
-		  type: (self clone accept: aNode type);
-		  variable: (self clone accept: aNode variable);
+		  startPos: aTypePattern type startPosition;
+		  endPos: aTypePattern variable stopPosition;
+		  type: (self clone accept: aTypePattern type);
+		  variable: (self clone accept: aTypePattern variable);
 		  yourself
 ]
 
@@ -1056,17 +1056,14 @@ JavaSmaCCProgramNodeImporterVisitor >> visitInitializer: aInitializer [
 	^ currentFASTEntity
 ]
 
-{ #category : 'generated' }
+{ #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitInstanceofPatternExpression: anInstanceofPatternExpression [
 	"SmaCC gives a single node representing both the instanceof operation and the type pattern.
 	FAST splits it into an infix operation with the type pattern as the right operand."
 
-	self
-		create: FASTJavaInfixOperation
-		from: anInstanceofPatternExpression.
-	currentFASTEntity leftOperand:
-		(self clone accept: anInstanceofPatternExpression object).
-	currentFASTEntity rightOperand: (self typePatternOf: anInstanceofPatternExpression).
+	self create: FASTJavaInfixOperation from: anInstanceofPatternExpression.
+	currentFASTEntity leftOperand: (self clone accept: anInstanceofPatternExpression object).
+	currentFASTEntity rightOperand: (self typePatternOf: anInstanceofPatternExpression pattern).
 	currentFASTEntity operator: 'instanceof'.
 	^ currentFASTEntity
 ]
@@ -1583,8 +1580,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchBlockExpressionGroup: aSwitchB
 	aSwitchBlockExpressionGroup constants do: [ :constant | switchLabel caseExpressions add: (self clone accept: constant) ].
 	"JLS 14.11.1: where a label writes no constant it may write a pattern, which the rule
 	reads as a variable, and a guard the match must satisfy."
-	aSwitchBlockExpressionGroup type ifNotNil: [
-			switchLabel caseExpressions add: (self typePatternOf: aSwitchBlockExpressionGroup).
+	aSwitchBlockExpressionGroup patterns ifNotEmpty: [ :patterns |
+			patterns do: [ :pattern | switchLabel caseExpressions add: (self typePatternOf: pattern) ].
 			aSwitchBlockExpressionGroup guard ifNotNil: [ :guard | switchLabel guard: (self clone accept: guard) ] ].
 	currentFASTEntity label: switchLabel.
 	currentFASTEntity body: (self clone accept: aSwitchBlockExpressionGroup value).
@@ -1633,8 +1630,8 @@ JavaSmaCCProgramNodeImporterVisitor >> visitSwitchLabel: aSwitchLabel [
 	aSwitchLabel constants do: [ :constant | currentFASTEntity caseExpressions add: (self clone accept: constant) ].
 	"JLS 14.11.1: where a label writes no constant it may write a pattern, which the
 	labeled statements read as a variable, and a guard the match must satisfy."
-	aSwitchLabel type ifNotNil: [
-			currentFASTEntity caseExpressions add: (self typePatternOf: aSwitchLabel).
+	aSwitchLabel patterns ifNotEmpty: [ :patterns |
+			patterns do: [ :pattern | currentFASTEntity caseExpressions add: (self typePatternOf: pattern) ].
 			aSwitchLabel guard ifNotNil: [ :guard | currentFASTEntity guard: (self clone accept: guard) ] ].
 	^ currentFASTEntity
 ]

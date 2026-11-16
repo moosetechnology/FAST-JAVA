@@ -37,11 +37,11 @@ BaselineOfFASTJava >> defineDependencies: spec [
 		copyFrom: 'FAST'
 		with: [ spec loads: #( 'core' 'tools' ) ].
 
-
+	"SmaCC has no release containing the working importer but changes with time. So I'm fixing the commit SHA"
 	spec baseline: 'SmaCC' with: [ 
 		spec
 			loads: #( 'JavaParser' 'SmaCCRuntime' );
-			repository: 'github://j-brant/SmaCC:master/src' ].
+			repository: 'github://j-brant/SmaCC:b24de3023a52b873f5423459806b56cd777340c/src' ].
 
 	spec for: #NeedsMoose do: [ 
 		spec baseline: 'Famix' with: [ 
