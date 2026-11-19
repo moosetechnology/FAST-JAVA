@@ -1523,6 +1523,9 @@ FASTJavaMetamodelGenerator >> defineProperties [
 	(javaEnumDeclaration property: #hasBodySemicolon type: #Boolean defaultValue: false) comment:
 		'Whether the semicolon opening the body is written where the enum declares no member, which JLS 8.9 allows; where it declares one the semicolon is written either way'.
 
+	(javaEnumConstant property: #hasClassBody type: #Boolean defaultValue: false) comment:
+		'Whether this constant writes a class body, even an empty one, which makes it the instance of an anonymous class extending its enum (JLS 8.9.1)'.
+
 	(javaTryCatchStatement property: #hasTrailingSemicolon type: #Boolean defaultValue: false) comment:
 		'Whether a semicolon is written after the last resource, which JLS 14.20.3 allows'.
 

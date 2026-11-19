@@ -15,6 +15,12 @@
 | `declarations` | `FASTJavaTWithDeclarations` | `javaDeclarationOwner` | `FASTJavaTDeclaration` | The elements I declare|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `hasClassBody` | `Boolean` | false | Whether this constant writes a class body, even an empty one, which makes it the instance of an anonymous class extending its enum (JLS 8.9.1)|
 
 "
 Class {
@@ -23,6 +29,7 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithDeclarations + FASTTWithArguments',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithDeclarations classTrait + FASTTWithArguments classTrait',
 	#instVars : [
+		'#hasClassBody => FMProperty defaultValue: false',
 		'#parentEnum => FMOne type: #FASTJavaEnumDeclaration opposite: #constants'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -37,6 +44,23 @@ FASTJavaEnumConstant class >> annotation [
 	<FMClass: #EnumConstant super: #FASTJavaVariableExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumConstant >> hasClassBody [
+
+	<FMProperty: #hasClassBody type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether this constant writes a class body, even an empty one, which makes it the instance of an anonymous class extending its enum (JLS 8.9.1)'>
+	^ hasClassBody ifNil: [ hasClassBody := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumConstant >> hasClassBody: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasClassBody := anObject
 ]
 
 { #category : 'testing' }
