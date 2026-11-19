@@ -86,6 +86,17 @@ JavaSmaCCProgramNodeImporterVisitor >> acceptStatement: aStatementNode [
 ]
 
 { #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> addAnnotationsOf: aNewNode to: aClassTypeExpression [
+	"JLS 15.9: the class a creation qualified by a primary instantiates may be annotated,
+	and its type then starts at its first annotation."
+
+	aNewNode annotations ifEmpty: [ ^ self ].
+	aNewNode annotations do: [ :annotation |
+		aClassTypeExpression addAnnotation: (self clone accept: annotation) ].
+	aClassTypeExpression startPos: aNewNode annotations first startPosition
+]
+
+{ #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> addModifiers: aNodeCollection to: aFASTEntity [
 	"JLS 8.1.1: a declaration writes its keywords and its annotations in one list, in any
 	order it likes. The model keeps the keywords in `modifiers` and the annotations in
@@ -1629,6 +1640,7 @@ public void onClick(ClickEvent event) {
 		ifNotNil: [ currentFASTEntity type: (self clone accept: aNewNode type) ]
 		ifNil: [
 			currentFASTEntity type: (self clone createTypeName: aNewNode name withArguments: aNewNode arguments).
+			self addAnnotationsOf: aNewNode to: currentFASTEntity type.
 			"JLS 15.9: the type a qualified creation instantiates ends with the type arguments
 			written for it."
 			aNewNode typeArgRight ifNotNil: [ :right | currentFASTEntity type endPos: right stopPosition ] ].
@@ -1671,6 +1683,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewClass: aNewClass [
 		ifNotNil: [ currentFASTEntity type: (self clone accept: aNewClass type) ]
 		ifNil: [
 			currentFASTEntity type: (self clone createTypeName: aNewClass name withArguments: aNewClass arguments).
+			self addAnnotationsOf: aNewClass to: currentFASTEntity type.
 			currentFASTEntity receiver: (self clone accept: aNewClass primary) ].
 	"JLS 15.9: a creation may write the type arguments of the constructor it calls between
 	`new` and the type, where they belong to that constructor and not to that type."
