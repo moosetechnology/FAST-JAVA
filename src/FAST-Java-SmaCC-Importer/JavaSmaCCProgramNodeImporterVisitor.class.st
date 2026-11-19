@@ -1105,6 +1105,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitEnumConstant: anEnumConstant [
 		currentFASTEntity addAnnotation: (self clone accept: annotation) ].
 	currentFASTEntity
 			name: anEnumConstant name value.
+	currentFASTEntity hasClassBody: anEnumConstant leftBrace isNotNil.
 	anEnumConstant expressions do: [ :expression |
 		currentFASTEntity arguments add: (self clone accept: expression) ].
 	anEnumConstant declarations do: [ :declaration |

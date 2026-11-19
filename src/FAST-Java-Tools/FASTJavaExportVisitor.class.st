@@ -657,7 +657,9 @@ FASTJavaExportVisitor >> visitFASTJavaEnumConstant: aFASTJavaEnumConstant [
 		self visitFASTJavaModifiersInline: aFASTJavaEnumConstant annotations.
 		self unindented: aFASTJavaEnumConstant name.
 		aFASTJavaEnumConstant arguments ifNotEmpty: [ :arguments | self visitFASTJavaArgumentsList: arguments ].
-		aFASTJavaEnumConstant declarations ifNotEmpty: [ :declarations | self visitJavaClassMemberDeclarations: declarations ]
+		"A class body, even an empty one, makes the constant the instance of a class of its own."
+		(aFASTJavaEnumConstant hasClassBody or: [ aFASTJavaEnumConstant declarations isNotEmpty ]) ifTrue: [
+			self visitJavaClassMemberDeclarations: aFASTJavaEnumConstant declarations ]
 	]
 ]
 

@@ -41,6 +41,18 @@ JavaSmaCCEnumConstantWithBodyTest >> testConstantBodyDeclaresTheMethodItWrites [
 ]
 
 { #category : 'tests' }
+JavaSmaCCEnumConstantWithBodyTest >> testConstantKeepsAnEmptyClassBody [
+	"JLS 8.9.1: a class body, even an empty one, makes the constant the instance of an
+	anonymous class extending its enum, so an empty body is not the same as none."
+
+	| constants |
+	constants := (self parseClassString: 'enum E { A { }, B }') allWithType: FASTJavaEnumConstant.
+
+	self assert: (constants detect: [ :each | each name = 'A' ]) hasClassBody.
+	self deny: (constants detect: [ :each | each name = 'B' ]) hasClassBody
+]
+
+{ #category : 'tests' }
 JavaSmaCCEnumConstantWithBodyTest >> testConstantKeepsTheArgumentItWrites [
 
 	self assert: self constant arguments anyOne primitiveValue equals: '+'
@@ -50,4 +62,10 @@ JavaSmaCCEnumConstantWithBodyTest >> testConstantKeepsTheArgumentItWrites [
 JavaSmaCCEnumConstantWithBodyTest >> testConstantKeepsTheBodyItDeclares [
 
 	self assert: self constant declarations size equals: 1
+]
+
+{ #category : 'tests' }
+JavaSmaCCEnumConstantWithBodyTest >> testConstantWritesAClassBody [
+
+	self assert: self constant hasClassBody
 ]
