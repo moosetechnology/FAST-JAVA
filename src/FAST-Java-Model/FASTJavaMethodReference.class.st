@@ -46,7 +46,7 @@ I represent a method reference
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
-| `typeArguments` | `FASTJavaMethodReference` | `javaMethodReferenceTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after the `::`, eg. the String of `List::<String>of`|
+| `typeArguments` | `FASTJavaMethodReference` | `javaMethodReferenceTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after the `::`, e.g. the String of `List::<String>of`|
 
 
 ## Properties
@@ -103,7 +103,7 @@ FASTJavaMethodReference >> typeArguments [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type arguments I write after the `::`, eg. the String of `List::<String>of`'>
+	<FMComment: 'The type arguments I write after the `::`, e.g. the String of `List::<String>of`'>
 	<derived>
 	^ typeArguments
 ]

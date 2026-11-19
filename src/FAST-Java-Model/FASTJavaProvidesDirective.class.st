@@ -11,7 +11,7 @@ provides com.example.Service with com.example.Impl;
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `implementations` | `FASTJavaProvidesDirective` | `javaProvidesDirectiveImplementationOwner` | `FASTJavaQualifiedName` | The classes implementing the service I provide, eg. the a.Impl of `provides a.S with a.Impl;`|
+| `implementations` | `FASTJavaProvidesDirective` | `javaProvidesDirectiveImplementationOwner` | `FASTJavaQualifiedName` | The classes implementing the service I provide, e.g. the a.Impl of `provides a.S with a.Impl;`|
 
 
 
@@ -50,7 +50,7 @@ FASTJavaProvidesDirective >> implementations [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The classes implementing the service I provide, eg. the a.Impl of `provides a.S with a.Impl;`'>
+	<FMComment: 'The classes implementing the service I provide, e.g. the a.Impl of `provides a.S with a.Impl;`'>
 	<derived>
 	^ implementations
 ]

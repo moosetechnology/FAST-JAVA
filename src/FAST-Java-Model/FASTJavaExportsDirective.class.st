@@ -11,7 +11,7 @@ exports com.example.api to java.logging, java.desktop;
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `targets` | `FASTJavaExportsDirective` | `javaExportsDirectiveTargetOwner` | `FASTJavaQualifiedName` | The modules I export to, eg. the java.logging of `exports a.b to java.logging;`|
+| `targets` | `FASTJavaExportsDirective` | `javaExportsDirectiveTargetOwner` | `FASTJavaQualifiedName` | The modules I export to, e.g. the java.logging of `exports a.b to java.logging;`|
 
 
 
@@ -58,7 +58,7 @@ FASTJavaExportsDirective >> targets [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The modules I export to, eg. the java.logging of `exports a.b to java.logging;`'>
+	<FMComment: 'The modules I export to, e.g. the java.logging of `exports a.b to java.logging;`'>
 	<derived>
 	^ targets
 ]

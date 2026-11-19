@@ -1674,6 +1674,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayNoArg [
 ]
 
 { #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayWritesTheAnnotationsOfEachPairOfBrackets [
+	"JLS 15.10.1: the annotations a pair of brackets carries are written before it, whether
+	it holds an expression or not."
+
+	self export: (self astFor: 'class C { Object o = new int @A [1] @B [] [], p = new int @C [] { 1 }; }') equals: 'class C {
+  Object o = new int @A [1] @B [][], p = new int @C [] { 1 };
+}
+'
+]
+
+{ #category : 'tests' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaNewClassExpressionKeepsItsQualifier [
 	"JLS 15.9: an inner class may be instantiated through an instance of the class
 	enclosing it, which the creation writes before `new`, a body of its own or not."

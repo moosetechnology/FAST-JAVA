@@ -1174,7 +1174,12 @@ FASTJavaExportVisitor >> visitFASTJavaNewArray: aFASTJavaNewArray [
 	self checkForComments: aFASTJavaNewArray andDo: [
 		self unindented: 'new '.
 		aFASTJavaNewArray type accept: self.
-		aFASTJavaNewArray arguments do: [ :arg |
+		aFASTJavaNewArray arguments doWithIndex: [ :arg :index |
+			"JLS 15.10.1: the annotations a pair of brackets carries are written before it."
+			aFASTJavaNewArray brackets size >= index ifTrue: [
+				(aFASTJavaNewArray brackets at: index) annotations ifNotEmpty: [ :annotations |
+					self space.
+					self visitFASTJavaModifiersInline: annotations ] ].
 			self unindented: $[.
 			arg accept: self.
 			self unindented: $].

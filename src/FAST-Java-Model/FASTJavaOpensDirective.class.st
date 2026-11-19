@@ -11,7 +11,7 @@ opens com.example.model to java.logging;
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `targets` | `FASTJavaOpensDirective` | `javaOpensDirectiveTargetOwner` | `FASTJavaQualifiedName` | The modules I open to, eg. the java.logging of `opens a.b to java.logging;`|
+| `targets` | `FASTJavaOpensDirective` | `javaOpensDirectiveTargetOwner` | `FASTJavaQualifiedName` | The modules I open to, e.g. the java.logging of `opens a.b to java.logging;`|
 
 
 
@@ -58,7 +58,7 @@ FASTJavaOpensDirective >> targets [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The modules I open to, eg. the java.logging of `opens a.b to java.logging;`'>
+	<FMComment: 'The modules I open to, e.g. the java.logging of `opens a.b to java.logging;`'>
 	<derived>
 	^ targets
 ]

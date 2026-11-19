@@ -2,7 +2,7 @@
 A part of variable declaration statement containing a variable (named entity) and an expression (optional) that is assigned to it.
 A variable declaration statement can contain several declarators.
 
-eg.
+e.g.
 
 int d = 3, e, f = 5;
 statement has 3 declarators separated by commas. Second declarator has no expression.
@@ -18,7 +18,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `brackets` | `FASTJavaVariableDeclarator` | `variableDeclaratorOwner` | `FASTJavaDimension` | The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not|
+| `brackets` | `FASTJavaVariableDeclarator` | `variableDeclaratorOwner` | `FASTJavaDimension` | The bracket pairs written after my name, e.g. the one `mixed` writes in `int mixed[], plain;` and `plain` does not|
 | `expression` | `FASTJavaVariableDeclarator` | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | Expression to be assigned to the var during declaration|
 | `variable` | `FASTJavaVariableDeclarator` | `javaVariableDeclaratorOwner` | `FASTJavaVariableExpression` | The variable that is being declared|
 
@@ -70,7 +70,7 @@ FASTJavaVariableDeclarator >> brackets [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'>
+	<FMComment: 'The bracket pairs written after my name, e.g. the one `mixed` writes in `int mixed[], plain;` and `plain` does not'>
 	^ brackets
 ]
 

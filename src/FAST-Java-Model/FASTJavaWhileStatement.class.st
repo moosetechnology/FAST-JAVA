@@ -1,7 +1,7 @@
 "
 A node of a while statement.
 
-eg.
+e.g.
 while(...) {
 ...
 }

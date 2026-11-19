@@ -1,7 +1,7 @@
 "
 A node representing a switch statement
 
-eg.
+e.g.
 switch (_) {
 ...
 }

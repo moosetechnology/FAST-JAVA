@@ -39,7 +39,7 @@ example:
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
-| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, e.g. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 | `parentConditional` | `FASTTExpression` | `condition` | `FASTTWithCondition` | Optional condition statement/expression where this expression is used|
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
@@ -54,7 +54,7 @@ example:
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationElement` | ""Arguments"" of the annotation, eg. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
+| `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationElement` | ""Arguments"" of the annotation, e.g. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
 | `qualifiedName` | `FASTJavaTWithQualifiedName` | `qualifiedNameOwner` | `FASTJavaQualifiedName` | The name that qualifies me|
 
 
@@ -105,7 +105,7 @@ FASTJavaAnnotation >> elements [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: '"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
+	<FMComment: '"Arguments" of the annotation, e.g. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")'>
 	<derived>
 	^ elements

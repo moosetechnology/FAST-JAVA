@@ -13,7 +13,7 @@ public @interface MyAnnotation {
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `defaultValue` | `FASTJavaAnnotationElementDeclaration` | `defaultValueOwner` | `FASTJavaTAnnotationElement` | The value I take when the annotation does not give one, eg. ""none"" in `String value() default ""none"";`|
+| `defaultValue` | `FASTJavaAnnotationElementDeclaration` | `defaultValueOwner` | `FASTJavaTAnnotationElement` | The value I take when the annotation does not give one, e.g. ""none"" in `String value() default ""none"";`|
 
 
 
@@ -44,7 +44,7 @@ FASTJavaAnnotationElementDeclaration >> defaultValue [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The value I take when the annotation does not give one, eg. "none" in `String value() default "none";`'>
+	<FMComment: 'The value I take when the annotation does not give one, e.g. "none" in `String value() default "none";`'>
 	^ defaultValue
 ]
 
