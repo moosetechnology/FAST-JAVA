@@ -353,6 +353,26 @@ JavaSmaCCProgramNodeImporterVisitor >> currentFASTEntity: anObject [
 ]
 
 { #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> declaratorWithBracketsOf: aMethodDeclaration [
+	"JLS 8.4: `int values() []` writes the brackets of the array returned after the
+	parameter list rather than after the return type, each pair wrapping the declarator in
+	one more and carrying its own annotations. Add them to the current method and answer
+	the declarator they wrap."
+
+	| declarator brackets |
+	declarator := aMethodDeclaration declarator.
+	brackets := OrderedCollection new.
+	[ declarator isKindOf: JavaArrayMethodDeclaratorNode ] whileTrue: [
+		brackets addFirst: (self
+				 dimensionOf: declarator
+				 from: declarator leftBracket
+				 to: declarator rightBracket).
+		declarator := declarator declarator ].
+	brackets do: [ :bracket | currentFASTEntity addBracket: bracket ].
+	^ declarator
+]
+
+{ #category : 'creating' }
 JavaSmaCCProgramNodeImporterVisitor >> dimensionExpressionOf: aNode [
 	"JLS 15.10.1: a pair of brackets that says how long the dimension it opens is, which
 	only an array creation writes, and only before the pairs it leaves empty."
@@ -665,17 +685,23 @@ JavaSmaCCProgramNodeImporterVisitor >> typeReceiverOf: aMethodReference [
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitAbstractMethodDeclaration: anAbstractMethodDeclaration [
+	"A method without a body, such as an interface declares, writes its declarator as any
+	method does, with a receiver parameter and brackets after its parameter list."
 
-	currentFASTEntity := (self create: FASTJavaMethodEntity from: anAbstractMethodDeclaration)
-		                     name: anAbstractMethodDeclaration declarator name value;
-		                     yourself.
+	| declarator |
+	self create: FASTJavaMethodEntity from: anAbstractMethodDeclaration.
+	declarator := self declaratorWithBracketsOf: anAbstractMethodDeclaration.
+	currentFASTEntity name: declarator name value.
 
 	self addModifiers: anAbstractMethodDeclaration modifiers to: currentFASTEntity.
 	currentFASTEntity type: (self clone accept: anAbstractMethodDeclaration type).
 
 	self addTypeParametersOf: anAbstractMethodDeclaration.
 
-	anAbstractMethodDeclaration declarator parameters do: [ :parameter |
+	declarator receiver ifNotNil: [ :receiver |
+		currentFASTEntity receiver: (self clone accept: receiver) ].
+
+	declarator parameters do: [ :parameter |
 		currentFASTEntity addParameter: (self clone accept: parameter) ].
 
 	self addThrowsOf: anAbstractMethodDeclaration.
@@ -699,11 +725,13 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationElementDeclaration: anElementDeclaration [
 	"JLS 9.6.1: an element of an annotation interface is declared as a method that takes no
-	parameter and may have a default value."
+	parameter and may have a default value. Like a method, it may write the brackets of
+	the array it returns after its empty parameter list."
 
-	currentFASTEntity := (self create: FASTJavaAnnotationElementDeclaration from: anElementDeclaration)
-		                     name: anElementDeclaration declarator name value;
-		                     yourself.
+	| declarator |
+	self create: FASTJavaAnnotationElementDeclaration from: anElementDeclaration.
+	declarator := self declaratorWithBracketsOf: anElementDeclaration.
+	currentFASTEntity name: declarator name value.
 
 	self addModifiers: anElementDeclaration modifiers to: currentFASTEntity.
 	currentFASTEntity type: (self clone accept: anElementDeclaration type).
@@ -1401,21 +1429,9 @@ JavaSmaCCProgramNodeImporterVisitor >> visitMatchAllPattern: aMatchAllPattern [
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitMethodDeclaration: aMethodDeclaration [
 
-	| methodBody declarator brackets |
+	| methodBody declarator |
 	self create: FASTJavaMethodEntity from: aMethodDeclaration.
-
-	"JLS 8.4: `int values() []` writes the brackets of the array returned after the
-	parameter list rather than after the return type, each pair wrapping the declarator in
-	one more and carrying its own annotations."
-	declarator := aMethodDeclaration declarator.
-	brackets := OrderedCollection new.
-	[ declarator isKindOf: JavaArrayMethodDeclaratorNode ] whileTrue: [
-		brackets addFirst: (self
-				 dimensionOf: declarator
-				 from: declarator leftBracket
-				 to: declarator rightBracket).
-		declarator := declarator declarator ].
-	brackets do: [ :bracket | currentFASTEntity addBracket: bracket ].
+	declarator := self declaratorWithBracketsOf: aMethodDeclaration.
 
 	currentFASTEntity name: declarator name value.
 

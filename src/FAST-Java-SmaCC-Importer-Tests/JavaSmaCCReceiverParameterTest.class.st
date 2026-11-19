@@ -19,6 +19,21 @@ JavaSmaCCReceiverParameterTest >> javaClass [
 ]
 
 { #category : 'tests' }
+JavaSmaCCReceiverParameterTest >> testMethodWithoutABodyKeepsItsReceiver [
+	"JLS 9.4: an interface method without a body may declare a receiver parameter as any
+	method does."
+
+	| method |
+	method := (self parseClassString: 'interface I { int size(I this, int a); }')
+		          allWithType: FASTJavaMethodEntity.
+	method := method anyOne.
+
+	self assert: method receiver isNotNil.
+	self assert: method receiver type typeName name equals: 'I'.
+	self assert: method parameters size equals: 1
+]
+
+{ #category : 'tests' }
 JavaSmaCCReceiverParameterTest >> testMethodWithoutAReceiverHasNone [
 
 	| model |
