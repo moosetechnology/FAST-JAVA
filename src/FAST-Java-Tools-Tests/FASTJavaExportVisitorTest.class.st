@@ -157,6 +157,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotatedQualifiedType [
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationElementDeclarationWritesTheBracketsAfterItsParameterList [
+	"JLS 9.6.1: an annotation element may write the brackets of the array it returns after
+	its empty parameter list, which is where they are written back."
+
+	self export: (self astFor: '@interface A { int values() @B []; }') equals: '@interface A {
+  int values() @B [];
+}
+'
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaAnnotationInterfaceDeclaration [
 
@@ -1365,6 +1376,17 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceDeclarationWithTypeParame
 	its name and the interfaces it extends."
 
 	self export: (self astFor: 'interface I<E> extends List<E> { }') equals: 'interface I<E> extends List<E> {
+}
+'
+]
+
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInterfaceMethodWritesItsReceiver [
+	"JLS 9.4: an interface method without a body writes its receiver parameter first in its
+	parameter list."
+
+	self export: (self astFor: 'interface I { int size(I this); }') equals: 'interface I {
+  int size(I this) ;
 }
 '
 ]

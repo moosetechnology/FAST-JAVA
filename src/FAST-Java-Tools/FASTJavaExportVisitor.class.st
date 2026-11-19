@@ -232,6 +232,10 @@ FASTJavaExportVisitor >> visitFASTJavaAnnotationElementDeclaration: aFASTJavaAnn
 			self space.
 			self unindented: aFASTJavaAnnotationElementDeclaration name.
 			self unindented: '()'.
+			"JLS 9.6.1: the brackets written after the parameter list are written back there."
+			aFASTJavaAnnotationElementDeclaration brackets do: [ :bracket |
+				bracket annotations ifEmpty: [ self space ].
+				bracket accept: self ].
 
 			aFASTJavaAnnotationElementDeclaration defaultValue ifNotNil: [ :defaultValue |
 					self unindented: ' default '.
