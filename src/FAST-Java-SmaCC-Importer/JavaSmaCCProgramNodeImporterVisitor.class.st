@@ -1657,7 +1657,7 @@ public void onClick(ClickEvent event) {
 
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
-	| dimExprs emptyExprs |
+	| dimExprs emptyExprs brackets |
 	currentFASTEntity := self addToModel: FASTJavaNewArray new.
 		self setStartEndPos: aNewArray.
 
@@ -1675,6 +1675,21 @@ JavaSmaCCProgramNodeImporterVisitor >> visitNewArray: aNewArray [
 	"put them in correct order following their startPos"
 	currentFASTEntity arguments:
 		((dimExprs , emptyExprs) sorted: [ :a :b | a startPos < b startPos ]).
+
+	"JLS 15.10.1: each pair of brackets carries the annotations written before it, and
+	holds the argument of the same index."
+	brackets := (aNewArray dimExpressions collect: [ :dimExpression |
+		             self
+			             dimensionOf: dimExpression
+			             from: dimExpression leftBracket
+			             to: dimExpression rightBracket ])
+	            , ((1 to: aNewArray leftBrackets size) collect: [ :index |
+			             self
+				             dimensionOf: (aNewArray dimensions at: index)
+				             from: (aNewArray leftBrackets at: index)
+				             to: (aNewArray rightBrackets at: index) ]).
+	(brackets sorted: [ :a :b | a startPos < b startPos ]) do: [ :bracket |
+		currentFASTEntity addBracket: bracket ].
 
 	^ currentFASTEntity
 ]

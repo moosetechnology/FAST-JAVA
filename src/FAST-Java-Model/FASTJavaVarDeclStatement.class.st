@@ -2,7 +2,7 @@
 A statement of variable declaration.
 A variable declaration statement can contain several declarators.
 
-eg.
+e.g.
 
 int d = 3, e, f = 5;
 statement has 3 declarators separated by commas. Second declarator has no expression.

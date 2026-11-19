@@ -10,6 +10,7 @@ new String()[""10px"", ""Hello world""]
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `brackets` | `FASTJavaNewArray` | `newArrayOwner` | `FASTJavaDimension` | The bracket pairs I write, one per argument|
 | `initializer` | `FASTJavaNewArray` | `javaNewArrayInitialOwner` | `FASTTExpression` | The initializer of the array|
 
 
@@ -18,6 +19,9 @@ new String()[""10px"", ""Hello world""]
 Class {
 	#name : 'FASTJavaNewArray',
 	#superclass : 'FASTJavaNewExpression',
+	#instVars : [
+		'#brackets => FMMany type: #FASTJavaDimension opposite: #newArrayOwner'
+	],
 	#category : 'FAST-Java-Model-Entities',
 	#package : 'FAST-Java-Model',
 	#tag : 'Entities'
@@ -30,6 +34,32 @@ FASTJavaNewArray class >> annotation [
 	<FMClass: #NewArray super: #FASTJavaNewExpression>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'adding' }
+FASTJavaNewArray >> addBracket: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self brackets add: anObject
+]
+
+{ #category : 'accessing' }
+FASTJavaNewArray >> brackets [
+	"Relation named: #brackets type: #FASTJavaDimension opposite: #newArrayOwner"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'The bracket pairs I write, one per argument'>
+	^ brackets
+]
+
+{ #category : 'accessing' }
+FASTJavaNewArray >> brackets: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	brackets value: anObject
 ]
 
 { #category : 'accessing' }

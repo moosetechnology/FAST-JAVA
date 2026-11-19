@@ -10,7 +10,7 @@ I can be used as an annotation ""argument"" eg: @SuppressWarnings(value=""unchec
 |---|
 | `arrayOwner` | `FASTJavaTAnnotationElement` | `values` | `FASTJavaArrayAnnotationElement` | The ArrayAnnotationElement I am an element of|
 | `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
-| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationElement` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, e.g. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 
 
@@ -81,7 +81,7 @@ FASTJavaTAnnotationElement >> parentAnnotation [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'An "argument" of an annotation, eg. "unchecked" in the following annotation:
+	<FMComment: 'An "argument" of an annotation, e.g. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")'>
 	<container>
 	^ parentAnnotation
