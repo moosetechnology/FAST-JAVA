@@ -22,6 +22,7 @@
 | Name | Type | Default value | Comment |
 |---|
 | `endPos` | `Number` | nil | |
+| `hasClassBody` | `Boolean` | false | Whether this constant writes a class body, even an empty one, which makes it the instance of an anonymous class extending its enum (JLS 8.9.1)|
 | `name` | `String` | nil | |
 | `startPos` | `Number` | nil | |
 
@@ -32,6 +33,7 @@ Class {
 	#traits : 'FASTJavaTWithAnnotations + FASTJavaTWithDeclarations + FASTTNamedEntity + FASTTWithArguments',
 	#classTraits : 'FASTJavaTWithAnnotations classTrait + FASTJavaTWithDeclarations classTrait + FASTTNamedEntity classTrait + FASTTWithArguments classTrait',
 	#instVars : [
+		'#hasClassBody => FMProperty defaultValue: false',
 		'#parentEnum => FMOne type: #FASTJavaEnumDeclaration opposite: #constants'
 	],
 	#category : 'FAST-Java-Model-Entities',
@@ -46,6 +48,23 @@ FASTJavaEnumConstant class >> annotation [
 	<FMClass: #EnumConstant super: #FASTJavaEntity>
 	<package: #'FAST-Java-Model'>
 	<generated>
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumConstant >> hasClassBody [
+
+	<FMProperty: #hasClassBody type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Whether this constant writes a class body, even an empty one, which makes it the instance of an anonymous class extending its enum (JLS 8.9.1)'>
+	^ hasClassBody ifNil: [ hasClassBody := false ]
+]
+
+{ #category : 'accessing' }
+FASTJavaEnumConstant >> hasClassBody: anObject [
+	<ignoreForCoverage>
+	<generated>
+	hasClassBody := anObject
 ]
 
 { #category : 'testing' }

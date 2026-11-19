@@ -823,6 +823,18 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithAnAnnotation [
 '
 ]
 
+{ #category : 'tests' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithAnEmptyBody [
+	"JLS 8.9.1: a class body, even an empty one, makes the constant the instance of an
+	anonymous class extending its enum, so an empty body is written back."
+
+	self export: (self astFor: 'enum E { A { }, B }') equals: 'enum E {
+  A {
+}, B
+}
+'
+]
+
 { #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaEnumConstantWithArguments [
 
