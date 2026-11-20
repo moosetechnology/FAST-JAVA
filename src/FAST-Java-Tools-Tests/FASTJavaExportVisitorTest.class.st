@@ -10,6 +10,17 @@ Class {
 }
 
 { #category : 'running' }
+FASTJavaExportVisitorTest >> assertExportReadsBackWithTheCommentsOf: sourceCode [
+	"The export of sourceCode parses, and holds each of its comments once"
+
+	| unit |
+	unit := self commentedAST: sourceCode.
+	self
+		assert: (self commentsOf: (self commentedAST: (FASTJavaExportVisitor new export: unit)))
+		equals: (self commentsOf: unit)
+]
+
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> astFor: sourceCode [
 
 	^JavaSmaCCProgramNodeImporterVisitor new
@@ -33,6 +44,21 @@ FASTJavaExportVisitorTest >> blockAST: sourceCode [
 	^self astFor: sourceCode withRule: #startingStateForblock_statement
 
 
+]
+
+{ #category : 'running' }
+FASTJavaExportVisitorTest >> commentedAST: sourceCode [
+	"The compilation unit of sourceCode, imported with its comments"
+
+	^ ((JavaSmaCCProgramNodeImporterVisitor new
+		    withComments;
+		    parseCodeString: sourceCode) allWithType: FASTJavaCompilationUnit) anyOne
+]
+
+{ #category : 'running' }
+FASTJavaExportVisitorTest >> commentsOf: aCompilationUnit [
+
+	^ ((aCompilationUnit mooseModel allWithType: FASTJavaComment) collect: [ :comment | comment content ]) asArray sort
 ]
 
 { #category : 'running' }
@@ -463,6 +489,26 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaBreakStatementWithALabel [
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCaseStatementKeepsTheCommentsOfItsLabels [
+	"A label is written by its group or its rule rather than visited, so they write its
+	comments too."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(char c) {
+		switch (c) {
+			case '' '': /* space */
+			case ''\t'': // tab
+				return 0;
+		}
+		return switch (c) {
+			case ''a'' /* letter */ -> 1;
+			default -> 2;
+		};
+	}
+}'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 	| node |
@@ -657,6 +703,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassWithAnnotationAfterAModifier 
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCommentAfterALineCommentStaysOnALineOfItsOwn [
+	"JLS 3.7: a line comment runs to the end of its line, so another one written after it,
+	whatever it belongs to, is written on the next line rather than merged into it."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(int n) {
+		if (n > 0) {
+			n--;
+		} else if (
+				// in the header
+				n < 0) {
+			n++;
+		} else {
+			n = 0;
+		} // after the block
+		return n; // first
+		// second
+	}
+}'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCompactCompilationUnit [
 	"JLS 7.3: a compact compilation unit writes the members of the class it implies, in the
 	order it writes them, beside any type it declares."
@@ -689,6 +757,15 @@ enum E {
 record R(int a) {
 }
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitOfAModuleKeepsItsComments [
+	"JLS 7.7: a modular compilation unit holds comments as any other unit does."
+
+	self assertExportReadsBackWithTheCommentsOf: '// the unit
+module m {
+}'
 ]
 
 { #category : 'test from source code' }
@@ -1265,6 +1342,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopWithAVariableWithModifiers 
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForStatementKeepsALineCommentAfterItsHeaderParts [
+	"JLS 14.14.1: a line comment after the initializer or the update of a for header ends its
+	line, so what follows it in the header is written on the next one."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	void m(int n) {
+		for (int i = 0; i < n; i++) // after the update
+			n--;
+		for (int i = 0 // after the initializer
+				; i < n; i++)
+			n--;
+	}
+}'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFullyQualifiedName [
 
 	| ast |
@@ -1310,6 +1403,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInitializer [
   }
 }
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInitializerKeepsItsComment [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	static int n;
+	/* set up */ static {
+		n = 1;
+	}
+}'
 ]
 
 { #category : 'test from source code' }
@@ -1583,6 +1686,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignme
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverWritesItsCommentsOnce [
+	"A receiver writes its own comments, and nothing writes them for it."
+
+	| invocation |
+	invocation := self expressionAST: 'o.toString()'.
+	invocation receiver addComment: (invocation mooseModel newComment
+			 content: '/* the receiver */';
+			 yourself).
+
+	self
+		assert: ((FASTJavaExportVisitor new export: invocation) allRangesOfSubstring: '/* the receiver */') size
+		equals: 1
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationTypeArguments [
 
 	| ast |
@@ -1698,6 +1816,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayIntArg [
 	| node |
 	node := builder newStringArrayExpression: { builder literalInt: 5 }.
 	self export: node equals: 'new String[5]'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayKeepsTheCommentsOfAnEmptyDimension [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	Object m(int n) {
+		return new byte[n][] // the rows
+		;
+	}
+}'
 ]
 
 { #category : 'test from FAST model' }
@@ -2013,6 +2141,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaRecordPatternWithAMatchAllComponen
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaStatementBodyWritesItsCommentsOnce [
+	"A comment on the statement an if, an else or a loop runs is written once."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(int n) {
+		if (n > 0) /* then */ n--; else /* else */ n++;
+		while (n > 0) /* while */ n--;
+		for (int i = 0; i < n; i++) /* for */ n--;
+		if (n > 0) /* block */ { n--; }
+		if (n > 0) /* return */ return n;
+		return n;
+	}
+}'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaStringLiteral [
 	| node |
@@ -2089,6 +2233,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchExpressionInColonForm [
     yield 3;
 };
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchKeepsTheCommentsOfItsRules [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(int n) {
+		return switch (n) {
+			case 1 -> 2; // one
+			default -> {
+				yield 0; // other
+			}
+		}; // done
+	}
+}'
 ]
 
 { #category : 'test from source code' }
@@ -2713,6 +2871,14 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVarTypeExpression [
   var inferred = 1;
 }
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVariableDeclaratorWithoutInitializerKeepsItsComment [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int count; // how many
+	int total = 0; // so far
+}'
 ]
 
 { #category : 'test from FAST model' }
