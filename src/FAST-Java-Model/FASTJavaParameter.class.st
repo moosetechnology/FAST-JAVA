@@ -48,7 +48,7 @@ I represent a parameter of a method declaration
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
-| `brackets` | `FASTJavaParameter` | `parameterOwner` | `FASTJavaDimension` | The bracket pairs written after my name, eg. the one of `char cbuf[]`|
+| `brackets` | `FASTJavaParameter` | `parameterOwner` | `FASTJavaDimension` | The bracket pairs written after my name, e.g. the one of `char cbuf[]`|
 | `ellipsis` | `FASTJavaParameter` | `ellipsisOwner` | `FASTJavaDimension` | The ellipsis I write before my name, and the annotations written on it|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `type` | `FASTJavaParameter` | `javaParameterTypeOwner` | `FASTJavaTypeExpression` | The type of the parameter|
@@ -105,7 +105,7 @@ FASTJavaParameter >> brackets [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The bracket pairs written after my name, eg. the one of `char cbuf[]`'>
+	<FMComment: 'The bracket pairs written after my name, e.g. the one of `char cbuf[]`'>
 	^ brackets
 ]
 

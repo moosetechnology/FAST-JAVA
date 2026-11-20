@@ -7,7 +7,7 @@ I am what an annotation gives between its parentheses: an element-value pair, as
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, e.g. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 
 
@@ -37,7 +37,7 @@ FASTJavaTAnnotationArgument >> parentAnnotation [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'An "argument" of an annotation, eg. "unchecked" in the following annotation:
+	<FMComment: 'An "argument" of an annotation, e.g. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")'>
 	<container>
 	^ parentAnnotation

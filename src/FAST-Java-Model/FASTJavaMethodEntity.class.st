@@ -15,7 +15,7 @@ Represents a Java method
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotations` | `FASTJavaTWithAnnotations` | `javaAnnotationOwner` | `FASTJavaAnnotation` | The annotations written on me|
-| `brackets` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaDimension` | The bracket pairs written after my parameter list, eg. the one of `int[] values() []`|
+| `brackets` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaDimension` | The bracket pairs written after my parameter list, e.g. the one of `int[] values() []`|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `parameters` | `FASTTWithParameters` | `parameterOwner` | `FASTTVariableEntity` | My parameters|
 | `receiver` | `FASTJavaMethodEntity` | `methodOwner` | `FASTJavaReceiverParameter` | The receiver parameter I write|
@@ -91,7 +91,7 @@ FASTJavaMethodEntity >> brackets [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`'>
+	<FMComment: 'The bracket pairs written after my parameter list, e.g. the one of `int[] values() []`'>
 	^ brackets
 ]
 

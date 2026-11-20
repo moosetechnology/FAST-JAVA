@@ -1,7 +1,7 @@
 "
 A node of a for loop statement.
 
-eg.
+e.g.
 for(_;_;_) {
 ...
 }

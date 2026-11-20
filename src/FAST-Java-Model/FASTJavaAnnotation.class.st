@@ -15,13 +15,13 @@ example:
 | `defaultValueOwner` | `FASTJavaTAnnotationElement` | `defaultValue` | `FASTJavaAnnotationElementDeclaration` | The annotation element declaration I am the default value of|
 | `elementValuePairOwner` | `FASTJavaTAnnotationElement` | `value` | `FASTJavaElementValuePair` | The element-value pair I am the value of|
 | `javaAnnotationOwner` | `FASTJavaAnnotation` | `annotations` | `FASTJavaTWithAnnotations` | The element I am written on|
-| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, e.g. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationArgument` | ""Arguments"" of the annotation, eg. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
-| `type` | `FASTJavaAnnotation` | `javaAnnotationTypeOwner` | `FASTJavaTypeName` | The type I am an instance of, eg. the `java.io.Serial` of `@java.io.Serial`|
+| `elements` | `FASTJavaAnnotation` | `parentAnnotation` | `FASTJavaTAnnotationArgument` | ""Arguments"" of the annotation, e.g. this @Author annotation has two annotation elements: 	@Author(name=""Benjamin Franklin"", date=""3/27/2003"")|
+| `type` | `FASTJavaAnnotation` | `javaAnnotationTypeOwner` | `FASTJavaTypeName` | The type I am an instance of, e.g. the `java.io.Serial` of `@java.io.Serial`|
 
 
 
@@ -64,7 +64,7 @@ FASTJavaAnnotation >> elements [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: '"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
+	<FMComment: '"Arguments" of the annotation, e.g. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")'>
 	<derived>
 	^ elements
@@ -111,7 +111,7 @@ FASTJavaAnnotation >> type [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type I am an instance of, eg. the `java.io.Serial` of `@java.io.Serial`'>
+	<FMComment: 'The type I am an instance of, e.g. the `java.io.Serial` of `@java.io.Serial`'>
 	^ type
 ]
 

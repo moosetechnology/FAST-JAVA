@@ -1,7 +1,7 @@
 "
 A node of a for loop statement.
 
-eg.
+e.g.
 for(Patate p : list) {
 ...
 }
@@ -28,7 +28,7 @@ for(Patate p : list) {
 | `list` | `FASTJavaForEachStatement` | `javaForEachStatementOwner` | `FASTTExpression` | The list that the for-each statement iterates over|
 | `modifiers` | `FASTJavaTWithModifiers` | `javaModifierOwner` | `FASTJavaModifier` | The keywords I write|
 | `type` | `FASTJavaForEachStatement` | `javaForEachStatementTypeOwner` | `FASTJavaTypeExpression` | The type of the created local variable|
-| `variable` | `FASTJavaForEachStatement` | `javaForEachStatementVariableOwner` | `FASTJavaVariableExpression` | The variable I declare, eg. the `s` of `for (String s : list)`|
+| `variable` | `FASTJavaForEachStatement` | `javaForEachStatementVariableOwner` | `FASTJavaVariableExpression` | The variable I declare, e.g. the `s` of `for (String s : list)`|
 
 
 ## Properties
@@ -121,7 +121,7 @@ FASTJavaForEachStatement >> variable [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The variable I declare, eg. the `s` of `for (String s : list)`'>
+	<FMComment: 'The variable I declare, e.g. the `s` of `for (String s : list)`'>
 	^ variable
 ]
 

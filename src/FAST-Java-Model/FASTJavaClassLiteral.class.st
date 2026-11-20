@@ -42,7 +42,7 @@ String.class
 | `javaThrowStatementOwner` | `FASTTExpression` | `expression` | `FASTJavaThrowStatement` | The javaThrowStatement owner (if possible)|
 | `javaUnaryExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaUnaryExpression` | The javaUnaryExpression owner (if possible)|
 | `javaVariableDeclaratorExpressionOwner` | `FASTTExpression` | `expression` | `FASTJavaVariableDeclarator` | The javaVariableDeclarator owner (if possible)|
-| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, e.g. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 | `parentConditional` | `FASTTExpression` | `condition` | `FASTTWithCondition` | Optional condition statement/expression where this expression is used|
 | `parentExpression` | `FASTTExpression` | `expression` | `FASTTUnaryExpression` | Parent (unary) expression|
 | `parentExpressionLeft` | `FASTTExpression` | `leftOperand` | `FASTTBinaryExpression` | Parent (binary) expression of which I am left side|
@@ -58,7 +58,7 @@ String.class
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `type` | `FASTJavaClassLiteral` | `javaClassLiteralTypeOwner` | `FASTJavaTypeExpression` | The type whose Class object I read, eg. the `String` of `String.class`|
+| `type` | `FASTJavaClassLiteral` | `javaClassLiteralTypeOwner` | `FASTJavaTypeExpression` | The type whose Class object I read, e.g. the `String` of `String.class`|
 
 
 ## Properties
@@ -106,7 +106,7 @@ FASTJavaClassLiteral >> type [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type whose Class object I read, eg. the `String` of `String.class`'>
+	<FMComment: 'The type whose Class object I read, e.g. the `String` of `String.class`'>
 	^ type
 ]
 

@@ -54,7 +54,7 @@ Outer.this.toString()
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `type` | `FASTJavaThis` | `javaThisOwner` | `FASTJavaTypeName` | The type whose enclosing instance I name, eg. the `Outer` of `Outer.this`|
+| `type` | `FASTJavaThis` | `javaThisOwner` | `FASTJavaTypeName` | The type whose enclosing instance I name, e.g. the `Outer` of `Outer.this`|
 
 
 ## Properties
@@ -102,7 +102,7 @@ FASTJavaThis >> type [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type whose enclosing instance I name, eg. the `Outer` of `Outer.this`'>
+	<FMComment: 'The type whose enclosing instance I name, e.g. the `Outer` of `Outer.this`'>
 	^ type
 ]
 

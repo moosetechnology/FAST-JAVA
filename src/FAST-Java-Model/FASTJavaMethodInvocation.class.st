@@ -48,7 +48,7 @@ A node representing method invocation
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `invoked` | `FASTTInvocation` | `invokedIn` | `FASTTNamedEntity` | The name of the behavioural invoked|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
-| `typeArguments` | `FASTJavaMethodInvocation` | `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write before the method name, eg. the String of `Collections.<String>emptyList()`|
+| `typeArguments` | `FASTJavaMethodInvocation` | `javaMethodInvocationTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write before the method name, e.g. the String of `Collections.<String>emptyList()`|
 
 
 ## Properties
@@ -97,7 +97,7 @@ FASTJavaMethodInvocation >> typeArguments [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type arguments I write before the method name, eg. the String of `Collections.<String>emptyList()`'>
+	<FMComment: 'The type arguments I write before the method name, e.g. the String of `Collections.<String>emptyList()`'>
 	<derived>
 	^ typeArguments
 ]

@@ -8,12 +8,12 @@ I am an element-value pair of an annotation (JLS 9.7.1): the name of an element 
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `invokedIn` | `FASTTNamedEntity` | `invoked` | `FASTTInvocation` | Optional invocation where this name is used|
-| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, eg. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
+| `parentAnnotation` | `FASTJavaTAnnotationArgument` | `elements` | `FASTJavaAnnotation` | An ""argument"" of an annotation, e.g. ""unchecked"" in the following annotation: 	@SuppressWarnings(value=""unchecked"")|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `value` | `FASTJavaElementValuePair` | `elementValuePairOwner` | `FASTJavaTAnnotationElement` | The element value I give, eg. ""unchecked"" in `@SuppressWarnings(value = ""unchecked"")`|
+| `value` | `FASTJavaElementValuePair` | `elementValuePairOwner` | `FASTJavaTAnnotationElement` | The element value I give, e.g. ""unchecked"" in `@SuppressWarnings(value = ""unchecked"")`|
 
 
 ## Properties
@@ -62,7 +62,7 @@ FASTJavaElementValuePair >> value [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The element value I give, eg. "unchecked" in `@SuppressWarnings(value = "unchecked")`'>
+	<FMComment: 'The element value I give, e.g. "unchecked" in `@SuppressWarnings(value = "unchecked")`'>
 	^ value
 ]
 

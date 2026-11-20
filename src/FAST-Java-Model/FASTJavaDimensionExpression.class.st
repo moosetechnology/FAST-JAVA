@@ -11,7 +11,7 @@ new int @Ann [3]
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `expression` | `FASTJavaDimensionExpression` | `javaDimensionExpressionOwner` | `FASTTExpression` | The expression saying how long the dimension I open is, eg. the 3 of `new int[3]`|
+| `expression` | `FASTJavaDimensionExpression` | `javaDimensionExpressionOwner` | `FASTTExpression` | The expression saying how long the dimension I open is, e.g. the 3 of `new int[3]`|
 
 
 
@@ -39,7 +39,7 @@ FASTJavaDimensionExpression >> expression [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The expression saying how long the dimension I open is, eg. the 3 of `new int[3]`'>
+	<FMComment: 'The expression saying how long the dimension I open is, e.g. the 3 of `new int[3]`'>
 	<FMProperty: #expression type: #FASTTExpression opposite: #javaDimensionExpressionOwner>
 	^ self attributeAt: #expression ifAbsent: [ nil ]
 ]

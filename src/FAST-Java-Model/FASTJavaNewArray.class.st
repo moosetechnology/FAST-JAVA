@@ -47,9 +47,9 @@ new String()[""10px"", ""Hello world""]
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `brackets` | `FASTJavaNewArray` | `newArrayOwner` | `FASTJavaDimension` | The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`|
+| `brackets` | `FASTJavaNewArray` | `newArrayOwner` | `FASTJavaDimension` | The bracket pairs I write|
 | `initializer` | `FASTJavaNewArray` | `javaNewArrayInitialOwner` | `FASTJavaArrayInitializer` | The initializer of the array|
-| `type` | `FASTJavaNewArray` | `javaNewArrayTypeOwner` | `FASTJavaTypeExpression` | The type of my elements, eg. the `int` of `new int[3]`|
+| `type` | `FASTJavaNewArray` | `javaNewArrayTypeOwner` | `FASTJavaTypeExpression` | The type of my elements, e.g. the `int` of `new int[3]`|
 
 
 ## Properties
@@ -99,7 +99,7 @@ FASTJavaNewArray >> brackets [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`'>
+	<FMComment: 'The bracket pairs I write'>
 	^ brackets
 ]
 
@@ -143,7 +143,7 @@ FASTJavaNewArray >> type [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type of my elements, eg. the `int` of `new int[3]`'>
+	<FMComment: 'The type of my elements, e.g. the `int` of `new int[3]`'>
 	^ type
 ]
 

@@ -356,7 +356,7 @@ new int @Ann [3]
 FASTJavaMetamodelGenerator >> commentForJavaDoWhileStatement [
 	^ 'A node of a do-while statement.
 
-eg.
+e.g.
 do {
 ...
 } while(...);'
@@ -439,7 +439,7 @@ float f = 12.3f;
 FASTJavaMetamodelGenerator >> commentForJavaForEachStatement [
 	^ 'A node of a for loop statement.
 
-eg.
+e.g.
 for(Patate p : list) {
 ...
 }'
@@ -449,7 +449,7 @@ for(Patate p : list) {
 FASTJavaMetamodelGenerator >> commentForJavaForStatement [
 	^ 'A node of a for loop statement.
 
-eg.
+e.g.
 for(_;_;_) {
 ...
 }'
@@ -459,7 +459,7 @@ for(_;_;_) {
 FASTJavaMetamodelGenerator >> commentForJavaIfStatement [
 	^ 'A node of a if statement or an if-else statement.
 
-eg.
+e.g.
 if(...) {
 ...
 } else {
@@ -731,7 +731,7 @@ FASTJavaMetamodelGenerator >> commentForJavaSwitchRule [
 FASTJavaMetamodelGenerator >> commentForJavaSwitchStatement [
 	^ 'A node representing a switch statement
 
-eg.
+e.g.
 switch (_) {
 ...
 }'
@@ -873,7 +873,7 @@ FASTJavaMetamodelGenerator >> commentForJavaVarDeclStatement [
 	^ 'A statement of variable declaration.
 A variable declaration statement can contain several declarators.
 
-eg.
+e.g.
 
 int d = 3, e, f = 5;
 statement has 3 declarators separated by commas. Second declarator has no expression.'
@@ -884,7 +884,7 @@ FASTJavaMetamodelGenerator >> commentForJavaVariableDeclarator [
 	^ 'A part of variable declaration statement containing a variable (named entity) and an expression (optional) that is assigned to it.
 A variable declaration statement can contain several declarators.
 
-eg.
+e.g.
 
 int d = 3, e, f = 5;
 statement has 3 declarators separated by commas. Second declarator has no expression.'
@@ -894,7 +894,7 @@ statement has 3 declarators separated by commas. Second declarator has no expres
 FASTJavaMetamodelGenerator >> commentForJavaWhileStatement [
 	^ 'A node of a while statement.
 
-eg.
+e.g.
 while(...) {
 ...
 }'
@@ -1609,14 +1609,14 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The owner of the expression').
 
 	((javaAnnotationExpression property: #elements) comment:
-		 '"Arguments" of the annotation, eg. this @Author annotation has two annotation elements:
+		 '"Arguments" of the annotation, e.g. this @Author annotation has two annotation elements:
 	@Author(name="Benjamin Franklin", date="3/27/2003")')
 	<>-* ((tAnnotationArgument property: #parentAnnotation) comment:
-			 'An "argument" of an annotation, eg. "unchecked" in the following annotation:
+			 'An "argument" of an annotation, e.g. "unchecked" in the following annotation:
 	@SuppressWarnings(value="unchecked")').
 
 	((javaElementValuePair property: #value) comment:
-		 'The element value I give, eg. "unchecked" in `@SuppressWarnings(value = "unchecked")`')
+		 'The element value I give, e.g. "unchecked" in `@SuppressWarnings(value = "unchecked")`')
 	<>- ((tAnnotationElement property: #elementValuePairOwner) comment:
 			 'The element-value pair I am the value of').
 
@@ -1626,7 +1626,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 			 'The ArrayAnnotationElement I am an element of').
 
 	((javaAnnotationElementDeclaration property: #defaultValue) comment:
-		 'The value I take when the annotation does not give one, eg. "none" in `String value() default "none";`')
+		 'The value I take when the annotation does not give one, e.g. "none" in `String value() default "none";`')
 	<>- ((tAnnotationElement property: #defaultValueOwner) comment:
 			 'The annotation element declaration I am the default value of').
 
@@ -1677,7 +1677,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 15.8.2: the type whose Class object a class literal reads, which may be a class,
 	an interface, an array, a primitive type or `void`."
 	((javaClassLiteral property: #type) comment:
-		 'The type whose Class object I read, eg. the `String` of `String.class`')
+		 'The type whose Class object I read, e.g. the `String` of `String.class`')
 	<>- ((javaTypeExpression property: #javaClassLiteralTypeOwner) comment:
 			 'The class literal that reads my Class object').
 
@@ -1704,21 +1704,21 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 15.8.4: `this` may be qualified by a type name, and `Outer.this` then names the
 	enclosing instance of Outer rather than the innermost one."
 	((javaThis property: #type) comment:
-		 'The type whose enclosing instance I name, eg. the `Outer` of `Outer.this`')
+		 'The type whose enclosing instance I name, e.g. the `Outer` of `Outer.this`')
 	<>- ((javaTypeName property: #javaThisOwner) comment:
 			 'The `this` I qualify').
 
 	"JLS 15.11.2: `super` may be qualified by a type name, and `T.super` then reaches a
 	member of the superinterface T rather than of the superclass."
 	((javaSuper property: #type) comment:
-		 'The type whose superinterface I reach, eg. the `Outer` of `Outer.super`')
+		 'The type whose superinterface I reach, e.g. the `Outer` of `Outer.super`')
 	<>- ((javaTypeName property: #javaSuperOwner) comment:
 			 'The `super` I qualify').
 
 	"JLS 9.7: an annotation writes `@` and the name of the annotation type it is an instance
 	of, which it may write qualified."
 	((javaAnnotationExpression property: #type) comment:
-		 'The type I am an instance of, eg. the `java.io.Serial` of `@java.io.Serial`')
+		 'The type I am an instance of, e.g. the `java.io.Serial` of `@java.io.Serial`')
 	<>- ((javaTypeName property: #javaAnnotationTypeOwner) comment:
 			 'The annotation whose type I name').
 
@@ -1740,7 +1740,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 14.14.2: the header of a for-each writes a local variable declaration, so what it
 	declares is a variable like the one a parameter or a declarator declares."
 	((javaForEachStatement property: #variable) comment:
-		 'The variable I declare, eg. the `s` of `for (String s : list)`')
+		 'The variable I declare, e.g. the `s` of `for (String s : list)`')
 	<>- ((javaVariableExpression property: #javaForEachStatementVariableOwner)
 			 comment: 'The for-each that declares me').
 	((javaForEachStatement property: #type) comment:
@@ -1835,7 +1835,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 
 	"JLS 15.10.1: an array creation writes the type of the elements it makes an array of."
 	((javaNewArray property: #type) comment:
-		 'The type of my elements, eg. the `int` of `new int[3]`')
+		 'The type of my elements, e.g. the `int` of `new int[3]`')
 	<>- ((javaTypeExpression property: #javaNewArrayTypeOwner) comment:
 			 'The array creation that makes an array of me').
 	"JLS 10.6: the initializer written after an array creation is an array initializer, and
@@ -1853,7 +1853,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 15.12: an invocation may write the type arguments of a generic method before
 	its name. They are types, a wildcard being no part of them."
 	((javaMethodInvocation property: #typeArguments) comment:
-		 'The type arguments I write before the method name, eg. the String of `Collections.<String>emptyList()`')
+		 'The type arguments I write before the method name, e.g. the String of `Collections.<String>emptyList()`')
 	<>-*
 		((javaTypeExpression property: #javaMethodInvocationTypeArgumentOwner)
 			 comment: 'The invocation that writes me as one of its type arguments').
@@ -1861,7 +1861,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 15.9: a creation may write the type arguments of the constructor it calls, which
 	come between `new` and the type instantiated and are no part of that type."
 	((javaNewExpression property: #typeArguments) comment:
-		 'The type arguments I write after `new`, eg. the String of `new <String>C()`')
+		 'The type arguments I write after `new`, e.g. the String of `new <String>C()`')
 	<>-*
 		((javaTypeExpression property: #javaNewExpressionTypeArgumentOwner)
 			 comment: 'The creation that writes me as one of its type arguments').
@@ -1869,7 +1869,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 15.13: a method reference may write the type arguments of the method it names
 	after the `::`, where an invocation writes them before the name."
 	((javaMethodReference property: #typeArguments) comment:
-		 'The type arguments I write after the `::`, eg. the String of `List::<String>of`')
+		 'The type arguments I write after the `::`, e.g. the String of `List::<String>of`')
 	<>-*
 		((javaTypeExpression property: #javaMethodReferenceTypeArgumentOwner)
 			 comment: 'The method reference that writes me as one of its type arguments').
@@ -1933,7 +1933,7 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	"JLS 10.1: the element type of an array is a type — a primitive type, a class or
 	interface type, or another array type — and never a bare name."
 	((javaArrayTypeExpression property: #baseType) comment:
-		 'The type of my elements, eg. the `Byte` of `Byte[]`')
+		 'The type of my elements, e.g. the `Byte` of `Byte[]`')
 	<>- ((javaTypeExpression property: #javaArrayBaseTypeOwner) comment:
 			 'The array type that makes an array of me').
 
@@ -2151,15 +2151,15 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	what writes them, each pair carrying its own annotations, so the type declared is the
 	one the declaration writes with these added."
 	((javaParameterExpression property: #brackets) comment:
-		 'The bracket pairs written after my name, eg. the one of `char cbuf[]`')
+		 'The bracket pairs written after my name, e.g. the one of `char cbuf[]`')
 	<>-* ((javaDimension property: #parameterOwner) comment:
 			 'The parameter that writes me after its name').
 	((javaVariableDeclarator property: #brackets) comment:
-		 'The bracket pairs written after my name, eg. the one `mixed` writes in `int mixed[], plain;` and `plain` does not')
+		 'The bracket pairs written after my name, e.g. the one `mixed` writes in `int mixed[], plain;` and `plain` does not')
 	<>-* ((javaDimension property: #variableDeclaratorOwner) comment:
 			 'The declarator that writes me after its name').
 	((javaMethodEntity property: #brackets) comment:
-		 'The bracket pairs written after my parameter list, eg. the one of `int[] values() []`')
+		 'The bracket pairs written after my parameter list, e.g. the one of `int[] values() []`')
 	<>-* ((javaDimension property: #methodOwner) comment:
 			 'The method that writes me after its parameter list').
 
@@ -2174,26 +2174,26 @@ FASTJavaMetamodelGenerator >> defineRelations [
 	ones giving a length and the trailing ones left empty, and each pair carries the
 	annotations written on the array type that dimension makes."
 	((javaNewArray property: #brackets) comment:
-		 'The bracket pairs I write, in the order I write them, eg. the two of `new int[3][]`')
+		 'The bracket pairs I write')
 	<>-* ((javaDimension property: #newArrayOwner) comment:
 			 'The array creation that writes me').
 	((javaDimensionExpression property: #expression) comment:
-		 'The expression saying how long the dimension I open is, eg. the 3 of `new int[3]`')
+		 'The expression saying how long the dimension I open is, e.g. the 3 of `new int[3]`')
 	<>- ((tExpression property: #javaDimensionExpressionOwner) comment:
 			 'The pair of brackets whose length I give').
 
 	"JLS 7.7.2 and 7.7.4: a directive may name modules or classes beside the package or
 	service it is about."
 	((javaExportsDirective property: #targets) comment:
-		 'The modules I export to, eg. the java.logging of `exports a.b to java.logging;`')
+		 'The modules I export to, e.g. the java.logging of `exports a.b to java.logging;`')
 	<>-* ((qualifiedName property: #javaExportsDirectiveTargetOwner) comment:
 			 'The exports directive that writes me as one of its targets').
 	((javaOpensDirective property: #targets) comment:
-		 'The modules I open to, eg. the java.logging of `opens a.b to java.logging;`')
+		 'The modules I open to, e.g. the java.logging of `opens a.b to java.logging;`')
 	<>-* ((qualifiedName property: #javaOpensDirectiveTargetOwner) comment:
 			 'The opens directive that writes me as one of its targets').
 	((javaProvidesDirective property: #implementations) comment:
-		 'The classes implementing the service I provide, eg. the a.Impl of `provides a.S with a.Impl;`')
+		 'The classes implementing the service I provide, e.g. the a.Impl of `provides a.S with a.Impl;`')
 	<>-* ((qualifiedName property: #javaProvidesDirectiveImplementationOwner) comment:
 			 'The provides directive that writes me as one of its implementations').
 

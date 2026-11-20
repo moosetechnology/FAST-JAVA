@@ -51,7 +51,7 @@ new Patate()
 | `arguments` | `FASTTWithArguments` | `argumentOwner` | `FASTTExpression` | My arguments|
 | `receiver` | `FASTJavaTWithReceiver` | `receiverOwner` | `FASTJavaTReceiver` | My receiver|
 | `type` | `FASTJavaNewExpression` | `javaNewExpressionTypeOwner` | `FASTJavaClassTypeExpression` | The type I instantiate|
-| `typeArguments` | `FASTJavaNewExpression` | `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after `new`, eg. the String of `new <String>C()`|
+| `typeArguments` | `FASTJavaNewExpression` | `javaNewExpressionTypeArgumentOwner` | `FASTJavaTypeExpression` | The type arguments I write after `new`, e.g. the String of `new <String>C()`|
 
 
 ## Properties
@@ -145,7 +145,7 @@ FASTJavaNewExpression >> typeArguments [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type arguments I write after `new`, eg. the String of `new <String>C()`'>
+	<FMComment: 'The type arguments I write after `new`, e.g. the String of `new <String>C()`'>
 	<derived>
 	^ typeArguments
 ]

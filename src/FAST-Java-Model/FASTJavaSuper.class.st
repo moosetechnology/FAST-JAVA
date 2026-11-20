@@ -23,7 +23,7 @@ Outer.super.toString()
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `type` | `FASTJavaSuper` | `javaSuperOwner` | `FASTJavaTypeName` | The type whose superinterface I reach, eg. the `Outer` of `Outer.super`|
+| `type` | `FASTJavaSuper` | `javaSuperOwner` | `FASTJavaTypeName` | The type whose superinterface I reach, e.g. the `Outer` of `Outer.super`|
 
 
 
@@ -64,7 +64,7 @@ FASTJavaSuper >> type [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type whose superinterface I reach, eg. the `Outer` of `Outer.super`'>
+	<FMComment: 'The type whose superinterface I reach, e.g. the `Outer` of `Outer.super`'>
 	^ type
 ]
 

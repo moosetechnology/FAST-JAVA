@@ -7,7 +7,7 @@ I represent an array type
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `baseType` | `FASTJavaArrayTypeExpression` | `javaArrayBaseTypeOwner` | `FASTJavaTypeExpression` | The type of my elements, eg. the `Byte` of `Byte[]`|
+| `baseType` | `FASTJavaArrayTypeExpression` | `javaArrayBaseTypeOwner` | `FASTJavaTypeExpression` | The type of my elements, e.g. the `Byte` of `Byte[]`|
 
 
 
@@ -38,7 +38,7 @@ FASTJavaArrayTypeExpression >> baseType [
 
 	<ignoreForCoverage>
 	<generated>
-	<FMComment: 'The type of my elements, eg. the `Byte` of `Byte[]`'>
+	<FMComment: 'The type of my elements, e.g. the `Byte` of `Byte[]`'>
 	^ baseType
 ]
 
