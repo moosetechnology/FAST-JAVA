@@ -1,7 +1,7 @@
 # FAST-JAVA
 
 [![CI](https://github.com/moosetechnology/FAST-JAVA/actions/workflows/tests.yml/badge.svg)](https://github.com/moosetechnology/FAST-JAVA/actions/workflows/tests.yml)
-[![Coverage Status](https://coveralls.io/repos/github/moosetechnology/FAST-JAVA/badge.svg?branch=v4)](https://coveralls.io/github/moosetechnology/FAST-JAVA?branch=v4)
+[![Coverage Status](https://coveralls.io/repos/github/moosetechnology/FAST-JAVA/badge.svg?branch=v5)](https://coveralls.io/github/moosetechnology/FAST-JAVA?branch=v5)
 [![Moose version 12](https://img.shields.io/badge/Moose-12-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 [![Moose version 13](https://img.shields.io/badge/Moose-13-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 
@@ -9,11 +9,13 @@ Represent the Java AST with Famix.
 
 ## Installation
 
+This is the v5 branch, still in development. The current release is on the [v4 branch](https://github.com/moosetechnology/FAST-JAVA/tree/v4).
+
 To load the FAST-Java project, execute in a playground:
 
 ```st
 Metacello new
-  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v4' path: 'src';
+  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v5' path: 'src';
   baseline: 'FASTJava';
   load
 ```
@@ -22,7 +24,7 @@ If you want to also load the SmaCC importer to create FAST-Java models from stri
 
 ```st
 Metacello new
-  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v4' path: 'src';
+  githubUser: 'moosetechnology' project: 'FAST-JAVA' commitish: 'v5' path: 'src';
   baseline: 'FASTJava';
   load: 'all'
 ```
