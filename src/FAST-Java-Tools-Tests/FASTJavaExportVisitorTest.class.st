@@ -10,6 +10,17 @@ Class {
 }
 
 { #category : 'running' }
+FASTJavaExportVisitorTest >> assertExportReadsBackWithTheCommentsOf: sourceCode [
+	"The export of sourceCode parses, and holds each of its comments once"
+
+	| unit |
+	unit := self commentedAST: sourceCode.
+	self
+		assert: (self commentsOf: (self commentedAST: (FASTJavaExportVisitor new export: unit)))
+		equals: (self commentsOf: unit)
+]
+
+{ #category : 'running' }
 FASTJavaExportVisitorTest >> astFor: sourceCode [
 
 	^JavaSmaCCProgramNodeImporterVisitor new
@@ -33,6 +44,21 @@ FASTJavaExportVisitorTest >> blockAST: sourceCode [
 	^self astFor: sourceCode withRule: #startingStateForblock_statement
 
 
+]
+
+{ #category : 'running' }
+FASTJavaExportVisitorTest >> commentedAST: sourceCode [
+	"The compilation unit of sourceCode, imported with its comments"
+
+	^ ((JavaSmaCCProgramNodeImporterVisitor new
+		    withComments;
+		    parseCodeString: sourceCode) allWithType: FASTJavaCompilationUnit) anyOne
+]
+
+{ #category : 'running' }
+FASTJavaExportVisitorTest >> commentsOf: aCompilationUnit [
+
+	^ ((aCompilationUnit mooseModel allWithType: FASTJavaComment) collect: [ :comment | comment content ]) asArray sort
 ]
 
 { #category : 'running' }
@@ -1265,6 +1291,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaForLoopWithAVariableWithModifiers 
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaForStatementKeepsALineCommentAfterItsHeaderParts [
+	"JLS 14.14.1: a line comment after the initializer or the update of a for header ends its
+	line, so what follows it in the header is written on the next one."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	void m(int n) {
+		for (int i = 0; i < n; i++) // after the update
+			n--;
+		for (int i = 0 // after the initializer
+				; i < n; i++)
+			n--;
+	}
+}'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaFullyQualifiedName [
 
 	| ast |
@@ -2011,6 +2053,22 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaRecordPatternWithAMatchAllComponen
   }
 }
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaStatementBodyWritesItsCommentsOnce [
+	"A comment on the statement an if, an else or a loop runs is written once."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(int n) {
+		if (n > 0) /* then */ n--; else /* else */ n++;
+		while (n > 0) /* while */ n--;
+		for (int i = 0; i < n; i++) /* for */ n--;
+		if (n > 0) /* block */ { n--; }
+		if (n > 0) /* return */ return n;
+		return n;
+	}
+}'
 ]
 
 { #category : 'test from FAST model' }
