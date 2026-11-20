@@ -426,6 +426,20 @@ JavaSmaCCProgramNodeImporterVisitor >> dimensionOf: aNode from: anOpeningToken t
 	^ dimension
 ]
 
+{ #category : 'creating' }
+JavaSmaCCProgramNodeImporterVisitor >> elementValueOf: aNode [
+	"JLS 9.7.1: an element value is a constant expression, a class literal, an enum constant,
+	an annotation or an array of element values. javac's parser reads any expression there,
+	and its compiler refuses the others, such as `this`, an invocation or a creation. The
+	model holds no element value of those kinds, so the import refuses them by that rule."
+
+	| value |
+	value := self clone accept: aNode.
+	(value class usesTrait: FASTJavaTAnnotationElement) ifFalse: [
+		self error: 'JLS 9.7.1: an element value is a constant expression, a class literal, an enum constant, an annotation or an array of element values, and `' , aNode source , '` is none of them' ].
+	^ value
+]
+
 { #category : 'visitor' }
 JavaSmaCCProgramNodeImporterVisitor >> expressionStatementOf: anExpressionNode [
 	"JLS 14.8: an expression written where a statement is expected is a statement of its own."
@@ -728,8 +742,10 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotation: anAnnotation [
 
 	self create: FASTJavaAnnotation from: anAnnotation.
 	currentFASTEntity type: (self typeNameOf: anAnnotation name).
-	anAnnotation values do: [ :expression |
-		currentFASTEntity addElement: (self clone accept: expression) ].
+	anAnnotation values do: [ :each |
+		currentFASTEntity addElement: ((each isKindOf: JavaElementValuePairNode)
+				 ifTrue: [ self clone accept: each ]
+				 ifFalse: [ self elementValueOf: each ]) ].
 	^ currentFASTEntity
 ]
 
@@ -748,7 +764,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitAnnotationElementDeclaration: anElem
 	currentFASTEntity type: (self clone accept: anElementDeclaration type).
 
 	(anElementDeclaration isKindOf: JavaAnnotationMethodDeclarationNode) ifTrue: [
-		currentFASTEntity defaultValue: (self clone accept: anElementDeclaration value) ].
+		currentFASTEntity defaultValue: (self elementValueOf: anElementDeclaration value) ].
 
 	^ currentFASTEntity
 ]
@@ -1091,7 +1107,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitElementArrayInitializer: anElementAr
 					  ifNotEmpty: [ :values | values last stopPosition ])
 			 and: anElementArrayInitializer rightBrace startPosition).
 	anElementArrayInitializer values do: [ :value |
-		currentFASTEntity  addValue: (self clone accept: value) ].
+		currentFASTEntity addValue: (self elementValueOf: value) ].
 	^ currentFASTEntity
 ]
 
@@ -1104,7 +1120,7 @@ JavaSmaCCProgramNodeImporterVisitor >> visitElementValuePair: anElementValuePair
 	self create: FASTJavaElementValuePair from: anElementValuePair.
 	currentFASTEntity
 		name: anElementValuePair name value;
-		value: (self clone accept: anElementValuePair value).
+		value: (self elementValueOf: anElementValuePair value).
 	^ currentFASTEntity
 ]
 
