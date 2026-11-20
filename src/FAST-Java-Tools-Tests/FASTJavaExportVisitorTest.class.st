@@ -489,6 +489,26 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaBreakStatementWithALabel [
 '
 ]
 
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCaseStatementKeepsTheCommentsOfItsLabels [
+	"A label is written by its group or its rule rather than visited, so they write its
+	comments too."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(char c) {
+		switch (c) {
+			case '' '': /* space */
+			case ''\t'': // tab
+				return 0;
+		}
+		return switch (c) {
+			case ''a'' /* letter */ -> 1;
+			default -> 2;
+		};
+	}
+}'
+]
+
 { #category : 'test from FAST model' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCastExpression [
 	| node |
@@ -683,6 +703,28 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaClassWithAnnotationAfterAModifier 
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCommentAfterALineCommentStaysOnALineOfItsOwn [
+	"JLS 3.7: a line comment runs to the end of its line, so another one written after it,
+	whatever it belongs to, is written on the next line rather than merged into it."
+
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(int n) {
+		if (n > 0) {
+			n--;
+		} else if (
+				// in the header
+				n < 0) {
+			n++;
+		} else {
+			n = 0;
+		} // after the block
+		return n; // first
+		// second
+	}
+}'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaCompactCompilationUnit [
 	"JLS 7.3: a compact compilation unit writes the members of the class it implies, in the
 	order it writes them, beside any type it declares."
@@ -715,6 +757,15 @@ enum E {
 record R(int a) {
 }
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaCompilationUnitOfAModuleKeepsItsComments [
+	"JLS 7.7: a modular compilation unit holds comments as any other unit does."
+
+	self assertExportReadsBackWithTheCommentsOf: '// the unit
+module m {
+}'
 ]
 
 { #category : 'test from source code' }
@@ -1355,6 +1406,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaInitializer [
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaInitializerKeepsItsComment [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	static int n;
+	/* set up */ static {
+		n = 1;
+	}
+}'
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaInitializerStatic [
 
 	| ast |
@@ -1625,6 +1686,21 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverIsAssignme
 ]
 
 { #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationReceiverWritesItsCommentsOnce [
+	"A receiver writes its own comments, and nothing writes them for it."
+
+	| invocation |
+	invocation := self expressionAST: 'o.toString()'.
+	invocation receiver addComment: (invocation mooseModel newComment
+			 content: '/* the receiver */';
+			 yourself).
+
+	self
+		assert: ((FASTJavaExportVisitor new export: invocation) allRangesOfSubstring: '/* the receiver */') size
+		equals: 1
+]
+
+{ #category : 'test from source code' }
 FASTJavaExportVisitorTest >> testVisitFASTJavaMethodInvocationTypeArguments [
 
 	| ast |
@@ -1740,6 +1816,16 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayIntArg [
 	| node |
 	node := builder newStringArrayExpression: { builder literalInt: 5 }.
 	self export: node equals: 'new String[5]'
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaNewArrayKeepsTheCommentsOfAnEmptyDimension [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	Object m(int n) {
+		return new byte[n][] // the rows
+		;
+	}
+}'
 ]
 
 { #category : 'test from FAST model' }
@@ -2147,6 +2233,20 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchExpressionInColonForm [
     yield 3;
 };
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaSwitchKeepsTheCommentsOfItsRules [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int m(int n) {
+		return switch (n) {
+			case 1 -> 2; // one
+			default -> {
+				yield 0; // other
+			}
+		}; // done
+	}
+}'
 ]
 
 { #category : 'test from source code' }
@@ -2771,6 +2871,14 @@ FASTJavaExportVisitorTest >> testVisitFASTJavaVarTypeExpression [
   var inferred = 1;
 }
 '
+]
+
+{ #category : 'test from source code' }
+FASTJavaExportVisitorTest >> testVisitFASTJavaVariableDeclaratorWithoutInitializerKeepsItsComment [
+	self assertExportReadsBackWithTheCommentsOf: 'class A {
+	int count; // how many
+	int total = 0; // so far
+}'
 ]
 
 { #category : 'test from FAST model' }
