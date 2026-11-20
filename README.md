@@ -9,8 +9,6 @@ Represent the Java AST with Famix.
 
 ## Installation
 
-This is the v5 branch, still in development. The current release is on the [v4 branch](https://github.com/moosetechnology/FAST-JAVA/tree/v4).
-
 To load the FAST-Java project, execute in a playground:
 
 ```st
