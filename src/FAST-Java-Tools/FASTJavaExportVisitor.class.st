@@ -351,17 +351,16 @@ FASTJavaExportVisitor >> visitFASTJavaAssignmentExpression: aFASTJavaAssignmentE
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaBlockOrStatement: aFASTJavaStatement [
-	self checkForComments: aFASTJavaStatement andDo: [
 	"for 'then' and 'else' parts of the if-statement,
 	if it's a simple statement (not a block), go to next line and indent
 	Not very elegant solution but simple.
 	A case statement answers isStatementBlock as well, holding statements of its own, so
-	the class is what is asked for here: only a braced block writes no newline."
+	the class is what is asked for here: only a braced block writes no newline.
+	The statement writes its own comments."
 	(aFASTJavaStatement isKindOf: FASTJavaStatementBlock)
 	ifFalse: [ self newLine ].
 
 	aFASTJavaStatement accept: self
-]
 
 ]
 
@@ -647,12 +646,9 @@ FASTJavaExportVisitor >> visitFASTJavaElementValuePair: aFASTJavaElementValuePai
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaElsePartStatement: aFASTJavaStatement [
-	self checkForComments: aFASTJavaStatement andDo: [
 	aFASTJavaStatement ifNil: [ ^self ].
 	self indented: 'else '.
 	self visitFASTJavaBlockOrStatement: aFASTJavaStatement
-]
-
 ]
 
 { #category : 'visiting' }
@@ -825,10 +821,7 @@ FASTJavaExportVisitor >> visitFASTJavaForStatementIncrementors: statements [
 	them, and nothing closes the part."
 
 	statements
-		do: [ :statement |
-			statement accept: self.
-			"a statement prints a semicolon and a new line"
-			self goBack: 2 ]
+		do: [ :statement | self visitFASTJavaForStatementPart: statement ]
 		separatedBy: [ self unindented: ', ' ]
 ]
 
@@ -840,13 +833,22 @@ FASTJavaExportVisitor >> visitFASTJavaForStatementInitializers: statements [
 	statements ifEmpty: [ ^ self unindented: $; ].
 
 	statements
-		do: [ :statement |
-			statement accept: self.
-			"a statement prints a semicolon and a new line"
-			self goBack: 2 ]
+		do: [ :statement | self visitFASTJavaForStatementPart: statement ]
 		separatedBy: [ self unindented: ', ' ].
 
 	self unindented: '; '
+]
+
+{ #category : 'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaForStatementPart: aFASTJavaStatement [
+	"JLS 14.14.1: a statement of a for header ends with no semicolon. A line comment written
+	after it ends its line, and the header goes on on the next."
+
+	self checkForComments: aFASTJavaStatement andDo: [
+		self indented: ''.
+		aFASTJavaStatement isVarDeclStatement
+			ifTrue: [ self visitFASTJavaLocalVariableDeclaration: aFASTJavaStatement ]
+			ifFalse: [ aFASTJavaStatement expression accept: self ] ]
 ]
 
 { #category : 'visiting statement' }
@@ -979,6 +981,17 @@ FASTJavaExportVisitor >> visitFASTJavaLambdaExpression: aFASTJavaLambdaExpressio
 { #category : 'visiting expression' }
 FASTJavaExportVisitor >> visitFASTJavaLiteral: aFASTJavaLiteral [
 	self unindented: aFASTJavaLiteral primitiveValue
+]
+
+{ #category : 'visiting statement' }
+FASTJavaExportVisitor >> visitFASTJavaLocalVariableDeclaration: aFASTJavaVarDeclStatement [
+	"JLS 14.4: a local variable declaration, which a statement ends with a semicolon and a
+	for header does not."
+
+	self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaVarDeclStatement).
+	aFASTJavaVarDeclStatement type accept: self.
+	self space.
+	self visitNodeListSeparatedByCommas: aFASTJavaVarDeclStatement declarators
 ]
 
 { #category : 'visiting expression' }
@@ -1446,10 +1459,11 @@ FASTJavaExportVisitor >> visitFASTJavaRequiresDirective: aFASTJavaRequiresDirect
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaReturnStatement: aFASTJavaReturnStatement [
-	self indented: 'return '.
-	aFASTJavaReturnStatement expression
-		ifNotNil: [ :returnedExpression | returnedExpression accept: self ].
-	self endOfStatement
+	self checkForComments: aFASTJavaReturnStatement andDo: [
+		self indented: 'return '.
+		aFASTJavaReturnStatement expression
+			ifNotNil: [ :returnedExpression | returnedExpression accept: self ].
+		self endOfStatement ]
 ]
 
 { #category : 'visiting' }
@@ -1474,17 +1488,18 @@ FASTJavaExportVisitor >> visitFASTJavaStatement: aFASTJavaStatement [
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaStatementBlock: aFASTJavaStatementBlock [
-	self outputTopLevelExpression: [
-		self unindented: ${.
-		self newLine.
-		self indent.
-		aFASTJavaStatementBlock statements do: [ :node |
-			node accept: self
-		].
-		self unindent.
-		self indented: $}.
-		self newLine
-	]
+	self checkForComments: aFASTJavaStatementBlock andDo: [
+		self outputTopLevelExpression: [
+			self unindented: ${.
+			self newLine.
+			self indent.
+			aFASTJavaStatementBlock statements do: [ :node |
+				node accept: self
+			].
+			self unindent.
+			self indented: $}.
+			self newLine
+		] ]
 ]
 
 { #category : 'visiting expression' }
@@ -1593,10 +1608,7 @@ FASTJavaExportVisitor >> visitFASTJavaTextBlock: aFASTJavaTextBlock [
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaThenPartStatement: aFASTJavaStatement [
-	self checkForComments: aFASTJavaStatement andDo: [
-		self visitFASTJavaBlockOrStatement: aFASTJavaStatement
-]
-
+	self visitFASTJavaBlockOrStatement: aFASTJavaStatement
 ]
 
 { #category : 'visiting expression' }
@@ -1727,10 +1739,7 @@ FASTJavaExportVisitor >> visitFASTJavaUsesDirective: aFASTJavaUsesDirective [
 FASTJavaExportVisitor >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 	self checkForComments: aFASTJavaVarDeclStatement andDo: [
 		self indented: ''.
-		self visitFASTJavaModifiersInline: (self writtenModifiersOf: aFASTJavaVarDeclStatement).
-		aFASTJavaVarDeclStatement type accept: self.
-		self space.
-		self visitNodeListSeparatedByCommas: aFASTJavaVarDeclStatement declarators.
+		self visitFASTJavaLocalVariableDeclaration: aFASTJavaVarDeclStatement.
 		self endOfStatement
 	]
 ]
@@ -1786,10 +1795,10 @@ FASTJavaExportVisitor >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
 
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitFASTJavaYieldStatement: aFASTJavaYieldStatement [
-
-	self indented: 'yield '.
-	aFASTJavaYieldStatement expression accept: self.
-	self endOfStatement
+	self checkForComments: aFASTJavaYieldStatement andDo: [
+		self indented: 'yield '.
+		aFASTJavaYieldStatement expression accept: self.
+		self endOfStatement ]
 ]
 
 { #category : 'visiting' }
@@ -1824,8 +1833,8 @@ FASTJavaExportVisitor >> visitTryResources: tryResources [
 { #category : 'visiting statement' }
 FASTJavaExportVisitor >> visitTryResources: tryResources trailingSemicolon: aBoolean [
 	"A resource is either a declaration or an expression referring to an existing variable.
-	Declarations are statements: #visitFASTJavaVarDeclStatement: ends them with a semicolon
-	and a newline, which are removed here so that all resources are printed uniformly.
+	A declaration is written without the semicolon that ends it as a statement, so that all
+	resources are printed uniformly, and a comment written after it stays after it.
 	JLS 14.20.3 allows a semicolon after the last resource, which aBoolean says was written."
 
 	| tmpIndent |
@@ -1836,8 +1845,11 @@ FASTJavaExportVisitor >> visitTryResources: tryResources trailingSemicolon: aBoo
 
 	tryResources
 		do: [ :aResource |
-				aResource accept: self.
-				aResource isVarDeclStatement ifTrue: [ self goBack: 2 ] ]
+			aResource isVarDeclStatement
+				ifTrue: [
+					self checkForComments: aResource andDo: [
+						self visitFASTJavaLocalVariableDeclaration: aResource ] ]
+				ifFalse: [ aResource accept: self ] ]
 		separatedBy: [ self unindented: '; ' ].
 
 	aBoolean ifTrue: [ self unindented: $; ].
